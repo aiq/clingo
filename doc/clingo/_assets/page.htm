@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>clingo : @{TITLE}</title>
+<link rel="stylesheet" href="@{CSSFILE}">
+<style>
+#content {
+   font-family: "Helvetica", "Arial", sans-serif;
+   position: relative;
+   margin-left: 300px;
+}
+.moduledoc {
+   padding-left: 2em;
+   padding-right: 2em;
+}
+</style>
+</head>
+
+<body>
+<div id="sidebar">
+   <div class="toc-container">
+      @{TOC}
+   </div>
+   <div class="sidebar-marker">
+      ⌘ <!-- U+2318 - &#8984 -->
+   </div>
+   <div class="link-tree">
+      @{LINKS}
+   </div>
+   <div class="sidebar-marker">
+      ܀ <!-- U+0700 - &#1792 -->
+   </div>
+</div>
+<div id="content">
+   <div class="moduledoc">
+      <h1>@{TITLE}</h1>
+      @{CONTENT}
+   </div>
+</div>
+</body>
+
+</html>
