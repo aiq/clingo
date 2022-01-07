@@ -1,0 +1,42 @@
+= clingo
+
+clingo is a standard library for C.
+You can explore the documentation at the https://clingo.aiq.dk/[website].
+
+== Build & Test
+
+=== cmake
+
+----
+$ mkdir bld
+$ cmake -S mk/cmake -B bld
+$ cd bld
+$ make -j32
+----
+
+=== Test
+
+----
+$ cd bld
+$ ctest
+$ ctest -E benchmark
+$ ctest -R benchmark
+----
+
+=== Generate HTML docs
+
+----
+$ lua mk/htmldoc/generate.lua
+----
+
+== Open Points
+
+* color sub module to handle colors, similar to the time sub module
+* add alloc/free functions for cError
+* select or create a formater for the source code
+* add missing tests and improve documentation
+
+== License
+
+clingo is licensed under the MIT Open Source license.
+For more information, see the LICENSE file in this repository.
