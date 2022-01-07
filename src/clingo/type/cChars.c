@@ -1,0 +1,246 @@
+#include "clingo/type/cChars.h"
+
+#include <string.h>
+
+#include "clingo/lang/algo.h"
+#include "clingo/lang/func.h"
+#include "clingo/type/uint64.h"
+
+#include "clingo/io/print.h"
+
+/*******************************************************************************
+********************************************************* Types and Definitions
+*******************************************************************************/
+
+SLICE_IMPL_C_(
+   char,       // Type
+   cChars,     // SliceType
+   chars_c,    // FuncName
+   cVarChars,  // VarSliceType
+   var_chars_c // VarFuncName
+)
+
+CHUNK_IMPL_C_(
+   cCharChunk,       // ChunkType
+   cChars,           // SliceType
+   char_chunk_c,     // FuncName
+   cVarCharChunk,    // VarChunkType
+   cVarChars,        // VarSliceType
+   var_char_chunk_c  // VarFuncName
+)
+
+WINDOW_IMPL_C_(
+   cCharWindow,      // WindowType
+   cChars,           // SliceType
+   char_window_c,    // FuncName
+   cVarCharWindow,   // VarWindowType
+   cVarChars,        // VarSliceType
+   var_char_window_c // VarFuncName
+)
+
+/*******************************************************************************
+********************************************************************* Functions
+********************************************************************************
+ overall 
+*******************************************************************************/
+
+extern inline cChars c_c( char const cstr[static 1] );
+
+bool chars_is_c( cChars chars, char const cstr[static 1] )
+{
+   return eq_c( cmp_chars_c( chars, c_c( cstr ) ) );
+}
+
+bool cstr_is_any_char_c( char const cstr[static 1], cChars set )
+{
+   char const* found = find_char_c( set, *cstr );
+   return found and *(++cstr) == '\0';
+}
+
+extern inline bool cstr_is_c( char const cstr[static 1],
+                              char const exp[static 1] );
+
+extern inline bool cstr_is_char_c( char const cstr[static 1], char c );
+
+bool eq_chars_c( cChars a, cChars b )
+{
+   return eq_c( cmp_chars_c( a, b ) );
+}
+
+char* make_cstr_c( cVarChars buf, cChars cs )
+{
+   if ( buf.s <= cs.s ) return NULL;
+   buf.s = set_chars_c( buf, cs );
+   buf.v[ buf.s ] = '\0';
+   return buf.v;
+}
+
+/*******************************************************************************
+ algo
+*******************************************************************************/
+
+CMP_SLICE_C_(
+   cmp_chars_c,   // FuncName
+   cChars,        // SliceType
+   char const,    // ValueType
+   cmp_char_c,    // CmpFunc
+   do_deref_c_    // DoDeref
+)
+
+COUNT_EQ_C_(
+   count_eq_char_c,  // FuncName
+   cChars,           // SliceType
+   char const,       // ValueType
+   char,             // SearchType
+   cmp_char_c,       // CmpFunc
+   do_deref_c_       // DoDeref
+)
+
+ENDS_WITH_C_(
+   chars_ends_with_c,   // FuncName
+   cChars,              // SliceType
+   char const,          // ValueType
+   cmp_char_c,          // CmpFunc
+   do_deref_c_          // DoDeref
+)
+
+char const* find_any_char_c( cChars chars, cChars set )
+{
+   for_each_c_( char const*, outItr, chars )
+   {
+      for_each_c_( char const*, inItr, set )
+      {
+         if ( *outItr == *inItr ) return outItr;
+      }
+   }
+   return NULL;
+}
+
+FIND_VAL_C_(
+   find_char_c,   // FuncName
+   cChars,        // SliceType
+   char const,    // ValueType
+   char,          // SearchType
+   cmp_char_c,    // CmpFunc
+   do_deref_c_    // DoDeref
+)
+
+INDEX_OF_SLICE_C_(
+   index_of_chars_c, // FuncName
+   cChars,           // SliceType
+   char const,       // ValueType
+   cmp_char_c,       // CmpFunc
+   do_deref_c_       // DoDeref
+)
+
+INSERT_VAL_C_(
+   insert_char_c,    // FuncName
+   cVarChars,        // VarSliceType
+   char,             // ValueType
+   char,             // InsertType
+   do_not_deref_c_   // DoDeref
+)
+
+INSERT_SLICE_C_(
+   insert_chars_c,   // FuncName
+   cVarChars,        // VarSliceType
+   cChars            // SliceType
+)
+
+QSORT_C_(
+   qsort_chars_c, // FuncName
+   cVarChars,     // SliceType
+   char,          // ValueType
+   cmp_char_c,    // CmpFunc
+   do_deref_c_    // DoDeref
+)
+
+REVERSE_C_(
+   reverse_chars_c,  // FuncName
+   cVarChars,        // SliceType
+   char              // ValueType
+)
+
+ROTATE_C_(
+   rotate_chars_c,   // FuncName
+   cVarChars,        // SliceType
+   char              // ValueType
+)
+
+STARTS_WITH_C_(
+   chars_starts_with_c, // FuncName
+   cChars,              // SliceType
+   char const,          // ValueType
+   cmp_char_c,          // CmpFunc
+   do_deref_c_          // DoDeref
+)
+
+/*******************************************************************************
+ trim
+*******************************************************************************/
+
+cChars trim_any_char_c( cChars chars, cChars set )
+{
+   chars = trim_any_char_left_c( chars, set );
+   chars = trim_any_char_right_c( chars, set );
+   return chars;
+}
+
+cChars trim_any_char_left_c( cChars chars, cChars set )
+{
+   if ( is_empty_c_( chars ) ) return chars;
+
+   char const* itr = begin_c_( chars );
+   char const* end = end_c_( chars );
+   while ( itr < end and find_char_c( set, *itr ) )
+   {
+      ++itr;
+   }
+   return make_chars_c( itr, end );
+}
+
+cChars trim_any_char_right_c( cChars chars, cChars set )
+{
+   if ( is_empty_c_( chars ) ) return chars;
+
+   char const* itr = rbegin_c_( chars );
+   char const* end = rend_c_( chars );
+   while ( itr > end and find_char_c( set, *itr ) )
+   {
+      --itr;
+   }
+   return make_chars_c( begin_c_( chars ), itr+1 );
+}
+
+cChars trim_char_match_c( cChars chars, c_check_char check )
+{
+   chars = trim_char_match_left_c( chars, check );
+   chars = trim_char_match_right_c( chars, check );
+   return chars;
+}
+
+cChars trim_char_match_left_c( cChars chars, c_check_char check )
+{
+   if ( is_empty_c_( chars ) ) return chars;
+
+   char const* itr = begin_c_( chars );
+   char const* end = end_c_( chars );
+   while ( itr < end and check( *itr ) )
+   {
+      ++itr;
+   }
+   return make_chars_c( itr, end );
+}
+
+cChars trim_char_match_right_c( cChars chars, c_check_char check )
+{
+   if ( is_empty_c_( chars ) ) return chars;
+
+   char const* itr = rbegin_c_( chars );
+   char const* end = rend_c_( chars );
+   while ( itr > end and check( *itr ) )
+   {
+      --itr;
+   }
+   return make_chars_c( begin_c_( chars ), itr+1 );
+}

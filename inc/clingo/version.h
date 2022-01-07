@@ -1,0 +1,11 @@
+#ifndef CLINGO_VERSION_H
+#define CLINGO_VERSION_H
+
+#define CLINGO_VERSION "0.1.0"
+#define CLINGO_VER_MAJOR 0
+#define CLINGO_VER_MINOR 1
+#define CLINGO_VER_REVISION 0
+
+#define CLINGO_SOVERSION 1
+
+#endif

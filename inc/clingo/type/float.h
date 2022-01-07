@@ -1,0 +1,111 @@
+#ifndef CLINGO_TYPE_FLOAT_H
+#define CLINGO_TYPE_FLOAT_H
+
+#include <float.h>
+
+#include "clingo/lang/chunk.h"
+#include "clingo/lang/slice.h"
+#include "clingo/lang/window.h"
+#include "clingo/type/c_ByteOrder.h"
+#include "clingo/type/uint32.h"
+
+/*******************************************************************************
+********************************************************* Types and Definitions
+*******************************************************************************/
+
+struct cFloatInfo
+{
+   uint8_t sign;
+   uint8_t exponent;
+   uint32_t mantissa;
+};
+typedef struct cFloatInfo cFloatInfo;
+
+SLICE_DEF_C_(
+   float,               // Type
+   cFloatSlice,         // SliceType
+   float_slice_c,       // FuncName
+   cVarFloatSlice,      // VarSliceType
+   var_float_slice_c    // VarFuncName
+)
+
+CHUNK_DEF_C_(
+   float,               // Type
+   cFloatChunk,         // ChunkType
+   cFloatSlice,         // SliceType
+   float_chunk_c,       // FuncName
+   cVarFloatChunk,      // VarChunkType
+   cVarFloatSlice,      // VarSliceType
+   var_float_chunk_c    // VarFuncName
+)
+
+WINDOW_DEF_C_(
+   float,               // Type
+   cFloatWindow,        // WindowType
+   cFloatSlice,         // SliceType
+   float_window_c,      // FuncName
+   cVarFloatWindow,     // VarWindowType
+   cVarFloatSlice,      // VarSliceType
+   var_float_window_c   // VarFuncName
+)
+
+/*******************************************************************************
+********************************************************************* Functions
+********************************************************************************
+ overall
+*******************************************************************************/
+
+inline int cmp_float_c( float a, float b )
+{
+   return ( a < b ) ? -1
+                    : ( a == b ) ? 0
+                                 : 1;
+}
+
+#define eq_float_c_( F1, F2 )                                                  \
+   eq_float_c( F1, F2, FLT_EPSILON )
+bool eq_float_c( float f1, float f2, float epsilon );
+
+#define float_c_( Value )                                                      \
+(                                                                              \
+   (float)(Value)                                                              \
+)
+
+/*******************************************************************************
+ info
+*******************************************************************************/
+
+float build_float_c( cFloatInfo info );
+
+cFloatInfo float_info_c( float f );
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+float swap_float_c( float f );
+float swap_float_from_c( float f, c_ByteOrder order );
+float swap_float_to_c( float f, c_ByteOrder order );
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+uint32_t pack_float_c( float f );
+float unpack_float_c( uint32_t u );
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+float const* find_float_c( cFloatSlice slice, float f );
+
+float const* max_float_c( cFloatSlice slice );
+
+float const* min_float_c( cFloatSlice slice );
+
+bool prod_float_c( cFloatSlice slice, float res[static 1] );
+
+bool sum_float_c( cFloatSlice slice, float res[static 1] );
+
+#endif
