@@ -1,0 +1,49 @@
+= CInt64Set
+:xmpldir: ../../../test/clingo/container/CInt64Set
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the CInt64Set and the associated functions.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='CInt64Set']
+==== CInt64Set
+[source,c]
+----
+struct CInt64Set;
+typedef struct CInt64Set CInt64Set;
+----
+
+Via the macros link:vec.html#VAL_SET_DEF_C_[VAL_SET_DEF_C_] and
+link:vec.html#VAL_SET_IMPL_C_[VAL_SET_IMPL_C_] declared and implemented struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c]
+----
+cMeta const C_Int64SetMeta;
+/* create */
+CInt64Set* make_int64_set_c( int64_t size, float maxLoadFactor );
+CInt64Set* new_int64_set_c();
+/* manage */
+cSetInfo const* info_of_int64_set_c( CInt64Set const* set );
+bool resize_int64_set_c( CInt64Set* set, int64_t cap );
+bool set_max_load_of_int64_set_c( CInt64Set* set );
+/* api */
+bool in_int64_set_c( CInt64Set* set, int64_t const* val );
+cSetItr next_in_int64_set_c( CInt64Set const* set,
+                             cSetItr itr,
+                             int64_t const* val[static 1] );
+bool remove_from_int64_set_c( CInt64Set* set, int64_t val );
+bool set_on_int64_set_c( CInt64Set* set, int64_t val );
+----
+

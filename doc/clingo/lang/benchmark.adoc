@@ -1,0 +1,130 @@
+= benchmark
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+This module allow to benchmark the time performance of some functions.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cBenchmark']
+==== cBenchmark
+[source,c]
+----
+struct cBenchmark
+{
+   char const* label;
+   clock_t start;
+   clock_t end;
+   struct cBenchmark* lastSub;
+   struct cBenchmark* prev;
+   struct cBenchmark* next;
+};
+typedef struct cBenchmark cBenchmark;
+----
+
+Struct to store the benchmark information.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+[id='benchmark_c_']
+==== benchmark_c_
+[source,c]
+----
+#define benchmark_c_( Label )
+----
+
+Macro function that initialises a cBenchmark variable with a label.
+
+//********************************************************************** struct
+=== struct
+
+==== chain_benchmarks_c
+[source,c]
+----
+void chain_benchmarks_c( cBenchmark prev[static 1], cBenchmark next[static 1] );
+----
+
+Function that chains two benchmarks together.
+
+==== add_sub_benchmark_c
+[source,c]
+----
+void add_sub_benchmark_c( cBenchmark main[static 1], cBenchmark sub[static 1] );
+----
+
+Function that adds a sub benchmark.
+
+==== first_sub_benchmark_c
+[source,c]
+----
+cBenchmark const* first_sub_benchmark_c( cBenchmark const b[static 1] );
+----
+
+Returns a pointer to the first sub benchmark.
+If a benchmark does not contain any sub benchmakrs returns the function NULL.
+
+//********************************************************************** result
+=== result
+
+==== measured_secs_c
+[source,c]
+----
+double measured_secs_c( cBenchmark const b[static 1] );
+----
+
+Returns the measured time as seconds.
+
+==== measured_msecs_c
+[source,c]
+----
+double measured_msecs_c( cBenchmark const b[static 1] );
+----
+
+Returns the measured time in millisecond.
+
+==== measured_usecs_c
+[source,c]
+----
+double measured_usecs_c( cBenchmark const b[static 1] );
+----
+
+Returns the measured time in microsecond.
+
+==== measured_nsecs_c
+[source,c]
+----
+double measured_nsecs_c( cBenchmark const b[static 1] );
+----
+
+Returns the measured time in nanosecond.
+
+//*********************************************************************** print
+=== print
+
+==== fprintln_benchmark_c
+[source,c]
+----
+int fprintln_benchmark_c( FILE* output, cBenchmark const b[static 1] );
+----
+
+Writes the benchmark result lines to the output stream.
+
+==== println_benchmark_c
+[source,c]
+----
+int println_benchmark_c( cBenchmark const b[static 1] );
+----
+
+Prints the benchmark result lines to the stdout stream.

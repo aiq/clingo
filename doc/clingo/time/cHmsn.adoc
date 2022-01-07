@@ -1,0 +1,218 @@
+= cHmsn
+:xmpldir: ../../../test/clingo/time/cHmsn
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cHmsn']
+=== cHmsn
+[source,c]
+----
+struct cHmsn
+{
+   int32_t hour;
+   int8_t min;
+   int8_t sec;
+   int32_t nsec;
+};
+typedef struct cHmsn cHmsn;
+----
+
+The cHmsn struct can store a daytime or a duration separated into the
+attributes hour, min, sec and nsec.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cHmsnSlice']
+==== cHmsnSlice
+[source,c]
+----
+struct cHmsnSlice
+{
+   int64_t s;
+   cHmsn const* v;
+};
+typedef struct cHmsnSlice cHmsnSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cHmsnSlice hmsn_slice_c( int64_t s, cHmsn const* v );
+cHmsnSlice make_hmsn_slice_c( cHmsn const* beg, cHmsn const* end );
+cHmsnSlice empty_hmsn_slice_c( void );
+/* sub */
+cHmsnSlice left_hmsn_slice_c( cHmsnSlice slice, int64_t maxLen );
+cHmsnSlice mid_hmsn_slice_c( cHmsnSlice slice, int64_t index );
+cHmsnSlice right_hmsn_slice_c( cHmsnSlice slice, int64_t maxLen );
+cHmsnSlice sub_hmsn_slice_c( cHmsnSlice slice,
+                             int64_t begIdx,
+                             int64_t endIdx);
+----
+
+[id='cVarHmsnSlice']
+==== cVarHmsnSlice
+[source,c]
+----
+struct cVarHmsnSlice
+{
+   int64_t s;
+   cHmsn* v;
+};
+typedef struct cVarHmsnSlice cVarHmsnSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarHmsnSlice var_hmsn_slice_c( int64_t s, cHmsn* v );
+cVarHmsnSlice make_var_hmsn_slice_c( cHmsn* beg, cHmsn* end );
+cVarHmsnSlice empty_var_hmsn_slice_c( void );
+/* sub */
+cVarHmsnSlice left_var_hmsn_slice_c( cVarHmsnSlice slice, int64_t maxLen );
+cVarHmsnSlice mid_var_hmsn_slice_c( cVarHmsnSlice slice, int64_t index );
+cVarHmsnSlice right_var_hmsn_slice_c( cVarHmsnSlice slice, int64_t maxLen );
+cVarHmsnSlice sub_var_hmsn_slice_c( cVarHmsnSlice slice,
+                                    int64_t begIdx,
+                                    int64_t endIdx);
+/* var slice */
+cVarHmsnSlice as_var_hmsn_slice_c( cVarHmsnSlice slice );
+cVarHmsnSlice cast_var_hmsn_slice_c( cVarHmsnSlice slice, cHmsnSlice sub );
+int64_t set_hmsn_slice_c( cVarHmsnSlice dst, cHmsnSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_hmsn_c
+[source,c]
+----
+int cmp_hmsn_c( cHmsn a, cHmsn b );
+----
+
+Compares two cHmsn values and returns the three possible results:
+
+<0:: if a is earlier as b
+0:: if both dates are equal
+>0:: if a is later as b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_hmsn.c[]
+----
+
+==== hms_c
+[source,c]
+----
+cHmsn hms_c( int64_t hour, int64_t min, int64_t sec );
+----
+
+Initialise a cHmsn value with hour, minute and second.
+
+==== hmsn_c
+[source,c]
+----
+cHmsn hmsn_c( int64_t hour, int64_t min, int64_t sec, int64_t nsec );
+----
+
+Initialise a cHmsn value with hour, minute, second and nanosecond.
+
+==== hmsn_is_valid_c
+[source,c]
+----
+bool hmsn_is_valid_c( cHmsn hmsn );
+----
+
+Returns true if the cHmsn value is valid, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/hmsn_is_valid.c[]
+----
+
+//************************************************************************** io
+=== io
+
+The functions read_hmsn_c and write_hmsn_c are using the following format:
+
+.format
+[cols="1,2,1"]
+|===
+|h |The hour without a leading character |0 to 23
+|_h |The hour with a leading space |0 to 23
+|hh |The hour with a leading zero |00 to 23
+|k |The kitchen hour without a leading character |
+|_k |The kitchen hour with a leading space |
+|kk |The kitchen hour with a leading zero |
+|m |The minute without a leading character |0 to 59
+|_m |The minute with a leading space |0 to 59
+|mm |The minute with a leading zero |00 to 59
+|s |The whole second, without a leading character |0 to 59
+|_s |The whole second, with a leading space |0 to 59
+|ss |The whole second, with a leading zero |00 to 59
+|i |The fractional part of the second in millisecond whithout trainling zeros |000 to 999
+|iii |The fractional part of the second in millisecond with trailing zeros |000 to 999
+|u |The fractional part of the second in microsecond without trailing zeros |000000 to 999999
+|uuu |The fractional part of the second in microsecond with trailing zeros |000000 to 999999
+|n |The fractional part of the second in nanosecond without trailing zeros |000000000 to 999999999
+|nnn |The fractional part of the second in nanosecond with trailing zeros |000000000 to 999999999
+|ap |Read or write AM or PM dependent on the hour value |
+|AP |Read or write am or pm dependent on the hour value |
+|===
+
+==== read_hmsn_c
+[source,c]
+----
+#define read_hmsn_c_( Sca, Hmsn )                                              \
+   read_hmsn_c( (Sca), (Hmsn), "" )
+bool read_hmsn_c( cScanner sca[static 1],
+                  cHmsn hmsn[static 1],
+                  char const fmt[static 1] );
+----
+
+Reads a cHmsn value from a text with a scanner.
+The function will use C_DaytimeFormat( "hh:mm:ss.n" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_hmsn.c[]
+----
+
+==== write_hmsn_c
+[source,c]
+----
+#define write_hmsn_c_( Rec, Hmsn )                                             \
+   write_hmsn_c( (Rec), (Hmsn), "" )
+bool write_hmsn_c( cRecorder rec[static 1],
+                   cHmsn hmsn,
+                   char const fmt[static 1] );
+----
+
+Writes a cHmsn value into the recorder.
+The function will use C_DaytimeFormat( "hh:mm:ss.n" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_hmsn.c[]
+----

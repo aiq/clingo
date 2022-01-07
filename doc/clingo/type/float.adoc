@@ -1,0 +1,383 @@
+= float
+:xmpldir: ../../../test/clingo/type/float
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with float values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cFloatInfo']
+==== cFloatInfo
+[source,c]
+----
+struct cFloatInfo
+{
+   uint8_t sign;
+   uint8_t exponent;
+   uint32_t mantissa;
+};
+typedef struct cFloatInfo cFloatInfo;
+----
+
+cFloatInfo represents the three sections of a float value.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cFloatSlice']
+==== cFloatSlice
+[source,c]
+----
+struct cFloatSlice
+{
+   int64_t s;
+   float const* v;
+};
+typedef struct cFloatSlice cFloatSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cFloatSlice float_slice_c( int64_t s, float const* v );
+cFloatSlice make_float_slice_c( float const* beg, float const* end );
+cFloatSlice empty_float_slice_c( void );
+/* sub */
+cFloatSlice left_float_slice_c( cFloatSlice slice, int64_t maxLen );
+cFloatSlice mid_float_slice_c( cFloatSlice slice, int64_t index );
+cFloatSlice right_float_slice_c( cFloatSlice slice, int64_t maxLen );
+cFloatSlice sub_float_slice_c( cFloatSlice slice,
+                               int64_t begIdx,
+                               int64_t endIdx );
+----
+
+[id='cVarFloatSlice']
+==== cVarFloatSlice
+[source,c]
+----
+struct cVarFloatSlice
+{
+   int64_t s;
+   float* v;
+};
+typedef struct cVarFloatSlice cVarFloatSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarFloatSlice var_float_slice_c( int64_t s, float* v );
+cVarFloatSlice make_var_float_slice_c( float* beg, float* end );
+cVarFloatSlice empty_var_float_slice_c( void );
+/* sub */
+cVarFloatSlice left_var_float_slice_c( cVarFloatSlice slice, int64_t maxLen );
+cVarFloatSlice mid_var_float_slice_c( cVarFloatSlice slice, int64_t index );
+cVarFloatSlice right_var_float_slice_c( cVarFloatSlice slice, int64_t maxLen );
+cVarFloatSlice sub_var_float_slice_c( cVarFloatSlice slice,
+                                      int64_t begIdx,
+                                      int64_t endIdx );
+/* var slice */
+cFloatSlice as_float_slice_c( cVarFloatSlice slice );
+cFloatSlice cast_float_slice_c( cVarFloatSlice slice, cFloatSlice sub );
+int64_t set_float_slice_c( cVarFloatSlice dst, cFloatSlice src );
+----
+
+[id='cFloatChunk']
+==== cFloatChunk
+[source,c]
+----
+struct cFloatChunk
+{
+   int64_t s;
+   float const* v;
+   int64_t favSize;
+   cFloatSlice slice;
+};
+typedef struct cFloatChunk cFloatChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_float_chunk_c( cFloatChunk chunk[static 1],
+                              int64_t s,
+                              cFloatSlice slice );
+void init_front_float_chunk_c( cFloatChunk chunk[static 1],
+                               int64_t s,
+                               cFloatSlice slice );
+----
+
+[id='cVarFloatChunk']
+==== cVarFloatChunk
+[source,c]
+----
+struct cVarFloatChunk
+{
+   int64_t s;
+   float* v;
+   int64_t favSize;
+   cVarFloatSlice slice;
+};
+typedef struc cVarFloatChunk cVarFloatChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_float_chunk_c( cVarFloatChunk chunk[static 1],
+                                  int64_t s,
+                                  cVarFloatSlice slice );
+void init_front_var_float_chunk_c( cVarFloatChunk chunk[static 1],
+                                   int64_t s,
+                                   cVarFloatSlice slice );
+----
+
+[id='cFloatWindow']
+==== cFloatWindow
+[source,c]
+----
+struct cFloatWindow
+{
+   int64_t s;
+   float const* v;
+   int64_t favSize;
+   cFloatSlice slice;
+};
+typedef struct cFloatWindow cFloatWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_float_window_c( cFloatWindow window[static 1],
+                               int64_t s,
+                               cFloatSlice slice );
+void init_front_float_window_c( cFloatWindow window[static 1],
+                                int64_t s,
+                                cFloatSlice slice );
+----
+
+[id='cVarFloatWindow']
+==== cVarFloatWindow
+[source,c]
+----
+struct cVarFloatWindow
+{
+   int64_t s;
+   float* v;
+   int64_t favSize;
+   cVarFloatSlice slice;
+};
+typedef struct cVarFloatWindow cVarFloatWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_float_window_c( cVarFloatWindow window[static 1],
+                                   int64_t s,
+                                   cVarFloatSlice slice );
+void init_front_var_float_window_c( cVarFloatWindow window[static 1],
+                                    int64_t s,
+                                    cVarFloatSlice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_float_c
+[source,c]
+----
+int cmp_float_c( float a, float b );
+----
+
+Compares two float values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_float.c[]
+----
+
+==== eq_float_c
+[source,c]
+----
+#define eq_float_c_( F1, F2 )                                                  \
+   eq_float_c( (F1), (F2), FLT_EPSILON )
+bool eq_float_c( float f1, float f2, float epsilon );
+----
+
+Returns true if both value are equal if you allow a epsilon range.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/eq_float.c[]
+----
+
+[id='float_c_']
+==== float_c_
+[source,c]
+----
+#define float_c_( Value )
+----
+
+Macro function that casts the Value as float.
+
+//************************************************************************ info
+=== info
+
+==== build_float_c
+[source,c]
+----
+float build_float_c( cFloatInfo info );
+----
+
+Creates a float from a sign, exponent and mantissa value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/build_float.c[]
+----
+
+==== float_info_c
+[source,c]
+----
+cFloatInfo float_info_c( float f );
+----
+
+Splits a float into a sign, exponent and mantissa value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/float_info.c[]
+----
+
+//************************************************************************ swap
+=== swap
+
+==== swap_float_c
+[source,c]
+----
+float swap_float_c( float val );
+----
+
+{Swap}
+
+==== swap_float_from_c
+[source,c]
+----
+float swap_float_from_c( float val, c_ByteOrder order );
+----
+
+{SwapFrom}
+
+==== swap_float_to_c
+[source,c]
+----
+float swap_float_to_c( float val, c_ByteOrder order );
+----
+
+{SwapTo}
+
+//************************************************************************ pack
+=== pack
+
+==== pack_float_c
+[source,c]
+----
+uint32_t pack_float_c( float f );
+----
+
+Packs the bytes of a float in a uint32_t value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/pack_float.c[]
+----
+
+==== unpack_float_c
+[source,c]
+----
+float unpack_float_c( uint32_t u );
+----
+
+Unpacks a double from the bytes in a uint32_t value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/unpack_float.c[]
+----
+
+//************************************************************************ algo
+=== algo
+
+==== find_float_c
+[source,c]
+----
+float const* find_float_c( cFloatSlice slice, float f );
+----
+
+{FindVal}
+
+==== max_float_c
+[source,c]
+----
+float const* max_float_c( cFloatSlice slice );
+----
+
+{FindMax}
+
+==== min_float_c
+[source,c]
+----
+float const* min_float_c( cFloatSlice slice );
+----
+
+{FindMin}
+
+==== prod_float_c
+[source,c]
+----
+bool prod_float_c( cFloatSlice slice, float res[static 1] );
+----
+
+{Prod}
+
+==== sum_float_c
+[source,c]
+----
+bool sum_float_c( cFloatSlice slice, float res[static 1] );
+----
+
+{Sum}

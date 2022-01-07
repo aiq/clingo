@@ -1,0 +1,355 @@
+= read_type
+:xmpldir: ../../../test/clingo/io/read_type
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions to read types from a text with a scanner.
+
+IMPORTANT: Check the err value of the scanner if a function returns false.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//*********************************************************************** basic
+=== basic
+
+==== read_bool_c
+[source,c]
+----
+#define read_bool_c_( Sca, Bool )                                              \
+   read_bool_c( (Sca), (Bool), "" )
+bool read_bool_c( cScanner sca[static 1],
+                  bool val[static 1],
+                  char const fmt[static 1] );
+----
+
+Reads a bool value from a text with a scanner.
+The function supports the following formats:
+
+.format
+[cols="1,2,1"]
+|===
+|l  |lower-case representation |true or false
+|U  |upper-case representation |TRUE or FALSE
+|Cc |camel-case representation |True or False
+|*  |all cases |
+|===
+
+The function will use \'*' as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_bool.c[]
+----
+
+==== read_byte_c
+[source,c]
+----
+#define read_byte_c_( Sca, Byte )                                              \
+   read_byte_c( (Sca), (Byte), "" )
+bool read_byte_c( cScanner sca[static 1],
+                  cByte byte[static 1],
+                  char const fmt[static 1] );
+----
+
+Reads a byte value from a text with a scanner.
+
+==== read_char_c
+[source,c]
+----
+#define read_char_c_( Sca, Char )                                              \
+   read_char_c( (Sca), (Char), "" )
+bool read_char_c( cScanner sca[static 1],
+                  char c[static 1],
+                  char const fmt[static 1] );
+----
+
+Reads a char value from a text with a scanner.
+
+==== read_range_c
+[source,c]
+----
+#define read_range_c_( Sca, Rng )                                              \
+   read_range_c( (Sca), (Rng), "" )
+bool read_range_c( cScanner sca[static 1],
+                   cRange rng[static 1],
+                   char const fmt[static 1] );
+----
+
+Reads a range from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_range.c[]
+----
+
+==== read_rune_c
+[source,c]
+----
+#define read_rune_c_( Sca, Rune )                                              \
+   read_rune_c( (Sca), (Rune), "" )
+bool read_rune_c( cScanner sca[static 1],
+                  cRune rune[static 1],
+                  char const fmt[static 1] );
+----
+
+Reads a rune value from a text with a scanner.
+The function supports the following formats:
+
+.format
+[cols="1,2,1"]
+|===
+|s |just the rune |♘
+|n |unicode number |U+2658
+|u8 |the UTF-8 hex values |e29998
+|html |decimal HTML-code |`&#9816;`
+|htmlx |hex HTML-code |`&#x2658;`
+|===
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_rune.c[]
+----
+
+//*********************************************************************** float
+=== float
+
+==== read_double_c
+[source,c]
+----
+#define read_double_c_( Sca, Double )                                          \
+   read_double_c( (Sca), (Double), "" )
+bool read_double_c( cScanner sca[static 1],
+                    double d[static 1],
+                    char const fmt[static 1] );
+----
+
+Reads a double value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_double.c[]
+----
+
+==== read_float_c
+[source,c]
+----
+#define read_float_c_( Sca, Float )                                            \
+   read_float_c( (Sca), (Float), "" )
+bool read_float_c( cScanner sca[static 1],
+                   float f[static 1],
+                   char const format[static 1] );
+----
+
+Reads a float value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_float.c[]
+----
+
+//********************************************************************** signed
+=== signed
+
+The format for all signed integers is:
+
+.format
+[cols="1,8"]
+|===
+|d |decimal value
+|x |lower- and upper-case hexadecimal value
+|X |lower- and upper-case hexadecimal value
+|o |octal-value
+|===
+
+==== read_int16_c
+[source,c]
+----
+#define read_int16_c_( Sca, Int16 )                                            \
+   read_int16_c( (Sca), (Int16), "" )
+bool read_int16_c( cScanner sca[static 1],
+                   int16_t i16[static 1],
+                   char const fmt[static 1] );
+// > C_ReadError
+----
+
+Reads a int16_t value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_int16.c[]
+----
+
+==== read_int32_c
+[source,c]
+----
+#define read_int32_c_( Sca, Int32 )                                            \
+   read_int32_c( (Sca), (Int32), "" )
+bool read_int32_c( cScanner sca[static 1],
+                   int32_t i32[static 1],
+                   char const fmt[static 1] );
+----
+
+Reads a int32_t value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_int32.c[]
+----
+
+==== read_int64_c
+[source,c]
+----
+#define read_int64_c_( Sca, Int64 )                                            \
+   read_int64_c( (Sca), (Int64), "" )
+bool read_int64_c( cScanner sca[static 1],
+                   int64_t i64[static 1],
+                   char const fmt[static 1] );
+----
+
+Reads a int64_t value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_int64.c[]
+----
+
+==== read_int8_c
+[source,c]
+----
+#define read_int8_c_( Sca, Int8 )                                              \
+   read_int8_c( (Sca), (Int8), "" )
+bool read_int8_c( cScanner sca[static 1],
+                  int8_t i8[static 1],
+                  char const fmt[static 1] );
+----
+
+Reads a int8_t value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_int8.c[]
+----
+
+//******************************************************************** unsigned
+=== unsigned
+
+The format for all unsigned integers is:
+
+.format
+[cols="1,8"]
+|===
+|d |decimal value
+|x |lower- and upper-case hexadecimal value
+|X |lower- and upper-case hexadecimal value
+|o |octal-value
+|===
+
+==== read_uint16_c
+[source,c]
+----
+#define read_uint16_c_( Sca, Uint16 )                                          \
+   read_uint16_c( (Sca), (Uint16), "" )
+bool read_uint16_c( cScanner sca[static 1],
+                    uint16_t u16[static 1],
+                    char const fmt[static 1] );
+----
+
+Reads a uint16_t value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_uint16.c[]
+----
+
+==== read_uint32_c
+[source,c]
+----
+#define read_uint32_c_( Sca, Uint32 )                                          \
+   read_uint32_c( (Sca), (Uint32), "" )
+bool read_uint32_c( cScanner sca[static 1],
+                    uint32_t u32[static 1],
+                    char const fmt[static 1] );
+----
+
+Reads a uint32_t value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_uint32.c[]
+----
+
+==== read_uint64_c
+[source,c]
+----
+#define read_uint64_c_( Sca, Uint64 )                                          \
+   read_uint64_c( (Sca), (Uint64), "" )
+bool read_uint64_c( cScanner sca[static 1],
+                    uint64_t u64[static 1],
+                    char const fmt[static 1] );
+----
+
+Reads a uint64_t value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_uint64.c[]
+----
+
+==== read_uint8_c
+[source,c]
+----
+#define read_uint8_c_( Sca, Uint8 )                                            \
+   read_uint8_c( (Sca), (Uint8), "" )
+bool read_uint8_c( cScanner sca[static 1],
+                   uint8_t u8[static 1],
+                   char const fmt[static 1] );
+----
+
+Reads a uint8_t value from a text with a scanner.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_uint8.c[]
+----
+
+//*********************************************************************** slice
+=== slice
+
+==== read_chars_c
+[source,c]
+----
+#define read_chars_c_( Sca, Chars )                                            \
+   read_chars_c( (Sca), (Chars), "" )
+bool read_chars_c( cScanner sca[static 1],
+                   cChars chars[static 1],
+                   char const fmt[static 1] );
+----
+
+Reads the scanner and tracks the read chars in the chars value.
+The fmt C-string can have the same commands and specifier like the read_c
+function.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_chars.c[]
+----

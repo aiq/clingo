@@ -1,0 +1,140 @@
+= mem
+:xmpldir: ../../../test/clingo/lang/mem
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Collection of function for dynamic memory alloction and macros for memory sizes.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cGib_']
+==== cGib_
+[source,c]
+----
+#define cGib_ 1073741824
+----
+
+Number of bytes for one gibibyte.
+1073741824 bytes are required to store one gibibyte.
+
+[id='cMib_']
+==== cMib_
+[source,c]
+----
+#define cMib_ 1048576
+----
+
+Number of bytes for one mebibyte.
+1048576 bytes are required to store one mebibyte.
+
+==== cKib_
+[source,c]
+----
+#define cKib_ 1024
+----
+
+Number of bytes for one kibibyte.
+1024 bytes are required to store one kibibyte.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//*************************************************** dynamic memory allocation
+=== dynamic memory allocation
+
+==== alloc_c
+[source,c]
+----
+#define alloc_c_( Type )                                                       \
+   alloc_c( sizeof_c_( Type ) )
+void* alloc_c( int64_t size );
+----
+
+Allocates a block of memory and returns a pointer to the beginning of the
+zero-initialized block.
+
+If the size is zero returns the function a NULL pointer.
+
+==== alloc_array_c
+[source,c]
+----
+#define alloc_array_c_( Number, Type )                                         \
+   alloc_array_c( (Number), sizeof_c_( Type ) )
+void* alloc_array_c( int64_t num, int64_t size );
+----
+
+Allocates a block of memory for an array of num elements, each of them size
+bytes long, and returns a pointer to the beginning of the zero-initialized
+block.
+
+If num or the size is zero returns the function a NULL pointer.
+
+==== free_all_c
+[source,c]
+----
+#define free_all_c_( ... )                                                     \
+   free_all_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+void free_all_c( int n, ... );
+----
+
+Calls free on n pointer arguments(...).
+It is recommended to use the macro function to count the numer of pointers
+automatically.
+
+==== realloc_c
+[source,c]
+----
+void* realloc_c( void* ptr, int64_t size );
+----
+
+Changes the size of an allocated memory block pointed by ptr.
+The function has three possible return values:
+
+   - the value from ptr if it is possible to resize the memory in place
+   - a pointer to a new memory block, the old memory block is moved to this location
+   - a NULL pointer if size is zero or a reallocation fails
+
+==== realloc_array_c
+[source,c]
+----
+#define realloc_array_c_( Ptr, Number, Type )                                  \
+   realloc_array_c( (Ptr), (Number), sizeof_c_( Type ) )
+void realloc_array_c( void* ptr, int64_t num, int64_t size );
+----
+
+Changes the block of memory pointed by ptr for an array to store num
+elements, each of them size bytes long.
+The function has three possible return values:
+
+   - the value from ptr if it is possible to resize the memory in place
+   - a pointer to a new memory block, the old memory block is moved to this location
+   - a NULL pointer if size is zero or a reallocation fails
+
+//********************************************************************* general
+=== general
+
+[id='ref_c_']
+==== ref_c_
+[source,c]
+----
+#define ref_c_( Type, Value )
+----
+
+Creates a const pointer to a Value.
+
+[id='sizeof_c_']
+==== sizeof_c_
+[source,c]
+----
+#define sizeof_c_( Type )
+----
+
+Reuturns the storage size of a Type as int64_t.

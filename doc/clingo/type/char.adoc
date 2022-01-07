@@ -1,0 +1,110 @@
+= char
+:xmpldir: ../../../test/clingo/type/char
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with single char values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+==== c_check_char
+[source,c]
+----
+typedef int ( *c_check_char )( int c );
+----
+
+c_check_char is the signature of a function to check a char value.
+The signature uses int values instead of bool and char to match the classify
+functions in ctype.h.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+[id='char_c_']
+==== char_c_
+[source,c]
+----
+#define char_c_( Value )
+----
+
+Macro function that casts the Value as char.
+
+==== cmp_char_c
+[source,c]
+----
+int cmp_char_c( char a, char b );
+----
+
+Compares two char values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_char.c[]
+----
+
+//******************************************************************* interpret
+=== interpret
+
+==== dec_char_value_c
+[source,c]
+----
+int8_t dec_char_value_c( char c );
+----
+
+Converts a char that represents a valid decimal value into a int8_t value.
+The function return -1 if the char does not represent a valid decimal value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/dec_char_value.c[]
+----
+
+==== hex_char_value_c
+[source,c]
+----
+int8_t hex_char_value_c( char c );
+----
+
+Converts a char that represents a valid hex value into a int8_t value.
+The function return -1 if the char does not represent a valid hex value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/hex_char_value.c[]
+----
+
+==== oct_char_value_c
+[source,c]
+----
+int8_t oct_char_value_c( char c );
+----
+
+Converts a char that represents a valid octal value into a int8_t value.
+The function return -1 if the char does not represent a valid octal value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/oct_char_value.c[]
+----
+

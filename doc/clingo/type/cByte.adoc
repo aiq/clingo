@@ -1,0 +1,126 @@
+= cByte
+:xmpldir: ../../../test/clingo/type/cByte
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with byte values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cByte']
+==== cByte
+[source,c]
+----
+typedef uint8_t cByte;
+----
+
+cByte is an alias for uint8 and is equivalent to uint8 in all ways.
+It is used, by convention, to distinguish byte values from 8-bit unsigned integer values. 
+
+==== c_check_byte
+[source,c]
+----
+typedef bool ( *c_check_byte )( cByte b );
+----
+
+c_check_byte is the signature of a function to check a byte value.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+[id='byte_c_']
+==== byte_c_
+[source,c]
+----
+#define byte_c_( Value )
+----
+
+Macro function that casts the Value as cByte.
+
+==== cmp_byte_c
+[source,c]
+----
+int cmp_byte_c( cByte a, cByte b );
+----
+
+Compares two cByte values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and be are equal
+>0:: means that a is greater compared to b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_byte.c[]
+----
+
+//************************************************************************* bit
+=== bit
+
+==== byte_as_bit_c
+[source,c]
+----
+cByte byte_as_bit_c( cByte byte );
+----
+
+Trims the byte to the least significant bit.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/byte_as_bit.c[]
+----
+
+==== get_byte_bit_c
+[source,c]
+----
+cByte get_byte_bit_c( cByte byte int64_t pos );
+----
+
+Returns the bit at pos in a byte.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/get_byte_bit.c[]
+----
+
+==== set_byte_bit_c
+[source,c]
+----
+cByte set_byte_bit_c( cByte byte, int64_t pos, cByte bit );
+----
+
+Sets the bit at pos in a byte.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_byte_bit.c[]
+----
+
+==== toggle_byte_bit_c
+[source,c]
+----
+cByte toggle_byte_bit_c( cByte byte, int64_t pos );
+----
+
+Toggles the bit at pos in a byte.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/toggle_byte_bit.c[]
+----

@@ -1,0 +1,605 @@
+= cDuration
+:xmpldir: ../../../test/clingo/time/cDuration
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview / Purpose
+
+The cDuration module provides the cDuration struct and functions to manipulate
+and interprete it.
+A cDuration value represents a duration of time measured in nanoseconds.
+A cDuration can be positive or negative, for both cases is the maximum value 
+15250w 1d 23h 47m 16.854775807s, thats approximately 290 years.
+Every higher/lower value will be a null cDuration value that is invalid.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cDuration']
+==== cDuration
+[source,c]
+----
+struct cDuration
+{
+   int64_t _v;
+};
+
+typedef struct cDuration cDuration;
+----
+
+The cDuration struct has just the attribute _v that safes the internal value.
+It should not be accessd directly.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cDurationSlice']
+==== cDurationSlice
+[source,c]
+----
+struct cDurationSlice
+{
+int64_t s;
+cDuration const* v;
+};
+typedef struct cDurationSlice cDurationSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cDurationSlice duration_slice_c( int64_t s, cDuration const* v );
+cDurationSlice make_duration_slice_c( cDuration const* beg,
+                                      cDuration const* end );
+cDurationSlice emtpy_duration_slice_c( void );
+/* sub */
+cDurationSlice left_duration_slice_c( cDurationSlice slice, int64_t maxLen );
+cDurationSlice mid_duration_slice_c( cDurationSlice slice, int64_t index );
+cDurationSlice right_duration_slice_c( cDurationSlice slice, int64_t maxLen );
+cDurationSlice sub_duration_slice_c( cDurationSlice slice,
+                                     int64_t begIdx,
+                                     int64_t endIdx);
+----
+
+[id='cVarDurationSlice']
+==== cVarDurationSlice
+[source,c]
+----
+struct cVarDurationSlice
+{
+int64_t s;
+cDuration* v;
+};
+typedef struct cVarDurationSlice cVarDurationSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarDurationSlice var_duration_slice_c( int64_t s, cDuration* v );
+cVarDurationSlice make_var_duration_slice_c( cDuration* beg, cDuration* end );
+cVarDurationSlice empty_var_duration_slice_c( void );
+/* sub */
+cVarDurationSlice left_var_duration_slice_c( cVarDurationSlice slice,
+                                             int64_t maxLen );
+cVarDurationSlice mid_var_duration_slice_c( cVarDurationSlice slice,
+                                            int64_t index );
+cVarDurationSlice right_var_duration_slice_c( cVarDurationSlice slice,
+                                           int64_t maxLen );
+cVarDurationSlice sub_var_duration_slice_c( cVarDurationSlice slice,
+                                            int64_t begIdx,
+                                            int64_t endIdx);
+/* var slice */
+cVarDurationSlice as_var_duration_slice_c( cVarDurationSlice slice );
+cVarDurationSlice cast_var_duration_slice_c( cVarDurationSlice slice,
+                                             cDurationSlice sub );
+int64_t set_duration_slice_c( cVarDurationSlice dst, cDurationSlice src );
+----
+
+//***************************************************************** Definitions
+=== Definitions
+
+[id='C_Week']
+==== C_Week
+[source,c]
+----
+int64_t const C_Week = 7L*24L*60L*60L*1000L*1000L*1000L;
+----
+
+Defines the multiplication factor to convert a week count to a duration value.
+
+[id='C_Day']
+==== C_Day
+[source,c]
+----
+int64_t const C_Day  = 24L*60l*60L*1000L*1000L*1000L;
+----
+
+Defines the multiplication factor to convert a day count to a duration value.
+
+[id='C_Hour']
+==== C_Hour
+[source,c]
+----
+int64_t const C_Hour = 60L*60L*1000L*1000L*1000L;
+----
+
+Defines the multiplication factor to convert a hour count to a duration value.
+
+[id='C_Min']
+==== C_Min
+[source,c]
+----
+int64_t const C_Min  = 60L*1000L*1000L*1000L;
+----
+
+Defines the multiplication factor to convert a minute count to a duration value.
+
+[id='C_Sec']
+==== C_Sec
+[source,c]
+----
+int64_t const C_Sec  = 1000L*1000L*1000L;
+----
+
+Defines the multiplication factor to convert a second count to a duration value.
+
+[id='C_Msec']
+==== C_Msec
+[source,c]
+----
+int64_t const C_Msec = 1000L*1000L;
+----
+
+Defines the multiplication factor to convert a millisecond count to a duration
+value.
+
+[id='C_Usec']
+==== C_Usec
+[source,c]
+----
+int64_t const C_Usec = 1000L;
+----
+
+Defines the multiplication factor to convert a microsecond count to a duration
+value.
+
+[id='C_Nsec']
+==== C_Nsec
+[source,c]
+----
+int64_t const C_Nsec = 1L;
+----
+
+Defines the multiplication factor to convert a nanosecond count to a duration
+value.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+Init functions
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cDuration-init.c[]
+----
+
+==== duration_c
+[source,c]
+----
+cDuration duration_c( int64_t h, int64_t m, int64_t s, int64_t n );
+----
+
+Initialise a duration with hour, minute, second and nanosecond.
+
+==== weeks_c
+[source,c]
+----
+cDuration weeks_c( int64_t weeks );
+----
+
+Creates a duration from a week count.
+
+==== days_c
+[source,c]
+----
+cDuration days_c( int64_t days );
+----
+
+Creates a duration from a day count.
+
+==== hours_c
+[source,c]
+----
+cDuration hours_c( int64_t hours );
+----
+
+Creates a duration from a hour count.
+
+==== mins_c
+[source,c]
+----
+cDuration mins_c( int64_t minutes );
+----
+
+Creates a duration from a minute count.
+
+==== secs_c
+[source,c]
+----
+cDuration secs_c( int64_t seconds );
+----
+
+Creates a duration from a second count.
+
+==== msecs_c
+[source,c]
+----
+cDuration msecs_c( int64_t milliseconds );
+----
+
+Creates a duration from a millisecond count.
+
+==== usecs_c
+[source,c]
+----
+cDuration usecs_c( int64_t microseconds );
+----
+
+Creates a duration from a microsecond count.
+
+==== nsecs_c
+[source,c]
+----
+cDuration nsecs_c( int64_t nanoseconds );
+----
+
+Creates a duration from a nanosecond count.
+
+==== null_duration_c
+[source,c]
+----
+cDuration null_duration_c( void );
+----
+
+Returns a null duration, null durations are invalid.
+
+//************************************************************************ from
+=== from
+
+==== duration_from_hmsn_c
+[source,c]
+----
+cDuration duration_from_hmsn_c( cHmsn hmsn );
+----
+
+Create a cDuration value from a cHmsn value.
+An invalid cHmsn value leads to an invalid cDuration value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/duration_from_hmsn.c[]
+----
+
+==== hmsn_from_duration_c
+[source,c]
+----
+cHmsn hmsn_from_duration_c( cDuration dur );
+----
+
+Creates a cHmsn value from a cDuration value.
+An invalid cDuration value leads to an invalid cHmsn value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/hmsn_from_duration.c[]
+----
+
+//************************************************************************ conv
+=== conv
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cDuration-conv.c[]
+----
+
+==== as_weeks_c
+[source,c]
+----
+int64_t as_weeks_c( cDuration duration );
+----
+
+Returns the duration as integer week count.
+
+==== as_days_c
+[source,c]
+----
+int64_t as_days_c( cDuration duration );
+----
+
+Returns the duration as an integer day count.
+
+==== as_hours_c
+[source,c]
+----
+int64_t as_hours_c( cDuration duration );
+----
+
+Returns the duration as an integer hour count.
+
+==== as_mins_c
+[source,c]
+----
+int64_t as_mins_c( cDuration duration );
+----
+
+Returns the duration as an integer minute count.
+
+==== as_secs_c
+[source,c]
+----
+int64_t as_secs_c( cDuration duration );
+----
+
+Returns the duration as an integer second count.
+
+==== as_msecs_c
+[source,c]
+----
+int64_t as_msecs_c( cDuration duration );
+----
+
+Returns the duration as an integer millisecond count.
+
+==== as_usecs_c
+[source,c]
+----
+int64_t as_usecs_c( cDuration duration );
+----
+
+Returns the duration as an integer microsecond count.
+
+==== as_nsecs_c
+[source,c]
+----
+int64_t as_nsecs_c( cDuration duration );
+----
+
+Returns the duration as an integer nanosecond count.
+
+==== to_time_unit_c
+[source,c]
+----
+int64_t to_time_unit_c( int64_t val, int64_t from, int64_t to );
+----
+
+Converts a duration value from one multiplication factor to another.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/to_time_unit.c[]
+----
+
+//********************************************************************* overall
+=== overall
+
+==== add_duration_c
+[source,c]
+----
+cDuration add_duration_c( cDuration a, cDuration b );
+----
+
+Adds both duration value to one single value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/add_duration.c[]
+----
+
+==== between_durations_c
+[source,c]
+----
+cDuration between_durations_c( cDuration a, cDuration b );
+----
+
+Returns the duration between two duration values.
+
+==== cmp_duration_c
+[source,c]
+----
+int cmp_duration_c( cDuration a, cDuration b );
+----
+
+Compares two duration and returns the three possible results:
+
+<0:: if a is shorter as b
+0:: if both dates are equal
+>0:: if a is longer as b
+
+==== duration_is_valid_c
+[source,c]
+----
+bool duration_is_valid_c( cDuration dur );
+----
+
+Returns true if the duration is valid, otherwise false.
+
+==== eq_duration_c
+[source,c]
+----
+bool eq_duration_c( cDuration a, cDuration b );
+----
+
+Returns true if both durations are equal, otherwise false.
+
+==== invert_duration_c
+[source,c]
+----
+cDuration invert_duration_c( cDuration dur );
+----
+
+Inverts the duration value, from positive to negative or vice versa.
+
+==== truncate_duration_c
+[source,c]
+----
+#define truncate_duration_c_( Dur, Fac )                                       \
+   trauncate_duration_c( (Dur), (Fac), ref_c_( cDuration, null_duration_c() ) )
+cDuration truncate_duration_c( cDuration dur,
+                               int64_t fac,
+                               cDuration tail[static 1] );
+----
+
+Returns the result of rounding dur toward zero to a multiple of fac, the
+truncated part of the duration can be stored in tail.
+If fac <= 0, returns the function dur unchanged. 
+
+.Example
+[source,c]
+----
+include::{xmpldir}/truncate_duration.c[]
+----
+
+//************************************************************************** io
+=== io
+
+The functions read_duration_c and write_duration_c are using the following
+format:
+
+.format
+[cols="1,2,1"]
+|===
+|w/W
+|Optional week value with a w or W after the value
+|5w or 5W
+
+|ww/WW
+|Week value with a w or W after the value
+|5w or 0W
+
+|d/D
+|Optional week value with a d or D after the value
+|6d or 6D
+
+|dd/DD
+|Week value with a d or D after the value
+|0d or 7D
+
+|h/H
+|Optional week value with a h or H after the value
+|12h or 12H
+
+|hh/HH
+|Week value with a h or H after the value
+|12h or 0H
+
+|m/M
+|Optional minute value with a m or M after the value
+|
+
+|mm/MM 
+|Minute value with a m or M after the value 
+|
+
+|s/S 
+|Optional second value with a s or S after the value 
+|
+
+|ss/SS 
+|Second value with a s or S after the value 
+|
+
+|i/I 
+|Optional millisecond value with ms or MS after the value 
+|
+
+|ii/II 
+|Millisecond value with ms or MS after the value 
+|
+
+|u/U 
+|Optional microsecond value with µs or µS after the value 
+|
+
+|uu/UU 
+|Microsecond value with µs or µS after the value 
+|
+
+|n/N
+|Optional nanosecond value with ns or NS after the value 
+|
+
+|nn/NN
+|Nanosecond value with ns or NS after the value 
+|
+
+|*U
+|Determines, based on the value, the right format _SS.N_, _II.N_, _UU.N_ or _NN_ 
+|
+
+|*l
+|Determines, based on the value, the right format _ss.n_, _ii.n_, _uu.n_ or _nn_
+|
+
+|(space)
+| Will insert a space to the output
+|
+|===
+
+==== read_duration_c
+[source,c]
+----
+#define read_duration_c( Sca, Dur )                                            \
+   read_duration_c( (Sca), (Dur), "" )
+bool read_duration_c( cScanner sca[static 1],
+                      cDuration dur[static 1],
+                      char const fmt[static 1] );
+----
+
+Reads a cDuration value from a text with a scanner.
+The 
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_duration.c[]
+----
+
+==== write_duration_c
+[source,c]
+----
+#define write_duration_c_( Rec, Dur )                                          \
+   write_duration_c( (Rec), (Dur), "" )
+bool write_duration_c( cRecorder rec[static 1],
+                       cDuration dur,
+                       char const fmt[static 1] );
+----
+
+Writes a cDuration value into the reocorder.
+The function will use "wdhm*l" as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_duration.c[]
+----

@@ -1,0 +1,112 @@
+= CByteVec
+:xmpldir: ../../../test/clingo/container/CByteVec
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the CByteVec type and the associated functions.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/CByteVec-overview.c[]
+----
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='CByteVec']
+==== CByteVec
+[source,c]
+----
+struct CByteVec;
+typedef struct CByteVec CByteVec;
+----
+
+Via the macros link:vec.html#VAL_VEC_DEF_C_[VAL_VEC_DEF_C_] and
+link:vec.html#VAL_VEC_IMPL_C_[VAL_VEC_IMPL_C_] declared and implemented struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c]
+----
+cMeta const C_ByteVecMeta;
+/* create */
+CByteVec* make_byte_vec_c( int64_t cap );
+CByteVec* new_byte_vec_c();
+/* manage */
+cByte const* data_of_byte_vec_c( CByteVec const* vec );
+cByte* var_data_of_byte_vec_c( CByteVec* vec );
+bool resize_byte_vec_c( CByteVec* vec, int64_t cap );
+cVecInfo const* info_of_byte_vec_c( CByteVec const* vec );
+/* api */
+cByte* access_byte_vec_c( CByteVec* vec, int64_t pos );
+bool add_to_byte_vec_c( CByteVec* vec, cByte val );
+bool add_array_to_byte_vec_c( CByteVec* vec, int64_t n, cByte const* arr );
+cByte const* get_from_byte_vec_c( CByteVec const* vec, int64_t pos );
+bool insert_into_byte_vec_c( CByteVec* vec, int64_t pos, cByte val );
+bool remove_from_byte_vec_c( CByteVec* vec, int64_t post );
+void set_on_byte_vec_c( CByteVec* vec, int64_t pos, cByte val );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== add_many_to_byte_vec_c
+[source,c]
+----
+#define add_many_to_byte_vec_c_( Vec, ... )                                    \
+   add_many_to_byte_vec_c( (Vec), (cBytes)slice_c_( cByte, __VA_ARGS__ ) )
+bool add_many_to_byte_vec_c( CByteVec* vec, cBytes many );
+----
+
+Adds all cByte values from the slice to the byte vector.
+
+==== slice_of_byte_vec_c
+[source,c]
+----
+cBytes slice_of_byte_vec_c( CByteVec const* vec );
+----
+
+Via the macro link:vec.html#SLICE_OF_VEC_C_[SLICE_OF_VEC_C_] implemented function.
+
+==== var_slice_of_byte_vec_c
+[source,c]
+----
+cVarBytes var_slice_of_byte_vec_c( CByteVec* vec );
+----
+
+Via the macro link:vec.html#VAR_SLICE_OF_VEC_C_[VAR_SLICE_OF_VEC_C_] implemented function.
+
+//************************************************************************** io
+=== io
+
+==== write_byte_vec_c
+[source,c]
+----
+#define write_byte_vec_c_( Rec, Vec )                                          \
+   write_byte_vec_c( (Rec), (Vec), "" )
+bool write_byte_vec_c( cRecorder rec[static 1],
+                       CByteVec const* vec,
+                       char const fmt[static 1] );
+----
+
+Writes the bytes from the byte vector in a text format into the recorder.
+It uses the same format as write_bytes_c.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_byte_vec.c[]
+----

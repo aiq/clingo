@@ -1,0 +1,524 @@
+= algo
+:xmpldir: ../../../test/clingo/lang/algo
+
+:FuncName: the name of the generated function
+:SliceType1: the type of the slice
+:SliceType2: the type of the slices
+:ValueType1: the type of the elements in the slice
+:ValueType2: the type of the elements in the slices
+:SearchType: the type of the search value
+:CmpFunc: compare function that takes the slice elements
+:CmpFuncSearch: compare function that takes the slice element as the first and search value as the second parameter
+:DoDeref: can be "*" or do_deref_c_ to dereference the pointer of the slice elements for the compare function
+:DoDerefSearch: can be "*" or do_deref_c_ to dereference the pointer for the element in the slice for the compare function
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Collection of code generation functions that are designed to be used on slices.
+
+//******************************************************************************
+//****************************************************** Code Generation Macros
+//******************************************************************************
+== Code Generation Macros
+
+//*********************************************************************** check
+=== check
+
+[id='CMP_SLICE_C_']
+==== CMP_SLICE_C_
+[source,c]
+----
+#define CMP_SLICE_C_(                                                          \
+   FuncName, SliceType, ValueType, CmpFunc, DoDeref                            \
+)
+----
+
+Generates a function that compares two slices by comparing all the elements with
+the CmpFunc function.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType2}
+ValueType:: {ValueType2}
+CmpFunc:: {CmpFunc}
+DoDeref:: {DoDeref}
+
+The generated function returns a compare function result and has the following
+signature:
+[source,c]
+----
+int FuncName( SliceType a, SliceType b );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_slice.c[]
+----
+
+[id='COUNT_EQ_C_']
+==== COUNT_EQ_C_
+[source,c]
+----
+#define COUNT_EQ_C_(                                                           \
+   FuncName, SliceType, ValueType, SearchType, CmpFunc, DoDeref                \
+)
+----
+
+Generates a function that counts the number of elements that are equal the
+searched value val.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType1}
+ValueType:: {ValueType1}
+SearchType:: {SearchType}
+CmpFunc:: {CmpFuncSearch}
+DoDeref:: {DoDerefSearch}
+
+The generated function returns the number of elements that match and has the
+following signature:
+[source,c]
+----
+int64_t FuncName( SliceType slice, SearchType val );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/count_eq.c[]
+----
+
+[id='ENDS_WITH_C_']
+==== ENDS_WITH_C_
+[source,c]
+----
+#define ENDS_WITH_C_(                                                          \
+   FuncName, SliceType, ValueType, CmpFunc, DoDeref                            \
+)
+----
+
+Generates a function that checks if a slice ends with the elements of a
+specified slice.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType2}
+ValueType:: {ValueType2}
+CmpFunc:: {CmpFunc}
+DoDeref:: {DoDeref}
+
+The generated function returns true if the slice ends with the elements from the
+needle and has the following signature:
+[source,c]
+----
+bool FuncName( SliceType slice, SliceType needle );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/ends_with.c[]
+----
+
+[id='STARTS_WITH_C_']
+==== STARTS_WITH_C_
+[source,c]
+----
+#define STARTS_WITH_C_(                                                        \
+   FuncName, SliceType, ValueType, CmpFunc, DoDeref                            \
+)
+----
+
+Generates a function that checks if a slice starts with the elements of a
+specified slice.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType2}
+ValueType:: {ValueType2}
+CmpFunc:: {CmpFunc}
+DoDeref:: {DoDeref}
+
+The generated function returns true if the slice starts with the elements from
+the needle and has the following signature:
+[source,c]
+----
+bool FuncName( SliceType slice, SliceType needle );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/starts_with.c[]
+----
+
+//************************************************************************ find
+=== find
+
+[id='BSEARCH_C_']
+==== BSEARCH_C_
+[source,c]
+----
+#define BSEARCH_C_(                                                            \
+   FuncName, SliceType, ValueType, SearchType, CmpFunc, DoDeref                \
+)
+----
+
+Generates a function that searches through a sorted slice for a value that is
+equal the searched value val.
+It is an abstract implementation of the
+link:https://en.wikipedia.org/wiki/Binary_search_algorithm[binary search algorithm].
+
+FuncName:: {FuncName}
+SliceType:: {SliceType1}
+ValueType:: {ValueType1}
+SearchType:: {SearchType}
+CmpFunc:: {CmpFuncSearch}
+DoDeref:: {DoDerefSearch}
+
+The generated function returns a pointer to the matching element and has the
+following common signature:
+[source,c]
+----
+Type* FuncName( SliceType slice, SearchType val );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/bsearch.c[]
+----
+
+[id='FIND_MAX_C_']
+==== FIND_MAX_C_
+[source,c]
+----
+#define FIND_MAX_C_(                                                           \
+   FuncName, SliceType, ValueType, CmpFunc, DoDeref                            \
+)
+----
+
+Generates a function that selects the greatest element in a slice.
+The function returns a pointer to the greatest element in the slice.
+If several elements in the slice are equivalent to the greatest element, returns
+the function a pointer to the first such element.
+Returns a NULL pointer if the slice is empty.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType1}
+ValueType:: {ValueType1}
+CmpFunc:: {CmpFuncSearch}
+DoDeref:: {DoDerefSearch}
+
+The generated function has the following common signature:
+[source,c]
+----
+ValueType* FuncName( SliceType slice );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_max.c[]
+----
+
+[id='FIND_MIN_C_']
+==== FIND_MIN_C_
+[source,c]
+----
+#define FIND_MIN_C_(                                                           \
+   FuncName, SliceType, ValueType, CmpFunc, DoDeref                            \
+)
+----
+
+Generates a function that selects the greatest element in a slice.
+The function returns a pointer to the smallest element in the slice.
+If several elements in the slice are equivalent to the smallest element, returns
+the function a pointer to the first such element.
+Returns a NULL pointer if the slice empty.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType1}
+ValueType:: {ValueType1}
+CmpFunc:: {CmpFuncSearch}
+DoDeref:: {DoDerefSearch}
+
+The generated function has the following common signature:
+[source,c]
+----
+ValueType* FuncName( SliceType slice );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_min.c[]
+----
+
+[id='FIND_VAL_C_']
+==== FIND_VAL_C_
+[source,c]
+----
+#define FIND_VAL_C_(                                                           \
+   FuncName, SliceType, ValueType, SearchType, CmpFunc, DoDeref                \
+)
+----
+
+Generates a function that select the first element that is equal the searched
+value val.
+The function returns a pointer to the first element that matches and a NULL
+pointer if the searched value does not exist in the slice.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType1}
+ValueType:: {ValueType1}
+SearchType:: {SearchType}
+CmpFunc:: {CmpFuncSearch}
+DoDeref:: {DoDerefSearch}
+
+The generated function has the following common signature:
+[source,c]
+----
+ValueType* FuncName( SliceType slice, SearchType val );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_val.c[]
+----
+
+[id='INDEX_OF_SLICE_C_']
+==== INDEX_OF_SLICE_C_
+[source,c]
+----
+#define INDEX_OF_SLICE_C_(                                                     \
+   FuncName, SliceType, ValueType, CmpFunc, DoDeref                            \
+)
+----
+
+Generates a function that returns the index where the sequence of the sub slice
+starts.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType2}
+ValueType:: {ValueType2}
+CmpFunc:: {CmpFunc}
+DoDeref:: {DoDeref}
+
+The generated function returns a positive index if the sub slice exist,
+otherwise returns the function -1.
+[source,c]
+----
+int64_t FuncName( SliceType slice, SliceType sub );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/index_of_slice.c[]
+----
+
+//****************************************************************** manipulate
+=== manipulate
+
+[id='INSERT_SLICE_C_']
+==== INSERT_SLICE_C_
+[source,c]
+----
+#define INSERT_SLICE_C_(                                                       \
+   FuncName, VarSliceType, SliceType                                           \
+)
+----
+
+Generates a function that allows to insert the elements from the source slice
+into the destination slice.
+The existing values will be moved, the overhang values at the end will be
+removed.
+
+FuncName:: {FuncName}
+VarSliceType:: the type of the destination slice
+SliceType:: the type of the source slice
+
+The generated function returns 1 if the value is inserted, otherwise 0.
+[source,c]
+----
+int64_t FuncName( VarSliceType dst, int64_t index, SliceType src );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/insert_slice.c[]
+----
+
+[id='INSERT_VAL_C_']
+==== INSERT_VAL_C_
+[source,c]
+----
+#define INSERT_VAL_C_(                                                         \
+   FuncName, VarSliceType, ValueType, InsertType, DoDeref                      \
+)
+----
+
+Generates a function that allows to insert a value into a slice.
+The existing values will be moved, the overhang value at the end will be
+removed.
+
+FuncName:: {FuncName}
+VarSliceType:: {SliceType1}
+ValueType:: {ValueType1}
+InsertType:: the type of the parameter
+DoDeref:: can be "*" to dereference the pointer of the InsertType
+
+The generated function returns the number of elements that are inserted into the
+dst slice, otherwise 0.
+[source,c]
+----
+int64_t FuncName( VarSliceType slice, int64_t index, InsertType val );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/insert_val.c[]
+----
+
+[id='QSORT_C_']
+==== QSORT_C_
+[source,c]
+----
+#define QSORT_C_(                                                              \
+   FuncName, SliceType, ValueType, CmpFunc, DoDeref                            \
+)
+----
+
+Generates a function that sorts the elements in the slice into ascending order.
+Equivalent elements are not guaranteed to keep their original relative order.
+
+FuncName:: {FuncName}
+SliceType:: {SliceType1}
+ValueType:: {ValueType1}
+CmpFunc:: {CmpFunc}
+DoDeref:: {DoDeref}
+
+The generated function has the following common signature:
+[source,c]
+----
+void FuncName( SliceType slice );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/qsort.c[]
+----
+
+[id='REVERSE_C_']
+==== REVERSE_C_
+[source,c]
+----
+#define REVERSE_C_(                                                            \
+   FuncName, SliceType, ValueType                                              \
+)
+----
+
+Generates a function that reverses the order of the elements in the slice.
+
+FuncName:: {FuncName}
+SliceType:: the type of the slice
+ValueType:: the type of the elements in the slice
+
+The generated function has the following common signature:
+[source,c]
+----
+void FuncName( SliceType slice );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/reverse.c[]
+----
+
+[id='ROTATE_C_']
+==== ROTATE_C_
+[source,c]
+----
+#define ROTATE_C_(                                                             \
+   FuncName, SliceType, ValueType                                              \
+)
+----
+
+Generates a function that allows to rotate the elements in the slice.
+A positive value rotates the elements to the right, a negative value rotates the
+elements to the left.
+
+FuncName:: {FuncName}
+SliceType:: the type of the slice
+ValueType:: the type of the elements in the slice
+
+The generated function has the following common signature:
+[source,c]
+----
+void FuncName( SliceType slice, int64_t distance );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/rotate.c[]
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************** do
+=== do
+
+[id='do_deref_c_']
+==== do_deref_c_
+[source,c]
+----
+#define do_deref_c_( Ptr )
+----
+
+Macro function that dereferences a pointer.
+
+[id='do_ref_c_']
+==== do_ref_c_
+[source,c]
+----
+#define do_ref_c_( Val )
+----
+
+Macro function that returns the pointer to a value.
+
+[id='do_nothing_c_']
+==== do_nothing_c_
+[source,c]
+----
+#define do_nothing_c_( Val )
+----
+
+Macro function that does nothing with the value, it even does not return Val.
+
+[id='do_not_deref_c_']
+==== do_not_deref_c_
+[source,c]
+----
+#define do_not_deref_c_( Ptr )
+----
+
+Macro function that returns Ptr.
+
+[id='do_not_ref_c_']
+==== do_not_ref_c_
+[source,c]
+----
+#define do_not_ref_c_( Val )
+----
+
+Macro function that returns Val.

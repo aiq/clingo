@@ -1,0 +1,394 @@
+= int64
+:xmpldir: ../../../test/clingo/type/int64
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Modue with functions and types to work with int64_t values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cInt64Slice']
+==== cInt64Slice
+[source,c]
+----
+struct cInt64Slice
+{
+   int64_t s;
+   int64_t const* v;
+};
+typedef struct cInt64Slice cInt64Slice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cInt64Slice int64_slice_c( int64_t s, int64_t const* v );
+cInt64Slice make_int64_slice_c( int64_t const* beg, int64_t const* end );
+cInt64Slice empty_int64_slice_c( void );
+/* sub */
+cInt64Slice left_int64_slice_c( cInt64Slice slice, int64_t maxLen );
+cInt64Slice mid_int64_slice_c( cInt64Slice slice, int64_t index );
+cInt64Slice right_int64_slice_c( cInt64Slice slice, int64_t maxLen );
+cInt64Slice sub_int64_slice_c( cInt64Slice slice,
+                               int64_t begIdx,
+                               int64_t endIdx );
+----
+
+[id='cVarInt64Slice']
+==== cVarInt64Slice
+[source,c]
+----
+struct cVarInt64Slice
+{
+   int64_t s;
+   int64_t* v;
+};
+typedef struct cVarInt64Slice cVarInt64Slice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarInt64Slice var_int64_slice_c( int64_t s, int64_t const* v );
+cVarInt64Slice make_var_int64_slice_c( int64_t* beg, int64_t* end );
+cVarInt64Slice empty_var_int64_slice_c( void );
+/* sub */
+cVarInt64Slice left_var_int64_slice_c( cVarInt64Slice slice, int64_t maxLen );
+cVarInt64Slice mid_var_int64_slice_c( cVarInt64Slice slice, int64_t index );
+cVarInt64Slice right_var_int64_slice_c( cVarInt64Slice slice, int64_t maxLen );
+cVarInt64Slice sub_var_int64_slice_c( cVarInt64Slice slice,
+                                      int64_t begIdx,
+                                      int64_t endIdx );
+/* var slice */
+cInt64Slice as_int64_slice_c( cVarInt64Slice slice );
+cVarInt64Slice cast_int64_slice_c( cVarInt64Slice slice, cInt64Slice sub );
+int64_t set_int64_slice_c( cVarInt64Slice dst, cInt64Slice src );
+----
+
+[id='cInt64Chunk']
+==== cInt64Chunk
+[source,c]
+----
+struct cInt64Chunk
+{
+   int64_t s;
+   int64_t const* v;
+   int64_t favSize;
+   cInt64Slice slice;
+};
+typedef struct cInt64Chunk cInt64Chunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_int64_chunk_c( cInt64Chunk chunk[static 1],
+                              int64_t s,
+                              cInt64Slice slice );
+void init_front_int64_chunk_c( cInt64Chunk chunk[static 1],
+                               int64_t s,
+                               cInt64Slice slice );
+----
+
+[id='cVarInt64Chunk']
+==== cVarInt64Chunk
+[source,c]
+----
+struct cVarInt64Chunk
+{
+   int64_t s;
+   int64_t* v;
+   int64_t favSize;
+   cInt64Slice slice;
+};
+typedef struct cVarInt64Chunk cVarInt64Chunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_int64_chunk_c( cVarInt64Chunk chunk[static 1],
+                                  int64_t s,
+                                  cVarInt64Slice slice );
+void init_front_var_int64_chunk_c( cVarInt64Chunk chunk[static 1],
+                                   int64_t s,
+                                   cVarInt64Slice slice );
+----
+
+[id='cInt64Window']
+==== cInt64Window
+[source,c]
+----
+struct cInt64Window
+{
+   int64_t s;
+   int64_t const* v;
+   int64_t favSize;
+   cInt64Slice slice;
+};
+typedef struct cInt64Window cInt64Window;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_int64_window_c( cInt64Window window[static 1],
+                               int64_t s,
+                               cInt64Slice slice );
+void init_front_int64_window_c( cInt64Window window[static 1],
+                                int64_t s,
+                                cInt64Slice slice );
+----
+
+[id='cVarInt64Window']
+==== cVarInt64Window
+[source,c]
+----
+struct cVarInt64Window
+{
+   int64_t s;
+   int64_t* v;
+   int64_t favSize;
+   cVarInt64Slice slice;
+};
+typedef struct cVarInt64Window cVarInt64Window;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_int64_window_c( cVarInt64Window window[static 1],
+                                   int64_t s,
+                                   cVarInt64Slice slice );
+void init_front_var_int64_window_c( cVarInt64Window window[static 1],
+                                    int64_t s,
+                                    cVarInt64Slice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_int64_c
+[source,c]
+----
+int cmp_int64_c( int64_t a, int64_t b );
+----
+
+Compares two int64_t values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_int64.c[]
+----
+
+[id='int64_c_']
+==== int64_c_
+[source,c]
+----
+#define int64_c_( Value )
+----
+
+Macro function that casts the Value as int64_t.
+
+//************************************************************************ conv
+=== conv
+
+==== uint64_to_int64_c
+[source,c]
+----
+bool uint64_to_int64_c( uint64_t src, int64_t dst[static 1] );
+----
+
+{Conv}
+Returns true if the uint64_t value can be represented in a int64_t variable,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/uint64_to_int64.c[]
+----
+
+//************************************************************************ swap
+=== swap
+
+==== swap_int64_c
+[source,c]
+----
+int64_t swap_int64_c( int64_t val );
+----
+
+{Swap}
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_int64.c[]
+----
+
+==== swap_int64_from_c
+[source,c]
+----
+int64_t swap_int64_from_c( int64_t val, c_ByteOrder order );
+----
+
+{SwapFrom}
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_int64_from.c[]
+----
+
+==== swap_int64_to_c
+[source,c]
+----
+int64_t swap_int64_to_c( int64_t val, c_ByteOrder order );
+----
+
+{SwapTo}
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_int64_to.c[]
+----
+
+//************************************************************************ math
+=== math
+
+==== hash_int64_c
+[source,c]
+----
+uint64_t hash_int64_c( int64_t val );
+----
+
+Returns a hash value of the int64_t value.
+
+==== next_pow2_int64_c
+[source,c]
+----
+int64_t next_pow2_int64_c( int64_t val );
+----
+
+Returns the next power of two value.
+
+//************************************************************************ algo
+=== algo
+
+==== bsearch_int64_c
+[source,c]
+----
+int64_t const* bsearch_int64_c( cInt64Slice slice, int64_t val );
+----
+
+{Bsearch}
+
+==== cmp_int64_slice_c
+[source,c]
+----
+int cmp_int64_slice_c( cInt64Slice a, cInt64Slice b );
+----
+
+{CmpSlice}
+
+==== count_eq_int64_c
+[source,c]
+----
+int64_t count_eq_int64_c( cInt64Slice slice, int64_t val );
+----
+
+{CountEq}
+
+==== find_int64_c
+[source,c]
+----
+int64_t const* find_int64_c( cInt64Slice slice, int64_t val );
+----
+
+{FindVal}
+
+==== max_int64_c
+[source,c]
+----
+int64_t const* max_int64_c( cInt64Slice slice );
+----
+
+{FindMax}
+
+==== min_int64_c
+[source,c]
+----
+int64_t const* min_int64_c( cInt64Slice slice );
+----
+
+{FindMin}
+
+==== prod_int64_c
+[source,c]
+----
+bool prod_int64_c( cInt64Slice slice, int64_t res[static 1] );
+----
+
+{Prod}
+
+==== qsort_int64_slice_c
+[source,c]
+----
+void qsort_int64_slice_c( cVarInt64Slice slice );
+----
+
+{Qsort}
+
+==== reverse_int64_slice_c
+[source,c]
+----
+void reverse_int64_slice_c( cVarInt64Slice slice );
+----
+
+{Reverse}
+
+==== rotate_int64_slice_c
+[source,c]
+----
+void rotate_int64_slice_c( cVarInt64Slice slice, int64_t distance );
+----
+
+{Rotate}
+
+==== sum_int64_c
+[source,c]
+----
+bool sum_int64_c( cInt64Slice slice, int64_t res[static 1] );
+----
+
+{Sum}

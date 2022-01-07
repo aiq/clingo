@@ -1,0 +1,338 @@
+= int8
+:xmpldir: ../../../test/clingo/type/int8
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with int8_t values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cInt8Slice']
+==== cInt8Slice
+[source,c]
+----
+struct cInt8Slice
+{
+   int64_t s;
+   int8_t const* v;
+};
+typedef struct cInt8Slice cInt8Slice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cInt8Slice int8_slice_c( int64_t s, int8_t const* v );
+cInt8Slice make_int8_slice_c( int8_t const* beg, int8_t const* end );
+cInt8Slice empty_int8_slice_c( void );
+/* sub */
+cInt8Slice left_int8_slice_c( cInt8Slice slice, int64_t maxLen );
+cInt8Slice mid_int8_slice_c( cInt8Slice slice, int64_t index );
+cInt8Slice right_int8_slice_c( cInt8Slice slice, int64_t maxLen );
+cInt8Slice sub_int8_slice_c( cInt8Slice slice,
+                             int64_t begIdx,
+                             int64_t endIdx );
+----
+
+[id='cVarInt8Slice']
+==== cVarInt8Slice
+[source,c]
+----
+struct cVarInt8Slice
+{
+   int64_t s;
+   int8_t* v;
+};
+typedef struct cVarInt8Slice cVarInt8Slice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarInt8Slice var_int8_slice_c( int64_t s, int8_t const* v );
+cVarInt8Slice make_var_int8_slice_c( int8_t* beg, int8_t* end );
+cVarInt8Slice empty_var_int8_slice_c( void );
+/* sub */
+cVarInt8Slice left_var_int8_slice_c( cVarInt8Slice slice, int64_t maxLen );
+cVarInt8Slice mid_var_int8_slice_c( cVarInt8Slice slice, int64_t index );
+cVarInt8Slice right_var_int8_slice_c( cVarInt8Slice slice, int64_t maxLen );
+cVarInt8Slice sub_var_int8_slice_c( cVarInt8Slice slice,
+                                    int64_t begIdx,
+                                    int64_t endIdx );
+/* var slice */
+cInt8Slice as_int8_slice_c( cVarInt8Slice slice );
+cVarInt8Slice cast_int8_slice_c( cVarInt8Slice slice, cInt8Slice sub );
+int64_t set_int8_slice_c( cVarInt8Slice dst, cInt8Slice src );
+----
+
+[id='cInt8Chunk']
+==== cInt8Chunk
+[source,c]
+----
+struct cInt8Chunk
+{
+   int64_t s;
+   int8_t const* v;
+   int64_t favSize;
+   cInt8Slice slice;
+};
+typedef struct cInt8Chunk cInt8Chunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_int8_chunk_c( cInt8Chunk chunk[static 1],
+                             int64_t s,
+                             cInt8Slice slice );
+void init_front_int8_chunk_c( cInt8Chunk chunk[static 1],
+                              int64_t s,
+                              cInt8Slice slice );
+----
+
+[id='cVarInt8Chunk']
+==== cVarInt8Chunk
+[source,c]
+----
+struct cVarInt8Chunk
+{
+   int64_t s;
+   int8_t* v;
+   int64_t favSize;
+   cInt8Slice slice;
+};
+typedef struct cVarInt8Chunk cVarInt8Chunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_int8_chunk_c( cVarInt8Chunk chunk[static 1],
+                                 int64_t s,
+                                 cVarInt8Slice slice );
+void init_front_var_int8_chunk_c( cVarInt8Chunk chunk[static 1],
+                                  int64_t s,
+                                  cVarInt8Slice slice );
+----
+
+[id='cInt8Window']
+==== cInt8Window
+[source,c]
+----
+struct cInt8Window
+{
+   int64_t s;
+   int8_t const* v;
+   int64_t favSize;
+   cInt8Slice slice;
+};
+typedef struct cInt8Window cInt8Window;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_int8_window_c( cInt8Window window[static 1],
+                              int64_t s,
+                              cInt8Slice slice );
+void init_front_int8_window_c( cInt8Window window[static 1],
+                               int64_t s,
+                               cInt8Slice slice );
+----
+
+[id='cVarInt8Window']
+==== cVarInt8Window
+[source,c]
+----
+struct cVarInt8Window
+{
+   int64_t s;
+   int8_t* v;
+   int64_t favSize;
+   cVarInt8Slice slice;
+};
+typedef struct cVarInt8Window cVarInt8Window;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_int8_window_c( cVarInt8Window window[static 1],
+                                  int64_t s,
+                                  cVarInt8Slice slice );
+void init_front_var_int8_window_c( cVarInt8Window window[static 1],
+                                   int64_t s,
+                                   cVarInt8Slice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_int8_c
+[source,c]
+----
+int cmp_int8_c( int8_t a, int8_t b );
+----
+
+Compares two int8_t values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_int8.c[]
+----
+
+[id='int8_c_']
+==== int8_c_
+[source,c]
+----
+#define int8_c_( Value )
+----
+
+Macro function that casts the Value as int8_t.
+
+//************************************************************************ conv
+=== conv
+
+==== int64_to_int8_c
+[source,c]
+----
+bool int64_to_int8_c( int64_t src, int8_t dst[static 1] );
+----
+
+{Conv}
+Returns true if the int64_t value can be represented in a int8_t variable,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/int64_to_int8.c[]
+----
+
+==== uint64_to_int8_c
+[source,c]
+----
+bool uint64_to_int8_c( uint64_t src, int8_t dst[static 1] );
+----
+
+{Conv}
+Returns true if the uint64_t value can be represented in a int8_t variable,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/uint64_to_int8.c[]
+----
+
+//************************************************************************ algo
+=== algo
+
+==== cmp_int8_slice_c
+[source,c]
+----
+int64_t cmp_int8_slice_c( cInt8Slice a, cInt8Slice b );
+----
+
+{CmpSlice}
+
+==== count_eq_int8_c
+[source,c]
+----
+int64_t count_eq_int8_c( cInt8Slice slice, int8_t val );
+----
+
+{CountEq}
+
+==== find_int8_c
+[source,c]
+----
+int8_t const* find_int8_c( cInt8Slice slice, int8_t val );
+----
+
+{FindVal}
+
+==== max_int8_c
+[source,c]
+----
+int8_t const* max_int8_c( cInt8Slice slice );
+----
+
+{FindMax}
+
+==== min_int8_c
+[source,c]
+----
+int8_t const* min_int8_c( cInt8Slice slice );
+----
+
+{FindMin}
+
+==== prod_int8_c
+[source,c]
+----
+bool prod_int8_c( cInt8Slice slice, int64_t res [static 1] );
+----
+
+{Prod}
+
+==== qsort_int8_slice_c
+[source,c]
+----
+void qsort_int8_slice_c( cVarInt8Slice slice );
+----
+
+{Qsort}
+
+==== reverse_int8_slice_c
+[source,c]
+----
+void reverse_int8_slice_c( cVarInt8Slice slice );
+----
+
+{Reverse}
+
+==== rotate_int8_slice_c
+[source,c]
+----
+void rotate_var_int8_slice_c( cVarInt8Slice slice, int64_t distance );
+----
+
+{Rotate}
+
+==== sum_int8_c
+[source,c]
+----
+bool sum_int8_c( cInt8Slice slice, int64_t res[static 1] );
+----
+
+{Sum}

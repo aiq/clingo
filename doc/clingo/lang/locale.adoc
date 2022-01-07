@@ -1,0 +1,62 @@
+= locale
+:xmpldir: ../../../test/clingo/lang/locale
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+[id='locale_name_buffer_c_']
+==== locale_name_buffer_c_
+[source,c]
+----
+#define locale_name_buffer_c_()
+----
+
+Creates a cVarChars buffer with enough space to write the name of a system
+locale.
+
+//********************************************************************* overall
+=== overall
+
+==== change_locale_c
+[source,c]
+----
+#define change_locale_c_( Cat, Name )                                          \
+   change_locale_c( (Cat), (Name), locale_name_buffer_c_() )
+char* change_locale_c( int category,
+                       char const name[static 1],
+                       cVarChars buf );
+----
+
+Set the system locale for a category with the name specified system locale and
+writes the current system locale into buf and returns a pointer to the value as
+C string.
+
+
+==== get_locale_c
+[source,c]
+----
+#define get_locale_c_( Cat )                                                   \
+   get_locale_c( (Cat), locale_name_buffer_c_() )
+char* get_locale_c( int category, cVarChars buf )
+----
+
+Writes the current system locale into buf and returns a pointer to the value as
+C string.
+
+==== set_locale_c
+[source,c]
+----
+bool set_locale_c( int category, char const name[static 1] );
+----
+
+Set the system locale for a category with the name specified system locale.

@@ -1,0 +1,133 @@
+= CDictionary
+:xmpldir: ../../../test/clingo/string/CDictionary
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the CDictionary and the associated functions.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/CDictionary-overview.c[]
+----
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='CDictionary']
+==== CDictionary
+[source,c]
+----
+struct CDictionary;
+typedef struct CDictionary CDictionary;
+----
+
+Via the macros link:../container/map.html#OBJ_OBJ_MAP_DEF_C_[OBJ_OBJ_MAP_DEF_C_]
+and link:../container/map.html#OBJ_OBJ_MAP_IMPL_C_[OBJ_OBJ_MAP_IMPL_C_] declared
+and implemented struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c]
+----
+cMeta const C_DictionaryMeta;
+/* create */
+CDictionary* make_dictionary_c( int64_t size, float maxLoad );
+CDictionary* new_dictionary_c();
+/* manage */
+cMapInfo const* info_of_dictionary_c( CDictionary const* map );
+bool resize_dictionary_c( CDictionary* map, int64_t cap );
+bool set_max_load_of_dictionary_c( CDictionary* map, float maxLoad );
+/* iterate */
+bool next_in_dictionary_c( CDictionary const* map, cMapItr itr[static 1] );
+bool next_var_in_dictionary_c( CDictionary* map, cVarMapItr itr[static 1] );
+/* api */
+int64_t const* get_from_dictionary_c( CDictionary const* map, int64_t const* key );
+bool in_dictionary_c( CDictionary const* map, int64_t const* key );
+bool remove_from_dictionary_c( CDictionary* map, int64_t const* key );
+bool set_on_dictionary_c( CDictionary* map, int64_t const* key, int64_t const* val );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ wrap
+=== wrap
+
+==== chars_in_dictionary_c
+[source,c]
+----
+bool chars_in_dictionary_c( CDictionary* dict, cChars key );
+----
+
+Util function that wraps in_dictionary_c.
+
+==== cstr_in_dictionary_c
+[source,c]
+----
+bool cstr_in_dictionary_c( CDictionary* dict, char const key[static 1] );
+----
+
+Util function that wraps in_dictionary_c.
+
+==== get_via_chars_from_dictionary_c
+[source,c]
+----
+CString* get_via_chars_from_dictionary_c( CDictionary* dict, cChars key );
+----
+
+Util function that wraps get_from_dictionary_c.
+
+==== get_via_cstr_from_dictionary_c
+[source,c]
+----
+CString* get_via_cstr_from_dictionary_c( CDictionary* dict,
+                                         char const key[static 1] );
+----
+
+Util function that wraps get_from_dictionary_c.
+
+==== remove_via_chars_from_dictionary_c
+[source,c]
+----
+bool remove_via_chars_from_dictionary_c( CDictionary* dict, cChars key );
+----
+
+Util function that wraps remove_from_dictionary_c.
+
+==== remove_via_cstr_from_dictionary_c
+[source,c]
+----
+bool remove_via_cstr_from_dictionary_c( CDictionary* dict,
+                                        char const key[static 1] );
+----
+
+Util function that wraps remove_from_dictionary_c.
+
+==== set_chars_on_dictionary_c
+[source,c]
+----
+bool set_chars_on_dictionary_c( CDictionary* dict, cChars key, cChars val );
+----
+
+Util function that wraps set_on_dictionary_c.
+
+==== set_cstr_on_dictionary_c
+[source,c]
+----
+bool set_cstr_on_dictionary_c( CDictionary* dict,
+                               char const key[static 1],
+                               char const val[static 1] );
+----
+
+Util function that wraps set_on_dictionary_c.
+

@@ -1,0 +1,226 @@
+= cWeekDate
+:xmpldir: ../../../test/clingo/time/cWeekDate
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cWeekDate']
+==== cWeekDate
+[source,c]
+----
+struct cWeekDate
+{
+   int32_t year;
+   int8_t week;
+   c_Weekday day;
+};
+typedef struct cWeekDate cWeekDate;
+----
+
+A cWeekDate struct represents a week date.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cWeekDateSlice']
+==== cWeekDateSlice
+[source,c]
+----
+struct cWeekDateSlice
+{
+   int64_t s;
+   cWeekDate const* v;
+};
+typedef struct cWeekDate cWeekDate;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cWeekDateSlice week_date_slice_c( int64_t s, cWeekDate const* v );
+cWeekDateSlice make_week_date_slice_c( cWeekDate const* beg,
+                                       cWeekDate const* end );
+cWeekDateSlice empty_week_date_slice_c( void );
+/* sub */
+cWeekDateSlice left_week_date_slice_c( cWeekDateSlice slice, int64_t maxLen );
+cWeekDateSlice mid_week_date_slice_c( cWeekDateSlice slice, int64_t index );
+cWeekDateSlice right_week_date_slice_c( cWeekDateSlice slice, int64_t maxLen );
+cWeekDateSlice sub_week_date_slice_c( cWeekDateSlice slice,
+                                      int64_t begIdx,
+                                      int64_t endIdx );
+----
+
+[id='cVarWeekDateSlice']
+==== cVarWeekDateSlice
+[source,c]
+----
+struct cVarWeekDateSlice
+{
+   int64_t s;
+   cWeekDate* v;
+};
+typedef struct cVarWeekDateSlice cVarWeekDateSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarWeekDateSlice var_week_date_slice_c( int64_t s, cWeekDate* v );
+cVarWeekDateSlice make_var_week_date_slice_c( cWeekDate* beg,
+                                              cWeekDate* end );
+cVarWeekDateSlice empty_var_week_date_slice_c( void );
+/* sub */
+cVarWeekDateSlice left_var_week_date_slice_c( cVarWeekDateSlice slice,
+                                              int64_t maxLen );
+cVarWeekDateSlice mid_var_week_date_slice_c( cVarWeekDateSlice slice,
+                                             int64_t index );
+cVarWeekDateSlice right_var_week_date_slcie_c( cVarWeekDateSlice slice,
+                                               int64_t maxLen );
+cVarWeekDateSlice sub_var_week_date_slice_c( cVarWeekDateSlice slice,
+                                             int64_t begIdx,
+                                             int64_t endIdx );
+/* var slice */
+cWeekDateSlice as_week_date_slice_c( cVarWeekDateSlice slice );
+cVarWeekDateSlice cast_week_date_slice_c( cVarWeekDateSlice slice,
+                                          cWeekDateSlice sub );
+int64_t set_week_date_slice_c( cVarWeekDateSlice dst, cWeekDateSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_week_date_c
+[source,c]
+----
+int cmp_week_date_c( cWeekDate a, cWeekDate b );
+----
+
+Compares two cWeekDate values and returns the three possible results:
+
+<0:: if a is earlier as b
+0:: if both dates are equal
+>0:: if a is later as b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_week_date.c[]
+----
+
+==== week_date_c
+[source,c]
+----
+cWeekDate week_date_c( int64_t year, int64_t week, int64_t day );
+----
+
+Initialise a week date with a year, week and weekday value.
+
+==== week_date_is_valid_c
+[source,c]
+----
+bool week_date_is_valid_c( cWeekDate wd );
+----
+
+Returns true if the specified week date is valid, otherwise false.
+
+//************************************************************************ from
+=== from
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cWeekDate-from.c[]
+----
+
+==== week_date_from_ymd_c
+[source,c]
+----
+cWeekDate week_date_from_ymd_c( cYmd ymd );
+----
+
+Creates a cWeekDate value from a cYmd value.
+An invalid cYmd value leads to an invalid cWeekDate value.
+
+==== ymd_from_week_date_c
+[source,c]
+----
+cYmd ymd_from_week_date_c( cWeekDate wd );
+----
+
+Creates a cYmd value from a cWeekDate value.
+An invalid cWeekDate value leads to an invalid cYmd value.
+
+//************************************************************************** io
+=== io
+
+The functions read_week_date_c and write_week_date_c are using the following
+format:
+
+.format
+[cols="1,2,1"]
+|===
+|E | The weekday as a number |1 to 7
+|EEE |The abbreviated localized weekday name |Mon to Sun
+|EEEE |The localized weekday name |Monday to Sunday
+|WW | The ISO week without a leading zero |W1 to W53
+|WWW | The ISO week with a leading zero |W01 to W53
+|XX |The ISO week date year as a two digit number |00 to 99
+|XXXX |The ISO week date year as a four digit number |like 1878
+|===
+
+==== read_week_date_c
+[source,c]
+----
+#define read_week_date_c_( Sca, Wd )                                           \
+   read_week_date_c( (Sca), (Wd), "" )
+bool read_week_date_c( cScanner sca[static 1],
+                       cWeekDate wd[static 1],
+                       char const fmt[static 1] );
+----
+
+Reads a cWeekDate value from a text with a scanner.
+The function will use C_IsoWeekDate( "XXXX-WWW-E" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_week_date.c[]
+----
+
+==== write_week_date_c
+[source,c]
+----
+#define write_week_date_c_( Rec, Wd )                                          \
+   write_week_date_c( (Rec), (Wd), "" )
+bool write_week_date_c( cRecorder rec[static 1],
+                        cWeekDate wd,
+                        char const fmt[static 1] );
+----
+
+Writes a cWeekDate value into the recorder.
+The function will use C_IsoWeekDate( "XXXX-WWW-E" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_week_date.c[]
+----
+

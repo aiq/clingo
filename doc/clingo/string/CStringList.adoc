@@ -1,0 +1,200 @@
+= CStringList
+:xmpldir: ../../../test/clingo/string/CStringList
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the CStringList type and the associated functions.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/CStringList-overview.c[]
+----
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='CStringList']
+==== CStringList
+[source,c]
+----
+struct CStringList;
+typedef struct CStringList CStringList;
+----
+
+Via the macros link:vec.html#OBJ_VEC_DEF_C_[OBJ_VEC_DEF_C_] and
+link:vec.html#OBJ_VEC_IMPL_C_[OBJ_VEC_IMPL_C_] declared and implemented struct.
+The macros declare and implement also the following functions.
+
+[source,c]
+----
+/* create */
+CStringList* make_string_list_c( int64_t cap );
+CStringList* new_string_list_c();
+/* data */
+CString* const* data_of_string_list_c( CStringList const* vec );
+CString** var_data_of_string_list_c( CStringList* vec );
+bool resize_string_list_c( CStringList* vec, int64_t cap );
+bool shrink_string_list_c( CStringList* vec );
+/* info */
+cVecInfo const* info_of_string_list_c( CStringList const* list );
+/* use */
+bool add_to_string_list_c( CStringList* vec, CString* val );
+bool add_array_to_string_list_c( CStringList* vec, int64_t n, CString* const* arr );
+CString* get_from_string_list_c( CStringList const* vec, int64_t pos );
+bool insert_into_string_list_c( CStringList* vec, int64_t pos, CString* val );
+bool remove_from_string_list_c( CStringList* vec, int64_t pos );
+void set_on_string_list_c( CStringList* vec, int64_t pos, CString* val );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== add_chars_slice_to_string_list_c
+[source,c]
+----
+bool add_chars_slice_to_string_list_c( CStringList* list, cCharsSlice slice );
+----
+
+Adds all chars as new strings to the string list.
+
+==== from_chars_slice_c
+[source,c]
+----
+CStringList* from_chars_slice_c( cCharsSlice slice );
+----
+
+Creates a new string list and adds all chars as new strings to the string list.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_chars_slice.c[]
+----
+
+//************************************************************************ wrap
+=== wrap
+
+==== add_chars_to_string_list_c
+[source,c]
+----
+bool add_chars_to_string_list_c( CStringList* list, cChars chars );
+----
+
+Util function that wraps add_to_string_list_c.
+
+==== add_cs_to_string_list_c
+[source,c]
+----
+bool add_cs_to_string_list_c( CStringList* list, char const cstr[static 1] );
+----
+
+Util function that wraps add_to_string_list_c.
+
+==== insert_chars_into_string_list_c
+[source,c]
+----
+bool insert_chars_into_string_list_c( CStringList* list,
+                                      int64_t pos,
+                                      cChars val );
+----
+
+Util function that wraps insert_into_string_list_c.
+
+==== insert_cstr_into_string_list_c
+[source,c]
+----
+bool insert_cstr_into_string_list_c( CStringList* list,
+                                     int64_t pos,
+                                     char const cstr[static 1] );
+----
+
+Util function that wraps insert_into_string_list_c.
+
+==== set_chars_on_string_list_c
+[source,c]
+----
+bool set_chars_on_string_list_c( CStringList* list, int64_t pos, cChars val );
+----
+
+Util function that wraps set_on_string_list_c.
+
+==== set_cstr_on_string_list_c
+[source,c]
+----
+bool set_cstr_on_string_list_c( CStringList* list,
+                                int64_t pos,
+                                char const cstr[static 1] );
+----
+
+Util function that wraps set_on_string_list_c.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_cstr_on_string_list.c[]
+----
+
+//************************************************************************ prop
+=== prop
+
+==== count_string_list_chars_c
+[source,c]
+----
+int64_t count_string_list_chars_c( CStringList const* list );
+----
+
+Returns the sum of all chars in the list.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/count_string_list_chars.c[]
+----
+
+==== count_string_list_runes_c
+[source,c]
+----
+int64_t count_string_list_runes_c( CStringList const* list );
+----
+
+Returns the sum of all runes in the list.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/count_string_list_runes.c[]
+----
+
+//*********************************************************************** parts
+=== parts
+
+==== join_string_list_c
+[source,c]
+----
+#define join_string_list_c_( List, CStr )                                      \
+   join_string_list_c( (List), c_c( CStr ) )
+CString* join_string_list_c( CStringList const* list, cChars sep );
+----
+
+Joins all strings in the list into a single string with each element separated
+by the given separator (sep).
+
+.Example
+[source,c]
+----
+include::{xmpldir}/join_string_list.c[]
+----

@@ -1,0 +1,73 @@
+= year
+:xmpldir: ../../../test/clingo/time/year
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Provides functions to interpret an year value.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== century_c
+[source,c]
+----
+int32_t century_c( int32_t year );
+----
+
+Returns the century part of an year value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/century.c[]
+----
+
+==== days_of_year_c
+[source,c]
+----
+int16_t days_of_year_c( int32_t year );
+----
+
+Returns the number of days the year has.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/days_of_year.c[]
+----
+
+==== is_leap_year_c
+[source,c]
+----
+bool is_leap_year_c( int32_t year );
+----
+
+Returns true if the year is a leap year, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/is_leap_year.c[]
+----
+
+==== year_in_century_c
+[source,c]
+----
+int32_t year_in_century_c( int32_t year );
+----
+
+Returns the year in the century.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/year_in_century.c[]
+----

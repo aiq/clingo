@@ -1,0 +1,490 @@
+= cChars
+:xmpldir: ../../../test/clingo/type/cChars
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+It is recommended to use cChars and cVarChars as alternative to a C-string.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cChars']
+==== cChars
+[source,c]
+----
+struct cChars
+{
+   int64_t s;
+   char const* v;
+};
+typedef struct cChars cChars;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cChars chars_c( int64_t s, char const* v );
+cChars make_chars_c( char const* beg, char const* end );
+cChars empty_chars_c( void );
+/* sub */
+cChars left_chars_c( cChars chars, int64_t maxLen );
+cChars mid_chars_c( cChars chars, int64_t index );
+cChars right_chars_c( cChars chars, int64_t maxLen );
+cChars sub_chars_c( cChars chars, int64_t begIdx, int64_t endIdx );
+----
+
+[id='cVarChars']
+==== cVarChars
+[source,c]
+----
+struct cVarChars
+{
+   int64_t s;
+   char* v;
+};
+typedef struct cVarChars cVarChars;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarChars var_chars_c( int64_t s, char* v );
+cVarChars make_var_chars_c( char* beg, char* end );
+cVarChars empty_var_chars_c( void );
+/* sub */
+cVarChars left_var_chars_c( cVarChars chars, int64_t maxLen );
+cVarChars mid_var_chars_c( cVarChars chars, int64_t index );
+cVarChars right_var_chars_c( cVarChars chars, int64_t maxLen );
+cVarChars sub_var_chars_c( cVarChars chars, int64_t begIdx, int64_t endIdx );
+/* var slice */
+cChars as_chars_c( cVarChars chars );
+cVarChars cast_chars_c( cVarChars chars, cChars sub );
+int64_t set_var_chars_c( cVarChars dst, cChars src );
+----
+
+[id='cCharChunk']
+==== cCharChunk
+[source,c]
+----
+struct cCharChunk
+{
+   int64_t s;
+   char const* v;
+   int64_t favSize;
+   cChars slice;
+};
+typedef struct cCharChunk cCharChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_char_chunk_c( cCharChunk chunk[static 1],
+                             int64_t s,
+                             cChars chars );
+void init_front_char_chunk_c( cCharChunk chunk[static 1],
+                              int64_t s,
+                              cChars chars );
+----
+
+[id='cVarCharChunk']
+==== cVarCharChunk
+[source,c]
+----
+struct cVarCharChunk
+{
+   int64_t s;
+   char* v;
+   int64_t favSize;
+   cVarChars slice;
+};
+typedef struct cVarCharChunk cVarCharChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_char_chunk_c( cVarCharChunk chunk[static 1],
+                                 int64_t s,
+                                 cVarChars chars );
+void init_front_var_char_chunk_c( cVarCharChunk chunk[static 1],
+                                  int64_t s,
+                                  cVarChars chars );
+----
+
+[id='cCharWindow']
+==== cCharWindow
+[source,c]
+----
+struct cCharWindow
+{
+   int64_t s;
+   char const* v;
+   cChars chars;
+};
+typedef struct cCharWindow cCharWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_char_window_c( cCharWindow window[static 1],
+                              int64_t s,
+                              cChars chars );
+void init_front_char_window_c( cCharWindow window[static 1],
+                               int64_t s,
+                               cChars chars );
+----
+
+[id='cVarCharWindow']
+==== cVarCharWindow
+[source,c]
+----
+struct cVarCharWindow
+{
+   int64_t s;
+   char* v;
+   cVarChars chars;
+};
+typedef struct cVarCharWindow cVarCharWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_char_window_c( cVarCharWindow window[static 1],
+                                  int64_t s,
+                                  cVarChars chars );
+void init_front_var_char_window_c( cVarCharWindow window[static 1],
+                                   int64_t s,
+                                   cVarChars chars );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== c_c
+[source,c]
+----
+cChars c_c( char const cstr[static 1] );
+----
+
+Function to create a chars value from a C-string.
+The '\0' from the c string will not be an element of chars.
+
+[id='char_buffer_c_']
+==== char_buffer_c_
+[source,c]
+----
+#define char_buffer_c_( Size )
+----
+
+Macro function that initializes a cVarChars that can store Size values.
+
+==== chars_is_c
+[source,c]
+----
+bool chars_is_c( cChars chars, char const cstr[static 1] );
+----
+
+Function that checks the elements with the help of a C-string.
+The check ignores the '\0' of the c string.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/chars_is.c[]
+----
+
+==== cstr_is_c
+[source,c]
+----
+bool cstr_is_c( char const cstr[static 1], char const exp[static 1] );
+----
+
+Function that checks if the C-string cstr equals exp.
+
+==== cstr_is_any_char_c
+[source,c]
+----
+#define cstr_is_any_char_c_( Cstr, Set )                                            \
+   cstr_is_any_char_c( (Cstr), c_c( Set ) )
+bool cstr_is_any_char_c( char const cstr[static 1], cChars set );
+----
+
+Function checks if the C-string represents any of the characters in the set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cstr_is_any_char.c[]
+----
+
+==== cstr_is_char_c
+[source,c]
+----
+bool cstr_is_char_c( char const cstr[static 1], char c );
+----
+
+Function checks if the C-string represents just one char value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cstr_is_char.c[]
+----
+
+==== eq_chars_c
+[source,c]
+----
+bool eq_chars_c( cChars a, cChars b );
+----
+
+Returns true if both chars are equal, otherwise false.
+
+==== make_cstr_c
+[source,c]
+----
+#define make_cstr_c_( Buf, Cstr )                                              \
+   make_cstr_c( (Buf), c_c( Cstr ) )
+char* make_cstr_c( cVarChars buf, cChars chars );
+----
+
+Creates a C-string in the memory of buf.
+Returns NULL if buf has not enough space to store the C-string.
+
+//************************************************************************ algo
+=== algo
+
+==== chars_ends_with_c
+[source,c]
+----
+#define chars_ends_with_c_( Chars, Cstr )                                      \
+   chars_ends_with_c( (Chars), c_c( Cstr ) )
+bool chars_ends_with_c( cChars chars, cChars needle );
+----
+
+{EndsWith}
+
+==== chars_starts_with_c
+[source,c]
+----
+#define chars_starts_with_c_( Chars, Cstr )                                    \
+   chars_starts_with_c( (Chars), c_c( Cstr ) )
+bool chars_starts_with_c( cChars chars, cChars needle );
+----
+
+{StartsWith}
+
+==== cmp_chars_c
+[source,c]
+----
+#define cmp_chars_c_( Chars, Cstr )                                            \
+   cmp_chars_c( (Chars), c_c( Cstr ) )
+int cmp_chars_c( cChars a, cChars b );
+----
+
+{CmpSlice}
+
+==== count_eq_char_c
+[source,c]
+----
+int64_t count_eq_char_c( cChars chars, char val );
+----
+
+{CountEq}
+
+==== find_any_char_c
+[source,c]
+----
+#define find_any_char_c_( Chars, Cstr )                                        \
+   find_any_char_c( (Chars), c_c( Cstr ) )
+char const* find_any_char_c( cChars chars, cChars set );
+----
+
+Returns a pointer to the first char that matches any of the characters in the
+set and NULL if non of the characters exist in the chars.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_any_char.c[]
+----
+
+==== find_char_c
+[source,c]
+----
+char const* find_char_c( cChars chars, char val );
+----
+
+{FindVal}
+
+==== index_of_chars_c
+[source,c]
+----
+#define index_of_chars_c_( Chars, Cstr )                                       \
+   index_of_chars_c( (Chars), c_c( Cstr ) )
+int64_t index_of_chars_c( cChars chars, cChars sub );
+----
+
+{IndexOfSlice}
+
+==== insert_char_c
+[source,c]
+----
+int64_t insert_char_c( cVarChars chars, int64_t index, char val );
+----
+
+{InsertVal}
+
+==== insert_chars_c
+[source,c]
+----
+#define insert_chars_c_( Chars, Index, Cstr )                                  \
+   insert_chars_c( (Chars), (Index), c_c( Cstr ) )
+int64_t insert_chars_c( cVarChars dst, int64_t index, cChars src );
+----
+
+{InsertSlice}
+
+==== qsort_chars_c
+[source,c]
+----
+void qsort_chars_c( cVarChars chars );
+----
+
+{Qsort}
+
+==== reverse_chars_c
+[source,c]
+----
+void reverse_chars_c( cVarChars chars );
+----
+
+{Reverse}
+
+==== rotate_chars_c
+[source,c]
+----
+void rotate_chars_c( cVarChars chars, int64_t distance );
+----
+
+{Rotate}
+
+//************************************************************************ trim
+=== trim
+
+==== trim_any_char_c
+[source,c]
+----
+#define trim_any_char_c_( Chars, Cstr )                                        \
+   trim_any_char_c( (Chars), c_c( Cstr ) )
+cChars trim_any_char_c( cChars chars, cChars set );
+----
+
+Returns a sub slice without all leading and trailing char values contained in
+set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/trim_any_char.c[]
+----
+
+==== trim_any_char_left_c
+[source,c]
+----
+#define trim_any_char_left_c_( Chars, Cstr )                                   \
+   trim_any_char_left_c( (Chars), c_c( Cstr ) )
+cChars trim_any_char_left_c( cChars chars, cChars set );
+----
+
+Returns a sub slice without all leading char values contained in set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/trim_any_char_left.c[]
+----
+
+==== trim_any_char_right_c
+[source,c]
+----
+#define trim_any_char_right_c_( Chars, Cstr )                                  \
+   trim_any_char_right_c( (Chars), c_c( Cstr ) )
+cChars trim_any_char_right_c( cChars chars, cChars set );
+----
+
+Returns a sub slice without all trailing char values contained in set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/trim_any_char_right.c[]
+----
+
+==== trim_char_match_c
+[source,c]
+----
+cChars trim_char_match_c( cChars chars, c_check_char check );
+----
+
+Returns a slice without all leading and trailing char values that pass the
+check.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/trim_char_match.c[]
+----
+
+==== trim_char_match_left_c
+[source,c]
+----
+cChars trim_char_match_left_c( cChars chars, c_check_char check );
+----
+
+Returns a slice without all leading char values that pass the check.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/trim_char_match_left.c[]
+----
+
+==== trim_char_match_right_c
+[source,c]
+----
+cChars trim_char_match_right_c( cChars chars, c_check_char check );
+----
+
+Returns a slice without all trailing char values that pass the check.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/trim_char_match_right.c[]
+----

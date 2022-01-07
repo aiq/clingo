@@ -1,0 +1,123 @@
+= c_ByteOrder
+:xmpldir: ../../../test/clingo/type/c_ByteOrder
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//***************************************************************** definitions
+=== definitions
+
+[id='cBYTE_ORDER_']
+==== cBYTE_ORDER_
+[source,c]
+----
+#define cBYTE_ORDER_
+----
+
+Defines the c_ByteOrder values.
+
+[id='c_ByteOrder']
+==== c_ByteOrder
+[source,c]
+----
+enum c_ByteOrder {
+   c_BigEndian = 0,
+   c_LittleEndian = 1,
+};
+type enum c_ByteOrder c_ByteOrder;
+----
+
+Enum type to represent the endiness of a system, file format or protocol.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ swap
+=== swap
+
+[id='swap_two_bytes_c_']
+==== swap_two_bytes_c_
+[source,c]
+----
+#define swap_two_bytes_c_( Data )
+----
+
+Macro function that returns a two byte long value with a changed byte order.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_two_bytes.c[]
+----
+
+[id='swap_four_bytes_c_']
+==== swap_four_bytes_c_
+[source,c]
+----
+#define swap_four_bytes_c_( Data )
+----
+
+Macro function that returns a four byte long value with a changed byte order.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_four_bytes.c[]
+----
+
+[id='swap_eight_bytes_c_']
+==== swap_eight_bytes_c_
+[source,c]
+----
+#define swap_eight_bytes_c_( Data )
+----
+
+Macro function that returns a eight byte long value with a changed byte order.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_eight_bytes.c[]
+----
+
+//************************************************************************ util
+=== util
+
+==== system_order_c
+[source,c]
+----
+c_ByteOrder system_order_c();
+----
+
+The function returns the byte order of the system.
+
+==== system_order_is_c
+[source,c]
+----
+bool system_order_is_c( c_ByteOrder order );
+----
+
+Function to check the byte order of the system.
+
+==== stringify_byte_order_c
+[source,c]
+----
+char const* stringify_byte_order_c( c_ByteOrder order );
+----
+
+Returns the string representation of a value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/stringify_byte_order.c[]
+----

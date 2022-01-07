@@ -1,0 +1,684 @@
+= cRecorder
+:xmpldir: ../../../test/clingo/io/cRecorder
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the cRecorder and functions to write data on a memory block.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cRecorder']
+==== cRecorder
+[source,c]
+----
+struct cRecorder
+{
+   int64_t pos;
+   int64_t space;
+   void*   mem;
+   int     err;
+};
+typedef struct cRecorder cRecorder;
+----
+
+cRecorder allows to record data on a memory block.
+The mem pointer points to the next byte that will be set.
+The pos value shows how much bytes are allready set.
+The space value tells how much bytes in the memory block are not set.
+The err value can be set to indicate the type of error that occurred.
+
+[id='cRecordMarker']
+==== cRecordMarker
+[source,c]
+----
+struct cRecordMarker
+{
+   cRecorder* x;
+   int64_t startPos;
+   int64_t lastPos;
+};
+typedef struct cRecordMarker cRecordMarker;
+----
+
+cRecordMarker allows to trace how much bytes of the memory block are recorded.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+[id='heap_recorder_c_']
+==== heap_recorder_c_
+[source,c]
+----
+#define heap_recorder_c_( Size )
+----
+
+Allocates a byte array at the heap and assigns the memory to a new created
+recorder.
+
+[id='make_recorder_c_']
+==== make_recorder_c_
+[source,c]
+----
+#define make_recorder_c_( Size, Memory )
+----
+
+Creates a recorder with the allready allocated memory.
+
+[id='null_recorder_c_']
+==== null_recorder_c_
+[source,c]
+----
+#define null_recorder_c_()
+----
+
+Creates a recorder where all attributes are set to 0 and NULL.
+
+[id='recorder_c_']
+==== recorder_c_
+[source,c]
+----
+#define recorder_c_( Size )
+----
+
+Allocates a byte array at the stack and assigns the memory to the recorder.
+
+//************************************************************************* mem
+=== mem
+
+==== alloc_recorder_mem_c
+[source,c]
+----
+bool alloc_recorder_mem_c( cRecorder rec[static 1], int64_t size );
+----
+
+Allocates a block of bytes of memory and assigns it to the recorder.
+If the allocation fails returns the function false, otherwise true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/alloc_recorder_mem.c[]
+----
+
+==== realloc_recorder_mem_c
+[source,c]
+----
+bool realloc_recorder_mem_c( cRecorder rec[static 1], int64_t size );
+----
+
+Changes the block of memory used by the recorder.
+If the reallocation fails returns the function false, otherwise true.
+
+A shrinked memory moves also the pos value of the recorder to stay in range.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/realloc_recorder_mem.c[]
+----
+
+==== free_recorder_mem_c
+[source,c]
+----
+void free_recorder_mem_c( cRecorder rec[static 1] );
+----
+
+Frees the block of memory that the recorder uses.
+
+==== recorder_cap_c
+[source,c]
+----
+int64_t recorder_cap_c( cRecorder const rec[static 1] );
+----
+
+Returns the size of the block of memory that the recorder uses.
+
+//************************************************************************ move
+=== move
+
+==== move_recorder_c
+[source,c]
+----
+bool move_recorder_c( cRecorder rec[static 1], int64_t offset );
+----
+
+Moves the recorder forward or backward.
+The function blocks attempts to move the recorder out of range and returns in
+this cases false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/move_recorder.c[]
+----
+
+==== move_recorder_to_c
+[source,c]
+----
+bool move_recorder_to_c( cRecorder rec[static 1], int64_t pos );
+----
+
+Moves the recorder to position pos in the memory.
+If the pos value is out of range will the recorder not be moved and the function
+returns false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/move_recorder_to.c[]
+----
+
+==== reset_recorder_c
+[source,c]
+----
+void reset_recorder_c( cRecorder rec[static 1] );
+----
+
+Resets the recorder to the beginning of the memory.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/reset_recorder.c[]
+----
+
+//*********************************************************************** error
+=== error
+
+==== record_error_c
+[source,c]
+----
+bool record_error_c( cRecorder rec[static 1], int err );
+----
+
+Sets the err value on the recorder and returns allways false.
+
+//********************************************************************** access
+=== access
+
+==== recorded_bytes_c
+[source,c]
+----
+cBytes recorded_bytes_c( cRecorder const rec[static 1] );
+----
+
+Util function to access the recoreded block of the memory as byte slice.
+
+==== recorded_chars_c
+[source,c]
+----
+cChars recorded_chars_c( cRecorder const rec[static 1] );
+----
+
+Util function to access the recorded block of the memory as chars.
+
+==== recorded_is_c
+[source,c]
+----
+bool recorded_is_c( cRecorder const rec[static 1], char const cstr[static 1] );
+----
+
+Util function to check the recorded chars.
+
+==== recorded_var_bytes_c
+[source,c]
+----
+cVarBytes recorded_var_bytes_c( cRecorder rec[static 1] );
+----
+
+Util function to access the recorded block of the memory as byte slice with
+variable elements.
+
+==== recorded_var_chars_c
+[source,c]
+----
+cVarChars recorded_var_chars_c( cRecorder rec[static 1] );
+----
+
+Util function to access the recorded block of the memory as chars with
+variable elements.
+
+//********************************************************************** record
+=== record
+
+==== record_bytes_c
+[source,c]
+----
+bool record_bytes_c( cRecorder rec[static 1], cBytes slice );
+----
+
+Writes the byte values of the byte slice to the memory of the recorder.
+Returns true if all byte values can be written, otherwise false.
+
+==== record_chars_c
+[source,c]
+----
+#define record_chars_c_( Rec, Cstr )                                           \
+   record_chars_c( (Rec), c_c( Cstr ) )
+bool record_chars_c( cRecorder rec[static 1], cChars chars );
+----
+
+Writes the char values of the chars to the memory of the recorder.
+Returns true if all char values can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_chars.c[]
+----
+
+==== record_chars_slice_c
+[source,c]
+----
+#define record_chars_slice_c_( Rec, Slice, Sep )                               \
+   record_chars_slice_c( (Rec), (Slice), c_c( Sep ) )
+bool record_chars_slice_c( cRecorder rec[static 1],
+                           cCharsSlice slice,
+                           cChars sep );
+----
+
+Writes the char values of all chars in the slice to the memory of the recorder.
+Each element will be separated by the chars in the given separator (sep).
+Returns true if all char values can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_chars_slice.c[]
+----
+
+==== record_cstr_c
+[source,c]
+----
+bool record_cstr_c( cRecorder rec[static 1], char const str[static 1] );
+----
+
+Writes all char values of a C-string, including the '\0' at the end, to the
+memory of the recorder.
+Returns true if all char values can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_cstr.c[]
+----
+
+==== record_endl_c
+[source,c]
+----
+bool record_endl_c( cRecorder rec[static 1] );
+----
+
+Writes a new-line char to the memory of the recorder.
+Returns true if the char value can be written, otherwise false.
+
+==== record_ends_c
+[source,c]
+----
+bool record_ends_c( cRecorder rec[static 1] );
+----
+
+Writes a null char to the memory of the recorder.
+Returns true if the char value can be written, otherwise false.
+
+==== record_mem_c
+[source,c]
+----
+bool record_mem_c( cRecorder rec[static 1], void const* mem, int64_t len );
+----
+
+Writes with the value len defined number of bytes to the memory of the recorder.
+Returns true if all bytes can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_mem.c[]
+----
+
+==== record_pad_c
+[source,c]
+----
+bool record_pad_c( cRecorder rec[static 1], char c, size_t n );
+----
+
+Repeats the writing of c to the memory of the recorder n times.
+Returns true if the writing can be executed, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_pad.c[]
+----
+
+==== recordf_c
+[source,c]
+----
+bool recordf_c( cRecorder rec[static 1], char const format[static 1], ... );
+----
+
+Writes a custom text(format) to the memory of the recorder.
+If format includes format specifiers (subsequences beginning with %), the
+additional arguments following format are formatted and inserted in the
+resulting string replacing their respective specifiers.
+
+The format string follows the same specifications as format in printf.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/recordf.c[]
+----
+
+//***************************************************************** record type
+=== record type
+
+==== record_byte_c
+[source,c]
+----
+bool record_byte_c( cRecorder rec[static 1], cByte val );
+----
+
+Writes the byte to the memory of the recorder.
+Returns true if the byte value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_byte.c[]
+----
+
+==== record_char_c
+[source,c]
+----
+bool record_char_c( cRecorder rec[static 1], char val );
+----
+
+Writes the char to the memory of the recorder.
+Returns true if the char value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_char.c[]
+----
+
+==== record_rune_c
+[source,c]
+----
+bool record_rune_c( cRecorder rec[static 1], cRune r );
+----
+
+Writes a valid rune to the memory of the recorder.
+Returns false if the rune is invalid or not enough space exist.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_rune.c[]
+----
+
+==== record_int8_c
+[source,c]
+----
+bool record_int8_c( cRecorder rec[static 1], int8_t val );
+----
+
+Writes the int8_t to the memory of the recorder.
+Returns true if the int8_t value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_int8.c[]
+----
+
+==== record_int16_c
+[source,c]
+----
+bool record_int16_c( cRecorder rec[static 1], int16_t val );
+----
+
+Writes the int16_t to the memory of the recorder.
+Returns true if all bytes of the int16_t value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_int16.c[]
+----
+
+==== record_int32_c
+[source,c]
+----
+bool record_int32_c( cRecorder rec[static 1], int32_t val );
+----
+
+Writes the int32_t to the memory of the recorder.
+Returns true if all bytes of the int32_t value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_int32.c[]
+----
+
+==== record_int64_c
+[source,c]
+----
+bool record_int64_c( cRecorder rec[static 1], int64_t val );
+----
+
+Writes the int64_t to the memory of the recorder.
+Returns true if all bytes of the int64_t value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_int64.c[]
+----
+
+==== record_uint8_c
+[source,c]
+----
+bool record_uint8_c( cRecorder rec[static 1], uint8_t val );
+----
+
+Writes the uint8_t to the memory of the recorder.
+Returns true if the uint8_t value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_uint8.c[]
+----
+
+==== record_uint16_c
+[source,c]
+----
+bool record_uint16_c( cRecorder rec[static 1], uint16_t val );
+----
+
+Writes the uint16_t to the memory of the recorder.
+Returns true if all bytes of the uint16_t value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_uint16.c[]
+----
+
+==== record_uint32_c
+[source,c]
+----
+bool record_uint32_c( cRecorder rec[static 1], uint32_t val );
+----
+
+Writes the uint32_t to the memory of the recorder.
+Returns true if all bytes of the uint32_t value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_uint32.c[]
+----
+
+==== record_uint64_c
+[source,c]
+----
+bool record_uint64_c( cRecorder rec[static 1], uint64_t val );
+----
+
+Writes the uint64_t to the memory of the recorder.
+Returns true if all bytes of the uint64_t value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_uint64.c[]
+----
+
+==== record_float_c
+[source,c]
+----
+bool record_float_c( cRecorder rec[static 1], float val );
+----
+
+Writes the float to the memory of the recorder.
+Returns true if all bytes of the float value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_float.c[]
+----
+
+==== record_double_c
+[source,c]
+----
+bool record_double_c( cRecorder rec[static 1], double val );
+----
+
+Writes the double to the memory of the recorder.
+Returns true if all bytes of the double value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_double.c[]
+----
+
+//********************************************************************** marker
+=== marker
+
+[id='record_marker_c_']
+==== record_marker_c_
+[source,c]
+----
+#define record_marker_c_( Rec )
+----
+
+Creates a marker for the recorder Rec.
+
+==== trace_full_record_c
+[source,c]
+----
+int64_t trace_record_c( cRecordMarker rm[static 1] );
+----
+
+Returns the number of bytes that are recorded since the creation of the marker.
+
+==== trace_record_c
+[source,c]
+----
+int64_t trace_record_c( cRecordMarker rm[static 1] );
+----
+
+Returns the number of bytes that are recorded since the last call of the
+function.
+
+==== undo_record_c
+[source,c]
+----
+bool undo_record_c( cRecordMarker rm[static 1] );
+----
+
+Moves the recorder back to the creation of the marker.
+
+==== undo_record_error_c
+[source,c]
+----
+bool undo_record_error_c( CRecordMarker rm[static 1], int err );
+----
+
+Moves the recorder back to the creation of the marker, sets the err value on the
+recorder and returns allways false.
+
+//************************************************************************ util
+=== util
+
+==== print_recorded_c
+[source,c]
+----
+void print_recorded_c( cRecorder rec[static 1] );
+----
+
+Prints the recorded bytes as characters to stdout.
+
+==== print_scope_c_
+[source,c]
+----
+#define print_scope_c_( Rec, Size )
+----
+
+Macro to define a for statement that defines a recorder instance and to loops
+one time.
+The recorded bytes will be printed as characters to stdout.
+
+==== println_recorded_c
+[source,c]
+----
+void println_recorded_c( cRecorder rec[static 1] );
+----
+
+Prints the recoreded bytes as characters to stdout and appends '\n' at the end.
+
+==== println_scope_c_
+[source,c]
+----
+#define println_scope_c_( Rec, Size )
+----
+
+Macro to define a for statement that defines a recorder instance and to loops
+one time.
+The recorded bytes will be printed as characters to stdout and appends '\n' at
+the end.
+
+==== turn_into_cstr_c
+[source,c]
+----
+char* turn_into_cstr_c( cRecorder rec[static 1] );
+----
+
+Records if necessary a null character, moves the recorder to the beginning and
+returns the recorded memory as C string.
+Returns NULL if the function can not finish the memory with a null character.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/turn_into_cstr.c[]
+----
+
+

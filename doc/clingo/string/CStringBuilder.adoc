@@ -1,0 +1,194 @@
+= CStringBuilder
+:xmpldir: ../../../test/clingo/string/CStringBuilder
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the CStringBuilder and functions to build a string.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/CStringBuilder-overview.c[]
+----
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='C_StringBuilderMeta']
+==== C_StringBuilderMeta
+[source,c]
+----
+cMeta const C_StringBuilderMeta;
+----
+
+Stores the cMeta instance that all CStringBuilder instances reference.
+
+[id='CStringBuilder']
+==== CStringBuilder
+[source,c]
+----
+struct CStringBuilder
+typedef struct CStringBuilder CStringBuilder
+----
+
+Abstract type that represents a string builder.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************** create
+=== create
+
+==== make_string_builder_c
+[source,c]
+----
+CStringBuilder* make_string_builder_c( int64_t cap );
+----
+
+Creates a string builder instance.
+The cap value defines how much the initiale capacity should be.
+
+==== new_string_builder_c
+[source,c]
+----
+CStringBuilder* new_string_builder_c();
+----
+
+Creates a string builder instance.
+
+//********************************************************************** manage
+=== manage
+
+==== reset_string_builder_c
+[source,c]
+----
+void reset_string_builder_c( CStringBuilder* builder );
+----
+
+Resets the builder.
+
+==== resize_string_builder_c
+[source,c]
+----
+bool resize_string_builder_c( CStringBuilder* builder, int64_t cap );
+----
+
+Allows to grow or reduce the capacity of a string builder.
+
+==== string_builder_byte_length_c
+[source,c]
+----
+int64_t string_builder_byte_length_c( CStringBuilder* builder );
+----
+
+Returns the byte length of the built string without the '\0' character at the
+end.
+
+==== string_builder_cap_c
+[source,c]
+----
+int64_t string_builder_cap_c( CStringBuilder* builder );
+----
+
+Returns the capacity of the string builder.
+
+==== string_builder_length_c
+[source,c]
+----
+int64_t string_builder_length_c( CStringBuilder* builder );
+----
+
+Returns the number of runes of the built string without the '\0' character at
+the end.
+
+==== string_builder_space_c
+[source,c]
+----
+int64_ string_builder_space_c( CStringBuilder* builder );
+----
+
+Returns the number of bytes that are not allready used.
+
+//********************************************************************** access
+=== access
+
+==== built_chars_c
+----
+cChars built_chars_c( CStringBuilder const* builder );
+----
+
+Returns the built string as chars.
+
+==== build_cstr_c
+----
+char const* built_cstr_c( CStringBuilder const* builder );
+----
+
+Returns the built string as C string.
+
+==== turn_into_string_c
+----
+CString* turn_into_string_c( CStringBuilder* builder );
+----
+
+Converts the built string to a CString instance.
+The builder transfers the ownership of the internal C string to the CString and
+the builder will have 0 capacity.
+
+//********************************************************************** append
+=== append
+
+==== append_char_c
+[source,c]
+----
+bool append_char_c( CStringBuilder* builder, char c );
+----
+
+Appends a char to the string builder.
+
+==== append_chars_c
+[source,c]
+----
+bool append_chars_c( CStringBuilder* builder, cChars chars );
+----
+
+Appends chars to the string builder.
+
+==== append_cstr_c
+[source,c]
+----
+bool append_cstr_c( CStringBuilder* builder, char const cstr[static 1] );
+----
+
+Appends a C string to the string builder.
+
+==== append_recorded_c
+[source,c]
+----
+bool append_recorded_c( CStringBuilder* builder, cRecorder rec[static 1] );
+----
+
+Appends the recorded chars to the string builder.
+
+==== append_rune_c
+[source,c]
+----
+bool append_rune_c( CStringBuilder* builder, cRune r );
+----
+
+Appends a rune to the string builder.
+
+==== append_string_c
+[source,c]
+----
+bool append_string_c( CStringBuilder* builder, CString const* str );
+----
+
+Appends a string to the string builder.

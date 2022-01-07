@@ -1,0 +1,69 @@
+= cStopwatch
+:xmpldir: ../../../test/clingo/time/cStopwatch
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Provides a struct and a set of functions that can be used to accurately measure
+elapsed time.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cStopwatch']
+==== cStopwatch
+[source,c]
+----
+struct cStopwatch
+{
+   cTimestamp start;
+   cTimestamp end;
+};
+typedef struct cStopwatch cStopwatch;
+----
+
+Struct to measure elapsed time.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== check_stopwatch_c
+[source,c]
+----
+cDuration check_stopwatch_c( cStopwatch sw[static 1] );
+----
+
+Returns the elapsed time since the start.
+
+==== restart_stopwatch_c
+[source,c]
+----
+cDuration restart_stopwatch_c( cStopwatch sw[static 1] );
+----
+
+Restarts the stopwatch and returns the elapsed time since the last start.
+
+==== start_stopwatch_c
+[source,c]
+----
+void start_stopwatch_c( cStopwatch sw[static 1] );
+----
+
+Starts the stopwatch.
+
+==== stop_stopwatch_c
+[source,c]
+----
+cDuration stop_stopwatch_c( cStopwatch sw[static 1] );
+----
+
+Stops the stopwatch and returns the elapsed time.

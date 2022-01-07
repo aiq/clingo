@@ -1,0 +1,233 @@
+= cOrdinalDate
+:xmpldir: ../../../test/clingo/time/cOrdinalDate
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cOrdinalDate']
+==== cOrdinalDate
+[source,c]
+----
+struct cOrdinalDate
+{
+   int32_t year;
+   int16_t day;
+};
+typedef struct cOrdinalDate cOrdinalDate;
+----
+
+A cOrdinalDate struct represents a ordinal date.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cOrdinalDateSlice']
+==== cOrdinalDateSlice
+[source,c]
+----
+struct cOrdinalDateSlice
+{
+   int64_t s;
+   cOrdinalDate const* v;
+};
+typedef struct cOrdinalDate cOrdinalDate;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cOrdinalDateSlice ordinal_date_slice_c( int64_t s, cOrdinalDate const* v );
+cOrdinalDateSlice make_ordinal_date_slice_c( cOrdinalDate const* beg,
+                                             cOrdinalDate const* end );
+cOrdinalDateSlice empty_ordinal_date_slice_c( void );
+/* sub */
+cOrdinalDateSlice left_ordinal_date_slice_c( cOrdinalDateSlice slice,
+                                             int64_t maxLen );
+cOrdinalDateSlice mid_ordinal_date_slice_c( cOrdinalDateSlice slice,
+                                            int64_t index );
+cOrdinalDateSlice right_ordinal_date_slice_c( cOrdinalDateSlice slice,
+                                              int64_t maxLen );
+cOrdinalDateSlice sub_ordinal_date_slice_c( cOrdinalDateSlice slice,
+                                            int64_t begIdx,
+                                            int64_t endIdx );
+----
+
+[id='cVarOrdinalDateSlice']
+==== cVarOrdinalDateSlice
+[source,c]
+----
+struct cVarOrdinalDateSlice
+{
+   int64_t s;
+   cOrdinalDate* v;
+};
+typedef struct cVarOrdinalDateSlice cVarOrdinalDateSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarOrdinalDateSlice var_ordinal_date_slice_c( int64_t s, cOrdinalDate* v );
+cVarOrdinalDateSlice make_var_ordinal_date_slice_c( cOrdinalDate* beg,
+                                                    cOrdinalDate* end );
+cVarOrdinalDateSlice empty_var_ordinal_date_slice_c( void );
+/* sub */
+cVarOrdinalDateSlice left_var_ordinal_date_slice_c( cVarOrdinalDateSlice slice,
+                                                    int64_t maxLen );
+cVarOrdinalDateSlice mid_var_ordinal_date_slice_c( cVarOrdinalDateSlice slice,
+                                                   int64_t index );
+cVarOrdinalDateSlice right_var_ordinal_date_slcie_c( cVarOrdinalDateSlice slice,
+                                                     int64_t maxLen );
+cVarOrdinalDateSlice sub_var_ordinal_date_slice_c( cVarOrdinalDateSlice slice,
+                                                   int64_t begIdx,
+                                                   int64_t endIdx );
+/* var slice */
+cOrdinalDateSlice as_ordinal_date_slice_c( cVarOrdinalDateSlice slice );
+cVarOrdinalDateSlice cast_ordinal_date_slice_c( cVarOrdinalDateSlice slice,
+                                                cOrdinalDateSlice sub );
+int64_t set_ordinal_date_slice_c( cVarOrdinalDateSlice dst,
+                                  cOrdinalDateSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_ordinal_date_c
+[source,c]
+----
+int cmp_ordinal_date_c( cOrdinalDate a, cOrdinalDate b );
+----
+
+Compares two cOrdinalDate values and returns the three possible results:
+
+<0:: if a is earlier as b
+0:: if both dates are equal
+>0:: if a is later as b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_ordinal_date.c[]
+----
+
+==== ordinal_date_c
+[source,c]
+----
+cOrdinalDate ordinal_date_c( int64_t year, int64_t day );
+----
+
+Initialise a ordinal date with a year and day value.
+
+==== ordinal_date_is_valid_c
+[source,c]
+----
+bool ordinal_date_is_valid_c( cOrdinalDate od );
+----
+
+Returns true if the specified ordinal date is valid, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/ordinal_date_is_valid.c[]
+----
+
+//************************************************************************ from
+=== from
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cOrdinalDate-from.c[]
+----
+
+==== ordinal_date_from_ymd_c
+[source,c]
+----
+cOrdinalDate ordinal_date_from_ymd_c( cYmd ymd );
+----
+
+Creates a cOrdinalDate value from a cYmd value.
+An invalid cYmd value leads to an invalid cOrdinalDate value.
+
+==== ymd_from_ordinal_date_c
+[source,c]
+----
+cYmd ymd_from_ordinal_date_c( cOrdinalDate od );
+----
+
+Creates a cYmd valud from a cOrdinalDate value.
+An invalid cOrdinalDate value leads to an invalid cYmd value.
+
+//************************************************************************** io
+=== io
+
+The functions read_ordinal_date_c and write_ordinal_date_c are using the
+following format:
+
+.format
+[cols="1,2,1"]
+|===
+|C |The day of year as a number without a leading character |1 to 365
+|__C |The day of year as a number with leading spaces |1 to 365
+|CCC |The day of year as a number with leading zeros |001 to 365
+|YY |The year as a two digit number |00 to 99
+|YYYY |The year as a four digit number |like 1878
+|===
+
+==== read_ordinal_date_c
+[source,c]
+----
+#define read_ordinal_date_c_( Sca, Od )                                        \
+   read_ordinal_day_c( (Sca), (Od), "" )
+bool read_ordinal_date_c( cScanner sca[static 1],
+                          cOrdinalDate od[static 1], 
+                          char const fmt[static 1] );
+----
+
+Reads a cOrdinalDate value from a text with a scanner.
+The function will use C_IsoOrdinalDate( "YYYY-CCC" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_ordinal_date.c[]
+----
+
+==== write_ordinal_date_c
+[source,c]
+----
+#define write_ordinal_date_c_( Rec, Od )                                       \
+   write_ordinal_date_c( (Rec), (Od), "" )
+bool write_ordinal_date_c( cRecorder rec[static 1],
+                           cOrdinalDate od,
+                           char const fmt[static 1] );
+----
+
+Writes a cOrdinalDate value into the recorder.
+The function will use C_IsoOrdinalDate( "YYYY-CCC" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_ordinal_date.c[]
+----
+

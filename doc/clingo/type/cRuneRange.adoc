@@ -1,0 +1,110 @@
+= cRange
+:xmpldir: ../../../test/clingo/type/cRuneRange
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with a cRuneRange values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cRuneRange-overview.c[]
+----
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cRuneRange']
+==== cRuneRange
+[source,c]
+----
+struct cRuneRange
+{
+   int64_t min;
+   int64_t max;
+};
+typedef struct cRuneRange cRuneRange;
+----
+
+A cRuneRange is bounded inclusively below and above [min..max].
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+==== build_rune_range_c
+[source,c]
+----
+cRuneRange build_rune_range_c( cRune min, cRune max );
+----
+
+Creates a cRuneRange.
+
+==== make_rune_range_c
+[source,c]
+----
+cRuneRange make_rune_range_c( cChars min, cChars max );
+----
+
+Creates a cRuneRange from the UTF-8 encoded code points at the front.
+
+==== rune_range_c
+[source,c]
+----
+cRuneRange rune_range_c( char const min[static 1], char const max[static 1] );
+----
+
+Creates a cRuneRange from the UTF-8 encoded code points at the front.
+
+==== utf16_rune_range_c
+[source,c]
+----
+cRuneRange utf16_rune_range_c( uint16_t min, uint16_t max );
+----
+
+Creates a cRuneRange from a UTF-16 encoded code points.
+
+==== utf32_rune_range_c
+[source,c]
+----
+cRuneRange utf32_rune_range_c( uint32_t min, uint32_t max );
+----
+
+Creates a cRuneRange from a UTF-32 encoded code points.
+
+//******************************************************************* */ overall
+=== overall
+
+==== eq_rune_range_c
+[source,c]
+----
+bool eq_rune_range_c( cRuneRange a, cRuneRange b );
+----
+
+==== in_rune_range_c
+[source,c]
+----
+#define in_rune_range_c_( Range, Cstr )                                        \
+   in_rune_range_c( (Range), rune_c( Cstr ) )
+bool in_rune_range_c( cRuneRange range, cRune r );
+----
+
+Returns true if r is greater or equal than min and less or equal than max,
+otherwise false.
+
+==== rune_range_is_valid_c
+[source,c]
+----
+bool rune_range_is_valid_c( cRuneRange range );
+----

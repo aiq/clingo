@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" viewBox="162.5 143.5 538 176" width="538" height="176">
+  <defs>
+    <font-face font-family="Helvetica" font-size="16" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="532.22656" cap-height="719.7266" ascent="770.0195" descent="-229.98047" font-weight="700">
+      <font-face-src>
+        <font-face-name name="Helvetica-Bold"/>
+      </font-face-src>
+    </font-face>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="black">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledBall_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-7 -4 8 8" markerWidth="8" markerHeight="8" color="black">
+      <g>
+        <circle cx="-2.9999986" cy="0" r="2.99999734868332" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.9.4 
+    <dc:date>2019-03-04 20:21:25 +0000</dc:date>
+  </metadata>
+  <g id="Arbeitsfl_che_1" fill="none" fill-opacity="1" stroke-dasharray="none" stroke-opacity="1" stroke="none">
+    <title>Arbeitsfläche 1</title>
+    <g id="Arbeitsfl_che_1: Ebene 1">
+      <title>Ebene 1</title>
+      <g id="Group_30">
+        <title>array-seq</title>
+        <g id="Graphic_2">
+          <title>array-0</title>
+          <rect x="300" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(305 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="10.113281" y="15">p</tspan>
+          </text>
+        </g>
+        <g id="Graphic_3">
+          <title>array-1</title>
+          <rect x="340" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(345 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="12.777344" y="15">i</tspan>
+          </text>
+        </g>
+        <g id="Graphic_4">
+          <title>array-2</title>
+          <rect x="380" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(385 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="10.113281" y="15">n</tspan>
+          </text>
+        </g>
+        <g id="Graphic_5">
+          <title>array-3</title>
+          <rect x="420" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(425 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="10.550781" y="15">e</tspan>
+          </text>
+        </g>
+        <g id="Graphic_6">
+          <title>array-4</title>
+          <rect x="460" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(465 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="10.550781" y="15">a</tspan>
+          </text>
+        </g>
+        <g id="Graphic_7">
+          <title>array-5</title>
+          <rect x="500" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(505 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="10.113281" y="15">p</tspan>
+          </text>
+        </g>
+        <g id="Graphic_8">
+          <title>array-6</title>
+          <rect x="540" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(545 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="10.113281" y="15">p</tspan>
+          </text>
+        </g>
+        <g id="Graphic_9">
+          <title>array-7</title>
+          <rect x="580" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(585 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="12.777344" y="15">l</tspan>
+          </text>
+        </g>
+        <g id="Graphic_10">
+          <title>array-8</title>
+          <rect x="620" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(625 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="10.550781" y="15">e</tspan>
+          </text>
+        </g>
+        <g id="Graphic_11">
+          <title>array-9</title>
+          <rect x="660" y="279" width="40" height="40" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(665 289.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="8.328125" y="15">\0</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Line_17">
+        <title>pineapple-ptr</title>
+        <line x1="272.87598" y1="211.10362" x2="304.59955" y2="270.27486" marker-end="url(#FilledArrow_Marker)" marker-start="url(#FilledBall_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Group_32">
+        <title>pineapple-slice</title>
+        <g id="Graphic_12">
+          <title>s</title>
+          <text transform="translate(241 171.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x=".38671875" y="15">s</tspan>
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" y="15">:</tspan>
+          </text>
+        </g>
+        <g id="Graphic_14">
+          <title>s-val</title>
+          <text transform="translate(266 171.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="3.0507812" y="15">9</tspan>
+          </text>
+        </g>
+        <g id="Graphic_15">
+          <title>v</title>
+          <text transform="translate(241 196.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x=".38671875" y="15">v</tspan>
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" y="15">:</tspan>
+          </text>
+        </g>
+        <g id="Graphic_18">
+          <title>name</title>
+          <text transform="translate(224 146.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="1.6601562" y="15">pineapple</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Group_29">
+        <title>apple-slice</title>
+        <g id="Graphic_27">
+          <title>s</title>
+          <text transform="translate(437 171.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x=".38671875" y="15">s:</tspan>
+          </text>
+        </g>
+        <g id="Graphic_26">
+          <title>s-val</title>
+          <text transform="translate(462 171.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="3.0507812" y="15">5</tspan>
+          </text>
+        </g>
+        <g id="Graphic_25">
+          <title>v</title>
+          <text transform="translate(437 196.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x=".38671875" y="15">v:</tspan>
+          </text>
+        </g>
+        <g id="Graphic_24">
+          <title>name</title>
+          <text transform="translate(435 146.5)" fill="black">
+            <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x="1.6054688" y="15">apple</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Line_28">
+        <title>apple-ptr</title>
+        <line x1="466.019" y1="210.91963" x2="475.2734" y2="269.2224" marker-end="url(#FilledArrow_Marker)" marker-start="url(#FilledBall_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_31">
+        <text transform="translate(167.5 289)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="700" fill="black" x=".30859375" y="15">char sequence:</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

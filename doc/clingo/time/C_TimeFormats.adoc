@@ -1,0 +1,205 @@
+= C_TimeFormats
+:xmpldir: ../../../test/clingo/time/C_TimeFormats
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Defines formats to read and write different time values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/C_TimeFormats-test.c[]
+----
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//************************************************************* date definitions
+=== date definitions
+
+[id='C_DateFormat']
+==== C_DateFormat
+[source,c]
+----
+char const*const C_DateFormat = "YYYY.MM.DD";
+----
+
+The definition of the default format to read or write a cDate value.
+
+[id='C_TextDate']
+==== C_TextDate
+[source,c]
+----
+char const*const C_TextDate = "EEE MMM _D YYYY";
+----
+
+The definition to read or write a cDate with some text.
+
+[id='C_IsoDate']
+==== C_IsoDate
+[source,c]
+----
+char const*const C_IsoDate = "YYYY-MM-DD";
+----
+
+The definition of a format to read or write a cDate value in the ISO format.
+
+[id='C_IsoOrdinalDate']
+==== C_IsoOrdinalDate
+[source,c]
+----
+char const*const C_IsoOrdinalDate = "YYYY-CCC";
+----
+
+The definition of a format to read or write a cDate value in the ISO format for
+ordinal dates.
+
+[id='C_IsoWeekDate']
+==== C_IsoWeekDate
+[source,c]
+----
+char const*const C_IsoWeekDate = "XXXX-WWW-E";
+----
+
+The definition of a format to read or write a cDate value in the ISO format for
+week dates.
+
+[id='C_Rfc2822Date']
+==== C_Rfc2822Date
+[source,c]
+----
+char const*const C_Rfc2822Date = "EEE, DD MMM YYYY";
+----
+
+The definition of a format to read or write a cDate value in the in RFC2822
+defined format.
+
+//********************************************************** daytime definitions
+=== daytime definitions
+
+[id='C_DaytimeFormat']
+==== C_DaytimeFormat
+[source,c]
+----
+char const*const C_DaytimeFormat = "hh:mm:ss.n";
+----
+
+The definition of the default format to read or write a cDaytime value.
+
+[id='C_IsoDaytime']
+==== C_IsoDaytime
+[source,c]
+----
+char const*const C_IsoDaytime = "hh:mm:ss";
+----
+
+The definition of a format to read or write a cDaytime value in the ISO format.
+
+[id='C_KitchenTime']
+==== C_KitchenTime
+[source,c]
+----
+char const*const C_KitchenTime = "_k:mmAP";
+----
+
+The definition of a format to read or write a cDaytime value from a kitchen
+clock.
+
+//********************************************************* duration definitions
+=== duration definitions
+
+[id='C_DurationFormat']
+==== C_DurationFormat
+[source,c]
+----
+char const*const C_DurationFormat = "wdhmsn";
+----
+
+The definition of the default format to read or write a cDuration value.
+
+//************************************************************* time definitions
+=== time definitions
+
+[id='C_TimeFormat']
+==== C_TimeFormat
+[source,c]
+----
+char const*const C_TimeFormat = "YYYY.MM.DD hh:mm:ss oooo";
+----
+
+The definition of the default format to read or write a cTime value.
+
+[id='C_IsoTime']
+==== C_IsoTime
+[source,c]
+----
+char const*const C_IsoTime = "YYYY-MM-DDThh:mm:ssoooo";
+----
+
+The definition of a format to read or write a cTime value int the ISO format.
+
+[id='C_Rfc2822Time']
+==== C_Rfc2822Time
+[source,c]
+----
+char const*const C_Rfc2822Time = "EEE, DD MMM YYYY hh:mm:sszzzz";
+----
+
+The definition of a format to read or write a cTime value in the in RFC2822
+defined format.
+
+[id='C_AnsiCTime']
+==== C_AnsiCTime
+[source,c]
+----
+char const*const C_AnsiCTime = "EEE MMM _D hh:mm:ss YYYY";
+----
+
+The definition of a format to read or write a cTime value in the default format
+in ANSI C.
+
+[id='C_Rfc882Time']
+==== C_Rfc882Time
+[source,c]
+----
+char const*const C_Rfc882Time = "DD MMM YY hh:mm oooo";
+----
+
+The definition of a format to read or write a cTime value in the in RFC882
+defined format.
+
+[id='C_Rfc1123Time']
+==== C_Rfc1123Time
+[source,c]
+----
+char const*const C_Rfc1123Time = "EEE, DD MMM YYYY hh:mm:ss oooo";
+----
+
+The definition of a format to read or write a cTime value in the in RFC1123
+defined format.
+
+[id='C_Rfc3339Time']
+==== C_Rfc3339Time
+[source,c]
+----
+char const*const C_Rfc3339Time = "YYYY-MM-DDThh:mm:sszz";
+----
+
+The definition of a format to read or write a cTime value in the in RFC3339
+defined format.
+
+[id='C_Rfc3339TimeNano']
+==== C_Rfc3339TimeNano
+[source,c]
+----
+char const*const C_Rfc3339TimeNano = "YYYY-MM-DDThh:mm:ss.nzz";
+----
+
+The definition of a format to read or write a cTime value in the in RFC3339
+defined format, including the nanoseconds part.
+

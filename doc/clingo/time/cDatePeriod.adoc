@@ -1,0 +1,320 @@
+= cDatePeriod
+:xmpldir: ../../../test/clingo/time/cDatePeriod
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cDatePeriod']
+==== cDatePeriod
+[source,c]
+----
+struct cDatePeriod
+{
+   cDate first;
+   cDate last;
+};
+typedef struct cDatePeriod cDatePeriod;
+----
+
+Struct that represents a date period.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cDatePeriodSlice']
+==== cDatePeriodSlice
+[source,c]
+----
+struct cDatePeriodSlice
+{
+   int64_t s;
+   cDatePeriod const* v;
+};
+typedef struct cDatePeriodSlice cDatePeriodSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cDatePeriodSlice date_period_slice_c( int64_t s, cDatePeriod const* v );
+cDatePeriodSlice make_date_period_slice_c( cDatePeriod const* beg,
+                                           cDatePeriod const* end );
+cDatePeriodSlice empty_date_period_slice_c( void );
+/* sub */
+cDatePeriodSlice left_date_period_slice_c( cDatePeriodSlice slice,
+                                           int64_t maxLen );
+cDatePeriodSlice mid_date_period_slice_c( cDatePeriodSlice slice,
+                                          int64_t index );
+cDatePeriodSlice right_date_period_slice_c( cDatePeriodSlice slice,
+                                            int64_t maxLen );
+cDatePeriodSlice sub_date_period_slice_c( cDatePeriodSlice slice,
+                                          int64_t begIdx,
+                                          int64_t endIdx);
+----
+
+[id='cVarDatePeriodSlice']
+==== cVarDatePeriodSlice
+[source,c]
+----
+struct cVarDatePeriodSlice
+{
+   int64_t s;
+   cDatePeriod* v;
+};
+typedef struct cVarDatePeriodSlice cVarDatePeriodSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarDatePeriodSlice var_date_period_slice_c( int64_t s, cDatePeriod* v );
+cVarDatePeriodSlice make_var_date_period_slice_c( cDatePeriod* beg,
+                                                  cDatePeriod* end );
+cVarDatePeriodSlice empty_var_date_period_slice_c( void );
+/* sub */
+cVarDatePeriodSlice left_var_date_period_slice_c( cVarDatePeriodSlice slice,
+                                                  int64_t maxLen );
+cVarDatePeriodSlice mid_var_date_period_slice_c( cVarDatePeriodSlice slice,
+                                                 int64_t index );
+cVarDatePeriodSlice right_var_date_period_slice_c( cVarDateSlice slice,
+                                                   int64_t maxLen );
+cVarDatePeriodSlice sub_var_date_period_slice_c( cVarDatePeriodSlice slice,
+                                                 int64_t begIdx,
+                                                 int64_t endIdx);
+/* var slice */
+cVarDatePeriodSlice as_var_date_slice_c( cVarDatePeriodSlice slice );
+cVarDatePeriodSlice cast_var_date_slice_c( cVarDatePeriodSlice slice,
+                                           cDatePeriodSlice sub );
+int64_t set_date_slice_c( cVarDatePeriodSlice dst, cDatePeriodSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+==== date_period_c
+[source,c]
+----
+cDatePeriod date_period_c( cDate first, cDate last );
+----
+
+Creates a date period.
+
+==== determine_date_period_c
+[source,c]
+----
+cDatePeriod determine_date_period_c( cDateSlice slice );
+----
+
+Creates a date period with the earliest date in the slice as first and the
+latest date in the slice as last.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/determine_date_period.c[]
+----
+
+==== cDatePeriod make_date_period_c
+[source,c]
+----
+cDatePeriod make_date_period_c( int64_t y1, int64_t m1, int64_t d1,
+                                int64_t y2, int64_t m2, int64_t d2 );
+----
+
+Creates a date period and the required dates.
+
+==== null_date_period_c
+[source,c]
+----
+cDatePeriod null_date_period_c();
+----
+
+Creates an invalid date period.
+
+==== single_date_period_c
+[source,c]
+----
+cDatePeriod single_date_period_c( cDate date );
+----
+
+Creates a date period that contains only one day.
+
+==== sized_date_period_c
+[source,c]
+----
+cDatePeriod sized_date_period_c( cDate first, int64_t days );
+----
+
+Creates a date period that contains the following days, starting at first.
+
+//********************************************************************** length
+=== length
+
+==== date_period_days_c
+[source,c]
+----
+int64_t date_period_days_c( cDatePeriod dp );
+----
+
+Returns the length of the date period dp in number of days.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/date_period_days.c[]
+----
+
+==== date_period_weeks_c
+[source,c]
+----
+int64_t date_period_weeks_c( cDatePeriod dp );
+----
+
+Returns the length of the date period dp in number of complete weeks.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/date_period_weeks.c[]
+----
+
+//********************************************************************* overall
+=== overall
+
+==== date_period_is_valid_c
+[source,c]
+----
+bool date_period_is_valid_c( cDatePeriod dp );
+----
+
+Returns true if the date period is valid, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/date_period_is_valid.c[]
+----
+
+==== eq_date_period_c
+[source,c]
+----
+bool eq_date_period_c( cDatePeriod a, cDatePeriod b );
+----
+
+Returns true if both date periods are equal, otherwise false.
+
+==== in_date_period_c
+[source,c]
+----
+bool in_date_period_c( cDatePeriod dp, cDate date );
+----
+
+Returns true if the date period contains date, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/in_date_period.c[]
+----
+
+==== resize_date_period_c
+[source,c]
+----
+cDatePeriod resize_date_period_c( cDatePeriod dp, int64_t days );
+----
+
+Increases(days is positve) or decreases(days is negatvie) a date period on both
+sizes.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/resize_date_period.c[]
+----
+
+==== shift_date_period_c
+[source,c]
+----
+cDatePeriod shift_date_period_c( cDatePeriod dp, int64_t days );
+----
+
+Shifts the date period forward(postive number of days) or backwards(negative
+number of days).
+
+.Example
+[source,c]
+----
+include::{xmpldir}/shift_date_period.c[]
+----
+
+//************************************************************************* set
+=== set
+
+==== date_periods_overlap_c
+[source,c]
+----
+bool date_periods_overlap_c( cDatePeriod a, cDatePeriod b );
+----
+
+Returns true if both date periods share days.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/date_periods_overlap.c[]
+----
+
+==== intersect_date_periods_c
+[source,c]
+----
+cDatePeriod intersect_date_periods_c( cDatePeriod a, cDatePeriod b );
+----
+
+Returns the days that are in both date periods.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/intersect_date_periods.c[]
+----
+
+==== is_sub_date_period_c
+[source,c]
+----
+bool is_sub_date_period_c( cDatePeriod dp, cDatePeriod sub );
+----
+
+Returns true if all days from the date period sub also exist in the date period
+dp.
+
+==== unite_date_periods_c
+[source,c]
+----
+cDatePeriod unite_date_periods_c( cDatePeriod a, cDatePeriod b )
+----
+
+Returns a date period that contains at least all days from a and b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/unite_date_periods.c[]
+----

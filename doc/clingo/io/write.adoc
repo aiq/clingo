@@ -1,0 +1,152 @@
+= write
+:xmpldir: ../../../test/clingo/io/write
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that allows to write text with additional arguments.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Type and Definitions
+
+//***************************************************************** definitions
+=== definitions
+
+[id='cWRITE_ERROR_']
+==== cWRITE_ERROR_
+[source,c]
+----
+#define cWRITE_ERROR_
+----
+
+Defines the c_WriteError values and the corresponding messages.
+
+[id='c_WriteError']
+==== c_WriteError
+[source,c]
+----
+enum c_WriteError {
+   c_NotEnoughRecorderSpace = 1,
+   c_ToLargeWriteFormat = 2,
+   c_InvalidWriteFormat = 3,
+};
+type enum c_WriteError c_WrtieError;
+----
+
+Enum type to represent errors that can happen in a write function.
+
+==== c_write_va_arg
+[source,c]
+----
+typedef bool ( *c_write_va_arg )( cRecorder rec[static 1],
+                                  va_list* list,
+                                  cChars type,
+                                  char const fmt[static 1] );
+----
+
+c_write_va_arg is the signature of a function to write a with type specified
+value val with the format fmt.
+The default implementatio of the function is write_format_arg_c.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== write_format_arg_c
+[source,c]
+----
+bool write_format_arg_c( cRecorder rec[static 1],
+                         va_list* list,
+                         cChars type,
+                         char const fmt[static 1] );
+----
+
+Writes the current element in the list into the recorder.
+
+==== write_c
+[souce,c]
+----
+#define write_c_( Rec, ... )                                                   \
+   write_c( (Rec), write_format_arg_c, nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+bool write_c( cRecorder rec[static 1],
+              c_write_va_arg write_arg,
+              int n,
+              ... );
+----
+
+Writes a formated text with the recorder.
+The text can have parameter specifier to insert the addition argument into the
+text.
+
+----
+{type[:fmt]}
+----
+
+The optional "fmt" value can have a size of 32 chars.
+The values `^` and `}` are special characters, use `^^` and `^}` to pass this
+characters in the "fmt" value to the corresponding read function.
+
+The requried type value shows witch sub read function will be used.
+The default read_arg value read_format_arg_c uses the following mapping:
+
+.type
+[cols="1,3"]
+|===
+|bool |write_bool_c
+|b    |write_byte_c
+|bs   |write_bytes_c
+|c    |write_char_c
+|cs   |write_chars_c
+|d    |write_double_c
+|f    |write_float_c
+|i8   |write_int8_c
+|i16  |write_int16_c
+|i32  |write_int32_c
+|i64  |write_int64_c
+|r    |write_rune_c
+|rec  |write_recorded_c
+|rng  |write_range_c
+|s    |write_cstr_c
+|u8   |write_uint8_c
+|u16  |write_uint16_c
+|u32  |write_uint32_c
+|u64  |write_uint64_c
+|===
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write.c[]
+----
+
+==== writeln_c
+[source,c]
+----
+#define writeln_c_( Rec, ... )                                                 \
+   writeln_c( (Rec), write_format_arg_c, nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+bool writeln_c( cRecorder rec[static 1],
+                c_write_va_arg write_arg,
+                int n,
+                ... );
+----
+
+Works like write_c, but adds a '\n' at the end.
+
+//*********************************************************************** error
+=== error
+
+==== write_error_msg_c
+[source,c]
+----
+char const* write_error_msg_c( cRecorder rec[static 1] );
+----
+
+Returns the corresponding message for a C_WriteError.

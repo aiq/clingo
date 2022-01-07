@@ -1,0 +1,383 @@
+= double
+:xmpldir: ../../../test/clingo/type/double
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with float values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cDoubleInfo']
+==== cDoubleInfo
+[source,c]
+----
+struct cDoubleInfo
+{
+   uint8_t sign;
+   uint16_t exponent;
+   uint64_t mantissa;
+};
+typedef struct cDoubleInfo cDoubleInfo;
+----
+
+cDoubleInfo represents the three sections of a double value.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cDoubleSlice']
+==== cDoubleSlice
+[source,c]
+----
+struct cDoubleSlice
+{
+   int64_t s;
+   double const* v;
+};
+typedef struct cDoubleSlice cDoubleSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cDoubleSlice double_slice_c( int64_t s, double const* v );
+cDoubleSlice make_double_slice_c( double const* beg, double const* end );
+cDoubleSlice empty_double_slice_c( void );
+/* sub */
+cDoubleSlice left_double_slice_c( cDoubleSlice slice, int64_t maxLen );
+cDoubleSlice mid_double_slice_c( cDoubleSlice slice, int64_t index );
+cDoubleSlice right_double_slice_c( cDoubleSlice slice, int64_t maxLen );
+cDoubleSlice sub_double_slice_c( cDoubleSlice slice,
+                                 int64_t begIdx,
+                                 int64_t endIdx );
+----
+
+[id='cVarDoubleSlice']
+==== cVarDoubleSlice
+[source,c]
+----
+struct cVarDoubleSlice
+{
+   int64_t s;
+   double* v;
+};
+typedef struct cVarDoubleSlice cVarDoubleSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarDoubleSlice var_double_slice_c( int64_t s, double* v );
+cVarDoubleSlice make_var_double_slice_c( double* beg, double* end );
+cVarDoubleSlice empty_var_double_slice_c( void );
+/* sub */
+cVarDoubleSlice left_var_double_slice_c( cVarDoubleSlice slice, int64_t maxLen );
+cVarDoubleSlice mid_var_double_slice_c( cVarDoubleSlice slice, int64_t index );
+cVarDoubleSlice right_var_double_slice_c( cVarDoubleSlice slice, int64_t maxLen );
+cVarDoubleSlice sub_var_double_slice_c( cVarDoubleSlice slice,
+                                        int64_t begIdx,
+                                        int64_t endIdx );
+/* var slice */
+cDoubleSlice as_double_slice_c( cVarDoubleSlice slice );
+cDoubleSlice cast_double_slice_c( cVarDoubleSlice slice, cDoubleSlice sub );
+int64_t set_double_slice_c( cVarDoubleSlice dst, cDoubleSlice src );
+----
+
+[id='cDoubleChunk']
+==== cDoubleChunk
+[source,c]
+----
+struct cDoubleChunk
+{
+   int64_t s;
+   float const* v;
+   int64_t favSize;
+   cDoubleSlice slice;
+};
+typedef struct cDoubleChunk cDoubleChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_double_chunk_c( cDoubleChunk chunk[static 1],
+                               int64_t s,
+                               cDoubleSlice slice );
+void init_front_double_chunk_c( cDoubleChunk chunk[static 1],
+                                int64_t s,
+                                cDoubleSlice slice );
+----
+
+[id='cVarDoubleChunk']
+==== cVarDoubleChunk
+[source,c]
+----
+struct cVarDoubleChunk
+{
+   int64_t s;
+   float* v;
+   int64_t favSize;
+   cVarDoubleSlice slice;
+};
+typedef struc cVarDoubleChunk cVarDoubleChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_double_chunk_c( cVarDoubleChunk chunk[static 1],
+                                   int64_t s,
+                                   cVarDoubleSlice slice );
+void init_front_var_double_chunk_c( cVarDoubleChunk chunk[static 1],
+                                    int64_t s,
+                                    cVarDoubleSlice slice );
+----
+
+[id='cDoubleWindow']
+==== cDoubleWindow
+[source,c]
+----
+struct cDoubleWindow
+{
+   int64_t s;
+   float const* v;
+   int64_t favSize;
+   cDoubleSlice slice;
+};
+typedef struct cDoubleWindow cDoubleWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_double_window_c( cDoubleWindow window[static 1],
+                                int64_t s,
+                                cDoubleSlice slice );
+void init_front_double_window_c( cDoubleWindow window[static 1],
+                                 int64_t s,
+                                 cDoubleSlice slice );
+----
+
+[id='cVarDoubleWindow']
+==== cVarDoubleWindow
+[source,c]
+----
+struct cVarDoubleWindow
+{
+   int64_t s;
+   float* v;
+   int64_t favSize;
+   cVarDoubleSlice slice;
+};
+typedef struct cVarDoubleWindow cVarDoubleWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_double_window_c( cVarDoubleWindow window[static 1],
+                                    int64_t s,
+                                    cVarDoubleSlice slice );
+void init_front_var_double_window_c( cVarDoubleWindow window[static 1],
+                                     int64_t s,
+                                     cVarDoubleSlice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_double_c
+[source,c]
+----
+int cmp_double( double a, double b );
+----
+
+Compares two double values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to b
+
+.Exampl
+[source,c]
+----
+include::{xmpldir}/cmp_double.c[]
+----
+
+[id='double_c_']
+==== double_c_
+[source,c]
+----
+#define double_c_( Value )
+----
+
+Macro function that casts the Value as double.
+
+==== eq_double_c
+[source,c]
+----
+#define eq_double_c_( D1, D2 )                                                 \
+   eq_double_c( (D1), (D2), DBL_EPSILON )
+bool eq_double_c( double d1, double d2, double epsilon );
+----
+
+Returns true if both value are equal if you allow a epsilon range.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/eq_double.c[]
+----
+
+//************************************************************************ info
+=== info
+
+==== build_double_c
+[source,c]
+----
+double build_double_c( cDoubleInfo info );
+----
+
+Creates a double from a sign, exponent and mantissa value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/build_double.c[]
+----
+
+==== double_info_c
+[source,c]
+----
+cDoubleInfo double_info_c( double d );
+----
+
+Splits a double into a sign, exponent and mantissa value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/double_info.c[]
+----
+
+//************************************************************************ swap
+=== swap
+
+==== swap_double_c
+[source,c]
+----
+double swap_double_c( double val );
+----
+
+{Swap}
+
+==== swap_double_from_c
+[source,c]
+----
+double swap_double_from_c( double val, c_ByteOrder order );
+----
+
+{SwapFrom}
+
+==== swap_double_to_c
+[source,c]
+----
+double swap_double_to_c( double val, c_ByteOrder order );
+----
+
+{SwapTo}
+
+//************************************************************************ pack
+=== pack
+
+==== pack_double_c
+[source,c]
+----
+uint64_t pack_double_c( double d );
+----
+
+Packs the bytes of a double in a uint64_t value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/pack_double.c[]
+----
+
+==== unpack_double_c
+[source,c]
+----
+double unpack_double_c( uint64_t u );
+----
+
+Unpacks a float from the bytes in a uint64_t value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/unpack_double.c[]
+----
+
+//************************************************************************ algo
+=== algo
+
+==== find_double_c
+[source,c]
+----
+double const* find_double_c( cDoubleSlice slice, double d );
+----
+
+{FindVal}
+
+==== max_double_c
+[source,c]
+----
+double const* max_double_c( cDoubleSlice slice );
+----
+
+{FindMax}
+
+==== min_double_c
+[source,c]
+----
+double const* min_double_c( cDoubleSlice slice );
+----
+
+{FindMin}
+
+==== prod_double_c
+[source,c]
+----
+bool prod_double_c( cDoubleSlice slice, double res[static 1] );
+----
+
+{Prod}
+
+==== sum_double_c
+[source,c]
+----
+bool sum_double_c( cDoubleSlice slice, double res[static 1] );
+----
+
+{Sum}

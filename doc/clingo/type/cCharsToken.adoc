@@ -1,0 +1,188 @@
+= cCharsToken
+:xmpldir: ../../../test/clingo/type/cCharsToken
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the cCharsToken and functions to tokenize a cChars value.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cCharsToken']
+==== cCharsToken
+[source,c]
+----
+struct cCharsToken
+{
+   cChars x;
+   cChars tail;
+};
+typedef struct cCharsToken cCharsToken;
+----
+
+cCharsToken allows to iterate over a cChars value.
+The x value stores the current token and tail stores the rest that will be
+tokenize.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+==== init_chars_token_c
+[source,c]
+----
+void init_chars_token_c( cCharsToken tok[static 1], cChars chars );
+----
+
+Initializes a cCharsToken with chars.
+
+==== init_cstr_token_c
+[source,c]
+----
+void init_cstr_token_c( cCharsToken tok[static 1], char const cstr[static 1] );
+----
+
+Initializes a cCharsToken with a C string.
+
+//************************************************************************ next
+=== next
+
+==== next_token_till_any_c
+[source,c]
+----
+#define next_token_till_any_c_( Tok, ... )                                     \
+   next_token_till_any_c( (Tok), cs_c_( __VA_ARGS__ ) )
+bool next_token_till_any_c( cCharsToken tok[static 1], cCharsSlice set );
+----
+
+Moves tok to the next token in the text that is split via one of the chars
+in the set.
+The function returns false if no other token exist in the text.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_token_till_any.c[]
+----
+
+==== next_token_till_c
+[source,c]
+----
+#define next_token_till_c_( Tok, Cstr )                                        \
+   next_token_till_c( (Tok), c_c( Cstr ) )
+bool next_token_till_c( cCharsToken tok[static 1], cChars deli );
+----
+
+Moves tok to the next token in the text that is split via deli value.
+The function returns false if no other token exist in the text.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_token_till.c[]
+----
+
+==== next_token_till_any_char_c
+[source,c]
+----
+#define next_token_till_any_char_c_( Tok, Cstr )                               \
+   next_token_till_any_char_c( (Tok), c_c( Cstr ) )
+bool next_token_till_any_char_c( cCharsToken tok[static 1], cChars set );
+----
+
+Moves tok to the next token in the text that is split via one of the char values
+in the set.
+The function returns false if no other token exist in the text.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_token_till_any_char.c[]
+----
+
+==== next_token_till_char_c
+[source,c]
+----
+bool next_token_till_char_c( cCharsToken tok[static 1], char deli );
+----
+
+Moves tok to the next token in the text that is split via deli value.
+The function returns false if no other token exist in the text.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_token_till_char.c[]
+----
+
+==== next_token_till_any_rune_c
+[source,c]
+----
+#define next_token_till_any_rune_c_( Tok, Cstr )                               \
+   next_token_till_any_rune_c( (Tok), c_c( Cstr ) )
+bool next_token_till_any_rune_c( cCharsToken tok[static 1], cChars set );
+----
+
+Moves tok to the next token in the text that is split via one of the runes
+in the set.
+The function returns false if no other token exist in the text.
+
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_token_till_rune.c[]
+----
+
+==== next_token_till_rune_c
+[source,c]
+----
+#define next_token_till_rune_c_( Tok, Cstr )                                   \
+   next_token_till_rune_c( (Tok), c_c( Cstr ) )
+bool next_token_till_rune_c( cCharsToken tok[static 1], cRune deli );
+----
+
+Moves tok to the next token in the text that is split via deli value.
+The function returns false if no other token exist in the text.
+
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_token_till_rune.c[]
+----
+
+//************************************************************************ prop
+=== prop
+
+==== is_last_token_c
+[source,c]
+----
+bool is_last_token_c( cCharsToken const tok[static 1] );
+----
+
+Returns true if the current token is the last token in the text.
+
+==== token_delimiter_c
+[source,c]
+----
+cChars token_delimiter_c( cCharsToken const tok[static 1] );
+----
+
+Returns the current delimiter between the t and the tail value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/token_delimiter.c[]
+----
+

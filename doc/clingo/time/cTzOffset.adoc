@@ -1,0 +1,271 @@
+= cTzOffset
+:xmpldir: ../../../test/clingo/time/cTzOffset
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+bla bla bla
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cTzOffset']
+==== cTzOffset
+[source,c]
+----
+struct cTzOffset
+{
+   int32_t _v;
+};
+typedef struct cTzOffset cTzOffset;
+----
+
+A cTzOffset value represents the offset of a time zone.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cTzOffsetSlice']
+==== cTzOffsetSlice
+[source,c]
+----
+struct cTzOffsetSlice
+{
+int64_t s;
+cTzOffset const* v;
+};
+typedef struct cTzOffsetSlice cTzOffsetSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cTzOffsetSlice tz_offset_slice_c( int64_t s, cTzOffset const* v );
+cTzOffsetSlice make_tz_offset_slice_c( cTzOffset const* beg,
+                                       cTzOffset const* end );
+cTzOffsetSlice empty_tz_offset_slice_c( void );
+/* sub */
+cTzOffsetSlice left_tz_offset_slice_c( cTzOffsetSlice slice, int64_t maxLen );
+cTzOffsetSlice mid_tz_offset_slice_c( cTzOffsetSlice slice, int64_t index );
+cTzOffsetSlice right_tz_offset_slice_c( cTzOffsetSlice slice, int64_t maxLen );
+cTzOffsetSlice sub_tz_offset_slice_c( cTzOffsetSlice slice,
+                                      int64_t begIdx,
+                                      int64_t endIdx);
+----
+
+[id='cVarTzOffsetSlice']
+==== cVarTzOffsetSlice
+[source,c]
+----
+struct cVarTzOffsetSlice
+{
+int64_t s;
+cTzOffset* v;
+};
+typedef struct cVarTzOffsetSlice cVarTzOffsetSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarTzOffsetSlice var_tz_offset_slice_c( int64_t s, cTzOffset* v );
+cVarTzOffsetSlice make_var_tz_offset_slice_c( cTzOffset* beg,
+                                              cTzOffset* end );
+cVarTzOffsetSlice empty_var_tz_offset_slice_c( void );
+/* sub */
+cVarTzOffsetSlice left_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
+                                              int64_t maxLen );
+cVarTzOffsetSlice mid_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
+                                             int64_t index );
+cVarTzOffsetSlice right_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
+                                               int64_t maxLen );
+cVarTzOffsetSlice sub_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
+                                             int64_t begIdx,
+                                             int64_t endIdx);
+/* var slice */
+cVarTzOffsetSlice as_var_tz_offset_slice_c( cVarTzOffsetSlice slice );
+cVarTzOffsetSlice cast_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
+                                              cTzOffsetSlice sub );
+int64_t set_tz_offset_slice_c( cVarTzOffsetSlice dst, cTzOffsetSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+==== local_c
+[source,c]
+----
+cTzOffset local_c( void );
+----
+
+Returns the offset of the current local time zone.
+
+==== null_tz_offset_c
+[source,c]
+----
+cTzOffset null_tz_offset_c( void );
+----
+
+Returns an invalid time zone offset.
+
+==== tz_c
+[source,c]
+----
+cTzOffset tz_c( int64_t v );
+----
+
+Initalise a cTzOffset value from one int value that contains the hour and minute
+value.
+
+==== utc_c
+[source,c]
+----
+cTzOffset utc_c( void );
+----
+
+Returns the offset of the UTC time zone.
+
+//************************************************************************ from
+=== from
+
+==== duration_from_tz_offset_c
+[source,c]
+----
+cDuration duration_from_tz_offset_c( cTzOffset tz );
+----
+
+Creates a cDuration value from a cTzOffset value.
+
+==== hmsn_from_tz_offset_c
+[source,c]
+----
+cHmsn hmsn_from_tz_offset_c( cTzOffset tz );
+----
+
+Creates a cHmsn value from a cTzOffset value.
+
+==== tz_offset_from_duration_c
+[source,c]
+----
+cTzOffset tz_offset_from_duration_c( cDuration dur );
+----
+
+Creates a cTzOffset value from a cDuration value.
+
+==== tz_offset_from_hmsn_c
+[source,c]
+----
+cTzOffset tz_offset_from_hmsn_c( cHmsn hmsn );
+----
+
+Creates a cTzOffset value from a cHmsn value.
+
+//************************************************************************* cmp
+=== cmp
+
+==== cmp_tz_offset_c
+[source,c]
+----
+int cmp_tz_offset_c( cTzOffset a, cTzOffset b );
+----
+
+Compares two time zone offsets and returns the three possible results:
+
+<0:: if the a offset is lower as b
+0:: if both offsets are equal
+>0:: if the a offset is higher as b
+
+==== eq_tz_offset_c
+[source,c]
+----
+bool eq_tz_offset_c( cTzOffset a, cTzOffset b );
+----
+
+Returns true if a is equal to b, otherwise false.
+
+//************************************************************************ diff
+=== diff
+
+==== between_tz_offsets_c
+[source,c]
+----
+cDuration between_tz_offsets_c( cTzOffset a, cTzOffset b );
+----
+
+Returns the duration between time zone values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/between_tz_offsets.c[]
+----
+
+//************************************************************************** io
+=== io
+
+The functions read_tz_offset_c and write_tz_offset_c are using the following
+format:
+
+.format
+[cols="1,2,1"]
+|===
+|o | The offset in the +hh:mm format, where the mm part is optional | +00, +10 or -04:30
+|oo | The offset in the +hh:mm format | +00:00, +10 or -04:30
+|oooo | The offset in the +hhmm format | +0000, +1000 or -0430
+|z | Like "o", but the UTC offset will be replaced with a Z | Z, +10 or -04:30
+|zz | Like "oo", but the UTC offset will be replaced with a Z | Z, +10:00 or -04:30
+|zzzz | Like "oooo", but the UTC offset will be replaced with a Z | Z, +1000 or -0430
+|===
+
+==== read_tz_offset_c
+[source,c]
+----
+#define read_tz_offset_c_( Sca, Tz )                                           \
+   read_tz_offset_c( (Sca), (Tz), "" )
+bool read_tz_offset_c( cScanner sca[static 1],
+                       cTzOffset tz[static 1],
+                       char const fmt[static 1] );
+----
+
+Reads a cTzOffset value from a text with a scanner.
+The function will use "oo" as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_tz_offset.c[]
+----
+
+==== write_tz_offset_c
+[source,c]
+----
+#define write_tz_offset_c_( Rec, Tz )                                          \
+   write_tz_offset_c( (Rec), (Tz), "" )
+bool write_tz_offset_c( cRecorder rec[static 1],
+                        cTzOffset tz,
+                        char const fmt[static 1] );
+----
+
+Writes a cTzOffset value into the recorder.
+The function will use "oo" as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_tz_offset.c[]
+----

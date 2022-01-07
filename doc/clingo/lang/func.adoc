@@ -1,0 +1,394 @@
+= func
+:xmpldir: ../../../test/clingo/lang/func
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Collection of general purpose functions.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************* cmp
+=== cmp
+
+Functions that interpret the result of a compare function.
+
+==== diff_c
+[source,c]
+----
+bool diff_c( int res );
+----
+
+Returns true if the result of a compare function means that both values are
+different, otherwise false.
+
+==== eq_c
+[source,c]
+----
+bool eq_c( int res );
+----
+
+Returns true if the result of a compare function means that the first and
+second value are equal, otherwise false.
+
+==== gt_c
+[source,c]
+----
+bool gt_c( int res );
+----
+
+Returns true if the result of a compare function means that the first value is
+greater than the second value, otherwise false.
+
+==== gte_c
+[source,c]
+----
+bool gte_c( int res );
+----
+
+Returns true if the result of a compare function means that the first value is
+greater than or equal the second value, otherwise false.
+
+==== lt_c
+[source,c]
+----
+bool lt_c( int res );
+----
+
+Returns true if the result of a compare function means that the first value is
+less than the second value, otherwise false.
+
+==== lte_c
+[source,c]
+----
+bool lte_c( int res );
+----
+
+Returns true if the result of a compare function means that the first value is
+less than or equal the second value, otherwise false.
+
+//********************************************************************** concat
+=== concat
+
+[id='concat2_c_']
+==== concat2_c_
+[source,c]
+----
+#define concat2_c_( A, B )
+----
+
+Concatenates both tokens via ##-operator.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/concat2.c[]
+----
+
+[id='concat3_c_']
+==== concat3_c_
+[source,c]
+----
+#define concat3_c_( A, B, C )
+----
+
+Concatenates three tokens via ##-operator.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/concat3.c[]
+----
+
+[id='xconcat2_c_']
+==== xconcat2_c_
+[source,c]
+----
+#define xconcat2_c_( A, B )
+----
+
+Concatenates the result of the expansion of the macros A and/or B.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/xconcat2.c[]
+----
+
+[id='xconcat3_c_']
+==== xconcat3_c_
+[source,c]
+----
+#define xconcat3_c_( A, B, C )
+----
+
+Concatenates the result of the expansion of the macros A, B and/or C.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/xconcat3.c[]
+----
+
+//***************************************************************** constraints
+=== constraints
+
+Constraints are macro functions that wrap assert and abort the program if the
+constraint is not fulfilled.
+The name of a constraint function must allways start with the prefix "must_".
+
+[id='must_be_c_']
+==== must_be_c_
+[source,c]
+----
+#define must_be_c_( Expression )
+----
+
+Constraint that requires the Expression to be true.
+
+[id='must_exist_c_']
+==== must_exist_c_
+[source,c]
+----
+#define must_exist_c_( Ptr )
+----
+
+Constraint that requires that the pointer Ptr is not NULL.
+
+[id='must_be_positive_c_']
+==== must_be_positive_c_
+[source,c]
+----
+#define must_be_positive_c_( Value )
+----
+
+Constraint that requires Value to be greater or equal 0.
+
+[id='must_be_in_range_c_']
+==== must_be_in_range_c_
+[source,c]
+----
+#define must_be_in_range_c_( First, Value, Last )
+----
+
+Constraint that requires Value to be in the range between First and Last.
+(First `<=` Value `<=` Last)
+
+//*********************************************************************** flags
+=== flags
+
+Macro functions to work with bitflags.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/flags.c[]
+----
+
+[id='has_c_']
+==== has_c_
+[source,c]
+----
+#define has_c_( Config, Flags )
+----
+
+Checks if the Config bitflag has all Flags set.
+
+[id='set_c_']
+==== set_c_
+[source,c]
+----
+#define set_c_( Config, Flags )
+----
+
+Sets the Flags on the Config bitflag.
+
+[id='unset_c_']
+==== unset_c_
+[source,c]
+----
+#define unset_c_( Config, Flags )
+----
+
+Unsets the Flags on the Config bitflag.
+
+//************************************************************************ loop
+=== loop
+
+[id='once_c_']
+==== once_c_
+[source,c]
+----
+#define once_c_( Var )
+----
+
+Macro to define a for statement to loop one time.
+Var will be the name of the int64_t loop control variable.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/once.c[]
+----
+
+[id='times_c_']
+==== times_c_
+[source,c]
+----
+#define times_c_( N, Var )
+----
+
+Macro to define a for statement to loop N times.
+Var will be the name of the int64_t loop controle variable.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/times.c[]
+----
+
+//************************************************************************* num
+=== num
+
+Functions that check or modify numbers.
+
+[id='in_range_c_']
+==== in_range_c_
+[source,c]
+----
+#define in_range_c_( Min, Value, Max )
+----
+
+Returns true if Value is greater or equal than Min and less or equal than Max,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/in_range.c[]
+----
+
+[id='is_sign_c_']
+==== is_sign_c_
+[source,c]
+----
+#define is_sign_c_( Value )
+----
+
+Checks if Value represants a sign.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/is_sign.c[]
+----
+
+[id='sign_c_']
+==== sign_c_
+[source,c]
+----
+#define sign_c_( Value )
+----
+
+Returns the sign of a number Value as char.
+'+' for positive values and '-' for negative values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/sign.c[]
+----
+
+//******************************************************************* stringify
+=== stringify
+
+Macro functions that stringify code.
+
+[id='stringify_c_']
+==== stringify_c_
+[source,c]
+----
+#define stringify_c_( A )
+----
+
+Turns a code fragment into a string constant whose contents are the text for the
+code fragment.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/stringify.c[]
+----
+
+[id='xstringify_c_']
+==== xstringify_c_
+[source,c]
+----
+#define xstringify_c_( A )
+----
+
+Stringifies the result of the expansion of a macro A.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/xstringify.c[]
+----
+
+//************************************************************************ swap
+=== swap
+
+Functions that allow to swap values or memory.
+
+[id='swap_c_']
+==== swap_c_
+[source,c]
+----
+#define swap_c_( Type, X, Y, Prefix )
+----
+
+Swaps the values between the variables X and Y.
+Both must have the same Type, and the Prefix value will be used as prefix for
+the temporary variable.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap.c[]
+----
+
+//********************************************************************* va_args
+=== va_args
+
+[id='nargs_c_']
+==== nargs_c_
+[source,c]
+----
+#define nargs_c_( ... )
+----
+
+Macro function that determines the number of arguments that the variable
+argument contains.
+The number of arguments must contain at least 1 and at most 255 elements.
+
+The function uses the macro function nargs_helper_c_ for the implementation.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/nargs.c[]
+----
+
+[id='nargs_helper_c_']
+==== nargs_helper_c_
+[source,c]
+----
+#define nargs_helper_c_( ... )
+----
+
+Macro function that is used be nargs_c_, should not be used.

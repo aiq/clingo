@@ -1,0 +1,925 @@
+= cScanner
+:xmpldir: ../../../test/clingo/io/cScanner
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Type and Definitions
+
+[id='cScanner']
+==== cScanner
+[source,c]
+----
+struct cScanner
+{
+   int64_t     pos;
+   int64_t     space;
+   void const* mem;
+   int         err;
+};
+typedef struct cScanner cScanner;
+----
+
+cScanner allows to extract data from a memory block.
+The mem pointer points to the next byte that will be scanned.
+The pos value shows how much bytes are allready scanned.
+The space value tells how much bytes in the memory block are not scanned.
+The err value can be set to indicate the type of error that occurred.
+
+[id='cScanMarker']
+==== cScanMarker
+[source,c]
+----
+struct cScanMarker
+{
+   cScanner* x;
+   int64_t startPos;
+   int64_t lastPos;
+};
+typedef struct cScanMarker cScanMarker;
+----
+
+cScanMarker allows to trace how much byte of the memory block are scanned.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+[id='cstr_scanner_c_']
+==== cstr_scanner_c_
+[source,c]
+----
+#define cstr_scanner_c_( Cstr )
+----
+
+Creates a scanner to scan the Cstr.
+The '\0' at the end of the string will not be scanned.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cstr_scanner.c[]
+----
+
+[id='make_scanner_c_']
+==== make_scanner_c_
+[source,c]
+----
+#define make_scanner_c_( Size, Memory )
+----
+
+Creates a scanner to scan the assigned memory.
+
+[id='null_scanner_c_']
+==== null_scanner_c_
+[source,c]
+----
+#define null_scanner_c_()
+----
+
+Creates a scanner where all attributes are set to 0 and NULL.
+
+[id='sub_scanner_c_']
+==== sub_scanner_c_
+[source,c]
+----
+#define sub_scanner_c_( Sca, MaxSize )
+----
+
+Returns a scanner to scan the leftmost unscanned bytes of Sca.
+If maxSize is greater or equal the space value of Sca, contains the sub-scanner
+all unscanned bytes from Sca.
+
+//************************************************************************ move
+=== move
+
+==== move_scanner_c
+[source,c]
+----
+bool move_scanner_c( cScanner sca[static 1], int64_t offset );
+----
+
+Moves the scanner forward or backward.
+The function blocks attempts to move the scanner out of range and returns in
+this cases false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/move_scanner.c[]
+----
+
+==== move_scanner_to_c
+[source,c]
+----
+bool move_scanner_to_c( cScanner sca[static 1], int64_t pos );
+----
+
+Moves the scanner to the position pos in the memory.
+If the pos value is out of range will the scanner not be moved and the function
+returns false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/move_scanner_to.c[]
+----
+
+==== reset_scanner_c
+[source,c]
+----
+void reset_scanner_c( cScanner sca[static 1] );
+----
+
+Resets the scanner to the beginning of the memory.
+
+//********************************************************************* move if
+=== move if
+
+==== move_if_byte_c
+[source,c]
+----
+bool move_if_byte_c( cScanner sca[static 1], cByte b );
+----
+
+Moves the scanner one byte value forward if the current value in the memory
+equals b.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_byte_match_c(
+[source,c]
+----
+bool move_if_byte_match_c( cScanner sca[static 1], c_check_byte check );
+----
+
+Moves the scanner one byte value forward if the current value in the memory
+passes the check.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_bytes_c
+[source,c]
+----
+bool move_if_bytes_c( cScanner sca[static 1], cBytes slice );
+----
+
+Moves the scanner the length of the slice forward if the current memory matches
+the slice values.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_any_char_c
+[source,c]
+----
+#define move_if_any_char_c_( Sca, Cstr )                                       \
+   move_if_any_char_c( (Sca), c_c( Cstr ) )
+bool move_if_any_char_c( cScanner sca[static 1], cChars set );
+----
+
+Moves the scanner one char value forward if the current value in the memory
+equals any of the char values in set.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_char_c
+[source,c]
+----
+bool move_if_char_c( cScanner sca[static 1], char c );
+----
+
+Moves the scanner one char value forward if the current value in the memory
+equals c.
+Returns true if the scanner was moved, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/move_if_char.c[]
+----
+
+==== move_if_char_match_c(
+[source,c]
+----
+bool move_if_char_match_c( cScanner sca[static 1], c_check_char check );
+----
+
+Moves the scanner one char value forward if the current value in the memory
+passes the check.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_any_chars_c
+[source,c]
+----
+#define move_if_any_chars_c_( Sca, ... )                                       \
+   move_if_any_chars_c( (Sca), cs_c_( __VA_ARGS__ ) )
+bool move_if_any_chars_c( cScanner sca[static 1], cCharsSlice slice );
+----
+
+Moves the scanner the length of the value forward that matches with the current
+memory.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_chars_c
+[source,c]
+----
+#define move_if_chars_c_( Sca, Cstr )                                          \
+   move_if_chars_c( (Sca), c_c( Cstr ) )
+bool move_if_chars_c( cScanner sca[static 1], cChars chars );
+----
+
+Moves the scanner the length of the chars forward if the current memory matches
+the chars.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_any_rune_c
+[source,c]
+----
+#define move_if_any_rune_c_( Sca, Cstr )                                       \
+   move_if_any_rune_c( (Sca), c_c( Cstr ) )
+bool move_if_any_rune_c( cScanner sca[static 1], cChars set );
+----
+
+Moves the scanner one rune value forward if the current value in the memory
+equals any of the rune values in set.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_rune_c
+[source,c]
+----
+bool move_if_rune_c( cScanner sca[static 1], cRune r );
+----
+
+Moves the scanner one rune value forward if the current value in the memory
+equals r.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_rune_match_c
+[source,c]
+----
+bool move_if_rune_match_c( cScanner sca[static 1], c_check_rune check );
+----
+
+Moves the scanner one rune value forward if the current value in the memory
+passes the check.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_if_in_range_c
+[source,c]
+----
+bool move_if_in_range_c( cScanner sca[static 1], cRuneRange range );
+----
+
+Moves the scanner one rune value forward if the current value in the memory
+is in the rune range.
+Returns true if the scanner was moved, otherwise false.
+
+//********************************************************************* move to
+=== move to
+
+==== move_to_byte_c
+[source,c]
+----
+bool move_to_byte_c( cScanner sca[static 1], cByte b );
+----
+
+Moves the scanner to the first byte value in the memory that matches with b.
+The function does not move the scanner if no value matches with b.
+Returns true if a match was found, otherwise false.
+
+==== move_to_byte_match_c
+[source,c]
+----
+bool move_to_byte_match_c( cScanner sca[static 1], c_check_byte check );
+----
+
+Moves the scanner to the first byte value in the memory that passes the check.
+The function does not move the scanner if no value checks true.
+Returns true if a match was found, otherwise false.
+
+==== move_to_bytes_c
+[source,c]
+----
+bool move_to_bytes_c( cScanner sca[static 1], cBytes slice );
+----
+
+Moves the scanner to the first occurrence a of the slice values.
+The function does not move the scanner if the slice does not occur in the
+memory.
+Returns true if a match was found, otherwise false.
+
+==== move_to_any_char_c
+[source,c]
+----
+#define move_to_any_char_c_( Sca, Cstr )                                       \
+   move_to_any_char_c( (Sca), c_c( Cstr ) )
+bool move_to_any_char_c( cScanner sca[static 1], cChars set );
+----
+
+Moves the scanner to the first char value in the memory that matches any of the
+char values in set.
+Returns true if a match was found, otherwise false.
+
+==== move_to_char_c
+[source,c]
+----
+bool move_to_char_c( cScanner sca[static 1], char c );
+----
+
+Moves the scanner to the first char value in the memory that matches with c.
+The function does not move the scanner if no value matches with c.
+Returns true if a match was found, otherwise false.
+
+==== move_to_char_match_c
+[source,c]
+----
+bool move_to_char_match_c( cScanner sca[static 1], c_check_char check );
+----
+
+Moves the scanner to the first char value in the memory that passes the check.
+The function does not move the scanner if no value checks true.
+Returns true if a match was found, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/move_to_char_match.c[]
+----
+
+==== move_to_any_chars_c
+[source,c]
+----
+#define move_to_any_chars_c_( Sca, ... )                                       \
+   move_to_any_chars_c( (Sca), cs_c_( __VA_ARGS__ ) )
+bool move_to_any_chars_c( cScanner sca[static 1], cCharsSlice slice );
+----
+
+Moves the scanner to the first occurrence of any of the chars from the slice.
+The function does not move the scanner if the chars does not occur in the
+memory.
+Returns true if a match was found, otherwise false.
+
+==== move_to_chars_c
+[source,c]
+----
+#define move_to_chars_c_( Sca, Cstr )                                          \
+   move_to_chars_c( (Sca), c_c( Cstr ) )
+bool move_to_chars_c( cScanner sca[static 1], cChars chars );
+----
+
+Moves the scanner to the first occurrence of the chars.
+The function does not move the scanner if the chars does not occur in the
+memory.
+Returns true if a match was found, otherwise false.
+
+==== move_to_any_rune_c
+[source,c]
+----
+#define move_to_any_rune_c_( Sca, Cstr )                                       \
+   move_to_any_rune_c( (Sca), c_c( CStr ) )
+bool move_to_any_rune_c( cScanner sca[static 1], cChars set );
+----
+
+Moves the scanner to the first rune value in the memory that matches any of the
+rune values in set.
+Returns true if a match was found, otherwise false.
+
+==== move_to_rune_c
+[source,c]
+----
+bool move_to_rune_c( cScanner sca[static 1], cRune r );
+----
+
+Moves the scanner to the first rune value in the memory that matches with r.
+The function does not move the scanner if no value matches with r.
+Returns true if a match was found, otherwise false.
+
+==== move_to_rune_match_c
+[source,c]
+----
+bool move_to_rune_match_c( cScanner sca[static 1], c_check_rune check );
+----
+
+Moves the scanner to the first rune value in the memory that matches the check.
+The function does not move the scanner if no value checks true.
+Returns true if a match was found, otherwise false.
+
+==== move_to_in_range_c
+[source,c]
+----
+bool move_to_in_range_c( cScanner sca[static 1], cRuneRange range );
+----
+
+Moves the scanner to the first rune value in the memory thats in the rune
+range.
+The function does not move the scanner if no value checks true.
+Returns true if a match was found, otherwise false.
+
+//****************************************************************** move while
+=== move while
+
+==== move_while_byte_c
+[source,c]
+----
+bool move_while_byte_c( cScanner sca[static 1], cByte b );
+----
+
+Moves the scanner to the first byte value in the memory that does not match
+with b.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_while_byte_match_c
+[source,c]
+----
+bool move_while_byte_match_c( cScanner sca[static 1], c_check_byte check );
+----
+
+Moves the scanner to the first byte value in the memory that does not pass the
+check.
+The function does not move the scanner if no value passes the check.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_while_any_char_c
+[source,c]
+----
+#define move_while_any_char_c_( Sca, Cstr )                                    \
+   move_while_any_char_c( (Sca), c_c( Cstr ) )
+bool move_while_any_char_c( cScanner sca[static 1], cChars set );
+----
+
+Moves the scanner to the first char value in the memory that does not match
+any of the char values in set.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_while_char_c
+[source,c]
+----
+bool move_while_char_c( cScanner sca[static 1], char c );
+----
+
+Moves the scanner to the first char value in the memory that does not match
+with c.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_while_char_match_c
+[source,c]
+----
+bool move_while_char_match_c( cScanner sca[static 1], c_check_char check );
+----
+
+Moves the scanner to the first char value in the memory that does not pass the
+check.
+The function does not move the scanner if no value passes the check.
+Returns true if the scanner was moved, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/move_while_char_match.c[]
+----
+
+==== move_while_any_rune_c
+[source,c]
+----
+#define move_while_any_run_c_( Sca, Cstr )                                     \
+   move_while_any_rune_c( (Sca), c_c( Cstr ) )
+bool move_while_any_rune_c( cScanner sca[static 1], cChars set );
+----
+
+Moves the scanner to the first rune value in the memory that does not match
+any of the rune values in set.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_while_rune_c
+[source,c]
+----
+bool move_while_rune_c( cScanner sca[static 1], cRune r );
+----
+
+Moves the scanner to the first rune value in the memory that does not match
+with r.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_while_rune_match_c
+[source,c]
+----
+bool move_while_rune_match_c( cScanner sca[static 1], c_check_rune check );
+----
+
+Moves the scanner to the first rune value in the memory that does not pass the
+check.
+The function does not move the scanner if no value passes the check.
+Returns true if the scanner was moved, otherwise false.
+
+==== move_while_in_rune_range_c
+[source,c]
+----
+bool move_while_in_range_c( cScanner sca[static 1], cRuneRange range );
+----
+
+Moves the scanner to the first rune value in the memory that is not in the
+rune range.
+The function does not move the scanner if no value passes the check.
+Returns true if the scanner was moved, otherwise false.
+
+//*********************************************************************** error
+=== error
+
+==== scan_error_c
+[source,c]
+----
+bool scan_error_c( cScanner sca[static 1], int err );
+----
+
+Sets the err value on the scanner and returns allways false.
+
+//********************************************************************** access
+=== access
+
+==== scanned_bytes_c
+[source,c]
+----
+#define scanned_bytes_c_( Sca )                                                \
+   scanned_bytes_c( (Sca), (Sca)->pos )
+cBytes scanned_bytes_c( cScanner const sca[static 1], int64_t size );
+----
+
+Util function to access the scanned block of the memory as byte slice.
+Returns an empty slice if size is greater as the number of bytes that are
+scanned.
+
+==== scanned_chars_c
+[source,c]
+----
+#define scanned_chars_c_( Sca )                                                \
+   scanned_chars_c( (Sca), (Sca)->pos )
+cChars scanned_chars_c( cScanner const sca[static 1], int64_t size );
+----
+
+Util function to access the scanned block of the memory as chars.
+Returns an empty slice if size is greater as the number of chars that are
+scanned.
+
+==== unscanned_bytes_c
+[source,c]
+----
+#define unscanned_bytes_c_( Sca )                                              \
+   unscanned_bytes_c( (Sca), (Sca)->space )
+cBytes unscanned_bytes_c( cScanner const sca[static 1], int64_t size );
+----
+
+Util function to access the unscanned block of the memory as byte slice.
+Returns an empty slice if size is greater as the number of bytes that are
+unscanned.
+
+==== unscanned_chars_c
+[source,c]
+----
+#define unscanned_chars_c_( Sca )                                              \
+   unscanned_chars_c( (Sca), (Sca)->space )
+cChars unscanned_chars_c( cScanner const sca[static 1], int64_t size );
+----
+
+Util function to access the unscanned block of the memory as chars.
+Returns an empty slice if size is greater as the number of chars that are
+unscanned.
+
+==== unscanned_is_c
+[source,c]
+----
+bool unscanned_is_c( cScanner const sca[static 1], char const cstr[static 1] );
+----
+
+Util function to check the whole unscanned chars.
+
+//************************************************************************** on
+=== on
+
+==== on_byte_c
+[source,c]
+----
+bool on_byte_c( cScanner sca[static 1], cByte b );
+----
+
+Returns true if the current value in the memory equals b, otherwise false.
+
+==== on_bytes_c
+[source,c]
+----
+bool on_bytes_c( cScanner sca[static 1], cBytes slice );
+----
+
+Returns true if the current memory matches the slice values, otherwise false.
+
+==== on_any_char_c
+[source,c]
+----
+#define on_any_char_c_( Sca, Cstr )                                            \
+   on_any_char_c( (Sca), c_c( Cstr ) )
+bool on_any_char_c( cScanner sca[static 1], cChars set );
+----
+
+Returns true if the current value in the memory equals any of the char values in
+set, otherwise false.
+
+==== on_char_c
+[source,c]
+----
+bool on_char_c( cScanner sca[static 1], char c );
+----
+
+Returns true if the current value in the memory equals c, otherwise false.
+
+==== on_chars_c
+[source,c]
+----
+bool on_chars_c( cScanner sca[static 1], cChars chars );
+----
+
+Returns true if the current memory matches the chars, otherwise false.
+
+==== on_rune_c
+[source,c]
+----
+bool on_rune_c( cScanner sca[static 1], cRune r );
+----
+
+Returns true if the current value in the memory equals r, otherwise false.
+
+//************************************************************************ view
+=== view
+
+==== view_bytes_c
+[source,c]
+----
+cBytes view_bytes_c( cScanner sca[static 1], int64_t size );
+----
+
+Returns cBytes to view the memory of the scanner from the current position
+and moves sca forward.
+The function returns a empty slice if the scanner has not enough space to fill
+the slice.
+
+==== view_chars_c
+[source,c]
+----
+cChars view_chars_c( cScanner sca[static 1], int64_t size );
+----
+
+Returns chars to view the memory of the scanner from the current position and
+moves sca forward.
+The function returns a empty slice if the scanner has not enough space to fill
+the slice.
+
+==== view_cstr_c
+[source,c]
+----
+char const* view_cstr_c( cScanner sca[static 1] );
+----
+
+Moves the scanner forward to the position after the next '\0' char value and
+returns a pointer to the memory position before the call.
+If no '\0' char exist in the remaining memory returns the function a NULL
+pointer.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/view_cstr.c[]
+----
+
+==== view_pad_c
+[source,c]
+----
+cChars view_pad_c( cScanner sca[static 1], char c );
+----
+
+Returns a cChars where all char values have the same value as c.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/view_pad.c[]
+----
+
+==== view_runes_c
+[source,c]
+----
+cChars view_runes_c( cScanner sca[static 1], int64_t size );
+----
+
+Returns chars to view the memory of the scanner from the current position and
+moves sca forward.
+The function returns a empty slice if the scanner has not enough runes in the
+space to fill the slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/view_runes.c[]
+----
+
+//************************************************************************ scan
+=== scan
+
+==== scan_byte_c
+[source,c]
+----
+bool scan_byte_c( cScanner sca[static 1], cByte b[static 1] );
+----
+
+Scans a byte from the memory of the scanner.
+Returns true if the byte value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/scan_byte.c[]
+----
+
+==== scan_char_c
+[source,c]
+----
+bool scan_char_c( cScanner sca[static 1], char c[static 1] );
+----
+
+Scans a char from the memory of the scanner.
+Returns true if the char value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/scan_char.c[]
+----
+
+==== scan_rune_c
+[source,c]
+----
+bool scan_rune_c( cScanner sca[static 1], cRune r[static 1] );
+----
+
+Scans a rune from the memory of the scanner.
+Returns true if the rune value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/scan_rune.c[]
+----
+
+==== scan_int8_c
+[source,c]
+----
+bool scan_int8_c( cScanner sca[static 1], int8_t i8[static 1] );
+----
+
+Scans a int8_t from the memory of the scanner.
+Returns true if the int8_t value can be written, otherwise false.
+
+==== scan_int16_c
+[source,c]
+----
+bool scan_int16_c( cScanner sca[static 1], int16_t i16[static 1] );
+----
+
+Scans a int16_t from the memory of the scanner.
+Returns true if the int16_t value can be written, otherwise false.
+
+==== scan_int32_c
+[source,c]
+----
+bool scan_int32_c( cScanner sca[static 1], int32_t i32[static 1] );
+----
+
+Scans a int32_t from the memory of the scanner.
+Returns true if the int32_t value can be written, otherwise false.
+
+==== scan_int64_c
+[source,c]
+----
+bool scan_int64_c( cScanner sca[static 1], int64_t i64[static 1] );
+----
+
+Scans a int64_t from the memory of the scanner.
+Returns true if the int64_t value can be written, otherwise false.
+
+==== scan_uint8_c
+[source,c]
+----
+bool scan_uint8_c( cScanner sca[static 1], uint8_t u8[static 1] );
+----
+
+Scans a uint8_t from the memory of the scanner.
+Returns true if the uint8_t value can be written, otherwise false.
+
+==== scan_uint16_c
+[source,c]
+----
+bool scan_uint16_c( cScanner sca[static 1], uint16_t u16[static 1] );
+----
+
+Scans a uint16_t from the memory of the scanner.
+Returns true if the uint16_t value can be written, otherwise false.
+
+==== scan_uint32_c
+[source,c]
+----
+bool scan_uint32_c( cScanner sca[static 1], uint32_t u32[static 1] );
+----
+
+Scans a uint32_t from the memory of the scanner.
+Returns true if the uint32_t value can be written, otherwise false.
+
+==== scan_uint64_c
+[source,c]
+----
+bool scan_uint64_c( cScanner sca[static 1], uint64_t u64[static 1] );
+----
+
+Scans a uint64_t from the memory of the scanner.
+Returns true if the uint64_t value can be written, otherwise false.
+
+==== scan_float_c
+[source,c]
+----
+bool scan_float_c( cScanner sca[static 1], float f[static 1] );
+----
+
+Scans a float from the memory of the scanner.
+Returns true if the float value can be written, otherwise false.
+
+==== scan_double_c
+[source,c]
+----
+bool scan_double_c( cScanner sca[static 1], double d[static 1] );
+----
+
+Scans a double from the memory of the scanner.
+Returns true if the double value can be written, otherwise false.
+
+//********************************************************************** marker
+=== marker
+
+[id='scan_marker_c_"]
+==== scan_marker_c_
+[source,c]
+----
+#define scan_marker_c_( Sca )
+----
+
+Creates a marker for the scanner Sca.
+
+==== trace_scan_c
+[source,c]
+----
+#define trace_scan_c_( Sm )                                                    \
+   trace_scan_c( (Sm), false )
+int64_t trace_scan_c( cScanMarker sm[static 1], bool full );
+----
+
+The full value tells to return the number of bytes that are scanned since
+the creation of the marker(true) or since the last call of the function(false).
+
+==== traced_bytes_c
+[source,c]
+----
+#define traced_bytes_c_( Sm )                                                  \
+   traced_bytes_c( (Sm), false )
+cBytes traced_bytes_c( cScanMarker sm[static 1], bool full );
+----
+
+The full value tells to return the bytes that are scanned since the creation of
+the marker(true) or since the last call of the function(false).
+
+==== traced_chars_c
+[source,c]
+----
+#define traced_chars_c_( Sm )                                                  \
+   traced_chars_c( (Sm), false )
+cBytes traced_chars_c( cScanMarker sm[static 1], bool full );
+----
+
+The full value tells to return the chars that are scanned since the creation of
+the marker(true) or since the last call of the function(false).
+
+==== undo_scan_c
+[source,c]
+----
+bool undo_scan_c( cScanMarker sm[static 1] );
+----
+
+Moves the scanner back to the creation of the marker.
+
+==== undo_scan_error_c
+[source,c]
+----
+bool undo_scan_error_c( cScanMarker sm[static 1], int err );
+----
+
+Moves the scanner back to the creation of the marker, sets the err value on the
+scanner and returns allways false.

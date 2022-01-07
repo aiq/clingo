@@ -1,0 +1,672 @@
+= write_type
+:xmpldir: ../../../test/clingo/io/write_type
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions to write types in a text format into the recorder.
+
+IMPORTANT: Check the err value of the recorder if a function returns false.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//*********************************************************************** basic
+=== basic
+
+==== write_bool_c
+[source,c]
+----
+#define write_bool_c_( Rec, Bool )                                             \
+   write_bool_c( (Rec), (Bool), "" )
+bool write_bool_c( cRecorder rec[static 1],
+                   bool val,
+                   char const fmt[static 1] );
+----
+
+Writes the bool value in a text format into the recorder.
+The function supports the following formats:
+
+.format
+[cols="1,2,1"]
+|===
+|l |lower-case representation |true or false
+|U |upper-case representation |TRUE or FALSE
+|Cc |camel-case representation |True or False
+|=== 
+
+The function will use \'l' as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_bool.c[]
+----
+
+==== write_byte_c
+[source,c]
+----
+#define write_byte_c_( Rec, Byte )                                             \
+   write_byte_c( (Rec), (Byte), "" )
+bool write_byte_c( cRecorder rec[static 1],
+                   cByte byte,
+                   char const fmt[static 1] );
+----
+
+Writes the byte value in a text format into the recorder.
+The function supports the following formats:
+
+.format
+[cols="1,2,1"]
+|===
+|x |lower-case hexadecimal value |0a
+|X |upper-case hexadecimal value |2D
+|b |lower-case bit value |oooo1oo1
+|B |upper-case bit value |11o1oo11
+|===
+
+The function will use \'x' as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_byte.c[]
+----
+
+==== write_char_c
+[source,c]
+----
+#define write_char_c_( Rec, Char )                                             \
+   write_char_c( (Rec), (Char), "" )
+bool write_char_c( cRecorder rec[static 1],
+                   char c,
+                   char const fmt[static 1] );
+----
+
+Writes the char value into the recorder.
+The function supports the following formats:
+
+.format
+[cols="1,2,1"]
+|===
+|c |prints just the char |x
+|q |single quote the char |\'x'
+|Q |double quote the char |"x"
+|===
+
+The function will use \'c' as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_char.c[]
+----
+
+==== write_range_c
+[source,c]
+----
+#define write_range_c_( Rec, Rng )                                             \
+   write_range_c( (Rec), (Rng), "" )
+bool write_range_c( cRecorder rec[static 1],
+                    cRange rng,
+                    char const fmt[static 1] );
+----
+
+Writes a range in a text format into the recorder.
+The format can be "dbg" or a format string with the following syntax:
+
+----
+[format][/delimiter]
+----
+
+The fix format "dbg" writes the struct layout of a cRange into the recorder.
+
+.format
+[cols="1,1,1"]
+|===
+|c |closed range |[12..96]
+|o |open range |(11..97)
+|co |closed-open range |[12..97)
+|oc |open-closed range |(11..96]
+|===
+
+The function will use \'c' as default format.
+
+.delimiter
+[cols="1,1,1"]
+|===
+|/, |use comma as delimiter |[12,96]
+|/; |use semicolon as delimiter |[12;96]
+|/\| |use vertical line as delimiter |[12\|96]
+|/.. |use two points as delimiter |[12..96]
+|===
+
+The function will use \'/..' as default delimiter.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_range.c[]
+----
+
+==== write_rune_c
+[source,c]
+----
+#define write_rune_c_( Rec, Rune )                                             \
+   write_rune_c( (Rec), (Rune), "" )
+bool write_rune_c( cRecorder rec[static 1],
+                   cRune rune,
+                   char const fmt[static 1] );
+----
+
+Writes the rune value into the recorder.
+The function supports the following formats:
+
+.format
+[cols="1,2,1"]
+|===
+|s |just the rune |♘
+|q |single quote the char |\'♘'
+|Q |double quote the char |"♘"
+|n |unicode number |U+2658
+|u8 |the UTF-8 hex values |e29998
+|html |decimal HTML-code |`&#9816;`
+|htmlx |hex HTML-code |`&#x2658;`
+|===
+
+The function will use \'s' as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_rune.c[]
+----
+
+//*********************************************************************** float
+=== float
+
+The format for all float values is "dbg" or follows this prototype:
+
+----
+[sign][type][precision][quote][cell]
+----
+
+The fix format "dbg" writes the sign, exponent and mantissa part of a float as
+struct.
+
+.sign
+[cols="1,8"]
+|===
+|+ |Forces to preceed the result with a plus or minus sign (+ or -) even for positive numbers.
+|===
+
+By default is the flag not set and only negative number are preceded with a \'-'
+sign.
+
+.type
+[cols="1,7,1"]
+|===
+|f |decimal floating point |392.65
+|e |lower-case scientific notation (mantissa/exponent) |3.9265e+2
+|E |upper-case scientific notation (mantissa/exponent) |3.9265E+2
+|g |use the shortest representation: %e or %f |392.65
+|G |use the shortest representation: %E or %F |392.65
+|x |lower-case hexadecimal floating point |-0xc.90fep-2
+|X |upper-case hexadecimal floating value |-0XC.90FEP-2
+|===
+
+The function will use \'f' as default type.
+
+.precision
+[cols="1,9"]
+|===
+|.n |this is the number of digits to be printed after the decimal point
+|===
+
+
+.quote
+[cols="1,3,1"]
+|===
+|q |single quote the value |\'747.34'
+|Q |double quote the value |"+123.45"
+|===
+
+By default will the quote flag not be set and the value will not be quoted.
+
+The optional cell part defines a cCell with the following Syntax:
+
+----
+([size][align][pad])
+----
+
+All three values are mandatory.
+The size value must be between 1 and 32767.
+The align value can be \'l', \'c' and \'r' and represent left, center and right
+text alignment.
+The final pad value is the char that will be used to fill up the cell.
+
+==== write_double_c
+[source,c]
+----
+#define write_double_c_( Double, Rec )                                         \
+   write_double_c( (Double), (Rec), "" )
+bool write_double_c( cRecorder rec[static 1],
+                     double d,
+                     char const fmt[static 1] );
+----
+
+Writes the double value in a text format into the recorder.
+The default format is "g.9".
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_double.c[]
+----
+
+==== write_float_c
+[source,c]
+----
+#define write_float_c_( Float, Rec )                                           \
+   write_float_c( (Float), (Rec), "" )
+bool write_float_c( cRecorder rec[static 1],
+                    float f,
+                    char const fmt[static 1] );
+----
+
+Writes the float value in a text format into the recorder.
+The default format is "g.17".
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_float.c[]
+----
+
+//********************************************************************** signed
+=== signed
+
+The format for all signed integers follows this prototype:
+
+----
+[sign][type][quote][cell]
+----
+
+.sign
+[cols="1,8"]
+|===
+|+ |Forces to preceed the result with a plus or minus sign (+ or -) even for positive numbers.
+|===
+
+By default is the flag not set and only negative number are preceded with a \'-'
+sign.
+
+.type
+[cols="1,7,1"]
+|===
+|d |decimal value |
+|x |lower-case hexadecimal value |
+|X |upper-case hexadecimal value |
+|o |octal value |
+|b |lower-case bit value |
+|B |upper-case bit value |
+|0x |memory in lower-case hexadecimal |
+|0X |memory in upper-case hexadecimal |
+|0o |memory in octal |
+|0b |memory in lower-case bit |
+|0B |memory in upper-case bit |
+|===
+
+The function will use \'d' as default type.
+
+.quote
+[cols="1,3,1"]
+|===
+|q |single quote the value |\'747'
+|Q |double quote the value |"+123"
+|===
+
+By default will the quote flag not be set and the value will not be quoted.
+
+The optional cell part defines a cCell with the following Syntax:
+
+----
+([size][align][pad])
+----
+
+All three values are mandatory.
+The size value must be between 1 and 32767.
+The align value can be \'l', \'c' and \'r' and represent left, center and right
+text alignment.
+The final pad value is the char that will be used to fill up the cell.
+
+==== write_int16_c
+[source,c]
+----
+#define write_int16_c_( Rec, Int16 )                                           \
+   write_int16_c( (Rec), (Int16), "" )
+bool write_int16_c( cRecorder rec[static 1],
+                    int16_t i16,
+                    char const fmt[static 1] );
+----
+
+Writes the int16_t value in a text format into the recorder.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_int16.c[]
+----
+
+==== write_int32_c
+[source,c]
+----
+#define write_int32_c_( Rec, Int32  )                                          \
+   write_int32_c( (Rec), (Int32), "" )
+bool write_int32_c( cRecorder rec[static 1],
+                    int32_t i32,
+                    char const fmt[static 1] );
+----
+
+Writes the in32_t value in a text format into the recorder.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_int32.c[]
+----
+
+==== write_int64_c
+[source,c]
+----
+#define write_int64_c_( Rec, Int64 )                                           \
+   write_int64_c( (Rec), (Int64), "" )
+bool write_int64_c( cRecorder rec[static 1],
+                    int64_t i64,
+                    char const fmt[static 1] );
+----
+
+Writes the in64_t value in a text format into the recorder.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_int64.c[]
+----
+
+==== write_int8_C
+[source,c]
+----
+#define write_int8_c_( Rec, Int8 )                                             \
+   write_int8_c( (Rec), (Int8), "" )
+bool write_int8_c( cRecorder rec[static 1],
+                   int8_t i8,
+                   char const format[static 1] );
+----
+
+Writes the int8_t value in a text format into the recorder.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_int8.c[]
+----
+
+//******************************************************************** unsigned
+=== unsigned
+
+The format for all unsigned integers follows this prototype:
+
+----
+[sign-flag][type][quote][cell]
+----
+
+.sign-flag
+[cols="1,8"]
+|===
+|+ |Forces to preceed the result with a plus.
+|===
+
+By default is the flag not set.
+
+.type
+[cols="1,7,1"]
+|===
+|d |decimal value |
+|x |lower-case hexadecimal value |
+|X |upper-case hexadecimal value |
+|o |octal value |
+|b |lower-case bit value |
+|B |upper-case bit value |
+|0x |memory in lower-case hexadecimal |
+|0X |memory in upper-case hexadecimal |
+|0o |memory in octal |
+|0b |memory in lower-case bit |
+|0B |memory in upper-case bit |
+|===
+
+The function will use \'d' as default type.
+
+.quote
+[cols="1,3,1"]
+|===
+|q |single quote the value |\'747'
+|Q |double quote the value |"+123"
+|===
+
+By default will the quote flag not be set and the value will not be quoted.
+
+The optional cell part defines a cCell with the following Syntax:
+
+----
+([size][align][pad])
+----
+
+All three values are mandatory.
+The size value must be between 1 and 32767.
+The align value can be \'l', \'c' and \'r' and represent left, center and right
+text alignment.
+The final pad value is the char that will be used to fill up the cell.
+
+
+==== write_uint16_c
+[source,c]
+----
+#define write_uint16_c_( Rec, Uint16 )                                         \
+   write_uint16_c( (Rec), (Uint16), "" )
+bool write_uint16_c( cRecorder rec[static 1],
+                     uint16_t u16,
+                     char const fmt[static 1] );
+----
+
+Writes the uint16_t value in a text format into the recorder.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_uint16.c[]
+----
+
+==== write_uint32_c
+[source,c]
+----
+#define write_uint32_c_( Rec, Uint32 )                                         \
+   write_uint32_c( (Rec), (Uint32), "" )
+bool write_uint32_c( cRecorder rec[static 1],
+                     uint32_t u32,
+                     char const fmt[static 1] );
+----
+
+Writes the uint32_t value in a text format into the recorder.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_uint32.c[]
+----
+
+==== write_uint64_c
+[source,c]
+----
+#define write_uint64_c_( Rec, Uint64 )                                         \
+   write_uint64_c( (Rec), (Uint64), "" )
+bool write_uint64_c( cRecorder rec[static 1],
+                     uint64_t u64,
+                     char const fmt[static 1] );
+----
+
+Writes the uint64_t value in a text format into the recorder.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_uint64.c[]
+----
+
+==== write_uint8_c
+[source,c]
+----
+#define write_uint8_c_( Rec, Uint8 )                                           \
+   write_uint8_c( (Rec), (Uint8), "" )
+bool write_uint8_c( cRecorder rec[static 1],
+                    uint8_t u8,
+                    char const fmt[static 1] );
+----
+
+Writes the uint8_t value in a text format into the recorder.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_uint8.c[]
+----
+
+//*********************************************************************** slice
+=== slice
+
+==== write_bytes_c
+[source,c]
+----
+#define write_bytes_c_( Rec, Bytes )                                           \
+   write_bytes_c( (Rec), (Bytes), "" )
+bool write_bytes_c( cRecorder rec[static 1],
+                    cBytes bytes,
+                    char const fmt[static 1] );
+----
+
+Writes the bytes from the slice in a text format into the recorder.
+The format string has the following parts:
+
+----
+[format][/[line][count][/chunk]]
+----
+
+.format
+[cols="1,2,1"]
+|===
+|x |lower-case hexadecimal value |0a
+|X |upper-case hexadecimal value |2D
+|===
+
+The function will use \'x' as default format for a byte.
+
+The optional line value defines how much bytes a line should contain, the
+default value is 24.
+
+.count
+[cols="1,8"]
+|===
+|c |appends at the end of the line the number of bytes allready written
+|===
+
+By default is the flag not set and no counter will be written.
+
+The chunk value defines after how much bytes in a line a whitespace character
+should be added, the default value is 1.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_bytes.c[]
+----
+
+==== write_chars_c
+[source,c]
+----
+#define write_chars_c_( Rec, Chars )                                           \
+   write_chars_c( (Rec), (Chars), "" )
+bool write_chars_c( cRecorder rec[static 1],
+                    cChars chars,
+                    char const fmt[static 1] );
+----
+
+Writes the char values from the slice into the recorder.
+The function supports the following formats:
+
+.format
+[cols="1,4,2"]
+|===
+|s |prints just the chars |x
+|q |single quote the slices |\'x'
+|Q |double quote the slices |"x"
+|e |double quoted C-string with escaped characters |"hello\nWorld!"
+|===
+
+The function will use \'s' as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_chars.c[]
+----
+
+==== write_cstr_c
+[source,c]
+----
+#define write_cstr_c_( Rec, Str )                                              \
+   write_cstr_c( (Rec), (Str), "" )
+bool write_cstr_c( cRecorder rec[static 1],
+                   char const str[static 1],
+                   char const fmt[static 1] );
+----
+
+Util function that wraps write_chars_c.
+
+
+==== write_recorded_c
+[source,c]
+----
+bool write_recorded_c( cRecorder rec[static 1],
+                       cRecorder const src[static 1],
+                       char const fmt[static 1] );
+----
+
+Writes the recorded chars or bytes from src into the recorder.
+If the fmt value is empty or starts with *cs* will write_chars_c be used,
+if it starts with *bs* will write_bytes_c be used.
+After a */* can the format for the concrete write function follow.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_recorded.c[]
+----
+
+==== write_unscanned_c
+[source,c]
+----
+#define write_unscanned_c_( Rec, Sca )                                         \
+   write_unscanned_c( (Rec), (Sca), "" )
+bool write_unscanned_c( cRecorder rec[static 1],
+                        cScanner const sca[static 1],
+                        char const fmt[static 1] );
+----
+
+Writes the unscanned chars or bytes from sca into the recorder.
+If the fmt value is empty or starts with *cs* will write_chars_c be used,
+if it starts with *bs* will write_bytes_c be used.
+After a */* can the format for the concrete write function follow.

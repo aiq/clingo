@@ -1,0 +1,590 @@
+= cDate
+:xmpldir: ../../../test/clingo/time/cDate
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cDate']
+==== cDate
+[source,c]
+----
+struct cDate
+{
+   int64_t _v;
+};
+typedef struct cDate cDate;
+----
+
+The cDate struct has just the attribute _v that represent the date value.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cDateSlice']
+==== cDateSlice
+[source,c]
+----
+struct cDateSlice
+{
+   int64_t s;
+   cDate const* v;
+};
+typedef struct cDateSlice cDateSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cDateSlice date_slice_c( int64_t s, cDate const* v );
+cDateSlice make_date_slice_c( cDate const* beg, cDate const* end );
+cDateSlice empty_date_slice_c( void );
+/* sub */
+cDateSlice left_date_slice_c( cDateSlice slice, int64_t maxLen );
+cDateSlice mid_date_slice_c( cDateSlice slice, int64_t index );
+cDateSlice right_date_slice_c( cDateSlice slice, int64_t maxLen );
+cDateSlice sub_date_slice_c( cDateSlice slice,
+                             int64_t begIdx,
+                             int64_t endIdx);
+----
+
+[id='cVarDateSlice']
+==== cVarDateSlice
+[source,c]
+----
+struct cVarDateSlice
+{
+   int64_t s;
+   cDate* v;
+};
+typedef struct cVarDateSlice cVarDateSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarDateSlice var_date_slice_c( int64_t s, cDate* v );
+cVarDateSlice make_var_date_slice_c( cDate* beg, cDate* end );
+cVarDateSlice empty_var_date_slice_c( void );
+/* sub */
+cVarDateSlice left_var_date_slice_c( cVarDateSlice slice, int64_t maxLen );
+cVarDateSlice mid_var_date_slice_c( cVarDateSlice slice, int64_t index );
+cVarDateSlice right_var_date_slice_c( cVarDateSlice slice, int64_t maxLen );
+cVarDateSlice sub_var_date_slice_c( cVarDateSlice slice,
+                                    int64_t begIdx,
+                                    int64_t endIdx);
+/* var slice */
+cVarDateSlice as_var_date_slice_c( cVarDateSlice slice );
+cVarDateSlice cast_var_date_slice_c( cVarDateSlice slice, cDateSlice sub );
+int64_t set_date_slice_c( cVarDateSlice dst, cDateSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+==== date_c
+[source,c]
+----
+cDate date_c( int64_t year, int64_t month, int64_t day );
+----
+
+Initialise a date with year, month and day.
+If the specified date is invalid, the date is not set and date_is_valid_c returns false.
+
+==== local_date_c
+[source,c]
+----
+cDate local_date_c( void );
+----
+
+Returns the current local date, as reported by the system clock.
+
+==== null_date_c
+[source,c]
+----
+cDate null_date_c( void );
+----
+
+Returns a null date, null dates are invalid.
+
+==== utc_date_c
+[source,c]
+----
+cDate utc_date_c( void );
+----
+
+Returns the current UTC date, as reported by the system clock.
+
+//************************************************************************ from
+=== from
+
+==== from_julian_day_c
+[source,c]
+----
+cDate from_julian_day_c( int64_t jd );
+----
+
+Creates a date from the Julian day value jd.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_julian_day.c[]
+----
+
+==== from_ordinal_date_c
+[source,c]
+----
+cDate from_ordinal_date_c( cOrdinalDate od );
+----
+
+Creates a date from the year and day value from the cOrdinalDate value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_ordinal_date.c[]
+----
+
+==== from_week_date_c
+[source,c]
+----
+cDate from_week_date_c( cWeekDate wd );
+----
+
+Creates a date from the year, week and day value from the cWeekDate value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_week_date.c[]
+----
+
+==== from_ymd_c
+[source,c]
+----
+cDate from_ymd_c( cYmd ymd );
+----
+
+Creates a date from the year, month and day values from the ymd instance.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_ymd.c[]
+----
+
+//************************************************************************** as
+=== as
+
+==== as_julian_day_c
+[source,c]
+----
+int64_t as_julian_day_c( cDate date );
+----
+
+Returns the date as Julian day.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_julian_day.c[]
+----
+
+==== as_ordinal_date_c
+[source,c]
+----
+cOrdinalDate as_ordinal_date_c( cDate date );
+----
+
+Returns the date as cOrdinalDate value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_ordinal_date.c[]
+----
+
+==== as_week_date_c
+[source,c]
+----
+cWeekDate as_week_date_c( cDate date );
+----
+
+Returns the date as cWeekDate value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_week_date.c[]
+----
+
+==== as_ymd_c
+[source,c]
+----
+cYmd as_ymd_c( cDate date );
+----
+
+Returns the date as cYmd value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_ymd.c[]
+----
+
+//************************************************************************ prop
+=== prop
+
+==== date_is_valid_c
+[source,c]
+----
+bool date_is_valid_c( cDate date );
+----
+
+Returns true if the specified date (year, month, and day) is valid, otherwise
+false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/date_is_valid.c[]
+----
+
+==== date_day_of_year_c
+[source,c]
+----
+int64_t date_day_of_year_c( cDate date );
+----
+
+Returns the day of the year (1 to 365 or 366 on leap years) of date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/date_day_of_year.c[]
+----
+
+==== date_weekday_c
+[source,c]
+----
+c_Weekday date_weekday_c( cDate date ;
+----
+
+Returns the weekday of date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/date_weekday.c[]
+----
+
+==== next_weekday_date_c
+[source,c]
+----
+cDate next_weekday_date_c( cDate date, c_Weekday wd );
+----
+
+Returns the next date that has the weekday wd.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_weekday_date.c[]
+----
+
+==== prev_weekday_date_c
+[source,c]
+----
+cDate prev_weekday_date_c( cDate date, c_Weekday wd );
+----
+
+Returns the previous date that has the weekday wd.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/prev_weekday_date.c[]
+----
+
+//************************************************************************* add
+=== add
+
+==== add_days_to_date_c
+[source,c]
+----
+cDate add_days_to_date_c( cDate date, int64_t days );
+----
+
+Returns a cDate date containing a date days later than the date (or earlier if
+days is negative).
+Returns an invalid cDate instance if the date is invalid or the new date is out
+of date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/add_days_to_date.c[]
+----
+
+==== add_weeks_to_date_c
+[source,c]
+----
+cDate add_weeks_to_date_c( cDate date, int64_t weeks );
+----
+
+Returns a cDate instance containing a date weeks later than the date (or earlier
+if weeks is negative).
+If the ending day/month combination does not exist in the resulting month/year,
+this function will return a date that is the latest valid date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/add_weeks_to_date.c[]
+----
+
+==== add_months_to_date_c
+[source,c]
+----
+cDate add_months_to_date_c( cDate date, int64_t months );
+----
+
+Returns a cDate instance containing a date months later than the date (or
+earlier if months is negative).
+If the ending day/month combination does not exist in the resulting month/year,
+this function will return a date that is the latest valid date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/add_months_to_date.c[]
+----
+
+==== add_years_to_date_c
+[source,c]
+----
+cDate add_years_to_date_c( cDate date, int64_t years );
+----
+
+Returns a cDate instance containing a date years later than the date (or earlier
+if years is negative).
+If the ending day/month combination does not exist in the resulting year (i.e.,
+if the date was Feb 29 and the final year is not a leap year), this function
+will return a date that is the latest valid date (that is, Feb 28).
+
+.Example
+[source,c]
+----
+include::{xmpldir}/add_years_to_date.c[]
+----
+
+//************************************************************************ diff
+=== diff
+
+==== days_between_dates_c
+[source,c]
+----
+int64_t days_between_dates_c( cDate a, cDate b );
+----
+
+Returns the number of days from a to b (which is negative if b is earlier than
+a).
+If one of the dates is invalid is the result undefined.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/days_between_dates.c[]
+----
+
+==== weeks_between_dates_c
+[source,c]
+----
+int64_t weeks_between_dates_c( cDate a, cDate b );
+----
+
+Returns the number of full weeks from a to b (which is negative if b is earlier
+than a).
+If one of the dates is invalid is the result undefined.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/weeks_between_dates.c[]
+----
+
+==== months_between_dates_c
+[source,c]
+----
+int64_t months_between_dates_c( cDate a, cDate b );
+----
+
+Returns the number of full months from a to b (which is negative if b is earlier
+than a).
+If one of the dates is invalid is the result undefined.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/months_between_dates.c[]
+----
+
+==== years_between_dates_c
+[source,c]
+----
+int64_t years_between_dates_c( cDate a, cDate b );
+----
+
+Returns the number of full years from a to b (which is negative if b is earlier
+than a).
+If one of the dates is invalid is the result undefined.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/years_between_dates.c[]
+----
+
+//************************************************************************* cmp
+=== cmp
+
+==== cmp_date_c
+[source,c]
+----
+int cmp_date_c( cDate a, cDate b );
+----
+
+Compares two dates and returns the three possible results:
+
+<0:: if a is earlier as b
+0:: if both dates are equal
+>0:: if a is later as b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_date.c[]
+----
+
+==== early_date_c
+[source,c]
+----
+cDate early_date_c( cDate a, cDate b );
+----
+
+Returns the earlier of both dates.
+An invalid date is allways earier as a valid date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/early_date.c[]
+----
+
+==== eq_date_c
+[source,c]
+----
+bool eq_date_c( cDate a, cDate b );
+----
+
+Returns true if a is equal to b, otherwise returns false.
+
+==== late_date_c
+[source,c]
+----
+cDate late_date_c( cDate a, cDate b );
+----
+
+Returns the later of the both dates.
+A valid date is allways later as an invalid date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/late_date.c[]
+----
+
+//************************************************************************** io
+=== io
+
+The functions read_date_c and write_date_c are using the following format:
+
+.format
+[cols="1,2,1"]
+|===
+|C |The day of year as a number without a leading character |1 to 365
+|__C |The day of year as a number with leading spaces |1 to 365
+|CCC |The day of year as a number with leading zeros |001 to 365
+|D |The day as a number without a leading character |1 to 31
+|_D |The day as a number with a leading space |1 to 31
+|DD |The day as a number with a leading zero |01 to 31
+|E | The weekday as a number |1 to 7
+|EEE |The abbreviated localized weekday name |Mon to Sun
+|EEEE |The localized weekday name |Monday to Sunday
+|M |The month as a number without a leading character |1 to 12
+|_M |The month as a number with a leading space |1 to 12
+|MM |The month as a number with a leading zero |01 to 12
+|MMM |The abbreviated localized month name |Jan' to Dec
+|WW | The ISO week without a leading zero |W1 to W53
+|WWW | The ISO week with a leading zero |W01 to W53
+|XX |The ISO week date year as a two digit number |00 to 99
+|XXXX |The ISO week date year as a four digit number |like 1878
+|YY |The year as a two digit number |00 to 99
+|YYYY |The year as a four digit number |like 1878
+|===
+
+==== read_date_c
+[source,c]
+----
+#define read_date_c_( Sca, Date )                                              \
+   read_date_c( (Sca), (Date), "" )
+bool read_date_c( cScanner sca[static 1],
+                  cDate date[static 1],
+                  char const fmt[static 1] );
+----
+
+Reads a cDate value from a text with a scanner.
+The function will use C_DateFormat( "YYYY.MM.DD" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_date.c[]
+----
+
+==== write_date_c
+[source,c]
+----
+#define write_date_c_( Rec, Date )                                             \
+   write_date_c( (Rec), (Date), "" )
+bool write_date_c( cRecorder rec[static 1],
+                   cDate date,
+                   char const fmt[static 1] );
+----
+
+Writes a cDate value into the recorder.
+The function will use C_DateFormat( "YYYY.MM.DD" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_date.c[]
+----

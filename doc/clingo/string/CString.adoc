@@ -1,0 +1,314 @@
+= CString.h
+:xmpldir: ../../../test/clingo/string/CString
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the CBitVec type and the associated functions.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='C_StringMeta']
+==== C_StringMeta
+[source,c]
+----
+cMeta const C_StringMeta;
+----
+
+Stores the cMeta instance that all CString instances reference.
+
+[id='CString']
+==== CString
+[source,c]
+----
+struct CString;
+typedef struct CString CString;
+----
+
+CString stores a utf8-encoded string.
+The actuall string is immutable.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************** create
+=== create
+
+==== adopt_cstr_c
+[source,c]
+----
+CString* adopt_cstr_c( char cstr[static 1] );
+----
+
+Creates a string that takes ownership of C string.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/adopt_string.c[]
+----
+
+==== empty_string_c
+[source,c]
+----
+CString* empty_string_c();
+----
+
+Creates a empty string.
+All empty string instances share the same instance.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/empty_string.c[]
+----
+
+==== make_string_c
+[source,c]
+----
+CString* make_string_c( cChars chars );
+----
+
+Creates a string with the content of chars.
+
+==== new_string_c
+[source,c]
+----
+CString* new_string_c( char const cstr[static 1] );
+----
+
+Creates a string that equals the C string cstr.
+
+==== str_c
+[source,c]
+----
+CString* str_c( char const cstr[static 1] );
+----
+
+Creates a string that wraps cstr.
+The C string will not be freed in this case.
+It is recomended to use this function for string literals.
+
+[source,c]
+----
+include::{xmpldir}/str.c[]
+----
+
+//************************************************************************ prop
+=== prop
+
+==== is_ascii_string_c
+[source,c]
+----
+bool is_ascii_string_c( CString const* str );
+----
+
+Returns true if all runes in str represent a ASCII character, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/is_ascii_string.c[]
+----
+
+==== string_byte_length_c
+[source,c]
+----
+int64_t string_byte_length_c( CString const* str );
+----
+
+Returns the number of bytes a string requires, without the '\0' character at the
+end.
+
+==== string_chars_c
+[source,c]
+----
+cChars string_chars_c( CString const* str );
+----
+
+Returns the internal C string as chars.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/string_chars.c[]
+----
+
+==== string_cstr_c
+[source,c]
+----
+char const* string_cstr_c( CString const* str );
+----
+
+Returns a pointer to the internal C string.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/string_cstr.c[]
+----
+
+==== string_is_empty_c
+[source,c]
+----
+bool string_is_empty_c( CString const* str );
+----
+
+Returns true if the str is empty.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/string_is_empty.c[]
+----
+
+==== string_length_c
+[source,c]
+----
+int64_t string_length_c( CString const* str );
+----
+
+Returns the number of runes in str.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/string_length.c[]
+----
+
+//************************************************************************* cmp
+=== cmp
+
+==== cmp_string_c
+[source,c]
+----
+int cmp_string_c( CString const* a, CString const* b );
+----
+
+Compares two strings and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to ba
+
+==== eq_string_c
+[source,c]
+----
+bool eq_string_c( CString const* a, CString const* b );
+----
+
+Returns true if both strings are equal, otherwise false.
+
+==== hash_string_c
+[source,c]
+----
+uint64_t hash_string_c( CString const* str );
+----
+
+Retuns the hash value of a string.
+
+==== string_is_c
+[source,c]
+----
+bool string_is_c( CString const* str, char const cstr[static 1] );
+----
+
+Function that compares the internal C string of a string with cstr.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/string_is.c[]
+----
+
+//************************************************************************* sub
+=== sub
+
+==== left_string_c
+[source,c]
+----
+cChars left_string_c( CString const* s, int64_t maxLen );
+----
+
+Returns the leftmost runes of a string as chars.
+If maxLen is greater or equal the length of the string, contains chars all runes
+from the string.
+
+==== new_left_string_c
+[source,c]
+----
+CString* new_left_string_c( CString const* s, int64_t maxLen );
+----
+
+Returns the leftmost runes of a string as a new string.
+If maxLen is greater or equal the length of the string, contains the new string
+all runes from the string.
+
+==== mid_string_c
+[source,c]
+----
+cChars mid_string_c( CString const* s, int64_t index );
+----
+
+Returns a chars starting(including) at a given rune index.
+If index does not point into chars returns the function an empty slice.
+
+==== new_mid_string_c
+[source,c]
+----
+CString* new_mid_string_c( CString const* s, int64_t maxLen );
+----
+
+Returns a new string starting(including) at a given rune index.
+If index does not point into the slice returns the function an empty string.
+
+==== right_string_c
+[source,c]
+----
+cChars right_string_c( CString const* s, int64_t maxLen );
+----
+
+Returns the rightmost runes of a string as chars.
+If maxLen is greater or equal the length of the string, contains chars all runes
+from the string.
+
+==== new_right_string_c
+[source,c]
+----
+CString* new_right_string_c( CString const* s, int64_t maxLen );
+----
+
+Returns the rightmost runes of a string as a new string.
+If maxLen is greater or equal the length of the string, contains the new string
+all runes from the string.
+
+==== sub_string_c
+[source,c]
+----
+cChars sub_string_c( CString const* s, int64_t min, int64_t max );
+----
+
+Returns a sub part of the string as chars.
+The returned chars includes the rune at begIdx(begin index) as first value
+and the rune at endIdx-1 as last value.
+If begIdx or endIdx are not valid rune indices returns the function a empty
+slice.
+
+==== new_sub_string_c
+[source,c]
+----
+CString* new_sub_string_c( CString const* s, int64_t min, int64_t max );
+----
+
+Returns a sub part of the string as a new string.
+The returned string includes the rune at begIdx(begin index) as first value
+and the rune at endIdx-1 as last value.
+If begIdx or endIdx are not valid rune indices returns the function a empty
+string.

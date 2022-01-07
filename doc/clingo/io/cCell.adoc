@@ -1,0 +1,88 @@
+= cCell
+:xmpldir: ../../../test/clingo/io/cCell
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to define and write text sectors.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cCell']
+==== cCell
+[source,c]
+----
+struct cCell
+{
+   int16_t size;
+   int8_t orient;
+   char pad;
+};
+typedef struct cCell cCell;
+----
+
+A cCell defines how a sector should be written.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+[id='cell_c_']
+==== cell_c_
+[source,c]
+----
+#define cell_c_( Size, Orient, Pad )
+----
+
+Creates a cell with defined values.
+
+[id='read_in_cell_c']
+==== read_in_cell_c
+[source,c]
+----
+bool read_in_cell_c( cScanner sca[static 1], cCell cell[static 1] );
+----
+
+Initialises a cell from a text representation that will be read with
+the scanner.
+The text representation of a cell has the following syntax:
+
+----
+([size][orient][pad])
+----
+
+All three values are mandatory.
+The size value must be between 1 and 32767.
+The orient value can be \'l', \'c' and \'r' and represent left, center and right
+text orientation.
+The final pad value is the char that will be used to fill up the cell.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_in_cell.c[]
+----
+
+[id='write_ascii_into_cell_c']
+==== write_ascii_into_cell_c
+[source,c]
+----
+bool write_ascii_into_cell_c( cRecorder rec[static 1],
+                              cChars ascii,
+                              cCell const cell[static 1] );
+----
+
+Writes the characters into a cell.
+A to long ascii text will be reduced to the cell size.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_ascii_into_cell.c[]
+----

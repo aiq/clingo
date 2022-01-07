@@ -1,0 +1,673 @@
+= cRune
+:xmpldir: ../../../test/clingo/type/cRune
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with cRune values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cRune']
+==== cRune
+[source,c]
+----
+struct cRune
+{
+   union
+   {
+      uint32_t ctrl;
+      cByte b[4];
+      char c[4];
+   };
+};
+typedef struct cRune cRune;
+----
+
+A cRune is a type that can hold a single Unicode code point.
+The Unicode code point is encoded in UTF-8 inside a cRune.
+
+==== c_check_rune
+[source,c]
+----
+typedef bool ( *c_check_rune )( cRune r )
+----
+
+c_check_rune is the signature of a function to check a rune value.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cRuneSlice]
+==== cRuneSlice
+[source,c]
+----
+struct cRuneSlice
+{
+   int64_t s;
+   cRune const* v;
+};
+typedef struct cRuneSlice cRuneSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cRuneSlice rune_slice_c( int64_t s, cRune const* v );
+cRuneSlice make_rune_slice_c( cRune const* beg, cRune const* end );
+cRuneSlice empty_rune_slice_c( void );
+/* sub */
+cRuneSlice left_rune_slice_c( cRuneSlice slice, int64_t maxLen );
+cRuneSlice mid_rune_slice_c( cRuneSlice slice, int64_t index );
+cRuneSlice right_rune_slice_c( cRuneSlice slice, int64_t maxLen );
+cRuneSlice sub_rune_slice_c( cRuneSlice slice, int64_t begIdx, int64_t endIdx );
+----
+
+[id='cVarRuneSlice']
+==== cVarRuneSlice
+[source,c]
+----
+struct cVarRuneSlice
+{
+   int64_t s;
+   cRune* v;
+};
+typedef struct cVarRuneSlice cVarRuneSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarRuneSlice var_rune_slice_c( int64_t s, cRune* v );
+cVarRuneSlice make_var_rune_slice_c( cRune* beg, cRune* end );
+cVarRuneSlice empty_var_rune_slice_c( void );
+/* sub */
+cVarRuneSlice left_var_rune_slice_c( cVarRuneSlice slice, int64_t maxLen );
+cVarRuneSlice mid_var_rune_slice_c( cVarRuneSlice slice, int64_t index );
+cVarRuneSlice right_var_rune_slcie_c( cVarRuneSlice slice, int64_t maxLen );
+cVarRuneSlice sub_var_rune_slice_c( cVarRuneSlice slice,
+                                    int64_t begIdx,
+                                    int64_t endIdx );
+/* var slice */
+cRuneSlice as_rune_slice_c( cVarRuneSlice slice );
+cVarRuneSlice cast_rune_slice_c( cVarRuneSlice slice, cRuneSlice sub );
+int64_t set_rune_slice_c( cVarRuneSlice dst, cRuneSlice src );
+----
+
+[id='cRuneChunk']
+==== cRuneChunk
+[source,c]
+----
+struct cRuneChunk
+{
+   int64_t s;
+   cRune const* v;
+   int64_t favSize;
+   cRuneSlice slice;
+};
+typedef struct cRuneChunk cRuneChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_rune_chunk_c( cRuneChunk chunk[static 1],
+                             int64_t s,
+                             cRuneSlice slice );
+void init_front_rune_chunk_c( cRuneChunk chunk[static 1],
+                              int64_t s,
+                              cRuneSlice slice );
+----
+
+[id='cVarRuneChunk']
+==== cVarRuneChunk
+[source,c]
+----
+struct cVarRuneChunk
+{
+   int64_t s;
+   cRune* v;
+   int64_t favSize;
+   cVarRuneSlice slice;
+};
+typedef struct cVarRuneChunk cVarRuneChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_rune_chunk_c( cVarRuneChunk chunk[static 1],
+                                 int64_t s,
+                                 cVarRuneSlice slice );
+void init_front_var_rune_chunk_c( cVarRuneChunk chunk[static 1],
+                                  int64_t s,
+                                  cVarRuneSlice slice );
+----
+
+[id='cRuneWindow']
+==== cRuneWindow
+[source,c]
+----
+struct cRuneWindow
+{
+   int64_t s;
+   cRune const* v;
+   cRuneSlice slice;
+};
+typedef struct cRuneWindow cRuneWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_rune_window_c( cRuneWindow window[static 1],
+                              int64_t s,
+                              cRuneSlice slice );
+void init_front_rune_window_c( cRuneWindow window[static 1],
+                               int64_t s,
+                               cRuneSlice slice );
+----
+
+[id='cVarRuneWindow']
+==== cVarRuneWindow
+[source,c]
+----
+struct cVarRuneWindow
+{
+   int64_t s;
+   cRune* v;
+   cVarRuneSlice slice;
+};
+typedef struct cVarRuneWindow cVarRuneWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_rune_window_c( cVarRuneWindow window[static 1],
+                                  int64_t s,
+                                  cVarRuneSlice slice );
+void init_front_var_rune_window_c( cVarRuneWindow window[static 1],
+                                   int64_t s,
+                                   cVarRuneSlice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ utf8
+=== utf8
+
+==== is_utf8_head_c
+[source,c]
+----
+bool is_utf8_head_c( char c );
+----
+
+Returns true if c is a valid first byte of a UTF-8 encoded code point, otherwise
+false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/is_utf8_head.c[]
+----
+
+==== is_utf8_tail_c
+[source,c]
+----
+bool is_utf8_tail_c( char c );
+----
+
+Returns true if c is a valid byte in the tail of a UTF-8 encoded code point,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/is_utf8_tail.c[]
+----
+
+==== utf8_length_c
+[source,c]
+----
+int8_t utf8_length_c( char c );
+----
+
+Returns number of bytes of the UTF-8 encoded code point.
+An invalid c value leads to the result 0.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/utf8_length.c[]
+----
+
+//************************************************************************ init
+=== init
+
+[id='build_rune_c_']
+==== build_rune_c_
+[source,c]
+----
+#define build_rune_c_( A, B, C, D )
+----
+
+Creates a cRune with the byte values A, B, C and D.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/build_rune.c[]
+----
+
+==== make_rune_c
+[source,c]
+----
+cRune make_rune_c( cChars chars );
+----
+
+Creates a cRune from the UTF-8 encoded code point at the front.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/make_rune.c[]
+----
+
+==== null_rune_c
+[source,c]
+----
+cRune null_rune_c();
+----
+
+Creates a invalid cRune.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/null_rune.c[]
+----
+
+[id='rune_c']
+==== rune_c
+[source,c]
+----
+cRune rune_c( char const cstr[static 1] );
+----
+
+Creates a cRune from the UTF-8 encoded code point at the front.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/rune.c[]
+----
+
+==== utf16_rune_c
+[source,c]
+----
+cRune utf16_rune_c( uint16_t val );
+----
+
+Creates a cRune from a UTF-16 encoded code point.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/utf16_rune.c[]
+----
+
+==== utf32_rune_c
+[source,c]
+----
+cRune utf32_rune_c( uint32_t val );
+----
+
+Creates a rune from a UTF-32 encoded code point.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/utf32_rune.c[]
+----
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_rune_c
+[source,c]
+----
+int cmp_rune_c( cRune a, cRune b );
+----
+
+Compares the cRune values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_rune.c[]
+----
+
+==== eq_rune_c
+[source,c]
+----
+bool eq_rune_c( cRune a, cRune b );
+----
+
+Checks if a and b are equal.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/eq_rune.c[]
+----
+
+==== rune_code_c
+[source,c]
+----
+uint32_t rune_code_c( cRune r );
+----
+
+Converts a rune into a UTF-32 encoded code point.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/rune_code.c[]
+----
+
+==== rune_is_c
+[source,c]
+----
+bool rune_is_c( cRune r, char const cstr[static 1] );
+----
+
+Checks if r and the first UTF-8 encoded code point in the C string are equal.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/rune_is.c[]
+----
+
+==== rune_is_valid_c
+[source,c]
+----
+bool rune_is_valid_c( cRune r );
+----
+
+Checks if r contains a valid byte sequence.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/rune_is_valid.c[]
+----
+
+==== rune_size_c
+[source,c]
+----
+int8_t rune_size_c( cRune r );
+----
+
+Returns how much bytes are used to store the UTF-8 encoded code point.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/rune_size.c[]
+----
+
+//******************************************************************* */ access
+=== access
+
+==== ceil_to_rune_c
+[source,c]
+----
+char const* ceil_to_rune_c( cChars chars, int64_t index );
+----
+
+Returns a pointer to the first char of a UTF-8 encoded code point at the byte
+index.
+If the char at index is a UTF-8 tail goes the function forward to the next
+UTF-8 head.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/ceil_to_rune.c[]
+----
+
+==== first_rune_c
+[source,c]
+----
+char const* first_rune_c( cChars chars );
+----
+
+Returns a pointer to the first rune in chars.
+
+==== floor_to_rune_c
+[source,c]
+----
+char const* floor_to_rune_c( cChars chars, int64_t index );
+----
+
+Returns a pointer to the first char of a UTF-8 encoded code point at the byte
+index.
+If the char at index is a UTF-8 tail goes the function back to the beginning of
+the UTF8- encoded code point.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/floor_to_rune.c[]
+----
+
+==== last_rune_c
+[source,c]
+----
+char const* last_rune_c( cChars chars );
+----
+
+Returns a pointer to the last rune in chars.
+
+==== nth_rune_c
+[source,c]
+----
+char const* nth_rune_c( cChars chars, int64_t n );
+----
+
+Returns a pointer to the nth UTF-8 encoded code point in the chars.
+The n value can be nagtive to access the chars backwards.
+If n is out of range returns the function NULL.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/nth_rune.c[]
+----
+
+//************************************************************************** itr
+=== iterate
+
+[id='iterate_runes_c_']
+==== iterate_runes_c_
+[source,c]
+----
+#define iterate_runes_c_( Itr, Rune, Chars )
+----
+
+Macro function to define a for statement to iterate over all runes in chars.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iterate_runes.c[]
+----
+
+==== next_rune_c
+[source,c]
+----
+char const* next_rune_c( cChars chars, char const* itr, cRune r[static 1] )
+----
+
+Navigates a to the next UTF-8 encoded code point in a C string.
+The returned iterator is invalid if no next value exist.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_rune.c[]
+----
+
+//*********************************************************************** slice
+=== char slice
+
+==== count_runes_c
+[source,c]
+----
+int64_t count_runes_c( cChars chars );
+----
+
+Counts the number of runes of the chars.
+Returns -1 for chars with incomplete runes.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/count_runes.c[]
+----
+
+==== fill_rune_slice_c
+[source,c]
+----
+cVarRuneSlice fill_rune_slice_c( cVarRuneSlice dst, cChars src );
+----
+
+Fills dst with the complete runes in src.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/fill_rune_slice.c[]
+----
+
+==== find_any_rune_c
+[source,c]
+----
+#define find_any_rune_c_( Chars, Cstr )                                        \
+   find_any_rune_c( (Chars), c_c( Cstr ) )
+char const* find_any_rune_c( cChars chars, cChars set );
+----
+
+Returns a pointer to the first char that matches any of the  runes in the set
+and NULL if non of the runes exist in the chars.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_any_rune.c[]
+----
+
+==== find_rune_c
+[source,c]
+----
+#define find_rune_c_( Chars, Cstr )                                            \
+   find_rune_c( (Chars), rune_c( Cstr ) )
+char const* find_rune_c( cChars chars, cRune r );
+----
+
+Returns a pointer to the first char of a UTF-8 encoded code point in a chars
+that equals r.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_rune.c[]
+----
+
+==== left_runes_c
+[source,c]
+----
+cChars left_runes_c( cChars chars, int64_t maxLen );
+----
+
+Returns the leftmost runes in a chars.
+If maxLen is greater or equal the number of runes in the chars returns the
+function the whole chars.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/left_runes.c[]
+----
+
+==== mid_runes_c
+[source,c]
+----
+cChars mid_runes_c( cChars chars, int64_t index );
+----
+
+Returns chars starting(including) at a given rune index.
+If index does not point into the chars returns the function an empty slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/mid_runes.c[]
+----
+
+==== right_runes_c
+[source,c]
+----
+cChars right_runes_c( cChars chars, int64_t maxLen );
+----
+
+Returns the rightmost runes in chars.
+If maxLen is greater or equal the number of runes in the chars returns the
+function the whole chars.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/right_runes.c[]
+----
+
+==== sub_runes_c
+[source,c]
+----
+cChars sub_runes_c( cChars chars, int64_t begIdx, int64_t endIdx );
+----
+
+The returned chars includes the rune at begIdx(begin index) as first value
+and the rune at endIdx-1 as last value.
+If begIdx or endIdx are not valid rune indices returns the function a empty
+slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/sub_runes.c[]
+----

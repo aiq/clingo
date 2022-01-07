@@ -1,0 +1,348 @@
+= cCharsSlice
+:xmpldir: ../../../test/clingo/type/cCharsSlice
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+It is recommended to use cChars and cVarChars as alternative to a C-string.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cCharsSlice']
+==== cCharsSlice
+[source,c]
+----
+struct cCharsSlice
+{
+   int64_t s;
+   char const* v;
+};
+typedef struct cCharsSlice cCharsSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cCharsSlice chars_slice_c( int64_t s, cChars const* v );
+cCharsSlice make_chars_slice_c( cChars const* beg, cChars const* end );
+cCharsSlice empty_chars_slice_c( void );
+/* sub */
+cCharsSlice left_chars_slice_c( cCharsSlice slice, int64_t maxLen );
+cCharsSlice mid_chars_slice_c( cCharsSlice slice, int64_t index );
+cCharsSlice right_chars_slice_c( cCharsSlice slice, int64_t maxLen );
+cCharsSlice sub_chars_slice_c( cCharsSlice slice,
+                               int64_t begIdx,
+                               int64_t endIdx );
+----
+
+[id='cVarCharsSlice']
+==== cVarCharsSlice
+[source,c]
+----
+struct cVarCharsSlice
+{
+   int64_t s;
+   char* v;
+};
+typedef struct cVarCharsSlice cVarCharsSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarCharsSlice var_chars_slice_c( int64_t s, cChars* v );
+cVarCharsSlice make_var_chars_slice_c( cChars* beg, cChars* end );
+cVarCharsSlice empty_var_chars_slice_c( void );
+/* sub */
+cVarCharsSlice left_var_chars_slice_c( cVarCharsSlice slice, int64_t maxLen );
+cVarCharsSlice mid_var_chars_slice_c( cVarCharsSlice slice, int64_t index );
+cVarCharsSlice right_var_slice_chars_c( cVarCharsSlice slice, int64_t maxLen );
+cVarCharsSlice sub_var_chars_slice_c( cVarCharsSlice slice,
+                                      int64_t begIdx,
+                                      int64_t endIdx );
+/* var slice */
+cCharsSlice as_chars_slice_c( cVarCharsSlice slice );
+cVarCharsSlice cast_chars_slice_c( cVarCharsSlice slice, cCharsSlice sub );
+int64_t set_var_chars_slice_c( cVarCharsSlice dst, cChars src );
+----
+
+[id='cCharsChunk']
+==== cCharsChunk
+[source,c]
+----
+struct cCharsChunk
+{
+   int64_t s;
+   cChars const* v;
+   int64_t favSize;
+   cCharsSlice slice;
+};
+typedef struct cCharsChunk cCharsChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_chars_chunk_c( cCharsChunk chunk[static 1],
+                              int64_t s,
+                              cCharsSlice slice );
+void init_front_chars_chunk_c( cCharsChunk chunk[static 1],
+                               int64_t s,
+                               cCharsSlice slice );
+----
+
+[id='cVarCharsChunk']
+==== cVarCharsChunk
+[source,c]
+----
+struct cVarCharsChunk
+{
+   int64_t s;
+   cChars* v;
+   int64_t favSize;
+   cVarCharsSlice slice;
+};
+typedef struct cVarCharsChunk cVarCharsChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_chars_chunk_c( cVarCharsChunk chunk[static 1],
+                                  int64_t s,
+                                  cVarCharsSlice slice );
+void init_front_var_chars_chunk_c( cVarCharsChunk chunk[static 1],
+                                   int64_t s,
+                                   cVarCharsSlice slice );
+----
+
+[id='cCharsWindow']
+==== cCharsWindow
+[source,c]
+----
+struct cCharsWindow
+{
+   int64_t s;
+   cChars const* v;
+   cCharsSlice slice;
+};
+typedef struct cCharsWindow cCharsWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_chars_window_c( cCharsWindow window[static 1],
+                               int64_t s,
+                               cCharsSlice slice );
+void init_front_chars_window_c( cCharsWindow window[static 1],
+                                int64_t s,
+                                cCharsSlice slice );
+----
+
+[id='cVarCharsWindow']
+==== cVarCharsWindow
+[source,c]
+----
+struct cVarCharsWindow
+{
+   int64_t s;
+   cChars* v;
+   cVarCharsSlice slice;
+};
+typedef struct cVarCharsWindow cVarCharsWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_chars_window_c( cVarCharsWindow window[static 1],
+                                   int64_t s,
+                                   cVarCharsSlice slice );
+void init_front_var_chars_window_c( cVarCharsWindow window[static 1],
+                                    int64_t s,
+                                    cVarCharsSlice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+[id='cs_c_']
+==== cs_c_
+[souce,c]
+----
+#define cs_c_( ... )
+----
+
+Macro function that creates a cCharsSlice value with the C-string values in *...*.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cs.c[]
+----
+
+==== init_chars_slice_c
+[source,c]
+----
+cCharsSlice init_chars_slice_c( cVarCharsSlice slice,
+                                int64_t n,
+                                char const* arr[static 1] );
+----
+
+Inits a slice with the n C-string values in the array.
+If the n is greater as the space in the slice returns the function an empty 
+slice.
+
+//************************************************************************ algo
+=== algo
+
+==== count_eq_chars_c
+[source,c]
+----
+int64_t count_eq_chars_c( cCharsSlice slice, cChars val );
+----
+
+{CountEq}
+
+==== find_chars_c
+[source,c]
+----
+cChars const* find_chars_c( cCharsSlice slice, cChars val );
+----
+
+{FindVal}
+
+==== qsort_chars_slice_c
+[source,c]
+----
+void qsort_chars_slice_c( cVarCharsSlice slice );
+----
+
+{Qsort}
+
+//************************************************************************ prop
+=== prop
+
+==== count_chars_slice_c
+[source,c]
+----
+int64_t count_chars_slice_c( cCharsSlice slice );
+----
+
+Returns the sum of all chars in the slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/count_chars_slice.c[]
+----
+
+==== count_chars_slice_runes_c
+[source,c]
+----
+int64_t count_chars_slice_runes_c( cCharsSlice slice );
+----
+
+Returns the sum of all runes in the slice.
+Returns -1 if one value in the slice is invalid.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/count_chars_slice_runes.c[]
+----
+
+//************************************************************************ util
+=== util
+
+==== chars_ends_with_any_c
+[source,c]
+----
+#define chars_ends_with_any_c_( Chars, ... )                                   \
+   chars_ends_with_any_c( (Chars), cs_c_( __VA_ARGS__ ) )
+bool chars_ends_with_any_c( cChars chars, cCharsSlice slice );
+----
+
+Returns true if chars ends with any of the values in slice, otherwise false.
+
+==== chars_is_any_c
+[source,c]
+----
+#define chars_is_any_c_( Chars, ... )                                          \
+   chars_is_any_c( (Chars), css_c_( __VA_ARGS__ ) )
+bool chars_is_any_c( cChars chars, cCharsSlice slice );
+----
+
+Returns true if chars equals any of the chars in the slice, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/chars_is_any.c[]
+----
+
+==== chars_starts_with_any_c
+[source,c]
+----
+#define chars_starts_with_any_c_( Chars, ... )                                 \
+   chars_starts_with_any_c( (Chars), cs_c_( __VA_ARGS__ ) )
+bool chars_starts_with_any_c( cChars chars, cCharsSlice slice );
+----
+
+Returns true if chars starts with any of the values in slice, otherwise false.
+
+==== index_of_any_chars_c
+[source,c]
+----
+#define index_of_any_chars_c_( Chars, ... )                                    \
+   index_of_any_chars_c( (Chars), cs_c_( __VA_ARGS__ ) )
+int64_t index_of_any_chars_c( cChars chars, cCharsSlice slice );
+----
+
+Returns a positive index if any value in the slice exist in chars, otherwise
+returns the function -1.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/index_of_any_chars.c[]
+----
+
+==== join_chars_slice_c
+[source,c]
+----
+cChars join_chars_slice_c( cCharsSlice slice, cChars sep, cVarChars buf );
+----
+
+Fills buf with all chars in the list.
+Each element will be separated by the given separator (sep).
+
+.Example
+[source,c]
+----
+include::{xmpldir}/join_chars_slice.c[]
+----

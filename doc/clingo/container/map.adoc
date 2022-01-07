@@ -1,0 +1,548 @@
+= map
+:xmpldir: ../../../test/clingo/container/map
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+[id='Overview']
+== Overview
+
+Module that defines the macros to generate map types.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Type and Definitions
+
+[id='C_MaxMapLoad']
+[source,c]
+----
+float const C_MaxMapLoad = 0.85f;
+----
+
+Defines the recommended maxLoad for a map.
+
+[id='cMapInfo']
+==== cMapInfo
+[source,c]
+----
+struct cMapInfo
+{
+   int64_t count;
+   int64_t size;
+   float maxLoad;
+};
+typedef struct cMapInfo cMapInfo;
+----
+
+cMapInfo stores the properties of the map.
+The count value tells how much elements are stored in the map.
+The size shows how much memory is allocated, the maxLoad says how much percent
+of the size can be used without to grow.
+
+[id='cMapItr']
+==== cMapItr
+[source,c]
+----
+struct cMapItr
+{
+   int64_t _v;
+};
+typedef struct cMapItr cMapItr;
+----
+
+Type to iterate over the entries in a map.
+
+//******************************************************************************
+//****************************************************** Code Generation Macros
+//******************************************************************************
+[id='Code-Generation-Macros']
+== Code Generation Macros
+
+//********************************************************************** create
+=== create
+
+[id='MAKE_MAP_C_']
+==== MAKE_MAP_C_
+[source,c]
+----
+#define MAKE_MAP_C_(                                                           \
+   FuncSuffix, MapType, RowType, Meta                                          \
+)
+----
+
+The generated function has the following common signature:
+[source,c]
+----
+MapType* make_FuncSuffix( int64_t size, float maxLoad );
+----
+
+[id='NEW_VEC_C_']
+==== NEW_VEC_C_
+[source,c]
+----
+#define NEW_MAP_C_(                                                            \
+   FuncSuffix, VecType                                                         \
+)
+----
+
+The generated function has the following common signature:
+[source,c]
+----
+MapType* new_FuncSuffix();
+----
+
+//********************************************************************** manage
+=== manage
+
+[id='INFO_OF_MAP_C_']
+==== INFO_OF_Map_C_
+[source,c]
+----
+#define INFO_OF_MAP_C_(                                                        \
+   FuncSuffix, MapType                                                         \
+)
+----
+
+Generates a function that returns a reference to the info from the vector.
+The generated function has the following common signature:
+[source,c]
+----
+cMapInfo const* info_of_FuncSuffix( MapType* map );
+----
+
+[id='RESIZE_MAP_C_']
+==== RESIZE_MAP_C_
+[source,c]
+----
+#define RESIZE_MAP_C_(                                                         \
+   FuncSuffix, MapType, RowType, HashFunc, DoRef                               \
+)
+----
+
+Generates a function to resize the map size.
+The generated function has the following common signature:
+[source,c]
+----
+bool resize_FuncSuffix( MapType* map, int64_t size );
+----
+
+[id='SET_MAX_LOAD_OF_MAP_C_']
+==== SET_MAX_LOAD_OF_MAP_C_
+[source,c]
+----
+#define SET_MAX_LOAD_OF_MAP_C_(                                                \
+   FuncSuffix, MapType                                                         \
+)
+----
+
+Generates a function to change the max load factor of the map.
+The generated function has the following common signature:
+[source,c]
+----
+bool set_max_load_of_FuncSuffix( MapType* map, float load );
+----
+
+//********************************************************************* iterate
+
+[id='NEXT_IN_MAP_C_']
+==== NEXT_IN_MAP_C_
+[source,c]
+----
+#define NEXT_IN_MAP_C_(                                                        \
+   FuncSuffix, MapType, RowType, KeyType, DoRefKey, ValType, DoRefVal          \
+)
+----
+
+Generates a function that gets a pointer to the next key and value in the map
+after the iterator position.
+The generated function has the following common signatures:
+[source,c]
+----
+cMapItr next_in_FuncSuffix( MapType const* map,
+                            cMapItr itr,
+                            KeyType const* key[static 1],
+                            ValType const* val[static 1] );
+----
+
+The function gives only read access to the value.
+The returned iterator is invalid if no next value exist.
+
+[id='NEXT_VAR_IN_MAP_C_']
+==== NEXT_VAR_IN_MAP_C_
+[source,c]
+----
+#define NEXT_VAR_IN_MAP_C_(                                                    \
+   FuncSuffix, MapType, RowType, KeyType, DoRefKey, ValType, DoRefVal          \
+)
+----
+
+Generates a function that gets a pointer to the next key and value in the map
+after the iterator position.
+The generated function has the following common signatures:
+[source,c]
+----
+cMapItr next_var_in_FuncSuffix( MapType const* map,
+                                cMapItr itr,
+                                KeyType const* key[static 1],
+                                ValType* val[static 1] );
+----
+
+The function gives only read access to the value.
+The returned iterator is invalid if no next value exist.
+
+//************************************************************************ intl
+=== intl
+
+[id='INTL_ERASE_IN_MAP_C_']
+==== INTL_ERASE_IN_MAP_C_
+[source,c]
+----
+#define INTL_ERASE_IN_MAP_C_(                                                  \
+   FuncSuffix, MapType, RowType                                                \
+)
+----
+
+Generates a internal function to erase a map entry.
+The generated function has the folllowing common signature:
+[source,c]
+----
+bool intl_erase_in_FuncSuffix( MapType* map, int64_t index, RowType* oldRow );
+----
+
+[id='INTL_INDEX_IN_MAP_C_']
+==== INTL_INDEX_IN_MAP_C_
+[source,c]
+----
+#define INTL_INDEX_IN_MAP_C_(                                                  \
+   FuncSuffix, MapType, RowType, KeyType, CmpFunc, DoRef                       \
+)
+----
+
+Generates a internal function that returns the index of a map entry.
+The generated function has the following common signature:
+[source,c]
+----
+int64_t intl_index_in_FuncSuffix( MapType* map, uint64_t hash, KeyType key );
+----
+
+[id='INTL_SET_ON_MAP_C_']
+==== INTL_SET_ON_MAP_C_
+[source,c]
+----
+#define INTL_SET_ON_MAP_C_(                                                    \
+   FuncSuffix, MapType, RowType, CmpFunc, DoRef                                \
+)
+----
+
+Generates a internal function 
+The generated function has the following common signature:
+[source,c]
+----
+bool intl_set_on_FuncSuffix( MapType* map,
+                             uint64_t hash,
+                             RowType* row,
+                             RowType* out );
+----
+
+//************************************************************************ type
+=== type
+
+[id='MAP_STRUCTS_C_']
+==== MAP_STRUCTS_C_
+[source,c]
+----
+#define MAP_STRUCTS_C_(                                                        \
+   MapType, RowType, KeyType, ValType                                          \
+)
+----
+
+Generates the structs that all functions in this module use.
+
+[source,c]
+----
+struct RowType                                                                 \
+{                                                                              \
+   int8_t d;                                                                   \
+   KeyType k;                                                                  \
+   ValType v;                                                                  \
+};                                                                             \
+typedef struct RowType RowType;                                                \
+                                                                               \
+struct MapType                                                                 \
+{                                                                              \
+   RowType* array;                                                             \
+   int64_t size;                                                               \
+   int64_t count;                                                              \
+   uint8_t shift;                                                              \
+   float maxLoadFactor;                                                        \
+};                                                                             \
+typedef struct MapType MapType;
+----
+
+[id='SHARED_MAP_INTL_DECL_C_']
+==== SHARED_MAP_INTL_DECL_C_
+[source,c]
+----
+#define SHARED_MAP_INTL_DECL_C_(                                               \
+   MapType, RowType, KeyType, FuncSuffix                                       \
+)
+----
+
+Generates the declaration for the internal functions.
+
+[id='OBJ_OBJ_MAP_DEF_C_']
+==== OBJ_OBJ_MAP_DEF_C_
+[source,c]
+----
+#define OBJ_OBJ_MAP_DEF_C_(                                                    \
+   MapType, KeyType, ValType, FuncSuffix, Meta                                 \
+)
+----
+
+Generates the definition of a map to store objects from type KeyType and ValType
+for a .h file.
+
+[source,c]
+----
+struct MapType;
+typedef struct MapType MapType;
+extern cMeta const Meta;
+/**************************************/
+MapType* make_FuncSuffix( int64_t size, float maxLoad );
+MapType* new_FuncSuffix();
+/**************************************/
+cMapInfo const* info_of_FuncSuffix( MapType const* map );
+bool resize_FuncSuffix( MapType* map, int64_t size );
+bool set_max_load_of_FuncSuffix( MapType* map, float maxLoad );
+/**************************************/
+bool next_in_FuncSuffix( MapType const* map, cMapItr itr[static 1] );
+bool next_var_in_FuncSuffix( MapType* map, cVarMapItr itr[static 1] );
+/**************************************/
+ValType* get_from_FuncSuffix( MapType const* map, KeyType const* key );
+bool in_FuncSuffix( MapType const* map, KeyType const* key );
+bool remove_from_FuncSuffix( MapType* map, KeyType const* key );
+bool set_on_FuncSuffix( MapType* map, KeyType* key, ValType* val );
+----
+
+[id='OBJ_OBJ_MAP_IMPL_C_']
+==== OBJ_OBJ_MAP_IMPL_C_
+[source,c]
+----
+#define OBJ_OBJ_MAP_IMPL_C_(                                                   \
+   Static, MapType, RowType, KeyType, ValType,                                 \
+   FuncSuffix, Meta, HashFunc, CmpFunc                                         \
+)
+----
+
+Generates the implementation of a map to store objects from type KeyType and
+ValType for a .c file.
+The Static value can be used to define the visibility of the functions.
+
+[source,c]
+----
+struct MapType;
+typedef struct MapType MapType;
+struct RowType;
+typedef struct RowType RowType;
+extern cMeta const Meta;
+/**************************************/
+MapType* make_FuncSuffix( int64_t size, float maxLoad );
+MapType* new_FuncSuffix();
+/**************************************/
+cMapInfo const* info_of_FuncSuffix( MapType const* map );
+bool resize_FuncSuffix( MapType* map, int64_t size );
+bool set_max_load_of_FuncSuffix( MapType* map, float maxLoad );
+/**************************************/
+bool next_in_FuncSuffix( MapType const* map, cMapItr itr[static 1] );
+bool next_var_in_FuncSuffix( MapType* map, cVarMapItr itr[static 1] );
+/**************************************/
+ValType* get_from_FuncSuffix( MapType const* map, KeyType const* key );
+bool in_FuncSuffix( MapType const* map, KeyType const* key );
+bool remove_from_FuncSuffix( MapType* map, KeyType const* key );
+bool set_on_FuncSuffix( MapType* map, KeyType* key, ValType* val );
+/**************************************/
+bool intl_erase_in_FuncSuffix( MapType* map, int64_t index, RowType* oldRow );
+int64_t intl_index_in_FuncSuffix( MapType* map, uint64_t hash, KeyType key );
+bool intl_set_on_FuncSuffix( MapType* map,
+                             uint64_t hash,
+                             RowType* row,
+                             RowType* out );
+----
+
+[id='VAL_VAL_MAP_DEF_C_']
+==== VAL_VAL_MAP_DEF_C_
+[source,c]
+----
+#define VAL_VAL_MAP_DEF_C_(                                                    \
+   MapType, KeyType, ValType, FuncSuffix, Meta                                 \
+)
+----
+
+Generates the definition of a map to store values from type KeyType and ValType
+for a .h file.
+
+[source,c]
+----
+struct MapType;
+typedef struct MapType MapType;
+extern cMeta const Meta;
+/**************************************/
+MapType* make_FuncSuffix( int64_t size, float maxLoad );
+MapType* new_FuncSuffix();
+/**************************************/
+cMapInfo const* info_of_FuncSuffix( MapType const* map );
+bool resize_FuncSuffix( MapType* map, int64_t size );
+bool set_max_load_of_FuncSuffix( MapType* map, float maxLoad );
+/**************************************/
+bool next_in_FuncSuffix( MapType const* map, cMapItr itr[static 1] );
+bool next_var_in_FuncSuffix( MapType* map, cVarMapItr itr[static 1] );
+/**************************************/
+ValType const* get_from_FuncSuffix( MapType const* map, KeyType key );
+ValType* get_var_from_FuncSuffix( MapType* map, KeyType key );
+bool in_FuncSuffix( MapType const* map, KeyType key );
+bool remove_from_FuncSuffix( MapType* map, KeyType key );
+bool set_on_FuncSuffix( MapType* map, KeyType key, ValType val );
+----
+
+[id='VAL_VAL_MAP_IMPL_C_']
+==== VAL_VAL_MAP_IMPL_C_
+[source,c]
+----
+#define VAL_VAL_MAP_IMPL_C_(                                                   \
+   Static, MapType, RowType, KeyType, ValType,                                 \
+   FuncSuffix, Meta, HashFunc, CmpFunc, DoRef                                  \
+)
+----
+
+Generates the implementation of a map to store values from type KeyType and
+ValType for a .c file.
+The Static value can be used to define the visibility of the functions.
+
+[source,c]
+----
+struct MapType;
+typedef struct MapType MapType;
+struct RowType;
+typedef struct RowType RowType;
+extern cMeta const Meta;
+/**************************************/
+MapType* make_FuncSuffix( int64_t size, float maxLoad );
+MapType* new_FuncSuffix();
+/**************************************/
+cMapInfo const* info_of_FuncSuffix( MapType const* map );
+bool resize_FuncSuffix( MapType* map, int64_t size );
+bool set_max_load_of_FuncSuffix( MapType* map, float maxLoad );
+/**************************************/
+bool next_in_FuncSuffix( MapType const* map, cMapItr itr[static 1] );
+bool next_var_in_FuncSuffix( MapType* map, cVarMapItr itr[static 1] );
+/**************************************/
+ValType const* get_from_FuncSuffix( MapType const* map, KeyType key );
+ValType* get_var_from_FuncSuffix( MapType* map, KeyType key );
+bool in_FuncSuffix( MapType const* map, KeyType key );
+bool remove_from_FuncSuffix( MapType* map, KeyType key );
+bool set_on_FuncSuffix( MapType* map, KeyType key, ValType val );
+/**************************************/
+bool intl_erase_in_FuncSuffix( MapType* map, int64_t index, RowType* oldRow );
+int64_t intl_index_in_FuncSuffix( MapType* map, uint64_t hash, KeyType key );
+bool intl_set_on_FuncSuffix( MapType* map,
+                             uint64_t hash,
+                             RowType* row,
+                             RowType* out );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ util
+=== util
+
+==== calculate_load_c
+[source,c]
+----
+float calculate_load_c( int64_t cap, int64_t count );
+----
+
+Calculates the load factor.
+
+==== fibonacci_hash_index_c
+[source,c]
+----
+int64_t fibonacci_hash_index_c( uint64_t hash, uint8_t shift );
+----
+
+Fibonacci Hash function.
+
+==== combine_hashes_c
+[source,c]
+----
+uint64_t combine_hashes_c( cUint64Slice hashes );
+----
+
+Combines single hash values to one hash value.
+
+//************************************************************************ info
+=== info
+
+==== map_cap_c
+[source,c]
+----
+int64_t map_cap_c( cMapInfo const info[static 1] );
+----
+
+Returns the capacity of a map.
+
+==== map_load_c
+[source,c]
+----
+float map_load_c( cMapInfo const info[static 1] );
+----
+
+Returns the load factor of a map.
+
+==== map_is_empty_c
+[source,c]
+----
+bool map_is_empty_c( cMapInfo const info[static 1] );
+----
+
+Returns true if a map is empty, otherwise false.
+
+
+//************************************************************************* itr
+=== itr
+
+[id='iterate_map_c_']
+==== iterate_map_c_
+[source,c]
+----
+#define iterate_map_c_( Itr, KeyPtr, ValPtr, Map, Func )
+----
+
+Macro function to define a for statement to iterate over all elements in a map.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iterate_map.c[]
+----
+
+[id='start_map_itr_c']
+==== start_map_itr_c
+[source,c]
+----
+cMapItr start_map_itr_c();
+----
+
+Function that returns a cMapItr value to get the first value in the map.
+
+[id='map_itr_is_valid_c']
+==== map_itr_is_valid_c
+[source,c]
+----
+bool map_itr_is_valid_c( cMapItr itr );
+----
+
+Function to check if the iterator is valid.

@@ -1,0 +1,225 @@
+= c_Month
+:xmpldir: ../../../test/clingo/time/c_Month
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//***************************************************************** definitions
+=== definitions
+
+[id='cMONTH_']
+==== cMONTH_
+[source,c]
+----
+#define cMONTH_
+----
+
+Defines the c_Month values.
+
+[id='c_Month']
+==== c_Month
+[source,c]
+----
+enum c_Month {
+   c_Jan =  1,
+   c_Feb =  2,
+   c_Mar =  3,
+   c_Apr =  4,
+   c_May =  5,
+   c_Jun =  6,
+   c_Jul =  7,
+   c_Aug =  8,
+   c_Sep =  9,
+   c_Oct = 10,
+   c_Nov = 11,
+   c_Dec = 12,
+};
+type enum c_Month c_Month;
+----
+
+Enum type to represent a month.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== int64_to_month_c
+[source,c]
+----
+bool int64_to_month_c( int64_t src, c_Month dst[static 1] );
+----
+
+Returns true if the int64_t value can be represented in a c_Weekend variable,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/int64_to_month.c[]
+----
+
+==== stringify_month_c
+[source,c]
+----
+char const* stringify_month_c( c_Month month );
+----
+
+Returns the string representation of a value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/stringify_month.c[]
+----
+
+//************************************************************************ days
+=== days
+
+==== days_per_month_c
+[source,c]
+----
+#define days_per_month_c_( Month, Year )                                       \
+   days_per_month_c( Month, is_leap_year_c( Year ) )
+int8_t days_per_month_c( c_Month month, bool leapYear );
+----
+
+Returns the number of days a month has.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/days_per_month.c[]
+----
+
+==== first_month_day_of_year_c
+[source,c]
+----
+#define first_month_day_of_year_c_( Month, Year )                              \
+   first_month_day_of_year_c( Month, is_leap_year_c( Year ) )
+int16_t first_month_day_of_year_c( c_Month month, bool leapYear );
+----
+
+Returns the day in year of the first day in the month.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/first_month_day_of_year.c[]
+----
+
+==== first_month_of_quarter_c
+[source,c]
+----
+c_Month first_month_of_quarter_c( c_Month month );
+----
+
+Returns the first month in the quarter of the month.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/first_month_of_quarter.c[]
+----
+
+//************************************************************************* itr
+=== itr
+
+==== next_month_c
+[source,c]
+----
+c_Month next_month_c( c_Month m );
+----
+
+Returns the month after m.
+
+==== prev_month_c
+[source,c]
+----
+c_Month prev_month_c( c_Month m );
+----
+
+Returns the month before m.
+
+//************************************************************************ text
+=== text
+
+==== get_month_abbrev_c
+[source,c]
+----
+cVarChars get_month_abbrev_c( c_Month month, cVarChars chars );
+----
+
+Writes the local abbreviation for the month into the chars buffer.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/get_month_abbrev.c[]
+----
+
+==== get_month_name_c
+[source,c]
+----
+cVarChars get_month_name_c( c_Month month, cVarChars chars );
+----
+
+Writes the local name for the month into the chars buffer.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/get_month_name.c[]
+----
+
+//************************************************************************** io
+=== io
+
+The read and write function are using the following format:
+
+.format
+[cols="1,2,1"]
+|===
+|M |The month as a number without a leading character |1 to 12
+|_M |The month as a number with a leading space |1 to 12
+|MM |The month as a number with a leading zero |01 to 12
+|MMM |The abbreviated localized month name |Jan to Dec
+|MMMM |The localized month name |January to December
+|===
+
+==== read_month_c
+[source,c]
+----
+#define read_month_c_( Sca, Month )                                            \
+   read_month_c( (Sca), (Month), "" )
+bool read_month_c( cScanner sca[static 1],
+                   c_Month month[static 1],
+                   char const fmt[static 1] );
+----
+
+Reads a c_Month value from a text with a scanner.
+The function will use "MMM" as default format.
+
+==== write_month_c
+[source,c]
+----
+#define write_month_c_( Rec, Month )                                           \
+   write_month_c( (Rec), (Month), "" )
+bool write_month_c( cRecorder rec[static 1],
+                    c_Month month,
+                    char const fmt[static 1] );
+----
+
+Writes a c_Month value into the recorder.
+The function will use "MMM" as default format.
+

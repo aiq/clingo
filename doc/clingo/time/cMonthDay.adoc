@@ -1,0 +1,187 @@
+= cMonthDay
+:xmpldir: ../../../test/clingo/time/cMonthDay
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cMonthDay']
+==== cMonthDay
+[source,c]
+----
+struct cMonthDay
+{
+   c_Month month;
+   int8_t day;
+};
+typedef struct cMonthDay cMonthDay;
+----
+
+The cMonthDay struct represents a day in a specific year that is not part of the
+struct.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cMonthDaySlice']
+==== cMonthDaySlice
+[source,c]
+----
+struct cMonthDaySlice
+{
+   int64_t s;
+   cMonthDay const* v;
+};
+typedef struct cMonthDaySlice cMonthDaySlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cMonthDaySlice month_day_slice_c( int64_t s, cMonthDay const* v );
+cMonthDaySlice make_month_day_slice_c( cMonthDay const* beg,
+                                       cMonthDay const* end );
+cMonthDaySlice empty_month_day_slice_c( void );
+/* sub */
+cMonthDaySlice left_month_day_slice_c( cMonthDaySlice slice, int64_t maxLen );
+cMonthDaySlice mid_month_day_slice_c( cMonthDaySlice slice, int64_t index );
+cMonthDaySlice right_month_day_slice_c( cMonthDaySlice slice, int64_t maxLen );
+cMonthDaySlice sub_month_day_slice_c( cMonthDaySlice slice,
+                                      int64_t begIdx,
+                                      int64_t endIdx);
+----
+
+[id='cVarMonthDaySlice']
+==== cVarMonthDaySlice
+[source,c]
+----
+struct cVarMonthDaySlice
+{
+   int64_t s;
+   cMonthDay* v;
+};
+typedef struct cVarMonthDaySlice cVarMonthDaySlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarMonthDaySlice var_month_day_slice_c( int64_t s, cMonthDay* v );
+cVarMonthDaySlice make_var_month_day_slice_c( cMonthDay* beg, cMonthDay* end );
+cVarMonthDaySlice empty_var_month_day_slice_c( void );
+/* sub */
+cVarMonthDaySlice left_var_month_day_slice_c( cVarMonthDaySlice slice,
+                                              int64_t maxLen );
+cVarMonthDaySlice mid_var_month_day_slice_c( cVarMonthDaySlice slice,
+                                             int64_t index );
+cVarMonthDaySlice right_var_month_day_slice_c( cVarMonthDaySlice slice,
+                                               int64_t maxLen );
+cVarMonthDaySlice sub_var_month_day_slice_c( cVarMonthDaySlice slice,
+                                             int64_t begIdx,
+                                             int64_t endIdx);
+/* var slice */
+cVarMonthDaySlice as_var_month_day_slice_c( cVarMonthDaySlice slice );
+cVarMonthDaySlice cast_var_month_day_slice_c( cVarMonthDaySlice slice,
+                                              cMonthDaySlice sub );
+int64_t set_month_day_slice_c( cVarMonthDaySlice dst, cMonthDaySlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_month_day_c
+[source,c]
+----
+int cmp_month_day_c( cMonthDay a, cMonthDay b );
+----
+
+Compares two cMonthDay values and returns the three possible results:
+
+<0:: if a is earlier as b
+0:: if both dates are equal
+>0:: if a is later as b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_month_day.c[]
+----
+
+==== month_day_c
+[source,c]
+----
+cMonthDay month_day_c( int64_t month, int64_t day );
+----
+
+Initialise a cMonthDay value with a month and day value.
+
+//************************************************************************** io
+=== io
+
+The functions read_month_day_c and write_month_day_c are using the following
+format:
+
+.format
+[cols="1,2,1"]
+|===
+|D |The day as a number without a leading character |1 to 31
+|_D |The day as a number with a leading space |1 to 31
+|DD |The day as a number with a leading zero |01 to 31
+|M |The month as a number without a leading character |1 to 12
+|_M |The month as a number with a leading space |1 to 12
+|MM |The month as a number with a leading zero |01 to 12
+|MMM |The abbreviated localized month name |Jan' to Dec
+|===
+
+==== read_month_day_c
+[source,c]
+----
+#define read_month_day_c_( Sca, MonthDay )                                     \
+   read_month_day_c( (Sca), (MonthDay), "" )
+bool read_month_day_c( cScanner sca[static 1],
+                       cMonthDay md[static 1],
+                       char const fmt[static 1] );
+----
+
+Reads a cMonthDay value from a text with a scanner.
+The function will use "MMM._D" as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_month_day.c[]
+----
+
+==== write_month_day_c
+[source,c]
+----
+#define write_month_day_c_( Rec, MonthDay )                                    \
+   write_month_day_c( (Rec), (MonthDay), "" )
+bool write_month_day_c( cRecorder rec[static 1],
+                        cMonthDay md,
+                        char const fmt[static 1] );
+----
+
+Writes a cMonthDay value into the recorder.
+The function will use "MMM._D" as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_month_day.c[]
+----

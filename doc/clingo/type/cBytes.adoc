@@ -1,0 +1,417 @@
+= cBytes
+:xmpldir: ../../../test/clingo/type/cBytes
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+It is recommended to use cBytes and cVarBytes for data buffer.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cBytes']
+==== cBytes
+[source,c]
+----
+struct cBytes
+{
+   int64_t s;
+   cByte const* v;
+};
+typedef struct cBytes cBytes;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cBytes bytes_c( int64_t s, cByte const* v );
+cBytes make_bytes_c( cByte const* beg, cByte const* end );
+cBytes empty_bytes_c( void );
+/* sub */
+cBytes left_bytes_c( cBytes bytes, int64_t maxLen );
+cBytes mid_bytes_c( cBytes bytes, int64_t index );
+cBytes right_bytes_c( cBytes bytes, int64_t maxLen );
+cBytes sub_bytes_c( cBytes bytes, int64_t begIdx,  int64_t endIdx );
+----
+
+[id='cVarBytes']
+==== cVarBytes
+[source,c]
+----
+struct cVarBytes
+{
+   int64_t s;
+   cByte* v;
+};
+typedef struct cVarBytes cVarBytes;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarBytes var_bytes_c( int64_t s, cByte* v );
+cVarBytes make_var_bytes_c( cByte* beg, cByte* end );
+cVarBytes empty_var_bytes_c( void );
+/* sub */
+cVarBytes left_var_bytes_c( cVarBytes bytes, int64_t maxLen );
+cVarBytes mid_var_bytes_c( cVarBytes bytes, int64_t index );
+cVarBytes right_var_bytes_c( cVarBytes bytes, int64_t maxLen );
+cVarBytes sub_var_bytes_c( cVarBytes bytes, int64_t begIdx, int64_t endIdx );
+/* var slice */
+cBytes as_bytes_c( cVarBytes bytes );
+cVarBytes cast_bytes_c( cVarBytes bytes, cBytes sub );
+int64_t set_bytes_c( cVarBytes dst, cBytes src );
+----
+
+[id='cByteChunk']
+==== cByteChunk
+[source,c]
+----
+struct cByteChunk
+{
+   int64_t s;
+   cByte const* v;
+   int64_t favSize;
+   cBytes slice;
+};
+typedef struct cByteChunk cByteChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_byte_chunk_c( cByteChunk chunk[static 1],
+                             int64_t s,
+                             cBytes slice );
+void init_front_byte_chunk_c( cByteChunk chunk[static 1],
+                              int64_t s,
+                              cBytes slice );
+----
+
+[id='cVarByteChunk']
+==== cVarByteChunk
+[source,c]
+----
+struct cVarByteChunk
+{
+   int64_t s;
+   cByte* v;
+   int64_t favSize;
+   cVarBytes slice;
+};
+typedef struct cVarByteChunk cVarByteChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_byte_chunk_c( cVarByteChunk chunk[static 1],
+                                 int64_t s,
+                                 cVarBytes slice );
+void init_front_var_byte_chunk_c( cVarByteChunk chunk[static 1],
+                                  int64_t s,
+                                  cVarBytes slice );
+----
+
+[id='cByteWindow']
+==== cByteWindow
+[source,c]
+----
+struct cByteWindow
+{
+   int64_t s;
+   cByte const* v;
+   cBytes slice;
+};
+typedef struct cByteWindow cByteWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_byte_window_c( cByteWindow window[static 1],
+                              int64_t s,
+                              cBytes slice );
+void init_front_byte_window_c( cByteWindow window[static 1],
+                               int64_t s,
+                               cBytes slice );
+----
+
+[id='cVarByteWindow']
+==== cVarByteWindow
+[source,c]
+----
+struct cVarByteWindow
+{
+   int64_t s;
+   cByte* v;
+   cVarBytes slice;
+};
+typedef struct cVarByteWindow cVarByteWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_byte_window_c( cVarByteWindow window[static 1],
+                                  int64_t s,
+                                  cVarBytes slice );
+void init_front_var_byte_window_c( cVarByteWindow window[static 1],
+                                   int64_t s,
+                                   cVarBytes slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+[id='byte_buffer_c_']
+==== byte_buffer_c_
+[source,c]
+----
+#define byte_buffer_c_( Size )
+----
+
+Macro function that initalizes a cVarBytes that can store Size values.
+
+//************************************************************************* bit
+=== bit
+
+==== get_bytes_bit_c
+[source,c]
+----
+cByte get_bytes_bit_c( cBytes slice, int64_t pos );
+----
+
+Returns the bit at pos in the byte slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/get_bytes_bit.c[]
+----
+
+==== set_bytes_bit_c
+[source,c]
+----
+void set_bytes_bit_c( cVarBytes slice, int64_t pos, cByte bit );
+----
+
+Sets the bit at pos in the byte slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_bytes_bit.c[]
+----
+
+==== set_bytes_bits_c
+[source,c]
+----
+void set_bytes_bits_c( cVarBytes slice, cRange range, cByte bit );
+----
+
+Sets all bits inside the range with the bit value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_bytes_bits.c[]
+----
+
+==== set_odd_byte_c
+[source,c]
+----
+void set_odd_byte_c( cVarBytes slice, int64_t pos, int64_t bitOffset, cByte byte );
+----
+
+Sets a byte value that overlaps with two bytes in the byte slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_odd_byte.c[]
+----
+
+==== shift_bytes_c
+[source,c]
+----
+void shift_bytes_c( cVarBytes slice, int64_t offset, cByte fillValue );
+----
+
+Shifts the bits in a byte slice.
+A negative offset shifts the bits to the left, a positive offset shifts the bits
+to the right.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/shift_bytes.c[]
+----
+
+==== toggle_bytes_bit_c
+[source,c]
+----
+void toggle_bytes_bit_c( cVarBytes slice, int64_t pos );
+----
+
+Toggles the bit at pos in the byte slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/toggle_bytes_bit.c[]
+----
+
+//*********************************************************************** logic
+=== logic
+
+==== bitand_bytes_c
+[source,c]
+----
+bool bitand_bytes_c( cBytes a, cBytes b, cVarBytes result );
+----
+
+Combines the bits of a and b with a logical and.
+Returns false if the slices have different s values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/bitand_bytes.c[]
+----
+
+==== bitor_bytes_c
+[source,c]
+----
+bool bitor_bytes_c( cBytes a, cBytes b, cVarBytes result );
+----
+
+Combines the bits of a and b with a logical or.
+Returns false if the slices have different s values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/bitor_bytes.c[]
+----
+
+==== compl_bytes_c
+[source,c]
+----
+bool compl_bytes_c( cBytes a, cVarBytes result );
+----
+
+Builds the complement of the slice a.
+Returns false if the slices have different s values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/compl_bytes.c[]
+----
+
+==== xor_bytes_c
+[source,c]
+----
+bool xor_bytes_c( cBytes a, cBytes b, cVarBytes result );
+----
+
+Combine the bits of a and b with a logical xor.
+Returns false if the slices have different s values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/xor_bytes.c[]
+----
+
+//************************************************************************ algo
+=== algo
+
+==== bytes_ends_with_c
+[source,c]
+----
+bool bytes_ends_with_c( cBytes slice, cBytes needle );
+----
+
+{EndsWith}
+
+==== bytes_starts_with_c
+[source,c]
+----
+bool bytes_starts_with_c( cBytes slice, cBytes needle );
+----
+
+{StartsWith}
+
+==== cmp_bytes_c
+[source,c]
+----
+#define cmp_bytes_c_( Slice, ... )                                             \
+   cmp_bytes_c( (Slice), ((cBytes)slice_c_( cByte, __VA_ARGS__ )) )
+int cmp_bytes_c( cBytes a, cBytes b );
+----
+
+{CmpSlice}
+
+==== count_eq_byte_c
+[source,c]
+----
+int64_t count_eq_byte_c( cBytes slice, cByte val );
+----
+
+{CountEq}
+
+==== find_byte_c
+[source,c]
+----
+cByte const* find_byte_c( cBytes slice, cByte val );
+----
+
+{FindVal}
+
+==== index_of_bytes_c
+[source,c]
+----
+int64_t index_of_bytes_c( cBytes slice, cBytes sub );
+----
+
+{IndexOfSlice}
+
+==== insert_byte_c
+[source,c]
+----
+int64_t insert_byte_c( cVarBytes slice, int64_t index, cByte val );
+----
+
+{InsertVal}
+
+==== insert_bytes_c
+[source,c]
+----
+int64_t insert_bytes_c( cVarBytes dst, int64_t index, cBytes src );
+----
+
+{InsertSlice}

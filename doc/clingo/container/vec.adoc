@@ -1,0 +1,429 @@
+= vec
+:xmpldir: ../../../test/clingo/container/vec
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+[id='Overview']
+== Overview
+
+Module that defines the macros to generate vector types.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Type and Definitions
+
+[id='cVecInfo']
+==== cVecInfo
+[source,c]
+----
+struct cVecInfo
+{
+   int64_t count;
+   int64_t cap;
+};
+typedef struct cVecInfo cVecInfo;
+----
+
+cVecInfo stores the properties of the vector.
+The count value tells how much elements are stored in the vector, cap shows how
+much elements the vector can store without to grow.
+
+//******************************************************************************
+//****************************************************** Code Generation Macros
+//******************************************************************************
+[id='Code-Generation-Macros']
+== Code Generation Macros
+
+//********************************************************************** create
+=== create
+
+[id='MAKE_VEC_C_']
+==== MAKE_VEC_C_
+[source,c]
+----
+#define MAKE_VEC_C_(                                                           \
+   FuncSuffix, VecType, ValType, Meta                                          \
+)
+----
+
+Generates a constructor function to create an instance with an initial container
+capacity.
+The generated function has the following common signature:
+[source,c]
+----
+VecType* make_FuncSuffix( int64_t cap );
+----
+
+[id='NEW_VEC_C_']
+==== NEW_VEC_C_
+[source,c]
+----
+#define NEW_VEC_C_(                                                            \
+   FuncSuffix, VecType                                                         \
+)
+----
+
+Generates a constructor function to create an instance with the default initial
+container capacity.
+The generated function has the following common signature:
+[source,c]
+----
+VecType* new_FuncSuffix();
+----
+
+//********************************************************************** manage
+=== manage
+
+[id='DATA_OF_VEC_C_']
+==== DATA_OF_VEC_C_
+[source,c]
+----
+#define DATA_OF_VEC_C_(                                                        \
+   FuncSuffix, VecType, ValType                                                \
+)
+----
+
+Generates a function that returns a pointer to read the array of the vector.
+The generated function has the following common signature:
+[source,c]
+----
+ValType const* data_of_FuncSuffix( VecType const* vec );
+----
+
+[id='VAR_DATA_OF_VEC_C_']
+==== VAR_DATA_OF_VEC_C_
+[source,c]
+----
+#define VAR_DATA_OF_VEC_C_(                                                    \
+   FuncSuffix, VecType, ValType                                                \
+)
+----
+
+Generates a function that returns a pointer to manipulate the array of the
+vector.
+The generated function has the following common signature:
+[source,c]
+----
+ValType* var_data_of_FuncSuffix( VecType* vec );
+----
+
+[id='RESIZE_VEC_C_']
+==== RESIZE_VEC_C_
+[source,c]
+----
+#define RESIZE_VEC_C_(                                                         \
+   FuncSuffix, VecType, ValType                                                \
+)
+----
+
+Generates a function to resize the vector capacity.
+Returns false if cap is less then the number of elements in the vector or the
+reallocation fails, otherwise true.
+The generated function has the following common signature:
+[source,c]
+----
+bool resize_FuncSuffix( VecType* vec, int64_t cap );
+----
+
+[id='INFO_OF_VEC_C_']
+==== INFO_OF_VEC_C_
+[source,c]
+----
+#define INFO_OF_C_(                                                            \
+   FuncSuffix, VecType                                                         \
+)
+----
+
+Generates a function that returns a reference to the info from the vector.
+The generated function has the following common signature:
+[source,c]
+----
+cVecInfo const* info_of_FuncSuffix( VecType* vec );
+----
+
+//************************************************************************* api
+=== api
+
+[id='ACCESS_VEC_C_']
+==== ACCESS_VEC_C_
+[source,c]
+----
+#defien ACCESS_VEC_C_(                                                         \
+   FuncSuffix, VecType, ValType                                                \
+)
+----
+
+Generates a function to access the element in the vector at pos.
+The generated function has the following common signature:
+[source,c]
+----
+ValType* access_FuncSuffx( VecType* vec, int64_t pos );
+----
+
+[id='ADD_TO_VEC_C_']
+==== ADD_TO_VEC_C_
+[source,c]
+----
+#define ADD_TO_VEC_C_(                                                         \
+   FuncSuffix, VecType, ValType, Retain, DoDeref                               \
+)    
+----
+
+Generates a function to add a object to the vector.
+The generated function has the following common signature:
+[source,c]
+----
+bool add_to_FuncSuffix( VecType* vec, ValType obj );
+----
+
+[id='ADD_ARRAY_TO_VEC_C_']
+==== ADD_ARRAY_TO_VEC_C_
+[source,c]
+----
+#define ADD_ARRAY_TO_VEC_C_(                                                   \
+   FuncSuffix, VecType, ValType, Retain                                        \
+)
+----
+
+Generates a function to fill the vector with the objects from an array.
+The generated function has the following common signature:
+[source,c]
+----
+bool add_array_to_FuncSuffix( VecType* vec, int64_t n, ValType const* arr );
+----
+
+[id='GET_FROM_VEC_C_']
+==== GET_FROM_VEC_C_
+[source,c]
+----
+#define GET_FROM_VEC_C_(                                                       \
+   FuncSuffix, VecType, ReturnType, DoDeref                                    \
+)
+----
+
+Generates a function that returns the object at pos in the vector.
+The generated function has the following common signature:
+[source,c]
+----
+ReturnType get_from_FuncSuffix( VecType const* vec, int64_t pos );
+----
+
+[id='INSERT_INTO_VEC_C_']
+==== INSERT_INTO_VEC_C_
+[source,c]
+----
+#define INSERT_INTO_VEC_C_(                                                    \
+   FuncSuffix, VecType, ValType, Retain                                        \
+)
+----
+
+Generates a function that inserts a object before the object at pos, increasing
+the container by the inserted object.
+The generated fucntion has the following common signature:
+[source,c]
+----
+bool insert_into_FuncSuffix( VecType* vec, int64_t pos, ValType val );
+----
+
+[id='REMOVE_FROM_VEC_C_']
+==== REMOVE_FROM_VEC_C_
+[source,c]
+----
+#define REMOVE_FROM_VEC_C_(                                                    \
+   FuncName, VecType, ValType, Release                                         \
+)
+----
+
+Generates a function that removes the value at pos in the vector.
+The generated function has the following common signature:
+[source,c]
+----
+bool remove_from_FuncSuffix( VecType* vec, int64_t pos );
+----
+
+[id='SET_ON_VEC_C_']
+==== SET_ON_VEC_C_
+[source,c]
+----
+#define SET_ON_VEC_C_(                                                         \
+   FuncSuffix, VecType, ValType, Retain, Release, DoDeref                      \
+)
+----
+
+Generates a function that overwrites the value at pos in the vector.
+The generated function has the following common signature:
+[source,c]
+----
+void set_on_FuncSuffix( VecType* vec, int64_t pos, ValType val );
+----
+
+//************************************************************************ type
+=== type
+
+[id='VEC_STRUCT_C_']
+==== VEC_STRUCT_C_
+[source,c]
+----
+#define VEC_STRUCT_C_(
+   VecType, ValType
+)
+----
+
+Generates the struct that all function in this module use.
+
+[id='OBJ_VEC_DEF_C_']
+==== OBJ_VEC_DEF_C_
+[source,c]
+----
+#define OBJ_VEC_DEF_C_(                                                        \
+   FuncName, VecType, ObjType, Meta                                            \
+)
+----
+
+Generates the definition of a vector to store objects from type ObjType for a .h
+file.
+
+[source,c]
+----
+struct VecType;
+typedef struct VecType VecType;
+extern cMeta const Meta;
+/**************************************/
+VecType* make_FuncSuffix( int64_t size );
+VecType* new_FuncSuffix();
+/**************************************/
+ObjType* const* data_of_FuncSuffix( VecType const* vec );
+cVecInfo const* info_of_FuncSuffix( VecType const* vec );
+bool resize_FuncSuffix( VecType* vec, int64_t size );
+ObjType** var_data_of_FuncSuffix( VecType* vec );
+/**************************************/
+bool add_to_FuncSuffix( VecType* vec, ObjType* obj );
+bool add_array_to_FuncSuffix( VecType* vec, int64_t n, ObjType* const* arr );
+ObjType* get_from_FuncSuffix( VecType const* vec, int64_t pos );
+bool insert_into_FuncSuffix( VecType* vec, int64_t pos, ObjType* obj );
+bool remove_from_FuncSuffix( VecType* vec, int64_t pos );
+void set_on_FuncSuffix( VecType* vec, int64_t pos, ObjType* obj );
+----
+
+[id='OBJ_VEC_IMPL_C_']
+==== OBJ_VEC_IMPL_C_
+[source,c]
+----
+#define OBJ_VEC_IMPL_C_(                                                       \
+   Static, VecType, ObjType, FuncName, Meta                                    \
+)
+----
+
+Generates the implementation of a vector to store objects from type ObjType for
+a .c file.
+The Static value can be used to define the visibility of the functions.
+
+[id='VAL_VEC_DEF_C_']
+==== VAL_VEC_DEF_C_
+[source,c]
+----
+#define VAL_VEC_DEF_C_(                                                        \
+   VecType, ValType, FuncName, Meta                                            \
+)
+----
+
+Generates the definition of a vector to store values from type ValType for a .h
+file.
+
+[source,c]
+----
+struct VecType;
+typedef struct VecType VecType;
+extern cMeta const Meta;
+/**************************************/
+VecType* make_FuncSuffix( int64_t cap );
+VecType* new_FuncSuffix();
+/**************************************/
+ValType const* data_of_FuncSuffix( VecType const* vec );
+ValType* var_data_of_FuncSuffix( VecType* vec );
+/**************************************/
+cVecInfo const* info_of_FuncSuffix( VecType const* vec );
+bool resize_FuncSuffix( VecType* vec, int64_t cap );
+/**************************************/
+bool add_to_FuncSuffix( VecType* vec, ValType val );
+bool add_array_to_FuncSuffix( VecType* vec, int64_t n, ValType const* arr );
+ValType const* get_from_FuncSuffix( VecType const* vec, int64_t pos );
+ValType* get_var_from_FuncSuffix( VecType* vec, int64_t pos );
+bool insert_into_FuncSuffix( VecType* vec, int64_t pos, ValType val );
+bool remove_from_FuncSuffix( VecType* vec, int64_t pos );
+void set_on_FuncSuffix( VecType* vec, int64_t pos, ValType val );
+----
+
+[id='VAL_VEC_IMPL_C_']
+==== VAL_VEC_IMPL_C_
+[source,c]
+----
+#define VAL_VEC_IMPL_C_(                                                       \
+   Static, VecType, ValType, FuncName, Meta                                    \
+)
+----
+
+Generates the implementation of a vector to store values from type ValType for
+a .c file.
+The static value can be used to define the visibility of the functions.
+
+//*********************************************************************** extra
+=== extra
+
+[id='SLICE_OF_VEC_C_']
+==== SLICE_OF_VEC_C_
+[source,c]
+----
+#defien SLICE_OF_VEC_C_(                                                       \
+   FuncSuffix, VecType, SliceType                                              \
+)
+----
+
+Generates a function to access the data of a vec as slice.
+The generated function has the following common signature:
+[source,c]
+----
+SliceType slice_of_FuncSuffix( VecType const* vec );
+----
+
+[id='VAR_SLICE_OF_VEC_C_']
+==== VAR_SLICE_OF_VEC_C_
+[source,c]
+----
+#define VAR_SLICE_OF_VEC_C_(                                                   \
+   FuncSuffix, VecType, SliceType                                              \
+)
+----
+
+Generates a function to access the data of a vec as var slice.
+The generated function has the following common signature:
+[source,c]
+----
+SliceType var_slice_of_FuncSuffix( VecType* vec );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ info
+=== info
+
+==== vec_load_c
+[source,c]
+----
+float vec_load_c( cVecInfo const info[static 1] );
+----
+
+Returns the load factor of a vector.
+
+==== vec_is_empty_c
+[source,c]
+----
+bool vec_is_empty_c( cVecInfo const info[static 1] );
+----
+
+Returns if a vector os empty.

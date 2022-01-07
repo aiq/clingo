@@ -1,0 +1,225 @@
+= CObject
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Objects in the clingo context are memory allocated data with the extra
+cObjectInfo header.
+The cObjectInfo instance stores the information for the specific data instance,
+like reference counting.
+The referenced cMeta instance stores the information that all instances with the
+same type share.
+
+image:CObject.svg[]
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='c_ObjectConfig']
+==== c_ObjectConfig
+[source,c]
+----
+enum c_ObjectConfig {
+   c_Release = 1 << 0,
+   c_Cleanup = 1 << 1,
+   c_DefaultObject = c_Release | c_Cleanup,
+};
+
+typedef enum c_ObjectConfig c_ObjectConfig;
+----
+
+Enum type that defines the flags that can configurate the behaviour of an
+object.
+
+c_Release:: should the memory of the object be freed
+c_Cleanup:: should the cleanup function be called
+c_DefaultObject:: the default configuration for an object.
+
+[id='CObject']
+==== CObject
+[source,c]
+----
+typedef void CObject;
+----
+
+A CObject pointer should only be used for data that is alloceted with the
+function alloc_object_c.
+
+==== c_cleanup
+[source,c]
+----
+typedef void ( *c_cleanup )( void* obj );
+----
+
+Type definition of a cleanup function to remove type specific data.
+
+[id='cMeta']
+==== cMeta
+[source,c]
+----
+struct cMeta
+{
+   char const* desc;
+   c_cleanup cleanup;
+};
+
+typedef struct cMeta cMeta;
+----
+
+Stores information of that all instances of a type share.
+The attribute desc is a string that represents the content type, like CString
+for example.
+The cleanup function should also be the same for all instances of a type.
+
+[id='cObjectInfo']
+==== cObjectInfo
+[source,c]
+----
+struct cObjectInfo
+{
+   uint32_t refs;
+   uint8_t config;
+   cMeta const* meta;
+};
+
+typedef struct cObjectInfo cObjectInfo;
+----
+
+Stores information for the specific instance.
+The refs stores the number of instances that share this object.
+The config value allows to stores flags for this instance.
+Finally is meta a pointer to the shared cMeta instance.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+[id='default_object_info_c_']
+==== default_object_info_c_
+[source,c]
+----
+#define default_object_info_c_( Meta )
+----
+
+Creates a cObjectInfo with the c_DefaultObject configuration.
+Meta is a pointer to the shared cMeta instance.
+
+[id='object_info_c_']
+==== object_info_c_
+[source,c]
+----
+#define object_info_c_( Meta, Config )
+----
+
+Creates a cObjectInfo with a individual configuration Config.
+Meta is a pointer to the shared cMeta instance.
+
+//******************************************************************* lifecycle
+=== lifecycle
+
+==== alloc_object_c
+[source,c]
+----
+#define alloc_object_c_( Type, Info )                                          \
+   alloc_object_c( sizeof_c_( Type ), Info )
+CObject* alloc_object_c( int64_t size, cObjectInfo const info[static 1] );
+----
+
+Allocates a CObject instance with the required overhead for the cObjectInfo
+instance.
+
+==== custom_object_c
+[source,c]
+----
+CObject* custom_object_c( void* mem, cMeta const meta[static 1] );
+----
+
+Initialises allocated memory as object that will not be released.
+
+==== references_c
+[source,c]
+----
+uint32_t references_c( const CObject* obj );
+----
+
+Returns the value of the refs counter.
+
+==== release_all_c
+[source,c]
+----
+#define release_all_c_( ... )                                                  \
+   release_all_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+void release_all_c( int n, ... );
+----
+
+Calls release_c on all(...) objects.
+It is recommended to use the macro function.
+
+==== release_c
+[source,c]
+----
+CObject* release_c( CObject* obj );
+----
+
+Decrements the refs counter of obj.
+If the refs counter reaches 0 and the doCleanup flag is set calls the
+function the cleanup function of the cMeta instance.
+
+==== retain_c
+[source,c]
+----
+CObject* retain_c( CObject* obj );
+----
+
+Increments the refs counter of obj.
+The obj value can be NULL, this allows to chain method calls.
+
+.Example
+[source,c]
+----
+CString* str = retain_c( new_string_c( "test" ) );
+----
+
+==== touch_c
+[source,c]
+----
+CObject* touch_c( CObject* obj );
+----
+
+Calls retain_c and release_c on obj.
+
+//***************************************************************** object info
+=== object info
+
+==== get_object_desc_c
+[source,c]
+----
+char const* get_object_desc_c( CObject const* obj );
+----
+
+Util function to access the desc attribute of the linked cMeta instance.
+
+==== get_object_info_c
+[source,c]
+----
+cObjectInfo const* get_object_info_c( CObject const* obj );
+----
+
+Returns the cObjectInfo of the CObject instance obj.
+
+==== sizeof_object_c_
+[source,c]
+----
+#define sizeof_object_c_( Type )
+----
+
+Macro function that returns the memory size a object for a Type requires.
+The type of the returned value is int64_t.

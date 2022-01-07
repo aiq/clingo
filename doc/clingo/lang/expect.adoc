@@ -1,0 +1,223 @@
+= expect
+:xmpldir: ../../../test/clingo/lang/expect
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Contains functions to create unit tests that output
+link:https://testanything.org/[TAP] streams.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ work
+=== workflow
+
+==== init_tap_c
+[source,c]
+----
+#define init_tap_c_()                                                          \
+   init_tap_c( __FILE__, stdout )
+void init_tap_c( char const name[static 1], FILE* output );
+----
+
+Function to initiate the test environment.
+It sets the output TAP stream and adds the name parameter as comment to the
+TAP stream.
+
+==== tap_plan_c
+[source,c]
+----
+void tap_plan_c( int64_t n );
+----
+
+Adds a plan line(1..n) to the TAP stream.
+The line tells how many tests will be run, or how many tests have run.
+
+==== tap_c
+[source,c]
+----
+void tap_c( bool result );
+----
+
+Adds a test line to the TAP stream.
+If the parameter is true writes the function "ok", otherwise "not ok".
+
+==== tap_desc_c
+[source,c]
+----
+void tap_desc_c( bool result, char const desc[static 1] );
+----
+
+Adds a test line with an additional description(desc) to the TAP stream.
+
+==== tap_descf_c
+[source,c]
+----
+void tap_descf_c( bool result, char const format[static 1], ... );
+----
+
+Adds a test line with a custum description(format) to the TAP stream.
+If format includes format specifiers (subsequences beginning with %), the
+additional arguments following format are formatted and inserted in the
+resulting string replacing their respective specifiers.
+
+The format string follows the same specifications as format in printf.
+
+==== tap_note_c
+[source,c]
+----
+void tap_note_c( char const note[static 1] );
+----
+
+Adds a note to the TAP stream.
+
+==== tap_skip_c
+[source,c]
+----
+void tap_skip_c( bool result, char const reason[static 1] );
+----
+
+Adds a skip directive to the TAP stream.
+
+==== tap_todo_c
+[source,c]
+----
+void tap_todo_c( bool result, char const explanation[static 1] );
+----
+
+Adds a TODO directive to the TAP stream.
+
+==== finish_tap_c
+[source,c]
+----
+#define finish_tap_c_()                                                        \
+   finish_tap_c( true )
+int finish_tap_c( bool withPlan );
+----
+
+Returns 0 if all tests succed or -1 if at least one test fails.
+With the withPlan parameter can a generated plan line be added to the TAP
+stream.
+
+// *****************************************************************************
+
+=== checks
+
+[id='expect_c_']
+==== expect_c_
+[source,c]
+----
+#define expect_c_( Result )
+----
+
+Macro function that adds a test line with a generated description to the TAP
+stream.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/expect.c[]
+----
+
+// *****************************************************************************
+
+=== check cmp results
+
+Macro functions that add a test line with a generated description to the TAP
+stream by interpreting the result of a compare function.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/check_cmp_results.c[]
+----
+
+[id='expect_diff_c_']
+==== expect_diff_c_
+[source,c]
+----
+#define expect_diff_c_( Result )
+----
+
+Adds "ok" if the result of a compare function means that both values are
+different, otherwise "not ok".
+
+[id='expect_eq_c_']
+==== expect_eq_c_
+[source,c]
+----
+#define expect_eq_c_( Result )
+----
+
+Adds "ok" if the result of a compare function means that that the first and
+second value are equal, otherwise "not ok".
+
+[id='expect_gt_c_']
+==== expect_gt_c_
+[source,c]
+----
+#define expect_gt_c_( Result )
+----
+
+Adds "ok" if the result of a compare function means that the first value is
+greater than the second value, otherwise "not ok".
+
+[id='expect_gte_c_']
+==== expect_gte_c_
+[source,c]
+----
+#define expect_gte_c_( Result )
+----
+
+Adds "ok" if the result of a compare function means that the first value is
+greater than or equal the second value, otherwise "not ok".
+
+[id='expect_lt_c_']
+==== expect_lt_c_
+[source,c]
+----
+#define expect_lt_c_( Result )
+----
+
+Adds "ok" if the result of a compare function means that the first value is
+less than the second value, otherwise "not ok".
+
+[id='expect_lte_c_']
+==== expect_lte_c_
+[source,c]
+----
+#define expect_lte_c_( Result )
+----
+
+Adds "ok" if the result of a compare function means that the first value is
+less than or equal the second value, otherwise "not ok".
+
+// *****************************************************************************
+
+=== control flow
+
+[id='abort_tap_c_']
+==== abort_tap_c_
+[source,c]
+----
+#define abort_tap_c_()
+----
+
+Macro function that adds a failed test with a generated description to the TAP
+stream and aborts the program.
+
+[id='require_c_']
+==== require_c_
+[source,c]
+----
+#define require_c_( Result )
+----
+
+If Result is true does the macro function nothing, otherwise adds the
+function a failed test with a generated description to the TAP stream and aborts
+the program.

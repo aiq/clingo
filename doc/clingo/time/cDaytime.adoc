@@ -1,0 +1,322 @@
+= cDaytime
+:xmpldir: ../../../test/clingo/time/cDaytime
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+==== cDaytime
+[source,c]
+----
+struct cDaytime
+{
+   int64_t _v;
+};
+
+typedef struct cDaytime cDaytime;
+----
+
+The cDaytime struct has just the attribute _v that represent the watch time of a
+day.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cDaytimeSlice']
+==== cDaytimeSlice
+[source,c]
+----
+struct cDaytimeSlice
+{
+   int64_t s;
+   cDate const* v;
+};
+typedef struct cDaytimeSlice cDaytimeSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cDaytimeSlice daytime_slice_c( int64_t s, cDaytime const* v );
+cDaytimeSlice make_daytime_slice_c( cDaytime const* beg, cDaytime const* end );
+cDaytimeSlice empty_daytime_slice_c( void );
+/* sub */
+cDaytimeSlice left_daytime_slice_c( cDaytimeSlice slice, int64_t maxLen );
+cDaytimeSlice mid_daytime_slice_c( cDaytimeSlice slice, int64_t index );
+cDaytimeSlice right_daytime_slice_c( cDaytimeSlice slice, int64_t maxLen );
+cDaytimeSlice sub_daytime_slice_c( cDaytimeSlice slice,
+                                   int64_t begIdx,
+                                   int64_t endIdx);
+----
+
+[id='cVarDaytimeSlice']
+==== cVarDaytimeSlice
+[source,c]
+----
+struct cVarDaytimeSlice
+{
+   int64_t s;
+   cDate* v;
+};
+typedef struct cVarDaytimeSlice cVarDaytimeSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarDaytimeSlice var_daytime_slice_c( int64_t s, cDaytime* v );
+cVarDaytimeSlice make_var_daytime_slice_c( cDaytime* beg, cDaytime* end );
+cVarDaytimeSlice empty_var_daytime_slice_c( void );
+/* sub */
+cVarDaytimeSlice left_var_daytime_slice_c( cVarDaytimeSlice slice,
+                                           int64_t maxLen );
+cVarDaytimeSlice mid_var_daytime_slice_c( cVarDaytimeSlice slice,
+                                          int64_t index );
+cVarDaytimeSlice right_var_daytime_slice_c( cVarDaytimeSlice slice,
+                                            int64_t maxLen );
+cVarDaytimeSlice sub_var_daytime_slice_c( cVarDaytimeSlice slice,
+                                          int64_t begIdx,
+                                          int64_t endIdx);
+/* var slice */
+cVarDaytimeSlice as_var_daytime_slice_c( cVarDaytimeSlice slice );
+cVarDaytimeSlice cast_var_daytime_slice_c( cVarDaytimeSlice slice,
+                                           cDaytimeSlice sub );
+int64_t set_daytime_slice_c( cVarDaytimeSlice dst, cDaytimeSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+==== daytime_c
+[source,c]
+----
+#define daytime_c_( H, M, S )                                                  \
+   daytime_c( (H), (M), (S), 0 )
+cDaytime daytime_c( int64_t h, int64_t m, int64_t s, int64_t n );
+----
+
+Initialise a daytime with hour, minute and second.
+
+==== local_daytime_c
+[source,c]
+----
+cDaytime local_daytime_c( void );
+----
+
+Returns the current local daytime, as reported by the system clock.
+
+==== null_daytime_c
+[source,c]
+----
+cDaytime null_daytime_c( void );
+----
+
+Returns a null daytime, null daytimes are invalid.
+
+==== utc_daytime_c
+[source,c]
+----
+cDaytime utc_daytime_c( void );
+----
+
+Returns the current UTC date, as reported by the system clock.
+
+//************************************************************************ from
+=== from
+
+==== from_duration_c
+[source,c]
+----
+cDaytime from_duration_c( cDuration dur );
+----
+
+Creates a daytime from the cDuration value.
+
+==== from_hmsn_c
+[source,c]
+----
+cDaytime from_hmsn_c( cHmsn hmsn );
+----
+
+Creates a daytime from the hour, min, sec and nsec value from the cHmsn value.
+
+//************************************************************************** as
+=== as
+
+==== as_duration_c
+[source,c]
+----
+cDuration as_duration_c( cDaytime dt );
+----
+
+Returns the daytime as cDuration value.
+
+==== as_hmsn_c
+[source,c]
+----
+cHmsn as_hmsn_c( cDaytime dt );
+----
+
+Returns the daytime as cHmsn value.
+
+//************************************************************************* add
+=== add
+
+==== add_to_daytime_c
+[source,c]
+----
+cDaytime add_to_daytime_c( cDaytime dt, cDuration dur );
+----
+
+Adds a duration to the daytime.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/add_to_daytime.c[]
+----
+
+//************************************************************************ diff
+=== diff
+
+==== between_daytimes_c
+[source,c]
+----
+cDuration between_daytimes_c( cDaytime a, cDaytime b );
+----
+
+Returns the duration between two duration values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/between_daytimes.c[]
+----
+
+//************************************************************************* cmp
+=== cmp
+
+==== cmp_daytime_c
+[source,c]
+----
+int cmp_daytime_c( cDaytime a, cDaytime b );
+----
+
+Compares two daytimes and returns the three possible results:
+
+<0:: if a is earlier as b
+0:: if both dates are equal
+>0:: if a is later as b
+
+==== daytime_is_valid_c
+[souce,c]
+----
+bool daytime_is_valid_c( cDaytime dt );
+----
+
+Returns true if the daytime value is valid, otherwise false.
+
+==== early_daytime_c
+[source,c]
+----
+cDaytime early_daytime_c( cDaytime a, cDaytime b );
+----
+
+Returns the earlier of both daytimes.
+An invalid daytime is allways earlier as a valid daytime.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/early_daytime.c[]
+----
+
+==== eq_daytime_c
+[source,c]
+----
+bool eq_daytime_c( cDaytime a, cDaytime b );
+----
+
+Returns true if a is equal to b, otherwise returns false.
+
+==== late_daytime_c
+[source,c]
+----
+cDaytime late_daytime_c( cDaytime a, cDaytime b );
+----
+
+Returns the later of both daytimes.
+A valid daytime is allways later as an invalid daytime.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/late_daytime.c[]
+----
+
+//************************************************************************** io
+=== io
+
+The functions read_daytime_c and write_daytime_c are using the following format:
+
+.format
+[cols="1,2,1"]
+|===
+|h |The hour without a leading character |0 to 23
+|_h |The hour with a leading space |0 to 23
+|hh |The hour with a leading zero |00 to 23
+|k |The kitchen hour without a leading character |
+|_k |The kitchen hour with a leading space |
+|kk |The kitchen hour with a leading zero |
+|m |The minute without a leading character |0 to 59
+|_m |The minute with a leading space |0 to 59
+|mm |The minute with a leading zero |00 to 59
+|s |The whole second, without a leading character |0 to 59
+|_s |The whole second, with a leading space |0 to 59
+|ss |The whole second, with a leading zero |00 to 59
+|i |The fractional part of the second in millisecond whithout trainling zeros |000 to 999
+|iii |The fractional part of the second in millisecond with trailing zeros |000 to 999
+|u |The fractional part of the second in microsecond without trailing zeros |000000 to 999999
+|uuu |The fractional part of the second in microsecond with trailing zeros |000000 to 999999
+|n |The fractional part of the second in nanosecond without trailing zeros |000000000 to 999999999
+|nnn |The fractional part of the second in nanosecond with trailing zeros |000000000 to 999999999
+|ap |Read or write AM or PM dependent on the hour value |
+|AP |Read or write am or pm dependent on the hour value |
+|===
+
+==== read_daytime_c
+[source,c]
+----
+bool read_daytime_c( cScanner sca[static 1],
+                     cDaytime dt[static 1],
+                     char const fmt[static 1] );
+----
+
+Reads a cDaytime value from a text with a scanner.
+The function will use C_DaytimeFormat( "hh:mm:ss.n" ) as default format.
+
+==== write_daytime_c
+[source,c]
+----
+bool write_daytime_c( cRecorder rec[static 1],
+                      cDaytime dt,
+                      char const fmt[static 1] );
+----
+
+Writes a cDaytime value into the recorder.
+The function will use C_DaytimeFormat( "hh:mm:ss.n" ) as default format.

@@ -1,0 +1,963 @@
+= math
+:xmpldir: ../../../test/clingo/lang/math
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+This module contains overflow safe functions for mathematical base operations.
+
+//******************************************************************************
+//****************************************************** Code Generation Macros
+//******************************************************************************
+== Code Generation Macros
+
+[id='ABS_C_']
+==== ABS_C_
+[source,c]
+----
+#define ABS_C_(                                                                \
+   FuncName, Type, EdgeValue                                                   \
+)
+----
+
+Generates a function that determines overflow safe the absolute value of val
+and writes the result into a pointer parameter.
+
+FuncName:: the name of the generated function
+Type:: the type of the arguments
+EdgeValue:: the negative value that would cause an overflow
+
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+The generated function has the following common signature:
+
+[source,c]
+----
+bool FuncName( Type val, Type res[static 1] );
+----
+
+[id='ADD_C_']
+==== ADD_C_
+[source,c]
+----
+#define ADD_C_(                                                                \
+   FuncName, Type, MinValue, MaxValue                                          \
+)
+----
+
+Generates a function that performs a overflow safe addition of two values and
+writes the result into a pointer parameter.
+
+FuncName:: the name of the generated function
+Type:: the type of the arguments
+MinValue:: the smallest possible value of the argument
+MaxValue:: the largest possible value of the argument
+
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+The generated function has the following common signature:
+
+[source,c]
+----
+bool FuncName( Type a, Type b, Type res[static 1] );
+----
+
+[id='CONV_C_']
+==== CONV_C_
+[source,c]
+----
+#define CONV_C_(                                                               \
+   FuncName, FromType, ToType, MinValue, MaxValue                              \
+)
+----
+
+Generates a function that converts a large integer type(FromType) into a
+smaller integer type(ToType).
+
+FuncName:: the name of the generated function
+FromType:: the type of the larger source type
+ToType:: the type of the smaller destination type
+MinValue:: the smallest possible value of the destination type
+MaxValue:: the largest possible value of the destination type
+
+The function returns true if a convertion is possible, otherwise reuturns the
+function false.
+The generated function has the following common signature:
+
+[source,c]
+----
+bool FuncName( FromType src, ToType dst[static 1] );
+----
+
+[id='MAX_C_']
+==== MAX_C_
+[source,c]
+----
+#define MAX_C_(                                                                \
+   FuncName, Type                                                              \
+)
+----
+
+Generates a function that returns the larger of its arguments.
+
+FuncName:: the name of the generated functions
+Type:: the type of the arguments
+
+The generated function has the following common signature:
+
+[source,c]
+----
+Type FuncName( Type a, Type b );
+----
+
+[id='MIN_C_']
+==== MIN_C_
+[source,c]
+----
+#define MIN_C_(                                                                \
+   FuncName, Type                                                              \
+)
+----
+
+Generates a function that returns the smaller of its arguments.
+
+FuncName:: the name of the generated function
+Type:: the type of the arguments
+
+The generated function has the following common signature:
+
+[source,c]
+----
+Type FuncName( Type a, Type b );
+----
+
+[id='MUL_C_']
+==== MUL_C_
+[source,c]
+----
+#define MUL_C_(                                                                \
+   FuncName, Type, TmpType, MinValue, MaxValue                                 \
+)
+----
+
+Generates a function that performs a overflow safe multiplication of two values
+and writes the result into as pointer parameter.
+
+FuncName:: the name of the generated function
+Type:: the type of the arguments
+TmpType:: larger type that can hold all possible values that the arguments can generate
+MinValue:: the smallest possible value of the arguments
+MaxValue:: the largest possible value of the arguments
+
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+The genereted function has the following common signature:
+
+[source,c]
+----
+bool FuncName( Type a, Type b, Type res[static 1] );
+----
+
+[id='SUB_C_']
+==== SUB_C_
+[source,c]
+----
+#define SUB_C_(                                                                \
+   FuncName, Type, MinValue, MaxValue                                          \
+)
+----
+
+Generates a function that performs a overflow safe subtraction of two values and
+writes the result into a pointer paramter.
+
+FuncName:: the name of the generated function
+Type:: the type of the arguments
+MinValue:: the smallest possible value of the arguments
+MaxValue:: the largest possible value of the arguments
+
+If a the operation would causes a overflow returns the function false,
+otherwise reutrns the function true.
+The generated function has the following common signature:
+
+[source,c]
+----
+bool FuncName( Type a, Type b, Type res[static 1] );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************* abs
+=== abs
+
+[id='abs_c_']
+==== abs_c_
+[source,c]
+----
+#define abs_c_( Val, Res )
+----
+
+Generic macro to determine the absolute value for signed integers.
+
+==== iabs8_c
+[source,c]
+----
+bool iabs8_c( int8_t val, int8_t res[static 1] );
+----
+
+Via the macro link:#ABS_C[ABS_C_] implemented function for *int8_t* values.
+If _val_ is _INT16_MIN_ returns the function *false*, all other *int8_t* values
+return *true*.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iabs8.c[]
+----
+
+==== iabs16_c
+[source,c]
+----
+bool iabs16_c( int16_t val, int16_t res[static 1] );
+----
+
+Via the macro link:#ABS_C[ABS_C_] implemented function for int16_t values.
+If val is INT16_MIN returns the function false, all other int16_t values
+return true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iabs16.c[]
+----
+
+==== iabs32_c
+[source,c]
+----
+bool iabs32_c( int32_t val, int32_t res[static 1] );
+----
+
+Via the macro link:#ABS_C[ABS_C_] implemented function for int32_t values.
+If val is INT32_MIN returns the function false, all other int32_t values
+return true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iabs32.c[]
+----
+
+==== iabs64_c
+[source,c]
+----
+bool iabs64_c( int64_t val, int64_t res[static 1] );
+----
+
+Via the macro link:#ABS_C[ABS_C_] implemented function for int64_t values.
+If val is INT64_MIN returns the function false, all other int64_t values
+return true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iabs64.c[]
+----
+
+//***********************************************************+************* add
+=== add
+
+[id='add_c_']
+==== add_c_
+[source,c]
+----
+#define add_c_( A, B, Res )
+----
+
+Generic macro to perform a overflow safe addition for signed and unsigned
+integers.
+
+==== iadd8_c
+[source,c]
+----
+bool iadd8_c( int8_t a, int8_t b, int8_t res[static 1] );
+----
+
+Via the macro link:#ADD_C_[ADD_C_] implemented function for int8_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iadd8.c[]
+----
+
+==== iadd16_c
+[source,c]
+----
+bool iadd16_c( int16_t a, int16_t b, int16_t res[static 1] );
+----
+
+Via the macro link:#ADD_C_[ADD_C_] implemented function for int16_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iadd16.c[]
+----
+
+==== iadd32_c
+[source,c]
+----
+bool iadd32_c( int32_t a, int32_t b, int32_t res[static 1] );
+----
+
+Via the macro link:#ADD_C_[ADD_C_] implemented function for int32_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iadd32.c[]
+----
+
+==== iadd64_c
+[source,c]
+----
+bool iadd64_c( int64_t a, int64_t b, int64_t res[static 1] );
+----
+
+Via the macro link:#ADD_C_[ADD_C_] implemented function for int64_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/iadd64.c[]
+----
+
+==== uadd8_c
+[source,c]
+----
+bool uadd8_c( uint8_t a, uint8_t b, uint8_t res[static 1] );
+----
+
+Via the macro link:#ADD_C_[ADD_C_] implemented function for uint8_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/uadd8.c[]
+----
+
+==== uadd16_c
+[source,c]
+----
+bool uadd16_c( uint16_t a, uint16_t b, uint16_t res[static 1] );
+----
+
+Via the macro link:#ADD_C_[ADD_C_] implemented function for uint16_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/uadd16.c[]
+----
+
+==== uadd32_c
+[source,c]
+----
+bool uadd32_c( uint32_t a, uint32_t b, uint32_t res[static 1] );
+----
+
+Via the macro link:#ADD_C_[ADD_C_] implemented function for uint32_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/uadd32.c[]
+----
+
+==== uadd64_c
+[source,c]
+----
+bool uadd64_c( uint64_t a, uint64_t b, uint64_t res[static 1] );
+----
+
+Via the macro link:#ADD_C_[ADD_C_] implemented function for uint64_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/uadd64.c[]
+----
+
+//************************************************************************ conv
+=== conv
+
+==== int64_to_size_c
+[source,c]
+----
+bool int64_to_size_c( int64_t src, size_t dst[static 1] );
+----
+
+Returns true if the int64_t value can be represented in a size_t variable,
+otherwise false.
+
+==== uint64_to_size_c
+[source,c]
+----
+bool uint64_to_size_c( uint64_t src, size_t dst[static 1] );
+----
+
+Returns true if the uint64_t value can be representd in a size_t variable,
+otherwise false.
+
+//************************************************************************* max
+=== max
+
+==== imax8_c
+[source,c]
+----
+int8_t imax8_c( int8_t a, int8_t b );
+----
+
+Returns the larger of its int8_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imax8.c[]
+----
+
+==== imax16_c
+[source,c]
+----
+int16_t imax16_c( int16_t a, int16_t b );
+----
+
+Returns the larger of its int16_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imax16.c[]
+----
+
+==== imax32_c
+[source,c]
+----
+int32_t imax32_c( int32_t a, int32_t b );
+----
+
+Returns the larger of its int32_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imax32.c[]
+----
+
+==== imax64_c
+[source,c]
+----
+int64_t imax64_c( int64_t a, int64_t b );
+----
+
+Returns the larger of its int64_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imax64.c[]
+----
+
+[id='max_c_']
+==== max_c_
+[source,c]
+----
+#define max_c_( A, B )
+----
+
+Generic macro function to determine the larger value for signed integers,
+unsigned integers and float numbers.
+
+==== umax8_c
+[source,c]
+----
+uint8_t umax8_c( uint8_t a, uint8_t b );
+----
+
+Returns the larger of its uint8_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umax8.c[]
+----
+
+==== umax16_c
+[source,c]
+----
+uint16_t umax16_c( uint16_t a, uint16_t b );
+----
+
+Returns the larger of its uint16_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umax16.c[]
+----
+
+==== umax32_c
+[source,c]
+----
+uint32_t umax32_c( int32_t a, uint32_t b );
+----
+
+Returns the larger of its uint32_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umax32.c[]
+----
+
+==== umax64_c
+[source,c]
+----
+uint64_t umax64_c( uint64_t a, uint64_t b );
+----
+
+Returns the larger of its uint64_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umax64.c[]
+----
+
+//************************************************************************* min
+=== min
+
+==== imin8_c
+[source,c]
+----
+int8_t imin8_c( int8_t a, int8_t b );
+----
+
+Returns the smaller of its int8_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imin8.c[]
+----
+
+==== imin16_c
+[source,c]
+----
+int16_t imin16_c( int16_t a, int16_t b );
+----
+
+Returns the smaller of its int16_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imin16.c[]
+----
+
+==== imin32_c
+[source,c]
+----
+int32_t imin32_c( int32_t a, int32_t b );
+----
+
+Returns the smaller of its int32_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imin32.c[]
+----
+
+==== imin64_c
+[source,c]
+----
+int64_t imin64_c( int64_t a, int64_t b );
+----
+
+Returns the smaller of its int64_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imin64.c[]
+----
+
+[id='min_c_']
+==== min_c_
+[source,c]
+----
+#define min_c_( A, B )
+----
+
+Generic macro function to determine the smaller value for signed integers,
+unsigned integers and float numbers.
+
+==== umin8_c
+[source,c]
+----
+uint8_t umin8_c( uint8_t a, uint8_t b );
+----
+
+Returns the smaller of its uint8_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umin8.c[]
+----
+
+==== umin16_c
+[source,c]
+----
+uint16_t umin16_c( uint16_t a, uint16_t b );
+----
+
+Returns the smaller of its uint16_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umin16.c[]
+----
+
+==== umin32_c
+[source,c]
+----
+uint32_t umin32_c( uint32_t a, uint32_t b );
+----
+
+Returns the smaller of its uint32_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umin32.c[]
+----
+
+==== umin64_c
+[source,c]
+----
+uint64_t umin64_c( uint64_t a, uint64_t b );
+----
+
+Returns the smaller of its uint64_t arguments: either a or b.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umin64.c[]
+----
+
+//************************************************************************* mul
+=== mul
+
+==== imul8_c
+[source,c]
+----
+bool imul8_c( int8_t a, int8_t b, int8_t res[static 1] );
+----
+
+Via the macro link:#MUL_C_[MUL_C_] implemented function for int8_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imul8.c[]
+----
+
+==== imul16_c
+[source,c]
+----
+bool imul16_c( int16_t a, int16_t b, int16_t res[static 1] );
+----
+
+Via the macro link:#MUL_C_[MUL_C_] implemented function for int16_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imul16.c[]
+----
+
+==== imul32_c
+[source,c]
+----
+bool imul32_c( int32_t a, int32_t b, int32_t res[static 1] );
+----
+
+Via the macro link:#MUL_C_[MUL_C_] implemented function for int32_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imul32.c[]
+----
+
+==== imul64_c
+[source,c]
+----
+bool imul64_c( int64_t a, int64_t b, int64_t res[static 1] );
+----
+
+Function that allows to multiply two int64_t values when no overflow occurs.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/imul64.c[]
+----
+
+[id='mul_c_']
+==== mul_c_
+[source,c]
+----
+#define mul_c_( A, B, Res )
+----
+
+Generic macro to perform a overflow safe multiplication for signed and unsigned
+integers.
+
+==== umul8_c
+[source,c]
+----
+bool umul8_c( uint8_t a, uint8_t b, uint8_t res[static 1] );
+----
+
+Via the macro link:#MUL_C_[MUL_C_] implemented function for uint8_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umul8.c[]
+----
+
+==== umul16_c
+[source,c]
+----
+bool umul16_c( uint16_t a, uint16_t b, uint16_t res[static 1] );
+----
+
+Via the macro link:#MUL_C_[MUL_C_] implemented function for uint16_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umul16.c[]
+----
+
+==== umul32_c
+[source,c]
+----
+bool umul32_c( uint32_t a, uint32_t b, uint32_t res[static 1] );
+----
+
+Via the macro link:#MUL_C_[MUL_C_] implemented function for uint32_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umul32.c[]
+----
+
+==== umul64_c
+[source,c]
+----
+bool umul64_c( uint64_t a, uint64_t b, uint64_t res[static 1] );
+----
+
+Function that allows to multiply two uint64_t values when no overflow occurs.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/umul64.c[]
+----
+
+//************************************************************************* sub
+=== sub
+
+==== isub8_c
+[source,c]
+----
+bool isub8_c( int8_t a, int8_t b, int8_t res[static 1] );
+----
+
+Via the macro link:#SUB_C_[SUB_C_] implemented function for int8_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/isub8.c[]
+----
+
+==== isub16_c
+[source,c]
+----
+bool isub16_c( int16_t a, int16_t b, int16_t res[static 1] );
+----
+
+Via the macro link:#SUB_C_[SUB_C_] implemented function for int16_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/isub16.c[]
+----
+
+==== isub32_c
+[source,c]
+----
+bool isub32_c( int32_t a, int32_t b, int32_t res[static 1] );
+----
+
+Via the macro link:#SUB_C_[SUB_C_] implemented function for int32_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/isub32.c[]
+----
+
+==== isub64_c
+[source,c]
+----
+bool isub64_c( int64_t a, int64_t b, int64_t res[static 1] );
+----
+
+Via the macro link:#SUB_C_[SUB_C_] implemented function for int64_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/isub64.c[]
+----
+
+[id='sub_c_']
+==== sub_c_
+[source,c]
+----
+#define sub_c_( A, B, Res )
+----
+
+Generic macro to perform a overflow safe subtraction for signed and unsigned
+integers.
+
+==== usub8_c
+[source,c]
+----
+bool usub8_c( uint8_t a, uint8_t b, uint8_t res[static 1] );
+----
+
+Via the macro link:#SUB_C_[SUB_C_] implemented function for uint8_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/usub8.c[]
+----
+
+==== usub16_c
+[source,c]
+----
+bool usub16_c( uint16_t a, uint16_t b, uint16_t res[static 1] );
+----
+
+Via the macro link:#SUB_C_[SUB_C_] implemented function for uint16_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/usub16.c[]
+----
+
+==== usub32_c
+[source,c]
+----
+bool usub32_c( uint32_t a, uint32_t b, uint32_t res[static 1] );
+----
+
+Via the macro link:#SUB_C_[SUB_C_] implemented function for uint32_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/usub32.c[]
+----
+
+==== usub64_c
+[source,c]
+----
+bool usub64_c( uint64_t a, uint64_t b, uint64_t res[static 1] );
+----
+
+Via the macro link:#SUB_C_[SUB_C_] implemented function for uint64_t values.
+If a the operation would causes a overflow returns the function false,
+otherwise returns the function true.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/usub64.c[]
+----
+

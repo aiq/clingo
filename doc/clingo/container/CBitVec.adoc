@@ -1,0 +1,411 @@
+= CBitVec
+:xmpldir: ../../../test/clingo/container/CBitVec
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the CBitVec type and the associated functions.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='C_BitVecMeta']
+==== C_BitVecMeta
+[source,c]
+----
+cMeta const C_BitVecMeta;
+----
+
+Stores the cMeta instance that all CBitVec instances reference.
+
+[id='CBitVec']
+==== CBitVec
+[source,c]
+----
+struct CBitVec;
+typedef struct CBitVec CBitVec;
+----
+
+Abstract type that represents a bit vector.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************** create
+=== create
+
+==== new_bit_vec_c
+[source,c]
+----
+CBitVec* new_bit_vec_c( int64_t n );
+----
+
+Creates a bit vector with n bits.
+
+==== copy_bit_vec_c
+[source,c]
+----
+CBitVec* copy_bit_vec_c( CBitVec const* vec );
+----
+
+Creates a copy of a bit vector.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/copy_bit_vec.c[]
+----
+
+==== bit_vec_from_chars_c
+[source,c]
+----
+CBitVec* bit_vec_from_chars_c( cChars chars );
+----
+
+Creates a bit vector from a char slice representation.
+Each \'0' and \'o' will be an unset bit, each \'1' will be set bit and
+space characters will be ignored.
+
+==== bit_vec_from_cstr_c
+[source,c]
+----
+CBitVec* bit_vec_from_cstr_c( char const bitstr[static 1] );
+----
+
+Creates a bit vector from a C string representation.
+Each \'0' and \'o' will be an unset bit, each \'1' will be set bit and
+space characters will be ignored.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/bit_vec_from_cstr.c[]
+----
+
+//************************************************************************ prop
+=== prop
+
+==== bit_vec_size_c
+[source,c]
+----
+int64_t bit_vec_size_c( CBitVec const* vec );
+----
+
+Returns the number of bits the vector stores.
+
+==== get_from_bit_vec_c
+[source,c]
+----
+cByte get_from_bit_vec_c( CBitVec const* vec, int64_t pos );
+----
+
+Returns the bit value at the index pos.
+
+==== find_index_of_bit_c
+[source,c]
+----
+int64_t find_index_of_bit_c( CBitVec const* vec, cByte bit, int64_t from );
+----
+
+Returns the next index with a bit value, starting from a known index.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_index_of_bit.c[]
+----
+
+==== popcount_bit_vec_c
+[source,c]
+----
+int64_t popcount_bit_vec_c( CBitVec const* vec, cByte bit );
+----
+
+Counts the number of bits with the specified bit value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/popcount_bit_vec.c[]
+----
+
+==== rfind_index_of_bit_c
+[source,c]
+----
+int64_t rfind_index_of_bit_c( CBitVec const* vec, cByte bit, int64_t from );
+----
+
+Returns the previous index with a bit value, starting from a known index.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/rfind_index_of_bit.c[]
+----
+
+//************************************************************************* set
+=== set
+
+==== set_on_bit_vec_c
+[source,c]
+----
+void set_on_bit_vec_c( CBitVec* vec, int64_t pos, cByte bit );
+----
+
+Sets the bit value at the index pos.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_on_bit_vec.c[]
+----
+
+==== set_range_on_bit_vec_c
+[source,c]
+----
+void set_range_on_bit_vec_c( CBitVec* vec, cRange range, cByte bit );
+----
+
+Sets the same value on a range in the bit vector.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_range_on_bit_vec.c[]
+----
+
+//*********************************************************************** logic
+=== logic
+
+==== bitand_bit_vec_c
+[source,c]
+----
+CBitVec* bitand_bit_vec_c( CBitVec const* a, CBitVec const* b );
+----
+
+Combines the bits of a and b with a logical and to a new bit vector.
+Returns NULL if the allocation fails or a and b have a different number of bits.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/bitand_bit_vec.c[]
+----
+
+==== bitand_on_bit_vec_c
+[source,c]
+----
+bool bitand_on_bit_vec_c( CBitVec* a, CBitVec const* b );
+----
+
+Overwrites a with a logical and of the bits of a and b.
+Returns false if a and b have a different number of bits.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/bitand_on_bit_vec.c[]
+----
+
+==== bitor_bit_vec_c
+[source,c]
+----
+CBitVec* bitor_bit_vec_c( CBitVec const* a, CBitVec const* b );
+----
+
+Combines the bits of a and b with a logical or to a new bit vector.
+Returns NULL if the allocation fails or a and b have a different number of bits.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/bitor_bit_vec.c[]
+----
+
+==== bitor_on_bit_vec_c
+[source,c]
+----
+bool bitor_on_bit_vec_c( CBitVec* a, CBitVec const* b );
+----
+
+Overwrites a with a logical or of the bits of a and b.
+Returns false if a and b have a different number of bits.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/bitor_on_bit_vec.c[]
+----
+
+==== compl_bit_vec_c
+[source,c]
+----
+CBitVec* compl_bit_vec_c( CBitVec const* vec );
+----
+
+Creates a new vector with the complement of the slice a.
+Returns NULL if the allocation fails.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/compl_bit_vec.c[]
+----
+
+==== compl_on_bit_vec_c
+[source,c]
+----
+bool compl_on_bit_vec_c( CBitVec* vec );
+----
+
+Builds the complement of the slice a.
+Returns false if the slices have different s values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/compl_on_bit_vec.c[]
+----
+
+==== xor_bit_vec_c
+[source,c]
+----
+CBitVec* xor_bit_vec_c( CBitVec const* a, CBitVec const* b );
+----
+
+Overwrites a with a logical exclusive or of the bits of a and b.
+Returns NULL if the allocation fails or a and b have a different number of bits.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/xor_bit_vec.c[]
+----
+
+==== xor_on_bit_vec_c
+[source,c]
+----
+bool xor_on_bit_vec_c( CBitVec* a, CBitVec* b );
+----
+
+Combines the bits of a and b with a logical exclusive or and overwrites a.
+Returns false if a and b have a different number of bits.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/xor_on_bit_vec.c[]
+----
+
+//*********************************************************************** shift
+=== shift
+
+==== shift_bit_vec_c
+[source,c]
+----
+void shift_bit_vec_c( CBitVec* vec, int64_t distance, cByte fill );
+----
+
+Shifts the bits in a byte slice.
+A negative offset shifts the bits to the left, a positive offset shifts the bits
+to the right.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/shift_bit_vec.c[]
+----
+
+//************************************************************************* cmp
+=== cmp
+
+==== bit_vec_is_c
+[source,c]
+----
+#define bit_vec_is_c( Vec, Cstr )                                              \
+   bit_vec_is_c( (Vec), c_c( Cstr ) )
+bool bit_vec_is_c( CBitVec* vec, cChars chars );
+----
+
+Function that checks the bits with the help of a chars value.
+The check ignores the \\0 of the c string.
+
+==== cmp_bit_vec_c
+[source,c]
+----
+int cmp_bit_vec_c( CBitVec const* a, CBitVec const* b );
+----
+
+Compares to bit vectors.
+
+==== eq_bit_vec_c
+[source,c]
+----
+bool eq_bit_vec_c( CBitVec const* a, CBitVec const* b );
+----
+
+Util function that wraps cmp_bit_vec_c and returns true if both bit vectors are
+equal.
+
+//************************************************************************** io
+=== io
+
+==== write_bit_vec_c
+[source,c]
+----
+#define write_bit_vec_c_( Rec, Vec )                                           \
+   write_bit_vec_c( (Rec), (Vec), "" )
+bool write_bit_vec_c( cRecorder rec[static 1],
+                      CBitVec const* vec,
+                      char const fmt[static 1] );
+----
+
+Writes the bits in a text format into the recorder.
+The format can be "dbg", "zip" or a format string with the following syntax:
+
+----
+[set][/[line][count][/chunk]]
+----
+
+The fix format "dbg" writes the struct layout of a CBitVec into the recorder.
+
+The fix format "zip" compresses the bit string with the following rules:
+.zip
+[cols="2,2"]
+|===
+|single 1 value between 0 values |write a \'+'
+|single 0 value between 1 values |write a \'_'
+|more then one 1 value beween 0 values |write the number of 1 followed by a \'i'
+|more then one 0 value beween 1 values |write the number of 0 followed by a \'z' 
+|===
+
+The format string has the following options:
+
+The set represents the two characters that should be used to represent 0 and 1.
+The defualt set is 'o1'.
+
+The optional line value defines how much bits a line should contain, the default
+value is 80.
+
+.count
+[cols="1,8"]
+|===
+|c |appends at the end of the line the number of bits allready written
+|===
+
+By default is the flag not set and no counter will be written.
+
+The chunk value defines after how much bits in a line a whitespace character
+should be added, the default value is 10.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_bit_vec.c[]
+----

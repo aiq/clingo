@@ -1,0 +1,261 @@
+= bool
+:xmpldir: ../../../test/clingo/type/bool
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with bool values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cBoolSlice']
+==== cBoolSlice
+[source,c]
+----
+struct cBoolSlice
+{
+   int64_t s;
+   bool const* v;
+};
+typedef struct cBoolSlice cBoolSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cBoolSlice bool_slice_c( int64_t s, bool const* v );
+cBoolSlice make_bool_slice_c( bool const* beg, bool const* end );
+cBoolSlice empty_bool_slice_c( void );
+/* sub */
+cBoolSlice left_bool_slice_c( cBoolSlice slice, int64_t maxLen );
+cBoolSlice mid_bool_slice_c( cBoolSlice slice, int64_t index );
+cBoolSlice right_bool_slice_c( cBoolSlice slice, int64_t maxLen );
+cBoolSlice sub_bool_slice_c( cBoolSlice slice, int64_t begIdx, int64_t endIdx );
+----
+
+[id='cVarBoolSlice']
+==== cVarBoolSlice
+[source,c]
+----
+struct cVarBoolSlice
+{
+   int64_t s;
+   bool* v;
+};
+typedef struct cVarBoolSlice cVarBoolSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarBoolSlice var_bool_slice_c( int64_t s, bool* v );
+cVarBoolSlice make_var_bool_slice_c( bool* beg, bool* end );
+cVarBoolSlice empty_var_bool_slice_c( void );
+/* sub */
+cVarBoolSlice left_var_bool_slice_c( cVarBoolSlice slice, int64_t maxLen );
+cVarBoolSlice mid_var_bool_slice_c( cVarBoolSlice slice, int64_t index );
+cVarBoolSlice right_var_bool_slice_c( cVarBoolSlice slice, int64_t maxLen );
+cVarBoolSlice sub_var_bool_slice_c( cVarBoolSlice slice,
+                                    int64_t begIdx,
+                                    int64_t endIdx );
+/* var slice */
+cBoolSlice as_bool_slice_c( cVarBoolSlice slice );
+cVarBoolSlice cast_bool_slice_c( cVarBoolSlice slice, cBoolSlice sub );
+int64_t set_bool_slice_c( cVarBoolSlice dst, cBoolSlice src );
+----
+
+[id='cBoolChunk']
+==== cBoolChunk
+[source,c]
+----
+struct cBoolChunk
+{
+   int64_t s;
+   bool const* v;
+   int64_t favSize;
+   cBoolSlice slice;
+};
+typedef struct cBoolChunk cBoolChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_bool_chunk_c( cBoolChunk chunk[static 1],
+                             int64_t s,
+                             cBoolSlice slice );
+void init_front_bool_chunk_c( cBoolChunk chunk[static 1],
+                              int64_t s,
+                              cBoolSlice slice );
+----
+
+[id='cVarBoolChunk']
+==== cVarBoolChunk
+[source,c]
+----
+struct cVarBoolChunk
+{
+   int64_t s;
+   bool* v;
+   int64_t favSize;
+   cVarBoolSlice slice;
+};
+typedef struct cVarBoolChunk cVarBoolChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_bool_chunk_c( cVarBoolChunk chunk[static 1],
+                                 int64_t s,
+                                 cVarBoolSlice slice );
+void init_front_var_bool_chunk_c( cVarBoolChunk chunk[static 1],
+                                  int64_t s,
+                                  cVarBoolSlice slice );
+----
+
+[id='cBoolWindow']
+==== cBoolWindow
+[source,c]
+----
+struct cBoolWindow
+{
+   int64_t s;
+   bool const* v;
+   cBoolSlice slice;
+};
+typedef struct cBoolWindow cBoolWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_bool_window_c( cBoolWindow window[static 1],
+                              int64_t s,
+                              cBoolSlice slice );
+void init_front_bool_window_c( cBoolWindow window[static 1],
+                               int64_t s,
+                               cBoolSlice slice );
+----
+
+[id='cVarBoolWindow']
+==== cVarBoolWindow
+[source,c]
+----
+struct cVarBoolWindow
+{
+   int64_t s;
+   bool* v;
+   cVarBoolSlice slice;
+};
+typedef struct cVarBoolWindow cVarBoolWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_bool_window_c( cVarBoolWindow window[static 1],
+                                  int64_t s,
+                                  cVarBoolSlice slice );
+void init_front_var_bool_window_c( cVarBoolWindow window[static 1],
+                                   int64_t s,
+                                   cVarBoolSlice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+[id='bool_c_']
+==== bool_c_
+[source,c]
+----
+#define bool_c_( Value )
+----
+
+Macro function that casts the Value as bool.
+
+==== cmp_bool_c
+[source,c]
+----
+int cmp_bool_c( bool a, bool b );
+----
+
+Compares two bool values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_bool.c[]
+----
+
+//************************************************************************ algo
+=== algo
+
+==== and_bool_slice_values_c
+[source,c]
+----
+bool and_bool_slice_values_c( cBoolSlice slice );
+----
+
+Combines all values in the slice with a logical and operation.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/and_bool_slice_values.c[]
+----
+
+==== count_eq_bool_c
+[source,c]
+----
+int64_t count_eq_bool_c( cBoolSlice slice, bool val );
+----
+
+{CountEq}
+
+.Example
+[source,c]
+----
+include::{xmpldir}/count_eq_bool.c[]
+----
+
+==== or_bool_slice_values_c
+[source,c]
+----
+bool or_bool_slice_values_c( cBoolSlice slice );
+----
+
+Combines all values in the slice with a logical or operation.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/or_bool_slice_values.c[]
+----

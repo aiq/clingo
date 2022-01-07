@@ -1,0 +1,363 @@
+= CDaySet
+:xmpldir: ../../../test/clingo/time/CDaySet
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='C_DaySetMeta']
+==== C_DaySetMeta
+[source,c]
+----
+cMeta const C_DaySetMeta;
+----
+
+Stores the cMeta intance that all CDaySet instances reference.
+
+[id='CDaySet']
+==== CDaySet
+[source,c]
+----
+struct CDaySet;
+typedef struct CDaySet CDaySet;
+----
+
+Abstract type that represents a day set.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************** create
+=== create
+
+==== new_day_set_c
+[source,c]
+----
+CDaySet* new_day_set_c();
+----
+
+Creates an empty day set.
+
+==== target_day_set_c
+[source,c]
+----
+CDaySet* target_day_set_c( cDatePeriod period );
+----
+
+Creates an empty day set that allocates enough memory to store days inside the
+period without reallocation.
+
+//********************************************************************* overall
+=== overall
+
+==== count_days_c
+[source,c]
+----
+int64_t count_days_c( CDaySet const* set );
+----
+
+Counts the number of days that the day set contains.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/count_days.c[]
+----
+
+==== day_set_is_empty_c
+[source,c]
+----
+bool day_set_is_empty_c( CDaySet const* set );
+----
+
+Returns true if the day set contains no days, otherwise false.
+
+==== day_set_period_c
+[source,c]
+----
+bool day_set_period_c( CDaySet const* set );
+----
+
+Returns a period that covers all the days in the day set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/day_set_period.c[]
+----
+
+//************************************************************************* itr
+=== itr
+
+==== first_in_day_set_c
+[source,c]
+----
+cDate first_in_day_set_c( CDaySet const* set );
+----
+
+Returns the earliest date in the day set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/first_in_day_set.c[]
+----
+
+[id='iterate_day_set_c_']
+==== iterate_day_set_c_
+[source,c]
+----
+#define iterate_day_set_c_( Day, DaySet )
+----
+
+Macro function to define a for statement to iterate from the earliest day to the
+latest day in the day set.
+
+[id='riterate_day_set_c_']
+==== riterate_day_set_c_
+[source,c]
+----
+#define riterate_day_set_c_( Day, DaySet )
+----
+
+Macro function to define a for statement to iterate from the latest day to the
+earliest day in the day set.
+
+==== last_in_day_set_c
+[source,c]
+----
+cDate last_in_day_set_c( CDaySet const* set );
+----
+
+Returns the latest date in the day set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/last_in_day_set.c[]
+----
+
+==== next_in_day_set_c
+[source,c]
+----
+cDate next_in_day_set_c( CDaySet const* set, cDate date );
+----
+
+Returns the date in the day set after date or an invalid date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_in_day_set.c[]
+----
+
+==== prev_in_day_set_c
+[source,c]
+----
+cDate prev_in_day_set_c( CDaySet const* set, cDate date );
+----
+
+Returns the date in the day set before date or an invalid date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/prev_in_day_set.c[]
+----
+
+//************************************************************************** in
+=== in
+
+==== date_period_in_day_set_c
+[source,c]
+----
+bool date_period_in_day_set_c( CDaySet const* set, cDatePeriod period );
+----
+
+Returns true if the day set contains all days of the date period, otherwise
+false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/date_period_in_day_set.c[]
+----
+
+==== days_in_day_set_c
+[source,c]
+----
+bool days_in_day_set_c( CDaySet const* set, CDaySet const* days );
+----
+
+Returns true if the day set contains all days, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/days_in_day_set.c[]
+----
+
+==== in_day_set_c
+[source,c]
+----
+bool in_day_set_c( CDaySet const* set, cDate date );
+----
+
+Returns true if the day set contains the date, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/in_day_set.c[]
+----
+
+//************************************************************************* set
+=== set
+
+==== set_date_period_on_day_set_c
+[source,c]
+----
+bool set_date_period_on_day_set_c( cDaySet* set, cDatePeriod period );
+----
+
+Adds all days of the date period to the day set.
+Returns false if it fails to add the days.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_date_period_on_day_set.c[]
+----
+
+==== set_days_on_day_set_c
+[source,c]
+----
+bool set_days_on_day_set_c( CDaySet* set, CDaySet const* days );
+----
+
+Adds all days to the day set.
+Returns false if it fails to add the days.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_days_on_day_set.c[]
+----
+
+==== set_many_on_day_set_c
+[source,c]
+----
+#define set_many_on_day_set_c_( Set, ... )                                     \
+   set_many_on_day_set_c( (Set), (cDateSlice)slice_c_( cDate, __VA_ARGS__ ) )
+bool set_many_on_day_set_c( CDaySet* set, cDateSlice slice );
+----
+
+Adds all dates from the slice to the day set.
+Returns false if it fails to add the dates.
+
+==== set_on_day_set_c
+[source,c]
+----
+bool set_on_day_set_c( CDaySet* set, cDate date );
+----
+
+Adds a date to the day set.
+Returns false if it fails to add the dates.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_on_day_set.c[]
+----
+
+//********************************************************************** remove
+=== remove
+
+==== remove_date_period_from_day_set_c
+[source,c]
+----
+void remove_date_period_from_day_set_c( CDaySet* set, cDatePeriod period );
+----
+
+Removes all days that the period covers from the day set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/remove_date_period_from_day_set.c[]
+----
+
+==== remove_days_from_day_set_c
+[source,c]
+----
+void remove_days_from_day_set_c( CDaySet* set, CDaySet const* days );
+----
+
+Removes all days from the day set.
+
+.Exampel
+[source,c]
+----
+include::{xmpldir}/remove_days_from_day_set.c[]
+----
+
+==== remove_from_day_set_c
+[source,c]
+----
+void remove_from_day_set_c( CDaySet* set, cDate date );
+----
+
+Removes a single day from the day set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/remove_from_day_set.c[]
+----
+
+//************************************************************************** io
+=== io
+
+==== write_day_set_c
+[source,c]
+----
+#define write_day_set_c_( Rec, Set )                                           \
+   write_day_set_c( (Rec), (Set), "" )
+bool write_day_set_c( cRecorder rec[static 1],
+                      CDaySet const* set,
+                      char const fmt[static 1] );
+----
+
+Writes the day set in a text format into the recorder.
+The format can be "dbg", "zip" or a customisable list matrix.
+
+The fix format "dbg" writes the struct layout of CDaySet into the recorder.
+
+The fix format "zip" writes the first day in the day set and all days as a
+compressed bit string with the following rules:
+.zip
+[cols="2,2"]
+|===
+|single 1 value between 0 values |write a \'+'
+|single 0 value between 1 values |write a \'_'
+|more then one 1 value beween 0 values |write the number of 1 followed by a \'i'
+|more then one 0 value beween 1 values |write the number of 0 followed by a \'z' 
+|===
+
+The customisable list matrix is the default format and it is possible the set
+the two charatcters that represend a not existing and existing days of a month.
+The default charatcter set is '.1'.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_day_set.c[]
+----

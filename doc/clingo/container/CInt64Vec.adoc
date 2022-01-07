@@ -1,0 +1,87 @@
+= CByteVec
+:xmpldir: ../../../test/clingo/container/CInt64Vec
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that defines the CInt64Vec type and the associated functions.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/CInt64Vec-overview.c[]
+----
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='CInt64Vec']
+==== CInt64Vec
+[source,c]
+----
+struct CInt64Vec;
+typedef struct CInt64Vec CInt64Vec;
+----
+
+Via the macros link:vec.html#VAL_VEC_DEF_C_[VAL_VEC_DEF_C_] and
+link:vec.html#VAL_VEC_IMPL_C_[VAL_VEC_IMPL_C_] declared and implemented struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c]
+----
+cMeta const C_Int64VecMeta;
+/* create */
+CInt64Vec* make_int64_vec_c( int64_t cap );
+CInt64Vec* new_int64_vec_c();
+/* manage */
+int64_t const* data_of_int64_vec_c( CInt64Vec const* vec );
+cVecInfo const* info_of_int64_vec_c( CInt64Vec const* vec );
+bool resize_int64_vec_c( CInt64Vec* vec, int64_t cap );
+int64_t* var_data_of_int64_vec_c( CInt64Vec* vec );
+/* api */
+bool add_to_int64_vec_c( CInt64Vec* vec, int64_t val );
+bool add_array_to_int64_vec_c( CInt64Vec* vec, int64_t n, int64_t const* arr );
+int64_t const* get_from_int64_vec_c( CInt64Vec const* vec, int64_t pos );
+int64_t* get_var_from_int64_vec_c( CInt64Vec* vec, int64_t pos );
+bool insert_into_int64_vec_c( CInt64Vec* vec, int64_t pos, int64_t val );
+bool remove_from_int64_vec_c( CInt64Vec* vec, int64_t pos );
+void set_on_int64_vec_c( CInt64Vec* vec, int64_t pos, int64_t val );
+----
+
+//********************************************************************* overall
+=== overall
+
+==== add_many_to_byte_vec_
+[source,c]
+----
+#define add_many_to_int64_vec_c_( Vec, ... )                                   \
+   add_many_to_int64_vec_c(                                                    \
+      (Vec), (cInt64Slice)slice_c_( int64_t, __VA_ARGS__ )                     \
+   )
+bool add_many_to_int64_vec_c( CInt64Vec* vec, cInt64Slice many );
+----
+
+Adds all int64_t values from the slice to the int64_t vector.
+
+==== slice_of_int64_vec_c
+[source,c]
+----
+cInt64Slice slice_of_int64_vec_c( CInt64Vec const* vec );
+----
+
+Via the macro link:vec.html#SLICE_OF_VEC_C_[SLICE_OF_VEC_C_] implemented function.
+
+==== var_slice_of_int64_vec_c
+[source,c]
+----
+cVarInt64Slice var_slice_of_int64_vec_c( CInt64Vec* vec );
+----
+
+Via the macro link:vec.html#VAR_SLICE_OF_VEC_C_[VAR_SLICE_OF_VEC_C_] implemented function.

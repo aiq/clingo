@@ -1,0 +1,197 @@
+= c_Weekday
+:xmpldir: ../../../test/clingo/time/c_Weekday
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//***************************************************************** definitions
+=== definitions
+
+[id='cWEEKDAY_']
+==== cWEEKDAY_
+[source,c]
+----
+#define cWEEKDAY_
+----
+
+Defines the c_Weekday values.
+
+[id='c_Weekday']
+==== c_Weekday
+[source,c]
+----
+enum c_Month {
+   c_Mon = 1,
+   c_Tue = 2,
+   c_Wed = 3,
+   c_Thu = 4,
+   c_Fri = 5,
+   c_Sat = 6,
+   c_Sun = 7,
+};
+type enum c_Weekday c_Weekday;
+----
+
+Enum type to represent a weekday.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== int64_to_weekday_c
+[source,c]
+----
+bool int64_to_weekday_c( int64_t src, c_Weekday dst[static 1] );
+----
+
+Returns true if the int64_t value can be represented in a c_Weekday variable,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/int64_to_weekday.c[]
+----
+
+==== stringify_weekday_c
+[source,c]
+----
+char const* stringify_weekday_c( c_Weekday wd );
+----
+
+Returns the string representation of a value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/stringify_weekday.c[]
+----
+
+==== tm_wday_to_weekday_c
+[source,c]
+----
+bool tm_wday_to_weekday_c( int src, c_Weekday dst[static 1] );
+----
+
+Returns true if the tm_wday can be converted to a weekday, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/tm_wday_to_weekday.c[]
+----
+
+==== weekday_c
+[source,c]
+----
+c_Weekday weekday_c( int32_t year, c_Month month, int8_t day );
+----
+
+Determines the weekday of a date.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/weekday.c[]
+----
+
+//************************************************************************* itr
+=== itr
+
+==== next_weekday_c
+[source,c]
+----
+c_Weekday next_weekday_c( c_Weekday wd );
+----
+
+Returns the weekday after wd.
+
+==== prev_weekday_c
+[source,c]
+----
+c_Weekday prev_weekday_c( c_Weekday wd );
+----
+
+Returns the weekday before wd.
+
+//************************************************************************ text
+=== text
+
+==== get_weekday_abbrev_c
+[source,c]
+----
+cVarChars get_weekday_abbrev_c( c_Weekday wd, cVarChars chars );
+----
+
+Writes the local abbreviation for the weekday into the chars buffer.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/get_weekday_abbrev.c[]
+----
+
+==== get_weekday_name_c
+[source,c]
+----
+cVarChars get_weekday_name_c( c_Weekday wd, cVarChars chars );
+----
+
+Writes the local name for the weekday into the chars buffer.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/get_weekday_name.c[]
+----
+
+//************************************************************************** io
+=== io
+
+The read and write function are using the following format:
+
+.format
+[cols="1,2,1"]
+|===
+|E | The weekday as a number |1 to 7
+|EEE |The abbreviated localized weekday name |Mon to Sun
+|EEEE |The localized weekday name |Monday to Sunday
+|===
+
+==== read_weekday_c
+[source,c]
+----
+#define read_weekday_c_( Sca, Wd )                                             \
+   read_weekday_c( (Sca), (Wd), "" )
+bool read_weekday_c( cScanner sca[static 1],
+                     c_Weekday wd[static 1],
+                     char const* fmt );
+----
+
+Reads a c_Weekday value from a text with a scanner.
+The function will use "EEE" as default format.
+
+==== write_weekday_c
+[source,c]
+----
+#define write_weekday_c_( Rec, Wd )                                            \
+   write_weekday_c( (Rec), (Wd), "" )
+bool write_weekday_c( cRecorder rec[static 1],
+                      c_Weekday wd,
+                      char const* fmt );
+----
+
+Writes a c_Weekday value into the recorder.
+The function will use "EEE" as default format.
+

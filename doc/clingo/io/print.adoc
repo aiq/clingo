@@ -1,0 +1,77 @@
+= print
+:xmpldir: ../../../test/clingo/io/print
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that contains macro function that allow to use
+
+* jot_c_
+* jotln_c_
+* write_c_
+* writeln_c_
+
+for print functions.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/print-overview.c[]
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+[id='printfn_c_']
+==== printfn_c_
+[source,c]
+----
+#define printfn_c_( Prefix, RecSize, Func, ... )
+----
+
+Macro function that creates a recorder with Prefix as name and the RecSize.
+The recorder will be uesed with the Func function and the arguments.
+
+[id='pjot_c_']
+==== pjot_c_
+[source,c]
+----
+#define pjot_c_( Prefix, RecSize, ... )
+----
+
+Macro function that creates a recorder with Prefix as name and the RecSize.
+The recorder will be uesed with the jot_c_ function and the arguments.
+
+[id='pjotln_c_']
+==== pjotln_c_
+[source,c]
+----
+#define pjotln_c_( Prefix, RecSize, ... )
+----
+
+Macro function that creates a recorder with Prefix as name and the RecSize.
+The recorder will be uesed with the jotln_c_ function and the arguments.
+
+[id='print_c_']
+==== print_c_
+[source,c]
+----
+#define print_c_( Prefix, RecSize, ... )
+----
+
+Macro function that creates a recorder with Prefix as name and the RecSize.
+The recorder will be uesed with the write_c_ function and the arguments.
+
+[id='println_c_']
+==== println_c_
+[source,c]
+----
+#define println_c_( Prefix, RecSize, ... )
+----
+
+Macro function that creates a recorder with Prefix as name and the RecSize.
+The recorder will be uesed with the writeln_c_ function and the arguments.

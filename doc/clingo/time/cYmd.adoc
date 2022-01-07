@@ -1,0 +1,199 @@
+= cYmd
+:xmpldir: ../../../test/clingo/time/cYmd
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cYmd']
+==== cYmd
+[source,c]
+----
+struct cYmd
+{
+   int32_t year;
+   c_Month month;
+   int8_t day;
+};
+typedef struct cYmd cYmd;
+----
+
+A cYmd struct represents a date via a year, month and day value.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cYmdSlice']
+==== cYmdSlice
+[source,c]
+----
+struct cYmdSlice
+{
+   int64_t s;
+   cYmd const* v;
+};
+typedef struct cYmd cYmd;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cYmdSlice ymd_slice_c( int64_t s, cYmd const* v );
+cYmdSlice make_ymd_slice_c( cYmd const* beg, cYmd const* end );
+cYmdSlice empty_ymd_slice_c( void );
+/* sub */
+cYmdSlice left_ymd_slice_c( cYmdSlice slice, int64_t maxLen );
+cYmdSlice mid_ymd_slice_c( cYmdSlice slice, int64_t index );
+cYmdSlice right_ymd_slice_c( cYmdSlice slice, int64_t maxLen );
+cYmdSlice sub_ymd_slice_c( cYmdSlice slice, int64_t begIdx, int64_t endIdx );
+----
+
+[id='cVarYmdSlice']
+==== cVarYmdSlice
+[source,c]
+----
+struct cVarYmdSlice
+{
+   int64_t s;
+   cYmd* v;
+};
+typedef struct cVarYmdSlice cVarYmdSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarYmdSlice var_ymd_slice_c( int64_t s, cYmd* v );
+cVarYmdSlice make_var_ymd_slice_c( cYmd* beg, cYmd* end );
+cVarYmdSlice empty_var_ymd_slice_c( void );
+/* sub */
+cVarYmdSlice left_var_ymd_slice_c( cVarYmdSlice slice, int64_t maxLen );
+cVarYmdSlice mid_var_ymd_slice_c( cVarYmdSlice slice, int64_t index );
+cVarYmdSlice right_var_ymd_slcie_c( cVarYmdSlice slice, int64_t maxLen );
+cVarYmdSlice sub_var_ymd_slice_c( cVarYmdSlice slice,
+                                  int64_t begIdx,
+                                  int64_t endIdx );
+/* var slice */
+cYmdSlice as_ymd_slice_c( cVarYmdSlice slice );
+cVarYmdSlice cast_ymd_slice_c( cVarYmdSlice slice, cYmdSlice sub );
+int64_t set_ymd_slice_c( cVarYmdSlice dst, cYmdSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_ymd_c
+[source,c]
+----
+int cmp_ymd_c( cYmd a, cYmd b );
+----
+
+Compares two cYmd values and returns the three possible results:
+
+<0:: if a is earlier as b
+0:: if both dates are equal
+>0:: if a is later as b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_ymd.c[]
+----
+
+==== ymd_c
+[source,c]
+----
+cYmd ymd_c( int64_t year, int64_t month, int64_t day );
+----
+
+Initialise a ymd with year, month and day.
+If the specified date is invalid, the date is not set and ymd_is_valid_c returns false.
+
+==== ymd_is_valid_c
+[source,c]
+----
+bool ymd_is_valid_c( cYmd ymd );
+----
+
+Returns true if the specified cYmd value is valid, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/ymd_is_valid.c[]
+----
+
+//************************************************************************** io
+=== io
+
+The functions read_ymd_c and write_ymd_c are using the following format:
+
+.format
+[cols="1,2,1"]
+|===
+|D |The day as a number without a leading character |1 to 31
+|_D |The day as a number with a leading space |1 to 31
+|DD |The day as a number with a leading zero |01 to 31
+|M |The month as a number without a leading character |1 to 12
+|_M |The month as a number with a leading space |1 to 12
+|MM |The month as a number with a leading zero |01 to 12
+|MMM |The abbreviated localized month name |Jan' to Dec
+|MMMM |The localized month name |January to December
+|YY |The year as a two digit number |00 to 99
+|YYYY |The year as a four digit number |like 1878
+|===
+
+==== read_ymd_c
+[source,c]
+----
+#define read_ymd_c_( Sca, Ymd )                                                \
+   read_ymd_c( (Sca), (Ymd), "" )
+bool read_ymd_c( cScanner sca[static 1],
+                 cYmd ymd[static 1],
+                 char const fmt[static 1] );
+----
+
+Reads a cYmd value from a text with a scanner.
+The function will use C_IsoDate( "YYYY-MM-DD" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_ymd.c[]
+----
+
+==== write_ymd_c
+[source,c]
+----
+#define write_ymd_c_( Rec, Ymd )                                               \
+   write_ymd_c( (Rec), (Ymd), "" )
+bool write_ymd_c( cRecorder rec[static 1],
+                  cYmd ymd,
+                  char const fmt[static 1] );
+----
+
+Writes a cYmd value into the recorder.
+The function will use C_IsoDate( "YYYY-MM-DD" ) as default format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_ymd.c[]
+----

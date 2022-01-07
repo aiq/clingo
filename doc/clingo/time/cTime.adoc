@@ -1,0 +1,394 @@
+= cTime
+:xmpldir: ../../../test/clingo/time/cTime
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+==== cTime
+[source,c]
+----
+struct cTime
+{
+   int64_t _s;
+   int32_t _n;
+   int32_t _z;
+};
+
+typedef struct cTime cTime;
+----
+
+The cTime struct has just the attriibutes _s, _n and _z that represent the time.
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cTimeSlice']
+==== cTimeSlice
+[source,c]
+----
+struct cTimeSlice
+{
+   int64_t s;
+   cTime const* v;
+};
+typedef struct cTimeSlice cTimeSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cTimeSlice time_slice_c( int64_t s, cTime const* v );
+cTimeSlice make_time_slice_c( cTime const* beg, cTime const* end );
+cTimeSlice empty_time_slice_c( void );
+/* sub */
+cTimeSlice left_time_slice_c( cTimeSlice slice, int64_t maxLen );
+cTimeSlice mid_time_slice_c( cTimeSlice slice, int64_t index );
+cTimeSlice right_time_slice_c( cTimeSlice slice, int64_t maxLen );
+cTimeSlice sub_time_slice_c( cTimeSlice slice,
+                             int64_t begIdx,
+                             int64_t endIdx);
+----
+
+[id='cVarTimeSlice']
+==== cVarTimeSlice
+[source,c]
+----
+struct cVarTimeSlice
+{
+   int64_t s;
+   cTime* v;
+};
+typedef struct cVarTimeSlice cVarTimeSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarTimeSlice var_time_slice_c( int64_t s, cTime* v );
+cVarTimeSlice make_var_time_slice_c( cTime* beg, cTime* end );
+cVarTimeSlice empty_var_time_slice_c( void );
+/* sub */
+cVarTimeSlice left_var_time_slice_c( cVarTimeSlice slice, int64_t maxLen );
+cVarTimeSlice mid_var_time_slice_c( cVarTimeSlice slice, int64_t index );
+cVarTimeSlice right_var_time_slice_c( cVarTimeSlice slice, int64_t maxLen );
+cVarTimeSlice sub_var_time_slice_c( cVarTimeSlice slice,
+                                    int64_t begIdx,
+                                    int64_t endIdx);
+/* var slice */
+cVarTimeSlice as_var_time_slice_c( cVarTimeSlice slice );
+cVarTimeSlice cast_var_time_slice_c( cVarTimeSlice slice, cTimeSlice sub );
+int64_t set_time_slice_c( cVarTimeSlice dst, cTimeSlice src );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+==== local_time_c
+[source,c]
+----
+cTime local_time_c( void );
+----
+
+Returns the current local time, as reported by the system clock.
+
+==== make_time_c
+[source,c]
+----
+cTime make_time_c( int64_t year, int64_t month, int64_t day,
+                   int64_t hour, int64_t min, int64_t sec, int64_t nsec,
+                   cTzOffset tz );
+----
+
+Initialse all time components.
+
+==== null_time_c
+[source,c]
+----
+cTime null_time_c( void );
+----
+
+Returns a null time, null times are invalid.
+
+==== time_c
+[source,c]
+----
+cTime time_c( cDate d, cDaytime dt, cTzOffset tz );
+----
+
+Initialise a time with a date, daytime and time zone.
+
+==== utc_time_c
+[source,c]
+----
+cTime utc_time_c( void );
+----
+
+Returns the current UTC time, as reported by the system clock.
+
+//******************************************************************* timestamp
+=== timestamp
+
+==== as_timestamp_c
+[source,c]
+----
+cTimestamp as_timestamp_c( cTime time );
+----
+
+Returns the cTime value as timestamp.
+
+==== from_timestamp_c
+[source,c]
+----
+cTime from_timestamp_c( cTimestamp ts );
+----
+
+Creates a cTime value from a timestamp.
+
+//************************************************************************* get
+=== get
+
+==== get_date_c
+[source,c]
+----
+cDate get_date_c( cTime time );
+----
+
+Returns the date of a time value.
+
+==== get_daytime_c
+[source,c]
+----
+cDaytime get_daytime_c( cTime time );
+----
+
+Returns the daytime of a time value.
+
+==== get_hmsn_c
+[source,c]
+----
+cHmsn get_hmsn_c( cTime time );
+----
+
+Returns the daytime of a time value as cHmsn value.
+
+==== get_ordinal_date_c
+[source,c]
+----
+cOrdinalDate get_ordinal_date_c( cTime time );
+----
+
+Returns the date of a time value as ordinal date.
+
+==== get_tz_offset_c
+[source,c]
+----
+cTzOffset get_tz_offset_c( cTime time );
+----
+
+Returns the time zone of a time value.
+
+==== get_week_date_c
+[source,c]
+----
+cWeekDate get_week_date_c( cTime time );
+----
+
+Returns the date of a time value as week date.
+
+==== get_ymd_c
+[source,c]
+----
+cYmd get_ymd_c( cTime time );
+----
+
+Returns the date of a time value as cYmd value.
+
+//************************************************************************* add
+=== add
+
+==== add_to_time_c
+[source,c]
+----
+cTime add_to_time_c( cTime time, cDuration dur );
+----
+
+Adds a duration to a time value.
+
+==== between_times_c
+[source,c]
+----
+cDuration between_times_c( cTime a, cTime b );
+----
+
+Returns the duration between two time values.
+
+==== shift_time_c
+[source,c]
+----
+cTime shift_time_c( cTime time, cTzOffset tz );
+----
+
+Shifts the time to another time zone.
+
+//************************************************************************* cmp
+=== cmp
+
+==== cmp_time_c
+[source,c]
+----
+int cmp_time_c( cTime a, cTime b );
+----
+
+Compares two time values and returns the three possible results:
+
+<0:: if a is earlier as b
+0:: if both times are equal
+>0:: if a is later as b
+
+==== early_time_c
+[source,c]
+----
+cTime early_time_c( cTime a, cTime b );
+----
+
+Returns the earlier of both times.
+An invalid time is allways earlier as a valid time.
+
+==== eq_time_c
+[source,c]
+----
+bool eq_time_c( cTime a, cTime b );
+----
+
+Returns true if a is equal to b, otherwise false.
+
+==== late_time_c
+[source,c]
+----
+cTime late_time_c( cTime a, cTime b );
+----
+
+Return the later of both times.
+A valid time is allways later as a invalid time.
+
+==== time_is_valid_c
+[source,c]
+----
+bool time_is_valid_c( cTime time );
+----
+
+Returns true if the time value is valid, otherwise false.
+
+//************************************************************************** io
+=== io
+
+The functions read_time_c and write_time_c are using the following format:
+
+.format
+[cols="1,2,1"]
+|===
+|C |The day of year as a number without a leading character |1 to 365
+|__C |The day of year as a number with leading spaces |1 to 365
+|CCC |The day of year as a number with leading zeros |001 to 365
+|D |The day as a number without a leading character |1 to 31
+|_D |The day as a number with a leading space |1 to 31
+|DD |The day as a number with a leading zero |01 to 31
+|E | The weekday as a number |1 to 7
+|EEE |The abbreviated localized weekday name |Mon to Sun
+|EEEE |The localized weekday name |Monday to Sunday
+|M |The month as a number without a leading character |1 to 12
+|_M |The month as a number with a leading space |1 to 12
+|MM |The month as a number with a leading zero |01 to 12
+|MMM |The abbreviated localized month name |Jan' to Dec
+|WW | The ISO week without a leading zero |W1 to W53
+|WWW | The ISO week with a leading zero |W01 to W53
+|XX |The ISO week date year as a two digit number |00 to 99
+|XXXX |The ISO week date year as a four digit number |like 1878
+|YY |The year as a two digit number |00 to 99
+|YYYY |The year as a four digit number |like 1878
+|h |The hour without a leading character |0 to 23
+|_h |The hour with a leading space |0 to 23
+|hh |The hour with a leading zero |00 to 23
+|k |The kitchen hour without a leading character |
+|_k |The kitchen hour with a leading space |
+|kk |The kitchen hour with a leading zero |
+|m |The minute without a leading character |0 to 59
+|_m |The minute with a leading space |0 to 59
+|mm |The minute with a leading zero |00 to 59
+|s |The whole second, without a leading character |0 to 59
+|_s |The whole second, with a leading space |0 to 59
+|ss |The whole second, with a leading zero |00 to 59
+|i |The fractional part of the second in millisecond whithout trainling zeros |000 to 999
+|iii |The fractional part of the second in millisecond with trailing zeros |000 to 999
+|u |The fractional part of the second in microsecond without trailing zeros |000000 to 999999
+|uuu |The fractional part of the second in microsecond with trailing zeros |000000 to 999999
+|n |The fractional part of the second in nanosecond without trailing zeros |000000000 to 999999999
+|nnn |The fractional part of the second in nanosecond with trailing zeros |000000000 to 999999999
+|ap |Read or write AM or PM dependent on the hour value |
+|AP |Read or write am or pm dependent on the hour value |
+|o | The offset in the +hh:mm format, where the mm part is optional | +00, +10 or -04:30
+|oo | The offset in the +hh:mm format | +00:00, +10 or -04:30
+|oooo | The offset in the +hhmm format | +0000, +1000 or -0430
+|z | Like "o", but the UTC offset will be replaced with a Z | Z, +10 or -04:30
+|zz | Like "oo", but the UTC offset will be replaced with a Z | Z, +10:00 or -04:30
+|zzzz | Like "oooo", but the UTC offset will be replaced with a Z | Z, +1000 or -0430
+|===
+
+==== read_time_c
+[source,c]
+----
+#define read_time_c_( Sca, Date )                                              \
+   read_time_c( (Sca), (Date), "" )
+bool read_time_c( cScanner sca[static 1],
+                  cTime time[static 1],
+                  char const fmt[static 1] );
+----
+
+Reads a cTime value from a text with a scanner.
+The function will use C_TimeFormat( "YYYY.MM.DD hh:mm:ss oooo" ) as default
+format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/read_time.c[]
+----
+
+==== write_time_c
+[source,c]
+----
+#define write_time_c_( Rec, Date )                                             \
+   write_time_c( (Rec), (Date), "" )
+bool write_time_c( cRecorder rec[static 1],
+                   cTime time,
+                   char const fmt[static 1] );
+----
+
+Writes a cTime value into the recorder.
+The function will use C_TimeFormat( "YYYY.MM.DD hh:mm:ss oooo" ) as default
+format.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_time.c[]
+----
+

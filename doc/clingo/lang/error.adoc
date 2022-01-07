@@ -1,0 +1,128 @@
+= error
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+This module allows to handle errors in a fashion that is similar to the way it
+works with the errno macro.
+But instead of a single value that can hold a int encourages clingo to use a
+thread local variable of the type cError to describe errors that occur.
+A cError variable should be used for specific domains and not globally for all
+kind of errors.
+
+The cError allows to store a code, a message(msg) and a reference to another
+cError variable(details).
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cNoError_']
+==== cNoError_
+[struct,c]
+----
+#define cNoError_ 0
+----
+
+Macro that defines the code value that represents no error.
+
+[id='cError']
+==== cError
+[source,c]
+----
+struct cError
+{
+   uint32_t code;
+   char const* msg;
+   struct cError* details;
+};
+typedef struct cError cError;
+----
+
+Struct to store error information.
+The code allows to check and handle an error in the code.
+The msg attribute allows to print or log the error.
+Finally makes details possible to chain errors together and to pass detail
+information forward without explicit handling.
+
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+[id='errno_error_c_']
+==== errno_error_c_
+[source,c]
+----
+#define errno_error_c_()
+----
+
+Macro function that initialises a cError variable with the current errno value.
+The msg attribute is set with the strerror function.
+
+[id='error_c_']
+==== error_c_
+[source,c]
+----
+#define error_c_( Code, Msg )
+----
+
+Macro function to initialise a cError variable with the arguments.
+
+[id='no_error_c_']
+==== no_error_c_
+[source,c]
+----
+#define no_error_c_()
+----
+
+Macro function to initialise a cError varibale with a value that represents no
+error.
+
+//************************************************************************ work
+=== work
+
+[id='error_depth_c']
+==== error_depth_c
+[source,c]
+----
+uint32_t error_depth_c( cError const err[static 1] );
+----
+
+Counts how much cError variables are chained together.
+
+[id='fprint_error_c']
+==== fprint_error_c
+[source,c]
+----
+int fprint_error_c( FILE* output, cError const err[static 1] );
+----
+
+Writes the msg value of err to the output stream.
+If the error has details concatenates the function the msg values with ": ".
+
+[id='print_error_c']
+==== print_error_c
+[source,c]
+----
+int print_error_c( cError const err[static 1] );
+----
+
+Prints the msg value of err to the stdout stream.
+
+[id='reset_error_c']
+==== reset_error_c
+[source,c]
+----
+void reset_error_c( cError err[static 1] );
+----
+
+Resets the err value itself and all concatented errors.
+

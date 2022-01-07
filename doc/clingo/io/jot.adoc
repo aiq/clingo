@@ -1,0 +1,111 @@
+= jot
+:xmpldir: ../../../test/clingo/io/jot
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that has the usefull macro functions jot_c_ and jotln_c_.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/jot.c[]
+----
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Type and Definitions
+
+[id='cJotDefaultMapping_']
+==== cJotDefaultMapping_
+[source,c]
+----
+#define c_JotDefaultMapping_
+----
+
+Defines the default types that the corresponding jot function that should be
+used.
+
+The supported types are:
+* cByte
+* char
+* bool
+* cRange
+* cRune
+* double
+* float
+* int8_t
+* int16_t
+* int32_t
+* int64_t
+* uint16_t
+* uint32_t
+* uint64_t
+* cBytes
+* cChars
+* char*
+* char const*
+* cRecorder*
+* cRecorder const*
+* cScanner*
+* cScanner const*
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+[id='jot_type_c_']
+==== jot_type_c_
+[source,c]
+----
+#define jot_type_c_( Rec, Val )
+----
+
+Util macro function that writes Val to the recorder Rec.
+The type of Val must exist in cJotDefaultMapping_.
+
+[id='jot_call_c_']
+==== jot_call_c_
+[source,c]
+----
+#define jot_call_c_( Func, Rec, ... )
+----
+
+Util macro function that calls Func with Rec and each value in __VA_ARGS__.
+The function Func takes a recorder and a single value, like jot_type_c_.
+
+[id='jot_c_']
+==== jot_c_
+[source,c]
+----
+#define jot_c_( Rec, ... )
+----
+
+jot writes the __VA_ARGS__ values using the in the mapping defined function into
+the recorder Rec.
+The function returns true if it is possible to write all values.
+
+[id='jotln_c_']
+==== jotln_c_
+[source,c]
+----
+#define jotln_c_( Rec, ... )
+----
+
+Works like jot_c_ with the addition that a '\n' will be added at the end.
+
+[id='jotx_c_']
+==== jotx_c_
+[source,c]
+----
+#define jot1_c_( Func, Rec, Val )
+#define jot2_c_( Func, Rec, Val, ... )
+...
+#define jot255_c_( Func, Rec, Val, ... )
+----
+
+Via script generated macro functions that jot_call_c_ uses.

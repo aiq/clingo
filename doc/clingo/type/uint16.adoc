@@ -1,0 +1,383 @@
+= uint16
+:xmpldir: ../../../test/clingo/type/uint16
+
+include::_attr.adoc[]
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module with functions and types to work with uint16_t values.
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cUint16Slice']
+==== cUint16Slice
+[source,c]
+----
+struct cUint16Slice
+{
+   int64_t s;
+   uint16_t const* v;
+};
+typedef struct cUint16Slice cUint16Slice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cUint16Slice uint16_slice_c( int64_t s, uint16_t const* v );
+cUint16Slice make_uint16_slice_c( uint16_t const* beg, uint16_t const* end );
+cUint16Slice empty_uint16_slice_c( void );
+/* sub */
+cUint16Slice left_uint16_slice_c( cUint16Slice slice, int64_t maxLen );
+cUint16Slice mid_uint16_slice_c( cUint16Slice slice, int64_t index );
+cUint16Slice right_uint16_slice_c( cUint16Slice slice, int64_t maxLen );
+cUint16Slice sub_uint16_slice_c( cUint16Slice slice,
+                                 int64_t begIdx,
+                                 int64_t endIdx );
+----
+
+[id='cVarUint16Slice']
+==== cVarUint16Slice
+[source,c]
+----
+struct cVarUint16Slice
+{
+   int64_t s;
+   uint16_t* v;
+};
+typedef struct cVarUint16Slice cVarUint16Slice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarUint16Slice var_uint16_slice_c( int64_t s, uint16_t const* v );
+cVarUint16Slice make_var_uint16_slice_c( uint16_t* beg, uint16_t* end );
+cVarUint16Slice empty_var_uint16_slice_c( void );
+/* sub */
+cVarUint16Slice left_var_uint16_slice_c( cVarUint16Slice slice, int64_t maxLen );
+cVarUint16Slice mid_var_uint16_slice_c( cVarUint16Slice slice, int64_t index );
+cVarUint16Slice right_var_uint16_slice_c( cVarUint16Slice slice, int64_t maxLen );
+cVarUint16Slice sub_var_uint16_slice_c( cVarUint16Slice slice,
+                                        int64_t begIdx,
+                                        int64_t endIdx );
+/* var slice */
+cUint16Slice as_uint16_slice_c( cVarUint16Slice slice );
+cVarUint16Slice cast_uint16_slice_c( cVarUint16Slice slice, cUint16Slice sub );
+int64_t set_uint16_slice_c( cVarUint16Slice dst, cUint16Slice src );
+----
+
+[id='cUint16Chunk']
+==== cUint16Chunk
+[source,c]
+----
+struct cUint16Chunk
+{
+   int64_t s;
+   uint16_t const* v;
+   int64_t favSize;
+   cUint16Slice slice;
+};
+typedef struct cUint16Chunk cUint16Chunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_uint16_chunk_c( cUint16Chunk chunk[static 1],
+                               int64_t s,
+                               cUint16Slice slice );
+void init_front_uint16_chunk_c( cUint16Chunk chunk[static 1],
+                                int64_t s,
+                                cUint16Slice slice );
+----
+
+[id='cVarUint16Chunk']
+==== cVarUint16Chunk
+[source,c]
+----
+struct cVarUint16Chunk
+{
+   int64_t s;
+   uint16_t* v;
+   int64_t favSize;
+   cUint16Slice slice;
+};
+typedef struct cVarUint16Chunk cVarUint16Chunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_uint16_chunk_c( cVarUint16Chunk chunk[static 1],
+                                   int64_t s,
+                                   cVarUint16Slice slice );
+void init_front_var_uint16_chunk_c( cVarUint16Chunk chunk[static 1],
+                                    int64_t s,
+                                    cVarUint16Slice slice );
+----
+
+[id='cUint16Window']
+==== cUint16Window
+[source,c]
+----
+struct cUint16Window
+{
+   int64_t s;
+   uint16_t const* v;
+   int64_t favSize;
+   cUint16Slice slice;
+};
+typedef struct cUint16Window cUint16Window;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_uint16_window_c( cUint16Window window[static 1],
+                                int64_t s,
+                                cUint16Slice slice );
+void init_front_uint16_window_c( cUint16Window window[static 1],
+                                 int64_t s,
+                                 cUint16Slice slice );
+----
+
+[id='cVarUint16Window']
+==== cVarUint16Window
+[source,c]
+----
+struct cVarUint16Window
+{
+   int64_t s;
+   uint16_t* v;
+   int64_t favSize;
+   cVarUint16Slice slice;
+};
+typedef struct cVarUint16Window cVarUint16Window;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_uint16_window_c( cVarUint16Window window[static 1],
+                                    int64_t s,
+                                    cVarUint16Slice slice );
+void init_front_var_uint16_window_c( cVarUint16Window window[static 1],
+                                     int64_t s,
+                                     cVarUint16Slice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//********************************************************************* overall
+=== overall
+
+==== cmp_uint16_c
+[source,c]
+----
+int cmp_uint16_c( uint16_t a, uint16_t b );
+----
+
+Compares two uint16_t values and returns the three possible results:
+
+<0:: means that a is less compared to b
+0:: means that a and b are equal
+>0:: means that a is greater compared to b
+
+.Example
+[source,c]
+----
+include::{xmpldir}/cmp_uint16.c[]
+----
+
+[id='uint16_c_']
+==== uint16_c_
+[source,c]
+----
+#define uint16_c_( Value )
+----
+
+Macro function that casts the Value as uint16_t.
+
+//************************************************************************ conv
+=== conv
+
+==== int64_to_uint16_c
+[source,c]
+----
+bool int64_to_uint16_c( int64_t src, uint16_t dst[static 1] );
+----
+
+{Conv}
+Returns true if the int64_t value can be represented in a uint16_t variable,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/int64_to_uint16.c[]
+----
+
+==== uint64_to_uint16_c
+[source,c]
+----
+bool uint64_to_uint16_c( uint64_t src, uint16_t dst[static 1] );
+----
+
+{Conv}
+Returns true if the uint16_t value can be represented in a uint16_t variable,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/uint64_to_uint16.c[]
+----
+
+//************************************************************************ swap
+=== swap
+
+==== swap_uint16_c
+[source,c]
+----
+uint16_t swap_uint16_c( uint16_t val );
+----
+
+{Swap}
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_uint16.c[]
+----
+
+==== swap_uint16_from_c
+[source,c]
+----
+uint16_t swap_uint16_from_c( uint16_t val, c_ByteOrder order );
+----
+
+{SwapFrom}
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_uint16_from.c[]
+----
+
+==== swap_uint16_to_c
+[source,c]
+----
+uint16_t swap_uint16_to_c( uint16_t val, c_ByteOrder order );
+----
+
+{SwapTo}
+
+.Example
+[source,c]
+----
+include::{xmpldir}/swap_uint16_to.c[]
+----
+
+//************************************************************************ algo
+=== algo
+
+==== cmp_uint16_slice_c
+[source,c]
+----
+int cmp_uint16_slice_c( cUint16Slice a, cUint16Slice b );
+----
+
+{CmpSlice}
+
+==== count_eq_uint16_c
+[source,c]
+----
+int64_t count_eq_uint16_c( cUint16Slice slice, uint16_t val );
+----
+
+{CountEq}
+
+==== find_uint16_c
+[source,c]
+----
+uint16_t const* find_uint16_c( cUint16Slice slice, uint16_t val );
+----
+
+{FindVal}
+
+==== max_uint16_c
+[source,c]
+----
+uint16_t const* max_uint16_c( cUint16Slice slice );
+----
+
+{FindMax}
+
+==== min_uint16_c
+[source,c]
+----
+uint16_t const* min_uint16_c( cUint16Slice slice );
+----
+
+{FindMin}
+
+==== prod_uint16_c
+[source,c]
+----
+bool prod_uint16_c( cUint16Slice slice, uint64_t res[static 1] );
+----
+
+{Prod}
+
+==== qsort_uint16_slice_c
+[source,c]
+----
+void qsort_uint16_slice_c( cVarUint16Slice slice );
+----
+
+{Qsort}
+
+==== reverse_uint16_slice_c
+[source,c]
+----
+void reverse_uint16_slice_c( cVarUint16Slice slice );
+----
+
+{Reverse}
+
+==== rotate_uint16_slice_c
+[source,c]
+----
+void rotate_uint16_slice_c( cVarUint16Slice slice, int64_t distance );
+----
+
+{Rotate}
+
+==== sum_uint16_c
+[source,c]
+----
+bool sum_uint16_c( cUint16Slice slice, uint64_t res[static 1] );
+----
+
+{Sum}
