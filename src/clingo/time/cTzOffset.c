@@ -67,7 +67,9 @@ extern inline cTzOffset tz_offset_from_hmsn_c( cHmsn hmsn );
 
 int cmp_tz_offset_c( cTzOffset a, cTzOffset b )
 {
-   return 0;
+   return ( a._v < b._v ) ? -1
+                          : ( a._v == b._v ) ? 0
+                                             : 1;
 }
 
 extern inline bool eq_tz_offset_c( cTzOffset a, cTzOffset b );

@@ -236,7 +236,7 @@ static inline const char* dec_exp_part( double* d,
    }
    double expValue = 0.0;
    char c = dec_char_value_c( *itr );
-   while ( c != -1 )
+   while ( itr < end and c != -1 )
    {
       expValue = ( expValue * 10 ) + c;
 

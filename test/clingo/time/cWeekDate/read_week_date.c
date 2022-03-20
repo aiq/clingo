@@ -22,8 +22,8 @@ int main( void )
 
    cWeekDate wd = week_date_c( 2014, 7, c_Fri );
    testSlice tests = slice_c_( test,
-      t_( "2014-W07-5", "XXXX-WWW-E", wd ),
-      t_( "14W7 Fri", "XXWW EEE", wd )
+      t_( "2014-W07-5", "XXXX-WWW-E", wd, cNoError_ ),
+      t_( "14W7 Fri", "XXWW EEE", wd, cNoError_ )
    );
 
    for_each_c_( test const*, t, tests )

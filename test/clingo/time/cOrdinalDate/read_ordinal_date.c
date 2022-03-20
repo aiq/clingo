@@ -19,9 +19,9 @@ int main( void )
 
    //********************************************************************* tests
    testSlice tests = slice_c_( test,
-      t_( "2014-023", "YYYY-CCC", ordinal_date_c( 2014,  23 ) ),
-      t_( "14/23", "YY/C", ordinal_date_c( 2014, 23 ) ),
-      t_( "2014-DDD.1", "YYYY-DDD.C", ordinal_date_c( 2014, 1 ) )
+      t_( "2014-023", "YYYY-CCC", ordinal_date_c( 2014,  23 ), cNoError_ ),
+      t_( "14/23", "YY/C", ordinal_date_c( 2014, 23 ), cNoError_ ),
+      t_( "2014-DDD.1", "YYYY-DDD.C", ordinal_date_c( 2014, 1 ), cNoError_ )
    );
 
    for_each_c_( test const*, t, tests )

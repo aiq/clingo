@@ -2,7 +2,7 @@
 
 #include "clingo/type/int32.h"
 
-int main( int argc, const char** args )
+int main( void )
 {
    init_tap_c_();
 

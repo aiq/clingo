@@ -229,7 +229,7 @@ cTime late_time_c( cTime a, cTime b )
 
 bool time_is_valid_c( cTime time )
 {
-   return false;
+   return diff_c(cmp_time_c(time, null_time_c()));
 }
 
 /*******************************************************************************
