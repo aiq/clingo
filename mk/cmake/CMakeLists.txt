@@ -26,14 +26,13 @@ include( ${CMAKE_SOURCE_DIR}/FileLists.cmake )
 ################################################################################
 # build - make
 ################################################################################
-include_directories( ${INC_DIR} ${SRC_DIR} ${PRIV_INC_DIR} ${PRESET_DIR} )
-
 add_library( ${LIB_NAME} SHARED ${SRC_FILES} )
+target_include_directories( ${LIB_NAME} PUBLIC ${INC_DIR} PRIVATE ${SRC_DIR} )
 target_link_libraries( ${LIB_NAME} m )
 
-set( TEST_TARGET_LIBRARIES ${LIB_NAME} )
-
-add_testfiles( "${TEST_FILES}" "${TEST_TARGET_LIBRARIES}" )
+set( TEST_INC_DIRS ${INC_DIR} ${SRC_DIR} )
+set( TEST_LINK_LIBS ${LIB_NAME} )
+add_tests( "${TEST_FILES}" "${TEST_INC_DIRS}" "${TEST_LINK_LIBS}" )
 
 #add_docfiles( "${DOC_FILES}" )
 

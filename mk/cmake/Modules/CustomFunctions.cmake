@@ -1,11 +1,12 @@
 
-function( add_testfiles TESTFILES TARGET_LIBRARIES )
-   foreach( TESTFILE ${TESTFILES} )
-      get_filename_component( TEST ${TESTFILE} NAME_WE )
-      add_executable( ${TEST} ${TESTFILE} )
-      target_link_libraries( ${TEST} ${TARGET_LIBRARIES} m )
+function( add_tests TestFiles IncDirs LinkLibs )
+   foreach( TestFile ${TestFiles} )
+      get_filename_component( Test ${TestFile} NAME_WE )
+      add_executable( ${Test} ${TestFile} )
+      target_include_directories( ${Test} PUBLIC ${IncDirs} )
+      target_link_libraries( ${Test} ${LinkLibs} m )
 
-      add_test( NAME ${TEST} COMMAND ${TEST} )
+      add_test( NAME ${Test} COMMAND ${Test} )
    endforeach()
-endfunction( add_testfiles )
+endfunction( add_tests )
 
