@@ -7,12 +7,12 @@ enable_testing()
 set( LIB_NAME ${PROJECT_NAME} )
 
 # where to look first for modules, before ${CMAKE_ROOT}/Modules/ is checked
-set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/Modules" )
-set( ROOT "${CMAKE_SOURCE_DIR}/../.." )
-set( DOC_DIR "${ROOR}/doc" )
-set( INC_DIR "${ROOT}/inc" )
-set( SRC_DIR "${ROOT}/src" )
-set( TEST_DIR "${ROOT}/test")
+set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/Modules )
+set( ROOT ${CMAKE_SOURCE_DIR}/../.. )
+set( DOC_DIR ${ROOR}/doc )
+set( INC_DIR ${ROOT}/inc )
+set( SRC_DIR ${ROOT}/src )
+set( TEST_DIR ${ROOT}/test )
 
 # add definitions
 include( CustomFunctions )
