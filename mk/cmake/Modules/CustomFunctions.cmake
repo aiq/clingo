@@ -1,6 +1,6 @@
 
 function( add_tests TestFiles IncDirs LinkLibs )
-   foreach( TestFile ${TestFiles} )
+   foreach( TestFile IN LISTS TestFiles )
       get_filename_component( Test ${TestFile} NAME_WE )
       add_executable( ${Test} ${TestFile} )
       target_include_directories( ${Test} PUBLIC ${IncDirs} )
