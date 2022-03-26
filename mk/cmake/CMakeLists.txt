@@ -1,7 +1,7 @@
-project( clingo )
+cmake_minimum_required( VERSION 3.2 )
 
-# Required cmake version
-cmake_minimum_required( VERSION 3.0 )
+project( clingo VERSION 0.1.0 LANGUAGES C )
+
 enable_testing()
 
 set( LIB_NAME ${PROJECT_NAME} )
@@ -28,10 +28,10 @@ include( ${CMAKE_SOURCE_DIR}/FileLists.cmake )
 ################################################################################
 add_library( ${LIB_NAME} SHARED ${SRC_FILES} )
 target_include_directories( ${LIB_NAME} PUBLIC ${INC_DIR} PRIVATE ${SRC_DIR} )
-target_link_libraries( ${LIB_NAME} m )
+target_link_libraries( ${LIB_NAME} PUBLIC m )
 
 set( TEST_INC_DIRS ${INC_DIR} ${SRC_DIR} )
-set( TEST_LINK_LIBS ${LIB_NAME} )
+set( TEST_LINK_LIBS ${LIB_NAME} m )
 add_tests( "${TEST_FILES}" "${TEST_INC_DIRS}" "${TEST_LINK_LIBS}" )
 
 #add_docfiles( "${DOC_FILES}" )
