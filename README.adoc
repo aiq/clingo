@@ -8,16 +8,15 @@ You can explore the documentation at the https://clingo.aiq.dk/[website].
 === cmake
 
 ----
-$ mkdir bld
-$ cmake -S mk/cmake -B bld
-$ cd bld
+$ cmake -DCMAKE_BUILD_TYPE:STRING=Debug -S mk/cmake -B bld-dbg
+$ cd bld-dbg
 $ make -j32
 ----
 
 === Test
 
 ----
-$ cd bld
+$ cd bld-dbg
 $ ctest
 $ ctest -E benchmark
 $ ctest -R benchmark
