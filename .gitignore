@@ -1,7 +1,10 @@
 # generated dirs
 bench/*
+bench-*/*
 build/*
+build-*/*
 bld/*
+bld-*/*
 
 # generated files
 *.html
