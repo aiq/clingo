@@ -16,7 +16,7 @@
 inline time_t local_offset( time_t t )
 {
    struct tm x;
-   localtime_r( &t, &x );
+   localtime_s( &t, &x );
    struct tm y = x;
    return timegm( &x ) - mktime( &y );
 }
