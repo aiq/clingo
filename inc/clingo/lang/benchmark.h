@@ -71,17 +71,17 @@ inline double measured_secs_c( cBenchmark const b[static 1] )
    return durVal;
 }
 
-double measured_msecs_c( cBenchmark const b[static 1] )
+inline double measured_msecs_c( cBenchmark const b[static 1] )
 {
    return measured_secs_c( b ) * 1000.0;
 }
 
-double measured_usecs_c( cBenchmark const b[static 1] )
+inline double measured_usecs_c( cBenchmark const b[static 1] )
 {
    return measured_msecs_c( b ) * 1000.0;
 }
 
-double measured_nsecs_c( cBenchmark const b[static 1] )
+inline double measured_nsecs_c( cBenchmark const b[static 1] )
 {
    return measured_usecs_c( b ) * 1000.0;
 }
