@@ -4,6 +4,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+#include "clingo/type/cCharsToken.h"
+
 /*******************************************************************************
  global test context
 *******************************************************************************/
@@ -79,18 +81,17 @@ void tap_descf_c( bool result, char const format[static 1], ... )
 
 void tap_note_c( char const note[static 1] )
 {
-   size_t n = strlen( note ) + 1;
-   char* str = calloc( n, 1 );
-   if ( str )
+   cCharsToken tok;
+   init_cstr_token_c( &tok, note );
+   while ( next_token_till_char_c( &tok, '\n' ) )
    {
-      str = strncpy( str, note, n );
-      char* tok = strtok( str, "\n" );
-      while ( tok != NULL )
+      fputc( '#', C_LogFile );
+      fputc( ' ', C_LogFile );
+      for_each_c_( char const*, c, tok.x )
       {
-         fprintf ( C_LogFile, "# %s\n", tok );
-         tok = strtok( NULL, "\n" );
+         fputc( *c, C_LogFile );
       }
-      free( str );
+      fputc( '\n', C_LogFile );
    }
 }
 
