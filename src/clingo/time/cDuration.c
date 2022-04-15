@@ -30,14 +30,14 @@ SLICE_IMPL_C_(
 
 static int64_t const NullDurationValue = INT64_MIN;
 
-int64_t const C_Week = 7L*24L*60L*60L*1000L*1000L*1000L;
-int64_t const C_Day  = 24L*60l*60L*1000L*1000L*1000L;
-int64_t const C_Hour = 60L*60L*1000L*1000L*1000L;
-int64_t const C_Min  = 60L*1000L*1000L*1000L;
-int64_t const C_Sec  = 1000L*1000L*1000L;
-int64_t const C_Msec = 1000L*1000L;
-int64_t const C_Usec = 1000L;
-int64_t const C_Nsec = 1L;
+int64_t const C_Week = 7LL*24LL*60LL*60LL*1000LL*1000LL*1000LL;
+int64_t const C_Day  = 24LL*60LL*60LL*1000LL*1000LL*1000LL;
+int64_t const C_Hour = 60LL*60LL*1000LL*1000LL*1000LL;
+int64_t const C_Min  = 60LL*1000LL*1000LL*1000LL;
+int64_t const C_Sec  = 1000LL*1000LL*1000LL;
+int64_t const C_Msec = 1000LL*1000LL;
+int64_t const C_Usec = 1000LL;
+int64_t const C_Nsec = 1LL;
 
 cDuration const C_MaxDuration = (cDuration){ INT64_MAX };
 
