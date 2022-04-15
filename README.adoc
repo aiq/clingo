@@ -5,13 +5,17 @@ You can explore the documentation at the https://clingo.aiq.dk/[website].
 
 == Build & Test
 
-=== cmake
+=== Build
 
+Unix::
 ----
 $ cmake -DCMAKE_BUILD_TYPE:STRING=Debug -S mk/cmake -B bld-dbg
 $ cd bld-dbg
 $ make -j32
 ----
+
+Windows::
+https://stackoverflow.com/a/61449746/3074987
 
 === Test
 
