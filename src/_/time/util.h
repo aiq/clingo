@@ -11,15 +11,15 @@
 
 #if _WIN32
 #    define timegm _mkgmtime
+#    define localtime_r localtime_s
 #endif
 
 inline time_t local_offset( time_t t )
 {
    struct tm x;
-   localtime_s( &t, &x );
+   localtime_r( &t, &x );
    struct tm y = x;
    return timegm( &x ) - mktime( &y );
 }
-
 
 #endif
