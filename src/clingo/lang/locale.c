@@ -86,8 +86,10 @@ int fprint_locale_c( FILE* output )
         fpchar( output, "p_sep_by_space", l->p_sep_by_space, &n ) and
         fpchar( output, "n_sep_by_space", l->n_sep_by_space, &n ) and
         fpchar( output, "p_sign_posn", l->p_sign_posn, &n ) and
+#if _WIN32
+        fplast( output, "n_sign_posn", l->n_sign_posn, &n ) and
+#else
         fpchar( output, "n_sign_posn", l->n_sign_posn, &n ) and
-        /*
         fpchar( output, "int_frac_digits", l->int_frac_digits, &n ) and
         fpchar( output, "int_p_cs_precedes", l->int_p_cs_precedes, &n ) and
         fpchar( output, "int_n_cs_precedes", l->int_n_cs_precedes, &n ) and
@@ -95,7 +97,7 @@ int fprint_locale_c( FILE* output )
         fpchar( output, "int_n_sep_by_space", l->int_n_sep_by_space, &n ) and
         fpchar( output, "int_p_sign_posn", l->int_p_sign_posn, &n ) and
         fplast( output, "int_n_sign_posn", l->int_n_sign_posn, &n ) and
-        */
+#endif
         fp( output, "}", &n ) )
    {
       return n;

@@ -12,6 +12,8 @@ set( CUSTOM_FLAGS_LIST
    -Werror=address-of-temporary
    -Wconversion # Warn for implicit conversions that may alter a value.
    -Werror=conversion
+   -Wunused-function
+   -Werror=unused-function
 )
 list( JOIN CUSTOM_FLAGS_LIST " " CUSTOM_FLAGS )
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CUSTOM_FLAGS}" )
