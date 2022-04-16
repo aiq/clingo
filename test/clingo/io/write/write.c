@@ -8,7 +8,7 @@ int main( void )
    cRecorder* rec = &recorder_c_( 1024 );
 
    expect_c_( write_c_( rec,
-      "{i64:q} is more as {i64:Q} ", max_c_( 64, 3 ), min_c_( 64, 3 ),
+      "{i64:q} is more as {i64:Q} ", imax64_c( 64, 3 ), imin64_c( 64, 3 ),
       "but both are in range {rng:c}{s}\n", closed_range_c_( 0, 64 ), "BOOM!",
       "{{really}\n", "BOOM!\n",
       "{cs:q}\n", c_c( "_" ),
