@@ -1,6 +1,7 @@
 #include "clingo/time/cDate.h"
 
 #include "_/time/read_time_util.h"
+#include "_/time/util.h"
 #include "_/time/write_time_util.h"
 #include "clingo/time/C_TimeFormats.h"
 #include <time.h>
@@ -29,13 +30,9 @@ SLICE_IMPL_C_(
 
 cDate local_date_c( void )
 {
-   time_t rawtime;
-   struct tm* ptm;
-
-   rawtime = time( 0 );
-   ptm = gmtime( &rawtime );
-
-   return date_c( ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday );
+   struct tm ptm;
+   conv_to_local_time( time( NULL ), &ptm );
+   return date_c( ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday );
 }
 
 cDate date_c( int64_t year, int64_t month, int64_t day )
@@ -50,13 +47,9 @@ cDate null_date_c( void )
 
 cDate utc_date_c( void )
 {
-   time_t rawtime;
-   struct tm* ptm;
-
-   rawtime = time( 0 );
-   ptm = gmtime( &rawtime );
-
-   return date_c( ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday );
+   struct tm ptm;
+   conv_to_utc_time( time( NULL ), &ptm );
+   return date_c( ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday );
 }
 
 /*******************************************************************************
