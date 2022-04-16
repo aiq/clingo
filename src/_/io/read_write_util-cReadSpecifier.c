@@ -63,11 +63,8 @@ bool read_in_read_specifier_c( cScanner sca[static 1],
    }
    spec->type = make_chars_c( typeStr, sca->mem );
 
-   char const* formatStr = sca->mem; // -------------------------------- format
-   if ( move_if_char_c( sca, ':' ) )
-   {
-      formatStr = sca->mem;
-   }
+   // ---------------------------------------------------------------- format
+   move_if_char_c( sca, ':' );
    {
       cChars tmpChars = empty_chars_c();
       if ( not read_in_till_end_c( sca, &tmpChars ) )
