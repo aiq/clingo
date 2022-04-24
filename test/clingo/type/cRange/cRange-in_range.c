@@ -1,4 +1,4 @@
-#include "clingo/lang/expect.c"
+#include "clingo/lang/expect.h"
 #include "clingo/type/cRange.h"
 
 int main( void )
