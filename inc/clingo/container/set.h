@@ -1,6 +1,7 @@
 #ifndef CLINGO_CONTAINER_SET_H
 #define CLINGO_CONTAINER_SET_H
 
+#include "clingo/apidecl.h"
 #include "clingo/container/map.h"
 
 /*******************************************************************************
@@ -70,26 +71,26 @@ typedef struct SetType SetType;
 *******************************************************************************/
 
 #define OBJ_SET_DEF_C_(                                                        \
-   SetType, ObjType, FuncSuffix, Meta                                          \
+   LibApi, SetType, ObjType, FuncSuffix, Meta                                  \
 )                                                                              \
 /**************************************/                                       \
 struct SetType;                                                                \
 typedef struct SetType SetType;                                                \
-extern cMeta const Meta;                                                       \
+LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
-SetType* make_##FuncSuffix( int64_t size, float maxLoad );                     \
-SetType* new_##FuncSuffix();                                                   \
+LibApi SetType* make_##FuncSuffix( int64_t size, float maxLoad );              \
+LibApi SetType* new_##FuncSuffix();                                            \
 /**************************************/                                       \
-cSetInfo const* info_of_##FuncSuffix( SetType const* set );                    \
-bool resize_##FuncSuffix( SetType* set, int64_t size );                        \
-bool set_max_load_of_##FuncSuffix( SetType* set, float maxLoad );              \
+LibApi cSetInfo const* info_of_##FuncSuffix( SetType const* set );             \
+LibApi bool resize_##FuncSuffix( SetType* set, int64_t size );                 \
+LibApi bool set_max_load_of_##FuncSuffix( SetType* set, float maxLoad );       \
 /**************************************/                                       \
-bool in_##FuncSuffix( SetType const* set, ObjType const* obj );                \
-cSetItr next_in_##FuncSuffix( SetType const* set,                              \
+LibApi bool in_##FuncSuffix( SetType const* set, ObjType const* obj );         \
+LibApi cSetItr next_in_##FuncSuffix( SetType const* set,                       \
                               cSetItr itr,                                     \
                               ObjType const* obj[static 1] );                  \
-bool remove_from_##FuncSuffix( SetType* set, ObjType const* obj );             \
-bool set_on_##FuncSuffix( SetType* set, ObjType* obj );
+LibApi bool remove_from_##FuncSuffix( SetType* set, ObjType const* obj );      \
+LibApi bool set_on_##FuncSuffix( SetType* set, ObjType* obj );
 
 /**********************************************************/
 
@@ -181,26 +182,26 @@ INTL_SET_ON_MAP_C_( FuncSuffix, SetType, RowType, CmpFunc, do_not_ref_c_ )
 *******************************************************************************/
 
 #define VAL_SET_DEF_C_(                                                        \
-   SetType, ValType, FuncSuffix, Meta                                          \
+   LibApi, SetType, ValType, FuncSuffix, Meta                                  \
 )                                                                              \
 /**************************************/                                       \
 struct SetType;                                                                \
 typedef struct SetType SetType;                                                \
-extern cMeta const Meta;                                                       \
+LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
-SetType* make_##FuncSuffix( int64_t size, float maxLoad );                     \
-SetType* new_##FuncSuffix();                                                   \
+LibApi SetType* make_##FuncSuffix( int64_t size, float maxLoad );              \
+LibApi SetType* new_##FuncSuffix();                                            \
 /**************************************/                                       \
-cSetInfo const* info_of_##FuncSuffx( SetType const* set );                     \
-bool resize_##FuncSuffix( SetType* set, int64_t size );                        \
-bool set_max_load_of_##FuncSuffix( SetType* set, float maxLoad );              \
+LibApi cSetInfo const* info_of_##FuncSuffx( SetType const* set );              \
+LibApi bool resize_##FuncSuffix( SetType* set, int64_t size );                 \
+LibApi bool set_max_load_of_##FuncSuffix( SetType* set, float maxLoad );       \
 /**************************************/                                       \
-bool in_##FuncSuffix( SetType const* set, ValType val );                       \
-cSetItr next_in_##FuncSuffix( SetType const* set,                              \
+LibApi bool in_##FuncSuffix( SetType const* set, ValType val );                \
+LibApi cSetItr next_in_##FuncSuffix( SetType const* set,                       \
                               cSetItr itr,                                     \
                               ValType const* val[static 1] );                  \
-bool remove_from_##FuncSuffix( SetType* set, ValType val );                    \
-bool set_on_##FuncSuffix( SetType* set, ValType val );
+LibApi bool remove_from_##FuncSuffix( SetType* set, ValType val );             \
+LibApi bool set_on_##FuncSuffix( SetType* set, ValType val );
 
 /**********************************************************/
 
@@ -268,20 +269,20 @@ static inline INTL_SET_ON_MAP_C_( FuncSuffix, SetType, RowType, CmpFunc, DoRef )
  info
 *******************************************************************************/
 
-inline int64_t set_cap_c( cSetInfo const info[static 1] )
+CLINGO_API inline int64_t set_cap_c( cSetInfo const info[static 1] )
 {
    must_exist_c_( info );
    return int64_c_( (double)info->size * (double)info->maxLoad );
 }
 
-inline float set_load_c( cSetInfo const info[static 1] )
+CLINGO_API inline float set_load_c( cSetInfo const info[static 1] )
 {
    must_exist_c_( info );
    return calculate_load_c( info->size, info->count );
 
 }
 
-inline bool set_is_empty_c( cSetInfo const info[static 1] )
+CLINGO_API inline bool set_is_empty_c( cSetInfo const info[static 1] )
 {
    must_exist_c_( info );
    return info->count == 0;
@@ -298,12 +299,12 @@ for (                                                                          \
    Itr = Func( Map, Itr, &ValPtr )                                             \
 )
 
-inline cSetItr start_set_itr_c()
+CLINGO_API inline cSetItr start_set_itr_c()
 {
    return (cSetItr){ ._v = -1 };
 }
 
-inline bool set_itr_is_valid_c( cSetItr itr )
+CLINGO_API inline bool set_itr_is_valid_c( cSetItr itr )
 {
    return itr._v != -1;
 }

@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
 #include "clingo/lang/window.h"
@@ -48,7 +49,7 @@ WINDOW_DEF_C_(
  overall
 *******************************************************************************/
 
-inline int cmp_int16_c( int16_t a, int16_t b )
+CLINGO_API inline int cmp_int16_c( int16_t a, int16_t b )
 {
    return a < b ? -1
                 : a > b ? 1
@@ -64,7 +65,7 @@ inline int cmp_int16_c( int16_t a, int16_t b )
  conv
 *******************************************************************************/
 
-inline CONV_C_(
+CLINGO_API inline CONV_C_(
    int64_to_int16_c, // FuncName
    int64_t,          // FromType
    int16_t,          // ToType
@@ -72,7 +73,7 @@ inline CONV_C_(
    INT16_MAX         // MaxValue
 )
 
-inline CONV_C_(
+CLINGO_API inline CONV_C_(
    uint64_to_int16_c,   // FuncName
    uint64_t,            // FromType
    int16_t,             // ToType
@@ -84,7 +85,7 @@ inline CONV_C_(
  swap
 *******************************************************************************/
 
-inline int16_t swap_int16_c( int16_t val )
+CLINGO_API inline int16_t swap_int16_c( int16_t val )
 {
    union { int16_t i; uint16_t u; } v;
 
@@ -93,12 +94,12 @@ inline int16_t swap_int16_c( int16_t val )
 
    return v.i;
 }
-inline int16_t swap_int16_from_c( int16_t val, c_ByteOrder order )
+CLINGO_API inline int16_t swap_int16_from_c( int16_t val, c_ByteOrder order )
 {
    return system_order_is_c( order ) ? val
                                      : swap_int16_c( val );
 }
-inline int16_t swap_int16_to_c( int16_t val, c_ByteOrder order )
+CLINGO_API inline int16_t swap_int16_to_c( int16_t val, c_ByteOrder order )
 {
    return system_order_is_c( order ) ? val
                                      : swap_int16_c( val );
@@ -108,24 +109,24 @@ inline int16_t swap_int16_to_c( int16_t val, c_ByteOrder order )
  algo
 *******************************************************************************/
 
-int cmp_int16_slice_c( cInt16Slice a, cInt16Slice b );
+CLINGO_API int cmp_int16_slice_c( cInt16Slice a, cInt16Slice b );
 
-int64_t count_eq_int16_c( cInt16Slice slice, int16_t val );
+CLINGO_API int64_t count_eq_int16_c( cInt16Slice slice, int16_t val );
 
-int16_t const* find_int16_c( cInt16Slice slice, int16_t val );
+CLINGO_API int16_t const* find_int16_c( cInt16Slice slice, int16_t val );
 
-int16_t const* max_int16_c( cInt16Slice slice );
+CLINGO_API int16_t const* max_int16_c( cInt16Slice slice );
 
-int16_t const* min_int16_c( cInt16Slice slice );
+CLINGO_API int16_t const* min_int16_c( cInt16Slice slice );
 
-bool prod_int16_c( cInt16Slice slice, int64_t res[static 1] );
+CLINGO_API bool prod_int16_c( cInt16Slice slice, int64_t res[static 1] );
 
-void qsort_int16_slice_c( cVarInt16Slice slice );
+CLINGO_API void qsort_int16_slice_c( cVarInt16Slice slice );
 
-void reverse_int16_slice_c( cVarInt16Slice slice );
+CLINGO_API void reverse_int16_slice_c( cVarInt16Slice slice );
 
-void rotate_int16_slice_c( cVarInt16Slice slice, int64_t distance );
+CLINGO_API void rotate_int16_slice_c( cVarInt16Slice slice, int64_t distance );
 
-bool sum_int16_c( cInt16Slice slice, int64_t res[static 1] );
+CLINGO_API bool sum_int16_c( cInt16Slice slice, int64_t res[static 1] );
 
 #endif

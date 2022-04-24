@@ -1,6 +1,7 @@
 #ifndef CLINGO_TIME_CMONTH_DAY_H
 #define CLINGO_TIME_CMONTH_DAY_H
 
+#include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
 #include "clingo/time/c_Month.h"
@@ -36,9 +37,9 @@ SLICE_DEF_C_(
  overall
 *******************************************************************************/
 
-int cmp_month_day_c( cMonthDay a, cMonthDay b );
+CLINGO_API int cmp_month_day_c( cMonthDay a, cMonthDay b );
 
-cMonthDay month_day_c( int64_t month, int64_t day );
+CLINGO_API cMonthDay month_day_c( int64_t month, int64_t day );
 
 /*******************************************************************************
  io
@@ -46,13 +47,13 @@ cMonthDay month_day_c( int64_t month, int64_t day );
 
 #define read_month_day_c_( Sca, Md )                                           \
    read_month_day_c( (Sca), (Md), "" )
-bool read_month_day_c( cScanner sca[static 1],
+CLINGO_API bool read_month_day_c( cScanner sca[static 1],
                        cMonthDay md[static 1],
                        char const fmt[static 1] );
 
 #define write_month_day_c_( Rec, Md )                                          \
    write_month_day_c( (Rec), (Md), "" )
-bool write_month_day_c( cRecorder rec[static 1],
+CLINGO_API bool write_month_day_c( cRecorder rec[static 1],
                         cMonthDay md,
                         char const fmt[static 1] );
 

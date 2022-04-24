@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/func.h"
 #include "clingo/lang/math.h"
 
@@ -27,6 +28,7 @@
 
 #define alloc_c_( Type )                                                       \
    alloc_c( sizeof_c_( Type ) )
+CLINGO_API
 inline void* alloc_c( int64_t size )
 {
    size_t sz;
@@ -38,6 +40,7 @@ inline void* alloc_c( int64_t size )
 
 #define alloc_array_c_( Number, Type )                                         \
    alloc_array_c( (Number), sizeof_c_( Type ) )
+CLINGO_API
 inline void* alloc_array_c( int64_t num, int64_t size )
 {
    must_be_positive_c_( num );
@@ -54,8 +57,10 @@ inline void* alloc_array_c( int64_t num, int64_t size )
 
 #define free_all_c_( ... )                                                     \
    free_all_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+CLINGO_API
 void free_all_c( int n, ... );
 
+CLINGO_API
 inline void* realloc_c( void* ptr, int64_t size )
 {
    size_t sz;
@@ -67,6 +72,7 @@ inline void* realloc_c( void* ptr, int64_t size )
 
 #define realloc_array_c_( Ptr, Number, Type )                                  \
    realloc_array_c( (Ptr), (Number), sizeof_c_( Type ) )
+CLINGO_API
 inline void* realloc_array_c( void* ptr, int64_t num, int64_t size )
 {
    must_be_positive_c_( num );

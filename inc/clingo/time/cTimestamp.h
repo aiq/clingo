@@ -1,6 +1,7 @@
 #ifndef CLINGO_TIME_CTIMESTAMP_H
 #define CLINGO_TIME_CTIMESTAMP_H
 
+#include "clingo/apidecl.h"
 #include "clingo/time/cDuration.h"
 
 /*******************************************************************************
@@ -33,35 +34,35 @@ SLICE_DEF_C_(
  init
 *******************************************************************************/
 
-cTimestamp now_c( void );
+CLINGO_API cTimestamp now_c( void );
 
-cTimestamp null_timestamp_c( void );
+CLINGO_API cTimestamp null_timestamp_c( void );
 
 /*******************************************************************************
  cmp
 *******************************************************************************/
 
-int cmp_timestamp_c( cTimestamp a, cTimestamp b );
+CLINGO_API int cmp_timestamp_c( cTimestamp a, cTimestamp b );
 
-inline bool eq_timestamp_c( cTimestamp a, cTimestamp b )
+CLINGO_API inline bool eq_timestamp_c( cTimestamp a, cTimestamp b )
 {
    return a._v == b._v;
 }
 
-bool timestamp_is_valid_c( cTimestamp ts );
+CLINGO_API bool timestamp_is_valid_c( cTimestamp ts );
 
 /*******************************************************************************
  diff
 *******************************************************************************/
 
-cDuration between_timestamps_c( cTimestamp a, cTimestamp b );
+CLINGO_API cDuration between_timestamps_c( cTimestamp a, cTimestamp b );
 
-inline cDuration since_c( cTimestamp ts )
+CLINGO_API inline cDuration since_c( cTimestamp ts )
 {
    return between_timestamps_c( ts, now_c() );
 }
 
-inline cDuration until_c( cTimestamp ts )
+CLINGO_API inline cDuration until_c( cTimestamp ts )
 {
    return between_timestamps_c( now_c(), ts );
 }

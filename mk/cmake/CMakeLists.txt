@@ -5,7 +5,10 @@ set( CMAKE_C_STANDARD          11 )
 set( CMAKE_C_STANDARD_REQUIRED ON )
 set( CMAKE_C_EXTENSIONS        OFF )
 
-set( CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON )
+if( WIN32 )
+    set( CMAKE_C_VISIBILITY_PRESET hidden )
+    set( CMAKE_VISIBILITY_INLINES_HIDDEN ON )
+endif()
 
 enable_testing()
 
@@ -25,7 +28,7 @@ include( ${CMAKE_SOURCE_DIR}/FileLists.cmake )
 ################################################################################
 # build - make
 ################################################################################
-add_library( ${LIB_NAME} STATIC ${SRC_FILES} )
+add_library( ${LIB_NAME} SHARED ${SRC_FILES} )
 target_include_directories( ${LIB_NAME} PUBLIC ${INC_DIR} PRIVATE ${SRC_DIR} )
 if( WIN32 )
     target_link_libraries( ${LIB_NAME} )

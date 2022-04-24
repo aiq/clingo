@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/func.h"
 #include "clingo/type/cByte.h"
 #include "clingo/type/cChars.h"
@@ -63,17 +64,17 @@ WINDOW_DEF_C_(
  utf8
 *******************************************************************************/
 
-inline bool is_utf8_head_c( char c )
+CLINGO_API inline bool is_utf8_head_c( char c )
 {
    return not in_range_c_( 0x80, uint8_c_( c ), 0xBF );
 }
 
-inline bool is_utf8_tail_c( char c )
+CLINGO_API inline bool is_utf8_tail_c( char c )
 {
    return in_range_c_( 0x80, uint8_c_( c ), 0xBF );
 }
 
-inline int8_t utf8_length_c( char c )
+CLINGO_API inline int8_t utf8_length_c( char c )
 {
    cByte const value = byte_c_( c );
    if ( value <= 0x7F)
@@ -105,43 +106,43 @@ inline int8_t utf8_length_c( char c )
    (cRune){ .b={ (A), (B), (C), (D) } }                                        \
 )
 
-cRune make_rune_c( cChars chars );
+CLINGO_API cRune make_rune_c( cChars chars );
 
-inline cRune null_rune_c()
+CLINGO_API inline cRune null_rune_c()
 {
    return build_rune_c_( 0xff, 0, 0, 0 );
 }
 
-cRune rune_c( char const cstr[static 1] );
+CLINGO_API cRune rune_c( char const cstr[static 1] );
 
-cRune utf16_rune_c( uint16_t val );
+CLINGO_API cRune utf16_rune_c( uint16_t val );
 
-cRune utf32_rune_c( uint32_t val );
+CLINGO_API cRune utf32_rune_c( uint32_t val );
 
 /*******************************************************************************
  overall
 *******************************************************************************/
 
-inline int cmp_rune_c( cRune a, cRune b )
+CLINGO_API inline int cmp_rune_c( cRune a, cRune b )
 {
    return a.ctrl == b.ctrl ? 0
                            : a.ctrl < b.ctrl ? -1
                                              : 1;
 }
 
-inline bool eq_rune_c( cRune a, cRune b )
+CLINGO_API inline bool eq_rune_c( cRune a, cRune b )
 {
    return a.ctrl == b.ctrl;
 }
 
-uint32_t rune_code_c( cRune r );
+CLINGO_API uint32_t rune_code_c( cRune r );
 
-inline bool rune_is_c( cRune r, char const cstr[static 1] )
+CLINGO_API inline bool rune_is_c( cRune r, char const cstr[static 1] )
 {
    return eq_rune_c( r, rune_c( cstr ) );
 }
 
-inline bool rune_is_valid_c( cRune r )
+CLINGO_API inline bool rune_is_valid_c( cRune r )
 {
    #define zero_( B ) ( (B) == 0 )
    #define tail_( B ) is_utf8_tail_c( B )
@@ -155,7 +156,7 @@ inline bool rune_is_valid_c( cRune r )
    }
 }
 
-inline int8_t rune_size_c( cRune r )
+CLINGO_API inline int8_t rune_size_c( cRune r )
 {
    return utf8_length_c( r.c[0] );
 }
@@ -164,11 +165,11 @@ inline int8_t rune_size_c( cRune r )
  chars
 *******************************************************************************/
 
-char const* ceil_to_rune_c( cChars chars, int64_t index );
-char const* first_rune_c( cChars chars );
-char const* floor_to_rune_c( cChars chars, int64_t index );
-char const* last_rune_c( cChars chars );
-char const* nth_rune_c( cChars chars, int64_t n );
+CLINGO_API char const* ceil_to_rune_c( cChars chars, int64_t index );
+CLINGO_API char const* first_rune_c( cChars chars );
+CLINGO_API char const* floor_to_rune_c( cChars chars, int64_t index );
+CLINGO_API char const* last_rune_c( cChars chars );
+CLINGO_API char const* nth_rune_c( cChars chars, int64_t n );
 
 /*******************************************************************************
  itr
@@ -178,7 +179,7 @@ char const* nth_rune_c( cChars chars, int64_t n );
    for ( char const* Itr = next_rune_c( Chars, NULL, &Rune );                  \
          Itr != NULL;                                                          \
          Itr = next_rune_c( Chars, Itr, &Rune ) )
-
+CLINGO_API
 inline char const* next_rune_c( cChars chars,
                                 char const* itr,
                                 cRune r[static 1] )
@@ -199,24 +200,24 @@ inline char const* next_rune_c( cChars chars,
  chars
 *******************************************************************************/
 
-int64_t count_runes_c( cChars chars );
+CLINGO_API int64_t count_runes_c( cChars chars );
 
-cVarRuneSlice fill_rune_slice_c( cVarRuneSlice dst, cChars src );
+CLINGO_API cVarRuneSlice fill_rune_slice_c( cVarRuneSlice dst, cChars src );
 
 #define find_any_rune_c_( Chars, Cstr )                                        \
    find_any_rune_c( (Chars), c_c( Cstr ) )
-char const* find_any_rune_c( cChars chars, cChars set );
+CLINGO_API char const* find_any_rune_c( cChars chars, cChars set );
 
 #define find_rune_c_( Chars, Cstr )                                            \
    find_rune_c( (Chars), rune_c( Cstr ) )
-char const* find_rune_c( cChars chars, cRune r );
+CLINGO_API char const* find_rune_c( cChars chars, cRune r );
 
-cChars left_runes_c( cChars chars, int64_t maxLen );
+CLINGO_API cChars left_runes_c( cChars chars, int64_t maxLen );
 
-cChars mid_runes_c( cChars chars, int64_t index );
+CLINGO_API cChars mid_runes_c( cChars chars, int64_t index );
 
-cChars right_runes_c( cChars chars, int64_t maxLen );
+CLINGO_API cChars right_runes_c( cChars chars, int64_t maxLen );
 
-cChars sub_runes_c( cChars chars, int64_t begIdx, int64_t endIdx );
+CLINGO_API cChars sub_runes_c( cChars chars, int64_t begIdx, int64_t endIdx );
 
 #endif

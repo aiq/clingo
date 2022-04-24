@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/mem.h"
 #include "clingo/type/cBytes.h"
 #include "clingo/type/cCharsSlice.h"
@@ -59,7 +60,7 @@ typedef struct cScanMarker cScanMarker;
  move
 *******************************************************************************/
 
-inline bool move_scanner_c( cScanner sca[static 1], int64_t offset )
+CLINGO_API inline bool move_scanner_c( cScanner sca[static 1], int64_t offset )
 {
    must_exist_c_( sca );
 
@@ -77,7 +78,7 @@ inline bool move_scanner_c( cScanner sca[static 1], int64_t offset )
    return true;
 }
 
-inline bool move_scanner_to_c( cScanner sca[static 1], int64_t pos )
+CLINGO_API inline bool move_scanner_to_c( cScanner sca[static 1], int64_t pos )
 {
    must_exist_c_( sca );
 
@@ -85,7 +86,7 @@ inline bool move_scanner_to_c( cScanner sca[static 1], int64_t pos )
    return move_scanner_c( sca, offset );
 }
 
-inline void reset_scanner_c( cScanner sca[static 1] )
+CLINGO_API inline void reset_scanner_c( cScanner sca[static 1] )
 {
    must_exist_c_( sca );
 
@@ -96,86 +97,86 @@ inline void reset_scanner_c( cScanner sca[static 1] )
  move if
 *******************************************************************************/
 
-bool move_if_byte_c( cScanner sca[static 1], cByte b );
-bool move_if_byte_match_c( cScanner sca[static 1], c_check_byte check );
-bool move_if_bytes_c( cScanner sca[static 1], cBytes slice );
+CLINGO_API bool move_if_byte_c( cScanner sca[static 1], cByte b );
+CLINGO_API bool move_if_byte_match_c( cScanner sca[static 1], c_check_byte check );
+CLINGO_API bool move_if_bytes_c( cScanner sca[static 1], cBytes slice );
 
 #define move_if_any_char_c_( Sca, Cstr )                                       \
    move_if_any_char_c( (Sca), c_c( Cstr ) )
-bool move_if_any_char_c( cScanner sca[static 1], cChars set );
-bool move_if_char_c( cScanner sca[static 1], char c );
-bool move_if_char_match_c( cScanner sca[static 1], c_check_char check );
+CLINGO_API bool move_if_any_char_c( cScanner sca[static 1], cChars set );
+CLINGO_API bool move_if_char_c( cScanner sca[static 1], char c );
+CLINGO_API bool move_if_char_match_c( cScanner sca[static 1], c_check_char check );
 
 #define move_if_any_chars_c_( Sca, ... )                                       \
    move_if_any_chars_c( (Sca), cs_c_( __VA_ARGS__ ) )
-bool move_if_any_chars_c( cScanner sca[static 1], cCharsSlice slice );
+CLINGO_API bool move_if_any_chars_c( cScanner sca[static 1], cCharsSlice slice );
 #define move_if_chars_c_( Sca, Cstr )                                          \
    move_if_chars_c( (Sca), c_c( Cstr ) )
-bool move_if_chars_c( cScanner sca[static 1], cChars chars );
+CLINGO_API bool move_if_chars_c( cScanner sca[static 1], cChars chars );
 
 #define move_if_any_rune_c_( Sca, Cstr )                                       \
    move_if_any_rune_c( (Sca), c_c( Cstr ) )
-bool move_if_any_rune_c( cScanner sca[static 1], cChars set );
-bool move_if_rune_c( cScanner sca[static 1], cRune r );
-bool move_if_rune_match_c( cScanner sca[static 1], c_check_rune check );
+CLINGO_API bool move_if_any_rune_c( cScanner sca[static 1], cChars set );
+CLINGO_API bool move_if_rune_c( cScanner sca[static 1], cRune r );
+CLINGO_API bool move_if_rune_match_c( cScanner sca[static 1], c_check_rune check );
 
-bool move_if_in_range_c( cScanner sca[static 1], cRuneRange range );
+CLINGO_API bool move_if_in_range_c( cScanner sca[static 1], cRuneRange range );
 
 /*******************************************************************************
  move to
 *******************************************************************************/
 
-bool move_to_byte_c( cScanner sca[static 1], cByte b );
-bool move_to_byte_match_c( cScanner sca[static 1], c_check_byte check );
-bool move_to_bytes_c( cScanner sca[static 1], cBytes slice );
+CLINGO_API bool move_to_byte_c( cScanner sca[static 1], cByte b );
+CLINGO_API bool move_to_byte_match_c( cScanner sca[static 1], c_check_byte check );
+CLINGO_API bool move_to_bytes_c( cScanner sca[static 1], cBytes slice );
 
 #define move_to_any_char_c_( Sca, Cstr )                                       \
    move_to_any_char_c( (Sca), c_c( Cstr ) )
-bool move_to_any_char_c( cScanner sca[static 1], cChars set );
-bool move_to_char_c( cScanner sca[static 1], char c );
-bool move_to_char_match_c( cScanner sca[static 1], c_check_char check );
+CLINGO_API bool move_to_any_char_c( cScanner sca[static 1], cChars set );
+CLINGO_API bool move_to_char_c( cScanner sca[static 1], char c );
+CLINGO_API bool move_to_char_match_c( cScanner sca[static 1], c_check_char check );
 
 #define move_to_any_chars_c_( Sca, ... )                                       \
    move_to_any_chars_c( (Sca), cs_c_( __VA_ARGS__ ) )
-bool move_to_any_chars_c( cScanner sca[static 1], cCharsSlice slice );
+CLINGO_API bool move_to_any_chars_c( cScanner sca[static 1], cCharsSlice slice );
 #define move_to_chars_c_( Sca, Cstr )                                          \
    move_to_chars_c( (Sca), c_c( Cstr ) )
-bool move_to_chars_c( cScanner sca[static 1], cChars chars );
+CLINGO_API bool move_to_chars_c( cScanner sca[static 1], cChars chars );
 
 #define move_to_any_rune_c_( Sca, Cstr )                                       \
    move_to_any_rune_c( (Sca), c_c( Cstr ) )
-bool move_to_any_rune_c( cScanner sca[static 1], cChars set );
-bool move_to_rune_c( cScanner sca[static 1], cRune r );
-bool move_to_rune_match_c( cScanner sca[static 1], c_check_rune check );
+CLINGO_API bool move_to_any_rune_c( cScanner sca[static 1], cChars set );
+CLINGO_API bool move_to_rune_c( cScanner sca[static 1], cRune r );
+CLINGO_API bool move_to_rune_match_c( cScanner sca[static 1], c_check_rune check );
 
-bool move_to_in_range_c( cScanner sca[static 1], cRuneRange range );
+CLINGO_API bool move_to_in_range_c( cScanner sca[static 1], cRuneRange range );
 
 /*******************************************************************************
  move while
 *******************************************************************************/
 
-bool move_while_byte_c( cScanner sca[static 1], cByte b );
-bool move_while_byte_match_c( cScanner sca[static 1], c_check_byte check );
+CLINGO_API bool move_while_byte_c( cScanner sca[static 1], cByte b );
+CLINGO_API bool move_while_byte_match_c( cScanner sca[static 1], c_check_byte check );
 
 #define move_while_any_char_c_( Sca, Cstr )                                    \
    move_while_any_char_c( (Sca), c_c( Cstr ) )
-bool move_while_any_char_c( cScanner sca[static 1], cChars set );
-bool move_while_char_c( cScanner sca[static 1], char c );
-bool move_while_char_match_c( cScanner sca[static 1], c_check_char check );
+CLINGO_API bool move_while_any_char_c( cScanner sca[static 1], cChars set );
+CLINGO_API bool move_while_char_c( cScanner sca[static 1], char c );
+CLINGO_API bool move_while_char_match_c( cScanner sca[static 1], c_check_char check );
 
 #define move_while_any_rune_c_( Sca, Cstr )                                    \
    move_while_any_rune_c( (Sca), c_c( Cstr ) )
-bool move_while_any_rune_c( cScanner sca[static 1], cChars set );
-bool move_while_rune_c( cScanner sca[static 1], cRune r );
-bool move_while_rune_match_c( cScanner sca[static 1], c_check_rune check );
+CLINGO_API bool move_while_any_rune_c( cScanner sca[static 1], cChars set );
+CLINGO_API bool move_while_rune_c( cScanner sca[static 1], cRune r );
+CLINGO_API bool move_while_rune_match_c( cScanner sca[static 1], c_check_rune check );
 
-bool move_while_in_range_c( cScanner sca[static 1], cRuneRange range );
+CLINGO_API bool move_while_in_range_c( cScanner sca[static 1], cRuneRange range );
 
 /*******************************************************************************
  error
 *******************************************************************************/
 
-inline bool scan_error_c( cScanner sca[static 1], int err )
+CLINGO_API inline bool scan_error_c( cScanner sca[static 1], int err )
 {
    sca->err = err;
    return false;
@@ -187,7 +188,7 @@ inline bool scan_error_c( cScanner sca[static 1], int err )
 
 #define scanned_bytes_c_( Sca )                                                \
    scanned_bytes_c( (Sca), (Sca)->pos )
-inline cBytes scanned_bytes_c( cScanner const sca[static 1], int64_t size )
+CLINGO_API inline cBytes scanned_bytes_c( cScanner const sca[static 1], int64_t size )
 {
    must_exist_c_( sca );
    must_be_positive_c_( size );
@@ -202,7 +203,7 @@ inline cBytes scanned_bytes_c( cScanner const sca[static 1], int64_t size )
 
 #define scanned_chars_c_( Sca )                                                \
    scanned_chars_c( (Sca), (Sca)->pos )
-inline cChars scanned_chars_c( cScanner const sca[static 1], int64_t size )
+CLINGO_API inline cChars scanned_chars_c( cScanner const sca[static 1], int64_t size )
 {
    must_exist_c_( sca );
    must_be_positive_c_( size );
@@ -217,7 +218,7 @@ inline cChars scanned_chars_c( cScanner const sca[static 1], int64_t size )
 
 #define unscanned_bytes_c_( Sca )                                              \
    unscanned_bytes_c( (Sca), (Sca)->space )
-inline cBytes unscanned_bytes_c( cScanner const sca[static 1], int64_t size )
+CLINGO_API inline cBytes unscanned_bytes_c( cScanner const sca[static 1], int64_t size )
 {
    must_exist_c_( sca );
    must_be_positive_c_( size );
@@ -232,7 +233,7 @@ inline cBytes unscanned_bytes_c( cScanner const sca[static 1], int64_t size )
 
 #define unscanned_chars_c_( Sca )                                              \
    unscanned_chars_c( (Sca), (Sca)->space )
-inline cChars unscanned_chars_c( cScanner const sca[static 1], int64_t size )
+CLINGO_API inline cChars unscanned_chars_c( cScanner const sca[static 1], int64_t size )
 {
    must_exist_c_( sca );
    must_be_positive_c_( size );
@@ -245,20 +246,20 @@ inline cChars unscanned_chars_c( cScanner const sca[static 1], int64_t size )
    return chars_c( size, ptr );
 }
 
-bool unscanned_is_c( cScanner const sca[static 1], char const cstr[static 1] );
+CLINGO_API bool unscanned_is_c( cScanner const sca[static 1], char const cstr[static 1] );
 
 /*******************************************************************************
  on
 *******************************************************************************/
 
-inline bool on_byte_c( cScanner sca[static 1], cByte b )
+CLINGO_API inline bool on_byte_c( cScanner sca[static 1], cByte b )
 {
    must_exist_c_( sca );
    cByte const* ptr = sca->mem;
    return ( sca->space > 0 and *ptr == b );
 }
 
-inline bool on_bytes_c( cScanner sca[static 1], cBytes slice )
+CLINGO_API inline bool on_bytes_c( cScanner sca[static 1], cBytes slice )
 {
    must_exist_c_( sca );
    cBytes unscanned = unscanned_bytes_c_( sca );
@@ -267,28 +268,28 @@ inline bool on_bytes_c( cScanner sca[static 1], cBytes slice )
 
 #define on_any_char_c_( Sca, Cstr )                                            \
    on_any_char_c( (Sca), c_c( Cstr ) )
-inline bool on_any_char_c( cScanner sca[static 1], cChars set )
+CLINGO_API inline bool on_any_char_c( cScanner sca[static 1], cChars set )
 {
    must_exist_c_( sca );
    char const* ptr = sca->mem;
    return ( sca->space > 0 and find_char_c( set, *ptr ) );
 }
 
-inline bool on_char_c( cScanner sca[static 1], char c )
+CLINGO_API inline bool on_char_c( cScanner sca[static 1], char c )
 {
    must_exist_c_( sca );
    char const* ptr = sca->mem;
    return ( sca->space > 0 and *ptr == c );
 }
 
-inline bool on_chars_c( cScanner sca[static 1], cChars chars )
+CLINGO_API inline bool on_chars_c( cScanner sca[static 1], cChars chars )
 {
    must_exist_c_( sca );
    cChars unscanned = unscanned_chars_c_( sca );
    return chars_starts_with_c( unscanned, chars );
 }
 
-inline bool on_rune_c( cScanner sca[static 1], cRune r )
+CLINGO_API inline bool on_rune_c( cScanner sca[static 1], cRune r )
 {
    must_exist_c_( sca );
    cChars unscanned = unscanned_chars_c_( sca );
@@ -300,7 +301,7 @@ inline bool on_rune_c( cScanner sca[static 1], cRune r )
  view
 *******************************************************************************/
 
-inline cBytes view_bytes_c( cScanner sca[static 1], int64_t size )
+CLINGO_API inline cBytes view_bytes_c( cScanner sca[static 1], int64_t size )
 {
    must_exist_c_( sca );
    must_be_positive_c_( size );
@@ -317,7 +318,7 @@ inline cBytes view_bytes_c( cScanner sca[static 1], int64_t size )
    return bytes_c( size, ptr );
 }
 
-inline cChars view_chars_c( cScanner sca[static 1], int64_t size )
+CLINGO_API inline cChars view_chars_c( cScanner sca[static 1], int64_t size )
 {
    must_exist_c_( sca );
    must_be_positive_c_( size );
@@ -334,32 +335,32 @@ inline cChars view_chars_c( cScanner sca[static 1], int64_t size )
    return chars_c( size, ptr );
 }
 
-char const* view_cstr_c( cScanner sca[static 1] );
+CLINGO_API char const* view_cstr_c( cScanner sca[static 1] );
 
-cChars view_pad_c( cScanner sca[static 1], char c );
+CLINGO_API cChars view_pad_c( cScanner sca[static 1], char c );
 
-cChars view_runes_c( cScanner sca[static 1], int64_t size );
+CLINGO_API cChars view_runes_c( cScanner sca[static 1], int64_t size );
 
 /*******************************************************************************
  scan
 *******************************************************************************/
 
-bool scan_byte_c(   cScanner sca[static 1], cByte b[static 1] );
-bool scan_char_c(   cScanner sca[static 1], char c[static 1] );
-bool scan_rune_c(   cScanner sca[static 1], cRune r[static 1] );
+CLINGO_API bool scan_byte_c(   cScanner sca[static 1], cByte b[static 1] );
+CLINGO_API bool scan_char_c(   cScanner sca[static 1], char c[static 1] );
+CLINGO_API bool scan_rune_c(   cScanner sca[static 1], cRune r[static 1] );
 
-bool scan_int8_c(   cScanner sca[static 1], int8_t i8[static 1] );
-bool scan_int16_c(  cScanner sca[static 1], int16_t i16[static 1] );
-bool scan_int32_c(  cScanner sca[static 1], int32_t i32[static 1] );
-bool scan_int64_c(  cScanner sca[static 1], int64_t i64[static 1] );
+CLINGO_API bool scan_int8_c(   cScanner sca[static 1], int8_t i8[static 1] );
+CLINGO_API bool scan_int16_c(  cScanner sca[static 1], int16_t i16[static 1] );
+CLINGO_API bool scan_int32_c(  cScanner sca[static 1], int32_t i32[static 1] );
+CLINGO_API bool scan_int64_c(  cScanner sca[static 1], int64_t i64[static 1] );
 
-bool scan_uint8_c(  cScanner sca[static 1], uint8_t u8[static 1] );
-bool scan_uint16_c( cScanner sca[static 1], uint16_t u16[static 1] );
-bool scan_uint32_c( cScanner sca[static 1], uint32_t u32[static 1] );
-bool scan_uint64_c( cScanner sca[static 1], uint64_t u64[static 1] );
+CLINGO_API bool scan_uint8_c(  cScanner sca[static 1], uint8_t u8[static 1] );
+CLINGO_API bool scan_uint16_c( cScanner sca[static 1], uint16_t u16[static 1] );
+CLINGO_API bool scan_uint32_c( cScanner sca[static 1], uint32_t u32[static 1] );
+CLINGO_API bool scan_uint64_c( cScanner sca[static 1], uint64_t u64[static 1] );
 
-bool scan_float_c(  cScanner sca[static 1], float f[static 1] );
-bool scan_double_c( cScanner sca[static 1], double d[static 1] );
+CLINGO_API bool scan_float_c(  cScanner sca[static 1], float f[static 1] );
+CLINGO_API bool scan_double_c( cScanner sca[static 1], double d[static 1] );
 
 /*******************************************************************************
  marker
@@ -372,7 +373,7 @@ bool scan_double_c( cScanner sca[static 1], double d[static 1] );
 
 #define trace_scan_c_( Sm )                                                    \
    trace_scan_c( (Sm), false )
-inline int64_t trace_scan_c( cScanMarker sm[static 1], bool full )
+CLINGO_API inline int64_t trace_scan_c( cScanMarker sm[static 1], bool full )
 {
    must_exist_c_( sm );
 
@@ -384,7 +385,7 @@ inline int64_t trace_scan_c( cScanMarker sm[static 1], bool full )
 
 #define traced_bytes_c_( Sm )                                                  \
    traced_bytes_c( (Sm), false )
-inline cBytes traced_bytes_c( cScanMarker sm[static 1], bool full )
+CLINGO_API inline cBytes traced_bytes_c( cScanMarker sm[static 1], bool full )
 {
    must_exist_c_( sm );
    return scanned_bytes_c( sm->x, trace_scan_c( sm, full ) );
@@ -392,19 +393,19 @@ inline cBytes traced_bytes_c( cScanMarker sm[static 1], bool full )
 
 #define traced_chars_c_( Sm )                                                  \
    traced_chars_c( (Sm), false )
-inline cChars traced_chars_c( cScanMarker sm[static 1], bool full )
+CLINGO_API inline cChars traced_chars_c( cScanMarker sm[static 1], bool full )
 {
    must_exist_c_( sm );
    return scanned_chars_c( sm->x, trace_scan_c( sm, full ) );
 }
 
-inline bool undo_scan_c( cScanMarker sm[static 1] )
+CLINGO_API inline bool undo_scan_c( cScanMarker sm[static 1] )
 {
    must_exist_c_( sm );
    return move_scanner_to_c( sm->x, sm->startPos );
 }
 
-inline bool undo_scan_error_c( cScanMarker sm[static 1], int err )
+CLINGO_API inline bool undo_scan_error_c( cScanMarker sm[static 1], int err )
 {
    must_exist_c_( sm );
    undo_scan_c( sm );

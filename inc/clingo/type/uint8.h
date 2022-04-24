@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
 #include "clingo/lang/window.h"
@@ -47,7 +48,7 @@ WINDOW_DEF_C_(
  overall
 *******************************************************************************/
 
-inline int cmp_uint8_c( uint8_t a, uint8_t b )
+CLINGO_API inline int cmp_uint8_c( uint8_t a, uint8_t b )
 {
    return a - b;
 }
@@ -61,7 +62,7 @@ inline int cmp_uint8_c( uint8_t a, uint8_t b )
  conv
 *******************************************************************************/
 
-inline CONV_C_(
+CLINGO_API inline CONV_C_(
    int64_to_uint8_c, // FuncName
    int64_t,          // FromType
    uint8_t,          // ToType
@@ -69,7 +70,7 @@ inline CONV_C_(
    UINT8_MAX         // MaxValue
 )
 
-inline CONV_C_(
+CLINGO_API inline CONV_C_(
    uint64_to_uint8_c,   // FuncName
    uint64_t,            // FromType
    uint8_t,             // ToType
@@ -81,24 +82,24 @@ inline CONV_C_(
  algo
 *******************************************************************************/
 
-int cmp_uint8_slice_c( cUint8Slice a, cUint8Slice b );
+CLINGO_API int cmp_uint8_slice_c( cUint8Slice a, cUint8Slice b );
 
-int64_t count_eq_uint8_c( cUint8Slice slice, uint8_t val );
+CLINGO_API int64_t count_eq_uint8_c( cUint8Slice slice, uint8_t val );
 
-uint8_t const* find_uint8_c( cUint8Slice slice, uint8_t val );
+CLINGO_API uint8_t const* find_uint8_c( cUint8Slice slice, uint8_t val );
 
-uint8_t const* max_uint8_c( cUint8Slice slice );
+CLINGO_API uint8_t const* max_uint8_c( cUint8Slice slice );
 
-uint8_t const* min_uint8_c( cUint8Slice slice );
+CLINGO_API uint8_t const* min_uint8_c( cUint8Slice slice );
 
-bool prod_uint8_c( cUint8Slice slice, uint64_t res[static 1] );
+CLINGO_API bool prod_uint8_c( cUint8Slice slice, uint64_t res[static 1] );
 
-void qsort_uint8_slice_c( cVarUint8Slice slice );
+CLINGO_API void qsort_uint8_slice_c( cVarUint8Slice slice );
 
-void reverse_uint8_slice_c( cVarUint8Slice slice );
+CLINGO_API void reverse_uint8_slice_c( cVarUint8Slice slice );
 
-void rotate_uint8_slice_c( cVarUint8Slice slice, int64_t distance );
+CLINGO_API void rotate_uint8_slice_c( cVarUint8Slice slice, int64_t distance );
 
-bool sum_uint8_c( cUint8Slice slice, uint64_t res[static 1] );
+CLINGO_API bool sum_uint8_c( cUint8Slice slice, uint64_t res[static 1] );
 
 #endif

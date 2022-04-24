@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
 #include "clingo/lang/window.h"
@@ -48,7 +49,7 @@ WINDOW_DEF_C_(
  overall
 *******************************************************************************/
 
-inline int cmp_int64_c( int64_t a, int64_t b )
+CLINGO_API inline int cmp_int64_c( int64_t a, int64_t b )
 {
    return a < b ? -1
                 : a > b ? 1
@@ -64,7 +65,7 @@ inline int cmp_int64_c( int64_t a, int64_t b )
  conv
 *******************************************************************************/
 
-inline CONV_C_(
+CLINGO_API inline CONV_C_(
    uint64_to_int64_c,   // FuncName
    uint64_t,            // FromType
    int64_t,             // ToType
@@ -76,7 +77,7 @@ inline CONV_C_(
  swap
 *******************************************************************************/
 
-inline int64_t swap_int64_c( int64_t val )
+CLINGO_API inline int64_t swap_int64_c( int64_t val )
 {
    union { int64_t i; uint64_t u; } v;
 
@@ -85,12 +86,12 @@ inline int64_t swap_int64_c( int64_t val )
 
    return v.i;
 }
-inline int64_t swap_int64_from_c( int64_t val, c_ByteOrder order )
+CLINGO_API inline int64_t swap_int64_from_c( int64_t val, c_ByteOrder order )
 {
    return system_order_is_c( order ) ? val
                                      : swap_int64_c( val );
 }
-inline int64_t swap_int64_to_c( int64_t val, c_ByteOrder order )
+CLINGO_API inline int64_t swap_int64_to_c( int64_t val, c_ByteOrder order )
 {
    return system_order_is_c( order ) ? val
                                      : swap_int64_c( val );
@@ -100,14 +101,14 @@ inline int64_t swap_int64_to_c( int64_t val, c_ByteOrder order )
  math
 *******************************************************************************/
 
-inline uint64_t hash_int64_c( int64_t val )
+CLINGO_API inline uint64_t hash_int64_c( int64_t val )
 {
    union { int64_t i; uint64_t u; } v;
    v.i = val;
    return v.u;
 }
 
-inline int64_t next_pow2_int64_c( int64_t val )
+CLINGO_API inline int64_t next_pow2_int64_c( int64_t val )
 {
    --val;
    val |= val >> 1;
@@ -125,26 +126,26 @@ inline int64_t next_pow2_int64_c( int64_t val )
  algo
 *******************************************************************************/
 
-int64_t const* bsearch_int64_c( cInt64Slice slice, int64_t val );
+CLINGO_API int64_t const* bsearch_int64_c( cInt64Slice slice, int64_t val );
 
-int cmp_int64_slice_c( cInt64Slice a, cInt64Slice b );
+CLINGO_API int cmp_int64_slice_c( cInt64Slice a, cInt64Slice b );
 
-int64_t count_eq_int64_c( cInt64Slice slice, int64_t val );
+CLINGO_API int64_t count_eq_int64_c( cInt64Slice slice, int64_t val );
 
-int64_t const* find_int64_c( cInt64Slice slice, int64_t val );
+CLINGO_API int64_t const* find_int64_c( cInt64Slice slice, int64_t val );
 
-int64_t const* max_int64_c( cInt64Slice slice );
+CLINGO_API int64_t const* max_int64_c( cInt64Slice slice );
 
-int64_t const* min_int64_c( cInt64Slice slice );
+CLINGO_API int64_t const* min_int64_c( cInt64Slice slice );
 
-bool prod_int64_c( cInt64Slice slice, int64_t res[static 1] );
+CLINGO_API bool prod_int64_c( cInt64Slice slice, int64_t res[static 1] );
 
-void qsort_int64_slice_c( cVarInt64Slice slice );
+CLINGO_API void qsort_int64_slice_c( cVarInt64Slice slice );
 
-void reverse_int64_slice_c( cVarInt64Slice slice );
+CLINGO_API void reverse_int64_slice_c( cVarInt64Slice slice );
 
-void rotate_int64_slice_c( cVarInt64Slice slice, int64_t distance );
+CLINGO_API void rotate_int64_slice_c( cVarInt64Slice slice, int64_t distance );
 
-bool sum_int64_c( cInt64Slice slice, int64_t res[static 1] );
+CLINGO_API bool sum_int64_c( cInt64Slice slice, int64_t res[static 1] );
 
 #endif

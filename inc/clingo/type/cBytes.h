@@ -1,6 +1,7 @@
 #ifndef CLINGO_TYPE_CBYTES_H
 #define CLINGO_TYPE_CBYTES_H
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
 #include "clingo/lang/window.h"
@@ -54,14 +55,14 @@ WINDOW_DEF_C_(
  bit
 *******************************************************************************/
 
-inline cByte get_bytes_bit_c( cBytes slice, int64_t pos )
+CLINGO_API inline cByte get_bytes_bit_c( cBytes slice, int64_t pos )
 {
    must_be_in_range_c_( 0, pos, slice.s * 8 );
 
    return get_byte_bit_c( slice.v[ pos / 8 ], pos % 8 );
 }
 
-inline void set_bytes_bit_c( cVarBytes slice, int64_t pos, cByte bit )
+CLINGO_API inline void set_bytes_bit_c( cVarBytes slice, int64_t pos, cByte bit )
 {
    must_be_in_range_c_( 0, pos, slice.s * 8 );
 
@@ -69,16 +70,16 @@ inline void set_bytes_bit_c( cVarBytes slice, int64_t pos, cByte bit )
    slice.v[ bytePos ] = set_byte_bit_c( slice.v[ bytePos ], pos % 8, bit );
 }
 
-void set_bytes_bits_c( cVarBytes slice, cRange range, cByte bit );
+CLINGO_API void set_bytes_bits_c( cVarBytes slice, cRange range, cByte bit );
 
-void set_odd_byte_c( cVarBytes slice,
-                     int64_t pos,
-                     int64_t bitOffset,
-                     cByte byte );
+CLINGO_API void set_odd_byte_c( cVarBytes slice,
+                                int64_t pos,
+                                int64_t bitOffset,
+                                cByte byte );
 
-void shift_bytes_c( cVarBytes slice, int64_t offset, cByte fillValue );
+CLINGO_API void shift_bytes_c( cVarBytes slice, int64_t offset, cByte fillValue );
 
-inline void toggle_bytes_bit_c( cVarBytes slice, int64_t pos )
+CLINGO_API inline void toggle_bytes_bit_c( cVarBytes slice, int64_t pos )
 {
    must_be_in_range_c_( 0, pos, slice.s * 8 );
 
@@ -90,7 +91,7 @@ inline void toggle_bytes_bit_c( cVarBytes slice, int64_t pos )
  logic
 *******************************************************************************/
 
-inline bool bitand_bytes_c( cBytes a, cBytes b, cVarBytes result )
+CLINGO_API inline bool bitand_bytes_c( cBytes a, cBytes b, cVarBytes result )
 {
    if ( a.s != b.s or a.s != result.s )
    {
@@ -105,7 +106,7 @@ inline bool bitand_bytes_c( cBytes a, cBytes b, cVarBytes result )
    return true;
 }
 
-inline bool bitor_bytes_c( cBytes a, cBytes b, cVarBytes result )
+CLINGO_API inline bool bitor_bytes_c( cBytes a, cBytes b, cVarBytes result )
 {
    if ( a.s != b.s or a.s != result.s )
    {
@@ -120,7 +121,7 @@ inline bool bitor_bytes_c( cBytes a, cBytes b, cVarBytes result )
    return true;
 }
 
-inline bool compl_bytes_c( cBytes slice, cVarBytes result )
+CLINGO_API inline bool compl_bytes_c( cBytes slice, cVarBytes result )
 {
    if ( slice.s != result.s )
    {
@@ -135,7 +136,7 @@ inline bool compl_bytes_c( cBytes slice, cVarBytes result )
    return true;
 }
 
-inline bool xor_bytes_c( cBytes a, cBytes b, cVarBytes result )
+CLINGO_API inline bool xor_bytes_c( cBytes a, cBytes b, cVarBytes result )
 {
    if ( a.s != b.s or a.s != result.s )
    {
@@ -154,22 +155,22 @@ inline bool xor_bytes_c( cBytes a, cBytes b, cVarBytes result )
  algo
 *******************************************************************************/
 
-bool bytes_ends_with_c( cBytes slice, cBytes needle );
+CLINGO_API bool bytes_ends_with_c( cBytes slice, cBytes needle );
 
-bool bytes_starts_with_c( cBytes slice, cBytes needle );
+CLINGO_API bool bytes_starts_with_c( cBytes slice, cBytes needle );
 
 #define cmp_bytes_c_( Slice, ... )                                             \
    cmp_bytes_c( (Slice), ((cBytes)slice_c_( cByte, __VA_ARGS__ )) )
-int cmp_bytes_c( cBytes a, cBytes b );
+CLINGO_API int cmp_bytes_c( cBytes a, cBytes b );
 
-int64_t count_eq_byte_c( cBytes slice, cByte val );
+CLINGO_API int64_t count_eq_byte_c( cBytes slice, cByte val );
 
-cByte const* find_byte_c( cBytes slice, cByte val );
+CLINGO_API cByte const* find_byte_c( cBytes slice, cByte val );
 
-int64_t index_of_bytes_c( cBytes slice, cBytes sub );
+CLINGO_API int64_t index_of_bytes_c( cBytes slice, cBytes sub );
 
-int64_t insert_byte_c( cVarBytes slice, int64_t index, cByte b );
+CLINGO_API int64_t insert_byte_c( cVarBytes slice, int64_t index, cByte b );
 
-int64_t insert_bytes_c( cVarBytes dst, int64_t index, cBytes src );
+CLINGO_API int64_t insert_bytes_c( cVarBytes dst, int64_t index, cBytes src );
 
 #endif

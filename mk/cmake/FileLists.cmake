@@ -2,6 +2,7 @@
 # INC_FILES
 ################################################################################
 set( INC_FILES
+   ${INC_DIR}/clingo/apidecl.h
    ${INC_DIR}/clingo/version.h
 
    ${INC_DIR}/clingo/container/CBitVec.h
@@ -180,13 +181,14 @@ set( SRC_FILES
 # TEST_FILES
 ################################################################################
 set( TEST_FILES
+#[[
    ${TEST_DIR}/_/io/read_write_util/read_in_read_command.c
    ${TEST_DIR}/_/io/read_write_util/read_in_till_end.c
    ${TEST_DIR}/_/io/write_num/write_bin.c
    ${TEST_DIR}/_/io/write_num/write_hex.c
    ${TEST_DIR}/_/io/write_num/write_oct.c
    ${TEST_DIR}/_/algo/sum.c
-
+]]
    ################################################################### container
    # CBitVec
    ${TEST_DIR}/clingo/container/CBitVec/bit_vec_from_cstr.c
@@ -339,6 +341,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/chunk/STATIC_BACK_CHUNK.c
    ${TEST_DIR}/clingo/lang/chunk/STATIC_FRONT_CHUNK.c
    ${TEST_DIR}/clingo/lang/chunk/valid_chunk.c
+
    # expect
    ${TEST_DIR}/clingo/lang/expect/check_cmp_results.c
    ${TEST_DIR}/clingo/lang/expect/expect.c
@@ -383,7 +386,6 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/math/isub32.c
    ${TEST_DIR}/clingo/lang/math/isub64.c
    ${TEST_DIR}/clingo/lang/math/isub8.c
-
    ${TEST_DIR}/clingo/lang/math/uadd16.c
    ${TEST_DIR}/clingo/lang/math/uadd32.c
    ${TEST_DIR}/clingo/lang/math/uadd64.c

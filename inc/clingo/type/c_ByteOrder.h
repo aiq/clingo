@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "clingo/apidecl.h"
+
 /*******************************************************************************
 ********************************************************* Types and Definitions
 *******************************************************************************/
@@ -54,18 +56,18 @@ typedef enum c_ByteOrder c_ByteOrder;
  util
 *******************************************************************************/
 
-inline c_ByteOrder system_order_c()
+CLINGO_API inline c_ByteOrder system_order_c()
 {
    int16_t word = 0x4321;
    return ( (*(char *)& word) == 0x21 ) ? c_LittleEndian
                                         : c_BigEndian;
 }
 
-inline bool system_order_is_c( c_ByteOrder order )
+CLINGO_API inline bool system_order_is_c( c_ByteOrder order )
 {
   return system_order_c() == order;
 }
 
-char const* stringify_byte_order_c( c_ByteOrder order );
+CLINGO_API char const* stringify_byte_order_c( c_ByteOrder order );
 
 #endif

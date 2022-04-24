@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
 #include "clingo/lang/window.h"
@@ -50,7 +51,7 @@ WINDOW_DEF_C_(
    (bool)(Value)                                                               \
 )
 
-inline int cmp_bool_c( bool a, bool b )
+CLINGO_API inline int cmp_bool_c( bool a, bool b )
 {
    return a - b;
 }
@@ -59,10 +60,10 @@ inline int cmp_bool_c( bool a, bool b )
  bool
 *******************************************************************************/
 
-bool and_bool_slice_values_c( cBoolSlice slice );
+CLINGO_API bool and_bool_slice_values_c( cBoolSlice slice );
 
-int64_t count_eq_bool_c( cBoolSlice slice, bool val );
+CLINGO_API int64_t count_eq_bool_c( cBoolSlice slice, bool val );
 
-bool or_bool_slice_values_c( cBoolSlice slice );
+CLINGO_API bool or_bool_slice_values_c( cBoolSlice slice );
 
 #endif

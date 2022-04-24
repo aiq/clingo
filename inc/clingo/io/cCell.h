@@ -1,6 +1,7 @@
 #ifndef CLINGO_IO_CCELL_H
 #define CLINGO_IO_CCELL_H
 
+#include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
 
@@ -25,8 +26,10 @@ typedef struct cCell cCell;
    (cCell){ .size=(Size), .orient=(Orient), .pad=(Pad) }                       \
 )
 
+CLINGO_API
 bool read_in_cell_c( cScanner sca[static 1], cCell cell[static 1] );
 
+CLINGO_API
 bool write_ascii_into_cell_c( cRecorder rec[static 1],
                               cChars ascii,
                               cCell const cell[static 1] );

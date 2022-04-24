@@ -26,7 +26,7 @@ typedef bool ( *c_check_byte )( cByte b );
    (cByte)(Value)                                                              \
 )
 
-inline int cmp_byte_c( cByte a, cByte b )
+CLINGO_API inline int cmp_byte_c( cByte a, cByte b )
 {
    return a < b ? -1 :
           a > b ? 1 :
@@ -37,19 +37,19 @@ inline int cmp_byte_c( cByte a, cByte b )
  bit
 *******************************************************************************/
 
-inline cByte byte_as_bit_c( cByte byte )
+CLINGO_API inline cByte byte_as_bit_c( cByte byte )
 {
    return byte & 1;
 }
 
-inline cByte get_byte_bit_c( cByte byte, int64_t pos )
+CLINGO_API inline cByte get_byte_bit_c( cByte byte, int64_t pos )
 {
    must_be_in_range_c_( 0, pos, 7 );
 
    return byte_as_bit_c( byte >> ( 7 - pos ) );
 }
 
-inline cByte set_byte_bit_c( cByte byte, int64_t pos, cByte bit )
+CLINGO_API inline cByte set_byte_bit_c( cByte byte, int64_t pos, cByte bit )
 {
    must_be_in_range_c_( 0, pos, 7 );
 
@@ -65,7 +65,7 @@ inline cByte set_byte_bit_c( cByte byte, int64_t pos, cByte bit )
    return byte;
 }
 
-inline cByte toggle_byte_bit_c( cByte byte, int64_t pos )
+CLINGO_API inline cByte toggle_byte_bit_c( cByte byte, int64_t pos )
 {
    must_be_in_range_c_( 0, pos, 7 );
 

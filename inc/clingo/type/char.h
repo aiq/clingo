@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <string.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
 #include "clingo/lang/window.h"
@@ -25,7 +26,7 @@ typedef int ( *c_check_char )( int c );
    (char)(Value)                                                               \
 )
 
-inline int cmp_char_c( char a, char b )
+CLINGO_API inline int cmp_char_c( char a, char b )
 {
    return a - b;
 }
@@ -34,7 +35,7 @@ inline int cmp_char_c( char a, char b )
  interpret
 *******************************************************************************/
 
-inline int8_t dec_char_value_c( char c )
+CLINGO_API inline int8_t dec_char_value_c( char c )
 {
    if ( in_range_c_( '0', c, '9' ) )
    {
@@ -44,7 +45,7 @@ inline int8_t dec_char_value_c( char c )
    return -1;
 }
 
-inline int8_t hex_char_value_c( char c )
+CLINGO_API inline int8_t hex_char_value_c( char c )
 {
    if ( in_range_c_( '0', c, '9' ) )
    {
@@ -62,7 +63,7 @@ inline int8_t hex_char_value_c( char c )
    return -1;
 }
 
-inline int8_t oct_char_value_c( char c )
+CLINGO_API inline int8_t oct_char_value_c( char c )
 {
    if ( in_range_c_( '0', c, '7' ) )
    {

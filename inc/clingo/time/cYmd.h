@@ -1,6 +1,7 @@
 #ifndef CLINGO_TIME_CYMD_H
 #define CLINGO_TIME_CYMD_H
 
+#include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
 #include "clingo/time/c_Month.h"
@@ -33,15 +34,15 @@ SLICE_DEF_C_(
  init
 *******************************************************************************/
 
-cYmd ymd_c( int64_t year, int64_t month, int64_t day );
+CLINGO_API cYmd ymd_c( int64_t year, int64_t month, int64_t day );
 
 /*******************************************************************************
  cmp
 *******************************************************************************/
 
-int cmp_ymd_c( cYmd a, cYmd b );
+CLINGO_API int cmp_ymd_c( cYmd a, cYmd b );
 
-bool ymd_is_valid_c( cYmd ymd );
+CLINGO_API bool ymd_is_valid_c( cYmd ymd );
 
 /*******************************************************************************
  io
@@ -49,13 +50,13 @@ bool ymd_is_valid_c( cYmd ymd );
 
 #define read_ymd_c_( Sca, Ymd )                                                \
    read_ymd_c( (Sca), (Ymd), "" )
-bool read_ymd_c( cScanner sca[static 1],
+CLINGO_API bool read_ymd_c( cScanner sca[static 1],
                  cYmd ymd[static 1],
                  char const fmt[static 1] );
 
 #define write_ymd_c_( Rec, Ymd )                                               \
    write_ymd_c( (Rec), (Ymd), "" )
-bool write_ymd_c( cRecorder rec[static 1],
+CLINGO_API bool write_ymd_c( cRecorder rec[static 1],
                   cYmd ymd,
                   char const fmt[static 1] );
 

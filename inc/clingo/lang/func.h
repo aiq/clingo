@@ -8,37 +8,45 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "clingo/apidecl.h"
+
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  cmp
 *******************************************************************************/
 
+CLINGO_API
 inline bool diff_c( int res )
 {
    return res != 0;
 }
 
+CLINGO_API
 inline bool eq_c( int res )
 {
    return res == 0;
 }
 
+CLINGO_API
 inline bool gt_c( int res )
 {
    return res > 0;
 }
 
+CLINGO_API
 inline bool gte_c( int res )
 {
    return res >= 0;
 }
 
+CLINGO_API
 inline bool lt_c( int res )
 {
    return res < 0;
 }
 
+CLINGO_API
 inline bool lte_c( int res )
 {
    return res <= 0;

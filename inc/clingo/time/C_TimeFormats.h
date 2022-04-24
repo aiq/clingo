@@ -1,6 +1,7 @@
 #ifndef CLINGO_TIME_CDATE_FORMATS_H
 #define CLINGO_TIME_CDATE_FORMATS_H
 
+#include "clingo/apidecl.h"
 #include "clingo/type/char.h"
 
 /*******************************************************************************
@@ -9,39 +10,39 @@
  date definitions
 *******************************************************************************/
 
-extern char const*const C_DateFormat;
-extern char const*const C_TextDate;
-extern char const*const C_IsoDate;
-extern char const*const C_IsoOrdinalDate;
-extern char const*const C_IsoWeekDate;
-extern char const*const C_Rfc2822Date;
+CLINGO_API extern char const*const C_DateFormat;
+CLINGO_API extern char const*const C_TextDate;
+CLINGO_API extern char const*const C_IsoDate;
+CLINGO_API extern char const*const C_IsoOrdinalDate;
+CLINGO_API extern char const*const C_IsoWeekDate;
+CLINGO_API extern char const*const C_Rfc2822Date;
 
 /*******************************************************************************
  daytime definitions
 *******************************************************************************/
 
-extern char const*const C_DaytimeFormat;
-extern char const*const C_IsoDaytime;
-extern char const*const C_KitchenTime;
+CLINGO_API extern char const*const C_DaytimeFormat;
+CLINGO_API extern char const*const C_IsoDaytime;
+CLINGO_API extern char const*const C_KitchenTime;
 
 /*******************************************************************************
  duration definitions
 *******************************************************************************/
 
-extern char const*const C_DurationFormat;
+CLINGO_API extern char const*const C_DurationFormat;
 
 /*******************************************************************************
  time definitions
 *******************************************************************************/
 
-extern char const*const C_TimeFormat;
-extern char const*const C_IsoTime;
-extern char const*const C_Rfc2822Time;
+CLINGO_API extern char const*const C_TimeFormat;
+CLINGO_API extern char const*const C_IsoTime;
+CLINGO_API extern char const*const C_Rfc2822Time;
 
-extern char const*const C_AnsiCTime;
-extern char const*const C_Rfc882Time;
-extern char const*const C_Rfc1123Time;
-extern char const*const C_Rfc3339Time;
-extern char const*const C_Rfc3339TimeNano;
+CLINGO_API extern char const*const C_AnsiCTime;
+CLINGO_API extern char const*const C_Rfc882Time;
+CLINGO_API extern char const*const C_Rfc1123Time;
+CLINGO_API extern char const*const C_Rfc3339Time;
+CLINGO_API extern char const*const C_Rfc3339TimeNano;
 
 #endif

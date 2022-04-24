@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
 #include "clingo/lang/window.h"
@@ -110,7 +111,7 @@ WINDOW_DEF_C_(
  overall
 *******************************************************************************/
 
-inline int64_t clamp_into_range_c( cRange range, int64_t value )
+CLINGO_API inline int64_t clamp_into_range_c( cRange range, int64_t value )
 {
    if ( value < range.min )
    {
@@ -126,27 +127,27 @@ inline int64_t clamp_into_range_c( cRange range, int64_t value )
    }
 }
 
-inline bool eq_range_c( cRange a, cRange b )
+CLINGO_API inline bool eq_range_c( cRange a, cRange b )
 {
    return a.min == b.min and a.max == b.max;
 }
 
-inline bool in_range_c( cRange range, int64_t value )
+CLINGO_API inline bool in_range_c( cRange range, int64_t value )
 {
    return in_range_c_( range.min, value, range.max );
 }
 
-inline bool range_is_valid_c( cRange range )
+CLINGO_API inline bool range_is_valid_c( cRange range )
 {
    return range.min <= range.max;
 }
 
-inline int64_t range_size_c( cRange range )
+CLINGO_API inline int64_t range_size_c( cRange range )
 {
    return ( range.max - range.min ) + 1;
 }
 
-inline cRange shift_range_c( cRange range, int64_t distance )
+CLINGO_API inline cRange shift_range_c( cRange range, int64_t distance )
 {
    return closed_range_c_( range.min + distance, range.max + distance );
 }

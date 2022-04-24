@@ -1,6 +1,7 @@
 #ifndef CLINGO_STR_CDICTIONARY_H
 #define CLINGO_STR_CDICTIONARY_H
 
+#include "clingo/apidecl.h"
 #include "clingo/container/map.h"
 #include "clingo/string/CString.h"
 
@@ -11,6 +12,7 @@
 *******************************************************************************/
 
 OBJ_OBJ_MAP_DEF_C_(
+   CLINGO_API,       // LibApi
    CDictionary,      // MapType
    CString,          // KeyType
    CString,          // ValType
@@ -24,7 +26,7 @@ OBJ_OBJ_MAP_DEF_C_(
  wrap
 *******************************************************************************/
 
-inline bool chars_in_dictionary_c( CDictionary* dict, cChars key )
+CLINGO_API inline bool chars_in_dictionary_c( CDictionary* dict, cChars key )
 {
    must_exist_c_( dict );
 
@@ -36,7 +38,7 @@ inline bool chars_in_dictionary_c( CDictionary* dict, cChars key )
    return ok;
 }
 
-inline bool cstr_in_dictionary_c( CDictionary* dict,
+CLINGO_API inline bool cstr_in_dictionary_c( CDictionary* dict,
                                   char const key[static 1] )
 {
    must_exist_c_( dict );
@@ -44,7 +46,7 @@ inline bool cstr_in_dictionary_c( CDictionary* dict,
    return chars_in_dictionary_c( dict, c_c( key ) );
 }
 
-inline CString* get_via_chars_from_dictionary_c( CDictionary* dict,
+CLINGO_API inline CString* get_via_chars_from_dictionary_c( CDictionary* dict,
                                                  cChars key )
 {
    must_exist_c_( dict );
@@ -57,7 +59,7 @@ inline CString* get_via_chars_from_dictionary_c( CDictionary* dict,
    return result;
 }
 
-inline CString* get_via_cstr_from_dictionary_c( CDictionary* dict,
+CLINGO_API inline CString* get_via_cstr_from_dictionary_c( CDictionary* dict,
                                                 char const key[static 1] )
 {
    must_exist_c_( dict );
@@ -65,7 +67,7 @@ inline CString* get_via_cstr_from_dictionary_c( CDictionary* dict,
    return get_via_chars_from_dictionary_c( dict, c_c( key ) );
 }
 
-inline bool remove_via_chars_from_dictionary_c( CDictionary* dict,
+CLINGO_API inline bool remove_via_chars_from_dictionary_c( CDictionary* dict,
                                                 cChars key )
 {
    must_exist_c_( dict );
@@ -78,7 +80,7 @@ inline bool remove_via_chars_from_dictionary_c( CDictionary* dict,
    return ok;
 }
 
-inline bool remove_via_cstr_from_dictionary_c( CDictionary* dict,
+CLINGO_API inline bool remove_via_cstr_from_dictionary_c( CDictionary* dict,
                                                char const key[static 1] )
 {
    must_exist_c_( dict );
@@ -86,7 +88,7 @@ inline bool remove_via_cstr_from_dictionary_c( CDictionary* dict,
    return remove_via_chars_from_dictionary_c( dict, c_c( key ) );
 }
 
-inline bool set_chars_on_dictionary_c( CDictionary* dict,
+CLINGO_API inline bool set_chars_on_dictionary_c( CDictionary* dict,
                                        cChars key,
                                        cChars val )
 {
@@ -108,7 +110,7 @@ inline bool set_chars_on_dictionary_c( CDictionary* dict,
    return ok;
 }
 
-inline bool set_cstr_on_dictionary_c( CDictionary* dict,
+CLINGO_API inline bool set_cstr_on_dictionary_c( CDictionary* dict,
                                       char const key[static 1],
                                       char const val[static 1] )
 {

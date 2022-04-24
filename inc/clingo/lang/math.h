@@ -1,6 +1,7 @@
 #ifndef CLINGO_LANG_MATH_H
 #define CLINGO_LANG_MATH_H
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/func.h"
 
 /*******************************************************************************
@@ -123,10 +124,10 @@ bool FuncName( Type a, Type b, Type res[static 1] )                            \
 *******************************************************************************/
 
 // ----------- FuncName,   Type,    EdgeValue
-inline ABS_C_( iabs8_c,    int8_t,  INT8_MIN )
-inline ABS_C_( iabs16_c,   int16_t, INT16_MIN )
-inline ABS_C_( iabs32_c,   int32_t, INT32_MIN )
-inline ABS_C_( iabs64_c,   int64_t, INT64_MIN )
+CLINGO_API inline ABS_C_( iabs8_c,    int8_t,  INT8_MIN )
+CLINGO_API inline ABS_C_( iabs16_c,   int16_t, INT16_MIN )
+CLINGO_API inline ABS_C_( iabs32_c,   int32_t, INT32_MIN )
+CLINGO_API inline ABS_C_( iabs64_c,   int64_t, INT64_MIN )
 
 #define abs_c_( Val, Res )                                                     \
    _Generic( ( *Res ),                                                         \
@@ -141,15 +142,15 @@ inline ABS_C_( iabs64_c,   int64_t, INT64_MIN )
 *******************************************************************************/
 
 // ----------- FuncName,   Type,       MinValue,   MaxValue
-inline ADD_C_( iadd8_c,    int8_t,     INT8_MIN,   INT8_MAX )
-inline ADD_C_( iadd16_c,   int16_t,    INT16_MIN,  INT16_MAX )
-inline ADD_C_( iadd32_c,   int32_t,    INT32_MIN,  INT32_MAX )
-inline ADD_C_( iadd64_c,   int64_t,    INT64_MIN,  INT64_MAX )
+CLINGO_API inline ADD_C_( iadd8_c,    int8_t,     INT8_MIN,   INT8_MAX )
+CLINGO_API inline ADD_C_( iadd16_c,   int16_t,    INT16_MIN,  INT16_MAX )
+CLINGO_API inline ADD_C_( iadd32_c,   int32_t,    INT32_MIN,  INT32_MAX )
+CLINGO_API inline ADD_C_( iadd64_c,   int64_t,    INT64_MIN,  INT64_MAX )
 
-inline ADD_C_( uadd8_c,    uint8_t,    0,          UINT8_MAX )
-inline ADD_C_( uadd16_c,   uint16_t,   0,          UINT16_MAX )
-inline ADD_C_( uadd32_c,   uint32_t,   0,          UINT32_MAX )
-inline ADD_C_( uadd64_c,   uint64_t,   0,          UINT64_MAX )
+CLINGO_API inline ADD_C_( uadd8_c,    uint8_t,    0,          UINT8_MAX )
+CLINGO_API inline ADD_C_( uadd16_c,   uint16_t,   0,          UINT16_MAX )
+CLINGO_API inline ADD_C_( uadd32_c,   uint32_t,   0,          UINT32_MAX )
+CLINGO_API inline ADD_C_( uadd64_c,   uint64_t,   0,          UINT64_MAX )
 
 #define add_c_( A, B, Res )                                                    \
    _Generic( ( *Res ),                                                         \
@@ -167,7 +168,7 @@ inline ADD_C_( uadd64_c,   uint64_t,   0,          UINT64_MAX )
  conv
 *******************************************************************************/
 
-inline CONV_C_(
+CLINGO_API inline CONV_C_(
    int64_to_size_c,  // FuncName
    int64_t,          // FromType
    size_t,           // ToType
@@ -175,7 +176,7 @@ inline CONV_C_(
    INT64_MAX         // MaxValue
 )
 
-inline CONV_C_(
+CLINGO_API inline CONV_C_(
    uint64_to_size_c,    // FuncName
    uint64_t,            // FromType
    size_t,              // ToType
@@ -188,15 +189,15 @@ inline CONV_C_(
 *******************************************************************************/
 
 // ----------- FuncName,   Type
-inline MAX_C_( imax8_c,    int8_t )
-inline MAX_C_( imax16_c,   int16_t )
-inline MAX_C_( imax32_c,   int32_t )
-inline MAX_C_( imax64_c,   int64_t )
+CLINGO_API inline MAX_C_( imax8_c,    int8_t )
+CLINGO_API inline MAX_C_( imax16_c,   int16_t )
+CLINGO_API inline MAX_C_( imax32_c,   int32_t )
+CLINGO_API inline MAX_C_( imax64_c,   int64_t )
 
-inline MAX_C_( umax8_c,    uint8_t )
-inline MAX_C_( umax16_c,   uint16_t )
-inline MAX_C_( umax32_c,   uint32_t )
-inline MAX_C_( umax64_c,   uint64_t )
+CLINGO_API inline MAX_C_( umax8_c,    uint8_t )
+CLINGO_API inline MAX_C_( umax16_c,   uint16_t )
+CLINGO_API inline MAX_C_( umax32_c,   uint32_t )
+CLINGO_API inline MAX_C_( umax64_c,   uint64_t )
 
 #define max_c_( A, B )                                                         \
    _Generic( ( (A) + (B) ),                                                    \
@@ -218,15 +219,15 @@ inline MAX_C_( umax64_c,   uint64_t )
 *******************************************************************************/
 
 // ----------- FuncName,   Type
-inline MIN_C_( imin8_c,    int8_t )
-inline MIN_C_( imin16_c,   int16_t )
-inline MIN_C_( imin32_c,   int32_t )
-inline MIN_C_( imin64_c,   int64_t )
+CLINGO_API inline MIN_C_( imin8_c,    int8_t )
+CLINGO_API inline MIN_C_( imin16_c,   int16_t )
+CLINGO_API inline MIN_C_( imin32_c,   int32_t )
+CLINGO_API inline MIN_C_( imin64_c,   int64_t )
 
-inline MIN_C_( umin8_c,    uint8_t )
-inline MIN_C_( umin16_c,   uint16_t )
-inline MIN_C_( umin32_c,   uint32_t )
-inline MIN_C_( umin64_c,   uint64_t )
+CLINGO_API inline MIN_C_( umin8_c,    uint8_t )
+CLINGO_API inline MIN_C_( umin16_c,   uint16_t )
+CLINGO_API inline MIN_C_( umin32_c,   uint32_t )
+CLINGO_API inline MIN_C_( umin64_c,   uint64_t )
 
 #define min_c_( A, B )                                                         \
    _Generic( ( (A) + (B) ),                                                    \
@@ -248,10 +249,10 @@ inline MIN_C_( umin64_c,   uint64_t )
 *******************************************************************************/
 
 // ----------- FuncName,   Type,    TmpType, MinValue,   MaxValue
-inline MUL_C_( imul8_c,    int8_t,  int16_t, INT8_MIN,   INT8_MAX )
-inline MUL_C_( imul16_c,   int16_t, int32_t, INT16_MIN,  INT16_MAX )
-inline MUL_C_( imul32_c,   int32_t, int64_t, INT32_MIN,  INT32_MAX )
-inline bool imul64_c( int64_t a, int64_t b, int64_t res[static 1] )
+CLINGO_API inline MUL_C_( imul8_c,    int8_t,  int16_t, INT8_MIN,   INT8_MAX )
+CLINGO_API inline MUL_C_( imul16_c,   int16_t, int32_t, INT16_MIN,  INT16_MAX )
+CLINGO_API inline MUL_C_( imul32_c,   int32_t, int64_t, INT32_MIN,  INT32_MAX )
+CLINGO_API inline bool imul64_c( int64_t a, int64_t b, int64_t res[static 1] )
 {
    if (
          ( a > 0 and b > 0 and a > ( INT64_MAX / b ) ) or
@@ -268,10 +269,10 @@ inline bool imul64_c( int64_t a, int64_t b, int64_t res[static 1] )
 }
 
 // ----------- FuncName,   Type.       TmpType,    MinValue,   MaxValue
-inline MUL_C_( umul8_c,    uint8_t,    uint16_t,   0,          UINT8_MAX )
-inline MUL_C_( umul16_c,   uint16_t,   uint32_t,   0,          UINT16_MAX )
-inline MUL_C_( umul32_c,   uint32_t,   uint64_t,   0,          UINT32_MAX )
-inline bool umul64_c( uint64_t a, uint64_t b, uint64_t res[static 1] )
+CLINGO_API inline MUL_C_( umul8_c,    uint8_t,    uint16_t,   0,          UINT8_MAX )
+CLINGO_API inline MUL_C_( umul16_c,   uint16_t,   uint32_t,   0,          UINT16_MAX )
+CLINGO_API inline MUL_C_( umul32_c,   uint32_t,   uint64_t,   0,          UINT32_MAX )
+CLINGO_API inline bool umul64_c( uint64_t a, uint64_t b, uint64_t res[static 1] )
 {
    if ( a > b )
    {
@@ -310,15 +311,15 @@ inline bool umul64_c( uint64_t a, uint64_t b, uint64_t res[static 1] )
 *******************************************************************************/
 
 // ----------- FuncName,   Type,       MinValue,   MaxValue
-inline SUB_C_( isub8_c,    int8_t,     INT8_MIN,   INT8_MAX )
-inline SUB_C_( isub16_c,   int16_t,    INT16_MIN,  INT16_MAX )
-inline SUB_C_( isub32_c,   int32_t,    INT32_MIN,  INT32_MAX )
-inline SUB_C_( isub64_c,   int64_t,    INT64_MIN,  INT64_MAX )
+CLINGO_API inline SUB_C_( isub8_c,    int8_t,     INT8_MIN,   INT8_MAX )
+CLINGO_API inline SUB_C_( isub16_c,   int16_t,    INT16_MIN,  INT16_MAX )
+CLINGO_API inline SUB_C_( isub32_c,   int32_t,    INT32_MIN,  INT32_MAX )
+CLINGO_API inline SUB_C_( isub64_c,   int64_t,    INT64_MIN,  INT64_MAX )
 
-inline SUB_C_( usub8_c,    uint8_t,    0,          UINT8_MAX )
-inline SUB_C_( usub16_c,   uint16_t,   0,          UINT16_MAX )
-inline SUB_C_( usub32_c,   uint32_t,   0,          UINT32_MAX )
-inline SUB_C_( usub64_c,   uint64_t,   0,          UINT64_MAX )
+CLINGO_API inline SUB_C_( usub8_c,    uint8_t,    0,          UINT8_MAX )
+CLINGO_API inline SUB_C_( usub16_c,   uint16_t,   0,          UINT16_MAX )
+CLINGO_API inline SUB_C_( usub32_c,   uint32_t,   0,          UINT32_MAX )
+CLINGO_API inline SUB_C_( usub64_c,   uint64_t,   0,          UINT64_MAX )
 
 #define sub_c_( A, B, Res )                                                    \
    _Generic( ( *Res )                                                          \

@@ -1,6 +1,7 @@
 #ifndef CLINGO_STR_CSTRING_SET_H
 #define CLINGO_STR_CSTRING_SET_H
 
+#include "clingo/apidecl.h"
 #include "clingo/container/set.h"
 #include "clingo/string/CString.h"
 
@@ -9,6 +10,7 @@
 *******************************************************************************/
 
 OBJ_SET_DEF_C_(
+   CLINGO_API,       // LibApi
    CStringSet,       // SetType
    CString,          // ObjType
    string_set_c,     // FuncSuffix
@@ -19,7 +21,7 @@ OBJ_SET_DEF_C_(
  wrap
 *******************************************************************************/
 
-inline bool chars_in_string_set_c( CStringSet* set, cChars val )
+CLINGO_API inline bool chars_in_string_set_c( CStringSet* set, cChars val )
 {
    must_exist_c_( set );
 
@@ -31,7 +33,7 @@ inline bool chars_in_string_set_c( CStringSet* set, cChars val )
    return ok;
 }
 
-inline bool remove_chars_from_string_set_c( CStringSet* set, cChars val )
+CLINGO_API inline bool remove_chars_from_string_set_c( CStringSet* set, cChars val )
 {
    must_exist_c_( set );
 
@@ -43,7 +45,7 @@ inline bool remove_chars_from_string_set_c( CStringSet* set, cChars val )
    return ok;
 }
 
-inline bool set_chars_on_string_set_c( CStringSet* set, cChars val )
+CLINGO_API inline bool set_chars_on_string_set_c( CStringSet* set, cChars val )
 {
    must_exist_c_( set );
 

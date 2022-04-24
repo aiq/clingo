@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <iso646.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/algo.h"
 #include "clingo/lang/CObject.h"
 #include "clingo/type/float.h"
@@ -297,29 +298,29 @@ typedef struct VecType VecType;
 
 
 #define OBJ_VEC_DEF_C_(                                                        \
-   VecType, ObjType, FuncSuffix, Meta                                          \
+   LibApi, VecType, ObjType, FuncSuffix, Meta                                  \
 )                                                                              \
 /**************************************/                                       \
 struct VecType;                                                                \
 typedef struct VecType VecType;                                                \
-extern cMeta const Meta;                                                       \
+LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
-VecType* make_##FuncSuffix( int64_t size );                                    \
-VecType* new_##FuncSuffix();                                                   \
+LibApi VecType* make_##FuncSuffix( int64_t size );                             \
+LibApi VecType* new_##FuncSuffix();                                            \
 /**************************************/                                       \
-ObjType* const* data_of_##FuncSuffix( VecType const* vec );                     \
-ObjType** var_data_of_##FuncSuffix( VecType* vec );                             \
+LibApi ObjType* const* data_of_##FuncSuffix( VecType const* vec );             \
+LibApi ObjType** var_data_of_##FuncSuffix( VecType* vec );                     \
 /**************************************/                                       \
-bool resize_##FuncSuffix( VecType* vec, int64_t size );                        \
+LibApi bool resize_##FuncSuffix( VecType* vec, int64_t size );                 \
 /**************************************/                                       \
-cVecInfo const* info_of_##FuncSuffix( VecType const* vec );                    \
+LibApi cVecInfo const* info_of_##FuncSuffix( VecType const* vec );             \
 /**************************************/                                       \
-bool add_to_##FuncSuffix( VecType* vec, ObjType* obj );                         \
-bool add_array_to_##FuncSuffix( VecType* vec, int64_t n, ObjType* const* arr );\
-ObjType* get_from_##FuncSuffix( VecType const* vec, int64_t pos );             \
-bool insert_into_##FuncSuffix( VecType* vec, int64_t pos, ObjType* obj );      \
-bool remove_from_##FuncSuffix( VecType* vec, int64_t pos );                    \
-void set_on_##FuncSuffix( VecType* vec, int64_t pos, ObjType* obj );
+LibApi bool add_to_##FuncSuffix( VecType* vec, ObjType* obj );                 \
+LibApi bool add_array_to_##FuncSuffix( VecType* vec, int64_t n, ObjType* const* arr );\
+LibApi ObjType* get_from_##FuncSuffix( VecType const* vec, int64_t pos );      \
+LibApi bool insert_into_##FuncSuffix( VecType* vec, int64_t pos, ObjType* obj );      \
+LibApi bool remove_from_##FuncSuffix( VecType* vec, int64_t pos );             \
+LibApi void set_on_##FuncSuffix( VecType* vec, int64_t pos, ObjType* obj );
 
 /**********************************************************/
 
@@ -375,30 +376,30 @@ Static SET_ON_VEC_C_(                                                          \
 *******************************************************************************/
 
 #define VAL_VEC_DEF_C_(                                                        \
-   VecType, ValType, FuncSuffix, Meta                                          \
+   LibApi, VecType, ValType, FuncSuffix, Meta                                  \
 )                                                                              \
 /**************************************/                                       \
 struct VecType;                                                                \
 typedef struct VecType VecType;                                                \
-extern cMeta const Meta;                                                       \
+LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
-VecType* make_##FuncSuffix( int64_t cap );                                     \
-VecType* new_##FuncSuffix();                                                   \
+LibApi VecType* make_##FuncSuffix( int64_t cap );                              \
+LibApi VecType* new_##FuncSuffix();                                            \
 /**************************************/                                       \
-ValType const* data_of_##FuncSuffix( VecType const* vec );                     \
-ValType* var_data_of_##FuncSuffix( VecType* vec );                             \
+LibApi ValType const* data_of_##FuncSuffix( VecType const* vec );              \
+LibApi ValType* var_data_of_##FuncSuffix( VecType* vec );                      \
 /**************************************/                                       \
-bool resize_##FuncSuffix( VecType* vec, int64_t cap );                         \
+LibApi bool resize_##FuncSuffix( VecType* vec, int64_t cap );                  \
 /**************************************/                                       \
-cVecInfo const* info_of_##FuncSuffix( VecType const* vec );                    \
+LibApi cVecInfo const* info_of_##FuncSuffix( VecType const* vec );             \
 /**************************************/                                       \
-bool add_to_##FuncSuffix( VecType* vec, ValType val );                         \
-bool add_array_to_##FuncSuffix( VecType* vec, int64_t n, ValType const* arr ); \
-ValType const* get_from_##FuncSuffix( VecType const* vec, int64_t pos );       \
-ValType* get_var_from_##FuncSuffix( VecType* vec, int64_t pos );               \
-bool insert_into_##FuncSuffix( VecType* vec, int64_t pos, ValType val );       \
-bool remove_from_##FuncSuffix( VecType* vec, int64_t pos );                    \
-void set_on_##FuncSuffix( VecType* vec, int64_t pos, ValType val );
+LibApi bool add_to_##FuncSuffix( VecType* vec, ValType val );                  \
+LibApi bool add_array_to_##FuncSuffix( VecType* vec, int64_t n, ValType const* arr ); \
+LibApi ValType const* get_from_##FuncSuffix( VecType const* vec, int64_t pos );\
+LibApi ValType* get_var_from_##FuncSuffix( VecType* vec, int64_t pos );        \
+LibApi bool insert_into_##FuncSuffix( VecType* vec, int64_t pos, ValType val );\
+LibApi bool remove_from_##FuncSuffix( VecType* vec, int64_t pos );             \
+LibApi void set_on_##FuncSuffix( VecType* vec, int64_t pos, ValType val );
 
 /**********************************************************/
 
@@ -480,7 +481,7 @@ SliceType var_slice_of_##FuncSuffix( VecType* vec )                            \
  info
 *******************************************************************************/
 
-inline float vec_load_c( cVecInfo const info[static 1] )
+CLINGO_API inline float vec_load_c( cVecInfo const info[static 1] )
 {
    must_exist_c_( info );
    double cap = (double)info->cap;
@@ -488,7 +489,7 @@ inline float vec_load_c( cVecInfo const info[static 1] )
    return float_c_( ( 1.0 / cap ) * count );
 }
 
-inline bool vec_is_empty_c( cVecInfo const info[static 1] )
+CLINGO_API inline bool vec_is_empty_c( cVecInfo const info[static 1] )
 {
    must_exist_c_( info );
    return info->count == 0;

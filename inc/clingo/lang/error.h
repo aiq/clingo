@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "clingo/apidecl.h"
+
 /*******************************************************************************
 ********************************************************* Types and Definitions 
 *******************************************************************************/
@@ -58,16 +60,19 @@ typedef struct cError cError;
 /*******************************************************************************
 
 *******************************************************************************/
-
+CLINGO_API
 uint32_t error_depth_c( cError const err[static 1] );
 
+CLINGO_API
 int fprint_error_c( FILE* output, cError const err[static 1] );
 
+CLINGO_API
 inline int print_error_c( cError const err[static 1] )
 {
    return fprint_error_c( stdout, err );
 }
 
+CLINGO_API
 void reset_error_c( cError err[static 1] );
 
 #endif

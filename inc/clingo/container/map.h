@@ -1,6 +1,7 @@
 #ifndef CLINGO_CONTAINER_MAP_H
 #define CLINGO_CONTAINER_MAP_H
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/algo.h"
 #include "clingo/lang/CObject.h"
 #include "clingo/lang/func.h"
@@ -410,33 +411,33 @@ intl_set_on_##FuncSuffix( MapType*, uint64_t, RowType*, RowType* );
 *******************************************************************************/
 
 #define OBJ_OBJ_MAP_DEF_C_(                                                    \
-   MapType, KeyType, ValType, FuncSuffix, Meta                                 \
+   LibApi, MapType, KeyType, ValType, FuncSuffix, Meta                         \
 )                                                                              \
 /**************************************/                                       \
 struct MapType;                                                                \
 typedef struct MapType MapType;                                                \
-extern cMeta const Meta;                                                       \
+LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
-MapType* make_##FuncSuffix( int64_t size, float maxLoad );                     \
-MapType* new_##FuncSuffix();                                                   \
+LibApi MapType* make_##FuncSuffix( int64_t size, float maxLoad );                     \
+LibApi MapType* new_##FuncSuffix();                                                   \
 /**************************************/                                       \
-cMapInfo const* info_of_##FuncSuffix( MapType const* map );                    \
-bool resize_##FuncSuffix( MapType* map, int64_t size );                        \
-bool set_max_load_of_##FuncSuffix( MapType* map, float maxLoad );              \
+LibApi cMapInfo const* info_of_##FuncSuffix( MapType const* map );                    \
+LibApi bool resize_##FuncSuffix( MapType* map, int64_t size );                        \
+LibApi bool set_max_load_of_##FuncSuffix( MapType* map, float maxLoad );              \
 /**************************************/                                       \
-cMapItr next_in_##FuncSuffix( MapType const* map,                              \
+LibApi cMapItr next_in_##FuncSuffix( MapType const* map,                              \
                               cMapItr itr,                                     \
                               KeyType const* key[static 1],                    \
                               ValType const* val[static 1] );                  \
-cMapItr next_var_in_##FuncSuffix( MapType* map,                                \
+LibApi cMapItr next_var_in_##FuncSuffix( MapType* map,                                \
                                   cMapItr itr,                                 \
                                   KeyType const* key[static 1],                \
                                   ValType* val[static 1] );                    \
 /**************************************/                                       \
-ValType* get_from_##FuncSuffix( MapType const* map, KeyType const* key );      \
-bool in_##FuncSuffix( MapType const* map, KeyType const* key );                \
-bool remove_from_##FuncSuffix( MapType* map, KeyType const* key );             \
-bool set_on_##FuncSuffix( MapType* map, KeyType* key, ValType* val );
+LibApi ValType* get_from_##FuncSuffix( MapType const* map, KeyType const* key );      \
+LibApi bool in_##FuncSuffix( MapType const* map, KeyType const* key );                \
+LibApi bool remove_from_##FuncSuffix( MapType* map, KeyType const* key );             \
+LibApi bool set_on_##FuncSuffix( MapType* map, KeyType* key, ValType* val );
 
 /******************************************************************************/
 
@@ -552,34 +553,34 @@ INTL_SET_ON_MAP_C_( FuncSuffix, MapType, RowType, CmpFunc, do_not_ref_c_ )
 *******************************************************************************/
 
 #define VAL_VAL_MAP_DEF_C_(                                                    \
-   MapType, KeyType, ValType, FuncSuffix, Meta                                 \
+   LibApi, MapType, KeyType, ValType, FuncSuffix, Meta                                 \
 )                                                                              \
 /**************************************/                                       \
 struct MapType;                                                                \
 typedef struct MapType MapType;                                                \
-extern cMeta const Meta;                                                       \
+LibApi extern cMeta const Meta;                                                       \
 /**************************************/                                       \
-MapType* make_##FuncSuffix( int64_t size, float maxLoad );                     \
-MapType* new_##FuncSuffix();                                                   \
+LibApi MapType* make_##FuncSuffix( int64_t size, float maxLoad );                     \
+LibApi MapType* new_##FuncSuffix();                                                   \
 /**************************************/                                       \
-cMapInfo const* info_of_##FuncSuffix( MapType const* map );                    \
-bool resize_##FuncSuffix( MapType* map, int64_t size );                        \
-bool set_max_load_of_##FuncSuffix( MapType* map, float maxLoad );              \
+LibApi cMapInfo const* info_of_##FuncSuffix( MapType const* map );                    \
+LibApi bool resize_##FuncSuffix( MapType* map, int64_t size );                        \
+LibApi bool set_max_load_of_##FuncSuffix( MapType* map, float maxLoad );              \
 /**************************************/                                       \
-cMapItr next_in_##FuncSuffix( MapType const* map,                              \
+LibApi cMapItr next_in_##FuncSuffix( MapType const* map,                              \
                               cMapItr itr,                                     \
                               KeyType const* key[static 1],                    \
                               ValType const* val[static 1] );                  \
-cMapItr next_var_in_##FuncSuffix( MapType* map,                                \
+LibApi cMapItr next_var_in_##FuncSuffix( MapType* map,                                \
                                   cMapItr itr,                                 \
                                   KeyType const* key[static 1],                \
                                   ValType* val[static 1] );                    \
 /**************************************/                                       \
-ValType const* get_from_##FuncSuffix( MapType const* map, KeyType key );       \
-ValType* get_var_from_##FuncSuffix( MapType* map, KeyType key );               \
-bool in_##FuncSuffix( MapType const* map, KeyType key );                       \
-bool remove_from_##FuncSuffix( MapType* map, KeyType key );                    \
-bool set_on_##FuncSuffix( MapType* map, KeyType key, ValType val );
+LibApi ValType const* get_from_##FuncSuffix( MapType const* map, KeyType key );       \
+LibApi ValType* get_var_from_##FuncSuffix( MapType* map, KeyType key );               \
+LibApi bool in_##FuncSuffix( MapType const* map, KeyType key );                       \
+LibApi bool remove_from_##FuncSuffix( MapType* map, KeyType key );                    \
+LibApi bool set_on_##FuncSuffix( MapType* map, KeyType key, ValType val );
 
 /******************************************************************************/
 
@@ -669,14 +670,14 @@ static inline INTL_SET_ON_MAP_C_( FuncSuffix, MapType, RowType, CmpFunc, DoRef )
  util
 *******************************************************************************/
 
-inline float calculate_load_c( int64_t cap, int64_t count )
+CLINGO_API inline float calculate_load_c( int64_t cap, int64_t count )
 {
    double fcap = (double)cap;
    double fcount = (double)count;
    return float_c_( ( 1.0 / fcap ) * fcount );
 }
 
-inline int64_t fibonacci_hash_index_c( uint64_t hash, uint8_t shift )
+CLINGO_API inline int64_t fibonacci_hash_index_c( uint64_t hash, uint8_t shift )
 {
    uint64_t u64 = ( 11400714819323198485ull * hash ) >> shift;
    int64_t i64 = 0;
@@ -684,7 +685,7 @@ inline int64_t fibonacci_hash_index_c( uint64_t hash, uint8_t shift )
    return i64;
 }
 
-inline uint64_t combine_hashes_c( cUint64Slice hashes )
+CLINGO_API inline uint64_t combine_hashes_c( cUint64Slice hashes )
 {
    uint64_t hash = 17;
    for_each_c_( uint64_t const*, oth, hashes )
@@ -698,20 +699,20 @@ inline uint64_t combine_hashes_c( cUint64Slice hashes )
  info
 *******************************************************************************/
 
-inline int64_t map_cap_c( cMapInfo const info[static 1] )
+CLINGO_API inline int64_t map_cap_c( cMapInfo const info[static 1] )
 {
    must_exist_c_( info );
    return int64_c_( (double)info->size * (double)info->maxLoad );
 }
 
-inline float map_load_c( cMapInfo const info[static 1] )
+CLINGO_API inline float map_load_c( cMapInfo const info[static 1] )
 {
    must_exist_c_( info );
    return calculate_load_c( info->size, info->count );
 
 }
 
-inline bool map_is_empty_c( cMapInfo const info[static 1] )
+CLINGO_API inline bool map_is_empty_c( cMapInfo const info[static 1] )
 {
    must_exist_c_( info );
    return info->count == 0;
@@ -728,12 +729,12 @@ for (                                                                          \
    Itr = Func( Map, Itr, &KeyPtr, &ValPtr )                                    \
 )
 
-inline cMapItr start_map_itr_c()
+CLINGO_API inline cMapItr start_map_itr_c()
 {
    return (cMapItr){ ._v = -1 };
 }
 
-inline bool map_itr_is_valid_c( cMapItr itr )
+CLINGO_API inline bool map_itr_is_valid_c( cMapItr itr )
 {
    return itr._v != -1;
 }

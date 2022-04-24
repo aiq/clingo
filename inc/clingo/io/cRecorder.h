@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/error.h"
 #include "clingo/lang/mem.h"
 #include "clingo/type/cBytes.h"
@@ -82,10 +83,14 @@ typedef struct cRecordMarker cRecordMarker;
  mem
 *******************************************************************************/
 
+CLINGO_API
 bool alloc_recorder_mem_c( cRecorder rec[static 1], int64_t size );
+CLINGO_API
 bool realloc_recorder_mem_c( cRecorder rec[static 1], int64_t size );
+CLINGO_API
 void free_recorder_mem_c( cRecorder rec[static 1] );
 
+CLINGO_API
 inline int64_t recorder_cap_c( cRecorder const rec[static 1] )
 {
    must_exist_c_( rec );
@@ -96,7 +101,7 @@ inline int64_t recorder_cap_c( cRecorder const rec[static 1] )
 /*******************************************************************************
  move
 *******************************************************************************/
-
+CLINGO_API
 inline bool move_recorder_c( cRecorder rec[static 1], int64_t offset )
 {
    must_exist_c_( rec );
@@ -115,18 +120,18 @@ inline bool move_recorder_c( cRecorder rec[static 1], int64_t offset )
    return true;
 }
 
+CLINGO_API
 inline bool move_recorder_to_c( cRecorder rec[static 1], int64_t pos )
 {
    must_exist_c_( rec );
-
    int64_t offset = pos - rec->pos;
    return move_recorder_c( rec, offset );
 }
 
+CLINGO_API
 inline void reset_recorder_c( cRecorder rec[static 1] )
 {
    must_exist_c_( rec );
-
    move_recorder_to_c( rec, 0 );
 }
 
@@ -143,7 +148,7 @@ inline bool record_error_c( cRecorder rec[static 1], int err )
 /*******************************************************************************
  recorded
 *******************************************************************************/
-
+CLINGO_API
 inline cBytes recorded_bytes_c( cRecorder const rec[static 1] )
 {
    must_exist_c_( rec );
@@ -155,6 +160,7 @@ inline cBytes recorded_bytes_c( cRecorder const rec[static 1] )
    return bytes_c( rec->pos, ptr - rec->pos );
 }
 
+CLINGO_API
 inline cChars recorded_chars_c( cRecorder const rec[static 1] )
 {
    must_exist_c_( rec );
@@ -166,8 +172,10 @@ inline cChars recorded_chars_c( cRecorder const rec[static 1] )
    return chars_c( rec->pos, ptr - rec->pos );
 }
 
+CLINGO_API
 bool recorded_is_c( cRecorder const[static 1], char const cstr[static 1] );
 
+CLINGO_API
 inline cVarBytes recorded_var_bytes_c( cRecorder rec[static 1] )
 {
    must_exist_c_( rec );
@@ -179,6 +187,7 @@ inline cVarBytes recorded_var_bytes_c( cRecorder rec[static 1] )
    return var_bytes_c( rec->pos, ptr - rec->pos );
 }
 
+CLINGO_API
 inline cVarChars recorded_var_chars_c( cRecorder rec[static 1] )
 {
    must_exist_c_( rec );
@@ -193,7 +202,7 @@ inline cVarChars recorded_var_chars_c( cRecorder rec[static 1] )
 /*******************************************************************************
  record
 *******************************************************************************/
-
+CLINGO_API
 inline bool record_mem_c( cRecorder rec[static 1],
                           void const* mem,
                           int64_t len )
@@ -211,6 +220,7 @@ inline bool record_mem_c( cRecorder rec[static 1],
    return true;
 }
 
+CLINGO_API
 inline bool record_bytes_c( cRecorder rec[static 1], cBytes slice )
 {
    return record_mem_c( rec, slice.v, slice.s );
@@ -218,6 +228,7 @@ inline bool record_bytes_c( cRecorder rec[static 1], cBytes slice )
 
 #define record_chars_c_( Rec, Cstr )                                           \
    record_chars_c( (Rec), c_c( Cstr ) )
+CLINGO_API
 inline bool record_chars_c( cRecorder rec[static 1], cChars chars )
 {
    return record_mem_c( rec, chars.v, chars.s );
@@ -225,10 +236,12 @@ inline bool record_chars_c( cRecorder rec[static 1], cChars chars )
 
 #define record_chars_slice_c_( Rec, Slice, Sep )                               \
    record_chars_slice_c( (Rec), (Slice), c_c( Sep ) )
+CLINGO_API
 bool record_chars_slice_c( cRecorder rec[static 1],
                            cCharsSlice slice,
                            cChars sep );
 
+CLINGO_API
 inline bool record_cstr_c( cRecorder rec[static 1],
                            char const str[static 1] )
 {
@@ -241,34 +254,38 @@ inline bool record_cstr_c( cRecorder rec[static 1],
    return false;
 }
 
+CLINGO_API
 bool record_endl_c( cRecorder rec[static 1] );
 
+CLINGO_API
 bool record_ends_c( cRecorder rec[static 1] );
 
+CLINGO_API
 bool record_pad_c( cRecorder rec[static 1], char c, int64_t n );
 
+CLINGO_API
 bool recordf_c( cRecorder rec[static 1], char const format[static 1], ... );
 
 /*******************************************************************************
  record type
 *******************************************************************************/
 
-bool record_byte_c( cRecorder rec[static 1], cByte b );
-bool record_char_c( cRecorder rec[static 1], char c );
-bool record_rune_c( cRecorder rec[static 1], cRune r );
+CLINGO_API bool record_byte_c( cRecorder rec[static 1], cByte b );
+CLINGO_API bool record_char_c( cRecorder rec[static 1], char c );
+CLINGO_API bool record_rune_c( cRecorder rec[static 1], cRune r );
 
-bool record_int8_c( cRecorder rec[static 1], int8_t i8 );
-bool record_int16_c( cRecorder rec[static 1], int16_t i16 );
-bool record_int32_c( cRecorder rec[static 1], int32_t i32 );
-bool record_int64_c( cRecorder rec[static 1], int64_t i64 );
+CLINGO_API bool record_int8_c( cRecorder rec[static 1], int8_t i8 );
+CLINGO_API bool record_int16_c( cRecorder rec[static 1], int16_t i16 );
+CLINGO_API bool record_int32_c( cRecorder rec[static 1], int32_t i32 );
+CLINGO_API bool record_int64_c( cRecorder rec[static 1], int64_t i64 );
 
-bool record_uint8_c( cRecorder rec[static 1], uint8_t u8 );
-bool record_uint16_c( cRecorder rec[static 1], uint16_t u16 );
-bool record_uint32_c( cRecorder rec[static 1], uint32_t u32 );
-bool record_uint64_c( cRecorder rec[static 1], uint64_t u64 );
+CLINGO_API bool record_uint8_c( cRecorder rec[static 1], uint8_t u8 );
+CLINGO_API bool record_uint16_c( cRecorder rec[static 1], uint16_t u16 );
+CLINGO_API bool record_uint32_c( cRecorder rec[static 1], uint32_t u32 );
+CLINGO_API bool record_uint64_c( cRecorder rec[static 1], uint64_t u64 );
 
-bool record_float_c( cRecorder rec[static 1], float f );
-bool record_double_c( cRecorder rec[static 1], double d );
+CLINGO_API bool record_float_c( cRecorder rec[static 1], float f );
+CLINGO_API bool record_double_c( cRecorder rec[static 1], double d );
 
 /*******************************************************************************
  marker
@@ -279,12 +296,14 @@ bool record_double_c( cRecorder rec[static 1], double d );
    (cRecordMarker){ .x=(Rec), .startPos=(Rec)->pos, .lastPos=(Rec)->pos }      \
 )
 
+CLINGO_API
 inline int64_t trace_full_record_c( cRecordMarker rm[static 1] )
 {
    must_exist_c_( rm );
    return rm->x->pos - rm->startPos;
 }
 
+CLINGO_API
 inline int64_t trace_record_c( cRecordMarker rm[static 1] )
 {
    must_exist_c_( rm );
@@ -294,12 +313,14 @@ inline int64_t trace_record_c( cRecordMarker rm[static 1] )
    return res;
 }
 
+CLINGO_API
 inline bool undo_record_c( cRecordMarker rm[static 1] )
 {
    must_exist_c_( rm );
    return move_recorder_to_c( rm->x, rm->startPos );
 }
 
+CLINGO_API
 inline bool undo_record_error_c( cRecordMarker rm[static 1], int err )
 {
    must_exist_c_( rm );
@@ -311,7 +332,7 @@ inline bool undo_record_error_c( cRecordMarker rm[static 1], int err )
  util
 *******************************************************************************/
 
-void print_recorded_c( cRecorder rec[static 1] );
+CLINGO_API void print_recorded_c( cRecorder rec[static 1] );
 
 #define print_scope_c_( Rec, Size )                                            \
 for (                                                                          \
@@ -320,7 +341,7 @@ for (                                                                          \
    print_recorded_c( Rec ), Rec = NULL                                         \
 )
 
-void println_recorded_c( cRecorder rec[static 1] );
+CLINGO_API void println_recorded_c( cRecorder rec[static 1] );
 
 #define println_scope_c_( Rec, Size )                                          \
 for (                                                                          \
@@ -329,6 +350,6 @@ for (                                                                          \
    println_recorded_c( Rec ), Rec = NULL                                       \
 )
 
-char* turn_into_cstr_c( cRecorder rec[static 1] );
+CLINGO_API char* turn_into_cstr_c( cRecorder rec[static 1] );
 
 #endif

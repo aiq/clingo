@@ -1,6 +1,7 @@
 #ifndef CLINGO_IO_READ_H
 #define CLINGO_IO_READ_H
 
+#include "clingo/apidecl.h"
 #include "clingo/io/cScanner.h"
 #include "clingo/io/write.h"
 
@@ -34,6 +35,7 @@ typedef int64_t ( *c_read_va_arg )( cScanner sca[static 1],
 
 *******************************************************************************/
 
+CLINGO_API
 int64_t read_format_arg_c( cScanner sca[static 1],
                            void* val,
                            cChars type,
@@ -41,6 +43,7 @@ int64_t read_format_arg_c( cScanner sca[static 1],
 
 #define read_c_( Sca, ... )                                                    \
    read_c( (Sca), read_format_arg_c, nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+CLINGO_API
 int64_t read_c( cScanner sca[static 1],
                 c_read_va_arg read_arg,
                 int n,
@@ -50,6 +53,7 @@ int64_t read_c( cScanner sca[static 1],
 
 *******************************************************************************/
 
+CLINGO_API
 char const* scan_error_msg_c( cScanner sca[static 1] );
 
 #endif

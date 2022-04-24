@@ -4,6 +4,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 
+#include "clingo/apidecl.h"
 #include "clingo/lang/func.h"
 #include "clingo/lang/mem.h"
 
@@ -67,28 +68,36 @@ typedef struct cObjectInfo cObjectInfo;
 
 #define alloc_object_c_( Type, Info )                                          \
    alloc_object_c( sizeof_c_( Type ), Info )
+CLINGO_API
 CObject* alloc_object_c( int64_t size, cObjectInfo const info[static 1] );
 
+CLINGO_API
 CObject* custom_object_c( void* mem, cMeta const meta[static 1] );
 
+CLINGO_API
 uint32_t references_c( CObject const* obj );
 
 #define release_all_c_( ... )                                                  \
    release_all_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+CLINGO_API
 void release_all_c( int n, ... );
 
+CLINGO_API
 CObject* release_c( CObject* obj );
 
+CLINGO_API
 CObject* retain_c( CObject* obj );
 
+CLINGO_API
 CObject* touch_c( CObject* obj );
 
 /*******************************************************************************
  object info
 *******************************************************************************/
-
+CLINGO_API
 char const* get_object_desc_c( CObject const* obj );
 
+CLINGO_API
 cObjectInfo const* get_object_info_c( CObject const* obj );
 
 #define sizeof_object_c_( Type )                                               \

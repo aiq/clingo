@@ -65,7 +65,7 @@ static inline int64_t bytes_index( int64_t b )
 
 static inline uint8_t bytes_offset( int64_t b )
 {
-   return ( b % BITS_IN_WORD_ );
+   return uint8_c_( b % BITS_IN_WORD_ );
 }
 
 // Number of words required to store a given number of bits
