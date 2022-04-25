@@ -8,7 +8,7 @@ You can explore the documentation at the https://clingo.aiq.dk/[website].
 It is recommended to use the following tools:
 
 * https://releases.llvm.org/download.html[clang]
-* https://cmake.org/download/[cmake]
+* https://cmake.org/download/[CMake]
 * https://ninja-build.org/[Ninja]
 * https://git-scm.com/downloads[Git]
 
