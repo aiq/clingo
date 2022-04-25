@@ -16,7 +16,6 @@ set( LIB_NAME ${PROJECT_NAME} )
 
 # where to look first for modules, before ${CMAKE_ROOT}/Modules/ is checked
 set( ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../.. )
-set( DOC_DIR ${ROOR}/doc )
 set( INC_DIR ${ROOT}/inc )
 set( SRC_DIR ${ROOT}/src )
 set( TEST_DIR ${ROOT}/test )
@@ -43,10 +42,3 @@ else()
     set( TEST_LINK_LIBS ${LIB_NAME} m )
 endif()
 add_tests( "${TEST_FILES}" "${TEST_INC_DIRS}" "${TEST_LINK_LIBS}" )
-
-################################################################################
-# install - make install
-################################################################################
-install( DIRECTORY ${INC_DIR}/clingo DESTINATION /usr/local/include )
-
-install( TARGETS ${LIB_NAME} DESTINATION lib )

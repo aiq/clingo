@@ -5,25 +5,31 @@ You can explore the documentation at the https://clingo.aiq.dk/[website].
 
 == Build & Test
 
+It is recommended to use the following tools:
+
+* https://releases.llvm.org/download.html[clang]
+* https://cmake.org/download/[cmake]
+* https://ninja-build.org/[Ninja]
+* https://git-scm.com/downloads[Git]
+
 === Build
 
-Unix::
 ----
-$ cmake -DCMAKE_BUILD_TYPE:STRING=Debug -S mk/cmake -B bld-dbg
-$ cd bld-dbg
-$ make -j32
+$ cmake -S mk/cmake -B bld -G "Ninja Multi-Config" -DCMAKE_C_COMPILER=clang
+$ cd bld
+$ ninja  # like: -f build-Debug.ninja
+$ ninja -f build-Debug.ninja
+$ ninja -f build-Release.ninja  
 ----
-
-Windows::
-https://stackoverflow.com/a/61449746/3074987
 
 === Test
 
 ----
-$ cd bld-dbg
-$ ctest
-$ ctest -E benchmark
-$ ctest -R benchmark
+$ bld
+$ ctest -C Debug                  # run all debug tests
+$ ctest -C Release                # run all release tests
+$ ctest -C Debug -E benchmark     # run debug tests without "benchmark" in the name
+$ ctest -C Release -R benchmark   # run release tests wit "benchmark" in the name
 ----
 
 === Generate HTML docs
@@ -34,7 +40,6 @@ $ lua mk/htmldoc/generate.lua
 
 == Open Points
 
-* generate __declspec in the build step
 * select or create a formater for the source code
 * add missing tests and improve documentation
 * add alloc/free functions for cError
