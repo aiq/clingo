@@ -87,7 +87,7 @@ int finish_tap_c( bool withPlan );
 
 #define require_c_( Result )                                                   \
 {                                                                              \
-   if ( not Result )                                                           \
+   if ( not (Result) )                                                         \
    {                                                                           \
       abort_tap_c_();                                                          \
    }                                                                           \
