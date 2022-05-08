@@ -7,7 +7,7 @@
    expect_c_( chars_is_c( unscanned_chars_c_( Sca ), (Right) ) );              \
 }
 
-int main()
+int main( void )
 {
    init_tap_c_();
 

@@ -22,7 +22,7 @@ typedef struct CStringBuilder CStringBuilder;
 
 CLINGO_API CStringBuilder* make_string_builder_c( int64_t cap );
 
-CLINGO_API CStringBuilder* new_string_builder_c();
+CLINGO_API CStringBuilder* new_string_builder_c( void );
 
 /*******************************************************************************
  manage
