@@ -73,21 +73,30 @@ bool add_many_to_byte_vec_c( CByteVec* vec, cBytes many );
 
 Adds all cByte values from the slice to the byte vector.
 
-==== slice_of_byte_vec_c
+==== build_byte_vec_c
 [source,c]
 ----
-cBytes slice_of_byte_vec_c( CByteVec const* vec );
+CByteVec* build_byte_vec_c( int64_t cap, int64_t count, cByte* data );
 ----
 
-Via the macro link:vec.html#SLICE_OF_VEC_C_[SLICE_OF_VEC_C_] implemented function.
+Creates a byte vector that can allready have some values.
+The byte vector takes ownership over data.
 
-==== var_slice_of_byte_vec_c
+==== byte_vec_bytes_c
 [source,c]
 ----
-cVarBytes var_slice_of_byte_vec_c( CByteVec* vec );
+cBytes byte_vec_bytes_c( CByteVec const* vec );
 ----
 
-Via the macro link:vec.html#VAR_SLICE_OF_VEC_C_[VAR_SLICE_OF_VEC_C_] implemented function.
+Returns the internal data as bytes.
+
+==== byte_vec_var_bytes_c
+[source,c]
+----
+cVarBytes byte_vec_var_bytes_c( CByteVec* vec );
+----
+
+Returns the internal data as var bytes.
 
 //************************************************************************** io
 === io

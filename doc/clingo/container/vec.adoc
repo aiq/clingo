@@ -372,6 +372,24 @@ The static value can be used to define the visibility of the functions.
 //*********************************************************************** extra
 === extra
 
+[id='BUILD_VEC_C_']
+==== BUILD_VEC_C_
+[source,c]
+----
+#define BUILD_VEC_C_(                                                          \
+   FuncSuffix, VecType, ValType, Meta                                          \
+)
+----
+
+Generates a constructor function to create an instance with an allready
+allocated data.
+The vec takes ownership of data.
+The generated function has the following common signature:
+[source,c]
+----
+VecType* build_FuncSuffix( int64_t cap, int64_t count, ValType* data );
+----
+
 [id='SLICE_OF_VEC_C_']
 ==== SLICE_OF_VEC_C_
 [source,c]

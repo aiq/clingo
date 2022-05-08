@@ -451,6 +451,28 @@ Static SET_ON_VEC_C_(                                                          \
  extra
 *******************************************************************************/
 
+#define BUILD_VEC_C_(                                                          \
+   FuncSuffix, VecType, ValType, Meta                                          \
+)                                                                              \
+VecType* build_##FuncSuffix( int64_t cap, int64_t count, ValType* data )       \
+{                                                                              \
+   must_be_positive_c_( count );                                               \
+   must_exist_c_( data );                                                      \
+                                                                               \
+   cObjectInfo const info = default_object_info_c_( &Meta );                   \
+   VecType* result = alloc_object_c_( VecType, &info );                        \
+   if ( result == NULL )                                                       \
+   {                                                                           \
+      return NULL;                                                             \
+   }                                                                           \
+                                                                               \
+   result->data = data;                                                        \
+   result->i.cap = cap;                                                        \
+   result->i.count = count;                                                    \
+                                                                               \
+   return result;                                                              \
+}
+
 #define SLICE_OF_VEC_C_(                                                       \
    FuncSuffix, VecType, SliceType                                              \
 )                                                                              \

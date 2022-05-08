@@ -29,6 +29,29 @@ CLINGO_API inline bool add_many_to_byte_vec_c( CByteVec* vec, cBytes many )
    return add_array_to_byte_vec_c( vec, many.s, many.v );
 }
 
+CLINGO_API
+CByteVec* build_byte_vec_c( int64_t cap, int64_t count, cByte* data );
+
+CLINGO_API inline cBytes byte_vec_bytes_c( CByteVec const* vec )
+{
+   must_exist_c_( vec );
+
+   return bytes_c(
+      info_of_byte_vec_c( vec )->count,
+      data_of_byte_vec_c( vec )
+   );
+}
+
+CLINGO_API inline cVarBytes byte_vec_var_bytes_c( CByteVec* vec )
+{
+   must_exist_c_( vec );
+
+   return var_bytes_c(
+      info_of_byte_vec_c( vec )->count,
+      var_data_of_byte_vec_c( vec )
+   );
+}
+
 /*******************************************************************************
  io
 *******************************************************************************/

@@ -21,17 +21,16 @@ VAL_VEC_IMPL_C_(
 
 extern inline bool add_many_to_byte_vec_c( CByteVec* vec, cBytes many );
 
-SLICE_OF_VEC_C_(
-   byte_vec_c, // FuncSuffix
-   CByteVec,   // VecType
-   cBytes      // SliceType
+BUILD_VEC_C_(
+   byte_vec_c,    // FuncSuffix
+   CByteVec,      // VecType
+   cByte,         // ValType
+   C_ByteVecMeta  // Meta
 )
 
-VAR_SLICE_OF_VEC_C_(
-   byte_vec_c, // FuncSuffix
-   CByteVec,   // VecType
-   cVarBytes   // SliceType
-)
+extern inline cBytes byte_vec_bytes_c( CByteVec const* vec );
+
+extern inline cVarBytes byte_vec_var_bytes_c( CByteVec* vec );
 
 /*******************************************************************************
  io
