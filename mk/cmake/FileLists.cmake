@@ -18,6 +18,7 @@ set( INC_FILES
    ${INC_DIR}/clingo/io/cCell.h
    ${INC_DIR}/clingo/io/cRecorder.h
    ${INC_DIR}/clingo/io/cScanner.h
+   ${INC_DIR}/clingo/io/file.h
    ${INC_DIR}/clingo/io/jot.h
    ${INC_DIR}/clingo/io/read.h
    ${INC_DIR}/clingo/io/read_type.h
@@ -113,6 +114,7 @@ set( SRC_FILES
    ${SRC_DIR}/clingo/io/cCell.c
    ${SRC_DIR}/clingo/io/cRecorder.c
    ${SRC_DIR}/clingo/io/cScanner.c
+   ${SRC_DIR}/clingo/io/file.c
    ${SRC_DIR}/clingo/io/read.c
    ${SRC_DIR}/clingo/io/read_type.c
    ${SRC_DIR}/clingo/io/write.c
@@ -276,12 +278,17 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/io/cScanner/view_pad.c
    ${TEST_DIR}/clingo/io/cScanner/view_runes.c
 
+   # file
+   ${TEST_DIR}/clingo/io/file/write_binary_file.c
+   ${TEST_DIR}/clingo/io/file/write_text_file.c
+
    ${TEST_DIR}/clingo/io/jot/jot.c
 
    ${TEST_DIR}/clingo/io/print/print-overview.c
 
    ${TEST_DIR}/clingo/io/read/read.c
 
+   # read_type
    ${TEST_DIR}/clingo/io/read_type/read_bool.c
    ${TEST_DIR}/clingo/io/read_type/read_chars.c
    ${TEST_DIR}/clingo/io/read_type/read_double.c
@@ -299,6 +306,7 @@ set( TEST_FILES
 
    ${TEST_DIR}/clingo/io/write/write.c
 
+   # write_type
    ${TEST_DIR}/clingo/io/write_type/write_bool.c
    ${TEST_DIR}/clingo/io/write_type/write_byte.c
    ${TEST_DIR}/clingo/io/write_type/write_bytes.c
