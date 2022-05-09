@@ -263,6 +263,11 @@ typedef struct Entry##Slice Entry##Slice;
    (Slice).s <= 0                                                              \
 )
 
+#define is_invalid_c_( Slice )                                                 \
+(                                                                              \
+   (Slice).s < 0                                                               \
+)
+
 #define is_sub_c_( Main, Sub )                                                 \
 (                                                                              \
    begin_c_( Main ) <= begin_c_( Sub ) and                                     \

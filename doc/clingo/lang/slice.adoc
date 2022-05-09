@@ -468,6 +468,16 @@ Returns true if the Slice is empty, otherwise false.
 include::{xmpldir}/is_empty.c[]
 ----
 
+[id='is_invalid_c_']
+==== is_empty_c_
+[source,c]
+----
+#define is_invalid_c_( Slice )
+----
+
+Returns true if the Slice is invalid, otherwise false.
+A slice wiht a negative s value is invalid.
+
 [id='is_sub_c_']
 ==== is_sub_c_
 [source,c]
