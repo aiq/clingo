@@ -236,6 +236,12 @@ typedef struct Entry##Slice Entry##Slice;
    .v=(Type*)alloc_array_c( (Size), sizeof_c_(Type) )                          \
 }
 
+#define invalid_slice_c_()                                                     \
+{                                                                              \
+   .s=-1,                                                                      \
+   .v=NULL                                                                     \
+}
+
 #define scalars_c_( Size, Type )                                               \
 {                                                                              \
    .s=(Size),                                                                  \
