@@ -9,14 +9,14 @@ int main( void )
 
    cChars path = c_c( "tmp-write_text_file.txt" );
 
-   expect_c_( write_text_file_c( path, chars ) );
+   expect_c_( write_text_file_c( path, chars ) == 0 );
 
-   cVarChars res = read_text_file_c( path );
-   require_c_( not is_empty_c_( res ) );
+   cVarChars res;
+   require_c_( read_text_file_c( path, &res ) == 0 );
 
    expect_c_( eq_chars_c( as_chars_c( res ), chars ) );
 
-   expect_c_( remove_file_c( path ) );
+   expect_c_( remove_file_c( path ) == 0 );
    free( res.v );
 
    return finish_tap_c_();

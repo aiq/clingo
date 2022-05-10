@@ -13,14 +13,14 @@ int main( void )
 
    cChars path = c_c( "tmp-write_binary_file.bin" );
 
-   expect_c_( write_binary_file_c( path, as_bytes_c( bytes ) ) );
+   expect_c_( write_binary_file_c( path, as_bytes_c( bytes ) ) == 0 );
 
-   cVarBytes res = read_binary_file_c( path );
-   require_c_( not is_empty_c_( res ) );
+   cVarBytes res;
+   require_c_( read_binary_file_c( path, &res ) == 0 );
 
    expect_eq_c_( cmp_bytes_c( as_bytes_c( res ), as_bytes_c( bytes ) ) );
 
-   expect_c_( remove_file_c( path ) );
+   expect_c_( remove_file_c( path ) == 0 );
    free( res.v );
 
    return finish_tap_c_();

@@ -6,9 +6,11 @@
  open
 *******************************************************************************/
 
-extern inline FILE* open_file_c( cChars chars, char const mode[static 1] );
+extern inline int open_file_c( FILE** file,
+                               cChars chars,
+                               char const mode[static 1] );
 
-extern inline bool remove_file_c( cChars path );
+extern inline int remove_file_c( cChars path );
 
 /*******************************************************************************
  
@@ -18,7 +20,7 @@ int64_t file_size_c( FILE* file )
 {
    must_exist_c_( file );
 
-   int64_t pos = ftell( file );
+   long pos = ftell( file );
    fseek( file, 0, SEEK_END );
    int64_t res = ftell( file );
    fseek( file, pos, SEEK_SET );
@@ -89,92 +91,97 @@ bool put_file_chars_c( FILE* file, cChars chars )
  
 *******************************************************************************/
 
-cVarBytes read_binary_file_c( cChars path )
+extern inline int ferror_close_c( FILE* file );
+
+int read_binary_file_c( cChars path, cVarBytes bytes[static 1] )
 {
    FILE* file = NULL;
-   cVarBytes bytes = empty_var_bytes_c();
+   int err = open_file_c( &file, path, "rb" );
+   if ( err != 0 ) return err;
 
-   once_c_( xyz )
+   *bytes = (cVarBytes)invalid_slice_c_();
+
+   int64_t size = file_size_c( file );
+   if ( size <= 0 )  return ferror_close_c( file );
+
+   *bytes = (cVarBytes)heap_slice_c_( size, cByte );
+   if ( bytes->v == NULL )
    {
-      file = open_file_c( path, "r" );
-      if ( file == NULL ) break;
-
-      int64_t size = file_size_c( file );
-      if ( size <= 0 ) break;
-
-      bytes = (cVarBytes)heap_slice_c_( size, cByte );
-      if ( bytes.v == NULL ) break;
-
-      if ( not get_file_bytes_c( file, &bytes ) ) break;
-
       fclose( file );
-      return bytes;
+      return ENOMEM;
+   } 
+
+   if ( not get_file_bytes_c( file, bytes ) )
+   {
+      free( bytes->v );
+      return ferror_close_c( file );
    }
 
-   if ( file != NULL ) fclose( file );
-   if ( bytes.v != NULL ) free( bytes.v );
-   bytes.s = -1;
-   return bytes;
+   return fclose( file );
 }
 
-cVarChars read_text_file_c( cChars path )
+int read_text_file_c( cChars path, cVarChars chars[static 1] )
 {
    FILE* file = NULL;
-   cVarChars chars = empty_var_chars_c();
+   int err = open_file_c( &file, path, "rb" );
+   if ( err != 0 ) return err;
 
-   once_c_( xyz )
+   *chars = (cVarChars)invalid_slice_c_();
+
+   int64_t size = file_size_c( file );
+   if ( size <= 0 ) return ferror_close_c( file );
+
+   int64_t allocSize = 0;
+   if ( not iadd64_c( size, 1, &allocSize ) )
    {
-      file = open_file_c( path, "r" );
-      if ( file == NULL ) break;
-
-      int64_t size = file_size_c( file );
-      if ( size <= 0 ) break;
-
-      int64_t allocSize = 0;
-      if ( not iadd64_c( size, 1, &allocSize ) ) break;
-
-      chars = (cVarChars)heap_slice_c_( allocSize, char );
-      if ( chars.v == NULL ) break;
-
-      chars.s = size;
-      if ( not get_file_chars_c( file, &chars ) ) break;
-
-      chars.v[chars.s] = '\0';
-
-      fclose(file);
-      return chars;
+      fclose( file );
+      return ERANGE;
    }
 
-   if ( file != NULL ) fclose( file );
-   if ( chars.v != NULL ) free( chars.v );
-   chars.s = -1;
-   return chars;
+   *chars = (cVarChars)heap_slice_c_( allocSize, char );
+   if ( chars->v == NULL )
+   {
+      fclose( file );
+      return ENOMEM;
+   }
+
+   chars->s = size;
+   if ( not get_file_chars_c( file, chars ) )
+   {
+      free( chars->v );
+      return ferror_close_c( file );
+   }
+
+   chars->v[chars->s] = '\0';
+   return fclose(file);
 }
   
-bool write_binary_file_c( cChars path, cBytes bytes )
+int write_binary_file_c( cChars path, cBytes bytes )
 {
-   FILE* file = open_file_c( path, "wb" );
-   if ( file == NULL )
+   FILE* file = NULL;
+   int err = open_file_c( &file, path, "wb" );
+   if ( err != 0 ) return err;
+
+   if ( not put_file_bytes_c( file, bytes ) )
    {
-      return NULL;
+      return ferror_close_c( file );
+
    }
 
-   bool res = put_file_bytes_c( file, bytes );
-
-   fclose( file );
-   return res;
+   return fclose( file );
 }
 
-bool write_text_file_c( cChars path, cChars chars )
+int write_text_file_c( cChars path, cChars chars )
 {
-   FILE* file = open_file_c( path, "w" );
-   if ( file == NULL )
+   FILE* file = NULL;
+   int err = open_file_c( &file, path, "wb" );
+   if ( err != 0 ) return err;
+
+   if ( not put_file_chars_c( file, chars ) )
    {
-      return NULL;
+      return ferror_close_c( file );
+
    }
 
-   bool res = put_file_chars_c( file, chars );
-
-   fclose( file );
-   return res;
+   return fclose( file );
 }
