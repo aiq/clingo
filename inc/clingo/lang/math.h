@@ -177,6 +177,22 @@ CLINGO_API inline CONV_C_(
 )
 
 CLINGO_API inline CONV_C_(
+   size_to_int64_c,  // FuncName
+   size_t,           // FromType
+   int64_t,          // ToType
+   0,                // MinValue
+   INT64_MAX         // MaxValue
+)
+
+CLINGO_API inline CONV_C_(
+   size_to_uint64_c, // FuncName
+   size_t,           // FromType
+   uint64_t,         // ToType
+   0,                // MinValue
+   UINT64_MAX        // MaxValue
+)
+
+CLINGO_API inline CONV_C_(
    uint64_to_size_c,    // FuncName
    uint64_t,            // FromType
    size_t,              // ToType

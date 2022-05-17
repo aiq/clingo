@@ -85,5 +85,7 @@ extern inline bool usub64_c( uint64_t a, uint64_t b, uint64_t res[static 1] );
 *******************************************************************************/
 
 extern inline bool int64_to_size_c( int64_t src, size_t dest[static 1] );
+extern inline bool size_to_int64_c( size_t src, int64_t dest[static 1] );
+extern inline bool size_to_uint64_c( size_t src, uint64_t dest[static 1] );
 extern inline bool uint64_to_size_c( uint64_t src, size_t dest[static 1] );
 
