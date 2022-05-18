@@ -55,13 +55,13 @@ CLINGO_API int64_t file_size_c( FILE* file );
  get and put
 *******************************************************************************/
 
-CLINGO_API bool get_file_bytes_c( FILE* file, cVarBytes bytes[static 1] );
+CLINGO_API bool fread_bytes_c( FILE* file, cVarBytes bytes[static 1] );
 
-CLINGO_API bool get_file_chars_c( FILE* file, cVarChars chars[static 1] );
+CLINGO_API bool fread_chars_c( FILE* file, cVarChars chars[static 1] );
 
-CLINGO_API bool put_file_bytes_c( FILE* file, cBytes bytes );
+CLINGO_API bool fwrite_bytes_c( FILE* file, cBytes bytes );
 
-CLINGO_API bool put_file_chars_c( FILE* file, cChars chars );
+CLINGO_API bool fwrite_chars_c( FILE* file, cChars chars );
 
 /*******************************************************************************
  util

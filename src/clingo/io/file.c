@@ -31,7 +31,7 @@ int64_t file_size_c( FILE* file )
  
 *******************************************************************************/
 
-bool get_file_bytes_c( FILE* file, cVarBytes bytes[static 1] )
+bool fread_bytes_c( FILE* file, cVarBytes bytes[static 1] )
 {
    must_exist_c_( file );
 
@@ -46,7 +46,7 @@ bool get_file_bytes_c( FILE* file, cVarBytes bytes[static 1] )
    return uint64_to_int64_c( res, &bytes->s );
 }
 
-bool get_file_chars_c( FILE* file, cVarChars chars[static 1] )
+bool fread_chars_c( FILE* file, cVarChars chars[static 1] )
 {
    must_exist_c_( file );
 
@@ -61,7 +61,7 @@ bool get_file_chars_c( FILE* file, cVarChars chars[static 1] )
    return uint64_to_int64_c( res, &chars->s );
 }
 
-bool put_file_bytes_c( FILE* file, cBytes bytes )
+bool fwrite_bytes_c( FILE* file, cBytes bytes )
 {
    must_exist_c_( file );
 
@@ -74,7 +74,7 @@ bool put_file_bytes_c( FILE* file, cBytes bytes )
    return res == size;
 }
 
-bool put_file_chars_c( FILE* file, cChars chars )
+bool fwrite_chars_c( FILE* file, cChars chars )
 {
    must_exist_c_( file );
 
@@ -111,7 +111,7 @@ int read_binary_file_c( cChars path, cVarBytes bytes[static 1] )
       return ENOMEM;
    } 
 
-   if ( not get_file_bytes_c( file, bytes ) )
+   if ( not fread_bytes_c( file, bytes ) )
    {
       free( bytes->v );
       return ferror_close_c( file );
@@ -146,7 +146,7 @@ int read_text_file_c( cChars path, cVarChars chars[static 1] )
    }
 
    chars->s = size;
-   if ( not get_file_chars_c( file, chars ) )
+   if ( not fread_chars_c( file, chars ) )
    {
       free( chars->v );
       return ferror_close_c( file );
@@ -162,7 +162,7 @@ int write_binary_file_c( cChars path, cBytes bytes )
    int err = open_file_c( &file, path, "wb" );
    if ( err != 0 ) return err;
 
-   if ( not put_file_bytes_c( file, bytes ) )
+   if ( not fwrite_bytes_c( file, bytes ) )
    {
       return ferror_close_c( file );
 
@@ -177,7 +177,7 @@ int write_text_file_c( cChars path, cChars chars )
    int err = open_file_c( &file, path, "wb" );
    if ( err != 0 ) return err;
 
-   if ( not put_file_chars_c( file, chars ) )
+   if ( not fwrite_chars_c( file, chars ) )
    {
       return ferror_close_c( file );
 
