@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <inttypes.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
@@ -16,13 +17,58 @@
 
 #define cNoError_ 0
 
+struct cErrorNotepad
+{
+   int64_t pos;
+   int64_t space;
+   void* mem;
+};
+typedef struct cErrorNotepad cErrorNotepad;
+
+typedef void cErrorData;
+
+struct cError;
+typedef struct cError cError;
+
+typedef bool ( *c_note_error )( cErrorNotepad notepad[static 1],
+                                cError const* err );
+
+struct cErrorType
+{
+   char const* desc;
+   c_note_error write;
+};
+typedef struct cErrorType cErrorType;
+
 struct cError
 {
-   int code;
-   char const* msg;
-   struct cError* details;
+   cErrorType const* type;
+   cError const* sub;
 };
-typedef struct cError cError;
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+struct cErrorStack
+{
+   int64_t space;
+   void* mem;
+   cError const* last;
+};
+typedef struct cErrorStack cErrorStack;
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+CLINGO_API extern cErrorType const C_ErrnoError;
+
+struct cErrnoErrorData
+{
+   int number;
+};
+typedef struct cErrnoErrorData cErrnoErrorData;
 
 /*******************************************************************************
 ********************************************************************* Functions
@@ -30,38 +76,10 @@ typedef struct cError cError;
  init
 *******************************************************************************/
 
-#define errno_error_c_()                                                       \
-(                                                                              \
-   (cError){                                                                   \
-      .code = errno,                                                           \
-      .msg = strerror( errno ),                                                \
-      .details = NULL                                                          \
-   }                                                                           \
-)
-
-#define error_c_( Code, Msg )                                                  \
-(                                                                              \
-   (cError){                                                                   \
-      .code = (Code),                                                          \
-      .msg = (Msg),                                                            \
-      .details = NULL                                                          \
-   }                                                                           \
-)
-
-#define no_error_c_()                                                          \
-(                                                                              \
-   (cError){                                                                   \
-      .code = cNoError_,                                                       \
-      .msg = "",                                                               \
-      .details = NULL                                                          \
-   }                                                                           \
-)
-
-/*******************************************************************************
-
-*******************************************************************************/
 CLINGO_API
 uint32_t error_depth_c( cError const err[static 1] );
+
+CLINGO_API cErrorData const* get_error_data_c( cError const* err );
 
 CLINGO_API
 int fprint_error_c( FILE* output, cError const err[static 1] );
@@ -72,7 +90,26 @@ inline int print_error_c( cError const err[static 1] )
    return fprint_error_c( stdout, err );
 }
 
-CLINGO_API
-void reset_error_c( cError err[static 1] );
+/*******************************************************************************
+
+*******************************************************************************/
+
+CLINGO_API bool push_error_c( cErrorStack stack[static 1],
+                              cErrorType const type[static 1],
+                              cErrorData const* data,
+                              int64_t dataSize );
+
+CLINGO_API bool note_error_c( cErrorNotepad rec[static 1],
+                              cError const err[static 1] );
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+CLINGO_API bool push_errno_error_c( cErrorStack stack[static 1],
+                                    int number );
+
+CLINGO_API bool note_errno_error_c( cErrorNotepad notepad[static 1],
+                                    cError const* data );
 
 #endif
