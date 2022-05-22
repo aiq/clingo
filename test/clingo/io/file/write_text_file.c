@@ -9,10 +9,11 @@ int main( void )
 
    cChars path = c_c( "tmp-write_text_file.txt" );
 
-   expect_c_( write_text_file_c( path, chars ) == 0 );
+   cErrorStack* es = &error_stack_c_( 128 );
+   expect_c_( write_text_file_c( path, chars, es ) );
 
-   cVarChars res;
-   require_c_( read_text_file_c( path, &res ) == 0 );
+   cVarChars res = read_text_file_c( path, es );
+   require_c_( not is_invalid_c_( res )  );
 
    expect_c_( eq_chars_c( as_chars_c( res ), chars ) );
 

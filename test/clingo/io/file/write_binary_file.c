@@ -13,10 +13,11 @@ int main( void )
 
    cChars path = c_c( "tmp-write_binary_file.bin" );
 
-   expect_c_( write_binary_file_c( path, as_bytes_c( bytes ) ) == 0 );
+   cErrorStack* es = &error_stack_c_( 128 );
+   expect_c_( write_binary_file_c( path, as_bytes_c( bytes ), es ) );
 
-   cVarBytes res;
-   require_c_( read_binary_file_c( path, &res ) == 0 );
+   cVarBytes res = read_binary_file_c( path, es );
+   require_c_( not is_invalid_c_( res ) );
 
    expect_eq_c_( cmp_bytes_c( as_bytes_c( res ), as_bytes_c( bytes ) ) );
 

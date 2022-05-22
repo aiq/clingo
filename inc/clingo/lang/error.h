@@ -25,6 +25,24 @@ struct cErrorNotepad
 };
 typedef struct cErrorNotepad cErrorNotepad;
 
+#define error_notepad_c_( Size )                                               \
+(                                                                              \
+   (cErrorNotepad){                                                            \
+      .pos=0,                                                                  \
+      .space=(Size),                                                           \
+      .mem=mem_c_( Size )                                                      \
+   }                                                                           \
+)
+
+#define heap_error_notepad_c_( Size )                                          \
+(                                                                              \
+   (cErrorNotepad){                                                            \
+      .pos=0,                                                                  \
+      .space=(Size),                                                           \
+      .mem=mem_c_( Size )                                                      \
+   }                                                                           \
+)
+
 typedef void cErrorData;
 
 struct cError;
@@ -36,7 +54,7 @@ typedef bool ( *c_note_error )( cErrorNotepad notepad[static 1],
 struct cErrorType
 {
    char const* desc;
-   c_note_error write;
+   c_note_error note;
 };
 typedef struct cErrorType cErrorType;
 
@@ -54,7 +72,7 @@ struct cErrorStack
 {
    int64_t space;
    void* mem;
-   cError const* last;
+   cError const* err;
 };
 typedef struct cErrorStack cErrorStack;
 
@@ -91,19 +109,59 @@ inline int print_error_c( cError const err[static 1] )
 }
 
 /*******************************************************************************
-
+ notepad
 *******************************************************************************/
+
+#define error_notepad_c_( Size )                                               \
+(                                                                              \
+   (cErrorNotepad){                                                            \
+      .pos=0,                                                                  \
+      .space=(Size),                                                           \
+      .mem=mem_c_( Size )                                                      \
+   }                                                                           \
+)
+
+#define heap_error_notepad_c_( Size )                                          \
+(                                                                              \
+   (cErrorNotepad){                                                            \
+      .pos=0,                                                                  \
+      .space=(Size),                                                           \
+      .mem=mem_c_( Size )                                                      \
+   }                                                                           \
+)
+
+CLINGO_API bool note_error_c( cErrorNotepad rec[static 1],
+                              cError const err[static 1] );
+
+/*******************************************************************************
+ stack
+*******************************************************************************/
+
+#define error_stack_c_( Size )                                                 \
+(                                                                              \
+   (cErrorStack){                                                              \
+      .space=0,                                                                \
+      .mem=(cByte[]){ [(Size)-1]=0 },                                          \
+      .err=NULL                                                                \
+   }                                                                           \
+)
+
+#define heap_error_stack_c_( Size )                                            \
+(                                                                              \
+   (cErrorStack){                                                              \
+      .space=0,                                                                \
+      .mem=alloc_c( Size ),                                                    \
+      .err=NULL                                                                \
+   }                                                                           \
+)
 
 CLINGO_API bool push_error_c( cErrorStack stack[static 1],
                               cErrorType const type[static 1],
                               cErrorData const* data,
                               int64_t dataSize );
 
-CLINGO_API bool note_error_c( cErrorNotepad rec[static 1],
-                              cError const err[static 1] );
-
 /*******************************************************************************
-
+ errno
 *******************************************************************************/
 
 CLINGO_API bool push_errno_error_c( cErrorStack stack[static 1],

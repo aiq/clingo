@@ -5,7 +5,8 @@
 #include "clingo/lang/mem.h"
 
 cErrorType const C_ErrnoError = {
-   .desc = "",
+   .desc = stringify_c_( C_ErrnoError ),
+   .note = &note_errno_error_c
 };
 
 /*******************************************************************************
@@ -91,7 +92,7 @@ bool push_error_c( cErrorStack stack[static 1],
 
    cError* e = stack->mem;
    e->type = type;
-   e->sub = stack->last;
+   e->sub = stack->err;
    stack->mem += sizeof_c_( cError );
 
    if ( data != NULL )
@@ -103,7 +104,7 @@ bool push_error_c( cErrorStack stack[static 1],
    }
 
    stack->space -= fullSize;
-   stack->last = e;
+   stack->err = e;
 
    return true;
 }
@@ -124,7 +125,7 @@ bool push_errno_error_c( cErrorStack stack[static 1], int number )
    return push_error_c( stack, &C_ErrnoError, &d, sizeof( cErrnoErrorData ) );
 }
 
-bool write_errno_error_c( cErrorNotepad notepad[static 1], cError const* err )
+bool note_errno_error_c( cErrorNotepad notepad[static 1], cError const* err )
 {
    cErrnoErrorData const* errData = get_error_data_c( err );
    char* errStr = strerror( errData->number );

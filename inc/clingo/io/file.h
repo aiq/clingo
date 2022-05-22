@@ -8,29 +8,52 @@
 #include "clingo/type/cChars.h"
 
 /*******************************************************************************
+********************************************************* Types and Definitions 
+*******************************************************************************/
+
+CLINGO_API extern cErrorType const C_FileError;
+
+struct cFileErrorData
+{
+   int number;
+};
+typedef struct cFileErrorData cFileErrorData;
+
+/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  os
 *******************************************************************************/
 
-CLINGO_API inline int open_file_c( FILE** file,
-                                   cChars path,
-                                   char const mode[static 1] )
+CLINGO_API bool close_file_c( FILE* file, cErrorStack es[static 1] );
+
+CLINGO_API inline FILE* open_file_c( cChars path,
+                                     char const mode[static 1],
+                                     cErrorStack es[static 1] )
 {
    cVarChars buf = char_buffer_c_( 4099 );
    char const* cstrPath = make_cstr_c( buf, path );
    if ( cstrPath == NULL )
    {
-      return ENOBUFS;
+      push_errno_error_c( es, ENOBUFS );
+      return NULL;
    }
 
+   FILE* file = NULL;
+   int errNum = 0;
 #if _WIN32
-   return fopen_s( file, cstrPath, mode );
+   errNum = fopen_s( &file, cstrPath, mode );
 #else
-   *file = fopen( cstrPath, mode );
-   return ( *file == NULL ) ? errno
-                            : 0;
+   file = fopen( cstrPath, mode );
+   errNum = ( *file == NULL ) ? errno
+                              : 0;
 #endif
+   if ( errNum != 0 )
+   {
+      push_errno_error_c( es, errNum );
+   }
+
+   return file;
 }
 
 CLINGO_API inline int remove_file_c( cChars path )
@@ -75,12 +98,28 @@ CLINGO_API inline int ferror_close_c( FILE* file )
    return err;
 }
 
-CLINGO_API int read_binary_file_c( cChars path, cVarBytes bytes[static 1] );
+CLINGO_API
+cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] );
 
-CLINGO_API int read_text_file_c( cChars path, cVarChars chars[static 1] );
+CLINGO_API
+cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] );
 
-CLINGO_API int write_binary_file_c( cChars path, cBytes bytes );
+CLINGO_API
+bool write_binary_file_c( cChars path, cBytes bytes, cErrorStack es[static 1] );
 
-CLINGO_API int write_text_file_c( cChars path, cChars chars );
+CLINGO_API
+bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] );
+
+/*******************************************************************************
+ error
+*******************************************************************************/
+
+CLINGO_API bool push_file_error_c( cErrorStack stack[static 1],
+                                   FILE* file );
+
+CLINGO_API bool push_file_error_and_close_c( cErrorStack stack[static 1],
+                                             FILE* file );
+
+CLINGO_API bool note_file_error_c( cErrorNotepad notepad[static 1] );
 
 #endif
