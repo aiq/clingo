@@ -45,8 +45,8 @@ CLINGO_API inline FILE* open_file_c( cChars path,
    errNum = fopen_s( &file, cstrPath, mode );
 #else
    file = fopen( cstrPath, mode );
-   errNum = ( *file == NULL ) ? errno
-                              : 0;
+   errNum = ( file == NULL ) ? errno
+                             : 0;
 #endif
    if ( errNum != 0 )
    {
