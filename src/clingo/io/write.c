@@ -255,18 +255,20 @@ bool writeln_c( cRecorder rec[static 1],
 }
 
 /*******************************************************************************
-
+ error
 *******************************************************************************/
 
 bool push_write_error_c( cErrorStack es[static 1], cRecorder rec[static 1] )
 {
-   return false;
+   cWriteErrorData d = { .errc=rec->err };
+   return push_error_c( es, &C_WriteError, &d, sizeof_c_( cWriteErrorData ) );
 }
 
 bool note_write_error_c( cRecorder rec[static 1], cError const* err )
 {
+   cWriteErrorData const* errd = get_error_data_c( err );
    char const* msg = NULL;
-   switch ( rec->err )
+   switch ( errd->errc )
    {
       #define XMAP_C_( N, I, T ) case N: msg = T;
          cWRITE_ERROR_CODE_

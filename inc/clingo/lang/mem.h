@@ -93,7 +93,7 @@ inline void* realloc_array_c( void* ptr, int64_t num, int64_t size )
 
 #define stack_mem_c_( Size )                                                   \
 (                                                                              \
-   (void*)((cByte[]){ [(Size)-1]=0 })                                          \
+   (void*)((uint8_t[]){ [(Size)-1]=0 })                                        \
 )
 
 #define ref_c_( Type, Value )                                                  \

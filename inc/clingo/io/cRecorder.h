@@ -75,7 +75,7 @@ typedef struct cRecordMarker cRecordMarker;
    (cRecorder){                                                                \
       .pos=0,                                                                  \
       .space=(Size),                                                           \
-      .mem=(cByte[]){ [(Size)-1]=0 }                                           \
+      .mem=stack_mem_c_( Size )                                                \
    }                                                                           \
 )
 

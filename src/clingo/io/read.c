@@ -4,8 +4,16 @@
 #include "_/io/read_write_util.h"
 #include "clingo/io/read_type.h"
 
-#include "clingo/io/print.h"
-#define pln_( ... ) pjotln_c_( xyz, 1024, __VA_ARGS__ )
+/*******************************************************************************
+********************************************************* Types and Definitions
+**+*****************************************************************************
+ Definitions
+*******************************************************************************/
+
+cErrorType const C_ReadError = {
+   .desc = stringify_c_( C_ReadError ),
+   .note = &note_read_error_c
+};
 
 /*******************************************************************************
 ********************************************************************* Functions
@@ -63,14 +71,14 @@ static bool read_format_text_c( cScanner sca[static 1],
 
 /******************************************************************************/
 
-int64_t read_format_arg_c( cScanner sca[static 1],
-                           void* val,
-                           cChars type,
-                           char const fmt[static 1] )
+bool read_format_arg_c( cScanner sca[static 1],
+                        void* val,
+                        cChars type,
+                        char const fmt[static 1] )
 {
    if ( is_empty_c_( type ) )
    {
-      return 0;
+      return true;
    }
 
    if ( type.v[0] == 'i' )
@@ -152,17 +160,17 @@ int64_t read_format_arg_c( cScanner sca[static 1],
       return read_range_c( sca, range, fmt );
    }
 
-   return 0;
+   return true;
 }
 
 /*******************************************************************************
 
 *******************************************************************************/
 
-int64_t read_c( cScanner sca[static 1],
-                c_read_va_arg read_arg,
-                int n,
-                ... )
+bool read_c( cScanner sca[static 1],
+             c_read_va_arg read_arg,
+             int n,
+             ... )
 {
    va_list list;
    va_start( list, n );
@@ -220,18 +228,26 @@ int64_t read_c( cScanner sca[static 1],
 }
 
 /*******************************************************************************
-
+  error
 *******************************************************************************/
 
-char const* scan_error_msg_c( cScanner sca[static 1] )
+bool push_read_error_c( cErrorStack es[static 1], cScanner sca[static 1] )
 {
-   switch ( sca->err )
-   {
-      #define XMAP_C_( N, I, T ) case N: return T;
-         cREAD_ERROR_
-      #undef XMAP_C_
-   }
-
-   return "";
+   cReadErrorData d = { .errc=sca->err };
+   return push_error_c( es, &C_ReadError, &d, sizeof_c_( cReadErrorData ) );
 }
 
+bool note_read_error_c( cRecorder rec[static 1], cError const* err )
+{
+   cReadErrorData const* errd = get_error_data_c( err );
+   char const* msg = NULL;
+   switch ( errd->errc )
+   {
+      #define XMAP_C_( N, I, T ) case N: msg = T;
+         cREAD_ERROR_CODE_
+      #undef XMAP_C_
+   }
+   if ( msg == NULL ) return false;
+
+   return record_chars_c_( rec, msg );
+}
