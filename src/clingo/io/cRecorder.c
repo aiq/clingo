@@ -66,7 +66,7 @@ extern inline void reset_recorder_c( cRecorder rec[static 1] );
  error
 *******************************************************************************/
 
-extern inline bool record_error_c( cRecorder rec[static 1], int err );
+extern inline bool set_recorder_error_c( cRecorder rec[static 1], int err );
 
 /*******************************************************************************
  access

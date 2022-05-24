@@ -157,7 +157,7 @@ bool write_tz_offset_c( cRecorder rec[static 1],
       }
       else
       {
-         return record_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
    }
    if ( not res )

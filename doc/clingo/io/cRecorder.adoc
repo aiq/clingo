@@ -196,10 +196,10 @@ include::{xmpldir}/reset_recorder.c[]
 //*********************************************************************** error
 === error
 
-==== record_error_c
+==== set_recorder_error_c
 [source,c]
 ----
-bool record_error_c( cRecorder rec[static 1], int err );
+bool set_recorder_error_c( cRecorder rec[static 1], int err );
 ----
 
 Sets the err value on the recorder and returns allways false.

@@ -504,7 +504,7 @@ static bool do_write( int64_t n, int64_t val )
 static bool rec_err( cRecorder rec[static 1], int64_t oldPos )
 {
    move_recorder_to_c( rec, oldPos );
-   return record_error_c( rec, c_InvalidWriteFormat );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 static bool record_sep( cScanner fmt[static 1], cRecorder rec[static 1] )
 {
@@ -694,6 +694,6 @@ bool write_duration_c( cRecorder rec[static 1],
    }
 
    move_recorder_to_c( rec, oldPos );
-   return record_error_c( rec, c_NotEnoughRecorderSpace );
+   return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 

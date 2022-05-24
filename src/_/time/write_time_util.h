@@ -32,7 +32,7 @@ inline bool intl_write_xsec_c( cRecorder rec[static 1],
    }
    return record_chars_c( rec, cs )
       ? true
-      : record_error_c( rec, c_NotEnoughRecorderSpace );
+      : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 inline bool intl_write_time_seperator_c( cRecorder rec[static 1],
@@ -42,7 +42,7 @@ inline bool intl_write_time_seperator_c( cRecorder rec[static 1],
    scan_char_c( fmtSca, &c );
    if ( not record_char_c( rec, c ) )
    {
-      return record_error_c( rec, c_NotEnoughRecorderSpace );
+      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
    return true;
 }
@@ -71,11 +71,11 @@ inline bool intl_write_day_c( cRecorder rec[static 1],
    }
    else
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return res ? true
-              : record_error_c( rec, c_NotEnoughRecorderSpace );
+              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 inline bool intl_write_day_of_year_c( cRecorder rec[static 1],
@@ -98,11 +98,11 @@ inline bool intl_write_day_of_year_c( cRecorder rec[static 1],
    }
    else
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return res ? true
-              : record_error_c( rec, c_NotEnoughRecorderSpace );
+              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 inline bool intl_write_month_c( cRecorder rec[static 1],
@@ -136,11 +136,11 @@ inline bool intl_write_month_c( cRecorder rec[static 1],
    }
    else
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return res ? true
-              : record_error_c( rec, c_NotEnoughRecorderSpace );
+              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 inline bool intl_write_week_c( cRecorder rec[static 1],
@@ -157,10 +157,10 @@ inline bool intl_write_week_c( cRecorder rec[static 1],
          res = recordf_c( rec, "W%02d", week );
          break;
       default:
-         return record_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
    return res ? true
-              : record_error_c( rec, c_NotEnoughRecorderSpace );
+              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 inline bool intl_write_weekday_c( cRecorder rec[static 1],
@@ -184,10 +184,10 @@ inline bool intl_write_weekday_c( cRecorder rec[static 1],
          res = record_mem_c( rec, buf.v, buf.s );
          break;
       default:
-         return record_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
    return res ? true
-              : record_error_c( rec, c_NotEnoughRecorderSpace );
+              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 inline bool intl_write_year_c( cRecorder rec[static 1],
@@ -204,10 +204,10 @@ inline bool intl_write_year_c( cRecorder rec[static 1],
          res = recordf_c( rec, "%04d", year );
          break;
       default:
-         return record_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
    return res ? true
-              : record_error_c( rec, c_NotEnoughRecorderSpace );
+              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 /*******************************************************************************
@@ -234,11 +234,11 @@ inline bool intl_write_hour_c( cRecorder rec[static 1],
    }
    else
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return res ? true
-              : record_error_c( rec, c_NotEnoughRecorderSpace );
+              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 inline bool intl_write_kitchen_hour_c( cRecorder rec[static 1],
@@ -270,7 +270,7 @@ inline bool intl_write_msec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
    return intl_write_xsec_c( rec, msec, ( fmt == 1 ), "%03d" );
 }
@@ -280,7 +280,7 @@ inline bool intl_write_usec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
    return intl_write_xsec_c( rec, usec, ( fmt == 1 ), "%06d" );
 }
@@ -290,7 +290,7 @@ inline bool intl_write_nsec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
    return intl_write_xsec_c( rec, nsec, ( fmt == 1 ), "%09d" );
 }
@@ -304,9 +304,9 @@ inline bool intl_write_offset_c( cRecorder rec[static 1],
    char sign = ( t.hour < 0 ) ? '-'
                             : '+';
    if ( not iabs32_c( t.hour, &(t.hour) ) )
-      return record_error_c( rec, c_NotEnoughRecorderSpace );
+      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    if ( not iabs8_c( t.min, &(t.min) ) )
-      return record_error_c( rec, c_NotEnoughRecorderSpace );
+      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 
    bool res = false;
    if ( z and t.hour == 0 and t.min == 0 )
@@ -331,11 +331,11 @@ inline bool intl_write_offset_c( cRecorder rec[static 1],
    }
    else
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return res ? true
-              : record_error_c( rec, c_NotEnoughRecorderSpace );
+              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 #endif

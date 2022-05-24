@@ -27,14 +27,14 @@ static bool write_format_text_c( cRecorder rec[static 1],
          cChars cs = make_chars_c( oldStr, sca->mem );
          if ( not record_chars_c( rec, cs ) )
          {
-            return record_error_c( rec, c_NotEnoughRecorderSpace );
+            return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
          }
 
          if ( move_if_chars_c_( sca, "{{" ) )
          {
             if ( not record_char_c( rec, '{' ) )
             {
-               return record_error_c( rec, c_NotEnoughRecorderSpace );
+               return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
             }
          }
          else
@@ -48,7 +48,7 @@ static bool write_format_text_c( cRecorder rec[static 1],
          move_scanner_c( sca, sca->space );
          return record_chars_c( rec, cs )
             ? true
-            : record_error_c( rec, c_NotEnoughRecorderSpace );
+            : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
       }
    }
 }
@@ -190,7 +190,7 @@ static inline bool write_impl( cRecorder rec[static 1],
          {
             if ( rec->err == cNoError_ )
             {
-               record_error_c( rec, c_InvalidWriteFormat );
+               set_recorder_error_c( rec, c_InvalidWriteFormat );
             }
             return false;
          }
@@ -237,7 +237,7 @@ bool writeln_c( cRecorder rec[static 1],
 
    if ( not record_endl_c( rec ) )
    {
-      return record_error_c( rec, c_NotEnoughRecorderSpace );
+      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
 
    return true;

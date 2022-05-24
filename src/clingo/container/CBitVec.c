@@ -481,7 +481,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
    {
       return record_chars_c_( rec, "'empty'" ) 
                 ? true
-                : record_error_c( rec, c_NotEnoughRecorderSpace );
+                : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
 
    cChars const fmtCs = c_c( fmt );
@@ -515,7 +515,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       }
 
       undo_record_c( marker );
-      return record_error_c( rec, c_NotEnoughRecorderSpace );
+      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
 
    // ---------------------------------------------------------------------- dbg
@@ -531,7 +531,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       else
       {
          undo_record_c( marker );
-         return record_error_c( rec, c_NotEnoughRecorderSpace );
+         return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
       }
    }
 
@@ -552,7 +552,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       }
       else
       {
-         return record_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
    }
 
@@ -575,14 +575,14 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       uint8_t tmp = 10;
       if ( not read_uint8_c_( sca, &tmp ) )
       {
-         return record_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
       chunkLen = int64_c_( tmp );
    }
 
    if ( sca->space > 0 ) // ------------------------------------------- fullScan
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    // -------------------------------------------------------------------- write
@@ -633,7 +633,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       if ( not res )
       {
          undo_record_c( marker );
-         return record_error_c( rec, c_NotEnoughRecorderSpace );
+         return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
       }
    }
 

@@ -2,9 +2,9 @@
 #define CLINGO_IO_CRECORDER_H
 
 #include <stdint.h>
+#include <stdio.h>
 
 #include "clingo/apidecl.h"
-#include "clingo/lang/error.h"
 #include "clingo/lang/mem.h"
 #include "clingo/type/cBytes.h"
 #include "clingo/type/cChars.h"
@@ -139,7 +139,7 @@ inline void reset_recorder_c( cRecorder rec[static 1] )
  error
 *******************************************************************************/
 
-inline bool record_error_c( cRecorder rec[static 1], int err )
+inline bool set_recorder_error_c( cRecorder rec[static 1], int err )
 {
    rec->err = err;
    return false;
@@ -325,7 +325,7 @@ inline bool undo_record_error_c( cRecordMarker rm[static 1], int err )
 {
    must_exist_c_( rm );
    undo_record_c( rm );
-   return record_error_c( rm->x, err );
+   return set_recorder_error_c( rm->x, err );
 }
 
 /*******************************************************************************

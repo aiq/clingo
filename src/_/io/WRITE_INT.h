@@ -18,7 +18,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
    cWriteNumFormat numFmt;                                                     \
    if ( not init_write_int_format_c( &numFmt, fmt ) )                          \
    {                                                                           \
-      return record_error_c( rec, c_InvalidWriteFormat );                      \
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );                \
    }                                                                           \
                                                                                \
    cVarChars valBuf = scalars_c_( cWRITE_NUM_VALUE_BUF_SIZE_, char );          \
@@ -124,7 +124,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
                                                                                \
    return record_chars_c( rec, valChars )                                      \
       ? true                                                                   \
-      : record_error_c( rec, c_NotEnoughRecorderSpace );                       \
+      : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );                 \
 }
 
 #endif

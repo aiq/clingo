@@ -26,7 +26,7 @@ bool write_float_num_c( cRecorder rec[static 1],
    cWriteNumFormat numFmt;
    if ( not init_write_float_format_c( &numFmt, fmt ) )
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
    // optional quote at begin --------------------------------------------------
    if ( numFmt.quote )
@@ -89,6 +89,6 @@ bool write_float_num_c( cRecorder rec[static 1],
 
    return record_chars_c( rec, valChars )
       ? true
-      : record_error_c( rec, c_NotEnoughRecorderSpace );
+      : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 

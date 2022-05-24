@@ -171,7 +171,7 @@ bool write_month_c( cRecorder rec[static 1],
    }
 
    int64_t n = count_eq_char_c( slc, 'M' );
-   return ( n != slc.s ) ? record_error_c( rec, c_InvalidWriteFormat )
+   return ( n != slc.s ) ? set_recorder_error_c( rec, c_InvalidWriteFormat )
                          : intl_write_month_c( rec, month, n, 0 );
 }
 

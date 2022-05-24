@@ -37,12 +37,12 @@ bool write_bool_c( cRecorder rec[static 1],
    }
    else
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return record_chars_c_( rec, txt )
       ? true
-      : record_error_c( rec, c_NotEnoughRecorderSpace );
+      : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 bool write_byte_c( cRecorder rec[static 1],
@@ -69,7 +69,7 @@ bool write_byte_c( cRecorder rec[static 1],
       return write_uint8_c( rec, byte, "B(8r0)" );
    }
 
-   return record_error_c( rec, c_InvalidWriteFormat );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 bool write_char_c( cRecorder rec[static 1],
@@ -99,12 +99,12 @@ bool write_char_c( cRecorder rec[static 1],
    }
    else
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return recRes
       ? true
-      : record_error_c( rec, c_NotEnoughRecorderSpace );
+      : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 bool write_range_c( cRecorder rec[static 1],
@@ -121,7 +121,7 @@ bool write_range_c( cRecorder rec[static 1],
       return recordf_c( rec, "{ .min=%"PRIi64", .max=%"PRIi64" }", rng.min,
                                                                    rng.max )
          ? true
-         : record_error_c( rec, c_NotEnoughRecorderSpace );
+         : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
 
    char const* fmtStr = "[%"PRIi64"%s%"PRIi64"]";
@@ -169,18 +169,18 @@ bool write_range_c( cRecorder rec[static 1],
       }
       else
       {
-         return record_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
    }
 
    if ( sca->space > 0 )
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return recordf_c( rec, fmtStr, rng.min, delimiter, rng.max )
       ? true
-      : record_error_c( rec, c_NotEnoughRecorderSpace );
+      : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 bool write_rune_c( cRecorder rec[static 1],
@@ -249,11 +249,11 @@ bool write_rune_c( cRecorder rec[static 1],
          return true;
       }
 
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    move_recorder_to_c( rec, oldPos );
-   return record_error_c( rec, c_NotEnoughRecorderSpace );
+   return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 /*******************************************************************************
@@ -418,14 +418,14 @@ bool write_bytes_c( cRecorder rec[static 1],
       uint8_t tmp = 1;
       if ( read_uint8_c_( sca, &tmp ) == 0 )
       {
-         return record_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
       chunkLen = int64_c_( tmp );
    }
 
    if ( sca->space != 0 )
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    int64_t const oldPos = rec->pos;
@@ -480,7 +480,7 @@ bool write_bytes_c( cRecorder rec[static 1],
    }
 
    move_recorder_to_c( rec, oldPos );
-   return record_error_c( rec, c_NotEnoughRecorderSpace );
+   return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 bool record_escaped_char( cRecorder rec[static 1], char c )
@@ -509,7 +509,7 @@ bool write_chars_c( cRecorder rec[static 1],
    }
    if ( not cstr_is_any_char_c_( fmt, "qQes" ) )
    {
-      return record_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    int64_t const oldPos = rec->pos;
@@ -549,7 +549,7 @@ bool write_chars_c( cRecorder rec[static 1],
    }
 
    move_recorder_to_c( rec, oldPos );
-   return record_error_c( rec, c_NotEnoughRecorderSpace );
+   return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
 bool write_cstr_c( cRecorder rec[static 1],
@@ -585,7 +585,7 @@ bool write_recorded_c( cRecorder rec[static 1],
       return write_bytes_c( rec, recorded_bytes_c( src ), sca->mem );
    }
 
-   return record_error_c( rec, c_InvalidWriteFormat );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 bool write_unscanned_c( cRecorder rec[static 1],
@@ -610,5 +610,5 @@ bool write_unscanned_c( cRecorder rec[static 1],
       return write_bytes_c( rec, unscanned_bytes_c_( sca ), fmtSca->mem );
    }
 
-   return record_error_c( rec, c_InvalidWriteFormat );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
