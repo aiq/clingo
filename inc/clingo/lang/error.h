@@ -11,6 +11,7 @@
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
+#include "clingo/lang/mem.h"
 
 /*******************************************************************************
 ********************************************************* Types and Definitions 
@@ -66,11 +67,11 @@ typedef struct cErrnoErrorData cErrnoErrorData;
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
- init
+
 *******************************************************************************/
 
 CLINGO_API
-uint32_t error_depth_c( cError const err[static 1] );
+int64_t error_depth_c( cError const* err );
 
 CLINGO_API cErrorData const* get_error_data_c( cError const* err );
 
@@ -84,7 +85,7 @@ inline int print_error_c( cError const err[static 1] )
 }
 
 /*******************************************************************************
- notepad
+ note
 *******************************************************************************/
 
 CLINGO_API bool note_error_c( cRecorder rec[static 1],
@@ -98,7 +99,7 @@ CLINGO_API bool note_error_c( cRecorder rec[static 1],
 (                                                                              \
    (cErrorStack){                                                              \
       .space=0,                                                                \
-      .mem=(cByte[]){ [(Size)-1]=0 },                                          \
+      .mem=stack_mem_c_( Size ),                                               \
       .err=NULL                                                                \
    }                                                                           \
 )
@@ -112,10 +113,16 @@ CLINGO_API bool note_error_c( cRecorder rec[static 1],
    }                                                                           \
 )
 
-CLINGO_API bool push_error_c( cErrorStack stack[static 1],
+CLINGO_API int64_t count_errors_c( cErrorStack es[static 1] );
+
+CLINGO_API void drop_error_c( cErrorStack es[static 1] );
+
+CLINGO_API bool push_error_c( cErrorStack es[static 1],
                               cErrorType const type[static 1],
                               cErrorData const* data,
                               int64_t dataSize );
+
+CLINGO_API void reset_error_stack_c( cErrorStack es[static 1] );
 
 /*******************************************************************************
  errno
