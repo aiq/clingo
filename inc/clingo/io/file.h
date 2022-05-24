@@ -4,6 +4,7 @@
 #include "clingo/apidecl.h"
 #include "clingo/container/CByteVec.h"
 #include "clingo/io/cRecorder.h"
+#include "clingo/lang/error.h"
 #include "clingo/string/CString.h"
 #include "clingo/type/cChars.h"
 
@@ -120,6 +121,6 @@ CLINGO_API bool push_file_error_c( cErrorStack stack[static 1],
 CLINGO_API bool push_file_error_and_close_c( cErrorStack stack[static 1],
                                              FILE* file );
 
-CLINGO_API bool note_file_error_c( cErrorNotepad notepad[static 1] );
+CLINGO_API bool note_file_error_c( cRecorder rec[static 1] );
 
 #endif

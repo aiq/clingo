@@ -8,6 +8,17 @@
 #include "clingo/io/write_type.h"
 
 /*******************************************************************************
+********************************************************* Types and Definitions
+**+*****************************************************************************
+ Definitions
+*******************************************************************************/
+
+cErrorType const C_WriteError = {
+   .desc = stringify_c_( C_WriteError ),
+   .note = &note_write_error_c
+};
+
+/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
 
@@ -247,15 +258,21 @@ bool writeln_c( cRecorder rec[static 1],
 
 *******************************************************************************/
 
-char const* record_error_msg_c( cRecorder rec[static 1] )
+bool push_write_error_c( cErrorStack es[static 1], cRecorder rec[static 1] )
 {
-   switch ( rec->err )
-   {
-      #define XMAP_C_( N, I, T ) case N: return T;
-         cWRITE_ERROR_
-      #undef XMAP_C_
-   }
-
-   return "";
+   return false;
 }
 
+bool note_write_error_c( cRecorder rec[static 1], cError const* err )
+{
+   char const* msg = NULL;
+   switch ( rec->err )
+   {
+      #define XMAP_C_( N, I, T ) case N: msg = T;
+         cWRITE_ERROR_CODE_
+      #undef XMAP_C_
+   }
+   if ( msg == NULL ) return false;
+
+   return record_chars_c_( rec, msg );
+}

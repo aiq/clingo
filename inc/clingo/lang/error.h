@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "clingo/apidecl.h"
+#include "clingo/io/cRecorder.h"
 
 /*******************************************************************************
 ********************************************************* Types and Definitions 
@@ -17,38 +18,12 @@
 
 #define cNoError_ 0
 
-struct cErrorNotepad
-{
-   int64_t pos;
-   int64_t space;
-   void* mem;
-};
-typedef struct cErrorNotepad cErrorNotepad;
-
-#define error_notepad_c_( Size )                                               \
-(                                                                              \
-   (cErrorNotepad){                                                            \
-      .pos=0,                                                                  \
-      .space=(Size),                                                           \
-      .mem=mem_c_( Size )                                                      \
-   }                                                                           \
-)
-
-#define heap_error_notepad_c_( Size )                                          \
-(                                                                              \
-   (cErrorNotepad){                                                            \
-      .pos=0,                                                                  \
-      .space=(Size),                                                           \
-      .mem=mem_c_( Size )                                                      \
-   }                                                                           \
-)
-
 typedef void cErrorData;
 
 struct cError;
 typedef struct cError cError;
 
-typedef bool ( *c_note_error )( cErrorNotepad notepad[static 1],
+typedef bool ( *c_note_error )( cRecorder rec[static 1],
                                 cError const* err );
 
 struct cErrorType
@@ -112,26 +87,8 @@ inline int print_error_c( cError const err[static 1] )
  notepad
 *******************************************************************************/
 
-#define error_notepad_c_( Size )                                               \
-(                                                                              \
-   (cErrorNotepad){                                                            \
-      .pos=0,                                                                  \
-      .space=(Size),                                                           \
-      .mem=mem_c_( Size )                                                      \
-   }                                                                           \
-)
-
-#define heap_error_notepad_c_( Size )                                          \
-(                                                                              \
-   (cErrorNotepad){                                                            \
-      .pos=0,                                                                  \
-      .space=(Size),                                                           \
-      .mem=mem_c_( Size )                                                      \
-   }                                                                           \
-)
-
-CLINGO_API bool note_error_c( cErrorNotepad rec[static 1],
-                              cError const err[static 1] );
+CLINGO_API bool note_error_c( cRecorder rec[static 1],
+                              cError const *err );
 
 /*******************************************************************************
  stack
@@ -167,7 +124,7 @@ CLINGO_API bool push_error_c( cErrorStack stack[static 1],
 CLINGO_API bool push_errno_error_c( cErrorStack stack[static 1],
                                     int number );
 
-CLINGO_API bool note_errno_error_c( cErrorNotepad notepad[static 1],
+CLINGO_API bool note_errno_error_c( cRecorder rec[static 1],
                                     cError const* data );
 
 #endif

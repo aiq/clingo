@@ -231,7 +231,7 @@ bool push_file_error_and_close_c( cErrorStack stack[static 1], FILE* file )
    return false;
 }
 
-bool note_file_error_c( cErrorNotepad notepad[static 1] )
+bool note_file_error_c( cRecorder rec[static 1] )
 {
    return false;
 }

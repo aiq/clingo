@@ -4,6 +4,12 @@
 #include "clingo/lang/func.h"
 #include "clingo/lang/mem.h"
 
+/*******************************************************************************
+********************************************************* Types and Definitions
+**+*****************************************************************************
+ Definitions
+*******************************************************************************/
+
 cErrorType const C_ErrnoError = {
    .desc = stringify_c_( C_ErrnoError ),
    .note = &note_errno_error_c
@@ -109,10 +115,18 @@ bool push_error_c( cErrorStack stack[static 1],
    return true;
 }
 
-bool note_error_c( cErrorNotepad notepad[static 1],
-                   cError const err[static 1] )
+bool note_error_c( cRecorder rec[static 1],
+                   cError const* err )
 {
-   return false;
+   if ( err == NULL ) return true;
+   
+   bool res = err->type->note( rec, err );
+   while ( res and err != NULL )
+   {
+      res &= record_chars_c_( rec, ": " );
+      res &= err->type->note( rec, err );
+   }
+   return res;
 }
 
 /*******************************************************************************
@@ -125,18 +139,11 @@ bool push_errno_error_c( cErrorStack stack[static 1], int number )
    return push_error_c( stack, &C_ErrnoError, &d, sizeof( cErrnoErrorData ) );
 }
 
-bool note_errno_error_c( cErrorNotepad notepad[static 1], cError const* err )
+bool note_errno_error_c( cRecorder rec[static 1], cError const* err )
 {
    cErrnoErrorData const* errData = get_error_data_c( err );
    char* errStr = strerror( errData->number );
    if ( errStr == NULL ) return false;
 
-   size_t lenSize = strlen( errStr );
-   int64_t len = 0;
-   if ( not size_to_int64_c( lenSize, &len ) ) return false;
-
-   if ( len > notepad->space ) return false;
-
-   memmove( notepad->mem, errStr, lenSize );
-   return true;
+   return record_chars_c_( rec, errStr );
 }
