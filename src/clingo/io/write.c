@@ -175,13 +175,13 @@ bool write_format_arg_c( cRecorder rec[static 1],
 }
 
 /*******************************************************************************
-
+ write
 *******************************************************************************/
 
-static inline bool write_impl( cRecorder rec[static 1],
-                               c_write_va_arg write_arg,
-                               int n,
-                               va_list list )
+bool write_impl_c( cRecorder rec[static 1],
+                   c_write_va_arg write_arg,
+                   int n,
+                   va_list list )
 {
    cScanner fmtStrSca = null_scanner_c_();
 
@@ -221,26 +221,32 @@ static inline bool write_impl( cRecorder rec[static 1],
    return true;
 }
 
-bool write_c( cRecorder rec[static 1],
-              c_write_va_arg write_arg,
-              int n,
-              ... )
+bool write_list_c( cRecorder rec[static 1], int n, va_list list )
 {
-   va_list list;
-   va_start( list, n );
-
-   return write_impl( rec, write_arg, n, list );
+   return write_impl_c( rec, write_format_arg_c, n, list );
 }
 
-bool writeln_c( cRecorder rec[static 1],
-              c_write_va_arg write_arg,
+bool write_c( cRecorder rec[static 1],
               int n,
               ... )
 {
    va_list list;
    va_start( list, n );
+   bool res = write_list_c( rec, n, list );
+   va_end( list );
+   return res;
+}
 
-   bool ok = write_impl( rec, write_arg, n, list );
+/*******************************************************************************
+ write
+*******************************************************************************/
+
+bool writeln_impl_c( cRecorder rec[static 1],
+                   c_write_va_arg write_arg,
+                   int n,
+                   va_list list )
+{
+   bool ok = write_impl_c( rec, write_arg, n, list );
    if ( not ok )
    {
       return false;
@@ -252,6 +258,22 @@ bool writeln_c( cRecorder rec[static 1],
    }
 
    return true;
+}
+
+bool writeln_list_c( cRecorder rec[static 1], int n, va_list list )
+{
+   return writeln_impl_c( rec, write_format_arg_c, n, list );
+}
+
+bool writeln_c( cRecorder rec[static 1],
+              int n,
+              ... )
+{
+   va_list list;
+   va_start( list, n );
+   bool res = writeln_list_c( rec, n, list );
+   va_end( list );
+   return res;
 }
 
 /*******************************************************************************

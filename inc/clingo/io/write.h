@@ -59,22 +59,38 @@ bool write_format_arg_c( cRecorder rec[static 1],
                          char const fmt[static 1] );
 
 /*******************************************************************************
-
+ write
 *******************************************************************************/
 
+CLINGO_API bool write_impl_c( cRecorder rec[static 1],
+                              c_write_va_arg write_arg,
+                              int n,
+                              va_list list );
+
+CLINGO_API bool write_list_c( cRecorder rec[static 1], int n, va_list list );
+
 #define write_c_( Rec, ... )                                                   \
-   write_c( (Rec), write_format_arg_c, nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+   write_c( (Rec), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
 CLINGO_API
 bool write_c( cRecorder rec[static 1],
-              c_write_va_arg write_arg,
               int n,
               ... );
 
+/*******************************************************************************
+ writeln
+*******************************************************************************/
+
+CLINGO_API bool writeln_impl_c( cRecorder rec[static 1],
+                                c_write_va_arg write_arg,
+                                int n,
+                                va_list list );
+
+CLINGO_API bool writeln_list_c( cRecorder rec[static 1], int n, va_list list );
+
 #define writeln_c_( Rec, ... )                                                 \
-   writeln_c( (Rec), write_format_arg_c, nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+   writeln_c( (Rec), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
 CLINGO_API
 bool writeln_c( cRecorder rec[static 1],
-                c_write_va_arg write_arg,
                 int n,
                 ... );
 
