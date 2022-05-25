@@ -155,7 +155,7 @@ void reset_error_stack_c( cErrorStack es[static 1] )
 bool push_errno_error_c( cErrorStack es[static 1], int number )
 {
    cErrnoErrorData d = { .number=number };
-   return push_error_c( es, &C_ErrnoError, &d, sizeof( cErrnoErrorData ) );
+   return push_error_c( es, &C_ErrnoError, &d, sizeof_c_( cErrnoErrorData ) );
 }
 
 bool note_errno_error_c( cRecorder rec[static 1], cError const* err )
