@@ -115,6 +115,7 @@ set( SRC_FILES
    ${SRC_DIR}/clingo/io/cRecorder.c
    ${SRC_DIR}/clingo/io/cScanner.c
    ${SRC_DIR}/clingo/io/file.c
+   ${SRC_DIR}/clingo/io/print.c
    ${SRC_DIR}/clingo/io/read.c
    ${SRC_DIR}/clingo/io/read_type.c
    ${SRC_DIR}/clingo/io/write.c

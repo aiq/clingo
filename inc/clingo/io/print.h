@@ -5,6 +5,14 @@
 #include "clingo/io/write.h"
 
 /*******************************************************************************
+******************************************************** Code Generation Macros 
+********************************************************************************
+
+*******************************************************************************/
+
+
+
+/*******************************************************************************
 
 *******************************************************************************/
 
@@ -23,12 +31,44 @@
 #define pjotln_c_( Prefix, RecSize, ... )                                      \
    printfn_c_( Prefix, RecSize, jotln_c_, __VA_ARGS__ )
 
-/**************************************/
+/*******************************************************************************
+ fprint
+*******************************************************************************/
 
-#define print_c_( Prefix, RecSize, ... )                                       \
-   printfn_c_( Prefix, RecSize, write_c_, __VA_ARGS__ )
+CLINGO_API bool fprint_impl_c( FILE* file,
+                               cErrorStack es[static 1],
+                               c_write_va_arg write_arg,
+                               int n,
+                               va_list list );
 
-#define println_c_( Prefix, RecSize, ... )                                     \
-   printfn_c_( Prefix, RecSize, writeln_c_, __VA_ARGS__ )
+CLINGO_API
+bool fprint_list_c( FILE* file, cErrorStack es[static 1], int n, va_list list );
+
+CLINGO_API bool fprint_c( FILE* file, cErrorStack es[static 1], int n, ... );
+
+#define print_c_( ... )                                                   \
+   print_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+CLINGO_API bool print_c( int n, ... );
+
+/*******************************************************************************
+ fprintln
+*******************************************************************************/
+
+CLINGO_API bool fprintln_impl_c( FILE* file,
+                                 cErrorStack es[static 1],
+                                 c_write_va_arg write_arg,
+                                 int n,
+                                 va_list list );
+
+CLINGO_API bool fprintln_list_c( FILE* file,
+                                 cErrorStack es[static 1],
+                                 int n,
+                                 va_list list );
+
+CLINGO_API bool fprintln_c( FILE* file, cErrorStack es[static 1], int n, ... );
+
+#define println_c_( ... )                                                 \
+   println_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+CLINGO_API bool println_c( int n, ... );
 
 #endif

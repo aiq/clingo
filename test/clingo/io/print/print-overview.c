@@ -3,8 +3,6 @@
 
 #define pln_( ... ) pjotln_c_( xyz, 256, __VA_ARGS__ )
 
-#define printfln_( ... ) println_c_( asdf, 256, __VA_ARGS__ )
-
 int main( void )
 {
    cRecorder* timeRec = &recorder_c_( 32 );
@@ -12,6 +10,6 @@ int main( void )
 
    pln_( c_c( "hello World!" ), " today is ", timeRec, " that is ", true, "!" );
 
-   printfln_( "{cs:q} today is {rec} ", c_c( "hello world!" ), timeRec,
-              "that is {bool:Cc}!", true );
+   println_c_( "{cs:q} today is {rec} ", c_c( "hello world!" ), timeRec,
+               "that is {bool:Cc}!", true );
 }
