@@ -1,6 +1,17 @@
 #include "clingo/io/file.h"
 
 /*******************************************************************************
+********************************************************* Types and Definitions 
+*******************************************************************************
+
+*******************************************************************************/
+
+cErrorType const C_FileError = {
+   .desc = stringify_c_( C_FileError ),
+   .note = &note_file_error_c
+};
+
+/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  open
@@ -196,8 +207,7 @@ bool write_binary_file_c( cChars path, cBytes bytes, cErrorStack es[static 1] )
 
    if ( not fwrite_bytes_c( file, bytes ) )
    {
-      return ferror_close_c( file );
-
+      return push_file_error_and_close_c( es, file );
    }
 
    return close_file_c( file, es );
@@ -210,8 +220,7 @@ bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] )
 
    if ( not fwrite_chars_c( file, chars ) )
    {
-      return ferror_close_c( file );
-
+      return push_file_error_and_close_c( es, file );
    }
 
    return close_file_c( file, es );
@@ -221,17 +230,25 @@ bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] )
  error
 *******************************************************************************/
 
-bool push_file_error_c( cErrorStack stack[static 1], FILE* file )
+bool push_file_error_c( cErrorStack es[static 1], FILE* file )
 {
+   cFileErrorData d = { .number=ferror( file ) };
+   return push_error_c( es, &C_FileError, &d, sizeof_c_( cFileErrorData ) );
+}
+
+bool push_file_error_and_close_c( cErrorStack es[static 1], FILE* file )
+{
+   cFileErrorData d = { .number=ferror( file ) };
+   push_error_c( es, &C_FileError, &d, sizeof_c_( cFileErrorData ) );
+   close_file_c( file, es );
    return false;
 }
 
-bool push_file_error_and_close_c( cErrorStack stack[static 1], FILE* file )
+bool note_file_error_c( cRecorder rec[static 1], cError const* err )
 {
-   return false;
-}
+   cFileErrorData const* errd = get_error_data_c( err );
+   char* errStr = strerror( errd->number );
+   if ( errStr == NULL ) return false;
 
-bool note_file_error_c( cRecorder rec[static 1] )
-{
-   return false;
+   return record_chars_c_( rec, errStr );
 }

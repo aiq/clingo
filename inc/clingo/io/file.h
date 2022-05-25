@@ -10,6 +10,8 @@
 
 /*******************************************************************************
 ********************************************************* Types and Definitions 
+*******************************************************************************
+
 *******************************************************************************/
 
 CLINGO_API extern cErrorType const C_FileError;
@@ -91,14 +93,6 @@ CLINGO_API bool fwrite_chars_c( FILE* file, cChars chars );
  util
 *******************************************************************************/
 
-CLINGO_API inline int ferror_close_c( FILE* file )
-{
-   must_exist_c_( file );
-   int err = ferror( file );
-   fclose( file );
-   return err;
-}
-
 CLINGO_API
 cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] );
 
@@ -115,12 +109,12 @@ bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] );
  error
 *******************************************************************************/
 
-CLINGO_API bool push_file_error_c( cErrorStack stack[static 1],
+CLINGO_API bool push_file_error_c( cErrorStack es[static 1],
                                    FILE* file );
 
-CLINGO_API bool push_file_error_and_close_c( cErrorStack stack[static 1],
+CLINGO_API bool push_file_error_and_close_c( cErrorStack es[static 1],
                                              FILE* file );
 
-CLINGO_API bool note_file_error_c( cRecorder rec[static 1] );
+CLINGO_API bool note_file_error_c( cRecorder rec[static 1], cError const* err );
 
 #endif
