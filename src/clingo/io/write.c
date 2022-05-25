@@ -27,9 +27,6 @@ cErrorType const C_WriteError = {
 static bool write_format_text_c( cRecorder rec[static 1],
                                  cScanner sca[static 1] )
 {
-   must_exist_c_( rec );
-   must_exist_c_( sca );
-
    while ( true )
    {
       char const* oldStr = sca->mem;
