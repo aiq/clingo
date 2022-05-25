@@ -17,6 +17,8 @@ cErrorType const C_ErrnoError = {
 
 /*******************************************************************************
 ********************************************************************* Functions
+********************************************************************************
+ error
 *******************************************************************************/
 
 int64_t error_depth_c( cError const* err )
@@ -37,36 +39,9 @@ cErrorData const* get_error_data_c( cError const* err )
    return err + sizeof( cError );
 }
 
-int fprint_error_c( FILE* output, cError const err[static 1] )
-{
-   int res = 0;
-/*
-   while ( err )
-   {
-      cError const* curr = err;
-      err = curr->details;
-      char const* fmtStr = err ? "%s: "
-                               : "%s";
-
-      int tmpRes = fprintf( output, fmtStr, curr->msg );
-      if ( tmpRes < 0 )
-      {
-         return tmpRes;
-      }
-      res += tmpRes;
-   }
-*/
-   return res;
-}
-
-extern inline int print_error_c( cError const err[static 1] );
-
-/*******************************************************************************
- note
-*******************************************************************************/
-
-bool note_error_c( cRecorder rec[static 1],
-                   cError const* err )
+bool write_error_c( cRecorder rec[static 1],
+                    cError const *err,
+                    char const fmt[static 1] )
 {
    if ( err == NULL ) return true;
    

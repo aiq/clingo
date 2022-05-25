@@ -102,8 +102,7 @@ bool fprint_impl_c( FILE* file,
                   cap *= 2;
                   if ( not alloc_recorder_mem_c( rec, cap ) )
                   {
-                     push_errno_error_c( es, ENOMEM );
-                     return false;
+                     return push_errno_error_c( es, ENOMEM );
                   }
                }
                while ( not write_arg( rec, &list, specifier.type, specifier.fmt ) )
@@ -112,16 +111,14 @@ bool fprint_impl_c( FILE* file,
                   if ( not realloc_recorder_mem_c( rec, cap ) )
                   {
                      free_recorder_mem_c( rec );
-                     push_errno_error_c( es, ENOMEM );
-                     return false;
+                     return push_errno_error_c( es, ENOMEM );
                   }
                }
             }
          }
          if ( not fwrite_chars_c( file, recorded_chars_c( rec ) ) )
          {
-            push_file_error_c( es, file );
-            return false;
+            return push_file_error_c( es, file );
          }
       }
 
@@ -138,6 +135,7 @@ bool fprint_impl_c( FILE* file,
       reset_recorder_c( rec );
    }
 
+   cleanup_fprint_impl_c( rec, initCap );
    return true;
 }
 

@@ -139,6 +139,10 @@ bool write_format_arg_c( cRecorder rec[static 1],
       char c = char_c_( tmp );
       return write_char_c( rec, c, fmt );
    }
+   else if ( chars_is_c( type, "e" ) )
+   {
+      return write_error_c( rec, va_arg( *list, cError const* ), fmt );
+   }
    else if ( chars_is_c( type, "r" ) )
    {
       return write_rune_c( rec, va_arg( *list, cRune ), fmt );
