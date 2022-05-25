@@ -160,7 +160,7 @@ bool read_format_arg_c( cScanner sca[static 1],
       return read_range_c( sca, range, fmt );
    }
 
-   return true;
+   return false;
 }
 
 /*******************************************************************************
