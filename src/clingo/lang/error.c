@@ -129,7 +129,7 @@ bool push_error_c( cErrorStack es[static 1],
    es->space -= fullSize;
    es->err = e;
 
-   return true;
+   return false;
 }
 
 void reset_error_stack_c( cErrorStack es[static 1] )
