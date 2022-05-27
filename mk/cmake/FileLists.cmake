@@ -280,6 +280,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/io/cScanner/view_runes.c
 
    # file
+   ${TEST_DIR}/clingo/io/file/fread_line.c
    ${TEST_DIR}/clingo/io/file/write_binary_file.c
    ${TEST_DIR}/clingo/io/file/write_text_file.c
 

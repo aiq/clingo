@@ -1,5 +1,8 @@
 #include "clingo/io/file.h"
 
+#include "clingo/io/print.h"
+#define pln_( ... ) pjotln_c_( xyz, 256, __VA_ARGS__ )
+
 /*******************************************************************************
 ********************************************************* Types and Definitions 
 *******************************************************************************
@@ -53,34 +56,69 @@ int64_t file_size_c( FILE* file )
  
 *******************************************************************************/
 
-bool fread_bytes_c( FILE* file, cVarBytes bytes[static 1] )
+bool fread_bytes_c( FILE* file, cVarBytes buf[static 1] )
 {
    must_exist_c_( file );
 
-   if ( is_empty_c_( *bytes ) ) return false;
+   if ( is_empty_c_( *buf ) ) return false;
 
    size_t size = 0;
-   if ( not int64_to_size_c( bytes->s, &size ) ) return false;
+   if ( not int64_to_size_c( buf->s, &size ) ) return false;
 
-   size_t res = fread( bytes->v, 1, size, file );
+   size_t res = fread( buf->v, 1, size, file );
    if ( res == 0 ) return false;
 
-   return uint64_to_int64_c( res, &bytes->s );
+
+   return uint64_to_int64_c( res, &buf->s );
 }
 
-bool fread_chars_c( FILE* file, cVarChars chars[static 1] )
+bool fread_chars_c( FILE* file, cVarChars buf[static 1] )
 {
    must_exist_c_( file );
 
-   if ( is_empty_c_( *chars ) ) return false;
+   if ( is_empty_c_( *buf ) ) return false;
 
    size_t size = 0;
-   if ( not int64_to_size_c( chars->s, &size ) ) return false;
+   if ( not int64_to_size_c( buf->s, &size ) ) return false;
 
-   size_t res = fread( chars->v, 1, size, file );
+   size_t res = fread( buf->v, 1, size, file );
    if ( res == 0 ) return false;
 
-   return uint64_to_int64_c( res, &chars->s );
+   return uint64_to_int64_c( res, &buf->s );
+}
+
+bool fread_line_c( FILE* file,
+                   int64_t n,
+                   cVarChars buf[static 1],
+                   bool fin[static 1] )
+{
+   must_exist_c_( file );
+   must_be_in_range_c_( 4, n, INT_MAX );
+   *fin = false;
+
+   if ( feof( file ) != 0 ) return false;
+ 
+   char* str = fgets( buf->v, (int)n, file );
+   if ( str == NULL )
+   {
+      if ( feof( file ) != 0 )
+      {
+         buf->s = 0;
+         buf->v[0] = '\0';
+         *fin = true;
+         return true;
+      }
+      return false;
+   }
+
+   uint64_to_int64_c( strlen( str ), &buf->s );
+   if ( last_c_( *buf ) == '\n' )
+   {
+      *fin = true;
+      --buf->s;
+   }
+
+   return true;
 }
 
 bool fwrite_bytes_c( FILE* file, cBytes bytes )
