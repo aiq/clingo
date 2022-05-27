@@ -5,11 +5,10 @@ int main( void )
 {
    init_tap_c_();
 
-   cChars chars = c_c( "text file text" );
-
    cChars path = c_c( "tmp-write_text_file.txt" );
-
    cErrorStack* es = &error_stack_c_( 128 );
+
+   cChars chars = c_c( "text file text" );
    expect_c_( write_text_file_c( path, chars, es ) );
 
    cVarChars res = read_text_file_c( path, es );
