@@ -20,7 +20,7 @@ int main( void )
 
    expect_eq_c_( cmp_bytes_c( as_bytes_c( res ), as_bytes_c( bytes ) ) );
 
-   expect_c_( remove_file_c( path ) == 0 );
+   expect_c_( remove_file_c( path, es ) );
    free( res.v );
 
    return finish_tap_c_();

@@ -35,7 +35,7 @@ extern inline FILE* open_file_c( cChars chars,
                                  char const mode[static 1],
                                  cErrorStack es[static 1] );
 
-extern inline int remove_file_c( cChars path );
+extern inline bool remove_file_c( cChars path, cErrorStack es[static 1] );
 
 /*******************************************************************************
  

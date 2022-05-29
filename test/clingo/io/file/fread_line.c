@@ -60,7 +60,7 @@ int main( void )
    expect_c_( feof( file ) != 0 );
 
    require_c_( close_file_c( file, es ) );
-   require_c_( remove_file_c( path ) == 0 );
+   require_c_( remove_file_c( path, es ) );
 
    return finish_tap_c_();
 }

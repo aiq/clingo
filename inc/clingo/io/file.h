@@ -59,16 +59,22 @@ CLINGO_API inline FILE* open_file_c( cChars path,
    return file;
 }
 
-CLINGO_API inline int remove_file_c( cChars path )
+CLINGO_API inline bool remove_file_c( cChars path, cErrorStack es[static 1] )
 {
    cVarChars buf = char_buffer_c_( 4099 );
    char const* cstrPath = make_cstr_c( buf, path );
    if ( cstrPath == NULL )
    {
-      return ENOBUFS;
+      return push_errno_error_c( es, ENOBUFS );
    }
 
-   return remove( cstrPath );
+   int errc = remove( cstrPath );
+   if ( errc != 0 )
+   {
+      return push_errno_error_c( es, errc );
+   }
+
+   return true;
 }
 
 /*******************************************************************************

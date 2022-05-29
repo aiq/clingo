@@ -16,7 +16,7 @@ int main( void )
 
    expect_c_( eq_chars_c( as_chars_c( res ), chars ) );
 
-   expect_c_( remove_file_c( path ) == 0 );
+   expect_c_( remove_file_c( path, es ) );
    free( res.v );
 
    return finish_tap_c_();
