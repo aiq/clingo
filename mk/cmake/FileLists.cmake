@@ -286,6 +286,7 @@ set( TEST_FILES
 
    ${TEST_DIR}/clingo/io/jot/jot.c
 
+   ${TEST_DIR}/clingo/io/print/fprintln.c
    ${TEST_DIR}/clingo/io/print/print-overview.c
 
    ${TEST_DIR}/clingo/io/read/read.c
