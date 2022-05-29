@@ -1,7 +1,6 @@
 #include "clingo/io/file.h"
 
-#include "clingo/io/print.h"
-#define pln_( ... ) pjotln_c_( xyz, 256, __VA_ARGS__ )
+#include <limits.h>
 
 /*******************************************************************************
 ********************************************************* Types and Definitions 
