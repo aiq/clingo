@@ -46,9 +46,12 @@ int64_t file_size_c( FILE* file )
    must_exist_c_( file );
 
    long pos = ftell( file );
-   fseek( file, 0, SEEK_END );
+   if ( fseek( file, 0, SEEK_END ) != 0 ) return -1;
+
    int64_t res = ftell( file );
-   fseek( file, pos, SEEK_SET );
+   
+   if ( fseek( file, pos, SEEK_SET ) != 0 ) return -1;
+
    return res;
 }
 

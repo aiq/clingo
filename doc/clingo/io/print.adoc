@@ -6,14 +6,8 @@
 //******************************************************************************
 == Overview
 
-Module that contains macro function that allow to use
-
-* jot_c_
-* jotln_c_
-* write_c_
-* writeln_c_
-
-for print functions.
+Module that contains functions and macro functions to print to stdout or write
+to a file.
 
 .Example
 [source,c]
@@ -56,22 +50,92 @@ The recorder will be uesed with the jot_c_ function and the arguments.
 Macro function that creates a recorder with Prefix as name and the RecSize.
 The recorder will be uesed with the jotln_c_ function and the arguments.
 
-[id='print_c_']
-==== print_c_
+//********************************************************************** fprint
+=== fprint
+
+==== fprint_impl_c
 [source,c]
 ----
-#define print_c_( Prefix, RecSize, ... )
+bool fprint_impl_c( FILE* file,
+                    cErrorStack es[static 1],
+                    c_write_va_arg write_arg,
+                    int n,
+                    va_list list );
 ----
 
-Macro function that creates a recorder with Prefix as name and the RecSize.
-The recorder will be uesed with the write_c_ function and the arguments.
+Bla, Bla, Bla.
 
-[id='println_c_']
-==== println_c_
+==== fprint_list_c
 [source,c]
 ----
-#define println_c_( Prefix, RecSize, ... )
+bool fprint_list_c( FILE* file, cErrorStack es[static 1], int n, va_list list );
 ----
 
-Macro function that creates a recorder with Prefix as name and the RecSize.
-The recorder will be uesed with the writeln_c_ function and the arguments.
+Bla, Bla, Bla.
+
+==== fprint_c
+[source,c]
+----
+#define fprint_c_( File, Es, ... )                                             \
+   fprint_c( (File), (Es), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+bool fprint_c( FILE* file, cErrorStack es[static 1], int n, ... );
+----
+
+Bla, Bla, Bla.
+
+==== print_c
+[source,c]
+----
+#define print_c_( ... )                                                        \
+   print_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+bool print_c( int n, ... );
+----
+
+Bla, Bla, Bla.
+
+//******************************************************************** fprintln
+=== fprintln
+
+==== fprintln_impl_c
+[source,c]
+----
+bool fprintln_impl_c( FILE* file,
+                      cErrorStack es[static 1],
+                      c_write_va_arg write_arg,
+                      int n,
+                      va_list list );
+----
+
+Bla, Bla, Bla.
+
+==== fprint_list_c
+[source,c]
+----
+bool fprintln_list_c( FILE* file,
+                      cErrorStack es[static 1],
+                      int n,
+                      va_list list );
+----
+
+Bla, Bla, Bla.
+
+==== fprintln_c
+[source,c]
+----
+#define fprintln_c_( File, Es, ... )                                           \
+   fprintln_c( (File), (Es), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+bool fprintln_c( FILE* file, cErrorStack es[static 1], int n, ... );
+----
+
+Bla, Bla, Bla.
+
+==== println_c
+[source,c]
+----
+#define println_c_( ... )                                                 \
+   println_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+bool println_c( int n, ... );
+----
+
+Bla, Bla, Bla.
+
