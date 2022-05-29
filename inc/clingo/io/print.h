@@ -44,9 +44,11 @@ CLINGO_API bool fprint_impl_c( FILE* file,
 CLINGO_API
 bool fprint_list_c( FILE* file, cErrorStack es[static 1], int n, va_list list );
 
+#define fprint_c_( File, Es, ... )                                             \
+   fprint_c( (File), (Es), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
 CLINGO_API bool fprint_c( FILE* file, cErrorStack es[static 1], int n, ... );
 
-#define print_c_( ... )                                                   \
+#define print_c_( ... )                                                        \
    print_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
 CLINGO_API bool print_c( int n, ... );
 
@@ -65,6 +67,8 @@ CLINGO_API bool fprintln_list_c( FILE* file,
                                  int n,
                                  va_list list );
 
+#define fprintln_c_( File, Es, ... )                                           \
+   fprintln_c( (File), (Es), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
 CLINGO_API bool fprintln_c( FILE* file, cErrorStack es[static 1], int n, ... );
 
 #define println_c_( ... )                                                 \
