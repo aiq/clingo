@@ -7,6 +7,7 @@
 #include "_/algo/sum.h"
 #include "clingo/lang/algo.h"
 #include "clingo/lang/func.h"
+#include "clingo/type/float.h"
 #include "clingo/type/uint16.h"
 
 /*******************************************************************************
@@ -46,6 +47,13 @@ WINDOW_IMPL_C_(
 *******************************************************************************/
 
 extern inline int cmp_double_c( double a, double b );
+
+bool double_to_float_c( double d, float f[static 1] )
+{
+   *f = float_c_( d );
+   double const tmpD = double_c_( *f );
+   return tmpD == d;
+}
 
 bool eq_double_c( double d1, double d2, double epsilon )
 {

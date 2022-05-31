@@ -731,6 +731,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/type/double/cmp_double.c
    ${TEST_DIR}/clingo/type/double/eq_double.c
    ${TEST_DIR}/clingo/type/double/double_info.c
+   ${TEST_DIR}/clingo/type/double/double_to_float.c
    ${TEST_DIR}/clingo/type/double/pack_double.c
    ${TEST_DIR}/clingo/type/double/unpack_double.c
    # float

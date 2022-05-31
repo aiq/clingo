@@ -234,6 +234,22 @@ include::{xmpldir}/cmp_double.c[]
 
 Macro function that casts the Value as double.
 
+==== double_to_float_c
+[source,c]
+----
+bool double_to_float_c( double d, float f[static 1] );
+----
+
+{Conv}
+Returns true if the double value can be represented in a float variable,
+otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/double_to_float.c[]
+----
+
 ==== eq_double_c
 [source,c]
 ----

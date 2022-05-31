@@ -67,6 +67,8 @@ CLINGO_API inline int cmp_double_c( double a, double b )
    (double)(Value)                                                             \
 )
 
+CLINGO_API bool double_to_float_c( double d, float f[static 1] );
+
 #define eq_double_c_( D1, D2 )                                                 \
    eq_double_c( (D1), (D2), DBL_EPSILON )
 CLINGO_API bool eq_double_c( double d1, double d2, double epsilon );
