@@ -5,29 +5,51 @@
 //******************************************************************************
 == Overview
 
-This module allows to handle errors in a fashion that is similar to the way it
-works with the errno macro.
-But instead of a single value that can hold a int encourages clingo to use a
-thread local variable of the type cError to describe errors that occur.
-A cError variable should be used for specific domains and not globally for all
-kind of errors.
-
-The cError allows to store a code, a message(msg) and a reference to another
-cError variable(details).
+Instances of cError should allways be stored on an cErrorStack instance.
+Each error can have custom information that can be stored after the cError
+instance on a stack.
 
 //******************************************************************************
 //******************************************************* Types and Definitions
 //******************************************************************************
 == Types and Definitions
 
+//*********************************************************************** error
+=== error
+
 [id='cNoError_']
 ==== cNoError_
-[struct,c]
+[source,c]
 ----
 #define cNoError_ 0
 ----
 
-Macro that defines the code value that represents no error.
+Macro that defines the error code value that represents no error.
+
+[id='c_note_error']
+==== c_note_error
+[source,c]
+----
+typedef bool ( *c_note_error )( cRecorder rec[static 1], cError const* err );
+----
+
+Type definition of a note function for an cErrorType.
+
+[id='cErrorType']
+==== cErrorType
+[source,c]
+----
+struct cErrorType
+{
+   char const* desc;
+   c_note_error note;
+};
+typedef struct cErrorType cErrorType;
+----
+
+Stores information of that all error types share.
+The attribute desc is a string that represents the content type, like C_ErrnoErrro for example.
+The note function should also be the same for all instances of a cErrorType.
 
 [id='cError']
 ==== cError
@@ -35,94 +57,182 @@ Macro that defines the code value that represents no error.
 ----
 struct cError
 {
-   uint32_t code;
-   char const* msg;
-   struct cError* details;
+   cErrorType const* type;
+   cError const* sub;
 };
 typedef struct cError cError;
 ----
 
 Struct to store error information.
+A cError instance should allways exist on an cErrorStack and should have stored
+the custom cErrorData directly after the cError.
+The type value stores a s
+
 The code allows to check and handle an error in the code.
 The msg attribute allows to print or log the error.
-Finally makes details possible to chain errors together and to pass detail
-information forward without explicit handling.
+The type value is a pointer to the shared cErrorType instance.
+The sub value can point to an sub error that triggered the error.
 
+==== cErrorStack
+[source,c]
+----
+struct cErrorStack
+{
+   int64_t space;
+   void* mem;
+   cError const* err;
+};
+typedef struct cErrorStack cErrorStack;
+----
+
+A stack that should be used to store the cError instances with the corresponding
+cErrorData. The err value points to the last error that was pushed on the stack.
+
+//*********************************************************************** errno
+=== errno
+
+[id='C_ErrnoError']
+==== C_ErrnoError
+[source,c]
+----
+cErrorType const C_ErrnoError;
+----
+
+Stores the cErrorType instance that all errors that represent an errno error
+reference.
+
+[id='cErrnoErrorData']
+==== cErrnoErrorData
+[source,c]
+----
+struct cErrnoErrorData
+{
+   int number;
+};
+typedef struct cErrnoErrorData cErrnoErrorData;
+----
+
+Stores the errno number that the error represents.
 
 //******************************************************************************
 //******************************************************************* Functions
 //******************************************************************************
 == Functions
 
-//************************************************************************ init
-=== init
-
-[id='errno_error_c_']
-==== errno_error_c_
-[source,c]
-----
-#define errno_error_c_()
-----
-
-Macro function that initialises a cError variable with the current errno value.
-The msg attribute is set with the strerror function.
-
-[id='error_c_']
-==== error_c_
-[source,c]
-----
-#define error_c_( Code, Msg )
-----
-
-Macro function to initialise a cError variable with the arguments.
-
-[id='no_error_c_']
-==== no_error_c_
-[source,c]
-----
-#define no_error_c_()
-----
-
-Macro function to initialise a cError varibale with a value that represents no
-error.
-
-//************************************************************************ work
-=== work
+//************************************************************************ error
+=== error
 
 [id='error_depth_c']
 ==== error_depth_c
 [source,c]
 ----
-uint32_t error_depth_c( cError const err[static 1] );
+int64_t error_depth_c( cError const err* );
 ----
 
-Counts how much cError variables are chained together.
+Counts how much cError variables are chained together..
 
-[id='fprint_error_c']
-==== fprint_error_c
+[id='write_error_c']
+==== write_error_c
 [source,c]
 ----
-int fprint_error_c( FILE* output, cError const err[static 1] );
+#define write_error_c_( Rec, Err )                                             \
+   write_error_c( (Rec), (Err), "" )
+bool write_error_c( cRecorder rec[static 1],
+                    cError const *err,
+                    char const fmt[static 1] );
 ----
 
-Writes the msg value of err to the output stream.
-If the error has details concatenates the function the msg values with ": ".
+Writes the error into a recorder.
+The default format writes the error notes of all chained errors and
+concatenates them with ": ".
 
-[id='print_error_c']
-==== print_error_c
+//************************************************************************ stack
+=== stack
+
+[id='error_stack_c_']
+==== error_stack_c_
 [source,c]
 ----
-int print_error_c( cError const err[static 1] );
+#define error_stack_c_( Size )
 ----
 
-Prints the msg value of err to the stdout stream.
+Allocates a byte array at the stack and assigns the memory to the error stack.
 
-[id='reset_error_c']
-==== reset_error_c
+[id='heap_error_stack_c_']
+==== heap_error_stack_c_
 [source,c]
 ----
-void reset_error_c( cError err[static 1] );
+#define heap_error_stack_c_( Size )
 ----
 
-Resets the err value itself and all concatented errors.
+Allocates a byte array at the heap and assigns the memory to a new created
+error stack.
 
+[id='make_error_stack_c_']
+==== make_error_stack_c_
+[source,c]
+----
+#define make_error_stack_c_( Size, Memory )
+----
+
+Creates a error stack with the allready allocated memory.
+
+[id='count_errors_c']
+==== count_errors_c
+[source,c]
+----
+int64_t count_errors_c( cErrorStack es[static 1] );
+----
+
+Counts how much cError variables are chained together on the stack.
+
+[id='drop_error_c']
+==== drop_error_c
+[source,c]
+----
+void drop_error_c( cErrorStack es[static 1] );
+----
+
+Drops the last pushed error from the stack.
+
+[id='push_error_c']
+==== push_error_c
+[source,c]
+----
+bool push_error_c( cErrorStack es[static 1],
+                   cErrorType const type[static 1],
+                   cErrorData const* data,
+                   int64_t dataSize );
+----
+
+Pushes a error on the stack with the corresponding cErrorData.
+
+[id='reset_error_stack_c']
+==== reset_error_stack_c
+[source,c]
+----
+void reset_error_stack_c( cErrorStack es[static 1] );
+----
+
+Removes all chained errors from the stack.
+
+//************************************************************************ errno
+=== errno
+
+[id='push_errno_error_c']
+==== push_errno_error_c
+[source,c]
+----
+bool push_errno_error_c( cErrorStack es[static 1], int number );
+----
+
+Function to push a errno error with the corresponding cErrorData on the stack.
+
+[id='note_errno_error_c']
+==== note_errno_error_c
+[source,c]
+----
+bool note_errno_error_c( cRecorder rec[static 1], cError const* data );
+----
+
+The c_note_error function that C_ErrnoError references.
