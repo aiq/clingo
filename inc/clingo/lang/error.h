@@ -24,8 +24,7 @@ typedef void cErrorData;
 struct cError;
 typedef struct cError cError;
 
-typedef bool ( *c_note_error )( cRecorder rec[static 1],
-                                cError const* err );
+typedef bool ( *c_note_error )( cRecorder rec[static 1], cError const* err );
 
 struct cErrorType
 {
@@ -39,10 +38,6 @@ struct cError
    cErrorType const* type;
    cError const* sub;
 };
-
-/*******************************************************************************
-
-*******************************************************************************/
 
 struct cErrorStack
 {
@@ -67,7 +62,7 @@ typedef struct cErrnoErrorData cErrnoErrorData;
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
-
+ error
 *******************************************************************************/
 
 CLINGO_API
@@ -99,6 +94,15 @@ CLINGO_API bool write_error_c( cRecorder rec[static 1],
    (cErrorStack){                                                              \
       .space=0,                                                                \
       .mem=alloc_c( Size ),                                                    \
+      .err=NULL                                                                \
+   }                                                                           \
+)
+
+#define make_error_stack_c_( Size, Memory )                                    \
+(                                                                              \
+   (cErrorStack){                                                              \
+      .space=(Size),                                                           \
+      .mem=(Memory),                                                           \
       .err=NULL                                                                \
    }                                                                           \
 )
