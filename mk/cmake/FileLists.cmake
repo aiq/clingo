@@ -597,6 +597,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/time/cOrdinalDate/write_ordinal_date.c
 
    # cTime
+   ${TEST_DIR}/clingo/time/cTime/as_timestamp.c
    ${TEST_DIR}/clingo/time/cTime/cTime-get.c
    ${TEST_DIR}/clingo/time/cTime/read_time.c
    ${TEST_DIR}/clingo/time/cTime/shift_time.c

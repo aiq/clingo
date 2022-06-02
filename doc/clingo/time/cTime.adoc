@@ -154,6 +154,12 @@ cTimestamp as_timestamp_c( cTime time );
 
 Returns the cTime value as timestamp.
 
+.Example
+[source,c]
+----
+include::{xmpldir}/as_timestamp.c[]
+----
+
 ==== from_timestamp_c
 [source,c]
 ----
