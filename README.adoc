@@ -42,7 +42,6 @@ $ lua mk/htmldoc/generate.lua
 
 * select or create a formater for the source code
 * add missing tests and improve documentation
-* add alloc/free functions for cError
 * maybe color sub module to handle colors, similar to the time sub module
 
 == License
