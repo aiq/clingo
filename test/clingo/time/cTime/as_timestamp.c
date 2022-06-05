@@ -17,9 +17,9 @@ int main( void )
 
    testSlice tests = slice_c_( test,
       t_( make_time_c( 2009, c_Feb, 13, 23, 31, 30, 0, utc_c() ),
-          from_unix_timestamp_c( secs_c( 1234567890 ) ) ),
+          unix_timestamp_c( secs_c( 1234567890 ) ) ),
       t_( make_time_c( 2001, c_Jan,  1,  0,  0,  0, 0, utc_c() ),
-          from_unix_timestamp_c( secs_c( 978307200 ) ) )
+          unix_timestamp_c( secs_c( 978307200 ) ) )
    );
 
    for_each_c_( test const*, t, tests )

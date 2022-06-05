@@ -9,6 +9,7 @@ include::_attr.adoc[]
 == Overview
 
 Provides a struct and a set of function to work with a moment in time.
+It saves the nano seconds since 00:00:00 UTC on 1 January 1970.
 
 //******************************************************************************
 //******************************************************* Types and Definitions
@@ -123,6 +124,49 @@ cTimestamp null_timestamp_c( void );
 ----
 
 Returns an invalid moment in time.
+
+==== unix_timestamp_c
+[source,c]
+----
+cTimestamp unix_timestamp_c( cDuration dur );
+----
+
+Creates a timestamp instance from the duration since 00:00:00 UTC on 1 January 1970.
+
+//************************************************************************ unix
+=== unix
+
+==== timestamp_secs_c
+[source,c]
+----
+int64_t timestamp_secs_c( cTimestamp ts );
+----
+
+Returns the seconds since 00:00:00 UTC on 1 January 1970.
+
+==== timestamp_msecs_c
+[source,c]
+----
+int64_t timestamp_msecs_c( cTimestamp ts );
+----
+
+Returns the milliseconds since 00:00:00 UTC on 1 January 1970.
+
+==== timestamp_usecs_c
+[source,c]
+----
+int64_t timestamp_usecs_c( cTimestamp ts );
+----
+
+Returns the microseconds since 00:00:00 UTC on 1 January 1970.
+
+==== timestamp_nsecs_c
+[source,c]
+----
+int64_t timestamp_nsecs_c( cTimestamp ts );
+----
+
+Returns the nanoseconds since 00:00:00 UTC on 1 January 1970.
 
 //************************************************************************* cmp
 === cmp

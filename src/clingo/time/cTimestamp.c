@@ -37,6 +37,23 @@ cTimestamp null_timestamp_c( void )
    return (cTimestamp){ -1 };
 }
 
+cTimestamp unix_timestamp_c( cDuration dur )
+{
+   return (cTimestamp){ ._v=dur._v };
+}
+
+/*******************************************************************************
+ unix
+*******************************************************************************/
+
+extern inline int64_t timestamp_secs_c( cTimestamp ts );
+
+extern inline int64_t timestamp_msecs_c( cTimestamp ts );
+
+extern inline int64_t timestamp_usecs_c( cTimestamp ts );
+
+extern inline int64_t timestamp_nsecs_c( cTimestamp ts );
+
 /*******************************************************************************
  cmp
 *******************************************************************************/

@@ -38,6 +38,32 @@ CLINGO_API cTimestamp now_c( void );
 
 CLINGO_API cTimestamp null_timestamp_c( void );
 
+CLINGO_API cTimestamp unix_timestamp_c( cDuration dur );
+
+/*******************************************************************************
+ unix
+*******************************************************************************/
+
+CLINGO_API inline int64_t timestamp_secs_c( cTimestamp ts )
+{
+   return as_secs_c( nsecs_c( ts._v ) );
+}
+
+CLINGO_API inline int64_t timestamp_msecs_c( cTimestamp ts )
+{
+   return as_msecs_c( nsecs_c( ts._v ) );
+}
+
+CLINGO_API inline int64_t timestamp_usecs_c( cTimestamp ts )
+{
+   return as_usecs_c( nsecs_c( ts._v ) );
+}
+
+CLINGO_API inline int64_t timestamp_nsecs_c( cTimestamp ts )
+{
+   return ts._v;
+}
+
 /*******************************************************************************
  cmp
 *******************************************************************************/
