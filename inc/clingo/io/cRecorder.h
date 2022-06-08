@@ -212,7 +212,7 @@ inline bool record_mem_c( cRecorder rec[static 1],
    size_t size;
    if ( not int64_to_size_c( len, &size ) ) return false;
 
-   memcpy( rec->mem, mem, size );
+   memmove( rec->mem, mem, size );
    rec->pos += len;
    rec->space -= len;
    rec->mem += len;
