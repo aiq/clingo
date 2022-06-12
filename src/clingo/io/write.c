@@ -171,6 +171,10 @@ bool write_format_arg_c( cRecorder rec[static 1],
    {
       return write_recorded_c( rec, va_arg( *list, cRecorder const* ), fmt );
    }
+   else if ( chars_is_c( type, "sca" ) )
+   {
+      return write_unscanned_c( rec, va_arg( *list, cScanner const* ), fmt );
+   }
 
    return false;
 }
