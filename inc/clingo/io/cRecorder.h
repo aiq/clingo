@@ -45,38 +45,27 @@ typedef struct cRecordMarker cRecordMarker;
 
 #define heap_recorder_c_( Size )                                               \
 (                                                                              \
-   (cRecorder){                                                                \
-      .pos=0,                                                                  \
-      .space=(Size),                                                           \
-      .mem=alloc_c( Size )                                                     \
-   }                                                                           \
+   (cRecorder){ .pos=0, .space=(Size), .mem=alloc_c( Size ) }                  \
 )
 
 #define make_recorder_c_( Size, Memory )                                       \
 (                                                                              \
-   (cRecorder){                                                                \
-      .pos=0,                                                                  \
-      .space=(Size),                                                           \
-      .mem=(Memory)                                                            \
-   }                                                                           \
+   (cRecorder){ .pos=0, .space=(Size), .mem=(Memory) }                         \
 )
 
 #define null_recorder_c_()                                                     \
 (                                                                              \
-   (cRecorder){                                                                \
-      .pos=0,                                                                  \
-      .space=0,                                                                \
-      .mem=NULL                                                                \
-   }                                                                           \
+   (cRecorder){ .pos=0, .space=0, .mem=NULL }                                  \
+)
+
+#define recorder_copy_c_( Rec )                                                \
+(                                                                              \
+   (cRecorder){ .pos=(Rec)->pos, .space=(Rec)->space, .mem=(Rec)->mem }        \
 )
 
 #define recorder_c_( Size )                                                    \
 (                                                                              \
-   (cRecorder){                                                                \
-      .pos=0,                                                                  \
-      .space=(Size),                                                           \
-      .mem=stack_mem_c_( Size )                                                \
-   }                                                                           \
+   (cRecorder){ .pos=0, .space=(Size), .mem=stack_mem_c_( Size ) }             \
 )
 
 /*******************************************************************************

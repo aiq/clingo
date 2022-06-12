@@ -51,6 +51,11 @@ typedef struct cScanMarker cScanMarker;
    (cScanner){ .pos=0, .space=0, .mem=NULL }                                   \
 )
 
+#define scanner_copy_c_( Sca )                                                 \
+(                                                                              \
+   (cScanner){ .pos=(Sca)->pos, .space=(Sca)->space, .mem=(Sca)->mem }         \
+)
+
 #define sub_scanner_c_( Sca, MaxSize )                                         \
 (                                                                              \
    make_scanner_c_( min_c_( (MaxSize), (Sca)->space ), (Sca)->mem )            \
