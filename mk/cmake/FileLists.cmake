@@ -18,7 +18,7 @@ set( INC_FILES
    ${INC_DIR}/clingo/io/cCell.h
    ${INC_DIR}/clingo/io/cRecorder.h
    ${INC_DIR}/clingo/io/cScanner.h
-   ${INC_DIR}/clingo/io/file.h
+   ${INC_DIR}/clingo/io/FILE.h
    ${INC_DIR}/clingo/io/jot.h
    ${INC_DIR}/clingo/io/read.h
    ${INC_DIR}/clingo/io/read_type.h
@@ -114,7 +114,7 @@ set( SRC_FILES
    ${SRC_DIR}/clingo/io/cCell.c
    ${SRC_DIR}/clingo/io/cRecorder.c
    ${SRC_DIR}/clingo/io/cScanner.c
-   ${SRC_DIR}/clingo/io/file.c
+   ${SRC_DIR}/clingo/io/FILE.c
    ${SRC_DIR}/clingo/io/print.c
    ${SRC_DIR}/clingo/io/read.c
    ${SRC_DIR}/clingo/io/read_type.c
@@ -279,10 +279,10 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/io/cScanner/view_pad.c
    ${TEST_DIR}/clingo/io/cScanner/view_runes.c
 
-   # file
-   ${TEST_DIR}/clingo/io/file/fread_line.c
-   ${TEST_DIR}/clingo/io/file/write_binary_file.c
-   ${TEST_DIR}/clingo/io/file/write_text_file.c
+   # FILE
+   ${TEST_DIR}/clingo/io/FILE/fread_line.c
+   ${TEST_DIR}/clingo/io/FILE/write_binary_file.c
+   ${TEST_DIR}/clingo/io/FILE/write_text_file.c
 
    ${TEST_DIR}/clingo/io/jot/jot.c
 

@@ -1,7 +1,7 @@
 #include "clingo/io/print.h"
 
 #include "_/io/read_write_util.h"
-#include "clingo/io/file.h"
+#include "clingo/io/FILE.h"
 
 /*******************************************************************************
 ********************************************************************* Functions 

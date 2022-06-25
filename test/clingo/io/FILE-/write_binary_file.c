@@ -1,4 +1,4 @@
-#include "clingo/io/file.h"
+#include "clingo/io/FILE.h"
 #include "clingo/lang/expect.h"
 
 int main( void )
