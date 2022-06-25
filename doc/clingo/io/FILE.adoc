@@ -1,0 +1,204 @@
+= file
+:xmpldir: ../../../test/clino/io/file
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+Module that adds function that simplify the use of files.
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************** os
+=== os
+
+==== close_file_c
+[source,c]
+----
+bool close_file_c( FILE* file, cErrorStack es[static 1] );
+----
+
+Wraps fclose and allows the use of chars as path.
+The size of path should not be greater as 4096.
+The function returns false and adds a C_ErrnoError to the error stack if a
+problem occurs.
+
+==== open_file_c
+[source,c]
+----
+FILE* open_file_c( cChars path,
+                   char const mode[static 1],
+                   cErrorStack es[static 1] );
+----
+
+Wraps fopen and allows the use of chars as path.
+The size of path should not be greater as 4096.
+The function returns NULL and adds a C_ErrnoError to the error stack if a
+problem occurs.
+
+==== remove_file_c
+[source,c]
+----
+bool remove_file_c( cChars path, cErrorStack es[static 1] );
+----
+
+Wraps remove and allows the use of chars as path.
+The size of path should not be creates as 4096.
+The function returns false and adds a C_ErrnoError to the error stack if a
+problem occurs.
+
+==== ropen_file_c
+[source,c]
+----
+FILE* ropen_file_c( cChars path, cErrorStack es[static 1] );
+----
+
+Opens a file that is readable.
+The size of path should not be greater as 4096.
+The function returns NULL and adds a C_ErrnoError to the error stack if a
+problem occurs.
+
+==== wopen_file_c
+[source,c]
+----
+FILE* wopen_file_c( cChars path, cErrorStack es[static 1] );
+----
+
+Opens a file that is writeable.
+The size of path should not be greater as 4096.
+The function returns NULL and adds a C_ErrnoError to the error stack if a
+problem occurs.
+
+//*********************************************************************** state
+=== state
+
+==== file_size_c
+[source,c]
+----
+int64_t file_size_c( FILE* file );
+----
+
+Returns the size of the current file.
+The function returns -1 if the size can not be determinied.
+
+//*********************************************************************** fread
+=== fread
+
+==== fread_bytes_c
+[source,c]
+----
+bool fread_bytes_c( FILE* file, cVarBytes bytes[static 1] );
+----
+
+Reads bytes from the file into bytes.
+Returns true if at least one byte have been read and no error occurs.
+
+==== fread_chars_c
+[source,c]
+----
+bool get_file_chars_c( FILE* file, cVarChars chars[static 1] );
+----
+
+Reads chars from the file into chars.
+Returns true if at least one char have been read and no error occurs.
+
+==== fread_line_c
+[source,c]
+----
+bool fread_line_c( FILE* file,
+                   int64_t n,
+                   cVarChars buf[static 1],
+                   bool fin[static 1] );
+----
+
+The function tries to return a single line, not including the end-of-line bytes.
+The fin value will be true if the lines ends.
+The text returned from will not include the line end ("\r\n" or "\n").
+If buf does not define enough space will 
+Returns true if no error occurs.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/fread_line.c[]
+----
+
+//********************************************************************** fwrite
+
+==== fwrite_bytes_c
+[source,c]
+----
+bool fwrite_bytes_c( FILE* file, cBytes bytes[static 1] );
+----
+
+Writes bytes to a file.
+Returns true if all bytes can be written to a file and no error occurs.
+
+==== fwrite_chars_c
+[source,c]
+----
+bool fwrite_chars_c( FILE* file, cChars chars[static 1] );
+----
+
+Writes chars to a file.
+Returns true if all chars can be written to a file and no error occurs.
+
+//************************************************************************ util
+=== util
+
+==== read_binary_file_c
+[source,c]
+----
+cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] );
+----
+
+Reads a whole binary file into the heap memory.
+Returns an invalid slice if an error occurs and adds a C_ErrnoError or
+C_FileError to the error stack.
+
+==== read_text_file_c
+[source,c]
+----
+cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] );
+----
+
+Reads a whole text file into the heap memory as C string.
+The end marker of the C string is not part of the slice.
+Returns an invalid slice if an error occurs and adds a C_ErrnoError or
+C_FileError to the error stack.
+
+==== write_binary_file_c
+[source,c]
+----
+bool write_binary_file_c( cChars path, cBytes bytes, cErrorStack es[static 1] );
+----
+
+Creates a binary file that consist of the bytes.
+Returns fals if an error occurs and adds a C_ErrnoError or C_FileError to the
+error stack.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_binary_file.c[]
+----
+
+==== write_text_file_c
+[source,c]
+----
+bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] );
+----
+
+Creates a binary file that consist of the bytes.
+Returns fals if an error occurs and adds a C_ErrnoError or C_FileError to the
+error stack.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/write_text_file.c[]
+----

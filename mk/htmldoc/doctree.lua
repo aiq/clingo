@@ -15,7 +15,7 @@ local doctree = {
          "cCell.adoc",
          "cRecorder.adoc",
          "cScanner.adoc",
-         "file.adoc",
+         "FILE.adoc",
          "jot.adoc",
          "print.adoc",
          "read.adoc",
