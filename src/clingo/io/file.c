@@ -36,6 +36,10 @@ extern inline FILE* open_file_c( cChars chars,
 
 extern inline bool remove_file_c( cChars path, cErrorStack es[static 1] );
 
+extern inline FILE* ropen_file_c( cChars path, cErrorStack es[static 1] );
+
+extern inline FILE* wopen_file_c( cChars path, cErrorStack es[static 1] );
+
 /*******************************************************************************
  
 *******************************************************************************/
@@ -159,7 +163,7 @@ cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] )
 {
    cVarBytes invalidBytes = invalid_slice_c_();
 
-   FILE* file = open_file_c( path, "rb", es );
+   FILE* file = ropen_file_c( path, es );
    if ( file == NULL ) return invalidBytes;
 
 
@@ -197,7 +201,7 @@ cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] )
 {
    cVarChars invalidChars = invalid_slice_c_();
 
-   FILE* file = open_file_c( path, "rb", es );
+   FILE* file = ropen_file_c( path, es );
    if ( file == NULL ) return invalidChars;
 
    int64_t size = file_size_c( file );
@@ -242,7 +246,7 @@ cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] )
   
 bool write_binary_file_c( cChars path, cBytes bytes, cErrorStack es[static 1] )
 {
-   FILE* file = open_file_c( path, "wb", es );
+   FILE* file = wopen_file_c( path, es );
    if ( file == NULL ) return false;
 
    if ( not fwrite_bytes_c( file, bytes ) )
@@ -255,7 +259,7 @@ bool write_binary_file_c( cChars path, cBytes bytes, cErrorStack es[static 1] )
 
 bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] )
 {
-   FILE* file = open_file_c( path, "wb", es );
+   FILE* file = wopen_file_c( path, es );
    if ( file == NULL ) return false;
 
    if ( not fwrite_chars_c( file, chars ) )

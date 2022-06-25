@@ -51,6 +51,28 @@ The size of path should not be creates as 4096.
 The function returns false and adds a C_ErrnoError to the error stack if a
 problem occurs.
 
+==== ropen_file_c
+[source,c]
+----
+FILE* ropen_file_c( cChars path, cErrorStack es[static 1] );
+----
+
+Opens a file that is readable.
+The size of path should not be greater as 4096.
+The function returns NULL and adds a C_ErrnoError to the error stack if a
+problem occurs.
+
+==== wopen_file_c
+[source,c]
+----
+FILE* wopen_file_c( cChars path, cErrorStack es[static 1] );
+----
+
+Opens a file that is writeable.
+The size of path should not be greater as 4096.
+The function returns NULL and adds a C_ErrnoError to the error stack if a
+problem occurs.
+
 //*********************************************************************** state
 === state
 

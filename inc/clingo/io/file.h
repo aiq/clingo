@@ -77,6 +77,16 @@ CLINGO_API inline bool remove_file_c( cChars path, cErrorStack es[static 1] )
    return true;
 }
 
+CLINGO_API inline FILE* ropen_file_c( cChars path, cErrorStack es[static 1] )
+{
+   return open_file_c( path, "rb", es );
+}
+
+CLINGO_API inline FILE* wopen_file_c( cChars path, cErrorStack es[static 1] )
+{
+   return open_file_c( path, "wb", es );
+}
+
 /*******************************************************************************
  state
 *******************************************************************************/
