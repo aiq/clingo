@@ -133,19 +133,18 @@ bool record_ends_c( cRecorder rec[static 1] )
 
 bool record_pad_c( cRecorder rec[static 1], char c, int64_t n )
 {
-   must_exist_c_( rec );
+   if ( not in_range_c_( 0, n, rec->space ) ) return false;
 
-   if ( n > rec->space ) return false;
-
-   size_t size;
-   if ( not int64_to_size_c( n, &size ) ) return false;
-
-   memset( rec->mem, c, size );
+   char* mem = rec->mem;
+   times_c_( n, i )
+   {
+      mem[i] = c;
+   }
    rec->pos += n;
    rec->space -= n;
    rec->mem += n;
 
-   return n;
+   return true;
 }
 
 bool recordf_c( cRecorder rec[static 1], char const format[static 1], ... )

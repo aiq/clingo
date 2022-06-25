@@ -15,6 +15,7 @@ int main( void )
    expect_c_( record_pad_c( rec, '-', 3 ) );
    expect_c_( record_pad_c( rec, 'a', 1 ) );
    expect_c_( record_pad_c( rec, 'b', 2 ) );
+   expect_c_( record_pad_c( rec, 'x', 0 ) );
    expect_c_( record_pad_c( rec, 'a', 1 ) );
 
    expect_c_( rec->pos == 7 ); // 3 + 1 + 2 + 1
