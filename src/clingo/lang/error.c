@@ -15,6 +15,11 @@ cErrorType const C_ErrnoError = {
    .note = &note_errno_error_c
 };
 
+cErrorType const C_TextError = {
+   .desc = stringify_c_( C_TextError ),
+   .note = &note_text_error_c
+};
+
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
@@ -140,4 +145,20 @@ bool note_errno_error_c( cRecorder rec[static 1], cError const* err )
    if ( errStr == NULL ) return false;
 
    return record_chars_c_( rec, errStr );
+}
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+bool push_text_error_c( cErrorStack es[static 1], cChars text )
+{
+   cTextErrorData d = { .text=text };
+   return push_error_c( es, &C_TextError, &d, sizeof_c_( cTextErrorData ) );
+}
+
+bool note_text_error_c( cRecorder rec[static 1], cError const* err )
+{
+   cTextErrorData const* errd = get_error_data_c( err );
+   return record_chars_c( rec, errd->text );
 }

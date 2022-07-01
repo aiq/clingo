@@ -59,6 +59,14 @@ struct cErrnoErrorData
 };
 typedef struct cErrnoErrorData cErrnoErrorData;
 
+CLINGO_API extern cErrorType const C_TextError;
+
+struct cTextErrorData
+{
+   cChars text;
+};
+typedef struct cTextErrorData cTextErrorData;
+
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
@@ -122,10 +130,22 @@ CLINGO_API void reset_error_stack_c( cErrorStack es[static 1] );
  errno
 *******************************************************************************/
 
-CLINGO_API bool push_errno_error_c( cErrorStack stack[static 1],
+CLINGO_API bool push_errno_error_c( cErrorStack es[static 1],
                                     int number );
 
 CLINGO_API bool note_errno_error_c( cRecorder rec[static 1],
                                     cError const* data );
+
+/*******************************************************************************
+ text
+*******************************************************************************/
+
+#define push_text_error_c_( Es, Text )                                         \
+   push_text_error_c( (Es), c_c( Text ) )
+CLINGO_API bool push_text_error_c( cErrorStack es[static 1],
+                                   cChars text );
+
+CLINGO_API bool note_text_error_c( cRecorder rec[static 1],
+                                   cError const* err );
 
 #endif
