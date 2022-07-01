@@ -650,6 +650,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/type/cBytes/set_bytes_bit.c
    ${TEST_DIR}/clingo/type/cBytes/set_bytes_bits.c
    ${TEST_DIR}/clingo/type/cBytes/set_odd_byte.c
+   ${TEST_DIR}/clingo/type/cBytes/shift_bytes_bits.c
    ${TEST_DIR}/clingo/type/cBytes/shift_bytes.c
    ${TEST_DIR}/clingo/type/cBytes/toggle_bytes_bit.c
    ${TEST_DIR}/clingo/type/cBytes/xor_bytes.c

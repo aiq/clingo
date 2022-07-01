@@ -395,7 +395,7 @@ void shift_bit_vec_c( CBitVec* vec, int64_t offset, cByte fillValue )
    must_exist_c_( vec );
    must_be_c_( offset != INT64_MIN );
 
-   shift_bytes_c( as_var_bytes( vec ), offset, fillValue );
+   shift_bytes_bits_c( as_var_bytes( vec ), offset, fillValue );
    if ( offset < 0 and unused_bits( vec ) > 0 )
    {
       abs_c_( offset, &offset );

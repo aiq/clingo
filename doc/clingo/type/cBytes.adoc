@@ -254,10 +254,10 @@ Sets a byte value that overlaps with two bytes in the byte slice.
 include::{xmpldir}/set_odd_byte.c[]
 ----
 
-==== shift_bytes_c
+==== shift_bytes_bits_c
 [source,c]
 ----
-void shift_bytes_c( cVarBytes slice, int64_t offset, cByte fillValue );
+void shift_bytes_bits_c( cVarBytes slice, int64_t offset, cByte fillValue );
 ----
 
 Shifts the bits in a byte slice.
@@ -267,7 +267,7 @@ to the right.
 .Example
 [source,c]
 ----
-include::{xmpldir}/shift_bytes.c[]
+include::{xmpldir}/shift_bytes_bits.c[]
 ----
 
 ==== toggle_bytes_bit_c
@@ -282,6 +282,25 @@ Toggles the bit at pos in the byte slice.
 [source,c]
 ----
 include::{xmpldir}/toggle_bytes_bit.c[]
+----
+
+//*********************************************************************** shift
+=== shift
+
+==== shift_bytes_c
+[source,c]
+----
+void shift_bytes_c( cVarBytes slice, int64_t offset );
+----
+
+Shifts the bits in a byte slice.
+A negative offset shifts the bits to the left, a positive offset shifts the bits
+to the right.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/shift_bytes.c[]
 ----
 
 //*********************************************************************** logic

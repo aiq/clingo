@@ -32,9 +32,9 @@ static inline cByte left_shift_pair( cByte leftByte,
    }
 }
 
-static inline void left_shift( cVarBytes slice,
-                               int64_t offset,
-                               cByte fillValue )
+static inline void left_shift_bits( cVarBytes slice,
+                                    int64_t offset,
+                                    cByte fillValue )
 {
    const int64_t bitOffset = offset % 8;
    const int64_t byteOffset = offset / 8;
@@ -81,9 +81,9 @@ static inline cByte right_shift_pair( cByte leftByte,
    }
 }
 
-static inline void right_shift( cVarBytes slice,
-                                int64_t offset,
-                                cByte fillValue )
+static inline void right_shift_bits( cVarBytes slice,
+                                     int64_t offset,
+                                     cByte fillValue )
 {
    const int64_t bitOffset = offset % 8;
    const int64_t byteOffset = offset / 8;
@@ -243,20 +243,53 @@ void set_odd_byte_c( cVarBytes slice,
    }
 }
 
-void shift_bytes_c( cVarBytes slice, int64_t offset, cByte fillValue )
+void shift_bytes_bits_c( cVarBytes slice, int64_t offset, cByte fillValue )
 {
    if ( offset < 0 )
    {
       abs_c_( offset, &offset );
-      left_shift( slice, offset, fillValue );
+      left_shift_bits( slice, offset, fillValue );
    }
    else
    {
-      right_shift( slice, offset, fillValue );
+      right_shift_bits( slice, offset, fillValue );
    }
 }
 
 extern inline void toggle_bytes_bit_c( cVarBytes slice, int64_t pos );
+
+/*******************************************************************************
+ shift
+*******************************************************************************/
+
+void shift_bytes_c( cVarBytes slice, int64_t offset )
+{
+   if ( offset < 0 )
+   {
+      abs_c_( offset, &offset );
+      cVarByteWindow window;
+      init_front_var_byte_window_c( &window, offset+1, slice );
+      while ( valid_window_c_( window ) )
+      {
+         cByte* dst = begin_c_( window );
+         cByte* src = rbegin_c_( window );
+         *dst = *src;
+         next_window_c_( window );
+      }
+   }
+   else
+   {
+      cVarByteWindow window;
+      init_back_var_byte_window_c( &window, offset+1, slice );
+      while ( valid_window_c_( window ) )
+      {
+         cByte* dst = rbegin_c_( window );
+         cByte* src = begin_c_( window );
+         *dst = *src;
+         prev_window_c_( window );
+      }
+   }
+}
 
 /*******************************************************************************
  logic

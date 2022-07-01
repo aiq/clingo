@@ -77,7 +77,8 @@ CLINGO_API void set_odd_byte_c( cVarBytes slice,
                                 int64_t bitOffset,
                                 cByte byte );
 
-CLINGO_API void shift_bytes_c( cVarBytes slice, int64_t offset, cByte fillValue );
+CLINGO_API
+void shift_bytes_bits_c( cVarBytes slice, int64_t offset, cByte fillValue );
 
 CLINGO_API inline void toggle_bytes_bit_c( cVarBytes slice, int64_t pos )
 {
@@ -86,6 +87,12 @@ CLINGO_API inline void toggle_bytes_bit_c( cVarBytes slice, int64_t pos )
    int64_t const bytePos = pos / 8;
    slice.v[ bytePos ] = toggle_byte_bit_c( slice.v[ bytePos ], pos % 8 );
 }
+
+/*******************************************************************************
+ shift
+*******************************************************************************/
+
+CLINGO_API void shift_bytes_c( cVarBytes slice, int64_t offset );
 
 /*******************************************************************************
  logic
