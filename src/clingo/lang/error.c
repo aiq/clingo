@@ -10,10 +10,27 @@
  Definitions
 *******************************************************************************/
 
+static bool note_errno_error_c( cRecorder rec[static 1], cError const* err )
+{
+   must_be_c_( err->type == &C_ErrnoError );
+   cErrnoErrorData const* errd = get_error_data_c( err );
+   char* errStr = strerror( errd->number );
+   if ( errStr == NULL ) return false;
+
+   return record_chars_c_( rec, errStr );
+}
+
 cErrorType const C_ErrnoError = {
    .desc = stringify_c_( C_ErrnoError ),
    .note = &note_errno_error_c
 };
+
+static bool note_text_error_c( cRecorder rec[static 1], cError const* err )
+{
+   must_be_c_( err->type == &C_TextError );
+   cTextErrorData const* errd = get_error_data_c( err );
+   return record_chars_c( rec, errd->text );
+}
 
 cErrorType const C_TextError = {
    .desc = stringify_c_( C_TextError ),
@@ -129,7 +146,7 @@ void reset_error_stack_c( cErrorStack es[static 1] )
 }
 
 /*******************************************************************************
-
+ push error
 *******************************************************************************/
 
 bool push_errno_error_c( cErrorStack es[static 1], int number )
@@ -138,27 +155,8 @@ bool push_errno_error_c( cErrorStack es[static 1], int number )
    return push_error_c( es, &C_ErrnoError, &d, sizeof_c_( cErrnoErrorData ) );
 }
 
-bool note_errno_error_c( cRecorder rec[static 1], cError const* err )
-{
-   cErrnoErrorData const* errd = get_error_data_c( err );
-   char* errStr = strerror( errd->number );
-   if ( errStr == NULL ) return false;
-
-   return record_chars_c_( rec, errStr );
-}
-
-/*******************************************************************************
-
-*******************************************************************************/
-
 bool push_text_error_c( cErrorStack es[static 1], cChars text )
 {
    cTextErrorData d = { .text=text };
    return push_error_c( es, &C_TextError, &d, sizeof_c_( cTextErrorData ) );
-}
-
-bool note_text_error_c( cRecorder rec[static 1], cError const* err )
-{
-   cTextErrorData const* errd = get_error_data_c( err );
-   return record_chars_c( rec, errd->text );
 }

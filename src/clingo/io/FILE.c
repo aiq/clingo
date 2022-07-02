@@ -8,6 +8,15 @@
 
 *******************************************************************************/
 
+static bool note_file_error_c( cRecorder rec[static 1], cError const* err )
+{
+   cFileErrorData const* errd = get_error_data_c( err );
+   char* errStr = strerror( errd->number );
+   if ( errStr == NULL ) return false;
+
+   return record_chars_c_( rec, errStr );
+}
+
 cErrorType const C_FileError = {
    .desc = stringify_c_( C_FileError ),
    .note = &note_file_error_c
@@ -286,13 +295,4 @@ bool push_file_error_and_close_c( cErrorStack es[static 1], FILE* file )
    push_error_c( es, &C_FileError, &d, sizeof_c_( cFileErrorData ) );
    close_file_c( file, es );
    return false;
-}
-
-bool note_file_error_c( cRecorder rec[static 1], cError const* err )
-{
-   cFileErrorData const* errd = get_error_data_c( err );
-   char* errStr = strerror( errd->number );
-   if ( errStr == NULL ) return false;
-
-   return record_chars_c_( rec, errStr );
 }

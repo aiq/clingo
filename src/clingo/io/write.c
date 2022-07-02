@@ -13,6 +13,21 @@
  Definitions
 *******************************************************************************/
 
+static bool note_write_error_c( cRecorder rec[static 1], cError const* err )
+{
+   cWriteErrorData const* errd = get_error_data_c( err );
+   char const* msg = NULL;
+   switch ( errd->errc )
+   {
+      #define XMAP_C_( N, I, T ) case N: msg = T;
+         cWRITE_ERROR_CODE_
+      #undef XMAP_C_
+   }
+   if ( msg == NULL ) return false;
+
+   return record_chars_c_( rec, msg );
+}
+
 cErrorType const C_WriteError = {
    .desc = stringify_c_( C_WriteError ),
    .note = &note_write_error_c
@@ -289,19 +304,4 @@ bool push_write_error_c( cErrorStack es[static 1], cRecorder rec[static 1] )
 {
    cWriteErrorData d = { .errc=rec->err };
    return push_error_c( es, &C_WriteError, &d, sizeof_c_( cWriteErrorData ) );
-}
-
-bool note_write_error_c( cRecorder rec[static 1], cError const* err )
-{
-   cWriteErrorData const* errd = get_error_data_c( err );
-   char const* msg = NULL;
-   switch ( errd->errc )
-   {
-      #define XMAP_C_( N, I, T ) case N: msg = T;
-         cWRITE_ERROR_CODE_
-      #undef XMAP_C_
-   }
-   if ( msg == NULL ) return false;
-
-   return record_chars_c_( rec, msg );
 }

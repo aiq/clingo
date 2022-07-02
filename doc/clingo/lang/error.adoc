@@ -217,7 +217,7 @@ void reset_error_stack_c( cErrorStack es[static 1] );
 Removes all chained errors from the stack.
 
 //************************************************************************ errno
-=== errno
+=== push error
 
 [id='push_errno_error_c']
 ==== push_errno_error_c
@@ -227,12 +227,3 @@ bool push_errno_error_c( cErrorStack es[static 1], int number );
 ----
 
 Function to push a errno error with the corresponding cErrorData on the stack.
-
-[id='note_errno_error_c']
-==== note_errno_error_c
-[source,c]
-----
-bool note_errno_error_c( cRecorder rec[static 1], cError const* data );
-----
-
-The c_note_error function that C_ErrnoError references.

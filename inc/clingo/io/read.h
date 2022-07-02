@@ -70,7 +70,4 @@ bool read_c( cScanner sca[static 1],
 CLINGO_API
 bool push_read_error_c( cErrorStack es[static 1], cScanner sca[static 1] );
 
-CLINGO_API
-bool note_read_error_c( cRecorder rec[static 1], cError const* err );
-
 #endif

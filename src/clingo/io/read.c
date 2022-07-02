@@ -10,6 +10,21 @@
  Definitions
 *******************************************************************************/
 
+static bool note_read_error_c( cRecorder rec[static 1], cError const* err )
+{
+   cReadErrorData const* errd = get_error_data_c( err );
+   char const* msg = NULL;
+   switch ( errd->errc )
+   {
+      #define XMAP_C_( N, I, T ) case N: msg = T;
+         cREAD_ERROR_CODE_
+      #undef XMAP_C_
+   }
+   if ( msg == NULL ) return false;
+
+   return record_chars_c_( rec, msg );
+}
+
 cErrorType const C_ReadError = {
    .desc = stringify_c_( C_ReadError ),
    .note = &note_read_error_c
@@ -235,19 +250,4 @@ bool push_read_error_c( cErrorStack es[static 1], cScanner sca[static 1] )
 {
    cReadErrorData d = { .errc=sca->err };
    return push_error_c( es, &C_ReadError, &d, sizeof_c_( cReadErrorData ) );
-}
-
-bool note_read_error_c( cRecorder rec[static 1], cError const* err )
-{
-   cReadErrorData const* errd = get_error_data_c( err );
-   char const* msg = NULL;
-   switch ( errd->errc )
-   {
-      #define XMAP_C_( N, I, T ) case N: msg = T;
-         cREAD_ERROR_CODE_
-      #undef XMAP_C_
-   }
-   if ( msg == NULL ) return false;
-
-   return record_chars_c_( rec, msg );
 }
