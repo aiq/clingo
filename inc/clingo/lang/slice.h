@@ -123,13 +123,15 @@ VarSliceType FuncName( VarSliceType slice, SliceType sub )                     \
 }
 
 #define SET_SLICE_C_( FuncName, VarSliceType, SliceType )                      \
-int64_t FuncName( VarSliceType dest, SliceType src )                           \
+int64_t FuncName( VarSliceType dst, SliceType src )                            \
 {                                                                              \
-   int64_t const n = min_c_( dest.s, src.s );                                  \
-   size_t size;                                                                \
-   if ( not int64_to_size_c( n, &size ) ) return 0;                            \
+   int64_t const n = min_c_( dst.s, src.s );                                   \
+   if ( n < 0 ) return 0;                                                      \
                                                                                \
-   memmove( dest.v, src.v, size );                                             \
+   times_c_( n, i )                                                            \
+   {                                                                           \
+      dst.v[i] = src.v[i];                                                     \
+   }                                                                           \
    return n;                                                                   \
 }
 
