@@ -17,7 +17,7 @@
 ********************************************************* Types and Definitions 
 *******************************************************************************/
 
-extern float const C_MaxMapLoad;
+CLINGO_API extern float const C_MaxMapLoad;
 
 struct cMapInfo
 {
