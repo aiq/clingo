@@ -8,6 +8,15 @@
 
 *******************************************************************************/
 
+static bool note_eof_error_c( cRecorder rec[static 1], cError const* err )
+{
+   return record_chars_c_( rec, "EOF" );
+}
+cErrorType const C_Eof = {
+   .desc = stringify_c_( C_Eof ),
+   .note = &note_eof_error_c
+};
+
 static bool note_file_error_c( cRecorder rec[static 1], cError const* err )
 {
    cFileErrorData const* errd = get_error_data_c( err );
@@ -16,7 +25,6 @@ static bool note_file_error_c( cRecorder rec[static 1], cError const* err )
 
    return record_chars_c_( rec, errStr );
 }
-
 cErrorType const C_FileError = {
    .desc = stringify_c_( C_FileError ),
    .note = &note_file_error_c
@@ -285,14 +293,21 @@ bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] )
 
 bool push_file_error_c( cErrorStack es[static 1], FILE* file )
 {
-   cFileErrorData d = { .number=ferror( file ) };
-   return push_error_c( es, &C_FileError, &d, sizeof_c_( cFileErrorData ) );
+   if ( ferror( file ) != 0 )
+   {
+      cFileErrorData d = { .number=ferror( file ) };
+      return push_error_c( es, &C_FileError, &d, sizeof_c_( cFileErrorData ) );
+   }
+   else if ( feof( file ) != 0 )
+   {
+      return push_error_c_( es, &C_Eof );
+   }
+   return false;
 }
 
 bool push_file_error_and_close_c( cErrorStack es[static 1], FILE* file )
 {
-   cFileErrorData d = { .number=ferror( file ) };
-   push_error_c( es, &C_FileError, &d, sizeof_c_( cFileErrorData ) );
+   push_file_error_c( es, file );
    close_file_c( file, es );
    return false;
 }

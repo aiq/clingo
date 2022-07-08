@@ -19,7 +19,6 @@ static bool note_errno_error_c( cRecorder rec[static 1], cError const* err )
 
    return record_chars_c_( rec, errStr );
 }
-
 cErrorType const C_ErrnoError = {
    .desc = stringify_c_( C_ErrnoError ),
    .note = &note_errno_error_c
@@ -31,7 +30,6 @@ static bool note_text_error_c( cRecorder rec[static 1], cError const* err )
    cTextErrorData const* errd = get_error_data_c( err );
    return record_chars_c( rec, errd->text );
 }
-
 cErrorType const C_TextError = {
    .desc = stringify_c_( C_TextError ),
    .note = &note_text_error_c

@@ -14,6 +14,8 @@
 
 *******************************************************************************/
 
+CLINGO_API extern cErrorType const C_Eof;
+
 CLINGO_API extern cErrorType const C_FileError;
 
 struct cFileErrorData

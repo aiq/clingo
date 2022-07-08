@@ -119,6 +119,8 @@ CLINGO_API int64_t count_errors_c( cErrorStack es[static 1] );
 
 CLINGO_API void drop_error_c( cErrorStack es[static 1] );
 
+#define push_error_c_( Es, Type )                                              \
+   push_error_c( (Es), (Type), NULL, 0 )
 CLINGO_API bool push_error_c( cErrorStack es[static 1],
                               cErrorType const type[static 1],
                               cErrorData const* data,
