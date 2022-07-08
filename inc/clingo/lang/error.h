@@ -14,6 +14,20 @@
 #include "clingo/lang/mem.h"
 
 /*******************************************************************************
+******************************************************** Code Generation Macros 
+*******************************************************************************/
+
+#define SINGLE_ERROR_TYPE_C_( Type, NoteFunc, Note )                           \
+static bool NoteFunc( cRecorder rec[static 1], cError const* err )             \
+{                                                                              \
+   return record_chars_c_( rec, Note );                                        \
+}                                                                              \
+cErrorType const Type = {                                                      \
+   .desc = stringify_c_( Type ),                                               \
+   .note = &NoteFunc                                                           \
+};
+
+/*******************************************************************************
 ********************************************************* Types and Definitions 
 *******************************************************************************/
 

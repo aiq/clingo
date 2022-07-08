@@ -8,14 +8,7 @@
 
 *******************************************************************************/
 
-static bool note_eof_error_c( cRecorder rec[static 1], cError const* err )
-{
-   return record_chars_c_( rec, "EOF" );
-}
-cErrorType const C_Eof = {
-   .desc = stringify_c_( C_Eof ),
-   .note = &note_eof_error_c
-};
+SINGLE_ERROR_TYPE_C_( C_Eof, note_eof_c, "EOF" )
 
 static bool note_file_error_c( cRecorder rec[static 1], cError const* err )
 {
