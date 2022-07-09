@@ -105,7 +105,7 @@ CLINGO_API bool write_error_c( cRecorder rec[static 1],
 #define error_stack_c_( Size )                                                 \
 (                                                                              \
    (cErrorStack){                                                              \
-      .space=0,                                                                \
+      .space=(Size),                                                           \
       .mem=stack_mem_c_( Size ),                                               \
       .err=NULL                                                                \
    }                                                                           \
@@ -114,7 +114,7 @@ CLINGO_API bool write_error_c( cRecorder rec[static 1],
 #define heap_error_stack_c_( Size )                                            \
 (                                                                              \
    (cErrorStack){                                                              \
-      .space=0,                                                                \
+      .space=(Size),                                                           \
       .mem=alloc_c( Size ),                                                    \
       .err=NULL                                                                \
    }                                                                           \
