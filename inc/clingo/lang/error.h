@@ -20,12 +20,30 @@
 #define SINGLE_ERROR_TYPE_C_( Type, NoteFunc, Note )                           \
 static bool NoteFunc( cRecorder rec[static 1], cError const* err )             \
 {                                                                              \
+   must_be_c_( err->type == &Type );                                           \
    return record_chars_c_( rec, Note );                                        \
 }                                                                              \
 cErrorType const Type = {                                                      \
    .desc = stringify_c_( Type ),                                               \
    .note = &NoteFunc                                                           \
 };
+
+#define LIT_STR_ERROR_TYPE_C_( Type, NoteFunc, WriteText, PushFunc )           \
+static bool NoteFunc( cRecorder rec[static 1], cError const* err )             \
+{                                                                              \
+   must_be_c_( err->type == &Type );                                           \
+   cLitStrErrorData const* errd = get_error_data_c( err );                     \
+   return write_c_( rec, WriteText, errd->str );                               \
+}                                                                              \
+cErrorType const Type = {                                                      \
+   .desc = stringify_c_( Type ),                                               \
+   .note = &NoteFunc                                                           \
+};                                                                             \
+bool PushFunc( cErrorStack es[static 1], char const str[static 1] )            \
+{                                                                              \
+   cLitStrErrorData d = { .str=str };                                          \
+   return push_error_c( es, &Type, &d, sizeof_c_( cLitStrErrorData ) );        \
+}
 
 /*******************************************************************************
 ********************************************************* Types and Definitions 
