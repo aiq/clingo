@@ -88,31 +88,31 @@ The function returns -1 if the size can not be determinied.
 //*********************************************************************** fread
 === fread
 
-==== fread_bytes_c
+==== fget_bytes_c
 [source,c]
 ----
-bool fread_bytes_c( FILE* file, cVarBytes bytes[static 1] );
+bool fget_bytes_c( FILE* file, cVarBytes bytes[static 1] );
 ----
 
 Reads bytes from the file into bytes.
 Returns true if at least one byte have been read and no error occurs.
 
-==== fread_chars_c
+==== fget_chars_c
 [source,c]
 ----
-bool get_file_chars_c( FILE* file, cVarChars chars[static 1] );
+bool fget_chars_c( FILE* file, cVarChars chars[static 1] );
 ----
 
 Reads chars from the file into chars.
 Returns true if at least one char have been read and no error occurs.
 
-==== fread_line_c
+==== fget_line_c
 [source,c]
 ----
-bool fread_line_c( FILE* file,
-                   int64_t n,
-                   cVarChars buf[static 1],
-                   bool fin[static 1] );
+bool fget_line_c( FILE* file,
+                  int64_t n,
+                  cVarChars buf[static 1],
+                  bool fin[static 1] );
 ----
 
 The function tries to return a single line, not including the end-of-line bytes.
@@ -129,19 +129,19 @@ include::{xmpldir}/fread_line.c[]
 
 //********************************************************************** fwrite
 
-==== fwrite_bytes_c
+==== fput_bytes_c
 [source,c]
 ----
-bool fwrite_bytes_c( FILE* file, cBytes bytes[static 1] );
+bool fput_bytes_c( FILE* file, cBytes bytes[static 1] );
 ----
 
 Writes bytes to a file.
 Returns true if all bytes can be written to a file and no error occurs.
 
-==== fwrite_chars_c
+==== fput_chars_c
 [source,c]
 ----
-bool fwrite_chars_c( FILE* file, cChars chars[static 1] );
+bool fput_chars_c( FILE* file, cChars chars[static 1] );
 ----
 
 Writes chars to a file.
