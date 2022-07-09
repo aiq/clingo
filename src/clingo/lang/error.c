@@ -56,7 +56,7 @@ cErrorData const* get_error_data_c( cError const* err )
 {
    must_exist_c_( err );
 
-   return err + sizeof( cError );
+   return err + 1;
 }
 
 bool write_error_c( cRecorder rec[static 1],
