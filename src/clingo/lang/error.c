@@ -63,13 +63,15 @@ bool write_error_c( cRecorder rec[static 1],
                     cError const *err,
                     char const fmt[static 1] )
 {
-   if ( err == NULL ) return true;
+   if ( err == NULL ) return record_chars_c_( rec, "no error" );
    
    bool res = err->type->note( rec, err );
+   err = err->sub;
    while ( res and err != NULL )
    {
       res &= record_chars_c_( rec, ": " );
       res &= err->type->note( rec, err );
+      err = err->sub;
    }
    return res;
 }
@@ -105,6 +107,7 @@ bool push_error_c( cErrorStack es[static 1],
    if ( not iadd64_c( sizeof_c_( cError ), dataSize, &fullSize ) )
       return false;
 
+
    if ( es->space < fullSize )
       return false;
 
@@ -117,6 +120,7 @@ bool push_error_c( cErrorStack es[static 1],
    {
       size_t size;
       int64_to_size_c( dataSize, &size );
+      
       memcpy( es->mem, data, size );
       es->mem += dataSize;
    }
