@@ -72,46 +72,41 @@ int64_t file_size_c( FILE* file )
  
 *******************************************************************************/
 
-bool fget_bytes_c( FILE* file, cVarBytes buf[static 1] )
+bool fread_bytes_c( FILE* file, cVarBytes buf[static 1] )
 {
    must_exist_c_( file );
 
    if ( is_empty_c_( *buf ) ) return false;
 
    size_t size = 0;
-   must_be_c_( int64_to_size_c( buf->s, &size ) );
+   if ( not int64_to_size_c( buf->s, &size ) ) return false;
 
    size_t res = fread( buf->v, 1, size, file );
    if ( res == 0 ) return false;
 
-   must_be_c_( uint64_to_int64_c( res, &(buf->s) ) );
-   if ( size != res and ferror( file ) != 0 ) return false;
 
-   return true;
+   return uint64_to_int64_c( res, &buf->s );
 }
 
-bool fget_chars_c( FILE* file, cVarChars buf[static 1] )
+bool fread_chars_c( FILE* file, cVarChars buf[static 1] )
 {
    must_exist_c_( file );
 
    if ( is_empty_c_( *buf ) ) return false;
 
    size_t size = 0;
-   must_be_c_( int64_to_size_c( buf->s, &size ) );
+   if ( not int64_to_size_c( buf->s, &size ) ) return false;
 
    size_t res = fread( buf->v, 1, size, file );
    if ( res == 0 ) return false;
 
-   must_be_c_( uint64_to_int64_c( res, &buf->s ) );
-   if ( size != res and ferror( file ) != 0 ) return false;
-
-   return true;
+   return uint64_to_int64_c( res, &buf->s );
 }
 
-bool fget_line_c( FILE* file,
-                  int64_t n,
-                  cVarChars buf[static 1],
-                  bool fin[static 1] )
+bool fread_line_c( FILE* file,
+                   int64_t n,
+                   cVarChars buf[static 1],
+                   bool fin[static 1] )
 {
    must_exist_c_( file );
    must_be_in_range_c_( 4, n, INT_MAX );
@@ -142,27 +137,27 @@ bool fget_line_c( FILE* file,
    return true;
 }
 
-bool fput_bytes_c( FILE* file, cBytes bytes )
+bool fwrite_bytes_c( FILE* file, cBytes bytes )
 {
    must_exist_c_( file );
 
    if ( is_empty_c_( bytes ) ) return true;
 
    size_t size = 0;
-   must_be_c_( int64_to_size_c( bytes.s, &size ) );
+   if ( not int64_to_size_c( bytes.s, &size ) ) return false;
 
    size_t res = fwrite( bytes.v, 1, size, file );
    return res == size;
 }
 
-bool fput_chars_c( FILE* file, cChars chars )
+bool fwrite_chars_c( FILE* file, cChars chars )
 {
    must_exist_c_( file );
 
    if ( is_empty_c_( chars ) ) return true;
 
    size_t size = 0;
-   must_be_c_( int64_to_size_c( chars.s, &size ) );
+   if ( not int64_to_size_c( chars.s, &size ) ) return false;
 
    size_t res = fwrite( chars.v, 1, size, file );
    return res == size;
@@ -197,7 +192,7 @@ cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] )
       return invalidBytes;
    }
 
-   if ( not fget_bytes_c( file, &bytes ) )
+   if ( not fread_bytes_c( file, &bytes ) )
    {
       free( bytes.v );
       push_file_error_and_close_c( es, file );
@@ -243,7 +238,7 @@ cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] )
    }
 
    chars.s = size;
-   if ( not fget_chars_c( file, &chars ) )
+   if ( not fread_chars_c( file, &chars ) )
    {
       free( chars.v );
       push_file_error_and_close_c( es, file );
@@ -264,7 +259,7 @@ bool write_binary_file_c( cChars path, cBytes bytes, cErrorStack es[static 1] )
    FILE* file = wopen_file_c( path, es );
    if ( file == NULL ) return false;
 
-   if ( not fput_bytes_c( file, bytes ) )
+   if ( not fwrite_bytes_c( file, bytes ) )
    {
       return push_file_error_and_close_c( es, file );
    }
@@ -277,7 +272,7 @@ bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] )
    FILE* file = wopen_file_c( path, es );
    if ( file == NULL ) return false;
 
-   if ( not fput_chars_c( file, chars ) )
+   if ( not fwrite_chars_c( file, chars ) )
    {
       return push_file_error_and_close_c( es, file );
    }

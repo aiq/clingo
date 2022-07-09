@@ -99,22 +99,22 @@ CLINGO_API int64_t file_size_c( FILE* file );
  fread
 *******************************************************************************/
 
-CLINGO_API bool fget_bytes_c( FILE* file, cVarBytes buf[static 1] );
+CLINGO_API bool fread_bytes_c( FILE* file, cVarBytes buf[static 1] );
 
-CLINGO_API bool fget_chars_c( FILE* file, cVarChars buf[static 1] );
+CLINGO_API bool fread_chars_c( FILE* file, cVarChars buf[static 1] );
 
-CLINGO_API bool fget_line_c( FILE* file,
-                             int64_t n,
-                             cVarChars buf[static 1],
-                             bool fin[static 1] );
+CLINGO_API bool fread_line_c( FILE* file,
+                              int64_t n,
+                              cVarChars buf[static 1],
+                              bool fin[static 1] );
 
 /*******************************************************************************
  fwrite
 *******************************************************************************/
 
-CLINGO_API bool fput_bytes_c( FILE* file, cBytes bytes );
+CLINGO_API bool fwrite_bytes_c( FILE* file, cBytes bytes );
 
-CLINGO_API bool fput_chars_c( FILE* file, cChars chars );
+CLINGO_API bool fwrite_chars_c( FILE* file, cChars chars );
 
 /*******************************************************************************
  util
