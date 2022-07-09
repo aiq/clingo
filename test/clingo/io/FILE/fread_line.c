@@ -45,7 +45,7 @@ int main( void )
    );
 
    int64_t i = 0;
-   int64_t const n = 8;
+   int32_t const n = 8;
    cVarChars buf = char_buffer_c_( n );
    bool fin = false;
    while ( fread_line_c( file, n, &buf, &fin ) )

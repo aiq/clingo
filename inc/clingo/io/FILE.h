@@ -104,7 +104,7 @@ CLINGO_API bool fread_bytes_c( FILE* file, cVarBytes buf[static 1] );
 CLINGO_API bool fread_chars_c( FILE* file, cVarChars buf[static 1] );
 
 CLINGO_API bool fread_line_c( FILE* file,
-                              int64_t n,
+                              int32_t n,
                               cVarChars buf[static 1],
                               bool fin[static 1] );
 
