@@ -20,6 +20,8 @@ CLINGO_API extern cErrorType const C_InvalidValueError;
 
 CLINGO_API extern cErrorType const C_Eof;
 
+CLINGO_API extern cErrorType const C_UnexpectedEof;
+
 CLINGO_API extern cErrorType const C_FileError;
 
 struct cFileErrorData

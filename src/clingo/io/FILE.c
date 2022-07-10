@@ -26,6 +26,12 @@ QUOTE_LIT_STR_ERROR_TYPE_C_(
 
 SINGLE_ERROR_TYPE_C_( C_Eof, note_eof_c, "EOF" )
 
+SINGLE_ERROR_TYPE_C_(
+   C_UnexpectedEof,
+   note_unexpected_eof_c,
+   "unexpected EOF"
+);
+
 static bool note_file_error_c( cRecorder rec[static 1], cError const* err )
 {
    cFileErrorData const* errd = get_error_data_c( err );
