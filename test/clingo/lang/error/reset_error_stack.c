@@ -17,6 +17,9 @@ int main( void )
    cErrorStack* es = &error_stack_c_( 248 );
    void const* mem = es->mem;
 
+   reset_error_stack_c( es );
+   expect_c_( mem == es->mem );
+
    push_error_c_( es, &C_Eof );
    expect_c_( mem != es->mem );
 
