@@ -28,7 +28,7 @@ cErrorType const Type = {                                                      \
    .note = &NoteFunc                                                           \
 };
 
-#define LIT_STR_ERROR_TYPE_C_( Type, NoteFunc, WriteText, PushFunc )           \
+#define QUOTE_LIT_STR_ERROR_TYPE_C_( Type, NoteFunc, WriteText, PushFunc )     \
 static bool NoteFunc( cRecorder rec[static 1], cError const* err )             \
 {                                                                              \
    must_be_c_( err->type == &Type );                                           \

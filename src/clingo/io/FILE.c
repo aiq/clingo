@@ -10,14 +10,14 @@
 
 *******************************************************************************/
 
-LIT_STR_ERROR_TYPE_C_(
+QUOTE_LIT_STR_ERROR_TYPE_C_(
    C_ReadError,
    note_read_error_c,
    "not able to read {s:q}",
    push_read_error_c
 )
 
-LIT_STR_ERROR_TYPE_C_(
+QUOTE_LIT_STR_ERROR_TYPE_C_(
    C_InvalidValueError,
    note_invalid_value_error_c,
    "invalid {s:q} value",
