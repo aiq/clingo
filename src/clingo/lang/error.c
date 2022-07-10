@@ -1,6 +1,7 @@
 #include "clingo/lang/error.h"
 
 #include <string.h>
+#include "clingo/io/write.h"
 #include "clingo/lang/func.h"
 #include "clingo/lang/mem.h"
 
@@ -34,6 +35,13 @@ cErrorType const C_LitStrError = {
    .desc = stringify_c_( C_LitStrError ),
    .note = &note_lit_str_error_c
 };
+
+QUOTE_LIT_STR_ERROR_TYPE_C_(
+   C_InvalidInputError,
+   note_invalid_input_error_c,
+   "invalid input for {s:q}",
+   push_invalid_input_error_c
+)
 
 /*******************************************************************************
 ********************************************************************* Functions

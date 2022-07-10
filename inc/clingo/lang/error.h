@@ -99,6 +99,8 @@ struct cLitStrErrorData
 };
 typedef struct cLitStrErrorData cLitStrErrorData;
 
+CLINGO_API extern cErrorType const C_InvalidInputError;
+
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
