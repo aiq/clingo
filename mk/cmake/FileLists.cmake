@@ -353,6 +353,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/chunk/STATIC_FRONT_CHUNK.c
    ${TEST_DIR}/clingo/lang/chunk/valid_chunk.c
    # error
+   ${TEST_DIR}/clingo/lang/error/reset_error_stack.c
    ${TEST_DIR}/clingo/lang/error/write_error.c
    # expect
    ${TEST_DIR}/clingo/lang/expect/check_cmp_results.c
