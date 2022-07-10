@@ -25,8 +25,8 @@ static bool note_read_error_c( cRecorder rec[static 1], cError const* err )
    return record_chars_c_( rec, msg );
 }
 
-cErrorType const C_ReadError = {
-   .desc = stringify_c_( C_ReadError ),
+cErrorType const C_ReadScannerError = {
+   .desc = stringify_c_( C_ReadScannerError ),
    .note = &note_read_error_c
 };
 
@@ -246,8 +246,8 @@ bool read_c( cScanner sca[static 1],
   error
 *******************************************************************************/
 
-bool push_read_error_c( cErrorStack es[static 1], cScanner sca[static 1] )
+bool push_read_scanner_error_c( cErrorStack es[static 1], cScanner sca[static 1] )
 {
    cReadErrorData d = { .errc=sca->err };
-   return push_error_c( es, &C_ReadError, &d, sizeof_c_( cReadErrorData ) );
+   return push_error_c( es, &C_ReadScannerError, &d, sizeof_c_( cReadErrorData ) );
 }

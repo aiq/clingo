@@ -26,7 +26,7 @@ typedef enum c_ReadErrorCode c_ReadErrorCode;
 
 *******************************************************************************/
 
-CLINGO_API extern cErrorType const C_ReadError;
+CLINGO_API extern cErrorType const C_ReadScannerError;
 
 struct cReadErrorData
 {
