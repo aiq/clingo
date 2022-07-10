@@ -192,7 +192,13 @@ bool fwrite_chars_c( FILE* file, cChars chars )
  
 *******************************************************************************/
 
-extern inline int ferror_close_c( FILE* file );
+static inline bool push_file_error_and_close( cErrorStack es[static 1],
+                                              FILE* file )
+{
+   push_file_error_c( es, file );
+   close_file_c( file, es );
+   return false;
+}
 
 cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] )
 {
@@ -205,7 +211,7 @@ cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] )
    int64_t size = file_size_c( file );
    if ( size <= 0 )
    {
-      push_file_error_and_close_c( es, file );
+      push_file_error_and_close( es, file );
       return invalidBytes;
    }
 
@@ -220,7 +226,7 @@ cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] )
    if ( not fread_bytes_c( file, &bytes ) )
    {
       free( bytes.v );
-      push_file_error_and_close_c( es, file );
+      push_file_error_and_close( es, file );
       return invalidBytes;
    }
 
@@ -242,7 +248,7 @@ cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] )
    int64_t size = file_size_c( file );
    if ( size <= 0 )
    {
-      push_file_error_and_close_c( es, file );
+      push_file_error_and_close( es, file );
       return invalidChars;
    }
 
@@ -266,7 +272,7 @@ cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] )
    if ( not fread_chars_c( file, &chars ) )
    {
       free( chars.v );
-      push_file_error_and_close_c( es, file );
+      push_file_error_and_close( es, file );
       return invalidChars;
    }
 
@@ -286,7 +292,7 @@ bool write_binary_file_c( cChars path, cBytes bytes, cErrorStack es[static 1] )
 
    if ( not fwrite_bytes_c( file, bytes ) )
    {
-      return push_file_error_and_close_c( es, file );
+      return push_file_error_and_close( es, file );
    }
 
    return close_file_c( file, es );
@@ -299,7 +305,7 @@ bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] )
 
    if ( not fwrite_chars_c( file, chars ) )
    {
-      return push_file_error_and_close_c( es, file );
+      return push_file_error_and_close( es, file );
    }
 
    return close_file_c( file, es );
@@ -320,12 +326,5 @@ bool push_file_error_c( cErrorStack es[static 1], FILE* file )
    {
       return push_error_c_( es, &C_Eof );
    }
-   return false;
-}
-
-bool push_file_error_and_close_c( cErrorStack es[static 1], FILE* file )
-{
-   push_file_error_c( es, file );
-   close_file_c( file, es );
    return false;
 }

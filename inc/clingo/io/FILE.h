@@ -149,7 +149,4 @@ CLINGO_API bool push_encode_error_c( cErrorStack es[static 1],
 CLINGO_API bool push_file_error_c( cErrorStack es[static 1],
                                    FILE* file );
 
-CLINGO_API bool push_file_error_and_close_c( cErrorStack es[static 1],
-                                             FILE* file );
-
 #endif
