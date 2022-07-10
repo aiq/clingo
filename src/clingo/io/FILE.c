@@ -11,17 +11,17 @@
 *******************************************************************************/
 
 LIT_STR_ERROR_TYPE_C_(
-   C_DecodeError,
-   note_decode_error_c,
-   "not able to decode {s:q}",
-   push_decode_error_c
+   C_ReadError,
+   note_read_error_c,
+   "not able to read {s:q}",
+   push_read_error_c
 )
 
 LIT_STR_ERROR_TYPE_C_(
-   C_EncodeError,
-   note_encode_error_c,
-   "not able to encode {s:q}",
-   push_encode_error_c
+   C_InvalidValueError,
+   note_invalid_value_error_c,
+   "invalid {s:q} value",
+   push_invalid_value_error_c
 )
 
 SINGLE_ERROR_TYPE_C_( C_Eof, note_eof_c, "EOF" )

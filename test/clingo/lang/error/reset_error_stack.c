@@ -27,8 +27,8 @@ int main( void )
    expect_c_( mem == es->mem );
 
    push_lit_str_error_c( es, "file error" );
-   push_decode_error_c( es, "some type" );
-   push_encode_error_c( es, "other type" );
+   push_read_error_c( es, "some type" );
+   push_invalid_value_error_c( es, "other type" );
    push_error_c_( es, &C_Eof );
    expect_c_( mem != es->mem );
 
