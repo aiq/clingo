@@ -68,6 +68,6 @@ bool read_c( cScanner sca[static 1],
 *******************************************************************************/
 
 CLINGO_API
-bool push_read_error_c( cErrorStack es[static 1], cScanner sca[static 1] );
+bool push_read_scanner_error_c( cErrorStack es[static 1], cScanner sca[static 1] );
 
 #endif
