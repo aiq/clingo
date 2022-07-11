@@ -101,6 +101,8 @@ typedef struct cLitStrErrorData cLitStrErrorData;
 
 CLINGO_API extern cErrorType const C_InvalidInputError;
 
+CLINGO_API extern cErrorType const C_NotEnoughSpaceError;
+
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************

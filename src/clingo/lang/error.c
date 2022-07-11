@@ -11,7 +11,7 @@
  Definitions
 *******************************************************************************/
 
-static bool note_errno_error_c( cRecorder rec[static 1], cError const* err )
+static bool note_errno_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_ErrnoError );
    cErrnoErrorData const* errd = get_error_data_c( err );
@@ -22,10 +22,10 @@ static bool note_errno_error_c( cRecorder rec[static 1], cError const* err )
 }
 cErrorType const C_ErrnoError = {
    .desc = stringify_c_( C_ErrnoError ),
-   .note = &note_errno_error_c
+   .note = &note_errno_error
 };
 
-static bool note_lit_str_error_c( cRecorder rec[static 1], cError const* err )
+static bool note_lit_str_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_LitStrError );
    cLitStrErrorData const* errd = get_error_data_c( err );
@@ -33,14 +33,19 @@ static bool note_lit_str_error_c( cRecorder rec[static 1], cError const* err )
 }
 cErrorType const C_LitStrError = {
    .desc = stringify_c_( C_LitStrError ),
-   .note = &note_lit_str_error_c
+   .note = &note_lit_str_error
 };
 
-QUOTE_LIT_STR_ERROR_TYPE_C_(
+SINGLE_ERROR_TYPE_C_(
    C_InvalidInputError,
-   note_invalid_input_error_c,
-   "invalid input for {s:q}",
-   push_invalid_input_error_c
+   note_invalid_input_error,
+   "invalid input"
+)
+
+SINGLE_ERROR_TYPE_C_(
+   C_NotEnoughSpaceError,
+   note_not_enough_space_error,
+   "not enough space"
 )
 
 /*******************************************************************************
