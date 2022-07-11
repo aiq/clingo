@@ -14,7 +14,7 @@
 
 *******************************************************************************/
 
-CLINGO_API extern cErrorType const C_ReadError;
+CLINGO_API extern cErrorType const C_FreadError;
 
 CLINGO_API extern cErrorType const C_InvalidValueError;
 
@@ -142,8 +142,8 @@ bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] );
  error
 *******************************************************************************/
 
-CLINGO_API bool push_read_error_c( cErrorStack es[static 1],
-                                   char const name[static 1] );
+CLINGO_API bool push_fread_error_c( cErrorStack es[static 1],
+                                    char const name[static 1] );
 
 CLINGO_API bool push_invalid_value_error_c( cErrorStack es[static 1],
                                             char const name[static 1] );

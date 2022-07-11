@@ -11,26 +11,26 @@
 *******************************************************************************/
 
 QUOTE_LIT_STR_ERROR_TYPE_C_(
-   C_ReadError,
-   note_read_error_c,
-   "not able to read {s:q}",
-   push_read_error_c
+   C_FreadError,
+   note_read_error,
+   "not able to fread {s:q}",
+   push_fread_error_c
 )
 
 QUOTE_LIT_STR_ERROR_TYPE_C_(
    C_InvalidValueError,
-   note_invalid_value_error_c,
+   note_invalid_value_error,
    "invalid {s:q} value",
    push_invalid_value_error_c
 )
 
-SINGLE_ERROR_TYPE_C_( C_Eof, note_eof_c, "EOF" )
+SINGLE_ERROR_TYPE_C_( C_Eof, note_eof, "EOF" )
 
 SINGLE_ERROR_TYPE_C_(
    C_UnexpectedEof,
-   note_unexpected_eof_c,
+   note_unexpected_eof,
    "unexpected EOF"
-);
+)
 
 static bool note_file_error_c( cRecorder rec[static 1], cError const* err )
 {
