@@ -1,6 +1,7 @@
 #ifndef CLINGO_INTERN_WRITE_TIME_UTIL_H
 #define CLINGO_INTERN_WRITE_TIME_UTIL_H
 
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
 #include "clingo/time/c_Month.h"
@@ -71,7 +72,7 @@ inline bool intl_write_day_c( cRecorder rec[static 1],
    }
    else
    {
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
    }
 
    return res ? true
@@ -98,7 +99,7 @@ inline bool intl_write_day_of_year_c( cRecorder rec[static 1],
    }
    else
    {
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
    }
 
    return res ? true
@@ -136,7 +137,7 @@ inline bool intl_write_month_c( cRecorder rec[static 1],
    }
    else
    {
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
    }
 
    return res ? true
@@ -157,7 +158,7 @@ inline bool intl_write_week_c( cRecorder rec[static 1],
          res = recordf_c( rec, "W%02d", week );
          break;
       default:
-         return set_recorder_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidFormatString );
    }
    return res ? true
               : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
@@ -184,7 +185,7 @@ inline bool intl_write_weekday_c( cRecorder rec[static 1],
          res = record_mem_c( rec, buf.v, buf.s );
          break;
       default:
-         return set_recorder_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidFormatString );
    }
    return res ? true
               : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
@@ -204,7 +205,7 @@ inline bool intl_write_year_c( cRecorder rec[static 1],
          res = recordf_c( rec, "%04d", year );
          break;
       default:
-         return set_recorder_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidFormatString );
    }
    return res ? true
               : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
@@ -234,7 +235,7 @@ inline bool intl_write_hour_c( cRecorder rec[static 1],
    }
    else
    {
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
    }
 
    return res ? true
@@ -270,7 +271,7 @@ inline bool intl_write_msec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
 
    return intl_write_xsec_c( rec, msec, ( fmt == 1 ), "%03d" );
 }
@@ -280,7 +281,7 @@ inline bool intl_write_usec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
 
    return intl_write_xsec_c( rec, usec, ( fmt == 1 ), "%06d" );
 }
@@ -290,7 +291,7 @@ inline bool intl_write_nsec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
 
    return intl_write_xsec_c( rec, nsec, ( fmt == 1 ), "%09d" );
 }
@@ -331,7 +332,7 @@ inline bool intl_write_offset_c( cRecorder rec[static 1],
    }
    else
    {
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
    }
 
    return res ? true

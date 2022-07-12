@@ -116,7 +116,7 @@ bool read_ymd_c( cScanner sca[static 1],
    if ( not ymd_is_valid_c( tmp ) )
    {
       move_scanner_to_c( sca, oldPos );
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
    }
 
    *ymd = tmp;

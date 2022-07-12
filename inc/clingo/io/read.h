@@ -10,34 +10,6 @@
 ********************************************************* Types and Definitions
 *******************************************************************************/
 
-#define cREAD_ERROR_CODE_                                                      \
-   XMAP_C_( c_NotAbleToReadValue, 1, "not able to read value" )                \
-   XMAP_C_( c_ToLargeReadFormat,  2, "to large read format string" )           \
-   XMAP_C_( c_InvalidReadFormat,  3, "invalid read format string" )
-
-/**************************************/
-
-#define XMAP_C_( N, I, T ) N = I,
-enum c_ReadErrorCode { cREAD_ERROR_CODE_ };
-#undef XMAP_C_
-typedef enum c_ReadErrorCode c_ReadErrorCode;
-                
-/*******************************************************************************
-
-*******************************************************************************/
-
-CLINGO_API extern cErrorType const C_ReadScannerError;
-
-struct cReadErrorData
-{
-   int errc;
-};
-typedef struct cReadErrorData cReadErrorData;
-                
-/*******************************************************************************
-
-*******************************************************************************/
-
 typedef bool ( *c_read_va_arg )( cScanner sca[static 1],
                                  void* val,
                                  cChars type,
@@ -68,6 +40,7 @@ bool read_c( cScanner sca[static 1],
 *******************************************************************************/
 
 CLINGO_API
-bool push_read_scanner_error_c( cErrorStack es[static 1], cScanner sca[static 1] );
+bool push_read_scanner_error_c( cErrorStack es[static 1],
+                                cScanner sca[static 1] );
 
 #endif

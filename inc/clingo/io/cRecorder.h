@@ -128,10 +128,17 @@ inline void reset_recorder_c( cRecorder rec[static 1] )
  error
 *******************************************************************************/
 
-inline bool set_recorder_error_c( cRecorder rec[static 1], int err )
+CLINGO_API inline bool set_recorder_error_c( cRecorder rec[static 1], int err )
 {
    rec->err = err;
    return false;
+}
+
+CLINGO_API inline int clear_recorder_error_c( cRecorder rec[static 1] )
+{
+   int res = rec->err;
+   rec->err = 0;
+   return res;
 }
 
 /*******************************************************************************

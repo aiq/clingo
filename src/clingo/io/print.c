@@ -1,6 +1,7 @@
 #include "clingo/io/print.h"
 
 #include "_/io/read_write_util.h"
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/FILE.h"
 
 /*******************************************************************************
@@ -91,7 +92,7 @@ bool fprint_impl_c( FILE* file,
             if ( rec->err == cNoError_ )
             {
                cleanup_fprint_impl_c( rec, initCap );
-               return set_recorder_error_c( rec, c_InvalidWriteFormat );
+               return set_recorder_error_c( rec, c_InvalidFormatString );
             }
             if ( rec->err == c_NotEnoughRecorderSpace )
             {

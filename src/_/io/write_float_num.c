@@ -1,6 +1,7 @@
 #include "_/io/write_num.h"
 
 #include "_/io/cWriteNumFormat.h"
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/write.h"
 
 /*******************************************************************************
@@ -26,7 +27,7 @@ bool write_float_num_c( cRecorder rec[static 1],
    cWriteNumFormat numFmt;
    if ( not init_write_float_format_c( &numFmt, fmt ) )
    {
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
    }
    // optional quote at begin --------------------------------------------------
    if ( numFmt.quote )

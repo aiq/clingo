@@ -181,10 +181,17 @@ CLINGO_API bool move_while_in_range_c( cScanner sca[static 1], cRuneRange range 
  error
 *******************************************************************************/
 
-CLINGO_API inline bool scan_error_c( cScanner sca[static 1], int err )
+CLINGO_API inline bool set_scanner_error_c( cScanner sca[static 1], int err )
 {
    sca->err = err;
    return false;
+}
+
+CLINGO_API inline int clear_scanner_error_c( cScanner sca[static 1] )
+{
+   int res = sca->err;
+   sca->err = 0;
+   return res;
 }
 
 /*******************************************************************************
@@ -414,7 +421,7 @@ CLINGO_API inline bool undo_scan_error_c( cScanMarker sm[static 1], int err )
 {
    must_exist_c_( sm );
    undo_scan_c( sm );
-   return scan_error_c( sm->x, err );
+   return set_scanner_error_c( sm->x, err );
 }
 
 #endif

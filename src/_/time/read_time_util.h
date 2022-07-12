@@ -1,6 +1,7 @@
 #ifndef CLINGO_INTERN_READ_TIME_UTIL_H
 #define CLINGO_INTERN_READ_TIME_UTIL_H
 
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/read.h"
 #include "clingo/io/read_type.h"
 #include "clingo/time/c_Month.h"
@@ -19,7 +20,8 @@ inline bool intl_read_hms_val_c( cScanner sca[static 1],
                                  int64_t spaces )
 {
    int64_t n = fmt + spaces;
-   if ( n != 1 and n != 2 ) return scan_error_c( sca, c_InvalidReadFormat );
+   if ( n != 1 and n != 2 )
+      return set_scanner_error_c( sca, c_InvalidFormatString );
 
    cScanner* subSca = &sub_scanner_c_( sca, n );
    if ( spaces > 0 )
@@ -28,7 +30,7 @@ inline bool intl_read_hms_val_c( cScanner sca[static 1],
    }
 
    if ( not read_int8_c_( subSca, val ) )
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    move_scanner_c( sca, subSca->pos );
    return true;
@@ -39,12 +41,12 @@ inline bool intl_read_xsec_c( cScanner sca[static 1],
                               int64_t fmt )
 {
    if ( on_char_c( sca, '+' ) or on_char_c( sca, '-' ) )
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    cScanner* subSca = &sub_scanner_c_( sca, fmt );
    int64_t p = subSca->pos;
    if ( not read_int32_c_( subSca, val ) )
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    int64_t n = fmt - ( subSca->pos - p );
    times_c_( n, i )
@@ -62,7 +64,7 @@ inline bool intl_read_time_seperator_c( cScanner sca[static 1],
    scan_char_c( fmtSca, &c );
    if ( not move_if_char_c( sca, c ) )
    {
-      return scan_error_c( sca, c_InvalidReadFormat );
+      return set_scanner_error_c( sca, c_InvalidFormatString );
    }
    return true;
 }
@@ -77,9 +79,11 @@ inline bool intl_read_day_of_year_c( cScanner sca[static 1],
                                      int64_t spaces )
 {
    int64_t n = fmt + spaces;
-   if ( n != 1 and n != 3 ) return scan_error_c( sca, c_InvalidReadFormat );
+   if ( n != 1 and n != 3 )
+      return set_scanner_error_c( sca, c_InvalidFormatString );
 
-   if ( n > sca->space ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( n > sca->space )
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    cScanner* subSca = &sub_scanner_c_( sca, 3 );
    if ( spaces > 0 )
@@ -88,7 +92,7 @@ inline bool intl_read_day_of_year_c( cScanner sca[static 1],
    }
 
    if ( not read_int16_c_( subSca, day ) )
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    move_scanner_c( sca, subSca->pos );
    return true;
@@ -115,7 +119,7 @@ inline bool intl_read_month_c( cScanner sca[static 1],
          return false;
 
       if ( not in_range_c_( c_Jan, tmp, c_Dec ) )
-         return scan_error_c( sca, c_NotAbleToReadValue );
+         return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
       *month = (c_Month)tmp;
    }
@@ -133,7 +137,7 @@ inline bool intl_read_month_c( cScanner sca[static 1],
             break;
          }
       }
-      if ( not res ) return scan_error_c( sca, c_NotAbleToReadValue );
+      if ( not res ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
    }
    else if ( fmt == 4 and spaces == 0 )
    {
@@ -149,11 +153,11 @@ inline bool intl_read_month_c( cScanner sca[static 1],
             break;
          }
       }
-      if ( not res ) return scan_error_c( sca, c_NotAbleToReadValue );
+      if ( not res ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
    }
    else
    {
-      return scan_error_c( sca, c_InvalidReadFormat );
+      return set_scanner_error_c( sca, c_InvalidFormatString );
    }
 
    return true;
@@ -163,15 +167,16 @@ inline bool intl_read_week_c( cScanner sca[static 1],
                               int8_t week[static 1],
                               int64_t fmt )
 {
-   if ( fmt != 2 and fmt != 3 ) return scan_error_c( sca, c_InvalidReadFormat );
+   if ( fmt != 2 and fmt != 3 )
+      return set_scanner_error_c( sca, c_InvalidFormatString );
 
    cScanner* subSca = &sub_scanner_c_( sca, 3 );
 
    if ( not move_if_char_c( subSca, 'W' ) )
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    if ( not read_int8_c_( subSca, week ) )
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    move_scanner_c( sca, subSca->pos );
    return true;
@@ -188,7 +193,7 @@ inline bool intl_read_weekday_c( cScanner sca[static 1],
          return false;
 
       if ( not in_range_c_( c_Mon, tmp, c_Sun ) )
-         return scan_error_c( sca, c_NotAbleToReadValue );
+         return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
       *wd = (c_Weekday)tmp;
    }
@@ -206,7 +211,7 @@ inline bool intl_read_weekday_c( cScanner sca[static 1],
             break;
          }
       }
-      if ( not res ) return scan_error_c( sca, c_NotAbleToReadValue );
+      if ( not res ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
    }
    else if ( fmt == 4 )
    {
@@ -222,11 +227,11 @@ inline bool intl_read_weekday_c( cScanner sca[static 1],
             break;
          }
       }
-      if ( not res ) return scan_error_c( sca, c_NotAbleToReadValue );
+      if ( not res ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
    }
    else
    {
-      return scan_error_c( sca, c_InvalidReadFormat );
+      return set_scanner_error_c( sca, c_InvalidFormatString );
    }
 
    return true;
@@ -238,9 +243,11 @@ inline bool intl_read_year_c( cScanner sca[static 1],
                               int64_t spaces )
 {
    int64_t n = fmt + spaces;
-   if ( n != 2 and n != 4 ) return scan_error_c( sca, c_InvalidReadFormat );
+   if ( n != 2 and n != 4 )
+      return set_scanner_error_c( sca, c_InvalidFormatString );
 
-   if ( n > sca->space ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( n > sca->space )
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    cScanner* subSca = &sub_scanner_c_( sca, n );
    if ( spaces > 0 )
@@ -249,7 +256,7 @@ inline bool intl_read_year_c( cScanner sca[static 1],
    }
 
    if ( not read_int32_c_( subSca, year ) )
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    if ( n == 2 )
    {
@@ -308,7 +315,7 @@ inline bool intl_read_isec_c( cScanner sca[static 1],
                               int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return scan_error_c( sca, c_InvalidReadFormat );
+      return set_scanner_error_c( sca, c_InvalidFormatString );
 
    return intl_read_xsec_c( sca, isec, 3 );
 }
@@ -318,7 +325,7 @@ inline bool intl_read_usec_c( cScanner sca[static 1],
                               int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return scan_error_c( sca, c_InvalidReadFormat );
+      return set_scanner_error_c( sca, c_InvalidFormatString );
 
    return intl_read_xsec_c( sca, usec, 6 );
 }
@@ -328,7 +335,7 @@ inline bool intl_read_nsec_c( cScanner sca[static 1],
                               int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return scan_error_c( sca, c_InvalidReadFormat );
+      return set_scanner_error_c( sca, c_InvalidFormatString );
 
    return intl_read_xsec_c( sca, nsec, 9 );
 }
@@ -347,7 +354,7 @@ inline bool intl_read_ap_c( cScanner sca[static 1],
       return true;
    }
 
-   return scan_error_c( sca, c_NotAbleToReadValue );
+   return set_scanner_error_c( sca, c_NotAbleToReadValue );
 }
 
 inline bool intl_read_offset_c( cScanner sca[static 1],
@@ -367,7 +374,7 @@ inline bool intl_read_offset_c( cScanner sca[static 1],
       {
          cScanner* subSca = &sub_scanner_c_( sca, 3 );
          if ( not read_int32_c_( subSca, &h ) or ( subSca->space > 0 ) )
-            return scan_error_c( sca, c_NotAbleToReadValue );
+            return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
          move_scanner_c( sca, subSca->pos );
       }
@@ -377,7 +384,7 @@ inline bool intl_read_offset_c( cScanner sca[static 1],
       {
          cScanner* subSca = &sub_scanner_c_( sca, 2 );
          if ( not read_int8_c_( subSca, &m ) or ( subSca->space > 0 ) )
-            return scan_error_c( sca, c_NotAbleToReadValue );
+            return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
          if ( h < 0 )
          {
@@ -387,7 +394,7 @@ inline bool intl_read_offset_c( cScanner sca[static 1],
       }
       else if ( fmt == 2 )
       {
-         return scan_error_c( sca, c_NotAbleToReadValue );
+         return set_scanner_error_c( sca, c_NotAbleToReadValue );
       }
 
       *tz = tz_offset_from_duration_c( duration_c( h, m, 0, 0 ) );
@@ -398,17 +405,17 @@ inline bool intl_read_offset_c( cScanner sca[static 1],
       cScanner* subSca = &sub_scanner_c_( sca, 5 );
       int32_t v;
       if ( not read_int32_c_( subSca, &v ) or ( subSca->space > 0 ) )
-         return scan_error_c( sca, c_NotAbleToReadValue );
+         return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
       move_scanner_c( sca, subSca->pos );
       return true;
    }
    else
    {
-      return scan_error_c( sca, c_InvalidReadFormat );
+      return set_scanner_error_c( sca, c_InvalidFormatString );
    }
 
-   return scan_error_c( sca, c_NotAbleToReadValue );
+   return set_scanner_error_c( sca, c_NotAbleToReadValue );
 }
 
 #endif

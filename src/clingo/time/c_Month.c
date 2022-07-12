@@ -5,6 +5,7 @@
 
 #include "_/time/read_time_util.h"
 #include "_/time/write_time_util.h"
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/type/int8.h"
 #include "clingo/type/int16.h"
 #include "clingo/type/int64.h"
@@ -152,7 +153,7 @@ bool read_month_c( cScanner sca[static 1],
    }
 
    int64_t n = count_eq_char_c( slc, 'M' );
-   return ( n != slc.s ) ? scan_error_c( sca, c_InvalidReadFormat )
+   return ( n != slc.s ) ? set_scanner_error_c( sca, c_InvalidFormatString )
                          : intl_read_month_c( sca, month, n, 0 );
 }
 
@@ -171,7 +172,7 @@ bool write_month_c( cRecorder rec[static 1],
    }
 
    int64_t n = count_eq_char_c( slc, 'M' );
-   return ( n != slc.s ) ? set_recorder_error_c( rec, c_InvalidWriteFormat )
+   return ( n != slc.s ) ? set_recorder_error_c( rec, c_InvalidFormatString )
                          : intl_write_month_c( rec, month, n, 0 );
 }
 

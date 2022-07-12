@@ -157,7 +157,7 @@ bool read_hmsn_c( cScanner sca[static 1],
    if ( not hmsn_is_valid_c( tmp ) )
    {
       move_scanner_to_c( sca, oldPos );
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
    }
 
    *hmsn = tmp;

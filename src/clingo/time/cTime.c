@@ -365,7 +365,7 @@ bool read_time_c( cScanner sca[static 1],
    else
    {
       undo_scan_c( marker );
-      return scan_error_c( sca, c_NotAbleToReadValue );
+      return set_scanner_error_c( sca, c_NotAbleToReadValue );
    }
 
    return true;

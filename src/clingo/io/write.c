@@ -4,34 +4,9 @@
 #include <stdio.h>
 
 #include "_/io/read_write_util.h"
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/jot.h"
 #include "clingo/io/write_type.h"
-
-/*******************************************************************************
-********************************************************* Types and Definitions
-**+*****************************************************************************
- Definitions
-*******************************************************************************/
-
-static bool note_write_error_c( cRecorder rec[static 1], cError const* err )
-{
-   cWriteErrorData const* errd = get_error_data_c( err );
-   char const* msg = NULL;
-   switch ( errd->errc )
-   {
-      #define XMAP_C_( N, I, T ) case N: msg = T;
-         cWRITE_ERROR_CODE_
-      #undef XMAP_C_
-   }
-   if ( msg == NULL ) return false;
-
-   return record_chars_c_( rec, msg );
-}
-
-cErrorType const C_WriteError = {
-   .desc = stringify_c_( C_WriteError ),
-   .note = &note_write_error_c
-};
 
 /*******************************************************************************
 ********************************************************************* Functions
@@ -221,7 +196,7 @@ bool write_impl_c( cRecorder rec[static 1],
          {
             if ( rec->err == cNoError_ )
             {
-               set_recorder_error_c( rec, c_InvalidWriteFormat );
+               set_recorder_error_c( rec, c_InvalidFormatString );
             }
             return false;
          }
@@ -294,14 +269,4 @@ bool writeln_c( cRecorder rec[static 1],
    bool res = writeln_list_c( rec, n, list );
    va_end( list );
    return res;
-}
-
-/*******************************************************************************
- error
-*******************************************************************************/
-
-bool push_write_error_c( cErrorStack es[static 1], cRecorder rec[static 1] )
-{
-   cWriteErrorData d = { .errc=rec->err };
-   return push_error_c( es, &C_WriteError, &d, sizeof_c_( cWriteErrorData ) );
 }

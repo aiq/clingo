@@ -584,7 +584,9 @@ bool move_while_in_range_c( cScanner sca[static 1], cRuneRange range )
  error
 *******************************************************************************/
 
-extern inline bool scan_error_c( cScanner sca[static 1], int err );
+extern inline bool set_scanner_error_c( cScanner sca[static 1], int err );
+
+extern inline int clear_scanner_error_c( cScanner sca[static 1] );
 
 /*******************************************************************************
  access

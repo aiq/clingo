@@ -5,32 +5,6 @@
 #include "clingo/io/read_type.h"
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-**+*****************************************************************************
- Definitions
-*******************************************************************************/
-
-static bool note_read_error_c( cRecorder rec[static 1], cError const* err )
-{
-   cReadErrorData const* errd = get_error_data_c( err );
-   char const* msg = NULL;
-   switch ( errd->errc )
-   {
-      #define XMAP_C_( N, I, T ) case N: msg = T;
-         cREAD_ERROR_CODE_
-      #undef XMAP_C_
-   }
-   if ( msg == NULL ) return false;
-
-   return record_chars_c_( rec, msg );
-}
-
-cErrorType const C_ReadScannerError = {
-   .desc = stringify_c_( C_ReadScannerError ),
-   .note = &note_read_error_c
-};
-
-/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
 
@@ -240,14 +214,4 @@ bool read_c( cScanner sca[static 1],
 
    va_end( list );
    return res;
-}
-
-/*******************************************************************************
-  error
-*******************************************************************************/
-
-bool push_read_scanner_error_c( cErrorStack es[static 1], cScanner sca[static 1] )
-{
-   cReadErrorData d = { .errc=sca->err };
-   return push_error_c( es, &C_ReadScannerError, &d, sizeof_c_( cReadErrorData ) );
 }

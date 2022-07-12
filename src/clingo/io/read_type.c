@@ -3,6 +3,7 @@
 #include "_/io/read_num.h"
 #include "_/io/read_write_util.h"
 #include "clingo/io/read.h"
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/write_type.h"
 
 /*******************************************************************************
@@ -46,7 +47,7 @@ bool read_bool_c( cScanner sca[static 1],
                                                      NULL;
       if ( !t or !f )
       {
-         return scan_error_c( sca, c_InvalidReadFormat );
+         return set_scanner_error_c( sca, c_InvalidFormatString );
       }
 
       if ( move_if_chars_c_( sca, t ) )
@@ -61,11 +62,11 @@ bool read_bool_c( cScanner sca[static 1],
       }
       else
       {
-         return scan_error_c( sca, c_InvalidReadFormat );
+         return set_scanner_error_c( sca, c_InvalidFormatString );
       }
    }
 
-   return scan_error_c( sca, c_NotAbleToReadValue );
+   return set_scanner_error_c( sca, c_NotAbleToReadValue );
 }
 
 bool read_byte_c( cScanner sca[static 1],
@@ -143,7 +144,7 @@ bool read_range_c( cScanner sca[static 1],
    }
 
    move_scanner_to_c( sca, oldPos );
-   return scan_error_c( sca, c_NotAbleToReadValue );
+   return set_scanner_error_c( sca, c_NotAbleToReadValue );
 }
 
 bool read_rune_c( cScanner sca[static 1],
@@ -222,7 +223,7 @@ bool read_rune_c( cScanner sca[static 1],
          return true;
       }
 
-      return scan_error_c( sca, c_InvalidReadFormat );
+      return set_scanner_error_c( sca, c_InvalidFormatString );
    }
 
    return undo_scan_error_c( marker, c_NotAbleToReadValue );
@@ -295,14 +296,14 @@ bool read_int16_c( cScanner sca[static 1],
    must_exist_c_( fmt );
 
    cChars src = unscanned_chars_c_( sca );
-   if ( is_empty_c_( src ) ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( is_empty_c_( src ) ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    int64_t tmp = 0;
    int64_t res = parse_int64_c( &tmp, fmt, src, INT16_MAX, INT16_MIN );
    *i16 = int16_c_( tmp );
 
-   return ( res < 0 )  ? scan_error_c( sca, c_InvalidReadFormat ) :
-          ( res == 0 ) ? scan_error_c( sca, c_NotAbleToReadValue ) :
+   return ( res < 0 )  ? set_scanner_error_c( sca, c_InvalidFormatString ) :
+          ( res == 0 ) ? set_scanner_error_c( sca, c_NotAbleToReadValue ) :
                          move_scanner_c( sca, res );
 }
 
@@ -315,14 +316,14 @@ bool read_int32_c( cScanner sca[static 1],
    must_exist_c_( fmt );
 
    cChars src = unscanned_chars_c_( sca );
-   if ( is_empty_c_( src ) ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( is_empty_c_( src ) ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    int64_t tmp = 0;
    int64_t res = parse_int64_c( &tmp, fmt, src, INT32_MAX, INT32_MIN );
    *i32 = int32_c_( tmp );
 
-   return ( res < 0 )  ? scan_error_c( sca, c_InvalidReadFormat ) :
-          ( res == 0 ) ? scan_error_c( sca, c_NotAbleToReadValue ) :
+   return ( res < 0 )  ? set_scanner_error_c( sca, c_InvalidFormatString ) :
+          ( res == 0 ) ? set_scanner_error_c( sca, c_NotAbleToReadValue ) :
                          move_scanner_c( sca, res );
 }
 
@@ -335,12 +336,12 @@ bool read_int64_c( cScanner sca[static 1],
    must_exist_c_( fmt );
 
    cChars src = unscanned_chars_c_( sca );
-   if ( is_empty_c_( src ) ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( is_empty_c_( src ) ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    int64_t res = parse_int64_c( i64, fmt, src, INT64_MAX, INT64_MIN );
 
-   return ( res < 0 )  ? scan_error_c( sca, c_InvalidReadFormat ) :
-          ( res == 0 ) ? scan_error_c( sca, c_NotAbleToReadValue ) :
+   return ( res < 0 )  ? set_scanner_error_c( sca, c_InvalidFormatString ) :
+          ( res == 0 ) ? set_scanner_error_c( sca, c_NotAbleToReadValue ) :
                          move_scanner_c( sca, res );
 }
 
@@ -353,14 +354,14 @@ bool read_int8_c( cScanner sca[static 1],
    must_exist_c_( fmt );
 
    cChars src = unscanned_chars_c_( sca );
-   if ( is_empty_c_( src ) ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( is_empty_c_( src ) ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    int64_t tmp = 0;
    int64_t res = parse_int64_c( &tmp, fmt, src, INT8_MAX, INT8_MIN );
    *i8 = int8_c_( tmp );
 
-   return ( res < 0 )  ? scan_error_c( sca, c_InvalidReadFormat ) :
-          ( res == 0 ) ? scan_error_c( sca, c_NotAbleToReadValue ) :
+   return ( res < 0 )  ? set_scanner_error_c( sca, c_InvalidFormatString ) :
+          ( res == 0 ) ? set_scanner_error_c( sca, c_NotAbleToReadValue ) :
                          move_scanner_c( sca, res );
 }
 
@@ -377,14 +378,14 @@ bool read_uint16_c( cScanner sca[static 1],
    must_exist_c_( fmt );
 
    cChars src = unscanned_chars_c_( sca );
-   if ( is_empty_c_( src ) ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( is_empty_c_( src ) ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    uint64_t tmp = 0;
    int64_t res = parse_uint64_c( &tmp, fmt, src, UINT16_MAX );
    *u16 = uint16_c_( tmp );
 
-   return ( res < 0 )  ? scan_error_c( sca, c_InvalidReadFormat ) :
-          ( res == 0 ) ? scan_error_c( sca, c_NotAbleToReadValue ) :
+   return ( res < 0 )  ? set_scanner_error_c( sca, c_InvalidFormatString ) :
+          ( res == 0 ) ? set_scanner_error_c( sca, c_NotAbleToReadValue ) :
                          move_scanner_c( sca, res );
 }
 
@@ -397,14 +398,14 @@ bool read_uint32_c( cScanner sca[static 1],
    must_exist_c_( fmt );
 
    cChars src = unscanned_chars_c_( sca );
-   if ( is_empty_c_( src ) ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( is_empty_c_( src ) ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    uint64_t tmp = 0;
    int64_t res = parse_uint64_c( &tmp, fmt, src, UINT32_MAX );
    *u32 = uint32_c_( tmp );
 
-   return ( res < 0 )  ? scan_error_c( sca, c_InvalidReadFormat ) :
-          ( res == 0 ) ? scan_error_c( sca, c_NotAbleToReadValue ) :
+   return ( res < 0 )  ? set_scanner_error_c( sca, c_InvalidFormatString ) :
+          ( res == 0 ) ? set_scanner_error_c( sca, c_NotAbleToReadValue ) :
                          move_scanner_c( sca, res );
 }
 
@@ -417,14 +418,14 @@ bool read_uint64_c( cScanner sca[static 1],
    must_exist_c_( fmt );
 
    cChars src = unscanned_chars_c_( sca );
-   if ( is_empty_c_( src ) ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( is_empty_c_( src ) ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    uint64_t tmp = 0;
    int64_t res = parse_uint64_c( &tmp, fmt, src, UINT64_MAX );
    *u64 = tmp;
 
-   return ( res < 0 )  ? scan_error_c( sca, c_InvalidReadFormat ) :
-          ( res == 0 ) ? scan_error_c( sca, c_NotAbleToReadValue ) :
+   return ( res < 0 )  ? set_scanner_error_c( sca, c_InvalidFormatString ) :
+          ( res == 0 ) ? set_scanner_error_c( sca, c_NotAbleToReadValue ) :
                          move_scanner_c( sca, res );
 }
 
@@ -437,14 +438,14 @@ bool read_uint8_c( cScanner sca[static 1],
    must_exist_c_( fmt );
 
    cChars src = unscanned_chars_c_( sca );
-   if ( is_empty_c_( src ) ) return scan_error_c( sca, c_NotAbleToReadValue );
+   if ( is_empty_c_( src ) ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
 
    uint64_t tmp = 0;
    int64_t res = parse_uint64_c( &tmp, fmt, src, UINT8_MAX );
    *u8 = uint8_c_( tmp );
 
-   return ( res < 0 )  ? scan_error_c( sca, c_InvalidReadFormat ) :
-          ( res == 0 ) ? scan_error_c( sca, c_NotAbleToReadValue ) :
+   return ( res < 0 )  ? set_scanner_error_c( sca, c_InvalidFormatString ) :
+          ( res == 0 ) ? set_scanner_error_c( sca, c_NotAbleToReadValue ) :
                          move_scanner_c( sca, res );
 }
 

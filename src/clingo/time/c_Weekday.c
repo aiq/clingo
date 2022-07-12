@@ -114,7 +114,7 @@ bool read_weekday_c( cScanner sca[static 1],
    }
    cChars slc = c_c( fmt );
    int64_t n = count_eq_char_c( slc, 'E' );
-   return ( n != slc.s ) ? scan_error_c( sca, c_InvalidReadFormat )
+   return ( n != slc.s ) ? set_scanner_error_c( sca, c_InvalidFormatString )
                          : intl_read_weekday_c( sca, wd, n );
 }
 
@@ -128,6 +128,6 @@ bool write_weekday_c( cRecorder rec[static 1],
    }
    cChars slc = c_c( fmt );
    int64_t n = count_eq_char_c( slc, 'E' );
-   return ( n != slc.s ) ? set_recorder_error_c( rec, c_InvalidWriteFormat )
+   return ( n != slc.s ) ? set_recorder_error_c( rec, c_InvalidFormatString )
                          : intl_write_weekday_c( rec, wd, n );
 }

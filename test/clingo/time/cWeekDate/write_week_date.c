@@ -1,4 +1,6 @@
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/write.h"
+#include "clingo/lang/error.h"
 #include "clingo/lang/expect.h"
 #include "clingo/lang/locale.h"
 #include "clingo/time/cWeekDate.h"
@@ -40,7 +42,7 @@ int main( void )
 
    //**************************************************************** withErrors
    testSlice withErrors = slice_c_( test,
-      t_( wd, "XX/W", "", c_InvalidWriteFormat )
+      t_( wd, "XX/W", "", c_InvalidFormatString )
    );
 
    for_each_c_( test const*, t, withErrors )

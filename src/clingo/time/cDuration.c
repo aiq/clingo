@@ -1,6 +1,7 @@
 #include "clingo/time/cDuration.h"
 
 #include "_/time/write_time_util.h"
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/read.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
@@ -216,12 +217,12 @@ static bool init_info( cScanner sca[static 1], fmtCheck check, fmtInfo i[static 
 static bool inv_err( cScanner sca[static 1], int64_t oldPos )
 {
    move_scanner_to_c( sca, oldPos );
-   return scan_error_c( sca, c_InvalidReadFormat );
+   return set_scanner_error_c( sca, c_InvalidFormatString );
 }
 static bool not_able_to_read_value( cScanner sca[static 1], int64_t oldPos )
 {
    move_scanner_to_c( sca, oldPos );
-   return scan_error_c( sca, c_NotAbleToReadValue );
+   return set_scanner_error_c( sca, c_NotAbleToReadValue );
 }
 struct scanValue
 {
@@ -504,7 +505,7 @@ static bool do_write( int64_t n, int64_t val )
 static bool rec_err( cRecorder rec[static 1], int64_t oldPos )
 {
    move_recorder_to_c( rec, oldPos );
-   return set_recorder_error_c( rec, c_InvalidWriteFormat );
+   return set_recorder_error_c( rec, c_InvalidFormatString );
 }
 static bool record_sep( cScanner fmt[static 1], cRecorder rec[static 1] )
 {

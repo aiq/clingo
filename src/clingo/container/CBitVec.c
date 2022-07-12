@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
@@ -552,7 +553,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       }
       else
       {
-         return set_recorder_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidFormatString );
       }
    }
 
@@ -575,14 +576,14 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       uint8_t tmp = 10;
       if ( not read_uint8_c_( sca, &tmp ) )
       {
-         return set_recorder_error_c( rec, c_InvalidWriteFormat );
+         return set_recorder_error_c( rec, c_InvalidFormatString );
       }
       chunkLen = int64_c_( tmp );
    }
 
    if ( sca->space > 0 ) // ------------------------------------------- fullScan
    {
-      return set_recorder_error_c( rec, c_InvalidWriteFormat );
+      return set_recorder_error_c( rec, c_InvalidFormatString );
    }
 
    // -------------------------------------------------------------------- write
@@ -639,4 +640,3 @@ bool write_bit_vec_c( cRecorder rec[static 1],
 
    return res;
 }
-
