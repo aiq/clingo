@@ -20,7 +20,7 @@ int main( void )
 
    push_error_c_( es, &C_Eof );
    push_lit_str_error_c( es, "file error" );
-   push_fread_error_c( es, "some type" );
+   push_read_type_error_c( es, "some type" );
    write_error_c( rec, es->err, "" );
    expect_recorded_( rec, "not able to fread 'some type': file error: EOF" );
 

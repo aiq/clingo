@@ -11,10 +11,10 @@
 *******************************************************************************/
 
 QUOTE_LIT_STR_ERROR_TYPE_C_(
-   C_FreadError,
-   note_read_error,
-   "not able to fread {s:q}",
-   push_fread_error_c
+   C_ReadTypeError,
+   note_read_type_error,
+   "not able to read {s:q}",
+   push_read_type_error_c
 )
 
 QUOTE_LIT_STR_ERROR_TYPE_C_(
