@@ -709,7 +709,7 @@ bool FuncName( cScanner sca[static 1], Type val[static 1] )                    \
    int64_t const size = sizeof_c_( Type );                                     \
    if ( size > sca->space )                                                    \
    {                                                                           \
-      return set_scanner_error_c( sca, c_IncompleteValue );                    \
+      return set_scanner_error_c( sca, c_NotAbleToScanValue );                 \
    }                                                                           \
                                                                                \
    Type const* ptr = sca->mem;                                                 \
@@ -730,7 +730,7 @@ bool scan_rune_c( cScanner sca[static 1], cRune r[static 1] )
 
    if ( sca->space == 0 )
    {
-      return set_scanner_error_c( sca, c_IncompleteValue );
+      return set_scanner_error_c( sca, c_NotAbleToScanValue );
    }
 
    char const* ptr = sca->mem;
@@ -738,7 +738,7 @@ bool scan_rune_c( cScanner sca[static 1], cRune r[static 1] )
    int64_t len = utf8_length_c( *ptr );
    if ( len > sca->space )
    {
-      return set_scanner_error_c( sca, c_NotAbleToScanValue );
+      return set_scanner_error_c( sca, c_IncompleteValue );
    }
 
    *r = rune_c( ptr );
