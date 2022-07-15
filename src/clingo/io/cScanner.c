@@ -1,5 +1,6 @@
 #include "clingo/io/cScanner.h"
 
+#include "clingo/io/c_ReadWriteError.h"
 #include "clingo/lang/func.h"
 
 /*******************************************************************************
@@ -708,7 +709,7 @@ bool FuncName( cScanner sca[static 1], Type val[static 1] )                    \
    int64_t const size = sizeof_c_( Type );                                     \
    if ( size > sca->space )                                                    \
    {                                                                           \
-      return false;                                                            \
+      return set_scanner_error_c( sca, c_IncompleteValue );                    \
    }                                                                           \
                                                                                \
    Type const* ptr = sca->mem;                                                 \
@@ -729,7 +730,7 @@ bool scan_rune_c( cScanner sca[static 1], cRune r[static 1] )
 
    if ( sca->space == 0 )
    {
-      return false;
+      return set_scanner_error_c( sca, c_IncompleteValue );
    }
 
    char const* ptr = sca->mem;
@@ -737,7 +738,7 @@ bool scan_rune_c( cScanner sca[static 1], cRune r[static 1] )
    int64_t len = utf8_length_c( *ptr );
    if ( len > sca->space )
    {
-      return false;
+      return set_scanner_error_c( sca, c_NotAbleToScanValue );
    }
 
    *r = rune_c( ptr );

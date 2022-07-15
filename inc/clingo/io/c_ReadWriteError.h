@@ -10,9 +10,11 @@
 
 #define cREAD_WRITE_ERROR_CODE_                                                \
    XMAP_C_( c_NotAbleToReadValue,      1, "not able to read value" )           \
-   XMAP_C_( c_NotEnoughRecorderSpace,  2, "not enough recorder space" )        \
-   XMAP_C_( c_ToLargeFormatString,     3, "to large format string" )           \
-   XMAP_C_( c_InvalidFormatString,     4, "invalid format string" )
+   XMAP_C_( c_NotAbleToScanValue,      2, "not able to scan value" )           \
+   XMAP_C_( c_IncompleteValue,         3, "incomplete value" )                 \
+   XMAP_C_( c_NotEnoughRecorderSpace,  4, "not enough recorder space" )        \
+   XMAP_C_( c_ToLargeFormatString,     5, "to large format string" )           \
+   XMAP_C_( c_InvalidFormatString,     6, "invalid format string" )
 
 #define XMAP_C_( N, I, T ) N = I,
 enum c_ReadWriteErrorCode { cREAD_WRITE_ERROR_CODE_ };
