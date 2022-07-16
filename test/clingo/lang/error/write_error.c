@@ -1,3 +1,4 @@
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/FILE.h"
 #include "clingo/lang/error.h"
 #include "clingo/lang/expect.h"
@@ -20,13 +21,13 @@ int main( void )
 
    push_error_c_( es, &C_Eof );
    push_lit_str_error_c( es, "file error" );
-   push_read_type_error_c( es, "some type" );
+   push_import_error_c( es, "some type" );
    write_error_c( rec, es->err, "" );
-   expect_recorded_( rec, "not able to read 'some type': file error: EOF" );
+   expect_recorded_( rec, "not able to import 'some type': file error: EOF" );
 
    push_invalid_value_error_c( es, "other type" );
    write_error_c( rec, es->err, "" );
-   expect_recorded_( rec, "invalid 'other type' value: not able to read 'some type': file error: EOF" );
+   expect_recorded_( rec, "invalid 'other type' value: not able to import 'some type': file error: EOF" );
 
    return finish_tap_c_();
 }

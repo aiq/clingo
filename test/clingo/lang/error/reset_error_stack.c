@@ -1,3 +1,4 @@
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/FILE.h"
 #include "clingo/lang/error.h"
 #include "clingo/lang/expect.h"
@@ -27,7 +28,7 @@ int main( void )
    expect_c_( mem == es->mem );
 
    push_lit_str_error_c( es, "file error" );
-   push_read_type_error_c( es, "some type" );
+   push_import_error_c( es, "some type" );
    push_invalid_value_error_c( es, "other type" );
    push_error_c_( es, &C_Eof );
    expect_c_( mem != es->mem );

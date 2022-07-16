@@ -5,7 +5,7 @@
 #include "_/io/WRITE_INT.h"
 #include "_/io/WRITE_UINT.h"
 #include "_/io/write_num.h"
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
 

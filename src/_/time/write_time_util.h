@@ -1,7 +1,7 @@
 #ifndef CLINGO_INTERN_WRITE_TIME_UTIL_H
 #define CLINGO_INTERN_WRITE_TIME_UTIL_H
 
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
 #include "clingo/time/c_Month.h"

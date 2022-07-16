@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"

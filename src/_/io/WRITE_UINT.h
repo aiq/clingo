@@ -3,7 +3,7 @@
 
 #include "_/io/cWriteNumFormat.h"
 #include "_/io/write_num.h"
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 
 #define WRITE_UINT_C_(                                                         \
    Type, FuncName, Dec                                                         \

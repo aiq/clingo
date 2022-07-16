@@ -1,7 +1,7 @@
 #include "clingo/time/cDuration.h"
 
 #include "_/time/write_time_util.h"
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/read.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"

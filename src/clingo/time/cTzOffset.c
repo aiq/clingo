@@ -3,7 +3,7 @@
 #include "_/time/read_time_util.h"
 #include "_/time/util.h"
 #include "_/time/write_time_util.h"
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/type/int32.h"
 
 /*******************************************************************************

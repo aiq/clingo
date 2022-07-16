@@ -1,6 +1,7 @@
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 
 #include "clingo/io/cRecorder.h"
+#include "clingo/io/write.h"
 
 /*******************************************************************************
 ********************************************************* Types and Definitions
@@ -8,7 +9,7 @@
  Definitions
 *******************************************************************************/
 
-static bool note_read_write_error( cRecorder rec[static 1], cError const* err )
+static bool note_imp_exp_error( cRecorder rec[static 1], cError const* err )
 {
    cReadWriteErrorData const* errd = get_error_data_c( err );
    char const* msg = NULL;
@@ -26,10 +27,24 @@ static bool note_read_write_error( cRecorder rec[static 1], cError const* err )
    return record_chars_c_( rec, msg );
 }
 
-cErrorType const C_ReadWriteError = {
-   .desc = stringify_c_( C_ReadWriteError ),
-   .note = &note_read_write_error
+cErrorType const C_ImpExpError = {
+   .desc = stringify_c_( C_ImpExpError ),
+   .note = &note_imp_exp_error
 };
+
+QUOTE_LIT_STR_ERROR_TYPE_C_(
+   C_ImportError,
+   note_import_error,
+   "not able to import {s:q}",
+   push_import_error_c
+)
+
+QUOTE_LIT_STR_ERROR_TYPE_C_(
+   C_ExportError,
+   note_export_error,
+   "not able to export {s:q}",
+   push_export_error_c
+)
 
 /*******************************************************************************
 ********************************************************************* Functions
@@ -37,7 +52,7 @@ cErrorType const C_ReadWriteError = {
 
 *******************************************************************************/
 
-bool is_read_write_error_c( int errc )
+bool is_imp_exp_error_c( int errc )
 {
    switch ( errc )
    {
@@ -48,8 +63,8 @@ bool is_read_write_error_c( int errc )
    return false;
 };
 
-bool push_read_write_error_c( cErrorStack es[static 1], int errc )
+bool push_imp_exp_error_c( cErrorStack es[static 1], int errc )
 {
    cReadWriteErrorData d = { .errc=errc };
-   return push_error_c( es, &C_ReadWriteError, &d, sizeof_c_( cReadWriteErrorData ) );
+   return push_error_c( es, &C_ImpExpError, &d, sizeof_c_( cReadWriteErrorData ) );
 }

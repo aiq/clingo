@@ -1,7 +1,7 @@
 #include "_/io/write_num.h"
 
 #include "_/io/cWriteNumFormat.h"
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/write.h"
 
 /*******************************************************************************

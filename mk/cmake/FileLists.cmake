@@ -15,7 +15,7 @@ set( INC_FILES
    ${INC_DIR}/clingo/container/set.h
    ${INC_DIR}/clingo/container/vec.h
 
-   ${INC_DIR}/clingo/io/c_ReadWriteError.h
+   ${INC_DIR}/clingo/io/c_ImpExpError.h
    ${INC_DIR}/clingo/io/cCell.h
    ${INC_DIR}/clingo/io/cRecorder.h
    ${INC_DIR}/clingo/io/cScanner.h
@@ -112,7 +112,7 @@ set( SRC_FILES
    ${SRC_DIR}/clingo/container/set.c
    ${SRC_DIR}/clingo/container/vec.c
 
-   ${SRC_DIR}/clingo/io/c_ReadWriteError.c
+   ${SRC_DIR}/clingo/io/c_ImpExpError.c
    ${SRC_DIR}/clingo/io/cCell.c
    ${SRC_DIR}/clingo/io/cRecorder.c
    ${SRC_DIR}/clingo/io/cScanner.c

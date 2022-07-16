@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/type/uint64.h"
 
 /*******************************************************************************
@@ -106,7 +107,10 @@ bool record_chars_slice_c( cRecorder rec[static 1],
    int64_t const strLen = count_chars_slice_c( slice );
    int64_t const sepLen = ( slice.s -1 ) * sep.s;
    int64_t const memLen = strLen + sepLen;
-   if ( memLen > rec->space ) return false;
+   if ( memLen > rec->space )
+   {
+      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   }
 
    cChars const* itr = begin_c_( slice );
    record_chars_c( rec, *itr );
@@ -183,7 +187,7 @@ bool FuncName( cRecorder rec[static 1], Type val )                             \
    int64_t const size = sizeof_c_( Type );                                     \
    if ( size > rec->space )                                                    \
    {                                                                           \
-     return false;                                                             \
+     return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );             \
    }                                                                           \
                                                                                \
    Type* ptr = rec->mem;                                                       \
@@ -204,7 +208,7 @@ bool record_rune_c( cRecorder rec[static 1], cRune r )
 
    if ( not rune_is_valid_c( r ) )
    {
-      return false;
+      return set_recorder_error_c( rec, c_NotAbleToRecordValue );
    }
 
    return record_mem_c( rec, r.c, rune_size_c( r ) );

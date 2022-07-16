@@ -1,6 +1,6 @@
 #include "clingo/io/cScanner.h"
 
-#include "clingo/io/c_ReadWriteError.h"
+#include "clingo/io/c_ImpExpError.h"
 #include "clingo/lang/func.h"
 
 /*******************************************************************************
