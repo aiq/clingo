@@ -282,7 +282,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/io/cScanner/view_runes.c
 
    # FILE
-   ${TEST_DIR}/clingo/io/FILE/fread_line.c
+   ${TEST_DIR}/clingo/io/FILE/fget_line.c
    ${TEST_DIR}/clingo/io/FILE/write_binary_file.c
    ${TEST_DIR}/clingo/io/FILE/write_text_file.c
 

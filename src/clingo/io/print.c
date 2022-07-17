@@ -20,7 +20,7 @@ static bool fprint_format_text_c( FILE* file,
       if ( move_to_char_c( sca, '{' ) )
       {
          cChars cs = make_chars_c( oldStr, sca->mem );
-         if ( not  fwrite_chars_c( file, cs ) )
+         if ( not  fput_chars_c( file, cs ) )
          {
             push_file_error_c( es, file );
             return false;
@@ -28,7 +28,7 @@ static bool fprint_format_text_c( FILE* file,
 
          if ( move_if_chars_c_( sca, "{{" ) )
          {
-            if ( not fwrite_chars_c( file, c_c( "{" ) ) )
+            if ( not fput_chars_c( file, c_c( "{" ) ) )
             {
                push_file_error_c( es, file );
                return false;
@@ -43,7 +43,7 @@ static bool fprint_format_text_c( FILE* file,
       {
          cChars cs = chars_c( sca->space, oldStr );
          move_scanner_c( sca, sca->space );
-         if ( not fwrite_chars_c( file, cs ) )
+         if ( not fput_chars_c( file, cs ) )
          {
             push_file_error_c( es, file );
             return false;
@@ -117,7 +117,7 @@ bool fprint_impl_c( FILE* file,
                }
             }
          }
-         if ( not fwrite_chars_c( file, recorded_chars_c( rec ) ) )
+         if ( not fput_chars_c( file, recorded_chars_c( rec ) ) )
          {
             return push_file_error_c( es, file );
          }
@@ -178,7 +178,7 @@ bool fprintln_impl_c( FILE* file,
    {
       return false;
    }
-   if ( not fwrite_chars_c( file, c_c( "\n" ) ) )
+   if ( not fput_chars_c( file, c_c( "\n" ) ) )
    {
       push_file_error_c( es, file );
       return false;

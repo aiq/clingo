@@ -25,7 +25,7 @@ int main( void )
 {
    init_tap_c_();
 
-   cChars path = c_c( "tmp-fread_line.txt" );
+   cChars path = c_c( "tmp-fget_line.txt" );
    cErrorStack* es = &error_stack_c_( 128 );
 
    require_c_( write_text_file_c( path, c_c( str ), es ) );
@@ -48,7 +48,7 @@ int main( void )
    int32_t const n = 8;
    cVarChars buf = char_buffer_c_( n );
    bool fin = false;
-   while ( fread_line_c( file, n, &buf, &fin ) )
+   while ( fget_line_c( file, n, &buf, &fin ) )
    {
        cChars chars = as_chars_c( buf );
        line l = lines.v[i];

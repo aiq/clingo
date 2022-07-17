@@ -87,7 +87,7 @@ int64_t file_size_c( FILE* file )
  
 *******************************************************************************/
 
-bool fread_bytes_c( FILE* file, cVarBytes buf[static 1] )
+bool fget_bytes_c( FILE* file, cVarBytes buf[static 1] )
 {
    must_exist_c_( file );
 
@@ -105,7 +105,7 @@ bool fread_bytes_c( FILE* file, cVarBytes buf[static 1] )
    return true;
 }
 
-bool fread_chars_c( FILE* file, cVarChars buf[static 1] )
+bool fget_chars_c( FILE* file, cVarChars buf[static 1] )
 {
    must_exist_c_( file );
 
@@ -123,10 +123,10 @@ bool fread_chars_c( FILE* file, cVarChars buf[static 1] )
    return true;
 }
 
-bool fread_line_c( FILE* file,
-                   int32_t n,
-                   cVarChars buf[static 1],
-                   bool fin[static 1] )
+bool fget_line_c( FILE* file,
+                  int32_t n,
+                  cVarChars buf[static 1],
+                  bool fin[static 1] )
 {
    must_exist_c_( file );
    must_be_in_range_c_( 4, n, INT_MAX );
@@ -161,7 +161,7 @@ bool fread_line_c( FILE* file,
  
 *******************************************************************************/
 
-bool fwrite_bytes_c( FILE* file, cBytes bytes )
+bool fput_bytes_c( FILE* file, cBytes bytes )
 {
    must_exist_c_( file );
 
@@ -174,7 +174,7 @@ bool fwrite_bytes_c( FILE* file, cBytes bytes )
    return res == size;
 }
 
-bool fwrite_chars_c( FILE* file, cChars chars )
+bool fput_chars_c( FILE* file, cChars chars )
 {
    must_exist_c_( file );
 
@@ -222,7 +222,7 @@ cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] )
       return invalidBytes;
    }
 
-   if ( not fread_bytes_c( file, &bytes ) )
+   if ( not fget_bytes_c( file, &bytes ) )
    {
       free( bytes.v );
       push_file_error_and_close( es, file );
@@ -268,7 +268,7 @@ cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] )
    }
 
    chars.s = size;
-   if ( not fread_chars_c( file, &chars ) )
+   if ( not fget_chars_c( file, &chars ) )
    {
       free( chars.v );
       push_file_error_and_close( es, file );
@@ -289,7 +289,7 @@ bool write_binary_file_c( cChars path, cBytes bytes, cErrorStack es[static 1] )
    FILE* file = wopen_file_c( path, es );
    if ( file == NULL ) return false;
 
-   if ( not fwrite_bytes_c( file, bytes ) )
+   if ( not fput_bytes_c( file, bytes ) )
    {
       return push_file_error_and_close( es, file );
    }
@@ -302,7 +302,7 @@ bool write_text_file_c( cChars path, cChars chars, cErrorStack es[static 1] )
    FILE* file = wopen_file_c( path, es );
    if ( file == NULL ) return false;
 
-   if ( not fwrite_chars_c( file, chars ) )
+   if ( not fput_chars_c( file, chars ) )
    {
       return push_file_error_and_close( es, file );
    }
