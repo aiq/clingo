@@ -43,9 +43,9 @@ SINGLE_ERROR_TYPE_C_(
 )
 
 SINGLE_ERROR_TYPE_C_(
-   C_NotEnoughSpaceError,
-   note_not_enough_space_error,
-   "not enough space"
+   C_NotEnoughBufferError,
+   note_not_enough_buffer_error,
+   "not enough buffer space"
 )
 
 /*******************************************************************************
