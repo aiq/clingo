@@ -1,5 +1,5 @@
 #include "clingo/io/FILE.h"
-#include "clingo/io/print.h"
+#include "clingo/io/fwrite.h"
 #include "clingo/lang/expect.h"
 
 TEMP_SLICE_DEF_C_(
@@ -15,14 +15,14 @@ int main( void )
 {
    init_tap_c_();
 
-   cChars path = c_c( "tmp-fprintln.txt" );
+   cChars path = c_c( "tmp-fwriteln.txt" );
    cErrorStack* es = &error_stack_c_( 128 );
 
    FILE* file = open_file_c( path, "wb", es );
    require_c_( file != NULL );
    testSlice tests = slice_c_( test,
       t_(
-         fprintln_c_( file, es, "{i64:q} in hex is {i64:xq}", int64_c_( 28 ), int64_c_( 28 ) ),
+         fwriteln_c_( file, es, "{i64:q} in hex is {i64:xq}", int64_c_( 28 ), int64_c_( 28 ) ),
          "'28' in hex is '1c'"
       ),
       t_( true, "" ) // last line
