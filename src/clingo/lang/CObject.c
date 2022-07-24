@@ -64,24 +64,25 @@ void release_all_c( int n, ... )
 
 CObject* release_c( CObject* obj )
 {
-   must_exist_c_( obj );
-
-   cObjectInfo* info = shift_to_info( obj );
-   if ( info->refs > 0 )
+   if( obj )
    {
-      info->refs -= 1;
-   }
-   if ( info->refs == 0 )
-   {
-      if ( has_c_( info->config, c_Cleanup ) and
-           info->meta->cleanup )
+      cObjectInfo* info = shift_to_info( obj );
+      if ( info->refs > 0 )
       {
-         info->meta->cleanup( obj );
+         info->refs -= 1;
       }
-      if ( has_c_( info->config, c_Release ) )
+      if ( info->refs == 0 )
       {
-         free( info );
-         return NULL;
+         if ( has_c_( info->config, c_Cleanup ) and
+              info->meta->cleanup )
+         {
+            info->meta->cleanup( obj );
+         }
+         if ( has_c_( info->config, c_Release ) )
+         {
+            free( info );
+            return NULL;
+         }
       }
    }
 
