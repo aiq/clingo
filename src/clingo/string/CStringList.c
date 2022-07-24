@@ -106,7 +106,7 @@ int64_t count_string_list_chars_c( CStringList const* list )
    for ( int64_t i = 0; i < info->count; ++i )
    {
       CString const* str = get_from_string_list_c( list, i );
-      result += string_chars_c( str ).s;
+      result += scs_c( str ).s;
    }
 
    return result;
@@ -158,12 +158,12 @@ CString* join_string_list_c( CStringList const* list, cChars sep )
 
    // record the result
    CString const* first = get_from_string_list_c( list, 0 );
-   record_chars_c( rec, string_chars_c( first ) );
+   record_chars_c( rec, scs_c( first ) );
    for ( int64_t i = 1; i < info->count; ++i )
    {
       record_chars_c( rec, sep );
       CString const* str = get_from_string_list_c( list, i );
-      record_chars_c( rec, string_chars_c( str ) );
+      record_chars_c( rec, scs_c( str ) );
    }
    record_char_c( rec, '\0' );
 

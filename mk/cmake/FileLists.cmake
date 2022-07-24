@@ -473,9 +473,9 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/string/CString/new_string.c
    ${TEST_DIR}/clingo/string/CString/new_sub_string.c
    ${TEST_DIR}/clingo/string/CString/right_string.c
+   ${TEST_DIR}/clingo/string/CString/scs.c
+   ${TEST_DIR}/clingo/string/CString/scstr.c
    ${TEST_DIR}/clingo/string/CString/str.c
-   ${TEST_DIR}/clingo/string/CString/string_chars.c
-   ${TEST_DIR}/clingo/string/CString/string_cstr.c
    ${TEST_DIR}/clingo/string/CString/string_is.c
    ${TEST_DIR}/clingo/string/CString/string_is_empty.c
    ${TEST_DIR}/clingo/string/CString/string_length.c

@@ -10,7 +10,7 @@ int main( void )
    CString* str = str_c( cstr );
 
    expect_c_( string_is_c( str, "banjo" ) );
-   expect_c_( string_cstr_c( str ) == cstr );
+   expect_c_( scstr_c( str ) == cstr );
 
    release_c( str );
 

@@ -190,13 +190,13 @@ int64_t string_byte_length_c( CString const* str )
    return str->chars.s;
 }
 
-cChars string_chars_c( CString const* str )
+cChars scs_c( CString const* str )
 {
    must_exist_c_( str );
    return str->chars;
 }
 
-char const* string_cstr_c( CString const* str )
+char const* scstr_c( CString const* str )
 {
    must_exist_c_( str );
    return str->chars.v;

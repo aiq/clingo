@@ -42,9 +42,9 @@ CLINGO_API bool is_ascii_string_c( CString const* str );
 
 CLINGO_API int64_t string_byte_length_c( CString const* str );
 
-CLINGO_API cChars string_chars_c( CString const* str );
+CLINGO_API cChars scs_c( CString const* str );
 
-CLINGO_API char const* string_cstr_c( CString const* str );
+CLINGO_API char const* scstr_c( CString const* str );
 
 CLINGO_API bool string_is_empty_c( CString const* str );
 
@@ -71,7 +71,7 @@ CLINGO_API bool string_is_c(  CString const* str, char const cstr[static 1] );
 
 CLINGO_API inline cChars left_string_c( CString const* s, int64_t maxLen )
 {
-   return left_chars_c( string_chars_c( s ), maxLen );
+   return left_chars_c( scs_c( s ), maxLen );
 }
 
 CLINGO_API inline CString* new_left_string_c( CString const* s, int64_t maxLen )
@@ -81,7 +81,7 @@ CLINGO_API inline CString* new_left_string_c( CString const* s, int64_t maxLen )
 
 CLINGO_API inline cChars mid_string_c( CString const* s, int64_t index )
 {
-   return mid_chars_c( string_chars_c( s ), index );
+   return mid_chars_c( scs_c( s ), index );
 }
 
 CLINGO_API inline CString* new_mid_string_c( CString const* s, int64_t index )
@@ -91,7 +91,7 @@ CLINGO_API inline CString* new_mid_string_c( CString const* s, int64_t index )
 
 CLINGO_API inline cChars right_string_c( CString const* s, int64_t maxLen )
 {
-   return right_chars_c( string_chars_c( s ), maxLen );
+   return right_chars_c( scs_c( s ), maxLen );
 }
 
 CLINGO_API inline CString* new_right_string_c( CString const* s, int64_t maxLen )
@@ -101,7 +101,7 @@ CLINGO_API inline CString* new_right_string_c( CString const* s, int64_t maxLen 
 
 CLINGO_API inline cChars sub_string_c( CString const* s, int64_t min, int64_t max )
 {
-   return sub_chars_c( string_chars_c( s ), min, max );
+   return sub_chars_c( scs_c( s ), min, max );
 }
 
 CLINGO_API inline CString* new_sub_string_c( CString const* s, int64_t min, int64_t max )

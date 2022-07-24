@@ -257,6 +257,6 @@ bool append_string_c( CStringBuilder* builder, CString const* str )
    must_exist_c_( builder );
    must_exist_c_( str );
 
-   return append( builder, string_chars_c( str ), string_length_c( str ) );
+   return append( builder, scs_c( str ), string_length_c( str ) );
 }
 
