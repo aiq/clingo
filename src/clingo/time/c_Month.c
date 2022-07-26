@@ -28,6 +28,8 @@ static int8_t const DaysPerMonthInLeapYear[ 12 ] = {
 
 extern inline bool int64_to_month_c( int64_t src, c_Month month[static 1] );
 
+extern inline bool uint64_to_month_c( uint64_t src, c_Month month[static 1] );
+
 char const* stringify_month_c( c_Month month )
 {
    switch( month ) 

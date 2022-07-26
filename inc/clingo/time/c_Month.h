@@ -46,6 +46,14 @@ CLINGO_API inline CONV_C_(
    c_Dec             // MaxValue
 )
 
+CLINGO_API inline CONV_C_(
+   uint64_to_month_c,   // FuncName
+   uint64_t,            // FromType
+   c_Month,             // ToType
+   c_Jan,               // MinValue
+   c_Dec                // MaxValue
+)
+
 CLINGO_API char const* stringify_month_c( c_Month month );
 
 /*******************************************************************************
