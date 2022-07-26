@@ -85,6 +85,12 @@ void release_all_c( int n, ... );
 CLINGO_API
 CObject* release_c( CObject* obj );
 
+#define replace_c_( Var, Obj )                                                 \
+{                                                                              \
+   release_c( Var );                                                           \
+   Var = retain_c( Obj );                                                      \
+}
+
 CLINGO_API
 CObject* retain_c( CObject* obj );
 
