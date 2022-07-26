@@ -37,7 +37,7 @@ cYmd ymd_c( int64_t year, int64_t month, int64_t day )
       return ymd;
    }
 
-   return (cYmd){ INT32_MIN, c_Dec, INT8_MIN };
+   return (cYmd){ INT32_MIN, c_Dec+1, INT8_MIN };
 }
 
 /*******************************************************************************

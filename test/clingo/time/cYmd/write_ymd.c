@@ -20,9 +20,11 @@ int main( void )
    set_locale_c( LC_TIME, "C" ); // For every system the same output
 
    cYmd ymd = ymd_c( 2013, c_Apr, 1 );
+   cYmd yxd = { 2022, c_Dec+1, 7 };
    testSlice tests = slice_c_( test,
       t_( ymd, "YYYYMMDD", "20130401" ),
-      t_( ymd, "YY-M-D", "13-4-1" )
+      t_( ymd, "YY-M-D", "13-4-1" ),
+      t_( yxd, "YY-M-D", "22-13-7" )
    );
 
    for_each_c_( test const*, t, tests )
