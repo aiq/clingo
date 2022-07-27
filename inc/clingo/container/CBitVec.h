@@ -34,6 +34,8 @@ CLINGO_API inline CBitVec* bit_vec_from_cstr_c( char const bitstr[static 1] )
    return bit_vec_from_chars_c( c_c( bitstr ) );
 }
 
+CLINGO_API bool resize_bit_vec_c( CBitVec* vec, int64_t n );
+
 /*******************************************************************************
  prop
 *******************************************************************************/
@@ -56,9 +58,9 @@ CLINGO_API int64_t rfind_index_of_bit_c( CBitVec const* vec,
  set
 *******************************************************************************/
 
-CLINGO_API void set_on_bit_vec_c( CBitVec* vec, int64_t pos, cByte bit );
+CLINGO_API bool set_on_bit_vec_c( CBitVec* vec, int64_t pos, cByte bit );
 
-CLINGO_API void set_range_on_bit_vec_c( CBitVec* vec, cRange range, cByte bit );
+CLINGO_API bool set_range_on_bit_vec_c( CBitVec* vec, cRange range, cByte bit );
 
 /*******************************************************************************
  logic

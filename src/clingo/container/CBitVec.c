@@ -145,8 +145,7 @@ CBitVec* new_bit_vec_c( int64_t n )
 
    if( result->bytes == NULL )
    {
-      release_c( result );
-      return NULL;
+      return release_c( result );
    }
 
    return result;
@@ -202,6 +201,22 @@ CBitVec* bit_vec_from_chars_c( cChars chars )
 }
 
 extern inline CBitVec* bit_vec_from_cstr_c( char const bitstr[static 1] );
+
+bool resize_bit_vec_c( CBitVec* vec, int64_t n )
+{
+   must_be_positive_c_( n );
+
+   int64_t numOfBytes = req_num_of_bytes( n );
+   cByte* bytes = realloc_array_c_( vec->bytes, numOfBytes, cByte );
+   if ( bytes == NULL ) return false;
+
+   vec->numOfBits = n;
+   vec->numOfBytes = numOfBytes;
+   vec->bytes = bytes;
+   vec->bitMask = bit_mask( bytes_offset( vec->numOfBits ) );
+
+   return true;
+}
 
 /*******************************************************************************
 
@@ -292,23 +307,45 @@ int64_t rfind_index_of_bit_c( CBitVec const* vec,
 
 *******************************************************************************/
 
-void set_on_bit_vec_c( CBitVec* vec, int64_t pos, cByte bit )
+bool set_on_bit_vec_c( CBitVec* vec, int64_t pos, cByte bit )
 {
    must_exist_c_( vec );
    must_be_positive_c_( pos );
-   must_be_c_( pos < vec->numOfBits );
+
+   if ( pos >= vec->numOfBits )
+   {
+      if ( byte_as_bit_c( bit ) == 0 ) return true;
+
+      if ( not resize_bit_vec_c( vec, pos+1 ) ) return false;
+   }
 
    cVarBytes bytes = var_bytes_c( vec->numOfBytes, vec->bytes );
    set_bytes_bit_c( bytes, pos, bit );
+   return true;
 }
 
-void set_range_on_bit_vec_c( CBitVec* vec, cRange range, cByte bit )
+bool set_range_on_bit_vec_c( CBitVec* vec, cRange range, cByte bit )
 {
    must_exist_c_( vec );
+
+   if ( range.max >= vec->numOfBits )
+   {
+      if ( byte_as_bit_c( bit ) == 0 )
+      {
+         if ( range.min >= vec->numOfBits ) return true;
+
+         range.max = vec->numOfBits-1;
+      }
+      else // bit == 1
+      {
+         if ( not resize_bit_vec_c( vec, range.max+1 ) ) return false;
+      }
+   }
 
    cVarBytes bytes = var_bytes_c( vec->numOfBytes, vec->bytes );
    set_bytes_bits_c( bytes, range, bit );
    mask_top_byte( vec );
+   return true;
 }
 
 /*******************************************************************************

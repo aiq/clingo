@@ -18,6 +18,10 @@ int main( void )
    set_on_bit_vec_c( vec, 14, 1 );
 
    expect_c_( bit_vec_is_c_( vec, "1001 1001 0011 001" ) );
+
+   set_on_bit_vec_c( vec, 19, 1 );
+
+   expect_c_( bit_vec_is_c_( vec, "1001 1001 0011 0010 0001" ) );
    
    release_c( vec );
 
