@@ -489,6 +489,19 @@ extern inline bool eq_bit_vec_c( CBitVec const* a, CBitVec const* b );
  io
 *******************************************************************************/
 
+static inline cRange find_set_range( CBitVec const* vec, int64_t from )
+{
+   must_exist_c_( vec );
+
+   int64_t beg = find_index_of_bit_c( vec, 1, from );
+   if ( beg == -1 ) return (cRange){ 0, -1 };
+
+   int64_t end = find_index_of_bit_c( vec, 0, beg );
+   if ( end == -1 ) end = bit_vec_size_c( vec );
+
+   return closed_open_range_c_( beg, end );
+}
+
 static inline bool write_zip_value( cRecorder rec[static 1],
                                     cByte val,
                                     int64_t n )
@@ -524,6 +537,38 @@ bool write_bit_vec_c( cRecorder rec[static 1],
 
    cChars const fmtCs = c_c( fmt );
    cRecordMarker* marker = &record_marker_c_( rec );
+   // --------------------------------------------------------------------- list
+   if ( chars_is_c( fmtCs, "list" ) )
+   {
+      once_c_( xyz )
+      {
+         cRange rng = find_set_range( vec, 0 );
+         bool withSep = false;
+         while ( range_is_valid_c( rng ) )
+         {
+            if ( withSep )
+            {
+               if ( not record_char_c( rec, ',' ) ) break;
+            }
+            if ( not write_int64_c_( rec, rng.min ) ) break;
+
+            if ( rng.min != rng.max )
+            {
+               if ( not record_char_c( rec, '-' ) ) break;
+            if ( not write_int64_c_( rec, rng.max ) ) break;
+            }
+
+            rng = find_set_range( vec, rng.max+1 );
+            withSep = true;
+         }
+
+         return true;
+      }
+
+      undo_record_c( marker );
+      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   }
+
    // ---------------------------------------------------------------------- zip
    if ( chars_is_c( fmtCs, "zip" ) )
    {

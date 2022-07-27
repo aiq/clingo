@@ -34,6 +34,9 @@ int main( void )
                         "1111ooo1" ),
       t_( vec1, "_I/12c", "____IIIIII _I | 12\n"
                           "I___IIII__ _I | 24" ),
+   // list
+      t_( vec1, "list", "4-9,11-12,16-19,23" ),
+      t_( vec2, "list", "1-2,4,6,8,12,14" ),
    // zip
       t_( vec1, "zip", "4z6i_2i3z4i3z+" ),
       t_( vec2, "zip", "_2i_+_+_+3z+_+" ),
