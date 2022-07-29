@@ -722,3 +722,252 @@ bool write_bit_vec_c( cRecorder rec[static 1],
 
    return res;
 }
+
+/******************************************************************************/
+
+static inline int64_t count_bit_str( cScanner sca[static 1],
+                                      int64_t size[static 1] )
+{
+   int64_t oldPos = sca->pos;
+   int64_t endPos = sca->pos;
+   int64_t num = 0;
+   while ( true )
+   {
+      if ( move_if_any_char_c_( sca, "0o1") )
+      {
+         endPos = sca->pos;
+         ++num;
+      }
+      else if ( move_if_char_match_c( sca, isspace ) )
+      {
+         // nothing to do
+      }
+      else
+      {
+         break;
+      }
+   }
+   int64_t len = endPos - oldPos;
+   *size = num;
+   move_scanner_to_c( sca, oldPos );
+   return len;
+}
+
+static inline void read_bit_str( cScanner sca[static 1], CBitVec* vec )
+{
+   int64_t i = 0;
+   while ( sca->space > 0 )
+   {
+      char c;
+      scan_char_c( sca, &c );
+      if ( is_bit_char( c ) )
+      {
+         if( c == '1' ) // BitVec is 0s by default -- just set the 1s
+         {
+            set_on_bit_vec_c( vec, i, char_as_bit( c ) );
+         }
+         ++i;
+      }
+   }
+}
+
+/******************************************************************************/
+
+static inline int64_t count_list_size( cScanner sca[static 1],
+                                       int64_t size[static 1] )
+{
+   int64_t oldPos = sca->pos;
+   int64_t endPos = sca->pos;
+   uint32_t num = 0;
+   while ( true )
+   {
+      move_while_char_match_c( sca, isspace );
+      if ( not read_uint32_c_( sca, &num ) ) break;
+
+      endPos = sca->pos;
+
+      move_while_char_match_c( sca, isspace );
+      if ( move_if_char_c( sca, '-' ) )
+      {
+         move_while_char_match_c( sca, isspace );
+         if ( not read_uint32_c_( sca, &num ) ) break;
+
+         endPos = sca->pos;
+      }
+
+      move_while_char_match_c( sca, isspace );
+      if ( not move_if_char_c( sca, ',') ) break;
+   }
+   int64_t len = endPos - oldPos;
+   *size = num;
+   move_scanner_to_c( sca, oldPos );
+   return len;
+}
+
+static inline void read_list( cScanner sca[static 1], CBitVec* vec )
+{
+   while ( sca->space > 0 )
+   {
+      uint32_t min = 0;
+      move_while_char_match_c( sca, isspace );
+      if ( !read_uint32_c_( sca, &min ) ) must_be_c_( false );
+
+      move_while_char_match_c( sca, isspace );
+      if ( move_if_char_c( sca, '-' ) )
+      {
+         move_while_char_match_c( sca, isspace );
+         uint32_t max = 0;
+         if ( !read_uint32_c_( sca, &max ) ) must_be_c_( false );
+
+         cRange rng = closed_range_c_( min, max );
+         set_range_on_bit_vec_c( vec, rng, 1 );
+      }
+      else
+      {
+         set_on_bit_vec_c( vec, min, 1 );
+      }
+
+      move_while_char_match_c( sca, isspace );
+      move_if_char_c( sca, ',' );
+   }
+}
+
+/******************************************************************************/
+
+static inline int64_t count_zip_size( cScanner sca[static 1],
+                                      int64_t size[static 1] )
+{
+   int64_t oldPos = sca->pos;
+   int64_t n = 0;
+   while ( true )
+   {
+      if ( move_if_any_char_c_( sca, "_+" ) )
+      {
+         ++n;
+      }
+      else if ( on_any_char_c_( sca, "123456789" ) )
+      {
+         int64_t tmpPos = sca->pos;
+         int64_t i;
+         read_int64_c_( sca, &i );
+         if ( not move_if_any_char_c_( sca, "iz" ) )
+         {
+            move_scanner_to_c( sca, tmpPos );
+            break;
+         }
+         n += i;
+      }
+      else
+      {
+         break;
+      }
+   }
+   int64_t len = sca->pos - oldPos;
+   *size = n;
+   move_scanner_to_c( sca, oldPos );
+   return len;
+}
+
+static inline void read_zip( cScanner sca[static 1], CBitVec* vec )
+{
+   int64_t i = 0;
+   while ( sca->space > 0 )
+   {
+      if ( move_if_char_c( sca, '_' ) )
+      {
+         // 0 must not set
+         ++i;
+      }
+      else if ( move_if_char_c( sca, '+' ) )
+      {
+         set_on_bit_vec_c( vec, i, 1 );
+         ++i;
+      }
+      else if ( on_any_char_c_( sca, "123456789" ) )
+      {
+         int64_t num;
+         if ( not read_int64_c_( sca, &num ) )
+         {
+            must_be_c_( false );
+         }
+         cRange rng = sized_range_c_( i, num );
+         i += num;
+         if ( move_if_char_c( sca, 'i' ) )
+         {
+            set_range_on_bit_vec_c( vec, rng, 1 );
+         } else if ( move_if_char_c( sca, 'z' ) )
+         {
+            // 0 must not set
+         }
+         else
+         {
+            must_be_c_( false );
+         }
+      }
+      else
+      {
+         must_be_c_( false );
+      }
+   }
+}
+
+/******************************************************************************/
+
+bool read_bit_vec_c( cScanner sca[static 1],
+                     CBitVec* vec[static 1],
+                     char const fmt[static 1] )
+{
+   cChars const fmtCs = c_c( fmt );
+   // --------------------------------------------------------------------------
+   if ( chars_is_c( fmtCs, "" ) )
+   {
+      int64_t size;
+      int64_t len = count_bit_str( sca, &size );
+      if ( size == 0 ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
+
+      cScanner* subSca = &sub_scanner_c_( sca, len );
+      *vec = new_bit_vec_c( size );
+      if ( vec == NULL )
+         return set_scanner_error_c( sca, c_InternalAllocError );
+
+      read_bit_str( subSca, *vec );
+      move_scanner_c( sca, len );
+      return true;
+   }
+
+   // --------------------------------------------------------------------- list
+   if ( chars_is_c( fmtCs, "list" ) )
+   {
+      int64_t size;
+      int64_t len = count_list_size( sca, &size );
+      if ( size == 0 ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
+
+      cScanner* subSca = &sub_scanner_c_( sca, len );
+      *vec = new_bit_vec_c( size );
+      if ( vec == NULL )
+         return set_scanner_error_c( sca, c_InternalAllocError );
+
+      read_list( subSca, *vec );
+      move_scanner_c( sca, len );
+      return true;
+   }
+
+   // ---------------------------------------------------------------------- zip
+   if ( chars_is_c( fmtCs, "zip" ) )
+   {
+      int64_t size;
+      int64_t len = count_zip_size( sca, &size );
+      if ( size == 0 ) return set_scanner_error_c( sca, c_NotAbleToReadValue );
+
+      cScanner* subSca = &sub_scanner_c_( sca, len );
+      *vec = new_bit_vec_c( size );
+      if ( vec == NULL )
+         return set_scanner_error_c( sca, c_InternalAllocError );
+
+      read_zip( subSca, *vec );
+      move_scanner_c( sca, len );
+      return true;
+   }
+
+  return set_scanner_error_c( sca, c_InvalidFormatString );
+}

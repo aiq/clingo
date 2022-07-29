@@ -3,6 +3,7 @@
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
+#include "clingo/io/cScanner.h"
 #include "clingo/lang/CObject.h"
 #include "clingo/type/cByte.h"
 #include "clingo/type/cRange.h"
@@ -116,7 +117,13 @@ CLINGO_API inline bool eq_bit_vec_c( CBitVec const* a, CBitVec const* b )
 #define write_bit_vec_c_( Rec, Vec )                                           \
    write_bit_vec_c( (Rec), (Vec), "" )
 CLINGO_API bool write_bit_vec_c( cRecorder rec[static 1],
-                      CBitVec const* vec,
-                      char const fmt[static 1] );
+                                 CBitVec const* vec,
+                                 char const fmt[static 1] );
+
+#define read_bit_vec_c_( Sca, Vec )                                            \
+   read_bit_vec_c( (Sca), (Vec), "" )
+CLINGO_API bool read_bit_vec_c( cScanner sca[static 1],
+                                CBitVec* vec[static 1],
+                                char const fmt[static 1] );
 
 #endif

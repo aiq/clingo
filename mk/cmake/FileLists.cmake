@@ -208,6 +208,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/container/CBitVec/copy_bit_vec.c
    ${TEST_DIR}/clingo/container/CBitVec/find_index_of_bit.c
    ${TEST_DIR}/clingo/container/CBitVec/popcount_bit_vec.c
+   ${TEST_DIR}/clingo/container/CBitVec/read_bit_vec.c
    ${TEST_DIR}/clingo/container/CBitVec/rfind_index_of_bit.c
    ${TEST_DIR}/clingo/container/CBitVec/set_on_bit_vec.c
    ${TEST_DIR}/clingo/container/CBitVec/set_range_on_bit_vec.c

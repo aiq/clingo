@@ -17,7 +17,8 @@
    XMAP_C_( c_NotEnoughRecorderSpace,  6, "not enough recorder space" )        \
    XMAP_C_( c_ToLargeFormatString,     7, "to large format string" )           \
    XMAP_C_( c_InvalidFormatString,     8, "invalid format string" )            \
-   XMAP_C_( c_CustomImpExpError,       9, "custom import/export error" )
+   XMAP_C_( c_InternalAllocError,      9, "allocation error" )                 \
+   XMAP_C_( c_CustomImpExpError,      10, "custom import/export error" )
 
 #define XMAP_C_( N, I, T ) N = I,
 enum c_ImpExpErrorCode { cREAD_WRITE_ERROR_CODE_ };
