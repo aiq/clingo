@@ -86,10 +86,10 @@ CString* new_string_c( char const cstr[static 1] );
 
 Creates a string that equals the C string cstr.
 
-==== str_c
+==== lit_c
 [source,c]
 ----
-CString* str_c( char const cstr[static 1] );
+CString* lit_c( char const cstr[static 1] );
 ----
 
 Creates a string that wraps cstr.

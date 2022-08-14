@@ -5,7 +5,7 @@ int main( void )
 {
    init_tap_c_();
 
-   CString* str = str_c( "something" );
+   CString* str = lit_c( "something" );
    CString* empty = empty_string_c();
    CString* nothing = new_string_c( "" );
 

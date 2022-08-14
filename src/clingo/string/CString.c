@@ -143,7 +143,7 @@ CString* make_string_c( cChars chars )
 
 /**************************************/
 
-CString* str_c( char const cstr[static 1] )
+CString* lit_c( char const cstr[static 1] )
 {
    must_exist_c_( cstr );
 

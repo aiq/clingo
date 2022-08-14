@@ -16,13 +16,13 @@ int main( void )
    expect_c_( info->count == 0 );
 
    add_cstr_to_string_list_c( list, "abc" );
-   add_to_string_list_c( list, str_c( "def" ) );
+   add_to_string_list_c( list, lit_c( "def" ) );
 
    expect_c_( not vec_is_empty_c( info ) );
    expect_c_( info->cap > 1 );
    expect_c_( info->count == 2 );
 
-   CString* arr[3]= { str_c( "bang" ), str_c( "bang" ), str_c( "bing" ) };
+   CString* arr[3]= { lit_c( "bang" ), lit_c( "bang" ), lit_c( "bing" ) };
    add_array_to_string_list_c( list, 3, arr );
 
    expect_c_( info->count == 5 );

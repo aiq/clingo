@@ -5,7 +5,7 @@ int main( void )
 {
    init_tap_c_();
 
-   CString* s = str_c( "Pineapple" );
+   CString* s = lit_c( "Pineapple" );
 
    cChars app = sub_string_c( s, 4, 7 );
    expect_c_( chars_is_c( app, "app" ) );

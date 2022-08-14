@@ -32,7 +32,7 @@ CLINGO_API CString* make_string_c( cChars chars );
 
 CLINGO_API CString* new_string_c( char const cstr[static 1] );
 
-CLINGO_API CString* str_c( char const cstr[static 1] );
+CLINGO_API CString* lit_c( char const cstr[static 1] );
 
 /*******************************************************************************
  prop

@@ -18,10 +18,10 @@ int main( void )
    CDictionary* dict = retain_c( make_dictionary_c( 4, 0.5f ) );
 
    inputSlice inputs = slice_c_( input,
-      i_( str_c( "Germany" ), str_c( "Deutschland" ) ),
-      i_( str_c( "Spain" ), str_c( "Spanien" ) ),
-      i_( str_c( "France" ), str_c( "Frankreich" ) ),
-      i_( str_c( "Germany" ), str_c( "Alemania" ) )
+      i_( lit_c( "Germany" ), lit_c( "Deutschland" ) ),
+      i_( lit_c( "Spain" ), lit_c( "Spanien" ) ),
+      i_( lit_c( "France" ), lit_c( "Frankreich" ) ),
+      i_( lit_c( "Germany" ), lit_c( "Alemania" ) )
    );
    for_each_c_( input const* ,i, inputs )
    {

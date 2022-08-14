@@ -5,15 +5,15 @@ int main( void )
 {
    init_tap_c_();
 
-   CString* ascii = str_c( "simple ascii text" );
+   CString* ascii = lit_c( "simple ascii text" );
    expect_c_( string_length_c( ascii ) == 17 );
    release_c( ascii );
 
-   CString* utf8 = str_c( "АᏂ 🚀 Ω" );
+   CString* utf8 = lit_c( "АᏂ 🚀 Ω" );
    expect_c_( string_length_c( utf8 ) == 6 );
    release_c( utf8 );
 
-   CString* euro = str_c( "€uro" );
+   CString* euro = lit_c( "€uro" );
    expect_c_( string_length_c( euro ) == 4 );
    release_c( euro );
 

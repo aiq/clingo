@@ -7,7 +7,7 @@ int main( void )
 
    char const* cstr = "banjo";
 
-   CString* str = str_c( cstr );
+   CString* str = lit_c( cstr );
 
    expect_c_( string_is_c( str, "banjo" ) );
    expect_c_( scstr_c( str ) == cstr );
