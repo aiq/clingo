@@ -16,18 +16,19 @@ int main( void )
 {
    init_tap_c_();
 
-   cErrorStack* es = &error_stack_c_( 248 );
+   cErrorStack* es = &error_stack_c_( 1024 );
    cRecorder* rec = &recorder_c_( 1024 );
 
    push_error_c_( es, &C_Eof );
-   push_lit_str_error_c( es, "file error" );
+   push_lit_error_c( es, "file error" );
    push_import_error_c( es, "some type" );
+   push_text_error_c_( es, "a custom text {i64}", 256 );
    write_error_c( rec, es->err, "" );
-   expect_recorded_( rec, "not able to import 'some type': file error: EOF" );
+   expect_recorded_( rec, "a custom text 256: not able to import 'some type': file error: EOF" );
 
    push_invalid_value_error_c( es, "other type" );
    write_error_c( rec, es->err, "" );
-   expect_recorded_( rec, "invalid 'other type' value: not able to import 'some type': file error: EOF" );
+   expect_recorded_( rec, "invalid 'other type' value: a custom text 256: not able to import 'some type': file error: EOF" );
 
    return finish_tap_c_();
 }

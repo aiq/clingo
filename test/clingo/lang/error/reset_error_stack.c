@@ -27,7 +27,7 @@ int main( void )
    reset_error_stack_c( es );
    expect_c_( mem == es->mem );
 
-   push_lit_str_error_c( es, "file error" );
+   push_lit_error_c( es, "file error" );
    push_import_error_c( es, "some type" );
    push_invalid_value_error_c( es, "other type" );
    push_error_c_( es, &C_Eof );

@@ -83,22 +83,6 @@ typedef struct cErrorStack cErrorStack;
 
 *******************************************************************************/
 
-CLINGO_API extern cErrorType const C_ErrnoError;
-
-struct cErrnoErrorData
-{
-   int number;
-};
-typedef struct cErrnoErrorData cErrnoErrorData;
-
-CLINGO_API extern cErrorType const C_LitError;
-
-struct cLitErrorData
-{
-   char const* str;
-};
-typedef struct cLitErrorData cLitErrorData;
-
 CLINGO_API extern cErrorType const C_InvalidInputError;
 
 CLINGO_API extern cErrorType const C_NotEnoughBufferError;
@@ -165,19 +149,35 @@ CLINGO_API bool push_error_c( cErrorStack es[static 1],
 CLINGO_API void reset_error_stack_c( cErrorStack es[static 1] );
 
 /*******************************************************************************
- push error
+ error types
 *******************************************************************************/
+
+CLINGO_API extern cErrorType const C_ErrnoError;
+
+typedef struct { int number; } cErrnoErrorData;
 
 CLINGO_API bool push_errno_error_c( cErrorStack es[static 1],
                                     int number );
 
-CLINGO_API bool push_lit_str_error_c( cErrorStack es[static 1],
-                                      char const cstr[static 1] );
+/******************************************************************************/
 
-#define push_str_error_c_( Es, ... )                                          \
-   push_str_error_c( (Es), nargs_c_( __VA_ARGS__ ), __VA_ARGS__)
-CLINGO_API bool push_str_error_c( cErrorStack es[static 1],
-                                  int n,
-                                  ... );
+CLINGO_API extern cErrorType const C_LitError;
+
+typedef struct { char const* str; } cLitErrorData;
+
+CLINGO_API bool push_lit_error_c( cErrorStack es[static 1],
+                                  char const cstr[static 1] );
+
+/******************************************************************************/
+
+CLINGO_API extern cErrorType const C_TextError;
+
+typedef struct { char const* str; } cTextErrorData;
+
+#define push_text_error_c_( Es, ... )                                          \
+   push_text_error_c( (Es), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+CLINGO_API bool push_text_error_c( cErrorStack es[static 1],
+                                   int n,
+                                   ... );
 
 #endif

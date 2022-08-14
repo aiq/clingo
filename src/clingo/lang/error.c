@@ -11,31 +11,6 @@
  Definitions
 *******************************************************************************/
 
-static bool note_errno_error( cRecorder rec[static 1], cError const* err )
-{
-   must_be_c_( err->type == &C_ErrnoError );
-   cErrnoErrorData const* errd = get_error_data_c( err );
-   char* errStr = strerror( errd->number );
-   if ( errStr == NULL ) return false;
-
-   return record_chars_c_( rec, errStr );
-}
-cErrorType const C_ErrnoError = {
-   .desc = stringify_c_( C_ErrnoError ),
-   .note = &note_errno_error
-};
-
-static bool note_lit_error( cRecorder rec[static 1], cError const* err )
-{
-   must_be_c_( err->type == &C_LitError );
-   cLitErrorData const* errd = get_error_data_c( err );
-   return record_chars_c_( rec, errd->str );
-}
-cErrorType const C_LitError = {
-   .desc = stringify_c_( C_LitError ),
-   .note = &note_lit_error
-};
-
 SINGLE_ERROR_TYPE_C_(
    C_InvalidInputError,
    note_invalid_input_error,
@@ -161,8 +136,22 @@ void reset_error_stack_c( cErrorStack es[static 1] )
 }
 
 /*******************************************************************************
- push error
+ error types
 *******************************************************************************/
+
+static bool note_errno_error( cRecorder rec[static 1], cError const* err )
+{
+   must_be_c_( err->type == &C_ErrnoError );
+   cErrnoErrorData const* errd = get_error_data_c( err );
+   char* errStr = strerror( errd->number );
+   if ( errStr == NULL ) return false;
+
+   return record_chars_c_( rec, errStr );
+}
+cErrorType const C_ErrnoError = {
+   .desc = stringify_c_( C_ErrnoError ),
+   .note = &note_errno_error
+};
 
 bool push_errno_error_c( cErrorStack es[static 1], int number )
 {
@@ -170,18 +159,52 @@ bool push_errno_error_c( cErrorStack es[static 1], int number )
    return push_error_c( es, &C_ErrnoError, &d, sizeof_c_( cErrnoErrorData ) );
 }
 
-bool push_lit_str_error_c( cErrorStack es[static 1], char const str[static 1] )
+/******************************************************************************/
+
+static bool note_lit_error( cRecorder rec[static 1], cError const* err )
+{
+   must_be_c_( err->type == &C_LitError );
+   cLitErrorData const* errd = get_error_data_c( err );
+   return record_chars_c_( rec, errd->str );
+}
+cErrorType const C_LitError = {
+   .desc = stringify_c_( C_LitError ),
+   .note = &note_lit_error
+};
+
+bool push_lit_error_c( cErrorStack es[static 1], char const str[static 1] )
 {
    cLitErrorData d = { .str=str };
    return push_error_c( es, &C_LitError, &d, sizeof_c_( cLitErrorData ) );
 }
 
-bool push_str_error_c( cErrorStack es[static 1], int n, ... )
+/******************************************************************************/
+
+static bool note_text_error( cRecorder rec[static 1], cError const* err )
+{
+   must_be_c_( err->type == &C_TextError );
+   cTextErrorData const* errd = get_error_data_c( err );
+   return record_chars_c_( rec, errd->str );
+}
+cErrorType const C_TextError = {
+   .desc = stringify_c_( C_TextError ),
+   .note = &note_text_error
+};
+
+bool push_text_error_c( cErrorStack es[static 1], int n, ... )
 {
    cRecorder* rec = &make_recorder_c_( es->space, es->mem );
    va_list list;
    va_start( list, n );
-   write_list_c( rec, n, list );
+   bool res = write_list_c( rec, n, list );
    va_end( list );
-   return false;
+   if ( res == false ) return false;
+
+   if ( not record_ends_c( rec ) ) return false;
+
+   es->space = rec->space;
+   es->mem = rec->mem;
+   reset_recorder_c( rec );
+   cTextErrorData d = { .str=rec->mem };
+   return push_error_c( es, &C_TextError, &d, sizeof_c_( cTextErrorData ) );
 }
