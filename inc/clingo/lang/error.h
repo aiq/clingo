@@ -28,12 +28,12 @@ cErrorType const Type = {                                                      \
    .note = &NoteFunc                                                           \
 };
 
-#define QUOTE_LIT_STR_ERROR_TYPE_C_( Type, NoteFunc, WriteText, PushFunc )     \
+#define QUOTE_LIT_ERROR_TYPE_C_( Type, NoteFunc, WriteText, PushFunc )         \
 static bool NoteFunc( cRecorder rec[static 1], cError const* err )             \
 {                                                                              \
    must_be_c_( err->type == &Type );                                           \
-   cLitStrErrorData const* errd = get_error_data_c( err );                     \
-   return write_c_( rec, WriteText, errd->str );                               \
+   cPtrErrorData const* errd = get_error_data_c( err );                        \
+   return write_c_( rec, WriteText, errd->ptr );                               \
 }                                                                              \
 cErrorType const Type = {                                                      \
    .desc = stringify_c_( Type ),                                               \
@@ -41,8 +41,8 @@ cErrorType const Type = {                                                      \
 };                                                                             \
 bool PushFunc( cErrorStack es[static 1], char const str[static 1] )            \
 {                                                                              \
-   cLitStrErrorData d = { .str=str };                                          \
-   return push_error_c( es, &Type, &d, sizeof_c_( cLitStrErrorData ) );        \
+   cPtrErrorData d = { .ptr=str };                                             \
+   return push_error_c( es, &Type, &d, sizeof_c_( cPtrErrorData ) );           \
 }
 
 /*******************************************************************************
@@ -93,11 +93,11 @@ typedef struct cErrnoErrorData cErrnoErrorData;
 
 CLINGO_API extern cErrorType const C_LitStrError;
 
-struct cLitStrErrorData
+struct cPtrErrorData
 {
-   char const* str;
+   void const* ptr;
 };
-typedef struct cLitStrErrorData cLitStrErrorData;
+typedef struct cPtrErrorData cPtrErrorData;
 
 CLINGO_API extern cErrorType const C_InvalidInputError;
 

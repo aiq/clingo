@@ -28,8 +28,8 @@ cErrorType const C_ErrnoError = {
 static bool note_lit_str_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_LitStrError );
-   cLitStrErrorData const* errd = get_error_data_c( err );
-   return record_chars_c_( rec, errd->str );
+   cPtrErrorData const* errd = get_error_data_c( err );
+   return record_chars_c_( rec, errd->ptr );
 }
 cErrorType const C_LitStrError = {
    .desc = stringify_c_( C_LitStrError ),
@@ -172,6 +172,6 @@ bool push_errno_error_c( cErrorStack es[static 1], int number )
 
 bool push_lit_str_error_c( cErrorStack es[static 1], char const str[static 1] )
 {
-   cLitStrErrorData d = { .str=str };
-   return push_error_c( es, &C_LitStrError, &d, sizeof_c_( cLitStrErrorData ) );
+   cPtrErrorData d = { .ptr=str };
+   return push_error_c( es, &C_LitStrError, &d, sizeof_c_( cPtrErrorData ) );
 }

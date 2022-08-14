@@ -10,7 +10,7 @@
 
 *******************************************************************************/
 
-QUOTE_LIT_STR_ERROR_TYPE_C_(
+QUOTE_LIT_ERROR_TYPE_C_(
    C_InvalidValueError,
    note_invalid_value_error,
    "invalid {s:q} value",

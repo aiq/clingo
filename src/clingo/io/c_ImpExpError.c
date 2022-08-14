@@ -32,14 +32,14 @@ cErrorType const C_ImpExpError = {
    .note = &note_imp_exp_error
 };
 
-QUOTE_LIT_STR_ERROR_TYPE_C_(
+QUOTE_LIT_ERROR_TYPE_C_(
    C_ImportError,
    note_import_error,
    "not able to import {s:q}",
    push_import_error_c
 )
 
-QUOTE_LIT_STR_ERROR_TYPE_C_(
+QUOTE_LIT_ERROR_TYPE_C_(
    C_ExportError,
    note_export_error,
    "not able to export {s:q}",
