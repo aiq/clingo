@@ -32,8 +32,8 @@ cErrorType const Type = {                                                      \
 static bool NoteFunc( cRecorder rec[static 1], cError const* err )             \
 {                                                                              \
    must_be_c_( err->type == &Type );                                           \
-   cPtrErrorData const* errd = get_error_data_c( err );                        \
-   return write_c_( rec, WriteText, errd->ptr );                               \
+   cLitErrorData const* errd = get_error_data_c( err );                        \
+   return write_c_( rec, WriteText, errd->str );                               \
 }                                                                              \
 cErrorType const Type = {                                                      \
    .desc = stringify_c_( Type ),                                               \
@@ -41,8 +41,8 @@ cErrorType const Type = {                                                      \
 };                                                                             \
 bool PushFunc( cErrorStack es[static 1], char const str[static 1] )            \
 {                                                                              \
-   cPtrErrorData d = { .ptr=str };                                             \
-   return push_error_c( es, &Type, &d, sizeof_c_( cPtrErrorData ) );           \
+   cLitErrorData d = { .str=str };                                             \
+   return push_error_c( es, &Type, &d, sizeof_c_( cLitErrorData ) );           \
 }
 
 /*******************************************************************************
@@ -91,13 +91,13 @@ struct cErrnoErrorData
 };
 typedef struct cErrnoErrorData cErrnoErrorData;
 
-CLINGO_API extern cErrorType const C_LitStrError;
+CLINGO_API extern cErrorType const C_LitError;
 
-struct cPtrErrorData
+struct cLitErrorData
 {
-   void const* ptr;
+   char const* str;
 };
-typedef struct cPtrErrorData cPtrErrorData;
+typedef struct cLitErrorData cLitErrorData;
 
 CLINGO_API extern cErrorType const C_InvalidInputError;
 
@@ -173,5 +173,11 @@ CLINGO_API bool push_errno_error_c( cErrorStack es[static 1],
 
 CLINGO_API bool push_lit_str_error_c( cErrorStack es[static 1],
                                       char const cstr[static 1] );
+
+#define push_str_error_c_( Es, ... )                                          \
+   push_str_error_c( (Es), nargs_c_( __VA_ARGS__ ), __VA_ARGS__)
+CLINGO_API bool push_str_error_c( cErrorStack es[static 1],
+                                  int n,
+                                  ... );
 
 #endif
