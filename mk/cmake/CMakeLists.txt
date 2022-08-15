@@ -28,6 +28,7 @@ include( ${CMAKE_CURRENT_SOURCE_DIR}/FileLists.cmake )
 # build - make
 ################################################################################
 add_library( ${LIB_NAME} SHARED ${SRC_FILES} )
+set_default_flags( ${LIB_NAME} )
 target_include_directories( ${LIB_NAME} PUBLIC ${INC_DIR} PRIVATE ${SRC_DIR} )
 if( WIN32 )
     target_link_libraries( ${LIB_NAME} )
