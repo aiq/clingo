@@ -113,18 +113,7 @@ WINDOW_DEF_C_(
 
 CLINGO_API inline int64_t clamp_into_range_c( cRange range, int64_t value )
 {
-   if ( value < range.min )
-   {
-      return range.min;
-   }
-   else if ( value > range.max )
-   {
-      return range.max;
-   }
-   else
-   {
-      return value;
-   }
+   return clamp_c_( range.min, value, range.max );
 }
 
 CLINGO_API inline bool eq_range_c( cRange a, cRange b )

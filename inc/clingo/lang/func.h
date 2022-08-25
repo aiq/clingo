@@ -117,6 +117,13 @@ for ( int64_t (Var) = 0; (Var) < (N); ++(Var) )
  num
 *******************************************************************************/
 
+#define clamp_c_( Min, Value, Max )                                            \
+(                                                                              \
+   (Value) < (Min) ? (Min)                                                     \
+                   : (Value) > (Max) ? (Max)                                   \
+                                     : (Value)                                 \
+)
+
 #define in_range_c_( Min, Value, Max )                                         \
 (                                                                              \
    ( ( (Value) >= (Min) ) and  ( (Value) <= (Max) ) )                          \
