@@ -99,13 +99,13 @@ CLINGO_API bool time_is_valid_c( cTime time );
 #define read_time_c_( Sca, Date )                                              \
    read_time_c( (Sca), (Date), "" )
 CLINGO_API bool read_time_c( cScanner sca[static 1],
-                  cTime time[static 1],
-                  char const fmt[static 1] );
+                             cTime time[static 1],
+                             char const fmt[static 1] );
 
 #define write_time_c_( Rec, Date )                                             \
    write_time_c( (Rec), (Date), "" )
 CLINGO_API bool write_time_c( cRecorder rec[static 1],
-                   cTime time,
-                   char const fmt[static 1] );
+                              cTime time,
+                              char const fmt[static 1] );
 
 #endif

@@ -35,10 +35,6 @@
    print_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
 CLINGO_API bool print_c( int n, ... );
 
-/*******************************************************************************
- println
-*******************************************************************************/
-
 #define println_c_( ... )                                                 \
    println_c( nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
 CLINGO_API bool println_c( int n, ... );
