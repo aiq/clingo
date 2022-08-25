@@ -5,6 +5,16 @@ set( INC_FILES
    ${INC_DIR}/clingo/apidecl.h
    ${INC_DIR}/clingo/version.h
 
+   ${INC_DIR}/clingo/color/cCmyk.h
+   ${INC_DIR}/clingo/color/cCmyk32.h
+   ${INC_DIR}/clingo/color/cColor.h
+   ${INC_DIR}/clingo/color/cHsl.h
+   ${INC_DIR}/clingo/color/cHsv.h
+   ${INC_DIR}/clingo/color/cP3Creator.h
+   ${INC_DIR}/clingo/color/cRgb.h
+   ${INC_DIR}/clingo/color/cRgb24.h
+   ${INC_DIR}/clingo/color/image.h
+
    ${INC_DIR}/clingo/container/CBitVec.h
    ${INC_DIR}/clingo/container/CByteVec.h
    ${INC_DIR}/clingo/container/CInt64Map.h
@@ -103,6 +113,16 @@ set( SRC_FILES
    ${SRC_DIR}/_/time/util.c
    ${SRC_DIR}/_/time/write_time_util.c
 
+   ${SRC_DIR}/clingo/color/cCmyk.c
+   ${SRC_DIR}/clingo/color/cCmyk32.c
+   ${SRC_DIR}/clingo/color/cColor.c
+   ${SRC_DIR}/clingo/color/cHsl.c
+   ${SRC_DIR}/clingo/color/cHsv.c
+   ${SRC_DIR}/clingo/color/cP3Creator.c
+   ${SRC_DIR}/clingo/color/cRgb.c
+   ${SRC_DIR}/clingo/color/cRgb24.c
+   ${SRC_DIR}/clingo/color/image.c
+
    ${SRC_DIR}/clingo/container/CBitVec.c
    ${SRC_DIR}/clingo/container/CByteVec.c
    ${SRC_DIR}/clingo/container/CInt64Map.c
@@ -196,6 +216,68 @@ set( TEST_FILES
    ${TEST_DIR}/_/io/write_num/write_oct.c
    ${TEST_DIR}/_/algo/sum.c
 ]]
+   ####################################################################### color
+   # cCmyk
+   ${TEST_DIR}/clingo/color/cCmyk/cmyk_from_cmyk32.c
+   ${TEST_DIR}/clingo/color/cCmyk/cmyk32_from_cmyk.c
+   ${TEST_DIR}/clingo/color/cCmyk/eq_cmyk.c
+   #${TEST_DIR}/clingo/color/cCmyk/read_cmyk.c
+   #${TEST_DIR}/clingo/color/cCmyk/write_cmyk.c
+
+   # cCmyk32
+   #${TEST_DIR}/clingo/color/cCmyk32/eq_cmyk32.c
+   #${TEST_DIR}/clingo/color/cCmyk32/read_cmyk32.c
+   #${TEST_DIR}/clingo/color/cCmyk32/write_cmyk32.c
+
+   # cColor
+   ${TEST_DIR}/clingo/color/cColor/as_cmyk.c
+   ${TEST_DIR}/clingo/color/cColor/as_cmyk32.c
+   ${TEST_DIR}/clingo/color/cColor/as_hsl.c
+   ${TEST_DIR}/clingo/color/cColor/as_hsv.c
+   ${TEST_DIR}/clingo/color/cColor/as_rgb.c
+   ${TEST_DIR}/clingo/color/cColor/average_color.c
+   ${TEST_DIR}/clingo/color/cColor/color_luma.c
+   ${TEST_DIR}/clingo/color/cColor/contrast_color.c
+   ${TEST_DIR}/clingo/color/cColor/darken_color.c
+   ${TEST_DIR}/clingo/color/cColor/desaturate_color.c
+   ${TEST_DIR}/clingo/color/cColor/difference_color.c
+   ${TEST_DIR}/clingo/color/cColor/eq_color.c
+   ${TEST_DIR}/clingo/color/cColor/exclusion_color.c
+   ${TEST_DIR}/clingo/color/cColor/fade_color.c
+   ${TEST_DIR}/clingo/color/cColor/from_cmyk.c
+   ${TEST_DIR}/clingo/color/cColor/from_cmyk32.c
+   ${TEST_DIR}/clingo/color/cColor/from_hsl.c
+   ${TEST_DIR}/clingo/color/cColor/from_hsv.c
+   ${TEST_DIR}/clingo/color/cColor/from_rgb.c
+   ${TEST_DIR}/clingo/color/cColor/greyscale_color.c
+   ${TEST_DIR}/clingo/color/cColor/hardlight_color.c
+   ${TEST_DIR}/clingo/color/cColor/lighten_color.c
+   ${TEST_DIR}/clingo/color/cColor/mix_color.c
+   ${TEST_DIR}/clingo/color/cColor/multiply_color.c
+   ${TEST_DIR}/clingo/color/cColor/negation_color.c
+   ${TEST_DIR}/clingo/color/cColor/overlay_color.c
+   #${TEST_DIR}/clingo/color/cColor/read_color.c
+   ${TEST_DIR}/clingo/color/cColor/saturate_color.c
+   ${TEST_DIR}/clingo/color/cColor/screen_color.c
+   ${TEST_DIR}/clingo/color/cColor/softlight_color.c
+   ${TEST_DIR}/clingo/color/cColor/spin_color.c
+   #${TEST_DIR}/clingo/color/cColor/write_color.c
+
+   # cP3Creator
+   ${TEST_DIR}/clingo/color/cP3Creator/cP3Creator-overview.c
+
+   # cRgb
+   #${TEST_DIR}/clingo/color/cRgb/eq_rgb.c
+   #${TEST_DIR}/clingo/color/cRgb/read_rgb.c
+   #${TEST_DIR}/clingo/color/cRgb/rgb_from_rgb24.c
+   #${TEST_DIR}/clingo/color/cRgb/rgb24_from_rgb.c
+   #${TEST_DIR}/clingo/color/cRgb/write_rgb.c
+
+   # cRgb24
+   #${TEST_DIR}/clingo/color/cRgb/eq_rgb24.c
+   #${TEST_DIR}/clingo/color/cRgb/read_rgb24.c
+   #${TEST_DIR}/clingo/color/cRgb/write_rgb24.c
+
    ################################################################### container
    # CBitVec
    ${TEST_DIR}/clingo/container/CBitVec/bit_vec_from_cstr.c
