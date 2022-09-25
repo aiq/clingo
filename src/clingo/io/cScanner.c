@@ -663,7 +663,7 @@ cChars view_pad_c( cScanner sca[static 1], char pad )
 
    if ( sca->space == 0 )
    {
-      return empty_chars_c();
+      return (cChars)empty_c_();
    }
 
    cChars chars = unscanned_chars_c_( sca );
@@ -678,7 +678,7 @@ cChars view_pad_c( cScanner sca[static 1], char pad )
    int64_t const offset = tmp - sca->mem;
    move_scanner_c( sca, offset );
 
-   return chars_c( offset, begin_c_( chars ) );
+   return (cChars){ offset, begin_c_( chars ) };
 }
 
 cChars view_runes_c( cScanner sca[static 1], int64_t size )
@@ -689,7 +689,7 @@ cChars view_runes_c( cScanner sca[static 1], int64_t size )
    cChars res = left_runes_c( unscanned, size );
    if ( count_runes_c( res ) != size )
    {
-      return empty_chars_c();
+      return (cChars)empty_c_();
    }
 
    move_scanner_c( sca, res.s );

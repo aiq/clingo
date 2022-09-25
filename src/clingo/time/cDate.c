@@ -14,14 +14,6 @@
 
 static const int64_t NullDateValue = INT64_MIN;
 
-SLICE_IMPL_C_(
-   cDate,            // Type
-   cDateSlice,       // SliceType
-   date_slice_c,     // FuncName
-   cVarDateSlice,    // VarSliceType
-   var_date_slice_c  // VarFuncName
-)
-
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************

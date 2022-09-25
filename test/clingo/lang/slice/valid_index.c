@@ -6,7 +6,7 @@ int main( void )
 {
    init_tap_c_();
 
-   cChars empty = empty_chars_c();
+   cChars empty = empty_c_();
    expect_c_( !valid_index_c_( empty, 0 ) );
    expect_c_( !valid_index_c_( empty, 1 ) );
 

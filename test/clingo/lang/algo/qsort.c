@@ -4,7 +4,7 @@
 
 #define expect_( VarChars, Exp )                                               \
    expect_c_(                                                                  \
-      chars_is_c( as_chars_c( VarChars ), (Exp) )                              \
+      chars_is_c( as_c_( cChars, VarChars ), (Exp) )                           \
    )
 
 int main( void )

@@ -305,8 +305,8 @@ struct VecType;                                                                \
 typedef struct VecType VecType;                                                \
 LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
-LibApi VecType* make_##FuncSuffix( int64_t size );                             \
-LibApi VecType* new_##FuncSuffix();                                            \
+LibApi VecType* make_##FuncSuffix( int64_t cap );                              \
+LibApi VecType* new_##FuncSuffix( void );                                      \
 /**************************************/                                       \
 LibApi ObjType* const* data_of_##FuncSuffix( VecType const* vec );             \
 LibApi ObjType** var_data_of_##FuncSuffix( VecType* vec );                     \
@@ -404,14 +404,15 @@ LibApi void set_on_##FuncSuffix( VecType* vec, int64_t pos, ValType val );
 /**********************************************************/
 
 #define VAL_VEC_IMPL_C_(                                                       \
-   Static, VecType, ValType, FuncSuffix, Meta                                  \
+   Static, VecType, ValType, FuncSuffix, Meta, InDepthCleanup                  \
 )                                                                              \
 /**************************************/                                       \
 VEC_STRUCT_C_( VecType, ValType )                                              \
 /**************************************/                                       \
 static inline void cleanup_##FuncSuffix( void* instance )                      \
 {                                                                              \
-   struct VecType* vec = instance;                                             \
+   VecType* vec = instance;                                                    \
+   InDepthCleanup( vec );                                                      \
                                                                                \
    if ( vec->data )                                                            \
    {                                                                           \

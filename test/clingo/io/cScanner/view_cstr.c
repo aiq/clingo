@@ -5,7 +5,7 @@
    expect_eq_c_(                                                               \
       cmp_bytes_c(                                                             \
          (Slice),                                                              \
-         bytes_c( (Slice).s, (cByte[]){ __VA_ARGS__ } )                        \
+         (cBytes){ (Slice).s, (cByte[]){ __VA_ARGS__ } }                       \
       )                                                                        \
    )
 

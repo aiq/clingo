@@ -15,29 +15,7 @@
 SLICE_DEF_C_(
    cByte,         // Type
    cBytes,        // SliceType
-   bytes_c,       // FuncName
-   cVarBytes,     // VarSliceType
-   var_bytes_c    // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   cByte,            // Type
-   cByteChunk,       // ChunkType
-   cBytes,           // SliceType
-   byte_chunk_c,     // FuncName
-   cVarByteChunk,    // VarChunkType
-   cVarBytes,        // VarSliceType
-   var_byte_chunk_c  // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   cByte,            // Type
-   cByteWindow,      // WindowType
-   cBytes,           // SliceType
-   byte_window_c,    // FuncName
-   cVarByteWindow,   // VarWindowType
-   cVarBytes,        // VarSliceType
-   var_byte_window_c // VarFuncName
+   cVarBytes      // VarSliceType
 )
 
 /*******************************************************************************

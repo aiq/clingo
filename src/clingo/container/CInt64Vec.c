@@ -5,11 +5,12 @@
 *******************************************************************************/
 
 VAL_VEC_IMPL_C_(
-   ,              // Static
-   CInt64Vec,     // VecType
-   int64_t,       // ValType
-   int64_vec_c,   // FuncName
-   C_Int64VecMeta // Meta
+   ,                 // Static
+   CInt64Vec,        // VecType
+   int64_t,          // ValType
+   int64_vec_c,      // FuncName
+   C_Int64VecMeta,   // Meta
+   do_nothing_c_     // InDepthCleanup
 )
 
 /*******************************************************************************

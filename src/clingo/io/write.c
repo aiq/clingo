@@ -22,7 +22,7 @@ static bool write_format_text_c( cRecorder rec[static 1],
       char const* oldStr = sca->mem;
       if ( move_to_char_c( sca, '{' ) )
       {
-         cChars cs = make_chars_c( oldStr, sca->mem );
+         cChars cs = atween_c_( oldStr, (char const*)sca->mem );
          if ( not record_chars_c( rec, cs ) )
          {
             return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
@@ -42,7 +42,7 @@ static bool write_format_text_c( cRecorder rec[static 1],
       }
       else
       {
-         cChars cs = chars_c( sca->space, oldStr );
+         cChars cs = { sca->space, oldStr };
          move_scanner_c( sca, sca->space );
          return record_chars_c( rec, cs )
             ? true

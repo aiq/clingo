@@ -185,7 +185,7 @@ static bool append( CStringBuilder* builder, cChars chars, int64_t len )
 
    if ( rec->space < chars.s+1 )
    {
-      int64_t oldSize = max_c_( recorder_cap_c( rec ), chars.s );
+      int64_t oldSize = imax64_c( recorder_cap_c( rec ), chars.s );
       int64_t const newSize = oldSize * 2;
       if ( not realloc_recorder_mem_c( rec, newSize ) )
       {
@@ -212,7 +212,7 @@ bool append_char_c( CStringBuilder* builder, char c )
 {
    must_exist_c_( builder );
 
-   return append( builder, chars_c( 1, &c ), 1 );
+   return append( builder, (cChars){ 1, &c }, 1 );
 }
 
 bool append_chars_c( CStringBuilder* builder, cChars chars )
@@ -248,7 +248,7 @@ bool append_rune_c( CStringBuilder* builder, cRune rune )
       return false;
    }
 
-   cChars cs = chars_c( rune_size_c( rune ), rune.c );
+   cChars cs = { rune_size_c( rune ), rune.c };
    return append( builder, cs, 1 );
 }
 

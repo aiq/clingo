@@ -27,7 +27,7 @@ CLINGO_API
 inline void init_chars_token_c( cCharsToken tok[static 1], cChars chars )
 {
    *tok = (cCharsToken){
-      .x = chars_c( 0, chars.v ),
+      .x = (cChars){ 0, chars.v },
       .tail = chars
    };
 }

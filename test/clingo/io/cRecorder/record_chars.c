@@ -27,7 +27,7 @@ int main( void )
    expect_c_( rec->space == 3 );
 
    // --------------------------------------------- fill recorder with sub chars
-   cChars subChars = left_chars_c( defg, rec->space );
+   cChars subChars = left_c_( cChars, defg, rec->space );
    expect_c_( record_chars_c( rec, subChars ) );
    expect_c_( rec->pos == 6 );
    expect_c_( rec->space == 0 );

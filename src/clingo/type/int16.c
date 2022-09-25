@@ -5,38 +5,6 @@
 #include "clingo/lang/algo.h"
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-********************************************************************************
- generated
-*******************************************************************************/
-
-SLICE_IMPL_C_(
-   int16_t,             // Type
-   cInt16Slice,         // SliceType
-   int16_slice_c,       // FuncName
-   cVarInt16Slice,      // VarSliceType
-   var_int16_slice_c    // VarFuncName
-)
-
-CHUNK_IMPL_C_(
-   cInt16Chunk,         // ChunkType
-   cInt16Slice,         // SliceType
-   int16_chunk_c,       // FuncName
-   cVarInt16Chunk,      // VarChunkType
-   cVarInt16Slice,      // VarSliceType
-   var_int16_chunk_c    // VarFuncName
-)
-
-WINDOW_IMPL_C_(
-   cInt16Window,        // WindowType
-   cInt16Slice,         // SliceType
-   int16_window_c,      // FuncName
-   cVarInt16Window,     // VarWindowType
-   cVarInt16Slice,      // VarSliceType
-   var_int16_window_c   // VarFuncName
-)
-
-/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  overall

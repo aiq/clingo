@@ -15,7 +15,7 @@ int main( void )
    init_tap_c_();
 
    testSlice tests = slice_c_( test,
-      t_( empty_date_slice_c(), null_date_period_c() ),
+      t_( (cDateSlice)empty_c_(), null_date_period_c() ),
       t_(
          slice_c_( cDate, date_c( 2020, 11, 30 ) ),
          single_date_period_c( date_c( 2020, 11, 30 ) )

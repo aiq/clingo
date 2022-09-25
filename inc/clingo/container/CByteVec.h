@@ -36,20 +36,20 @@ CLINGO_API inline cBytes byte_vec_bytes_c( CByteVec const* vec )
 {
    must_exist_c_( vec );
 
-   return bytes_c(
+   return (cBytes){
       info_of_byte_vec_c( vec )->count,
       data_of_byte_vec_c( vec )
-   );
+   };
 }
 
 CLINGO_API inline cVarBytes byte_vec_var_bytes_c( CByteVec* vec )
 {
    must_exist_c_( vec );
 
-   return var_bytes_c(
+   return (cVarBytes){
       info_of_byte_vec_c( vec )->count,
       var_data_of_byte_vec_c( vec )
-   );
+   };
 }
 
 /*******************************************************************************

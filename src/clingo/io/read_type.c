@@ -466,7 +466,7 @@ bool read_chars_c( cScanner sca[static 1],
    {
       return false;
    }
-   *chars = make_chars_c( beg, sca->mem );
+   *chars = (cChars)atween_c_( beg, (char const*)sca->mem );
 
    return true;
 }

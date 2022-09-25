@@ -24,9 +24,7 @@ typedef struct cDatePeriod cDatePeriod;
 SLICE_DEF_C_(
    cDatePeriod,            // Type
    cDatePeriodSlice,       // SliceType
-   date_period_slice_c,    // FuncName
-   cVarDatePeriodSlice,    // VarSliceType
-   var_date_period_slice_c // VarFuncName
+   cVarDatePeriodSlice     // VarSliceType
 )
 
 /*******************************************************************************

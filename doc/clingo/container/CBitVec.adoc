@@ -1,5 +1,5 @@
 = CBitVec
-:xmpldir: ../../../test/clingo/container/CBitVec
+:xmpldir: {testroot}/clingo/container/CBitVec
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -87,6 +87,15 @@ space characters will be ignored.
 ----
 include::{xmpldir}/bit_vec_from_cstr.c[]
 ----
+
+==== resize_bit_vec_c
+[source,c]
+----
+bool resize_bit_vec_c( CBitVec* vec, int64_t n );
+----
+
+Reduces or expands the number of bits that can be stored inside the CBitVec
+instance.
 
 //************************************************************************ prop
 === prop
@@ -355,6 +364,16 @@ equal.
 
 //************************************************************************** io
 === io
+
+==== read_bit_vec_c
+[source,c]
+----
+#define read_bit_vec_c_( Sca, Vec )                                            \
+   read_bit_vec_c( (Sca), (Vec), "" )
+bool read_bit_vec_c( cScanner sca[static 1],
+                     CBitVec* vec[static 1],
+                     char const fmt[static 1] );
+----
 
 ==== write_bit_vec_c
 [source,c]

@@ -2,8 +2,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/type/cChars.h"
 
-//-------------------- Type,       WindowType, SliceType,   FuncSuffix
-STATIC_BACK_WINDOW_C_( char const, charWindow, cChars,      char_window )
+WINDOW_C_( char const, cChars, charWindow )
 
 int main( void )
 {
@@ -11,8 +10,7 @@ int main( void )
 
    cChars abcdef = c_c( "abcdef" );
 
-   charWindow window;
-   init_back_char_window( &window, 3, abcdef ); // ------------------------- def
+   charWindow window = back_window_c_( 3, abcdef ); // --------------------- def
    expect_c_( valid_window_c_( window ) );
    expect_c_( first_c_( window ) == 'd' );
    expect_c_( last_c_( window ) == 'f' );

@@ -18,29 +18,7 @@
 SLICE_DEF_C_(
    uint16_t,            // Type
    cUint16Slice,        // SliceType
-   uint16_slice_c,      // FuncName
-   cVarUint16Slice,     // VarSliceType
-   var_uint16_slice_c   // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   uint16_t,            // Type
-   cUint16Chunk,        // ChunkType
-   cUint16Slice,        // SliceType
-   uint16_chunk_c,      // FuncName
-   cVarUint16Chunk,     // VarChunkType
-   cVarUint16Slice,     // VarSliceType
-   var_uint16_chunk_c   // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   uint16_t,            // Type
-   cUint16Window,       // WindowType
-   cUint16Slice,        // SliceType
-   uint16_window_c,     // FuncName
-   cVarUint16Window,    // VarWindowType
-   cVarUint16Slice,     // VarSliceType
-   var_uint16_window_c  // VarFuncName
+   cVarUint16Slice      // VarSliceType
 )
 
 /*******************************************************************************

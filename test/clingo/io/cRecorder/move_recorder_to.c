@@ -9,7 +9,7 @@ int main( void )
    init_tap_c_();
 
    cRecorder* rec = &recorder_c_( 10 );
-   cChars mem = chars_c( rec->space, rec->mem );
+   cChars mem = { rec->space, rec->mem };
 
    record_pad_c( rec, '_', 10 );
    expect_c_( rec->pos == 10 );

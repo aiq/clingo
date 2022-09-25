@@ -11,36 +11,6 @@
 #include "clingo/type/uint16.h"
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-*******************************************************************************/
-
-SLICE_IMPL_C_(
-   double,              // Type
-   cDoubleSlice,        // SliceType
-   double_slice_c,      // FuncName
-   cVarDoubleSlice,     // VarSliceType
-   var_double_slice_c   // VarFuncName
-)
-
-CHUNK_IMPL_C_(
-   cDoubleChunk,        // ChunkType
-   cDoubleSlice,        // SliceType
-   double_chunk_c,      // FuncName
-   cVarDoubleChunk,     // VarChunkType
-   cVarDoubleSlice,     // VarSliceType
-   var_double_chunk_c   // VarFuncName
-)
-
-WINDOW_IMPL_C_(
-   cDoubleWindow,       // WindowType
-   cDoubleSlice,        // SliceType
-   double_window_c,     // FuncName
-   cVarDoubleWindow,    // VarWindowType
-   cVarDoubleSlice,     // VarSliceType
-   var_double_window_c  // VarFuncName
-)
-
-/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  overall

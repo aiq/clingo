@@ -24,9 +24,7 @@ typedef struct cRgb cRgb;
 SLICE_DEF_C_(
    cRgb,             // Type
    cRgbSlice,        // SliceType
-   rgb_slice_c,      // FuncName
-   cVarRgbSlice,     // VarSliceType
-   var_rgb_slice_c   // VarFuncName
+   cVarRgbSlice      // VarSliceType
 )
 
 /*******************************************************************************

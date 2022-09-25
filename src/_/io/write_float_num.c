@@ -67,7 +67,7 @@ bool write_float_num_c( cRecorder rec[static 1],
       }
    }
 
-   cVarChars numBuf = mid_var_chars_c( valBuf, len );
+   cVarChars numBuf = mid_c_( cVarChars, valBuf, len );
    size_t size;
    if ( not int64_to_size_c( numBuf.s, &size ) ) return false;
     
@@ -82,7 +82,7 @@ bool write_float_num_c( cRecorder rec[static 1],
    valBuf.s = len;
 
    // write the value in cell or plain -----------------------------------------
-   cChars valChars = as_chars_c( valBuf );
+   cChars valChars = as_c_( cChars, valBuf );
    if ( numFmt.cell.size > 0 )
    {
       return write_ascii_into_cell_c( rec, valChars, &numFmt.cell );

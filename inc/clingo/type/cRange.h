@@ -31,29 +31,7 @@ typedef struct cRange cRange;
 SLICE_DEF_C_(
    cRange,           // Type
    cRangeSlice,      // SliceType
-   range_slice_c,    // FuncName
-   cVarRangeSlice,   // VarSliceType
-   var_range_slice_c // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   cRange,           // Type
-   cRangeChunk,      // ChunkType
-   cRangeSlice,      // SliceType
-   range_chunk_c,    // FuncName
-   cVarRangeChunk,   // VarChunkType
-   cVarRangeSlice,   // VarSliceType
-   var_range_chunk_c // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   cRange,              // Type
-   cRangeWindow,        // WindowType
-   cRangeSlice,         // SliceType
-   range_window_c,      // FuncName
-   cVarRangeWindow,     // VarWindowType
-   cVarRangeSlice,      // VarSliceType
-   var_range_window_c   // VarFuncName
+   cVarRangeSlice    // VarSliceType
 )
 
 /*******************************************************************************

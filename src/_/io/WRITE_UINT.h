@@ -33,12 +33,12 @@ bool FuncName( cRecorder rec[static 1],                                        \
    }                                                                           \
                                                                                \
    /* optional sign ------------------------------------------------------- */ \
-   cVarChars numBuf = mid_var_chars_c( valBuf, len );                          \
+   cVarChars numBuf = mid_c_( cVarChars, valBuf, len );                        \
    if ( numFmt.sign and not numFmt.memory )                                    \
    {                                                                           \
       *(numBuf.v) = '+';                                                       \
       ++len;                                                                   \
-      numBuf = mid_var_chars_c( numBuf, 1 );                                   \
+      numBuf = mid_c_( cVarChars, numBuf, 1 );                                 \
    }                                                                           \
                                                                                \
    /* value --------------------------------------------------------------- */ \
@@ -76,7 +76,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
    valBuf.s = len;                                                             \
                                                                                \
    /* write the value in cell or plain ------------------------------------ */ \
-   cChars valChars = as_chars_c( valBuf );                                     \
+   cChars valChars = as_c_( cChars, valBuf );                                  \
                                                                                \
    if ( numFmt.cell.size > 0 )                                                 \
    {                                                                           \

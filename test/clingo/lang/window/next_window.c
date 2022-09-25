@@ -2,14 +2,15 @@
 #include "clingo/lang/window.h"
 #include "clingo/type/cChars.h"
 
+WINDOW_C_( char const, cChars, cCharWindow )
+
 int main( void )
 {
    init_tap_c_();
 
    cChars abcdef = c_c( "abcdef" );
 
-   cCharWindow window;
-   init_front_char_window_c( &window, 3, abcdef ); // ---------------------- abc
+   cCharWindow window = front_window_c_( 3, abcdef); // -------------------- abc
    expect_c_( valid_window_c_( window ) );
    expect_c_( first_c_( window ) == 'a' );
    expect_c_( last_c_( window ) == 'c' );

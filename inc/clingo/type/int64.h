@@ -18,29 +18,7 @@
 SLICE_DEF_C_(
    int64_t,             // Type
    cInt64Slice,         // SliceType
-   int64_slice_c,       // FuncName
-   cVarInt64Slice,      // VarSliceType
-   var_int64_slice_c    // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   int64_t,             // Type
-   cInt64Chunk,         // ChunkType
-   cInt64Slice,         // SliceType
-   int64_chunk_c,       // FuncName
-   cVarInt64Chunk,      // VarChunkType
-   cVarInt64Slice,      // VarSliceType
-   var_int64_chunk_c    // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   int64_t,             // Type
-   cInt64Window,        // WindowType
-   cInt64Slice,         // SliceType
-   int64_window_c,      // FuncName
-   cVarInt64Window,     // VarWindowType
-   cVarInt64Slice,      // VarSliceType
-   var_int64_window_c   // VarFuncName
+   cVarInt64Slice       // VarSliceType
 )
 
 /*******************************************************************************

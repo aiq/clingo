@@ -87,12 +87,12 @@ static inline int64_t unused_bits( CBitVec* vec )
 
 static inline cBytes as_bytes( CBitVec const* vec )
 {
-   return bytes_c( vec->numOfBytes, vec->bytes );
+   return (cBytes){ vec->numOfBytes, vec->bytes };
 }
 
 static inline cVarBytes as_var_bytes( CBitVec* vec )
 {
-   return var_bytes_c( vec->numOfBytes, vec->bytes );
+   return (cVarBytes){ vec->numOfBytes, vec->bytes };
 }
 
 // '0' is 0x30 = 0 / '1' is 0x31 = 1
@@ -319,7 +319,7 @@ bool set_on_bit_vec_c( CBitVec* vec, int64_t pos, cByte bit )
       if ( not resize_bit_vec_c( vec, pos+1 ) ) return false;
    }
 
-   cVarBytes bytes = var_bytes_c( vec->numOfBytes, vec->bytes );
+   cVarBytes bytes = { vec->numOfBytes, vec->bytes };
    set_bytes_bit_c( bytes, pos, bit );
    return true;
 }
@@ -342,7 +342,7 @@ bool set_range_on_bit_vec_c( CBitVec* vec, cRange range, cByte bit )
       }
    }
 
-   cVarBytes bytes = var_bytes_c( vec->numOfBytes, vec->bytes );
+   cVarBytes bytes = { vec->numOfBytes, vec->bytes };
    set_bytes_bits_c( bytes, range, bit );
    mask_top_byte( vec );
    return true;

@@ -2,14 +2,15 @@
 #include "clingo/lang/expect.h"
 #include "clingo/type/cChars.h"
 
+CHUNK_C_( char const, cChars, cCharChunk )
+
 int main( void )
 {
    init_tap_c_();
 
    cChars abcdefg = c_c( "abcdefg" );
 
-   cCharChunk chunk;
-   init_back_char_chunk_c( &chunk, 2, abcdefg ); // ------------------------- fg
+   cCharChunk chunk = back_chunk_c_( 2, abcdefg ); // ----------------------- fg
    expect_c_( valid_chunk_c_( chunk ) );
    expect_c_( first_c_( chunk ) == 'f' );
    expect_c_( last_c_( chunk ) == 'g' );

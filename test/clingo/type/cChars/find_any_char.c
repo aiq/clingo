@@ -16,31 +16,31 @@ int main( void )
    idx = index_of_c_( base, ptr );
    expect_c_( *ptr == '-' );
    expect_c_( idx == 0 );
-   chars = mid_chars_c( base, idx+1 );
+   chars = mid_c_( cChars, base, idx+1 );
 
    ptr = find_any_char_c( chars, set ); // --------------------------------- ' '
    idx = index_of_c_( base, ptr );
    expect_c_( *ptr == ' ' );
    expect_c_( idx == 1 );
-   chars = mid_chars_c( base, idx+1 );
+   chars = mid_c_( cChars, base, idx+1 );
 
    ptr = find_any_char_c( chars, set ); // --------------------------------- ','
    idx = index_of_c_( base, ptr );
    expect_c_( *ptr == ',' );
    expect_c_( idx == 6 );
-   chars = mid_chars_c( base, idx+1 );
+   chars = mid_c_( cChars, base, idx+1 );
 
    ptr = find_any_char_c( chars, set ); // --------------------------------- ' '
    idx = index_of_c_( base, ptr );
    expect_c_( *ptr == ' ' );
    expect_c_( idx == 7 );
-   chars = mid_chars_c( base, idx+1 );
+   chars = mid_c_( cChars, base, idx+1 );
 
    ptr = find_any_char_c( chars, set ); // --------------------------------- '.'
    idx = index_of_c_( base, ptr );
    expect_c_( *ptr == '.' );
    expect_c_( idx == 14 );
-   chars = mid_chars_c( base, idx+1 );
+   chars = mid_c_( cChars, base, idx+1 );
 
    return finish_tap_c_();
 }

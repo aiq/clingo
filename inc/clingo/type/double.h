@@ -24,29 +24,7 @@ typedef struct cDoubleInfo cDoubleInfo;
 SLICE_DEF_C_(
    double,              // Type
    cDoubleSlice,        // SliceType
-   double_slice_c,      // FuncName
-   cVarDoubleSlice,     // VarSliceType
-   var_double_slice_c   // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   double,              // Type
-   cDoubleChunk,        // ChunkType
-   cDoubleSlice,        // SliceType
-   double_chunk_c,      // FuncName
-   cVarDoubleChunk,     // VarChunkType
-   cVarDoubleSlice,     // VarSliceType
-   var_double_chunk_c   // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   double,              // Type
-   cDoubleWindow,       // WindowType
-   cDoubleSlice,        // SliceType
-   double_window_c,     // FuncName
-   cVarDoubleWindow,    // VarWindowType
-   cVarDoubleSlice,     // VarSliceType
-   var_double_window_c  // VarFuncName
+   cVarDoubleSlice      // VarSliceType
 )
 
 /*******************************************************************************

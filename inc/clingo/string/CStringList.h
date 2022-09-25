@@ -15,7 +15,7 @@ OBJ_VEC_DEF_C_(
    CLINGO_API,       // LibApi
    CStringList,      // VecType
    CString,          // ObjType
-   string_list_c,    // FuncName
+   string_list_c,    // FuncSuffix
    C_StringListMeta  // Meta
 )
 
@@ -48,7 +48,7 @@ CLINGO_API inline bool add_chars_to_string_list_c( CStringList* list, cChars val
 }
 
 CLINGO_API inline bool add_cstr_to_string_list_c( CStringList* list,
-                                       char const cstr[static 1] )
+                                                  char const cstr[static 1] )
 {
    must_exist_c_( list );
    must_exist_c_( cstr );

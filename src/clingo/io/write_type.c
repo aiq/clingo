@@ -198,7 +198,7 @@ bool write_rune_c( cRecorder rec[static 1],
    {
       if ( cstr_is_any_char_c_( fmt, "qQs" ) )
       {
-         cChars cs = chars_c( rune_size_c( rune ), rune.c );
+         cChars cs = { rune_size_c( rune ), rune.c };
          return write_chars_c( rec, cs, fmt );
       }
       else if ( cstr_is_char_c( fmt, 'n' ) )

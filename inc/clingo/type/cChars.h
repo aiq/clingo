@@ -19,29 +19,7 @@ typedef int ( *c_check_char )( int c );
 SLICE_DEF_C_(
    char,       // Type
    cChars,     // SliceType
-   chars_c,    // FuncName
-   cVarChars,  // VarSliceType
-   var_chars_c // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   char,             // Type
-   cCharChunk,       // ChunkType
-   cChars,           // SliceType
-   char_chunk_c,     // FuncName
-   cVarCharChunk,    // VarChunkType
-   cVarChars,        // VarSliceType
-   var_char_chunk_c  // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   char,             // Type
-   cCharWindow,      // WindowType
-   cChars,           // SliceType
-   char_window_c,    // FuncName
-   cVarCharWindow,   // VarWindowType
-   cVarChars,        // VarSliceType
-   var_char_window_c // VarFuncName
+   cVarChars   // VarSliceType
 )
 
 /*******************************************************************************
@@ -52,7 +30,7 @@ WINDOW_DEF_C_(
 
 CLINGO_API inline cChars c_c( char const cstr[static 1] )
 {
-   return chars_c( (int64_t)strlen( cstr ), cstr );
+   return (cChars){ (int64_t)strlen( cstr ), cstr };
 }
 
 #define char_buffer_c_( Size )                                                 \
@@ -114,9 +92,6 @@ CLINGO_API char const* find_char_c( cChars chars, char val );
    index_of_chars_c( (Chars), c_c( Cstr ) )
 CLINGO_API int64_t index_of_chars_c( cChars chars, cChars sub );
 
-#define set_chars_c_( Chars, Cstr )                                            \
-   set_chars_c( (Chars), c_c( Cstr ) )
-
 CLINGO_API int64_t insert_char_c( cVarChars chars, int64_t index, char c );
 
 #define insert_chars_c_( Chars, Index, Cstr )                                  \
@@ -128,6 +103,10 @@ CLINGO_API void qsort_chars_c( cVarChars chars );
 CLINGO_API void reverse_chars_c( cVarChars chars );
 
 CLINGO_API void rotate_chars_c( cVarChars chars, int64_t distance );
+
+#define set_chars_c_( Chars, Cstr )                                            \
+   set_chars_c( (Chars), c_c( Cstr ) )
+CLINGO_API int64_t set_chars_c( cVarChars dst, cChars src ); 
 
 /*******************************************************************************
  trim

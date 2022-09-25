@@ -201,7 +201,7 @@ static inline bool push_file_error_and_close( cErrorStack es[static 1],
 
 cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] )
 {
-   cVarBytes invalidBytes = invalid_slice_c_();
+   cVarBytes invalidBytes = invalid_c_();
 
    FILE* file = ropen_file_c( path, es );
    if ( file == NULL ) return invalidBytes;
@@ -239,7 +239,7 @@ cVarBytes read_binary_file_c( cChars path, cErrorStack es[static 1] )
 
 cVarChars read_text_file_c( cChars path, cErrorStack es[static 1] )
 {
-   cVarChars invalidChars = invalid_slice_c_();
+   cVarChars invalidChars = invalid_c_();
 
    FILE* file = ropen_file_c( path, es );
    if ( file == NULL ) return invalidChars;

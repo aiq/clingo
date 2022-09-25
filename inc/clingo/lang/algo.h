@@ -525,6 +525,20 @@ void FuncName( SliceType slice, int64_t distance )                             \
    }                                                                           \
 }
 
+#define SET_C_( FuncName, VarSliceType, SliceType )                            \
+int64_t FuncName( VarSliceType dst, SliceType src )                            \
+{                                                                              \
+   int64_t const n = min_c_( dst.s, src.s );                                   \
+   if ( n < 0 ) return 0;                                                      \
+                                                                               \
+   dst.s = n;                                                                  \
+   times_c_( n, i )                                                            \
+   {                                                                           \
+      dst.v[i] = src.v[i];                                                     \
+   }                                                                           \
+   return n;                                                                   \
+}
+
 /**********++*******************************************************************
 ********************************************************************* Functions 
 ********************************************************************************

@@ -215,21 +215,6 @@ CLINGO_API inline MAX_C_( umax16_c,   uint16_t )
 CLINGO_API inline MAX_C_( umax32_c,   uint32_t )
 CLINGO_API inline MAX_C_( umax64_c,   uint64_t )
 
-#define max_c_( A, B )                                                         \
-   _Generic( ( (A) + (B) ),                                                    \
-      int8_t: imax8_c,                                                         \
-      int16_t: imax16_c,                                                       \
-      int32_t: imax32_c,                                                       \
-      int64_t: imax64_c,                                                       \
-      uint8_t: umax8_c,                                                        \
-      uint16_t: umax16_c,                                                      \
-      uint32_t: umax32_c,                                                      \
-      uint64_t: umax64_c,                                                      \
-      float: fmaxf,                                                            \
-      double: fmax,                                                            \
-      long double: fmaxl                                                       \
-   )( (A), (B) )
-
 /*******************************************************************************
  min
 *******************************************************************************/
@@ -310,18 +295,6 @@ CLINGO_API inline bool umul64_c( uint64_t a, uint64_t b, uint64_t res[static 1] 
    return uadd64_c( s, r, res );
 }
 
-#define mul_c_( A, B, Res )                                                    \
-   _Generic( ( *Res ),                                                         \
-      int8_t: imul8_c,                                                         \
-      int16_t: imul16_c,                                                       \
-      int32_t: imul32_c,                                                       \
-      int64_t: imul64_c,                                                       \
-      uint8_t: umul8_c,                                                        \
-      uint16_t: umul16_c,                                                      \
-      uint32_t: umul32_c,                                                      \
-      uint64_t: umul64_c                                                       \
-   )( (A), (B), (Res) )
-
 /*******************************************************************************
  sub
 *******************************************************************************/
@@ -336,17 +309,5 @@ CLINGO_API inline SUB_C_( usub8_c,    uint8_t,    0,          UINT8_MAX )
 CLINGO_API inline SUB_C_( usub16_c,   uint16_t,   0,          UINT16_MAX )
 CLINGO_API inline SUB_C_( usub32_c,   uint32_t,   0,          UINT32_MAX )
 CLINGO_API inline SUB_C_( usub64_c,   uint64_t,   0,          UINT64_MAX )
-
-#define sub_c_( A, B, Res )                                                    \
-   _Generic( ( *Res )                                                          \
-      int8_t: isub8_c,                                                         \
-      int16_t: isub16_c,                                                       \
-      int32_t: isub32_c,                                                       \
-      int64_t: isub64_c,                                                       \
-      uint8_t: usub8_c,                                                        \
-      uint16_t: usub16_c,                                                      \
-      uint32_t: usub32_c,                                                      \
-      uint64_t: usub64_c                                                       \
-   )( (A), (B), (Res) )
 
 #endif

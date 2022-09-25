@@ -53,7 +53,7 @@ cVarChars get_weekday_abbrev_c( c_Weekday wd, cVarChars buf )
    if ( is_empty_c_( buf ) ) return buf;
 
    size_t sz;
-   if ( not int64_to_size_c( buf.s, &sz ) ) return empty_var_chars_c();
+   if ( not int64_to_size_c( buf.s, &sz ) ) return (cVarChars)empty_c_();
 
    struct tm t;
    t.tm_wday = wd % 7;
@@ -67,7 +67,7 @@ cVarChars get_weekday_name_c( c_Weekday wd, cVarChars buf )
    if ( is_empty_c_( buf ) ) return buf;
 
    size_t sz;
-   if ( not int64_to_size_c( buf.s, &sz ) ) return empty_var_chars_c();
+   if ( not int64_to_size_c( buf.s, &sz ) ) return (cVarChars)empty_c_();
 
    struct tm t;
    t.tm_wday = wd % 7;

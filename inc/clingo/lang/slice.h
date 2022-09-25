@@ -14,133 +14,10 @@
 /*******************************************************************************
 ******************************************************** Code Generation Macros 
 ********************************************************************************
- init
-*******************************************************************************/
-
-#define EMPTY_SLICE_C_( FuncName, SliceType )                                  \
-SliceType FuncName( void )                                                     \
-{                                                                              \
-   return (SliceType){ .s=0, .v=NULL };                                        \
-}
-
-#define MAKE_SLICE_C_( FuncName, SliceType, Type )                             \
-SliceType FuncName( Type* beg, Type* end )                                     \
-{                                                                              \
-   must_exist_c_( beg );                                                       \
-   must_exist_c_( end );                                                       \
-                                                                               \
-   int64_t s = end - beg;                                                      \
-   return ( s < 0 ) ? (SliceType){ .s=0, .v=NULL }                             \
-                    : (SliceType){ .s=s, .v=beg };                             \
-}
-
-#define SLICE_C_( FuncName, SliceType, Type )                                  \
-SliceType FuncName( int64_t s, Type* v )                                       \
-{                                                                              \
-   must_be_positive_c_( s );                                                   \
-   return (SliceType){ .s=s, .v=v };                                           \
-}
-
-/*******************************************************************************
- sub
-*******************************************************************************/
-
-#define LEFT_SLICE_C_( FuncName, SliceType )                                   \
-SliceType FuncName( SliceType slice, int64_t maxLen )                          \
-{                                                                              \
-   must_be_positive_c_( maxLen );                                              \
-                                                                               \
-   if ( maxLen == 0 )                                                          \
-   {                                                                           \
-      return (SliceType){ .s=0, .v=slice.v };                                  \
-   }                                                                           \
-                                                                               \
-   int64_t const minLen = min_c_( slice.s, maxLen );                           \
-   return (SliceType){ .s=minLen, .v=slice.v };                                \
-}
-
-#define MID_SLICE_C_( FuncName, SliceType )                                    \
-SliceType FuncName( SliceType slice, int64_t index )                           \
-{                                                                              \
-   must_be_positive_c_( index );                                               \
-                                                                               \
-   if ( index > slice.s )                                                      \
-   {                                                                           \
-      return (SliceType){ .s=0, .v=NULL };                                     \
-   }                                                                           \
-                                                                               \
-   return (SliceType){ .s=slice.s-index, .v=slice.v+index };                   \
-}
-
-#define RIGHT_SLICE_C_( FuncName, SliceType )                                  \
-SliceType FuncName( SliceType slice, int64_t maxLen )                          \
-{                                                                              \
-   must_be_positive_c_( maxLen );                                              \
-                                                                               \
-   if ( maxLen == 0 )                                                          \
-   {                                                                           \
-      return (SliceType){ .s=0, .v=slice.v+slice.s };                                \
-   }                                                                           \
-                                                                               \
-   int64_t const minLen = min_c_( slice.s, maxLen );                           \
-   return (SliceType){ .s=minLen, .v=slice.v+(slice.s-minLen) };               \
-}
-
-#define SUB_SLICE_C_( FuncName, SliceType )                                    \
-SliceType FuncName( SliceType slice, int64_t begIdx, int64_t endIdx )          \
-{                                                                              \
-   must_be_positive_c_( begIdx );                                              \
-   must_be_positive_c_( endIdx );                                              \
-                                                                               \
-   if ( endIdx <= begIdx or endIdx > slice.s )                                 \
-   {                                                                           \
-      return (SliceType){ .s=0, .v=NULL };                                     \
-   }                                                                           \
-                                                                               \
-   return (SliceType){ .s=(endIdx-begIdx), .v=slice.v+begIdx };                \
-}
-
-/*******************************************************************************
- var slice
-*******************************************************************************/
-
-#define AS_SLICE_C_( FuncName, SliceType, VarSliceType )                       \
-SliceType FuncName( VarSliceType slice )                                       \
-{                                                                              \
-   return (SliceType){ .s=slice.s, .v=slice.v };                               \
-}
-
-#define CAST_SLICE_C_( FuncName, VarSliceType, SliceType )                     \
-VarSliceType FuncName( VarSliceType slice, SliceType sub )                     \
-{                                                                              \
-   int64_t const begIdx = index_of_c_( slice, sub.v );                         \
-   int64_t const endIdx = begIdx + sub.s;                                      \
-   if ( begIdx == -1 or endIdx <= begIdx or endIdx > slice.s )                 \
-   {                                                                           \
-      return (VarSliceType){ .s=0, .v=NULL };                                  \
-   }                                                                           \
-   return (VarSliceType){ .s=(endIdx-begIdx), .v=slice.v+begIdx };             \
-}
-
-#define SET_SLICE_C_( FuncName, VarSliceType, SliceType )                      \
-int64_t FuncName( VarSliceType dst, SliceType src )                            \
-{                                                                              \
-   int64_t const n = min_c_( dst.s, src.s );                                   \
-   if ( n < 0 ) return 0;                                                      \
-                                                                               \
-   times_c_( n, i )                                                            \
-   {                                                                           \
-      dst.v[i] = src.v[i];                                                     \
-   }                                                                           \
-   return n;                                                                   \
-}
-
-/*******************************************************************************
  type
 *******************************************************************************/
 
-#define SLICE_DEF_C_( Type, SliceType, FuncSuffix,                             \
-                      VarSliceType, VarFuncSuffix )                            \
+#define SLICE_DEF_C_( Type, SliceType, VarSliceType )                          \
 struct SliceType                                                               \
 {                                                                              \
    int64_t s;                                                                  \
@@ -148,57 +25,12 @@ struct SliceType                                                               \
 };                                                                             \
 typedef struct SliceType SliceType;                                            \
                                                                                \
-inline SLICE_C_( FuncSuffix, SliceType, Type const )                           \
-inline MAKE_SLICE_C_( make_##FuncSuffix, SliceType, Type const )               \
-inline EMPTY_SLICE_C_( empty_##FuncSuffix, SliceType )                         \
-                                                                               \
-inline SUB_SLICE_C_( sub_##FuncSuffix, SliceType )                             \
-inline LEFT_SLICE_C_( left_##FuncSuffix, SliceType )                           \
-inline MID_SLICE_C_( mid_##FuncSuffix, SliceType )                             \
-inline RIGHT_SLICE_C_( right_##FuncSuffix, SliceType )                         \
-                                                                               \
 struct VarSliceType                                                            \
 {                                                                              \
    int64_t s;                                                                  \
    Type* v;                                                                    \
 };                                                                             \
-typedef struct VarSliceType VarSliceType;                                      \
-                                                                               \
-inline SLICE_C_( VarFuncSuffix, VarSliceType, Type )                           \
-inline MAKE_SLICE_C_( make_##VarFuncSuffix, VarSliceType, Type )               \
-inline EMPTY_SLICE_C_( empty_##VarFuncSuffix, VarSliceType )                   \
-                                                                               \
-inline SUB_SLICE_C_( sub_##VarFuncSuffix, VarSliceType )                       \
-inline LEFT_SLICE_C_( left_##VarFuncSuffix, VarSliceType )                     \
-inline MID_SLICE_C_( mid_##VarFuncSuffix, VarSliceType )                       \
-inline RIGHT_SLICE_C_( right_##VarFuncSuffix, VarSliceType )                   \
-                                                                               \
-inline AS_SLICE_C_( as_##FuncSuffix, SliceType, VarSliceType )                 \
-inline CAST_SLICE_C_( cast_##FuncSuffix, VarSliceType, SliceType )             \
-inline SET_SLICE_C_( set_##FuncSuffix, VarSliceType, SliceType )
-
-/**********************************************************/
-
-#define SLICE_IMPL_C_( Type, SliceType, FuncSuffix,                            \
-                       VarSliceType, VarFuncSuffix )                           \
-extern inline SliceType FuncSuffix( int64_t, Type const* );                    \
-extern inline SliceType make_##FuncSuffix( Type const*, Type const* );         \
-extern inline SliceType empty_##FuncSuffix( void );                            \
-extern inline SliceType sub_##FuncSuffix( SliceType, int64_t, int64_t );       \
-extern inline SliceType left_##FuncSuffix( SliceType, int64_t );               \
-extern inline SliceType mid_##FuncSuffix( SliceType, int64_t );                \
-extern inline SliceType right_##FuncSuffix( SliceType, int64_t );              \
-                                                                               \
-extern inline VarSliceType VarFuncSuffix( int64_t, Type* );                    \
-extern inline VarSliceType make_##VarFuncSuffix( Type*, Type* );               \
-extern inline VarSliceType empty_##VarFuncSuffix( void );                      \
-extern inline VarSliceType sub_##VarFuncSuffix( VarSliceType, int64_t, int64_t );\
-extern inline VarSliceType left_##VarFuncSuffix( VarSliceType, int64_t );      \
-extern inline VarSliceType mid_##VarFuncSuffix( VarSliceType, int64_t );       \
-extern inline VarSliceType right_##VarFuncSuffix( VarSliceType, int64_t );     \
-extern inline SliceType as_##FuncSuffix( VarSliceType );                       \
-extern inline VarSliceType cast_##FuncSuffix( VarSliceType, SliceType );       \
-extern inline int64_t set_##FuncSuffix( VarSliceType, SliceType );
+typedef struct VarSliceType VarSliceType;
 
 /*******************************************************************************
  temp
@@ -232,13 +64,31 @@ typedef struct Entry##Slice Entry##Slice;
  init
 *******************************************************************************/
 
+#define as_c_( SliceType, Slice )                                              \
+(SliceType){                                                                   \
+   .s=(Slice).s,                                                               \
+   .v=(Slice).v                                                                \
+}
+
+#define atween_c_( Beg, End )                                                  \
+{                                                                              \
+   .s=(End) - (Beg),                                                           \
+   .v=(Beg)                                                                    \
+}
+
+#define empty_c_()                                                             \
+{                                                                              \
+   .s=0,                                                                       \
+   .v=NULL                                                                     \
+}
+
 #define heap_slice_c_( Size, Type )                                            \
 {                                                                              \
    .s=(Size),                                                                  \
    .v=(Type*)alloc_array_c( (Size), sizeof_c_(Type) )                          \
 }
 
-#define invalid_slice_c_()                                                     \
+#define invalid_c_()                                                           \
 {                                                                              \
    .s=-1,                                                                      \
    .v=NULL                                                                     \
@@ -261,6 +111,45 @@ typedef struct Entry##Slice Entry##Slice;
    .s=(Size),                                                                  \
    .v=(Type[]){ [(Size)-1]={} }                                                \
 }
+
+/*******************************************************************************
+ sub
+*******************************************************************************/
+
+#define left_c_( SliceType, Slice, MaxLen )                                    \
+(                                                                              \
+   (SliceType){                                                                \
+      .s=(min_c_( (Slice).s, (MaxLen) ) ),                                     \
+      .v=(Slice).v                                                             \
+   }                                                                           \
+)
+
+#define mid_c_( SliceType, Slice, Idx )                                        \
+(                                                                              \
+   ( not in_range_c_( 0, (Idx), (Slice).s ) )                                  \
+      ? (SliceType)empty_c_()                                                  \
+      : (SliceType){ .s=(Slice).s-(Idx), .v=(Slice).v+(Idx) }                  \
+)
+
+#define right_c_( SliceType, Slice, MaxLen )                                   \
+(                                                                              \
+   ( (MaxLen) <= 0 )                                                           \
+      ? (SliceType)empty_c_()                                                  \
+      : (SliceType){                                                           \
+           .s=min_c_( (Slice).s, (MaxLen) ),                                   \
+           .v=(Slice).v + ( (Slice).s - min_c_( (Slice).s, (MaxLen) ) )        \
+        }                                                                      \
+)
+
+#define sub_c_( SliceType, Slice, BegIdx, EndIdx )                             \
+(                                                                              \
+   (                                                                           \
+      (BegIdx) < 0 or (EndIdx) < 0 or                                          \
+      (EndIdx) <= (BegIdx) or (EndIdx) > (Slice).s                             \
+   )                                                                           \
+      ? (SliceType)empty_c_()                                                  \
+      : (SliceType){ .s=(EndIdx) - (BegIdx), .v=(Slice).v + (BegIdx) }         \
+)
 
 /*******************************************************************************
  check

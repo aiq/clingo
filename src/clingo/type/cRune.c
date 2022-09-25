@@ -2,38 +2,6 @@
 #include <stdio.h>
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-********************************************************************************
- generated
-*******************************************************************************/
-
-SLICE_IMPL_C_(
-   cRune,            // Type
-   cRuneSlice,       // SliceType
-   rune_slice_c,     // FuncName
-   cVarRuneSlice,    // VarSliceType
-   var_rune_slice_c  // VarFuncName
-)
-
-CHUNK_IMPL_C_(
-   cRuneChunk,       // ChunkType
-   cRuneSlice,       // SliceType
-   rune_chunk_c,     // FuncName
-   cVarRuneChunk,    // VarChunkType
-   cVarRuneSlice,    // VarSliceType
-   var_rune_chunk_c  // VarFuncName
-)
-
-WINDOW_IMPL_C_(
-   cRuneWindow,         // WindowType
-   cRuneSlice,          // SliceType
-   rune_window_c,       // FuncName
-   cVarRuneWindow,      // VarWindowType
-   cVarRuneSlice,       // VarSliceType
-   var_rune_window_c    // VarFuncName
-)
-
-/*******************************************************************************
 ********************************************************************+ Functions
 ********************************************************************************
  utf8
@@ -363,42 +331,42 @@ cChars left_runes_c( cChars chars, int64_t maxLen )
 {
    must_be_positive_c_( maxLen );
 
-   if ( is_empty_c_( chars ) or maxLen == 0 ) return empty_chars_c();
+   if ( is_empty_c_( chars ) or maxLen == 0 ) return (cChars)empty_c_();
 
    if ( chars.s <= maxLen ) return chars;
 
    char const* end = nth_rune_c( chars, maxLen );
    if ( end == NULL ) return chars;
 
-   return make_chars_c( begin_c_( chars ), end );
+   return (cChars)atween_c_( begin_c_( chars ), end );
 }
 
 cChars mid_runes_c( cChars chars, int64_t index )
 {
    must_be_positive_c_( index );
 
-   if ( is_empty_c_( chars ) or chars.s <= index ) return empty_chars_c();
+   if ( is_empty_c_( chars ) or chars.s <= index ) return (cChars)empty_c_();
 
    if ( index == 0 ) return chars;
 
    char const* beg = nth_rune_c( chars, index );
-   if ( beg == NULL ) return empty_chars_c();
+   if ( beg == NULL ) return (cChars)empty_c_();
 
-   return make_chars_c( beg, end_c_( chars ) );
+   return (cChars)atween_c_( beg, end_c_( chars ) );
 }
 
 cChars right_runes_c( cChars chars, int64_t maxLen )
 {
    must_be_positive_c_( maxLen );
 
-   if ( is_empty_c_( chars ) or maxLen == 0 ) return empty_chars_c();
+   if ( is_empty_c_( chars ) or maxLen == 0 ) return (cChars)empty_c_();
 
    if ( chars.s <= maxLen ) return chars;
 
    char const* beg = nth_rune_c( chars, -maxLen );
    if ( beg == NULL ) return chars;
 
-   return make_chars_c( beg, end_c_( chars ) );
+   return (cChars)atween_c_( beg, end_c_( chars ) );
 }
 
 cChars sub_runes_c( cChars chars, int64_t begIdx, int64_t endIdx )
@@ -408,10 +376,10 @@ cChars sub_runes_c( cChars chars, int64_t begIdx, int64_t endIdx )
 
    char const* beg = nth_rune_c( chars, begIdx );
    char const* end = nth_rune_c( chars, endIdx - 1 );
-   if ( beg == NULL or end == NULL ) return empty_chars_c();
+   if ( beg == NULL or end == NULL ) return (cChars)empty_c_();
 
    end = move_rune_ptr( end );
-   if ( end > end_c_( chars ) ) return empty_chars_c();
+   if ( end > end_c_( chars ) ) return (cChars)empty_c_();
 
-   return make_chars_c( beg, end );
+   return (cChars)atween_c_( beg, end );
 }

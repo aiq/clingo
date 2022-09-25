@@ -24,9 +24,7 @@ typedef struct cDuration cDuration;
 SLICE_DEF_C_(
    cDuration,           // Type
    cDurationSlice,      // SliceType
-   duration_slice_c,    // FuncName
-   cVarDurationSlice,   // VarSliceType
-   var_duration_slice_c // VarFuncName
+   cVarDurationSlice    // VarSliceType
 )
 
 /*******************************************************************************

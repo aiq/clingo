@@ -35,9 +35,7 @@ typedef struct cColor cColor;
 SLICE_DEF_C_(
    cColor,           // Type
    cColorSlice,      // SliceType
-   color_slice_c,    // FuncName
-   cVarColorSlice,   // VarSliceType
-   var_color_slice_c // VarFuncName
+   cVarColorSlice    // VarSliceType
 )
 
 IMAGE_TYPE_C_(

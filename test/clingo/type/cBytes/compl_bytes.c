@@ -7,7 +7,7 @@ int main( void )
 
    cVarBytes slice = slice_c_( cByte, 0x0f, 0xc3, 0x5d, 0x10 );
 
-   compl_bytes_c( as_bytes_c( slice ), slice );
+   compl_bytes_c( as_c_( cBytes, slice ), slice );
 
    expect_c_( slice.v[ 0 ] == 0xf0 );
    expect_c_( slice.v[ 1 ] == 0x3c );

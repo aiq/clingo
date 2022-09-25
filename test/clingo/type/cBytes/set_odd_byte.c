@@ -4,8 +4,8 @@
 #define expect_bytes_( Slice, ... )                                            \
    expect_eq_c_(                                                               \
       cmp_bytes_c(                                                             \
-         as_bytes_c( Slice ),                                                  \
-         bytes_c( (Slice).s, (cByte[]){ __VA_ARGS__ } )                        \
+         as_c_( cBytes, Slice ),                                               \
+         (cBytes){ (Slice).s, (cByte[]){ __VA_ARGS__ } }                       \
       )                                                                        \
    )
 

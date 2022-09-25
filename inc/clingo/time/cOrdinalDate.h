@@ -22,9 +22,7 @@ typedef struct cOrdinalDate cOrdinalDate;
 SLICE_DEF_C_(
    cOrdinalDate,              // Type
    cOrdinalDateSlice,         // SliceType
-   ordinal_date_slice_c,      // FuncName
-   cVarOrdinalDateSlice,      // VarSliceType
-   var_ordinal_date_slice_c   // VarFuncName
+   cVarOrdinalDateSlice       // VarSliceType
 )
 
 /*******************************************************************************

@@ -8,7 +8,7 @@ int main( void )
    CString* e1 = empty_string_c();
    CString* e2 = lit_c( "" );
    CString* e3 = new_string_c( "" );
-   CString* e4 = make_string_c( empty_chars_c() );
+   CString* e4 = make_string_c( (cChars)empty_c_() );
 
    expect_c_( string_is_empty_c( e1 ) );
    expect_c_( string_is_empty_c( e2 ) );

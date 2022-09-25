@@ -14,10 +14,10 @@ int main( void )
    expect_c_( chars2.s == 8 );
    expect_c_( count_runes_c( chars2 ) == 8 );
 
-   cChars empty = empty_chars_c();
+   cChars empty = (cChars)empty_c_();
    expect_c_( count_runes_c( empty ) == 0 );
 
-   cChars euroSign = chars_c( 7, "euro:€" ); // wrong size
+   cChars euroSign = (cChars){ 7, "euro:€" }; // wrong size
    expect_c_( count_runes_c( euroSign ) == -1 );
    euroSign.s = 8;
    expect_c_( count_runes_c( euroSign ) == 6 );

@@ -32,7 +32,7 @@ int main( void )
    {
       cVarChars varChars = scalars_c_( 16, char );
       varChars = get_weekday_name_c( t->wd, varChars );
-      cChars chars = as_chars_c( varChars );
+      cChars chars = as_c_( cChars, varChars );
       bool res = chars_is_c( chars, t->exp );
 
       tap_descf_c( res, "test %s", t->exp );

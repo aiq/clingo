@@ -3,6 +3,8 @@
 #include "clingo/lang/window.h"
 #include "clingo/type/cChars.h"
 
+WINDOW_C_( char const, cChars, cCharWindow )
+
 int main( void )
 {
    init_tap_c_();
@@ -11,38 +13,38 @@ int main( void )
    cCharWindow window;
 
    // -------------------------------------------------------------- valid cases
-   init_front_char_window_c( &window, 1, slice );
+   window = (cCharWindow)front_window_c_( 1, slice );
    expect_c_( valid_window_c_( window ) );
 
-   init_front_char_window_c( &window, 2, slice );
+   window = (cCharWindow)front_window_c_( 2, slice );
    expect_c_( valid_window_c_( window ) );
 
-   init_front_char_window_c( &window, 3, slice );
+   window = (cCharWindow)front_window_c_( 3, slice );
    expect_c_( valid_window_c_( window ) );
 
    // ------------------------------------------------------------ invalid cases
-   init_front_char_window_c( &window, 0, slice );
+   window = (cCharWindow)front_window_c_( 0, slice );
    expect_c_( not valid_window_c_( window ) );
 
-   init_front_char_window_c( &window, 4, slice );
+   window = (cCharWindow)front_window_c_( 4, slice );
    expect_c_( not valid_window_c_( window ) );
 
    // ---------------------------------------------------------- iteration -next
    cRecorder* rec = &recorder_c_( 32 );
-   init_front_char_window_c( &window, 2, c_c( "abcdef" ) );
+   window = (cCharWindow)front_window_c_( 2, c_c( "abcdef" ) );
    while ( valid_window_c_( window ) )
    {
-      record_chars_c( rec, chars_c( window.s, window.v ) );
+      record_chars_c( rec, as_c_( cChars, window ) );
       next_window_c_( window );
    }
    expect_c_( recorded_is_c( rec, "abbccddeef" ) );
 
    // ---------------------------------------------------------- iteration -prev
    reset_recorder_c( rec );
-   init_back_char_window_c( &window, 2, c_c( "abcdef" ) );
+   window = (cCharWindow)back_window_c_( 2, c_c( "abcdef" ) );
    while ( valid_window_c_( window ) )
    {
-      record_chars_c( rec, chars_c( window.s, window.v ) );
+      record_chars_c( rec, as_c_( cChars, window ) );
       prev_window_c_( window );
    }
    expect_c_( recorded_is_c( rec, "efdecdbcab" ) );

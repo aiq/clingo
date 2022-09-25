@@ -1,5 +1,5 @@
 = slice
-:xmpldir: ../../../test/clingo/lang/slice
+:xmpldir: {testroot}/clingo/lang/slice
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -45,197 +45,6 @@ viewed as a slice.
 [id='Code-Generation-Macros']
 == Code Generation Macros
 
-//************************************************************************ init
-=== init
-
-[id='EMPTY_SLICE_C_']
-==== EMPTY_SLICE_C_
-[source,c]
-----
-#define EMPTY_SLICE_C_( FuncName, SliceType )
-----
-
-Generates a constructor function that returns a empty slice where s is 0 and
-v is NULL.
-The generated function has the following common signature:
-[source,c]
-----
-SliceType FuncName( void );
-----
-
-[id='MAKE_SLICE_C_']
-==== MAKE_SLICE_C_
-[source,c]
-----
-#define MAKE_SLICE_C_( FuncName, SliceType, Type )
-----
-
-Generates a constructor function that returns a slice that is defined with a
-pointer at the first element and a pointer after the last element.
-The generated function has the following common signature:
-[source,c]
-----
-SliceType FuncName( Type* beg, Type* end )
-----
-
-.Example
-[source,c]
-----
-include::{xmpldir}/MAKE_SLICE.c[]
-----
-
-[id='SLICE_C_']
-==== SLICE_C_
-[source,c]
-----
-#define SLICE_C_( FuncName, SliceType, Type )
-----
-
-Generates a constructor function that returns a slice where the s and v values
-are set.
-The generated function has the following common signature:
-[source,c]
-----
-SliceType FuncName( int64_t s, Type* v );
-----
-
-//************************************************************************* sub
-=== sub
-
-[id='LEFT_SLICE_C_']
-==== LEFT_SLICE_C_
-[source,c]
-----
-#define LEFT_SLICE_C_( FuncName, SliceType )
-----
-
-Generates a function that returns a sub-slice that contains the leftmost values
-of a slice.
-
-The generated function has the following common signature:
-[source,c]
-----
-SliceType FuncName( SliceType slice, int64_t maxLen )
-----
-If maxLen is greater or equal the s value of slice, contains the sub-slice
-all values from the slice.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/LEFT_SLICE.c[]
-----
-
-[id='MID_SLICE_C_']
-==== MID_SLICE_C_
-[source,c]
-----
-#define MID_SLICE_C_( FuncName, SliceType )
-----
-
-Generates a function that returns a sub-slice starting(including) at a given
-index.
-
-The generated function has the following common signature:
-[source,c]
-----
-SliceType FuncName( SliceType slice, int64_t index )
-----
-If index does not point into the slice returns the function an empty slice.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/MID_SLICE.c[]
-----
-
-[id='RIGHT_SLICE_C_']
-==== RIGHT_SLICE_C_
-[source,c]
-----
-#define RIGHT_SLICE_C_( FuncName, SliceType )
-----
-
-Generates a function that return a sub-slice that contains the rightmost values
-of a slice.
-The generated function has the following common signature:
-[source,c]
-----
-SliceType FuncName( SliceType slice, int64_t maxLen )
-----
-If maxLen is greater or equal as the s value of slice, contains the
-sub-slice all values from the slice.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/RIGHT_SLICE.c[]
-----
-
-[id='SUB_SLICE_C_']
-==== SUB_SLICE_C_
-[source,c]
-----
-#define SUB_SLICE_C_( FuncName, SliceType )
-----
-
-Generates a function that returns a sub-slice of a given slice.
-The generated function has the following common signature:
-[source,c]
-----
-SliceType FuncName( SliceType slice, int64_t begIdx, int64_t endIdx )
-----
-The returned sub-slice includes the value at begIdx(begin index) as first
-value and the value at endIdx-1 as last value.
-If begIdx or endIdx are not valid indices returns the function a empty
-slice.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/SUB_SLICE.c[]
-----
-
-//******************************************************************* var slice
-=== var slice
-
-[id='AS_SLICE_C_']
-==== AS_SLICE_C_
-[source,c]
-----
-#define AS_SLICE_C_( FuncName, SliceType, VarSliceType )
-----
-
-Generates a function that converts a slice with variable data to a slice with
-const data.
-The generated function has the following common signature:
-[source,c]
-----
-SliceType FuncName( VarSliceType slice )
-----
-
-[id='CAST_SLICE_C_']
-==== CAST_SLICE_C_
-[source,c]
-----
-#define CAST_SLICE_C_( FuncName, VarSliceType, SliceType )
-----
-
-Generates a function that converts a slice with const data to a slice with
-variable data.
-The generated function has the following common signature:
-[source,c]
-----
-VarSliceType FuncName( VarSliceType slice, SliceType sub );
-----
-The function returns an empty slice if sub is not a complete subset of slice.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/CAST_SLICE.c[]
-----
-
 [id='SET_SLICE_C_']
 ==== SET_SLICE_C_
 [source,c]
@@ -266,85 +75,22 @@ include::{xmpldir}/SET_SLICE.c[]
 ==== SLICE_DEF_C_
 [source,c]
 ----
-#define SLICE_DEF_C_( Type, SliceType, FuncSuffix, VarSliceType, VarFuncSuffix )
+#define SLICE_DEF_C_( Type, SliceType, VarSliceType )
 ----
 
 Generates two slices for sequences with Type values.
 The struct SliceType for const sequences and VarSliceType for variable
 sequences.
-The values FuncSuffix and VarFuncSuffix are used as postfix for the generated
-inline functions.
 
 The following call can be used in a .h or .c file.
 [source,c]
 ----
 SLICE_DEF_C_(
-   int8_t,           // Type
-   cInt8Slice,       // SliceType
-   int8_slice_c,     // FuncSuffix
-   cVarInt8Slice,    // VarSliceType
-   var_int8_slice_c  // VarFuncSuffix
+   int8_t,        // Type
+   cInt8Slice,    // SliceType
+   cVarInt8Slice  // VarSliceType
 )
 ----
-The overview shows the generated structs and functions for the call.
-
-[options="header"]
-|====
-| | Const Data Slice | Variable Data Slice
-
-| struct
-| cInt8Slice
-| cVarInt8Slice
-
-| SLICE_C_
-| int8_slice_c
-| var_int8_slice_c
-
-| MAKE_SLICE_C_
-| make_int8_slice_c
-| make_var_int8_slice_c
-
-| EMPTY_SLICE_C
-| empty_int8_slice_c
-| empty_var_int8_slice_c
-
-| SUB_SLICE_C_
-| sub_int8_slice_c
-| sub_var_int8_slice_c
-
-| LEFT_SLICE_C_
-| left_int8_slice_c
-| left_var_int8_slice_c
-
-| MID_SLICE_C_
-| mid_int8_slice_c
-| mid_var_int8_slice_c
-
-| RIGHT_SLICE_C_
-| right_int8_slice_c
-| right_var_int8_slice_c
-
-| AS_SLICE_C_
-| -
-| as_int8_slice_c
-
-| CAST_SLICE_C
-| -
-| cast_int8_slice_c
-
-| SET_SLICE_C_
-| -
-| set_int8_slice_c
-|====
-
-[id='SLICE_IMPL_C_']
-==== SLICE_IMPL_C_
-[source,c]
-----
-#define SLICE_IMPL_C_( Type, SliceType, FuncSuffix, VarSliceType, VarFuncSuffix )
-----
-
-Generates the correspondent extern inline functions for the SLICE_DEF_C_ macro.
 
 //************************************************************************ type
 === type
@@ -385,6 +131,40 @@ The Entry struct will have the in EntryStruct defined structure.
 //************************************************************************ init
 === init
 
+[id='as_c_']
+==== as_c_
+[source,c]
+----
+#define as_c_( SliceType, Slice )
+----
+
+A macro function that converts a abstract slice to a slice with the SliceType.
+
+[id='atween_c_']
+==== atween_c_
+[source,c]
+----
+#define atween_c_( Beg, End )
+----
+
+A macro function that returns a slice that is defined with a
+pointer at the first element and a pointer after the last element.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/atween.c[]
+----
+
+[id='empty_c_']
+==== empty_c_
+[source,c]
+----
+#define empty_c_() 
+----
+
+A macro function to initialse an empty slice where s is 0 and v is NULL.
+
 [id='heap_slice_c_']
 ==== heap_slice_c_
 [source,c]
@@ -396,6 +176,15 @@ A macro function for the initialization of a slice with a sequence that will be
 allocated on the heap.
 Size defines the length of the sequence.
 Type defines the data type of the values in the sequence.
+
+[id='invalid_c_']
+==== invalid_c_
+[source,c]
+----
+#define invalid_c_()
+----
+
+A macro function to initialse an invalid slice.
 
 [id='scalars_c_']
 ==== scalars_c_
@@ -448,6 +237,81 @@ Type defines the data type of the values in the sequence.
 [source,c]
 ----
 include::{xmpldir}/structs.c[]
+----
+
+//************************************************************************* sub
+=== sub
+
+[id='left_c_']
+==== left_c_
+[source,c]
+----
+#define left_c_( SliceType, Slice, MaxLen )
+----
+
+A macro function that returns a sub-slice that contains the leftmost values
+of a slice.
+If maxLen is greater or equal the s value of slice, contains the sub-slice
+all values from the slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/left.c
+----
+
+[id='mid_c_']
+==== mid_c_
+[source,c]
+----
+#define mid_c_( SliceType, Slice, Idx )
+----
+
+A macro function that returns a sub-slice starting(including) at a given
+index.
+If index does not point into the slice returns the function an empty slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/mid.c
+----
+
+[id='right_c_']
+==== right_c_
+[source,c]
+----
+#define right_c_( SliceType, Slice, MaxLen )
+----
+
+A macro function that return a sub-slice that contains the rightmost values
+of a slice.
+If maxLen is greater or equal as the s value of slice, contains the
+sub-slice all values from the slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/right.c
+----
+
+[id='sub_c_']
+==== sub_c_
+[source,c]
+----
+#define sub_c_( SliceType, Slice, BegIdx, EndIdx )
+----
+
+A macro function that returns a sub-slice of a given slice.
+The returned sub-slice includes the value at begIdx(begin index) as first
+value and the value at endIdx-1 as last value.
+If begIdx or endIdx are not valid indices returns the function a empty
+slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/sub.c
 ----
 
 //*********************************************************************** check

@@ -3,7 +3,7 @@
 
 #define expect_( VarChars, Exp )                                               \
    expect_c_(                                                                  \
-      chars_is_c( as_chars_c( VarChars ), (Exp) )                              \
+      chars_is_c( as_c_( cChars, VarChars ), (Exp) )                           \
    )
 
 int main( void )
@@ -13,7 +13,7 @@ int main( void )
    cVarChars allChars = scalars_c_( 8, char );
    set_chars_c_( allChars, "#abcdef#" );
 
-   cVarChars subChars = sub_var_chars_c( allChars, 1, 7 );
+   cVarChars subChars = sub_c_( cVarChars, allChars, 1, 7 );
 
    // ----------------------------------------------------- insert in the middle
    expect_c_( insert_char_c( subChars, 1, '+' ) == 1 );

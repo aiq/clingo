@@ -36,7 +36,7 @@ int main( void )
       cVarChars buf = char_buffer_c_( 128 );
       bool fin = false;
       fget_line_c( file, 128, &buf, &fin );
-      bool res = chars_is_c( as_chars_c( buf ), t->exp );
+      bool res = chars_is_c( as_c_( cChars, buf ), t->exp );
       tap_desc_c( res, t->exp );
    }
    require_c_( close_file_c( file, es ) );

@@ -27,9 +27,7 @@ typedef struct cDaytime cDaytime;
 SLICE_DEF_C_(
    cDaytime,            // Type
    cDaytimeSlice,       // SliceType
-   daytime_slice_c,     // FuncSuffix
-   cVarDaytimeSlice,    // VarSliceType
-   var_daytime_slice_c  // VarFuncName
+   cVarDaytimeSlice     // VarSliceType
 )
 
 /*******************************************************************************

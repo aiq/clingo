@@ -1,0 +1,25 @@
+Via the macros link:{docroot}/clingo/container/vec.html#VAL_VEC_DEF_C_[VAL_VEC_DEF_C_] and
+link:{docroot}/clingo/container/vec.html#VAL_VEC_IMPL_C_[VAL_VEC_IMPL_C_] declared and implemented struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c,subs=attributes+]
+----
+/* create */
+{ValVec-VecType}* make_{ValVec-FuncSuffix}( int64_t cap );
+{ValVec-VecType}* new_{ValVec-FuncSuffix}( void );
+/* manage */
+{ValVec-ValType} const* data_of_{ValVec-FuncSuffix}( {ValVec-VecType} const* vec );
+{ValVec-ValType}* var_data_of_{ValVec-FuncSuffix}( {ValVec-VecType}* vec );
+/* resize */
+bool resize_{ValVec-FuncSuffix}( {ValVec-VecType}* vec, int64_t cap );
+/* info */
+cVecInfo const* info_of_{ValVec-FuncSuffix}( {ValVec-VecType} const* vec );
+/* use */
+bool add_to_{ValVec-FuncSuffix}( {ValVec-VecType}* vec, {ValVec-ValType} val );
+bool add_array_to_{ValVec-FuncSuffix}( {ValVec-VecType}* vec, int64_t n, {ValVec-ValType} const* arr );
+{ValVec-ValType} const* get_from_{ValVec-FuncSuffix}( {ValVec-VecType} const* vec, int64_t pos );
+{ValVec-ValType}* get_var_from_{ValVec-FuncSuffix}( {ValVec-VecType}* vec, int64_t pos );
+bool insert_into_{ValVec-FuncSuffix}( {ValVec-VecType}* vec, int64_t pos, {ValVec-ValType} val );
+bool remove_from_{ValVec-FuncSuffix}( {ValVec-VecType}* vec, int64_t pos );
+void set_on_{ValVec-FuncSuffix}( {ValVec-VecType}* vec, int64_t pos, {ValVec-ValType} val );
+----

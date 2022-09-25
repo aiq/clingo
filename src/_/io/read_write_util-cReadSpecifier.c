@@ -26,7 +26,7 @@ bool read_in_till_end_c( cScanner sca[static 1], cChars dst[static 1] )
 
       if ( on_char_c( sca, '}' ) )
       {
-         *dst = make_chars_c( beg, sca->mem );
+         *dst = (cChars)atween_c_( beg, (char const*)sca->mem );
          return true;
       }
       else if ( on_char_c( sca, '^' ) and
@@ -61,12 +61,12 @@ bool read_in_read_specifier_c( cScanner sca[static 1],
       move_scanner_to_c( sca, initPos );
       return false;
    }
-   spec->type = make_chars_c( typeStr, sca->mem );
+   spec->type = (cChars)atween_c_( typeStr, (char const*)sca->mem );
 
    // ---------------------------------------------------------------- format
    move_if_char_c( sca, ':' );
    {
-      cChars tmpChars = empty_chars_c();
+      cChars tmpChars = (cChars)empty_c_();
       if ( not read_in_till_end_c( sca, &tmpChars ) )
       {
          move_scanner_to_c( sca, initPos );
@@ -113,6 +113,6 @@ void reset_read_specifier_c( cReadSpecifier spec[static 1] )
    must_exist_c_( spec );
 
    spec->withDst = true;
-   spec->type = empty_chars_c();
+   spec->type = (cChars)empty_c_();
    spec->fmt[ 0 ] = '\0';
 }

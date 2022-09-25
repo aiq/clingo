@@ -14,7 +14,7 @@ int main( void )
    cVarChars res = read_text_file_c( path, es );
    require_c_( not is_invalid_c_( res )  );
 
-   expect_c_( eq_chars_c( as_chars_c( res ), chars ) );
+   expect_c_( eq_chars_c( as_c_( cChars, res ), chars ) );
 
    expect_c_( remove_file_c( path, es ) );
    free( res.v );

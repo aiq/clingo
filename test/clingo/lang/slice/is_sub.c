@@ -9,10 +9,10 @@ int main( void )
    // ------------------------------------------------------------------- cChars
    cChars chars = c_c( "Earth, Wind and Fire" );
 
-   cChars earth = left_chars_c( chars, 5 );
-   cChars wind = sub_chars_c( chars, 7, 11 );
-   cChars fire = right_chars_c( chars, 4 );
-   cChars windAndFire = mid_chars_c( chars, 7 );
+   cChars earth = left_c_( cChars, chars, 5 );
+   cChars wind = sub_c_( cChars, chars, 7, 11 );
+   cChars fire = right_c_( cChars, chars, 4 );
+   cChars windAndFire = mid_c_( cChars, chars, 7 );
 
    expect_c_( is_sub_c_( chars, earth ) );
    expect_c_( is_sub_c_( chars, wind ) );

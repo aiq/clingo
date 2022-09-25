@@ -31,7 +31,7 @@ int main( void )
    for_each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->str );
-      cChars chars = empty_chars_c();
+      cChars chars = (cChars)empty_c_();
       bool res = read_chars_c( sca, &chars, t->fmt );
       res &= chars_is_c( chars, t->expChars );
       res &= unscanned_is_c( sca, t->expUnscanned );

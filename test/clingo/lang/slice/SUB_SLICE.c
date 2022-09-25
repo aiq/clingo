@@ -10,24 +10,24 @@ int main( void )
    // ------------------------------------------------------------------- cChars
    cChars chars = c_c( "Nine pineapples" );
 
-   cChars nine = sub_chars_c( chars, 0, 4 );
+   cChars nine = sub_c_( cChars, chars, 0, 4 );
    expect_c_( chars_is_c( nine, "Nine" ) );
 
-   cChars pineapple = sub_chars_c( chars, 5, 15 );
+   cChars pineapple = sub_c_( cChars, chars, 5, 15 );
    expect_c_( chars_is_c( pineapple, "pineapples" ) );
 
-   cChars emptyChars = sub_chars_c( chars, 6, 16 );
+   cChars emptyChars = sub_c_( cChars, chars, 6, 16 );
    expect_c_( is_empty_c_( emptyChars ) );
 
    // -------------------------------------------------------------- cInt32Slice
    cInt32Slice int32s = slice_c_( int32_t, -123, 4356, 876, -3, 98676 );
 
-   cInt32Slice three = sub_int32_slice_c( int32s, 1, 4 );
+   cInt32Slice three = sub_c_( cInt32Slice, int32s, 1, 4 );
    expect_c_( three.s == 3 );
    expect_c_( three.v[ 0 ] == 4356 );
    expect_c_( three.v[ 2 ] == -3 );
 
-   cInt32Slice one = sub_int32_slice_c( int32s, 2, 3 );
+   cInt32Slice one = sub_c_( cInt32Slice, int32s, 2, 3 );
    expect_c_( one.s == 1 );
    expect_c_( one.v[ 0 ] == 876 );
 

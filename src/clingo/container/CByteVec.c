@@ -12,7 +12,8 @@ VAL_VEC_IMPL_C_(
    CByteVec,      // VecType
    cByte,         // ValType
    byte_vec_c,    // FuncSuffix
-   C_ByteVecMeta  // Meta
+   C_ByteVecMeta, // Meta
+   do_nothing_c_  // InDepthCleanup
 )
 
 /*******************************************************************************
@@ -44,7 +45,7 @@ bool write_byte_vec_c( cRecorder rec[static 1],
    must_exist_c_( vec );
    must_exist_c_( fmt );
 
-   cBytes slice = bytes_c( vec->i.count, vec->data );
+   cBytes slice = { vec->i.count, vec->data };
    return write_bytes_c( rec, slice, fmt );
 }
 

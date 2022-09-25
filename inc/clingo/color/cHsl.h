@@ -24,9 +24,7 @@ typedef struct cHsl cHsl;
 SLICE_DEF_C_(
    cHsl,             // Type
    cHslSlice,        // SliceType
-   hsl_slice_c,      // FuncName
-   cVarHslSlice,     // VarSliceType
-   var_hsl_slice_c   // VarFuncName
+   cVarHslSlice      // VarSliceType
 )
 
 /*******************************************************************************

@@ -33,29 +33,7 @@ typedef bool ( *c_check_rune )( cRune r );
 SLICE_DEF_C_(
    cRune,            // Type
    cRuneSlice,       // SliceType
-   rune_slice_c,     // FuncName
-   cVarRuneSlice,    // VarSliceType
-   var_rune_slice_c  // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   cRune,            // Type
-   cRuneChunk,       // ChunkType
-   cRuneSlice,       // SliceType
-   rune_chunk_c,     // FuncName
-   cVarRuneChunk,    // VarChunkType
-   cVarRuneSlice,    // VarSliceType
-   var_rune_chunk_c  // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   cRune,               // Type
-   cRuneWindow,         // WindowType
-   cRuneSlice,          // SliceType
-   rune_window_c,       // FuncName
-   cVarRuneWindow,      // VarWindowType
-   cVarRuneSlice,       // VarSliceType
-   var_rune_window_c    // VarFuncName
+   cVarRuneSlice     // VarSliceType
 )
 
 /*******************************************************************************

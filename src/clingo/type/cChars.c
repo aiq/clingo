@@ -9,36 +9,6 @@
 #include "clingo/io/print.h"
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-*******************************************************************************/
-
-SLICE_IMPL_C_(
-   char,       // Type
-   cChars,     // SliceType
-   chars_c,    // FuncName
-   cVarChars,  // VarSliceType
-   var_chars_c // VarFuncName
-)
-
-CHUNK_IMPL_C_(
-   cCharChunk,       // ChunkType
-   cChars,           // SliceType
-   char_chunk_c,     // FuncName
-   cVarCharChunk,    // VarChunkType
-   cVarChars,        // VarSliceType
-   var_char_chunk_c  // VarFuncName
-)
-
-WINDOW_IMPL_C_(
-   cCharWindow,      // WindowType
-   cChars,           // SliceType
-   char_window_c,    // FuncName
-   cVarCharWindow,   // VarWindowType
-   cVarChars,        // VarSliceType
-   var_char_window_c // VarFuncName
-)
-
-/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  overall 
@@ -175,6 +145,12 @@ STARTS_WITH_C_(
    do_deref_c_          // DoDeref
 )
 
+SET_C_(
+   set_chars_c,   // FuncName
+   cVarChars,     // VarSliceType
+   cChars         // SliceType
+)
+
 /*******************************************************************************
  trim
 *******************************************************************************/
@@ -196,7 +172,7 @@ cChars trim_any_char_left_c( cChars chars, cChars set )
    {
       ++itr;
    }
-   return make_chars_c( itr, end );
+   return (cChars)atween_c_( itr, end );
 }
 
 cChars trim_any_char_right_c( cChars chars, cChars set )
@@ -209,7 +185,7 @@ cChars trim_any_char_right_c( cChars chars, cChars set )
    {
       --itr;
    }
-   return make_chars_c( begin_c_( chars ), itr+1 );
+   return (cChars)atween_c_( begin_c_( chars ), itr+1 );
 }
 
 cChars trim_char_match_c( cChars chars, c_check_char check )
@@ -229,7 +205,7 @@ cChars trim_char_match_left_c( cChars chars, c_check_char check )
    {
       ++itr;
    }
-   return make_chars_c( itr, end );
+   return (cChars)atween_c_( itr, end );
 }
 
 cChars trim_char_match_right_c( cChars chars, c_check_char check )
@@ -242,5 +218,5 @@ cChars trim_char_match_right_c( cChars chars, c_check_char check )
    {
       --itr;
    }
-   return make_chars_c( begin_c_( chars ), itr+1 );
+   return (cChars)atween_c_( begin_c_( chars ), itr+1 );
 }

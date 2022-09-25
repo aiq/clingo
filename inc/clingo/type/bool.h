@@ -15,29 +15,7 @@
 SLICE_DEF_C_(
    bool,             // Type
    cBoolSlice,       // SliceType
-   bool_slice_c,     // FuncName
-   cVarBoolSlice,    // VarSliceType
-   var_bool_slice_c  // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   bool,             // Type
-   cBoolChunk,       // ChunkType
-   cBoolSlice,       // SliceType
-   bool_chunk_c,     // FuncName
-   cVarBoolChunk,    // VarChunkType
-   cVarBoolSlice,    // VarSliceType
-   var_bool_chunk_c  // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   bool,             // Type
-   cBoolWindow,      // WindowType
-   cBoolSlice,       // SliceType
-   bool_window_c,    // FuncName
-   cVarBoolWindow,   // VarWindowType
-   cVarBoolSlice,    // VarSliceType
-   var_bool_window_c // VarFuncName
+   cVarBoolSlice     // VarSliceType
 )
 
 /*******************************************************************************

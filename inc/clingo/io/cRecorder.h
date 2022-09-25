@@ -150,10 +150,10 @@ inline cBytes recorded_bytes_c( cRecorder const rec[static 1] )
    must_exist_c_( rec );
    if ( rec->pos == 0 )
    {
-      return empty_bytes_c();
+      return (cBytes)empty_c_();
    }
    const cByte* ptr = rec->mem;
-   return bytes_c( rec->pos, ptr - rec->pos );
+   return (cBytes){ rec->pos, ptr - rec->pos };
 }
 
 CLINGO_API
@@ -162,10 +162,10 @@ inline cChars recorded_chars_c( cRecorder const rec[static 1] )
    must_exist_c_( rec );
    if ( rec->pos == 0 )
    {
-      return empty_chars_c();
+      return (cChars)empty_c_();
    }
    const char* ptr = rec->mem;
-   return chars_c( rec->pos, ptr - rec->pos );
+   return (cChars){ rec->pos, ptr - rec->pos };
 }
 
 CLINGO_API
@@ -177,10 +177,10 @@ inline cVarBytes recorded_var_bytes_c( cRecorder rec[static 1] )
    must_exist_c_( rec );
    if ( rec->pos == 0 )
    {
-      return empty_var_bytes_c();
+      return (cVarBytes)empty_c_();
    }
    cByte* ptr = rec->mem;
-   return var_bytes_c( rec->pos, ptr - rec->pos );
+   return (cVarBytes){ rec->pos, ptr - rec->pos };
 }
 
 CLINGO_API
@@ -189,10 +189,10 @@ inline cVarChars recorded_var_chars_c( cRecorder rec[static 1] )
    must_exist_c_( rec );
    if ( rec->pos == 0 )
    {
-      return empty_var_chars_c();
+      return (cVarChars)empty_c_();
    }
    char* ptr = rec->mem;
-   return var_chars_c( rec->pos, ptr - rec->pos );
+   return (cVarChars){ rec->pos, ptr - rec->pos };
 }
 
 /*******************************************************************************

@@ -23,9 +23,7 @@ typedef struct cYmd cYmd;
 SLICE_DEF_C_(
    cYmd,             // Type
    cYmdSlice,        // SliceType
-   ymd_slice_c,      // FuncName
-   cVarYmdSlice,     // VarSliceType
-   var_ymd_slice_c   // VarFuncName
+   cVarYmdSlice      // VarSliceType
 )
 
 /*******************************************************************************

@@ -477,12 +477,18 @@ local function cmdexec( cmdtab )
    return stdout
 end
 
-local function adoctohtml( adocfile ) --> html
-   local cmd = { "asciidoc" }
+local function adoctohtml( adocfile, rootdir ) --> html
+   local adocdir = dirname( adocfile )
+
+   local cmd = { "asciidoctor" }
    append( cmd, "-a", "idprefix=''" )
    append( cmd, "--backend", "html5" )
    append( cmd, "--no-header-footer" )
    append( cmd, "--out-file", "-" )
+   append( cmd, "--attribute=source-highlighter=coderay" )
+   append( cmd, "--attribute=rootdir="..relativepath( adocdir, rootdir ) )
+   append( cmd, "--attribute=testroot="..relativepath( adocdir, joinpath{ rootdir, "test" } ) )
+   append( cmd, "--attribute=docroot="..relativepath( adocdir, joinpath{ rootdir, "doc" } ) )
    append( cmd, adocfile )
    return cmdexec( cmd )
 end
@@ -612,7 +618,7 @@ local function writehtml( name, docfile, fromdir, destfile )
       CSSFILE = relativepath( dirname( destfile ), csspath ),
       TOC = tochtml( docfile, relativepath( dirname( destfile ), logopath ) ),
       LINKS = table.concat( linktreehtml( fromdir , doctree ) ),
-      CONTENT = adoctohtml( docfile )
+      CONTENT = adoctohtml( docfile, clingodir )
    }
    logln( "writefile: "..destfile )
    writefile( destfile, page )

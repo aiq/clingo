@@ -7,7 +7,7 @@ int main( void )
    init_tap_c_();
 
    cVarInt64Slice slice4 = slice_c_( int64_t, 11, 22, 33, 44 );
-   cVarInt64Slice slice3 = left_var_int64_slice_c( slice4, 3 );
+   cVarInt64Slice slice3 = left_c_( cVarInt64Slice, slice4, 3 );
    put_c_( slice3, 0, 10 );
    put_c_( slice3, 1, 20 );
    put_c_( slice3, 2, 30 );

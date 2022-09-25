@@ -23,7 +23,7 @@ static bool read_format_text_c( cScanner sca[static 1],
       char const* fmtStr = fmtSca->mem;
       if ( move_to_char_c( fmtSca, '{' ) )
       {
-         cChars cs = make_chars_c( fmtStr, fmtSca->mem );
+         cChars cs = atween_c_( fmtStr, (char const*)fmtSca->mem );
          if ( not move_if_chars_c( sca, cs ) )
          {
             move_scanner_to_c( sca, scaInitPos );

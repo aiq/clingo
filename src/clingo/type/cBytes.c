@@ -108,36 +108,6 @@ static inline void right_shift_bits( cVarBytes slice,
 }
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-*******************************************************************************/
-
-SLICE_IMPL_C_(
-   cByte,            // Type
-   cBytes,       // SliceType
-   bytes_c,     // FuncName
-   cVarBytes,    // VarSliceType
-   var_bytes_c  // VarFuncName
-)
-
-CHUNK_IMPL_C_(
-   cByteChunk,       // ChunkType
-   cBytes,       // SliceType
-   byte_chunk_c,     // FuncName
-   cVarByteChunk,    // VarChunkType
-   cVarBytes,    // VarSliceType
-   var_byte_chunk_c  // VarFuncName
-)
-
-WINDOW_IMPL_C_(
-   cByteWindow,      // WindowType
-   cBytes,       // SliceType
-   byte_window_c,    // FuncName
-   cVarByteWindow,   // VarWindowType
-   cVarBytes,    // VarSliceType
-   var_byte_window_c // VarFuncName
-)
-
-/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  bit
@@ -262,13 +232,14 @@ extern inline void toggle_bytes_bit_c( cVarBytes slice, int64_t pos );
  shift
 *******************************************************************************/
 
+WINDOW_C_( cByte, cVarBytes, cVarByteWindow )
+
 void shift_bytes_c( cVarBytes slice, int64_t offset )
 {
    if ( offset < 0 )
    {
       abs_c_( offset, &offset );
-      cVarByteWindow window;
-      init_front_var_byte_window_c( &window, offset+1, slice );
+      cVarByteWindow window = front_window_c_( offset+1, slice );
       while ( valid_window_c_( window ) )
       {
          cByte* dst = begin_c_( window );
@@ -279,8 +250,7 @@ void shift_bytes_c( cVarBytes slice, int64_t offset )
    }
    else
    {
-      cVarByteWindow window;
-      init_back_var_byte_window_c( &window, offset+1, slice );
+      cVarByteWindow window = back_window_c_( offset+1, slice );
       while ( valid_window_c_( window ) )
       {
          cByte* dst = rbegin_c_( window );

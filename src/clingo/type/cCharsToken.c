@@ -22,7 +22,7 @@ static inline bool update_token( cCharsToken tok[static 1],
    {
       tok->x.v = tok->tail.v;
       tok->x.s = v - tok->tail.v;
-      tok->tail = mid_chars_c( tok->tail, tok->x.s + len );
+      tok->tail = mid_c_( cChars, tok->tail, tok->x.s + len );
    }
    else // last
    {
@@ -41,7 +41,7 @@ bool next_token_till_any_c( cCharsToken tok[static 1], cCharsSlice set )
    char const* end = end_c_( tok->tail );
    for ( ; beg < end; ++beg )
    {
-      cChars sub = make_chars_c( beg, end );
+      cChars sub = atween_c_( beg, end );
       for_each_c_( cChars const*, any, set )
       {
          if ( chars_starts_with_c( sub, *any ) )
@@ -109,9 +109,9 @@ cChars token_delimiter_c( cCharsToken const tok[static 1] )
 {
    must_exist_c_( tok );
 
-   if ( tok->x.v >=  tok->tail.v ) return empty_chars_c();
+   if ( tok->x.v >=  tok->tail.v ) return (cChars)empty_c_();
 
    char const* v = tok->x.v + tok->x.s;
    int64_t s = tok->tail.v - v;
-   return chars_c( s, v );
+   return (cChars){ s, v };
 }

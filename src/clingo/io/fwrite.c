@@ -19,7 +19,7 @@ static bool fwrite_format_text_c( FILE* file,
       char const* oldStr = sca->mem;
       if ( move_to_char_c( sca, '{' ) )
       {
-         cChars cs = make_chars_c( oldStr, sca->mem );
+         cChars cs = atween_c_( oldStr, (char const*)sca->mem );
          if ( not  fput_chars_c( file, cs ) )
          {
             push_file_error_c( es, file );
@@ -41,7 +41,7 @@ static bool fwrite_format_text_c( FILE* file,
       }
       else
       {
-         cChars cs = chars_c( sca->space, oldStr );
+         cChars cs = { sca->space, oldStr };
          move_scanner_c( sca, sca->space );
          if ( not fput_chars_c( file, cs ) )
          {

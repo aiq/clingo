@@ -23,9 +23,7 @@ typedef struct cTimestamp cTimestamp;
 SLICE_DEF_C_(
    cTimestamp,             // Type
    cTimestampSlice,        // SliceType
-   timestamp_slice_c,      // FuncName
-   cVarTimestampSlice,     // VarSliceType
-   var_timestamp_slice_c   // VarFuncName
+   cVarTimestampSlice      // VarSliceType
 )
 
 /*******************************************************************************

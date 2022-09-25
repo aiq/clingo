@@ -23,7 +23,7 @@ int main( void )
       }
    }
 
-   cChars slc = as_chars_c( buf );
+   cChars slc = as_c_( cChars, buf );
    expect_c_( chars_is_c( slc, "+.+.+.+." ) );
 
    return finish_tap_c_();

@@ -1,5 +1,5 @@
 = CStringList
-:xmpldir: ../../../test/clingo/string/CStringList
+:xmpldir: {testroot}/clingo/string/CStringList
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -30,30 +30,10 @@ struct CStringList;
 typedef struct CStringList CStringList;
 ----
 
-Via the macros link:vec.html#OBJ_VEC_DEF_C_[OBJ_VEC_DEF_C_] and
-link:vec.html#OBJ_VEC_IMPL_C_[OBJ_VEC_IMPL_C_] declared and implemented struct.
-The macros declare and implement also the following functions.
-
-[source,c]
-----
-/* create */
-CStringList* make_string_list_c( int64_t cap );
-CStringList* new_string_list_c();
-/* data */
-CString* const* data_of_string_list_c( CStringList const* vec );
-CString** var_data_of_string_list_c( CStringList* vec );
-bool resize_string_list_c( CStringList* vec, int64_t cap );
-bool shrink_string_list_c( CStringList* vec );
-/* info */
-cVecInfo const* info_of_string_list_c( CStringList const* list );
-/* use */
-bool add_to_string_list_c( CStringList* vec, CString* val );
-bool add_array_to_string_list_c( CStringList* vec, int64_t n, CString* const* arr );
-CString* get_from_string_list_c( CStringList const* vec, int64_t pos );
-bool insert_into_string_list_c( CStringList* vec, int64_t pos, CString* val );
-bool remove_from_string_list_c( CStringList* vec, int64_t pos );
-void set_on_string_list_c( CStringList* vec, int64_t pos, CString* val );
-----
+:ObjVec-VecType: CStringList
+:ObjVec-ObjType: CString
+:ObjVec-FuncSuffix: string_list_c
+include::../_tmpl/ObjVec.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions
@@ -96,10 +76,10 @@ bool add_chars_to_string_list_c( CStringList* list, cChars chars );
 
 Util function that wraps add_to_string_list_c.
 
-==== add_cs_to_string_list_c
+==== add_cstr_to_string_list_c
 [source,c]
 ----
-bool add_cs_to_string_list_c( CStringList* list, char const cstr[static 1] );
+bool add_cstr_to_string_list_c( CStringList* list, char const cstr[static 1] );
 ----
 
 Util function that wraps add_to_string_list_c.

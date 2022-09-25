@@ -57,8 +57,8 @@ int8_t days_per_month_c( c_Month month, bool leapYear )
 int16_t first_month_day_of_year_c( c_Month month, bool leapYear )
 {
    cInt8Slice slice = leapYear
-      ? int8_slice_c( month - 1, DaysPerMonthInLeapYear )
-      : int8_slice_c( month - 1, DaysPerMonth );
+      ? (cInt8Slice){ month - 1, DaysPerMonthInLeapYear }
+      : (cInt8Slice){ month - 1, DaysPerMonth };
 
    int64_t sum = 0;
    sum_int8_c( slice, &sum );
@@ -113,7 +113,7 @@ cVarChars get_month_abbrev_c( c_Month month, cVarChars buf )
    if ( is_empty_c_( buf ) ) return buf;
 
    size_t sz;
-   if ( not int64_to_size_c( buf.s, &sz ) ) return empty_var_chars_c();
+   if ( not int64_to_size_c( buf.s, &sz ) ) return (cVarChars)empty_c_();
 
    struct tm t;
    t.tm_mon = int8_c_( month ) - 1;
@@ -127,7 +127,7 @@ cVarChars get_month_name_c( c_Month month, cVarChars buf )
    if ( is_empty_c_( buf ) ) return buf;
 
    size_t sz;
-   if ( not int64_to_size_c( buf.s, &sz ) ) return empty_var_chars_c();
+   if ( not int64_to_size_c( buf.s, &sz ) ) return (cVarChars)empty_c_();
 
    struct tm t;
    t.tm_mon = int8_c_( month ) - 1;

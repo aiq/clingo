@@ -10,36 +10,6 @@
 #include "clingo/type/uint8.h"
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-*******************************************************************************/
-
-SLICE_IMPL_C_(
-   float,               // Type
-   cFloatSlice,         // SliceType
-   float_slice_c,       // FuncName
-   cVarFloatSlice,      // VarSliceType
-   var_float_slice_c    // VarFuncName
-)
-
-CHUNK_IMPL_C_(
-   cFloatChunk,         // ChunkType
-   cFloatSlice,         // SliceType
-   float_chunk_c,       // FuncName
-   cVarFloatChunk,      // VarChunkType
-   cVarFloatSlice,      // VarSliceType
-   var_float_chunk_c    // VarFuncName
-)
-
-WINDOW_IMPL_C_(
-   cFloatWindow,        // WindowType
-   cFloatSlice,         // SliceType
-   float_window_c,      // FuncName
-   cVarFloatWindow,     // VarWindowType
-   cVarFloatSlice,      // VarSliceType
-   var_float_window_c   // VarFuncName
-)
-
-/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  overall

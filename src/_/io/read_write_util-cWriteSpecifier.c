@@ -29,7 +29,7 @@ bool read_in_write_specifier_c( cScanner sca[static 1],
       move_scanner_to_c( sca, initPos );
       return false;
    }
-   spec->type = make_chars_c( typeStr, sca->mem );
+   spec->type = (cChars)atween_c_( typeStr, (char const*)sca->mem );
 
    char const* formatStr = sca->mem; // -------------------------------- format
    int64_t const formatPos = sca->pos;
@@ -48,8 +48,8 @@ bool read_in_write_specifier_c( cScanner sca[static 1],
       return false;
    }
    int64_t const formatSize = set_chars_c( 
-      var_chars_c( cMaxSpecifierFormatLength_, spec->fmt ),
-      make_chars_c( formatStr, sca->mem )
+      (cVarChars){ cMaxSpecifierFormatLength_, spec->fmt },
+      (cChars)atween_c_( formatStr, (char const*)sca->mem )
    );
    spec->fmt[ formatSize ] = '\0';
 
@@ -66,6 +66,6 @@ void reset_write_specifier_c( cWriteSpecifier spec[static 1] )
 {
    must_exist_c_( spec );
 
-   spec->type = empty_chars_c();
+   spec->type = (cChars)empty_c_();
    spec->fmt[ 0 ] = '\0';
 }

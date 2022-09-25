@@ -2,8 +2,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/type/cChars.h"
 
-//-------------------- Type,       ChunkType, SliceType,    FuncSuffix
-STATIC_FRONT_CHUNK_C_( char const, charChunk, cChars,       char_chunk )
+CHUNK_C_( char const, cChars, charChunk )
 
 int main( void )
 {
@@ -11,8 +10,7 @@ int main( void )
 
    cChars abcdefg = c_c( "abcdefg" );
 
-   charChunk chunk;
-   init_front_char_chunk( &chunk, 2, abcdefg ); // -------------------------- ab
+   charChunk chunk = front_chunk_c_( 2, abcdefg ); // ----------------------- ab
    expect_c_( valid_chunk_c_( chunk ) );
    expect_c_( first_c_( chunk ) == 'a' );
    expect_c_( last_c_( chunk ) == 'b' );

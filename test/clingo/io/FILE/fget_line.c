@@ -50,7 +50,7 @@ int main( void )
    bool fin = false;
    while ( fget_line_c( file, n, &buf, &fin ) )
    {
-       cChars chars = as_chars_c( buf );
+       cChars chars = as_c_( cChars, buf );
        line l = lines.v[i];
        expect_c_( chars_is_c( chars, l.str ) );
        expect_c_( fin == l.fin );

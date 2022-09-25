@@ -27,9 +27,7 @@ typedef struct cHmsn cHmsn;
 SLICE_DEF_C_(
    cHmsn,            // Type
    cHmsnSlice,       // SliceType
-   hmsn_slice_c,     // FuncName
-   cVarHmsnSlice,    // VarSliceType
-   var_hmsn_slice_c  // VarFuncName
+   cVarHmsnSlice     // VarSliceType
 )
 
 /*******************************************************************************

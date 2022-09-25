@@ -13,19 +13,6 @@
 /*******************************************************************************
 ********************************************************* Types and Definitions
 ********************************************************************************
- generated
-*******************************************************************************/
-
-
-SLICE_IMPL_C_(
-   cDuration,           // Type
-   cDurationSlice,      // SliceType
-   duration_slice_c,    // FuncName
-   cVarDurationSlice,   // VarSliceType
-   var_duration_slice_c // VarFuncName
-)
-
-/*******************************************************************************
  definitions
 *******************************************************************************/
 
@@ -266,7 +253,7 @@ static bool scan_value( cScanner sca[static 1], scanValue inp[static 1] )
       return false;
    }
    char const* typeEnd = sca->mem;
-   inp->type = make_chars_c( typeBeg, typeEnd );
+   inp->type = (cChars)atween_c_( typeBeg, typeEnd );
 
    return true;
 }

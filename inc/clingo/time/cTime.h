@@ -31,9 +31,7 @@ typedef struct cTime cTime;
 SLICE_DEF_C_(
    cTime,            // Type
    cTimeSlice,       // SliceType
-   time_slice_c,     // FuncName
-   cVarTimeSlice,    // VarSliceType
-   var_time_slice_c  // VarFuncName
+   cVarTimeSlice     // VarSliceType
 )
 
 /*******************************************************************************

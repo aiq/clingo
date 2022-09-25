@@ -129,7 +129,7 @@ inline bool intl_read_month_c( cScanner sca[static 1],
       bool res = false;
       for ( c_Month m = c_Jan; m <= c_Dec; ++m )
       {
-         cChars cs = as_chars_c( get_month_abbrev_c( m, varChars ) );
+         cChars cs = as_c_( cChars, get_month_abbrev_c( m, varChars ) );
          if ( move_if_chars_c( sca, cs ) )
          {
             *month = m;
@@ -145,7 +145,7 @@ inline bool intl_read_month_c( cScanner sca[static 1],
       bool res = false;
       for ( c_Month m = c_Jan; m <= c_Dec; ++m )
       {
-         cChars cs = as_chars_c( get_month_name_c( m, varChars ) );
+         cChars cs = as_c_( cChars, get_month_name_c( m, varChars ) );
          if ( move_if_chars_c( sca, cs ) )
          {
             *month = m;
@@ -203,7 +203,7 @@ inline bool intl_read_weekday_c( cScanner sca[static 1],
       bool res = false;
       for ( c_Weekday w = c_Mon; w <= c_Sun; ++w )
       {
-         cChars cs = as_chars_c( get_weekday_abbrev_c( w, varChars ) );
+         cChars cs = as_c_( cChars, get_weekday_abbrev_c( w, varChars ) );
          if ( move_if_chars_c( sca, cs ) )
          {
             *wd = w;
@@ -219,7 +219,7 @@ inline bool intl_read_weekday_c( cScanner sca[static 1],
       bool res = false;
       for ( c_Weekday w = c_Mon; w <= c_Sun; ++w )
       {
-         cChars cs = as_chars_c( get_weekday_name_c( w, varChars ) );
+         cChars cs = as_c_( cChars, get_weekday_name_c( w, varChars ) );
          if ( move_if_chars_c( sca, cs ) )
          {
             *wd = w;

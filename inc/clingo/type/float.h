@@ -25,29 +25,7 @@ typedef struct cFloatInfo cFloatInfo;
 SLICE_DEF_C_(
    float,               // Type
    cFloatSlice,         // SliceType
-   float_slice_c,       // FuncName
-   cVarFloatSlice,      // VarSliceType
-   var_float_slice_c    // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   float,               // Type
-   cFloatChunk,         // ChunkType
-   cFloatSlice,         // SliceType
-   float_chunk_c,       // FuncName
-   cVarFloatChunk,      // VarChunkType
-   cVarFloatSlice,      // VarSliceType
-   var_float_chunk_c    // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   float,               // Type
-   cFloatWindow,        // WindowType
-   cFloatSlice,         // SliceType
-   float_window_c,      // FuncName
-   cVarFloatWindow,     // VarWindowType
-   cVarFloatSlice,      // VarSliceType
-   var_float_window_c   // VarFuncName
+   cVarFloatSlice       // VarSliceType
 )
 
 /*******************************************************************************

@@ -52,7 +52,7 @@ int main( void )
    for_each_c_( test const*, t, tests )
    {
       shift_bytes_c( t->inp, t->offset );
-      bool res = eq_c( cmp_bytes_c( as_bytes_c( t->inp ), t->exp ) );
+      bool res = eq_c( cmp_bytes_c( as_c_( cBytes, t->inp ), t->exp ) );
       expect_c_( res );
    }
 

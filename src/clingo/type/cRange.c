@@ -1,38 +1,6 @@
 #include "clingo/type/cRange.h"
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-********************************************************************************
- generated
-*******************************************************************************/
-
-SLICE_IMPL_C_(
-   cRange,           // Type
-   cRangeSlice,      // SliceType
-   range_slice_c,    // FuncName
-   cVarRangeSlice,   // VarSliceType
-   var_range_slice_c // VarFuncName
-)
-
-CHUNK_IMPL_C_(
-   cRangeChunk,      // ChunkType
-   cRangeSlice,      // SliceType
-   range_chunk_c,    // FuncName
-   cVarRangeChunk,   // VarChunkType
-   cVarRangeSlice,   // VarSliceType
-   var_range_chunk_c // VarFuncName
-)
-
-WINDOW_IMPL_C_(
-   cRangeWindow,        // WindowType
-   cRangeSlice,         // SliceType
-   range_window_c,      // FuncName
-   cVarRangeWindow,     // VarWindowType
-   cVarRangeSlice,      // VarSliceType
-   var_range_window_c   // VarFuncName
-)
-
-/*******************************************************************************
 ********************************************************************+ Functions
 ********************************************************************************
  overall

@@ -26,9 +26,7 @@ typedef struct cMonthDay cMonthDay;
 SLICE_DEF_C_(
    cMonthDay,              // Type
    cMonthDaySlice,         // SliceType
-   month_day_slice_c,      // FuncName
-   cVarMonthDaySlice,      // VarSliceType
-   var_month_day_slice_c   // VarFuncName
+   cVarMonthDaySlice       // VarSliceType
 )
 
 /*******************************************************************************

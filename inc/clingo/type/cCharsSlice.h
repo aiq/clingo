@@ -9,31 +9,9 @@
 *******************************************************************************/
 
 SLICE_DEF_C_(
-   cChars,           // Type
-   cCharsSlice,      // SliceType
-   chars_slice_c,    // FuncName
-   cVarCharsSlice,   // VarSliceType
-   var_chars_slice_c // VarFuncName
-)
-
-CHUNK_DEF_C_(
-   cChars,           // Type
-   cCharsChunk,      // ChunkType
-   cCharsSlice,      // SliceType
-   chars_chunk_c,    // FuncName
-   cVarCharsChunk,   // VarChunkType
-   cVarCharsSlice,   // VarSliceType
-   var_chars_chunk_c // VarFuncName
-)
-
-WINDOW_DEF_C_(
-   cChars,              // Type
-   cCharsWindow,        // WindowType
-   cCharsSlice,         // SliceType
-   chars_window_c,      // FuncName
-   cVarCharsWindow,     // VarWindowType
-   cVarCharsSlice,      // VarSliceType
-   var_chars_window_c   // VarFuncName
+   cChars,        // Type
+   cCharsSlice,   // SliceType
+   cVarCharsSlice // VarSliceType
 )
 
 /*******************************************************************************

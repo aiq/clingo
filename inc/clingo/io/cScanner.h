@@ -207,10 +207,10 @@ CLINGO_API inline cBytes scanned_bytes_c( cScanner const sca[static 1], int64_t 
 
    if ( sca->pos <= 0 or size > sca->pos )
    {
-      return empty_bytes_c();
+      return (cBytes)empty_c_();
    }
    cByte const* ptr = sca->mem;
-   return bytes_c( size, ptr - size );
+   return (cBytes){ size, ptr - size };
 }
 
 #define scanned_chars_c_( Sca )                                                \
@@ -222,10 +222,10 @@ CLINGO_API inline cChars scanned_chars_c( cScanner const sca[static 1], int64_t 
 
    if ( sca->pos <= 0 or size > sca->pos )
    {
-      return empty_chars_c();
+      return (cChars)empty_c_();
    }
    char const* ptr = sca->mem;
-   return chars_c( size, ptr - size );
+   return (cChars){ size, ptr - size };
 }
 
 #define unscanned_bytes_c_( Sca )                                              \
@@ -237,10 +237,10 @@ CLINGO_API inline cBytes unscanned_bytes_c( cScanner const sca[static 1], int64_
 
    if ( sca->space <= 0 or size > sca->space )
    {
-      return empty_bytes_c();
+      return (cBytes)empty_c_();
    }
    cByte const* ptr = sca->mem;
-   return bytes_c( size, ptr );
+   return (cBytes){ size, ptr };
 }
 
 #define unscanned_chars_c_( Sca )                                              \
@@ -252,10 +252,10 @@ CLINGO_API inline cChars unscanned_chars_c( cScanner const sca[static 1], int64_
 
    if ( sca->space <= 0 or size > sca->space )
    {
-      return empty_chars_c();
+      return (cChars)empty_c_();
    }
    char const* ptr = sca->mem;
-   return chars_c( size, ptr );
+   return (cChars){ size, ptr };
 }
 
 CLINGO_API bool unscanned_is_c( cScanner const sca[static 1], char const cstr[static 1] );
@@ -320,14 +320,14 @@ CLINGO_API inline cBytes view_bytes_c( cScanner sca[static 1], int64_t size )
 
    if ( size > sca->space )
    {
-      return empty_bytes_c();
+      return (cBytes)empty_c_();
    }
 
    const cByte* ptr = sca->mem;
    sca->pos += size;
    sca->space -= size;
    sca->mem += size;
-   return bytes_c( size, ptr );
+   return (cBytes){ size, ptr };
 }
 
 CLINGO_API inline cChars view_chars_c( cScanner sca[static 1], int64_t size )
@@ -337,14 +337,14 @@ CLINGO_API inline cChars view_chars_c( cScanner sca[static 1], int64_t size )
 
    if ( size > sca->space )
    {
-      return empty_chars_c();
+      return (cChars)empty_c_();
    }
 
    char const* ptr = sca->mem;
    sca->pos += size;
    sca->space -= size;
    sca->mem += size;
-   return chars_c( size, ptr );
+   return (cChars){ size, ptr };
 }
 
 CLINGO_API char const* view_cstr_c( cScanner sca[static 1] );

@@ -24,9 +24,7 @@ typedef struct cRgb24 cRgb24;
 SLICE_DEF_C_(
    cRgb24,           // Type
    cRgb24Slice,      // SliceType
-   rgb24_slice_c,    // FuncName
-   cVarRgb24Slice,   // VarSliceType
-   var_rgb24_slice_c // VarFuncName
+   cVarRgb24Slice    // VarSliceType
 )
 
 IMAGE_TYPE_C_(

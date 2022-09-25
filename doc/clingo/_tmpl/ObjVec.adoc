@@ -1,0 +1,24 @@
+Via the macros link:{docroot}/clingo/container/vec.html#OBJ_VEC_DEF_C_[OBJ_VEC_DEF_C_] and
+link:{docroot}/clingo/container/vec.html#OBJ_VEC_IMPL_C_[OBJ_VEC_IMPL_C_] declared and implemented struct.
+The macros declare and implement also the following functions.
+
+[source,c,subs=attributes+]
+----
+/* create */
+{ObjVec-VecType}* make_{ObjVec-FuncSuffix}( int64_t cap );
+{ObjVec-VecType}* new_{ObjVec-FuncSuffix}( void );
+/* data */
+{ObjVec-ObjType}* const* data_of_{ObjVec-FuncSuffix}( {ObjVec-VecType} const* vec );
+{ObjVec-ObjType}** var_data_of_{ObjVec-FuncSuffix}( {ObjVec-VecType}* vec );
+/* resize */
+bool resize_{ObjVec-FuncSuffix}( {ObjVec-VecType}* vec, int64_t cap );
+/* info */
+cVecInfo const* info_of_{ObjVec-FuncSuffix}( {ObjVec-VecType} const* list );
+/* use */
+bool add_to_{ObjVec-FuncSuffix}( {ObjVec-VecType}* vec, {ObjVec-ObjType}* val );
+bool add_array_to_{ObjVec-FuncSuffix}( {ObjVec-VecType}* vec, int64_t n, {ObjVec-ObjType}* const* arr );
+{ObjVec-ObjType}* get_from_{ObjVec-FuncSuffix}( {ObjVec-VecType} const* vec, int64_t pos );
+bool insert_into_{ObjVec-FuncSuffix}( {ObjVec-VecType}* vec, int64_t pos, {ObjVec-ObjType}* val );
+bool remove_from_{ObjVec-FuncSuffix}( {ObjVec-VecType}* vec, int64_t pos );
+void set_on_{ObjVec-FuncSuffix}( {ObjVec-VecType}* vec, int64_t pos, {ObjVec-ObjType}* val );
+----

@@ -92,7 +92,7 @@ CString* empty_string_c()
       {
          return NULL;
       }
-      emptyString->chars = chars_c( 0, "" );
+      emptyString->chars = (cChars){ 0, "" };
    }
    return emptyString;
 }

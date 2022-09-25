@@ -5,36 +5,6 @@
 #include "clingo/type/cRune.h"
 
 /*******************************************************************************
-********************************************************* Types and Definitions
-*******************************************************************************/
-
-SLICE_IMPL_C_(
-   cChars,           // Type
-   cCharsSlice,      // SliceType
-   chars_slice_c,    // FuncName
-   cVarCharsSlice,   // VarSliceType
-   var_chars_slice_c // VarFuncName
-)
-
-CHUNK_IMPL_C_(
-   cCharsChunk,      // ChunkType
-   cCharsSlice,      // SliceType
-   chars_chunk_c,    // FuncName
-   cVarCharsChunk,   // VarChunkType
-   cVarCharsSlice,   // VarSliceType
-   var_chars_chunk_c // VarFuncName
-)
-
-WINDOW_IMPL_C_(
-   cCharsWindow,        // WindowType
-   cCharsSlice,         // SliceType
-   chars_window_c,      // FuncName
-   cVarCharsWindow,     // VarWindowType
-   cVarCharsSlice,      // VarSliceType
-   var_chars_window_c   // VarFuncName
-)
-
-/*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
  overall 
@@ -44,7 +14,7 @@ cCharsSlice init_chars_slice_c( cVarCharsSlice slice,
                                 int64_t n,
                                 char const* arr[static 1] )
 {
-   if ( n > slice.s ) return empty_chars_slice_c();
+   if ( n > slice.s ) return (cCharsSlice)empty_c_();
 
    for ( int64_t i = 0; i < n; ++i )
    {
@@ -52,7 +22,7 @@ cCharsSlice init_chars_slice_c( cVarCharsSlice slice,
    }
 
    slice.s = n;
-   return as_chars_slice_c( slice );
+   return as_c_( cCharsSlice, slice );
 }
 
 /*******************************************************************************
@@ -142,7 +112,7 @@ int64_t index_of_any_chars_c( cChars chars, cCharsSlice slice )
    char const* end = end_c_( chars );
    for ( ; beg < end; ++beg )
    {
-      cChars sub = make_chars_c( beg, end );
+      cChars sub = atween_c_( beg, end );
       if ( chars_starts_with_any_c( sub, slice ) )
       {
          return index_of_c_( chars, beg );

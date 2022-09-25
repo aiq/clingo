@@ -1,0 +1,361 @@
+= cRange
+:xmpldir: {testroot}/clingo/color/cCmyk
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cCmyk']
+==== cCmyk
+[source,c]
+----
+struct cCmyk
+{
+   float cyan;
+   float magenta;
+   float yellow;
+   float key;
+};
+typedef struct cCmyk cCmyk;
+----
+
+
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cRangeSlice']
+==== cRangeSlice
+[source,c]
+----
+struct cRangeSlice
+{
+   int64_t s;
+   cRange const* v;
+};
+typedef struct cRangeSlice cRangeSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cRangeSlice range_slice_c( int64_t s, cRange const* v );
+cRangeSlice make_range_slice_c( cRange const* beg, cRange const* end );
+cRangeSlice null_range_slice_c( void );
+/* sub */
+cRangeSlice left_range_slice_c( cRangeSlice slice, int64_t maxLen );
+cRangeSlice mid_range_slice_c( cRangeSlice slice, int64_t index );
+cRangeSlice right_range_slice_c( cRangeSlice slice, int64_t maxLen );
+cRangeSlice sub_range_slice_c( cRangeSlice slice,
+                               int64_t begIdx,
+                               int64_t endIdx);
+----
+
+[id='cVarRangeSlice']
+==== cVarRangeSlice
+[source,c]
+----
+struct cVarRangeSlice
+{
+   int64_t s;
+   cRange* v;
+};
+typedef struct cVarRangeSlice cVarRangeSlice;
+----
+
+{Slice}
+
+[source,c]
+----
+/* init */
+cVarRangeSlice var_range_slice_c( int64_t s, cRange* v );
+cVarRangeSlice make_var_range_slice_c( cRange* beg, cRange* end );
+cVarRangeSlice null_var_range_slice_c( void );
+/* sub */
+cVarRangeSlice left_var_range_slice_c( cVarRangeSlice slice, int64_t maxLen );
+cVarRangeSlice mid_var_range_slice_c( cVarRangeSlice slice, int64_t index );
+cVarRangeSlice right_var_range_slice_c( cVarRangeSlice slice, int64_t maxLen );
+cVarRangeSlice sub_var_range_slice_c( cVarRangeSlice slice,
+                                      int64_t begIdx,
+                                      int64_t endIdx);
+/* var slice */
+cVarRangeSlice as_var_range_slice_c( cVarRangeSlice slice );
+cVarRangeSlice cast_var_range_slice_c( cVarRangeSlice slice, cRangeSlice sub );
+int64_t set_range_slice_c( cVarRangeSlice dst, cRangeSlice src );
+----
+
+[id='cRangeChunk']
+==== cRangeChunk
+[source,c]
+----
+struct cRangeChunk
+{
+   int64_t s;
+   cRange const* v;
+   int64_t favSize;
+   cRangeSlice slice;
+}
+typedef struct cRangeChunk cRangeChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_range_chunk_c( cRangeChunk chunk[static 1],
+                              int64_t s,
+                              cRangeSlice slice );
+void init_front_range_chunk_c( cRangeChunk chunk[static 1],
+                               int64_t s,
+                               cRangeSlice slice );
+----
+
+[id='cVarRangeChunk']
+==== cVarRangeChunk
+[source,c]
+----
+struct cVarRangeChunk
+{
+   int64_t s;
+   cRange* v;
+   int64_t favSize;
+   cVarRangeSlice slice;
+};
+typedef struct cVarRangeChunk cVarRangeChunk;
+----
+
+{Chunk}
+
+[source,c]
+----
+void init_back_var_range_chunk_c( cVarRangeChunk chunk[static 1],
+                                  int64_t s,
+                                  cVarRangeSlice slice );
+void init_front_var_range_chunk_c( cVarRangeChunk chunk[static 1],
+                                   int64_t s,
+                                   cVarRangeSlice slice );
+----
+
+[id='cRangeWindow']
+==== cRangeWindow
+[source,c]
+----
+struct cRangeWindow
+{
+   int64_t s;
+   cRange const* v;
+   cRangeSlice slice;
+};
+typedef struct cRangeWindow cRangeWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_range_window_c( cRangeWindow window[static 1],
+                               int64_t s,
+                               cRangeSlice slice );
+void init_front_range_window_c( cRangeWindow window[static 1],
+                                int64_t s,
+                                cRangeSlice slice );
+----
+
+[id='cVarRangeSlice']
+==== cVarRangeWindow
+[source,c]
+----
+struct cVarRangeWindow
+{
+   int64_t s;
+   cRange* v;
+   cVarRangeSlice slice;
+};
+typedef struct cVarRangeWindow cVarRangeWindow;
+----
+
+{Window}
+
+[source,c]
+----
+void init_back_var_range_window_c( cVarRangeWindow window[static 1],
+                                   int64_t s,
+                                   cVarRangeSlice slice );
+void init_front_var_range_window_c( cVarRangeWindow window[static 1],
+                                    int64_t s,
+                                    cVarRangeSlice slice );
+----
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+[id='closed_open_range_c_']
+==== closed_open_range_c_
+[source,c]
+----
+#define closed_open_range_c_( Start, End )
+----
+
+Creates a half opened range [Start..End).
+
+.Example
+[source,c]
+----
+include::{xmpldir}/closed_open_range.c[]
+----
+
+[id='closed_range_c_']
+==== closed_range_c_
+[source,c]
+----
+#define closed_range_c_( Start, End )
+----
+
+Creates a closed range [Start..End].
+
+.Example
+[source,c]
+----
+include::{xmpldir}/closed_range.c[]
+----
+
+[id='open_closed_range_c_']
+==== open_closed_range_c_
+[source,c]
+----
+#define open_closed_range_c_( Start, End )
+----
+
+Creates a half opened range (Start..End].
+
+.Example
+[source,c]
+----
+include::{xmpldir}/open_closed_range.c[]
+----
+
+[id='open_range_c_']
+==== open_range_c_
+[source,c]
+----
+#define open_range_c_( Start, End )
+----
+
+Creates a open range (Start..End).
+
+.Example
+[source,c]
+----
+include::{xmpldir}/open_range.c[]
+----
+
+[id='sized_range_c_']
+==== sized_range_c_
+[source,c]
+----
+#define sized_range_c_( Start, Size )
+----
+
+Creates a range that uses Start as Min Value and contains Size values.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/sized_range.c[]
+----
+
+//********************************************************************* overall
+=== overall
+
+==== clamp_into_range_c
+[source,c]
+----
+int64_t clamp_into_range_c( cRange range, int64_t value );
+----
+
+Clamps the value into the defined range.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/clamp_into_range.c[]
+----
+
+==== eq_range_c
+[source,c]
+----
+bool eq_range_c( cRange a, cRange b );
+----
+
+Returns true if both ranges are equal, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/eq_range.c[]
+----
+
+==== in_range_c
+[source,c]
+----
+bool in_range_c( cRange range, int64_t value );
+----
+
+Returns true if the range contains value, otherwise false.
+
+==== range_is_valid_c
+[source,c]
+----
+bool range_is_valid_c( cRange range );
+----
+
+Returns true if the range is valid, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/range_is_valid.c[]
+----
+
+==== range_size_c
+[source,c]
+----
+int64_t range_size_c( cRange range );
+----
+
+Returns the number of values the range contains.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/range_size.c[]
+----
+
+==== shift_range_c
+[source,c]
+----
+cRange shift_range_c( cRange range, int64_t distance );
+----
+
+Shifts the range forward(positive distance) or backwards(negative distance).
+
+.Example
+[source,c]
+----
+include::{xmpldir}/shift_range.c[]
+----

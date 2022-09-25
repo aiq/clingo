@@ -24,9 +24,7 @@ typedef struct cHsv cHsv;
 SLICE_DEF_C_(
    cHsv,             // Type
    cHsvSlice,        // SliceType
-   hsv_slice_c,      // FuncName
-   cVarHsvSlice,     // VarSliceType
-   var_hsv_slice_c   // VarFuncName
+   cVarHsvSlice      // VarSliceType
 )
 
 /*******************************************************************************

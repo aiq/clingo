@@ -23,9 +23,7 @@ typedef struct cTzOffset cTzOffset;
 SLICE_DEF_C_(
    cTzOffset,              // Type
    cTzOffsetSlice,         // SliceType
-   tz_offset_slice_c,      // FuncName
-   cVarTzOffsetSlice,      // VarSliceType
-   var_tz_offset_slice_c   // VarFuncName
+   cVarTzOffsetSlice       // VarSliceType
 )
 
 /*******************************************************************************

@@ -32,7 +32,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
       ++len;                                                                   \
    }                                                                           \
                                                                                \
-   cVarChars numBuf = mid_var_chars_c( valBuf, len );                          \
+   cVarChars numBuf = mid_c_( cVarChars, valBuf, len );                        \
    /* decimal value ------------------------------------------------------- */ \
    if ( numFmt.type == 'd' )                                                   \
    {                                                                           \
@@ -82,7 +82,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
          *(numBuf.v) = negative ? '-'                                          \
                                 : '+';                                         \
          ++len;                                                                \
-         numBuf = mid_var_chars_c( numBuf, 1 );                                \
+         numBuf = mid_c_( cVarChars, numBuf, 1 );                              \
       }                                                                        \
                                                                                \
       if ( numFmt.type == 'x' )                                                \
@@ -116,7 +116,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
    valBuf.s = len;                                                             \
                                                                                \
    /* write the value in cell or plain ------------------------------------ */ \
-   cChars valChars = as_chars_c( valBuf );                                     \
+   cChars valChars = as_c_( cChars, valBuf );                                  \
                                                                                \
    if ( numFmt.cell.size > 0 )                                                 \
    {                                                                           \

@@ -25,9 +25,7 @@ typedef struct cCmyk32 cCmyk32;
 SLICE_DEF_C_(
    cCmyk32,             // Type
    cCmyk32Slice,        // SliceType
-   cmyk32_slice_c,      // FuncName
-   cVarCmyk32Slice,     // VarSliceType
-   var_cmyk32_slice_c   // VarFuncName
+   cVarCmyk32Slice      // VarSliceType
 )
 
 /*******************************************************************************
