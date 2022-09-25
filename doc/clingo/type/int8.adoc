@@ -1,5 +1,5 @@
 = int8
-:xmpldir: ../../../test/clingo/type/int8
+:xmpldir: {testroot}/clingo/type/int8
 
 include::_attr.adoc[]
 
@@ -32,21 +32,6 @@ typedef struct cInt8Slice cInt8Slice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cInt8Slice int8_slice_c( int64_t s, int8_t const* v );
-cInt8Slice make_int8_slice_c( int8_t const* beg, int8_t const* end );
-cInt8Slice empty_int8_slice_c( void );
-/* sub */
-cInt8Slice left_int8_slice_c( cInt8Slice slice, int64_t maxLen );
-cInt8Slice mid_int8_slice_c( cInt8Slice slice, int64_t index );
-cInt8Slice right_int8_slice_c( cInt8Slice slice, int64_t maxLen );
-cInt8Slice sub_int8_slice_c( cInt8Slice slice,
-                             int64_t begIdx,
-                             int64_t endIdx );
-----
-
 [id='cVarInt8Slice']
 ==== cVarInt8Slice
 [source,c]
@@ -60,129 +45,6 @@ typedef struct cVarInt8Slice cVarInt8Slice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarInt8Slice var_int8_slice_c( int64_t s, int8_t const* v );
-cVarInt8Slice make_var_int8_slice_c( int8_t* beg, int8_t* end );
-cVarInt8Slice empty_var_int8_slice_c( void );
-/* sub */
-cVarInt8Slice left_var_int8_slice_c( cVarInt8Slice slice, int64_t maxLen );
-cVarInt8Slice mid_var_int8_slice_c( cVarInt8Slice slice, int64_t index );
-cVarInt8Slice right_var_int8_slice_c( cVarInt8Slice slice, int64_t maxLen );
-cVarInt8Slice sub_var_int8_slice_c( cVarInt8Slice slice,
-                                    int64_t begIdx,
-                                    int64_t endIdx );
-/* var slice */
-cInt8Slice as_int8_slice_c( cVarInt8Slice slice );
-cVarInt8Slice cast_int8_slice_c( cVarInt8Slice slice, cInt8Slice sub );
-int64_t set_int8_slice_c( cVarInt8Slice dst, cInt8Slice src );
-----
-
-[id='cInt8Chunk']
-==== cInt8Chunk
-[source,c]
-----
-struct cInt8Chunk
-{
-   int64_t s;
-   int8_t const* v;
-   int64_t favSize;
-   cInt8Slice slice;
-};
-typedef struct cInt8Chunk cInt8Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_int8_chunk_c( cInt8Chunk chunk[static 1],
-                             int64_t s,
-                             cInt8Slice slice );
-void init_front_int8_chunk_c( cInt8Chunk chunk[static 1],
-                              int64_t s,
-                              cInt8Slice slice );
-----
-
-[id='cVarInt8Chunk']
-==== cVarInt8Chunk
-[source,c]
-----
-struct cVarInt8Chunk
-{
-   int64_t s;
-   int8_t* v;
-   int64_t favSize;
-   cInt8Slice slice;
-};
-typedef struct cVarInt8Chunk cVarInt8Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_int8_chunk_c( cVarInt8Chunk chunk[static 1],
-                                 int64_t s,
-                                 cVarInt8Slice slice );
-void init_front_var_int8_chunk_c( cVarInt8Chunk chunk[static 1],
-                                  int64_t s,
-                                  cVarInt8Slice slice );
-----
-
-[id='cInt8Window']
-==== cInt8Window
-[source,c]
-----
-struct cInt8Window
-{
-   int64_t s;
-   int8_t const* v;
-   int64_t favSize;
-   cInt8Slice slice;
-};
-typedef struct cInt8Window cInt8Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_int8_window_c( cInt8Window window[static 1],
-                              int64_t s,
-                              cInt8Slice slice );
-void init_front_int8_window_c( cInt8Window window[static 1],
-                               int64_t s,
-                               cInt8Slice slice );
-----
-
-[id='cVarInt8Window']
-==== cVarInt8Window
-[source,c]
-----
-struct cVarInt8Window
-{
-   int64_t s;
-   int8_t* v;
-   int64_t favSize;
-   cVarInt8Slice slice;
-};
-typedef struct cVarInt8Window cVarInt8Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_int8_window_c( cVarInt8Window window[static 1],
-                                  int64_t s,
-                                  cVarInt8Slice slice );
-void init_front_var_int8_window_c( cVarInt8Window window[static 1],
-                                   int64_t s,
-                                   cVarInt8Slice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

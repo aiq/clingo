@@ -1,5 +1,5 @@
 = c_ByteOrder
-:xmpldir: ../../../test/clingo/type/c_ByteOrder
+:xmpldir: {testroot}/clingo/type/c_ByteOrder
 
 //******************************************************************************
 //******************************************************************** Overview

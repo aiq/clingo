@@ -1,5 +1,5 @@
 = uint32
-:xmpldir: ../../../test/clingo/type/uint32
+:xmpldir: {testroot}/clingo/type/uint32
 
 include::_attr.adoc[]
 
@@ -32,21 +32,6 @@ typedef struct cUint32Slice cUint32Slice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cUint32Slice uint32_slice_c( int64_t s, uint32_t const* v );
-cUint32Slice make_uint32_slice_c( uint32_t const* beg, uint32_t const* end );
-cUint32Slice empty_uint32_slice_c( void );
-/* sub */
-cUint32Slice left_uint32_slice_c( cUint32Slice slice, int64_t maxLen );
-cUint32Slice mid_uint32_slice_c( cUint32Slice slice, int64_t index );
-cUint32Slice right_uint32_slice_c( cUint32Slice slice, int64_t maxLen );
-cUint32Slice sub_uint32_slice_c( cUint32Slice slice,
-                                 int64_t begIdx,
-                                 int64_t endIdx );
-----
-
 [id='cVarUint32Slice']
 ==== cVarUint32Slice
 [source,c]
@@ -60,129 +45,6 @@ typedef struct cVarUint32Slice cVarUint32Slice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarUint32Slice var_uint32_slice_c( int64_t s, uint32_t const* v );
-cVarUint32Slice make_var_uint32_slice_c( uint32_t* beg, uint32_t* end );
-cVarUint32Slice empty_var_uint32_slice_c( void );
-/* sub */
-cVarUint32Slice left_var_uint32_slice_c( cVarUint32Slice slice, int64_t maxLen );
-cVarUint32Slice mid_var_uint32_slice_c( cVarUint32Slice slice, int64_t index );
-cVarUint32Slice right_var_uint32_slice_c( cVarUint32Slice slice, int64_t maxLen );
-cVarUint32Slice sub_var_uint32_slice_c( cVarUint32Slice slice,
-                                        int64_t begIdx,
-                                        int64_t endIdx );
-/* var slice */
-cUint32Slice as_uint32_slice_c( cVarUint32Slice slice );
-cVarUint32Slice cast_uint32_slice_c( cVarUint32Slice slice, cUint32Slice sub );
-int64_t set_uint32_slice_c( cVarUint32Slice dst, cUint32Slice src );
-----
-
-[id='cUint32Chunk']
-==== cUint32Chunk
-[source,c]
-----
-struct cUint32Chunk
-{
-   int64_t s;
-   uint32_t const* v;
-   int64_t favSize;
-   cUint32Slice slice;
-};
-typedef struct cUint32Chunk cUint32Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_uint32_chunk_c( cUint32Chunk chunk[static 1],
-                               int64_t s,
-                               cUint32Slice slice );
-void init_front_uint32_chunk_c( cUint32Chunk chunk[static 1],
-                                int64_t s,
-                                cUint32Slice slice );
-----
-
-[id='cVarUint32Chunk']
-==== cVarUint32Chunk
-[source,c]
-----
-struct cVarUint32Chunk
-{
-   int64_t s;
-   uint32_t* v;
-   int64_t favSize;
-   cUint32Slice slice;
-};
-typedef struct cVarUint32Chunk cVarUint32Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_uint32_chunk_c( cVarUint32Chunk chunk[static 1],
-                                   int64_t s,
-                                   cVarUint32Slice slice );
-void init_front_var_uint32_chunk_c( cVarUint32Chunk chunk[static 1],
-                                    int64_t s,
-                                    cVarUint32Slice slice );
-----
-
-[id='cUint32Window']
-==== cUint32Window
-[source,c]
-----
-struct cUint32Window
-{
-   int64_t s;
-   uint32_t const* v;
-   int64_t favSize;
-   cUint32Slice slice;
-};
-typedef struct cUint32Window cUint32Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_uint32_window_c( cUint32Window window[static 1],
-                                int64_t s,
-                                cUint32Slice slice );
-void init_front_uint32_window_c( cUint32Window window[static 1],
-                                 int64_t s,
-                                 cUint32Slice slice );
-----
-
-[id='cVarUint32Window']
-==== cVarUint32Window
-[source,c]
-----
-struct cVarUint32Window
-{
-   int64_t s;
-   uint32_t* v;
-   int64_t favSize;
-   cVarUint32Slice slice;
-};
-typedef struct cVarUint32Window cVarUint32Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_uint32_window_c( cVarUint32Window window[static 1],
-                                    int64_t s,
-                                    cVarUint32Slice slice );
-void init_front_var_uint32_window_c( cVarUint32Window window[static 1],
-                                     int64_t s,
-                                     cVarUint32Slice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

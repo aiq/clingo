@@ -1,5 +1,5 @@
 = uint64
-:xmpldir: ../../../test/clingo/type/uint64
+:xmpldir: {testroot}/clingo/type/uint64
 
 include::_attr.adoc[]
 
@@ -32,21 +32,6 @@ typedef struct cUint64Slice cUint64Slice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cUint64Slice uint64_slice_c( int64_t s, uint64_t const* v );
-cUint64Slice make_uint64_slice_c( uint64_t const* beg, uint64_t const* end );
-cUint64Slice empty_uint64_slice_c( void );
-/* sub */
-cUint64Slice left_uint64_slice_c( cUint64Slice slice, int64_t maxLen );
-cUint64Slice mid_uint64_slice_c( cUint64Slice slice, int64_t index );
-cUint64Slice right_uint64_slice_c( cUint64Slice slice, int64_t maxLen );
-cUint64Slice sub_uint64_slice_c( cUint64Slice slice,
-                                 int64_t begIdx,
-                                 int64_t endIdx );
-----
-
 [id='cVarUint64Slice']
 ==== cVarUint64Slice
 [source,c]
@@ -60,129 +45,6 @@ typedef struct cVarUint64Slice cVarUint64Slice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarUint64Slice var_uint64_slice_c( int64_t s, uint64_t* v );
-cVarUint64Slice make_var_uint64_slice_c( uint64_t* beg, uint64_t* end );
-cVarUint64Slice empty_var_uint64_slice_c( void );
-/* sub */
-cVarUint64Slice left_var_uint64_slice_c( cVarUint64Slice slice, int64_t maxLen );
-cVarUint64Slice mid_var_uint64_slice_c( cVarUint64Slice slice, int64_t index );
-cVarUint64Slice right_var_uint64_slice_c( cVarUint64Slice slice, int64_t maxLen );
-cVarUint64Slice sub_var_uint64_slice_c( cVarUint64Slice slice,
-                                        int64_t begIdx,
-                                        int64_t endIdx );
-/* var slice */
-cUint64Slice as_uint64_slice_c( cVarUint64Slice slice );
-cVarUint64Slice cast_uint64_slice_c( cVarUint64Slice slice, cUint64Slice sub );
-int64_t set_uint64_slice_c( cVarUint64Slice dst, cUint64Slice src );
-----
-
-[id='cUint64Chunk']
-==== cUint64Chunk
-[source,c]
-----
-struct cUint64Chunk
-{
-   int64_t s;
-   uint64_t const* v;
-   int64_t favSize;
-   cUint64Slice slice;
-};
-typedef struct cUint64Chunk cUint64Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_uint64_chunk_c( cUint64Chunk chunk[static 1],
-                               int64_t s,
-                               cUint64Slice slice );
-void init_front_uint64_chunk_c( cUint64Chunk chunk[static 1],
-                                int64_t s,
-                                cUint64Slice slice );
-----
-
-[id='cVarUint64Chunk']
-==== cVarUint64Chunk
-[source,c]
-----
-struct cVarUint64Chunk
-{
-   int64_t s;
-   uint64_t* v;
-   int64_t favSize;
-   cVarUint64Slice slice;
-};
-typedef struct cVarUint64Chunk cVarUint64Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_uint64_chunk_c( cVarUint64Chunk chunk[static 1],
-                                   int64_t s,
-                                   cVarUint64Slice slice );
-void init_front_var_uint64_chunk_c( cVarUint64Chunk chunk[static 1],
-                                    int64_t s,
-                                    cVarUint64Slice slice );
-----
-
-[id='cUint64Window']
-==== cUint64Window
-[source,c]
-----
-struct cUint64Window
-{
-   int64_t s;
-   uint64_t const* v;
-   int64_t favSize;
-   cUint64Slice slice;
-};
-typedef struct cUint64Window cUint64Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_uint64_window_c( cUint64Window window[static 1],
-                                int64_t s,
-                                cUint64Slice slice );
-void init_front_uint64_window_c( cUint64Window window[static 1],
-                                 int64_t s,
-                                 cUint64Slice slice );
-----
-
-[id='cVarUint64Window']
-==== cVarUint64Window
-[source,c]
-----
-struct cVarUint64Window
-{
-   int64_t s;
-   uint64_t* v;
-   int64_t favSize;
-   cVarUint64Slice slice;
-};
-typedef struct cVarUint64Window cVarUint64Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_uint64_window_c( cVarUint64Window window[static 1],
-                                    int64_t s,
-                                    cVarUint64Slice slice );
-void init_front_var_uint64_window_c( cVarUint64Window window[static 1],
-                                     int64_t s,
-                                     cVarUint64Slice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

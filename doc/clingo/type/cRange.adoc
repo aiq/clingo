@@ -1,5 +1,5 @@
 = cRange
-:xmpldir: ../../../test/clingo/type/cRange
+:xmpldir: {testroot}/clingo/type/cRange
 
 include::_attr.adoc[]
 
@@ -46,21 +46,6 @@ typedef struct cRangeSlice cRangeSlice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cRangeSlice range_slice_c( int64_t s, cRange const* v );
-cRangeSlice make_range_slice_c( cRange const* beg, cRange const* end );
-cRangeSlice null_range_slice_c( void );
-/* sub */
-cRangeSlice left_range_slice_c( cRangeSlice slice, int64_t maxLen );
-cRangeSlice mid_range_slice_c( cRangeSlice slice, int64_t index );
-cRangeSlice right_range_slice_c( cRangeSlice slice, int64_t maxLen );
-cRangeSlice sub_range_slice_c( cRangeSlice slice,
-                               int64_t begIdx,
-                               int64_t endIdx);
-----
-
 [id='cVarRangeSlice']
 ==== cVarRangeSlice
 [source,c]
@@ -74,127 +59,6 @@ typedef struct cVarRangeSlice cVarRangeSlice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarRangeSlice var_range_slice_c( int64_t s, cRange* v );
-cVarRangeSlice make_var_range_slice_c( cRange* beg, cRange* end );
-cVarRangeSlice null_var_range_slice_c( void );
-/* sub */
-cVarRangeSlice left_var_range_slice_c( cVarRangeSlice slice, int64_t maxLen );
-cVarRangeSlice mid_var_range_slice_c( cVarRangeSlice slice, int64_t index );
-cVarRangeSlice right_var_range_slice_c( cVarRangeSlice slice, int64_t maxLen );
-cVarRangeSlice sub_var_range_slice_c( cVarRangeSlice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx);
-/* var slice */
-cVarRangeSlice as_var_range_slice_c( cVarRangeSlice slice );
-cVarRangeSlice cast_var_range_slice_c( cVarRangeSlice slice, cRangeSlice sub );
-int64_t set_range_slice_c( cVarRangeSlice dst, cRangeSlice src );
-----
-
-[id='cRangeChunk']
-==== cRangeChunk
-[source,c]
-----
-struct cRangeChunk
-{
-   int64_t s;
-   cRange const* v;
-   int64_t favSize;
-   cRangeSlice slice;
-}
-typedef struct cRangeChunk cRangeChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_range_chunk_c( cRangeChunk chunk[static 1],
-                              int64_t s,
-                              cRangeSlice slice );
-void init_front_range_chunk_c( cRangeChunk chunk[static 1],
-                               int64_t s,
-                               cRangeSlice slice );
-----
-
-[id='cVarRangeChunk']
-==== cVarRangeChunk
-[source,c]
-----
-struct cVarRangeChunk
-{
-   int64_t s;
-   cRange* v;
-   int64_t favSize;
-   cVarRangeSlice slice;
-};
-typedef struct cVarRangeChunk cVarRangeChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_range_chunk_c( cVarRangeChunk chunk[static 1],
-                                  int64_t s,
-                                  cVarRangeSlice slice );
-void init_front_var_range_chunk_c( cVarRangeChunk chunk[static 1],
-                                   int64_t s,
-                                   cVarRangeSlice slice );
-----
-
-[id='cRangeWindow']
-==== cRangeWindow
-[source,c]
-----
-struct cRangeWindow
-{
-   int64_t s;
-   cRange const* v;
-   cRangeSlice slice;
-};
-typedef struct cRangeWindow cRangeWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_range_window_c( cRangeWindow window[static 1],
-                               int64_t s,
-                               cRangeSlice slice );
-void init_front_range_window_c( cRangeWindow window[static 1],
-                                int64_t s,
-                                cRangeSlice slice );
-----
-
-[id='cVarRangeSlice']
-==== cVarRangeWindow
-[source,c]
-----
-struct cVarRangeWindow
-{
-   int64_t s;
-   cRange* v;
-   cVarRangeSlice slice;
-};
-typedef struct cVarRangeWindow cVarRangeWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_range_window_c( cVarRangeWindow window[static 1],
-                                   int64_t s,
-                                   cVarRangeSlice slice );
-void init_front_var_range_window_c( cVarRangeWindow window[static 1],
-                                    int64_t s,
-                                    cVarRangeSlice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

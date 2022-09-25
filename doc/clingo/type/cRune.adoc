@@ -1,5 +1,5 @@
 = cRune
-:xmpldir: ../../../test/clingo/type/cRune
+:xmpldir: {testroot}/clingo/type/cRune
 
 include::_attr.adoc[]
 
@@ -59,19 +59,6 @@ typedef struct cRuneSlice cRuneSlice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cRuneSlice rune_slice_c( int64_t s, cRune const* v );
-cRuneSlice make_rune_slice_c( cRune const* beg, cRune const* end );
-cRuneSlice empty_rune_slice_c( void );
-/* sub */
-cRuneSlice left_rune_slice_c( cRuneSlice slice, int64_t maxLen );
-cRuneSlice mid_rune_slice_c( cRuneSlice slice, int64_t index );
-cRuneSlice right_rune_slice_c( cRuneSlice slice, int64_t maxLen );
-cRuneSlice sub_rune_slice_c( cRuneSlice slice, int64_t begIdx, int64_t endIdx );
-----
-
 [id='cVarRuneSlice']
 ==== cVarRuneSlice
 [source,c]
@@ -85,127 +72,6 @@ typedef struct cVarRuneSlice cVarRuneSlice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarRuneSlice var_rune_slice_c( int64_t s, cRune* v );
-cVarRuneSlice make_var_rune_slice_c( cRune* beg, cRune* end );
-cVarRuneSlice empty_var_rune_slice_c( void );
-/* sub */
-cVarRuneSlice left_var_rune_slice_c( cVarRuneSlice slice, int64_t maxLen );
-cVarRuneSlice mid_var_rune_slice_c( cVarRuneSlice slice, int64_t index );
-cVarRuneSlice right_var_rune_slcie_c( cVarRuneSlice slice, int64_t maxLen );
-cVarRuneSlice sub_var_rune_slice_c( cVarRuneSlice slice,
-                                    int64_t begIdx,
-                                    int64_t endIdx );
-/* var slice */
-cRuneSlice as_rune_slice_c( cVarRuneSlice slice );
-cVarRuneSlice cast_rune_slice_c( cVarRuneSlice slice, cRuneSlice sub );
-int64_t set_rune_slice_c( cVarRuneSlice dst, cRuneSlice src );
-----
-
-[id='cRuneChunk']
-==== cRuneChunk
-[source,c]
-----
-struct cRuneChunk
-{
-   int64_t s;
-   cRune const* v;
-   int64_t favSize;
-   cRuneSlice slice;
-};
-typedef struct cRuneChunk cRuneChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_rune_chunk_c( cRuneChunk chunk[static 1],
-                             int64_t s,
-                             cRuneSlice slice );
-void init_front_rune_chunk_c( cRuneChunk chunk[static 1],
-                              int64_t s,
-                              cRuneSlice slice );
-----
-
-[id='cVarRuneChunk']
-==== cVarRuneChunk
-[source,c]
-----
-struct cVarRuneChunk
-{
-   int64_t s;
-   cRune* v;
-   int64_t favSize;
-   cVarRuneSlice slice;
-};
-typedef struct cVarRuneChunk cVarRuneChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_rune_chunk_c( cVarRuneChunk chunk[static 1],
-                                 int64_t s,
-                                 cVarRuneSlice slice );
-void init_front_var_rune_chunk_c( cVarRuneChunk chunk[static 1],
-                                  int64_t s,
-                                  cVarRuneSlice slice );
-----
-
-[id='cRuneWindow']
-==== cRuneWindow
-[source,c]
-----
-struct cRuneWindow
-{
-   int64_t s;
-   cRune const* v;
-   cRuneSlice slice;
-};
-typedef struct cRuneWindow cRuneWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_rune_window_c( cRuneWindow window[static 1],
-                              int64_t s,
-                              cRuneSlice slice );
-void init_front_rune_window_c( cRuneWindow window[static 1],
-                               int64_t s,
-                               cRuneSlice slice );
-----
-
-[id='cVarRuneWindow']
-==== cVarRuneWindow
-[source,c]
-----
-struct cVarRuneWindow
-{
-   int64_t s;
-   cRune* v;
-   cVarRuneSlice slice;
-};
-typedef struct cVarRuneWindow cVarRuneWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_rune_window_c( cVarRuneWindow window[static 1],
-                                  int64_t s,
-                                  cVarRuneSlice slice );
-void init_front_var_rune_window_c( cVarRuneWindow window[static 1],
-                                   int64_t s,
-                                   cVarRuneSlice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

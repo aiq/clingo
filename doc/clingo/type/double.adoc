@@ -1,5 +1,5 @@
 = double
-:xmpldir: ../../../test/clingo/type/double
+:xmpldir: {testroot}/clingo/type/double
 
 include::_attr.adoc[]
 
@@ -47,21 +47,6 @@ typedef struct cDoubleSlice cDoubleSlice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cDoubleSlice double_slice_c( int64_t s, double const* v );
-cDoubleSlice make_double_slice_c( double const* beg, double const* end );
-cDoubleSlice empty_double_slice_c( void );
-/* sub */
-cDoubleSlice left_double_slice_c( cDoubleSlice slice, int64_t maxLen );
-cDoubleSlice mid_double_slice_c( cDoubleSlice slice, int64_t index );
-cDoubleSlice right_double_slice_c( cDoubleSlice slice, int64_t maxLen );
-cDoubleSlice sub_double_slice_c( cDoubleSlice slice,
-                                 int64_t begIdx,
-                                 int64_t endIdx );
-----
-
 [id='cVarDoubleSlice']
 ==== cVarDoubleSlice
 [source,c]
@@ -75,129 +60,6 @@ typedef struct cVarDoubleSlice cVarDoubleSlice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarDoubleSlice var_double_slice_c( int64_t s, double* v );
-cVarDoubleSlice make_var_double_slice_c( double* beg, double* end );
-cVarDoubleSlice empty_var_double_slice_c( void );
-/* sub */
-cVarDoubleSlice left_var_double_slice_c( cVarDoubleSlice slice, int64_t maxLen );
-cVarDoubleSlice mid_var_double_slice_c( cVarDoubleSlice slice, int64_t index );
-cVarDoubleSlice right_var_double_slice_c( cVarDoubleSlice slice, int64_t maxLen );
-cVarDoubleSlice sub_var_double_slice_c( cVarDoubleSlice slice,
-                                        int64_t begIdx,
-                                        int64_t endIdx );
-/* var slice */
-cDoubleSlice as_double_slice_c( cVarDoubleSlice slice );
-cDoubleSlice cast_double_slice_c( cVarDoubleSlice slice, cDoubleSlice sub );
-int64_t set_double_slice_c( cVarDoubleSlice dst, cDoubleSlice src );
-----
-
-[id='cDoubleChunk']
-==== cDoubleChunk
-[source,c]
-----
-struct cDoubleChunk
-{
-   int64_t s;
-   float const* v;
-   int64_t favSize;
-   cDoubleSlice slice;
-};
-typedef struct cDoubleChunk cDoubleChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_double_chunk_c( cDoubleChunk chunk[static 1],
-                               int64_t s,
-                               cDoubleSlice slice );
-void init_front_double_chunk_c( cDoubleChunk chunk[static 1],
-                                int64_t s,
-                                cDoubleSlice slice );
-----
-
-[id='cVarDoubleChunk']
-==== cVarDoubleChunk
-[source,c]
-----
-struct cVarDoubleChunk
-{
-   int64_t s;
-   float* v;
-   int64_t favSize;
-   cVarDoubleSlice slice;
-};
-typedef struc cVarDoubleChunk cVarDoubleChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_double_chunk_c( cVarDoubleChunk chunk[static 1],
-                                   int64_t s,
-                                   cVarDoubleSlice slice );
-void init_front_var_double_chunk_c( cVarDoubleChunk chunk[static 1],
-                                    int64_t s,
-                                    cVarDoubleSlice slice );
-----
-
-[id='cDoubleWindow']
-==== cDoubleWindow
-[source,c]
-----
-struct cDoubleWindow
-{
-   int64_t s;
-   float const* v;
-   int64_t favSize;
-   cDoubleSlice slice;
-};
-typedef struct cDoubleWindow cDoubleWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_double_window_c( cDoubleWindow window[static 1],
-                                int64_t s,
-                                cDoubleSlice slice );
-void init_front_double_window_c( cDoubleWindow window[static 1],
-                                 int64_t s,
-                                 cDoubleSlice slice );
-----
-
-[id='cVarDoubleWindow']
-==== cVarDoubleWindow
-[source,c]
-----
-struct cVarDoubleWindow
-{
-   int64_t s;
-   float* v;
-   int64_t favSize;
-   cVarDoubleSlice slice;
-};
-typedef struct cVarDoubleWindow cVarDoubleWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_double_window_c( cVarDoubleWindow window[static 1],
-                                    int64_t s,
-                                    cVarDoubleSlice slice );
-void init_front_var_double_window_c( cVarDoubleWindow window[static 1],
-                                     int64_t s,
-                                     cVarDoubleSlice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

@@ -1,5 +1,5 @@
 = int16
-:xmpldir: ../../../test/clingo/type/int16
+:xmpldir: {testroot}/clingo/type/int16
 
 include::_attr.adoc[]
 
@@ -32,21 +32,6 @@ typedef struct cInt16Slice cInt16Slice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cInt16Slice int16_slice_c( int64_t s, int16_t const* v );
-cInt16Slice make_int16_slice_c( int16_t const* beg, int16_t const* end );
-cInt16Slice empty_int16_slice_c( void );
-/* sub */
-cInt16Slice left_int16_slice_c( cInt16Slice slice, int64_t maxLen );
-cInt16Slice mid_int16_slice_c( cInt16Slice slice, int64_t index );
-cInt16Slice right_int16_slice_c( cInt16Slice slice, int64_t maxLen );
-cInt16Slice sub_int16_slice_c( cInt16Slice slice,
-                               int64_t begIdx,
-                               int64_t endIdx );
-----
-
 [id='cVarInt16Slice']
 ==== cVarInt16Slice
 [source,c]
@@ -60,127 +45,6 @@ typedef struct cVarInt16Slice cVarInt16Slice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarInt16Slice var_int16_slice_c( int64_t s, int16_t* v );
-cVarInt16Slice make_var_int16_slice_c( int16_t* beg, int16_t* end );
-cVarInt16Slice empty_var_int16_slice_c( void );
-/* sub */
-cVarInt16Slice left_var_int16_slice_c( cVarInt16Slice slice, int64_t maxLen );
-cVarInt16Slice mid_var_int16_slice_c( cVarInt16Slice slice, int64_t index );
-cVarInt16Slice right_var_int16_slice_c( cVarInt16Slice slice, int64_t maxLen );
-cVarInt16Slice sub_var_int16_slice_c( cVarInt16Slice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx );
-/* var slice */
-cInt16Slice as_int16_slice_c( cVarInt16Slice slice );
-cVarInt16Slice cast_int16_slice_c( cVarInt16Slice slice, cInt16Slice sub );
-int64_t set_int16_slice_c( cVarInt16Slice dst, cInt16Slice src );
-----
-
-[id='cInt16Chunk']
-==== cInt16Chunk
-[source,c]
-----
-struct cInt16Chunk
-{
-   int64_t s;
-   int16_t const* v;
-   int64_t favSize;
-   cInt16Slice slice;
-};
-typedef struct cInt16Chunk cInt16Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_int16_chunk_c( cInt16Chunk chunk[static 1],
-                              int64_t s,
-                              cInt16Slice slice );
-void init_front_int16_chunk_c( cInt16Chunk chunk[static 1],
-                               int64_t s,
-                               cInt16Slice slice );
-----
-
-[id='cVarInt16Chunk']
-==== cVarInt16Chunk
-[source,c]
-----
-struct cVarInt16Chunk
-{
-   int64_t s;
-   int16_t* v;
-   int64_t favSize;
-   cVarInt16Slice slice;
-};
-typedef struct cVarInt16Chunk cVarInt16Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_int16_chunk_c( cVarInt16Chunk chunk[static 1],
-                                  int64_t s,
-                                  cVarInt16Slice slice );
-void init_front_var_int16_chunk_c( cVarInt16Chunk chunk[static 1],
-                                   int64_t s,
-                                   cVarInt16Slice slice );
-----
-
-[id='cInt16Window']
-==== cInt16Window
-[source,c]
-----
-struct cInt16Window
-{
-   int64_t s;
-   int16_t const* v;
-   cInt16Slice slice;
-};
-typedef struct cInt16Window cInt16Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_int16_window_c( cInt16Window window[static 1],
-                               int64_t s,
-                               cInt16Slice slice );
-void init_front_int16_window_c( cInt16Window window[static 1],
-                                int64_t s,
-                                cInt16Slice slice );
-----
-
-[id='cVarInt16Window']
-==== cVarInt16Window
-[source,c]
-----
-struct cVarInt16Window
-{
-   int64_t s;
-   int16_t* v;
-   cVarInt16Slice slice;
-};
-typedef struct cVarInt16Window cVarInt16Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_int16_window_c( cVarInt16Window window[static 1],
-                                   int64_t s,
-                                   cVarInt16Slice slice );
-void init_front_var_int16_window_c( cVarInt16Window window[static 1],   
-                                    int64_t s,
-                                    cVarInt16Slice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

@@ -1,5 +1,5 @@
 = cChars
-:xmpldir: ../../../test/clingo/type/cChars
+:xmpldir: {testroot}/clingo/type/cChars
 
 include::_attr.adoc[]
 
@@ -32,19 +32,6 @@ typedef struct cChars cChars;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cChars chars_c( int64_t s, char const* v );
-cChars make_chars_c( char const* beg, char const* end );
-cChars empty_chars_c( void );
-/* sub */
-cChars left_chars_c( cChars chars, int64_t maxLen );
-cChars mid_chars_c( cChars chars, int64_t index );
-cChars right_chars_c( cChars chars, int64_t maxLen );
-cChars sub_chars_c( cChars chars, int64_t begIdx, int64_t endIdx );
-----
-
 [id='cVarChars']
 ==== cVarChars
 [source,c]
@@ -58,125 +45,6 @@ typedef struct cVarChars cVarChars;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarChars var_chars_c( int64_t s, char* v );
-cVarChars make_var_chars_c( char* beg, char* end );
-cVarChars empty_var_chars_c( void );
-/* sub */
-cVarChars left_var_chars_c( cVarChars chars, int64_t maxLen );
-cVarChars mid_var_chars_c( cVarChars chars, int64_t index );
-cVarChars right_var_chars_c( cVarChars chars, int64_t maxLen );
-cVarChars sub_var_chars_c( cVarChars chars, int64_t begIdx, int64_t endIdx );
-/* var slice */
-cChars as_chars_c( cVarChars chars );
-cVarChars cast_chars_c( cVarChars chars, cChars sub );
-int64_t set_var_chars_c( cVarChars dst, cChars src );
-----
-
-[id='cCharChunk']
-==== cCharChunk
-[source,c]
-----
-struct cCharChunk
-{
-   int64_t s;
-   char const* v;
-   int64_t favSize;
-   cChars slice;
-};
-typedef struct cCharChunk cCharChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_char_chunk_c( cCharChunk chunk[static 1],
-                             int64_t s,
-                             cChars chars );
-void init_front_char_chunk_c( cCharChunk chunk[static 1],
-                              int64_t s,
-                              cChars chars );
-----
-
-[id='cVarCharChunk']
-==== cVarCharChunk
-[source,c]
-----
-struct cVarCharChunk
-{
-   int64_t s;
-   char* v;
-   int64_t favSize;
-   cVarChars slice;
-};
-typedef struct cVarCharChunk cVarCharChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_char_chunk_c( cVarCharChunk chunk[static 1],
-                                 int64_t s,
-                                 cVarChars chars );
-void init_front_var_char_chunk_c( cVarCharChunk chunk[static 1],
-                                  int64_t s,
-                                  cVarChars chars );
-----
-
-[id='cCharWindow']
-==== cCharWindow
-[source,c]
-----
-struct cCharWindow
-{
-   int64_t s;
-   char const* v;
-   cChars chars;
-};
-typedef struct cCharWindow cCharWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_char_window_c( cCharWindow window[static 1],
-                              int64_t s,
-                              cChars chars );
-void init_front_char_window_c( cCharWindow window[static 1],
-                               int64_t s,
-                               cChars chars );
-----
-
-[id='cVarCharWindow']
-==== cVarCharWindow
-[source,c]
-----
-struct cVarCharWindow
-{
-   int64_t s;
-   char* v;
-   cVarChars chars;
-};
-typedef struct cVarCharWindow cVarCharWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_char_window_c( cVarCharWindow window[static 1],
-                                  int64_t s,
-                                  cVarChars chars );
-void init_front_var_char_window_c( cVarCharWindow window[static 1],
-                                   int64_t s,
-                                   cVarChars chars );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

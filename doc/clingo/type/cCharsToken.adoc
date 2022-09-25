@@ -1,5 +1,5 @@
 = cCharsToken
-:xmpldir: ../../../test/clingo/type/cCharsToken
+:xmpldir: {testroot}/clingo/type/cCharsToken
 
 //******************************************************************************
 //******************************************************************** Overview

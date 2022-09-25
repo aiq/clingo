@@ -1,5 +1,5 @@
 = uint8
-:xmpldir: ../../../test/clingo/type/uint8
+:xmpldir: {testroot}/clingo/type/uint8
 
 include::_attr.adoc[]
 
@@ -32,21 +32,6 @@ typedef struct cUint8Slice cUint8Slice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cUint8Slice uint8_slice_c( int64_t s, uint8_t const* v );
-cUint8Slice make_uint8_slice_c( uint8_t const* beg, uint8_t const* end );
-cUint8Slice empty_uint8_slice_c( void );
-/* sub */
-cUint8Slice left_uint8_slice_c( cUint8Slice slice, int64_t maxLen );
-cUint8Slice mid_uint8_slice_c( cUint8Slice slice, int64_t index );
-cUint8Slice right_uint8_slice_c( cUint8Slice slice, int64_t maxLen );
-cUint8Slice sub_uint8_slice_c( cUint8Slice slice,
-                               int64_t begIdx,
-                               int64_t endIdx );
-----
-
 [id='cVarUint8Slice']
 ==== cVarUint8Slice
 [source,c]
@@ -60,129 +45,6 @@ typedef struct cVarUint8Slice cVarUint8Slice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarUint8Slice var_uint8_slice_c( int64_t s, uint8_t const* v );
-cVarUint8Slice make_var_uint8_slice_c( uint8_t* beg, uint8_t* end );
-cVarUint8Slice empty_var_uint8_slice_c( void );
-/* sub */
-cVarUint8Slice left_var_uint8_slice_c( cVarUint8Slice slice, int64_t maxLen );
-cVarUint8Slice mid_var_uint8_slice_c( cVarUint8Slice slice, int64_t index );
-cVarUint8Slice right_var_uint8_slice_c( cVarUint8Slice slice, int64_t maxLen );
-cVarUint8Slice sub_var_uint8_slice_c( cVarUint8Slice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx );
-/* var slice */
-cUint8Slice as_uint8_slice_c( cVarUint8Slice slice );
-cVarUint8Slice cast_uint8_slice_c( cVarUint8Slice slice, cUint8Slice sub );
-int64_t set_uint8_slice_c( cVarUint8Slice dst, cUint8Slice src );
-----
-
-[id='cUint8Chunk']
-==== cUint8Chunk
-[source,c]
-----
-struct cUint8Chunk
-{
-   int64_t s;
-   uint8_t const* v;
-   int64_t favSize;
-   cUint8Slice slice;
-};
-typedef struct cUint8Chunk cUint8Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_uint8_chunk_c( cUint8Chunk chunk[static 1],
-                              int64_t s,
-                              cUint8Slice slice );
-void init_front_uint8_chunk_c( cUint8Chunk chunk[static 1],
-                               int64_t s,
-                               cUint8Slice slice );
-----
-
-[id='cVarUint8Chunk']
-==== cVarUint8Chunk
-[source,c]
-----
-struct cVarUint8Chunk
-{
-   int64_t s;
-   uint8_t* v;
-   int64_t favSize;
-   cUint8Slice slice;
-};
-typedef struct cVarUint8Chunk cVarUint8Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_uint8_chunk_c( cVarUint8Chunk chunk[static 1],
-                                  int64_t s,
-                                  cVarUint8Slice slice );
-void init_front_var_uint8_chunk_c( cVarUint8Chunk chunk[static 1],
-                                   int64_t s,
-                                   cVarUint8Slice slice );
-----
-
-[id='cUint8Window']
-==== cUint8Window
-[source,c]
-----
-struct cUint8Window
-{
-   int64_t s;
-   uint8_t const* v;
-   int64_t favSize;
-   cUint8Slice slice;
-};
-typedef struct cUint8Window cUint8Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_uint8_window_c( cUint8Window window[static 1],
-                               int64_t s,
-                               cUint8Slice slice );
-void init_front_uint8_window_c( cUint8Window window[static 1],
-                                int64_t s,
-                                cUint8Slice slice );
-----
-
-[id='cVarUint8Window']
-==== cVarUint8Window
-[source,c]
-----
-struct cVarUint8Window
-{
-   int64_t s;
-   uint8_t* v;
-   int64_t favSize;
-   cVarUint8Slice slice;
-};
-typedef struct cVarUint8Window cVarUint8Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_uint8_window_c( cVarUint8Window window[static 1],
-                                   int64_t s,
-                                   cVarUint8Slice slice );
-void init_front_var_uint8_window_c( cVarUint8Window window[static 1],
-                                    int64_t s,
-                                    cVarUint8Slice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

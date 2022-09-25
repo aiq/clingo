@@ -5,9 +5,7 @@
 #include <string.h>
 
 #include "clingo/apidecl.h"
-#include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
-#include "clingo/lang/window.h"
 
 /*******************************************************************************
 ********************************************************* Types and Definitions

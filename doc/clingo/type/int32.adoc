@@ -1,5 +1,5 @@
 = int32
-:xmpldir: ../../../test/clingo/type/int32
+:xmpldir: {testroot}/clingo/type/int32
 
 include::_attr.adoc[]
 
@@ -32,21 +32,6 @@ typedef struct cInt32Slice cInt32Slice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cInt32Slice int32_slice_c( int64_t s, int32_t const* v );
-cInt32Slice make_int32_slice_c( int32_t const* beg, int32_t const* end );
-cInt32Slice empty_int32_slice_c( void );
-/* sub */
-cInt32Slice left_int32_slice_c( cInt32Slice slice, int64_t maxLen );
-cInt32Slice mid_int32_slice_c( cInt32Slice slice, int64_t index );
-cInt32Slice right_int32_slice_c( cInt32Slice slice, int64_t maxLen );
-cInt32Slice sub_int32_slice_c( cInt32Slice slice,
-                               int64_t begIdx,
-                               int64_t endIdx );
-----
-
 [id='cVarInt32Slice']
 ==== cVarInt32Slice
 [source,c]
@@ -60,128 +45,6 @@ typedef struct cVarInt32Slice cVarInt32Slice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarInt32Slice var_int32_slice_c( int64_t s, int32_t const* v );
-cVarInt32Slice make_var_int32_slice_c( int32_t* beg, int32_t* end );
-cVarInt32Slice empty_var_int32_slice_c( void );
-/* sub */
-cVarInt32Slice left_var_int32_slice_c( cVarInt32Slice slice, int64_t maxLen );
-cVarInt32Slice mid_var_int32_slice_c( cVarInt32Slice slice, int64_t index );
-cVarInt32Slice right_var_int32_slice_c( cVarInt32Slice slice, int64_t maxLen );
-cVarInt32Slice sub_var_int32_slice_c( cVarInt32Slice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx );
-/* var slice */
-cInt32Slice as_int32_slice_c( cVarInt32Slice slice );
-cVarInt32Slice cast_int32_slice_c( cVarInt32Slice slice, cInt32Slice sub );
-int64_t set_int32_slice_c( cVarInt32Slice dst, cInt32Slice src );
-----
-
-[id='cInt32Chunk']
-==== cInt32Chunk
-[source,c]
-----
-struct cInt32Chunk
-{
-   int64_t s;
-   int32_t const* v;
-   int64_t favSize;
-   cInt32Slice slice;
-};
-typedef struct cInt32Chunk cInt32Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_int32_chunk_c( cInt32Chunk chunk[static 1],
-                              int64_t s,
-                              cInt32Slice slice );
-void init_front_int32_chunk_c( cInt32Chunk chunk[static 1],
-                               int64_t s,
-                               cInt32Slice slice );
-----
-
-[id='cVarInt32Chunk']
-==== cVarInt32Chunk
-[source,c]
-----
-struct cVarInt32Chunk
-{
-   int64_t s;
-   int32_t* v;
-   int64_t favSize;
-   cInt32Slice slice;
-};
-typedef struct cVarInt32Chunk cVarInt32Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_int32_chunk_c( cVarInt32Chunk chunk[static 1],
-                                  int64_t s,
-                                  cVarInt32Slice slice );
-void init_front_var_int32_chunk_c( cVarInt32Chunk chunk[static 1],
-                                   int64_t s,
-                                   cVarInt32Slice slice );
-----
-
-[id='cInt32Window']
-==== cInt32Window
-[source,c]
-----
-struct cInt32Window
-{
-   int64_t s;
-   int32_t const* v;
-   int64_t favSize;
-   cInt32Slice slice;
-};
-typedef struct cInt32Window cInt32Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_int32_window_c( cInt32Window window[static 1],
-                               int64_t s,
-                               cInt32Slice slice );
-void init_front_int32_window_c( cInt32Window window[static 1],
-                                int64_t s,
-                                cInt32Slice slice );
-----
-
-==== cVarInt32Window
-[source,c]
-----
-struct cVarInt32Window
-{
-   int64_t s;
-   int32_t* v;
-   int64_t favSize;
-   cVarInt32Slice slice;
-};
-typedef struct cVarInt32Window cVarInt32Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_int32_window_c( cVarInt32Window window[static 1],
-                                   int64_t s,
-                                   cVarInt32Slice slice );
-void init_front_var_int32_window_c( cVarInt32Window window[static 1],
-                                    int64_t s,
-                                    cVarInt32Slice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

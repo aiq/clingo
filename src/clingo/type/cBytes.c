@@ -6,6 +6,7 @@
 #include "clingo/lang/algo.h"
 #include "clingo/lang/func.h"
 #include "clingo/lang/math.h"
+#include "clingo/lang/window.h"
 #include "clingo/type/c_ByteOrder.h"
 #include "clingo/io/print.h"
 

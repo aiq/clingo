@@ -1,5 +1,5 @@
 = char
-:xmpldir: ../../../test/clingo/type/char
+:xmpldir: {testroot}/clingo/type/char
 
 include::_attr.adoc[]
 

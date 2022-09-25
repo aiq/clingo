@@ -46,21 +46,6 @@ typedef struct cRangeSlice cRangeSlice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cRangeSlice range_slice_c( int64_t s, cRange const* v );
-cRangeSlice make_range_slice_c( cRange const* beg, cRange const* end );
-cRangeSlice null_range_slice_c( void );
-/* sub */
-cRangeSlice left_range_slice_c( cRangeSlice slice, int64_t maxLen );
-cRangeSlice mid_range_slice_c( cRangeSlice slice, int64_t index );
-cRangeSlice right_range_slice_c( cRangeSlice slice, int64_t maxLen );
-cRangeSlice sub_range_slice_c( cRangeSlice slice,
-                               int64_t begIdx,
-                               int64_t endIdx);
-----
-
 [id='cVarRangeSlice']
 ==== cVarRangeSlice
 [source,c]
@@ -75,24 +60,6 @@ typedef struct cVarRangeSlice cVarRangeSlice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cVarRangeSlice var_range_slice_c( int64_t s, cRange* v );
-cVarRangeSlice make_var_range_slice_c( cRange* beg, cRange* end );
-cVarRangeSlice null_var_range_slice_c( void );
-/* sub */
-cVarRangeSlice left_var_range_slice_c( cVarRangeSlice slice, int64_t maxLen );
-cVarRangeSlice mid_var_range_slice_c( cVarRangeSlice slice, int64_t index );
-cVarRangeSlice right_var_range_slice_c( cVarRangeSlice slice, int64_t maxLen );
-cVarRangeSlice sub_var_range_slice_c( cVarRangeSlice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx);
-/* var slice */
-cVarRangeSlice as_var_range_slice_c( cVarRangeSlice slice );
-cVarRangeSlice cast_var_range_slice_c( cVarRangeSlice slice, cRangeSlice sub );
-int64_t set_range_slice_c( cVarRangeSlice dst, cRangeSlice src );
-----
 
 [id='cRangeChunk']
 ==== cRangeChunk

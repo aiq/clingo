@@ -1,5 +1,5 @@
 = uint16
-:xmpldir: ../../../test/clingo/type/uint16
+:xmpldir: {testroot}/clingo/type/uint16
 
 include::_attr.adoc[]
 
@@ -32,21 +32,6 @@ typedef struct cUint16Slice cUint16Slice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cUint16Slice uint16_slice_c( int64_t s, uint16_t const* v );
-cUint16Slice make_uint16_slice_c( uint16_t const* beg, uint16_t const* end );
-cUint16Slice empty_uint16_slice_c( void );
-/* sub */
-cUint16Slice left_uint16_slice_c( cUint16Slice slice, int64_t maxLen );
-cUint16Slice mid_uint16_slice_c( cUint16Slice slice, int64_t index );
-cUint16Slice right_uint16_slice_c( cUint16Slice slice, int64_t maxLen );
-cUint16Slice sub_uint16_slice_c( cUint16Slice slice,
-                                 int64_t begIdx,
-                                 int64_t endIdx );
-----
-
 [id='cVarUint16Slice']
 ==== cVarUint16Slice
 [source,c]
@@ -60,129 +45,6 @@ typedef struct cVarUint16Slice cVarUint16Slice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarUint16Slice var_uint16_slice_c( int64_t s, uint16_t const* v );
-cVarUint16Slice make_var_uint16_slice_c( uint16_t* beg, uint16_t* end );
-cVarUint16Slice empty_var_uint16_slice_c( void );
-/* sub */
-cVarUint16Slice left_var_uint16_slice_c( cVarUint16Slice slice, int64_t maxLen );
-cVarUint16Slice mid_var_uint16_slice_c( cVarUint16Slice slice, int64_t index );
-cVarUint16Slice right_var_uint16_slice_c( cVarUint16Slice slice, int64_t maxLen );
-cVarUint16Slice sub_var_uint16_slice_c( cVarUint16Slice slice,
-                                        int64_t begIdx,
-                                        int64_t endIdx );
-/* var slice */
-cUint16Slice as_uint16_slice_c( cVarUint16Slice slice );
-cVarUint16Slice cast_uint16_slice_c( cVarUint16Slice slice, cUint16Slice sub );
-int64_t set_uint16_slice_c( cVarUint16Slice dst, cUint16Slice src );
-----
-
-[id='cUint16Chunk']
-==== cUint16Chunk
-[source,c]
-----
-struct cUint16Chunk
-{
-   int64_t s;
-   uint16_t const* v;
-   int64_t favSize;
-   cUint16Slice slice;
-};
-typedef struct cUint16Chunk cUint16Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_uint16_chunk_c( cUint16Chunk chunk[static 1],
-                               int64_t s,
-                               cUint16Slice slice );
-void init_front_uint16_chunk_c( cUint16Chunk chunk[static 1],
-                                int64_t s,
-                                cUint16Slice slice );
-----
-
-[id='cVarUint16Chunk']
-==== cVarUint16Chunk
-[source,c]
-----
-struct cVarUint16Chunk
-{
-   int64_t s;
-   uint16_t* v;
-   int64_t favSize;
-   cUint16Slice slice;
-};
-typedef struct cVarUint16Chunk cVarUint16Chunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_uint16_chunk_c( cVarUint16Chunk chunk[static 1],
-                                   int64_t s,
-                                   cVarUint16Slice slice );
-void init_front_var_uint16_chunk_c( cVarUint16Chunk chunk[static 1],
-                                    int64_t s,
-                                    cVarUint16Slice slice );
-----
-
-[id='cUint16Window']
-==== cUint16Window
-[source,c]
-----
-struct cUint16Window
-{
-   int64_t s;
-   uint16_t const* v;
-   int64_t favSize;
-   cUint16Slice slice;
-};
-typedef struct cUint16Window cUint16Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_uint16_window_c( cUint16Window window[static 1],
-                                int64_t s,
-                                cUint16Slice slice );
-void init_front_uint16_window_c( cUint16Window window[static 1],
-                                 int64_t s,
-                                 cUint16Slice slice );
-----
-
-[id='cVarUint16Window']
-==== cVarUint16Window
-[source,c]
-----
-struct cVarUint16Window
-{
-   int64_t s;
-   uint16_t* v;
-   int64_t favSize;
-   cVarUint16Slice slice;
-};
-typedef struct cVarUint16Window cVarUint16Window;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_uint16_window_c( cVarUint16Window window[static 1],
-                                    int64_t s,
-                                    cVarUint16Slice slice );
-void init_front_var_uint16_window_c( cVarUint16Window window[static 1],
-                                     int64_t s,
-                                     cVarUint16Slice slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

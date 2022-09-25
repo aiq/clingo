@@ -1,5 +1,5 @@
 = cCharsSlice
-:xmpldir: ../../../test/clingo/type/cCharsSlice
+:xmpldir: {testroot}/clingo/type/cCharsSlice
 
 include::_attr.adoc[]
 

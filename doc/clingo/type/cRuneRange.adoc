@@ -1,5 +1,5 @@
 = cRange
-:xmpldir: ../../../test/clingo/type/cRuneRange
+:xmpldir: {testroot}/clingo/type/cRuneRange
 
 include::_attr.adoc[]
 

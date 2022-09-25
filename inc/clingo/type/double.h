@@ -3,9 +3,7 @@
 
 #include <float.h>
 
-#include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
-#include "clingo/lang/window.h"
 #include "clingo/type/c_ByteOrder.h"
 #include "clingo/type/uint64.h"
 

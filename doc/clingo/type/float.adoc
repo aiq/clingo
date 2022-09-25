@@ -1,5 +1,5 @@
 = float
-:xmpldir: ../../../test/clingo/type/float
+:xmpldir: {testroot}/clingo/type/float
 
 include::_attr.adoc[]
 

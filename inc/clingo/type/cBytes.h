@@ -2,9 +2,7 @@
 #define CLINGO_TYPE_CBYTES_H
 
 #include "clingo/apidecl.h"
-#include "clingo/lang/chunk.h"
 #include "clingo/lang/slice.h"
-#include "clingo/lang/window.h"
 #include "clingo/type/cByte.h"
 #include "clingo/type/cRange.h"
 

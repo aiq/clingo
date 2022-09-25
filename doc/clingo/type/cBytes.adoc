@@ -1,5 +1,5 @@
 = cBytes
-:xmpldir: ../../../test/clingo/type/cBytes
+:xmpldir: {testroot}/clingo/type/cBytes
 
 include::_attr.adoc[]
 
@@ -32,19 +32,6 @@ typedef struct cBytes cBytes;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cBytes bytes_c( int64_t s, cByte const* v );
-cBytes make_bytes_c( cByte const* beg, cByte const* end );
-cBytes empty_bytes_c( void );
-/* sub */
-cBytes left_bytes_c( cBytes bytes, int64_t maxLen );
-cBytes mid_bytes_c( cBytes bytes, int64_t index );
-cBytes right_bytes_c( cBytes bytes, int64_t maxLen );
-cBytes sub_bytes_c( cBytes bytes, int64_t begIdx,  int64_t endIdx );
-----
-
 [id='cVarBytes']
 ==== cVarBytes
 [source,c]
@@ -58,125 +45,6 @@ typedef struct cVarBytes cVarBytes;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarBytes var_bytes_c( int64_t s, cByte* v );
-cVarBytes make_var_bytes_c( cByte* beg, cByte* end );
-cVarBytes empty_var_bytes_c( void );
-/* sub */
-cVarBytes left_var_bytes_c( cVarBytes bytes, int64_t maxLen );
-cVarBytes mid_var_bytes_c( cVarBytes bytes, int64_t index );
-cVarBytes right_var_bytes_c( cVarBytes bytes, int64_t maxLen );
-cVarBytes sub_var_bytes_c( cVarBytes bytes, int64_t begIdx, int64_t endIdx );
-/* var slice */
-cBytes as_bytes_c( cVarBytes bytes );
-cVarBytes cast_bytes_c( cVarBytes bytes, cBytes sub );
-int64_t set_bytes_c( cVarBytes dst, cBytes src );
-----
-
-[id='cByteChunk']
-==== cByteChunk
-[source,c]
-----
-struct cByteChunk
-{
-   int64_t s;
-   cByte const* v;
-   int64_t favSize;
-   cBytes slice;
-};
-typedef struct cByteChunk cByteChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_byte_chunk_c( cByteChunk chunk[static 1],
-                             int64_t s,
-                             cBytes slice );
-void init_front_byte_chunk_c( cByteChunk chunk[static 1],
-                              int64_t s,
-                              cBytes slice );
-----
-
-[id='cVarByteChunk']
-==== cVarByteChunk
-[source,c]
-----
-struct cVarByteChunk
-{
-   int64_t s;
-   cByte* v;
-   int64_t favSize;
-   cVarBytes slice;
-};
-typedef struct cVarByteChunk cVarByteChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_byte_chunk_c( cVarByteChunk chunk[static 1],
-                                 int64_t s,
-                                 cVarBytes slice );
-void init_front_var_byte_chunk_c( cVarByteChunk chunk[static 1],
-                                  int64_t s,
-                                  cVarBytes slice );
-----
-
-[id='cByteWindow']
-==== cByteWindow
-[source,c]
-----
-struct cByteWindow
-{
-   int64_t s;
-   cByte const* v;
-   cBytes slice;
-};
-typedef struct cByteWindow cByteWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_byte_window_c( cByteWindow window[static 1],
-                              int64_t s,
-                              cBytes slice );
-void init_front_byte_window_c( cByteWindow window[static 1],
-                               int64_t s,
-                               cBytes slice );
-----
-
-[id='cVarByteWindow']
-==== cVarByteWindow
-[source,c]
-----
-struct cVarByteWindow
-{
-   int64_t s;
-   cByte* v;
-   cVarBytes slice;
-};
-typedef struct cVarByteWindow cVarByteWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_byte_window_c( cVarByteWindow window[static 1],
-                                  int64_t s,
-                                  cVarBytes slice );
-void init_front_var_byte_window_c( cVarByteWindow window[static 1],
-                                   int64_t s,
-                                   cVarBytes slice );
-----
 
 //******************************************************************************
 //******************************************************************* Functions
