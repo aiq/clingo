@@ -39,27 +39,3 @@ bool eq_cmyk_c( cCmyk a, cCmyk b, float epsilon )
           eq_float_c( a.yellow, b.yellow, epsilon ) and
           eq_float_c( a.key, b.key, epsilon );
 }
-
-bool read_cmyk_c( cScanner sca[static 1],
-                  cCmyk cmyk[static 1],
-                  char const fmt[static 1] )
-{
-   return false;
-}
-
-bool write_cmyk_c( cRecorder rec[static 1],
-                   cCmyk cmyk,
-                   char const fmt[static 1] )
-{
-   cChars format = c_c( fmt );
-
-   if ( is_empty_c_( format ) or chars_is_c( format, "()" ))
-   {
-      return write_c_( rec,
-         "cmyk({f:f.3}%,{f:f.3}%,{f:f.3}%,{f:f.3}%)",
-         cmyk.cyan*100.0, cmyk.magenta*100.0, cmyk.yellow*100.0, cmyk.key*100.0
-      );
-   }
-
-   return false;
-}

@@ -1,0 +1,574 @@
+= cColor
+:xmpldir: {testroot}/clingo/color/cColor
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+
+
+//******************************************************************************
+//******************************************************* Types and Definitions
+//******************************************************************************
+== Types and Definitions
+
+[id='cColor']
+==== cColor
+[source,c]
+----
+struct cColor
+{
+
+};
+typedef struct cColor cColor;
+----
+
+//******************************************************************* Generated
+=== Generated
+
+[id='cColorSlice']
+==== cColorSlice
+[source,c]
+----
+struct cColorSlice
+{
+   int64_t s;
+   cColor const* v;
+};
+typedef struct cColorSlice cColorSlice;
+----
+
+{Slice}
+
+[id='cVarColorSlice']
+==== cVarColorSlice
+[source,c]
+----
+struct cVarColorSlice
+{
+   int64_t s;
+   cColor* v;
+};
+typedef struct cVarColorSlice cVarColorSlice;
+----
+
+{Slice}
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//************************************************************************ init
+=== init
+
+[id='color_c_']
+==== color_c_
+[source,c]
+----
+#define color_c_( Red, Green, Blue, Alpha )
+----
+
+asdfsadf
+
+[id='rgb_color_c']
+==== rgb_color_c
+[source,c]
+----
+cColor rgb_color_c( uint32_t raw );
+----
+
+sadffsd
+
+[id='rgba_color_c']
+==== rgba_color_c
+[source,c]
+----
+cColor rgba_color_c( uint32_t raw );
+----
+
+affdadgg
+
+[id='argb_color_c']
+==== argb_color_c
+[source,c]
+----
+cColor argb_color_c( uint32_t raw );
+----
+
+adfdsag
+
+[id='alpha_color_c']
+==== alpha_color_c
+[source,c]
+----
+cColor alpha_color_c( uint8_t red, uint32_t green, uint32_t blue, float alpha );
+----
+
+asdfsdf
+
+//************************************************************************ from
+=== from
+
+[id='from_cmyk_c']
+==== from_cmyk_c
+[source,c]
+----
+#define from_cmyk_c_( Cyan, Magenta, Yellow, Key )                             \
+   from_cmyk_c( cmyk_c_( (Cyan), (Magenta), (Yellow), (Key) ) )
+cColor from_cmyk_c( cCmyk cmyk );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_cmyk.c[]
+----
+
+[id='from_cmyk32_c']
+==== from_cmyk32_c
+[source,c]
+----
+#define from_cmyk32_c_( Cyan, Magenta, Yellow, Key )                           \
+   from_cmyk32_c( cmyk32_c_( (Cyan), (Magenta), (Yellow), (Key) ) )
+cColor from_cmyk32_c( cCmyk32 cmyk );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_cmyk32.c[]
+----
+
+[id='from_hsl_c']
+==== from_hsl_c
+[source,c]
+----
+#define from_hsl_c_( Hue, Saturation, Lightness )                              \
+   from_hsl_c( hsl_c_( (Hue), (Saturation), (Lightness) ) )
+cColor from_hsl_c( cHsl hsl );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_hsl.c[]
+----
+
+[id='from_hsv_c']
+==== from_hsv_c
+[source,c]
+----
+#define from_hsv_c_( Hue, Saturation, Value )                                  \
+   from_hsv_c( hsv_c_( (Hue), (Saturation), (Value) ) )
+cColor from_hsv_c( cHsv hsv );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_hsv.c[]
+----
+
+[id='from_rgb_c']
+==== from_rgb_c
+[source,c]
+----
+#define from_rgb_c_( Red, Green, Blue )                                        \
+   from_rgb_c( rgb_c_( (Red), (Green), (Blue) ) )
+cColor from_rgb_c( cRgb rgb );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/from_rgb.c[]
+----
+
+[id='from_rgb24_c']
+==== from_rgb24_c
+[source,c]
+----
+#define from_rgb24_c_( Red, Green, Blue )                                      \
+   from_rgb24_c( rgb24_c_( (Red), (Green), (Blue) ) )
+cColor from_rgb24_c( cRgb24 rgb );
+----
+
+//************************************************************************** as
+=== as
+
+[id='as_cmyk_c']
+==== as_cmyk_c
+[source,c]
+----
+cCmyk as_cmyk_c( cColor color );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_cmyk.c[]
+----
+
+[id='as_cmyk32_c']
+==== as_cmyk32_c
+[source,c]
+----
+cCmyk32 as_cmyk32_c( cColor color );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_cmyk32.c[]
+----
+
+[id='as_hsl_c']
+==== as_hsl_c
+[source,c]
+----
+cHsl as_hsl_c( cColor color );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_hsl.c[]
+----
+
+[id='as_hsv_c']
+==== as_hsv_c
+[source,c]
+----
+cHsv as_hsv_c( cColor color );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_hsv.c[]
+----
+
+[id='as_rgb_c']
+==== as_rgb_c
+[source,c]
+----
+cRgb as_rgb_c( cColor color );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/as_rgb.c[]
+----
+
+[id='as_rgb24_c']
+==== as_rgb24_c
+[source,c]
+----
+cRgb24 as_rgb24_c( cColor color );
+----
+
+//************************************************************************* cmp
+=== cmp
+
+[id='eq_color_c']
+==== eq_color_c
+[source,c]
+----
+bool eq_color_c( cColor a, cColor b );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/eq_color.c[]
+----
+
+[id='eq_rgb_color_c']
+==== eq_rgb_color_c
+[source,c]
+----
+bool eq_rgb_color_c( cColor a, cColor b );
+----
+
+//*********************************************************************** alpha
+=== alpha
+
+[id='color_alpha_c']
+==== color_alpha_c
+[source,c]
+----
+float color_alpha_c( cColor color );
+----
+
+[id='set_color_alpha_c']
+==== set_color_alpha_c
+[source,c]
+----
+cColor set_color_alpha_c( cColor color, float alpha );
+----
+
+[id='color_luma_c']
+==== color_luma_c
+[source,c]
+----
+float color_luma_c( cColor color );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/color_luma.c[]
+----
+
+//****************************************************************** operations
+=== operations
+
+[id='saturate_color_c']
+==== saturate_color_c
+[source,c]
+----
+cColor saturate_color_c( cColor color, float amount );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/saturate_color.c[]
+----
+
+[id='desaturate_color_c']
+==== desaturate_color_c
+[source,c]
+----
+cColor desaturate_color_c( cColor color, float amount );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/desaturate_color.c[]
+----
+
+[id='lighten_color_c']
+==== lighten_color_c
+[source,c]
+----
+cColor lighten_color_c( cColor color, float amount );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/lighten_color.c[]
+----
+
+[id='darken_color_c']
+==== darken_color_c
+[source,c]
+----
+cColor darken_color_c( cColor color, float amount );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/darken_color.c[]
+----
+
+[id='fade_color_c']
+==== fade_color_c
+[source,c]
+----
+cColor fade_color_c( cColor color, float amount );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/fade_color.c[]
+----
+
+[id='spin_color_c']
+==== spin_color_c
+[source,c]
+----
+cColor spin_color_c( cColor color, float amount );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/spin_color.c[]
+----
+
+[id='mix_color_c']
+==== mix_color_c
+[source,c]
+----
+#define mix_color_c_( Color, Extra ) \
+   mix_color_c( Color, Extra, cMIX_COLOR_WEIGHT_ )
+cColor mix_color_c( cColor color, cColor extra, float weight );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/mix_color.c[]
+----
+
+[id='greyscale_color_c']
+==== greyscale_color_c
+[source,c]
+----
+cColor greyscale_color_c( cColor color );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/greyscale_color.c[]
+----
+
+[id='contrast_color_c']
+==== contrast_color_c
+[source,c]
+----
+#define contrast_color_c_( Color )                                             \
+   contrast_color_c( (Color),                                                  \
+                     cCONTRAST_COLOR_DARK_,                                    \
+                     cCONTRAST_COLOR_LIGHT_,                                   \
+                     cCONTRAST_COLOR_THRESHOLD_ )
+cColor contrast_color_c( cColor color,
+                         cColor dark,
+                         cColor light,
+                         float threshold );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/contrast_color.c[]
+----
+
+//******************************************************************** blending
+=== blending
+
+[id='multiply_color_c']
+==== multiply_color_c
+[source,c]
+----
+cColor multiply_color_c( cColor a, cColor b );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/multiply_color.c[]
+----
+
+[id='screen_color_c']
+==== screen_color_c
+[source,c]
+----
+cColor screen_color_c( cColor a, cColor b );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/screen_color.c[]
+----
+
+[id='overlay_color_c']
+==== overlay_color_c
+[source,c]
+----
+cColor overlay_color_c( cColor a, cColor b );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/overlay_color.c[]
+----
+
+[id='softlight_color_c']
+==== softlight_color_c
+[source,c]
+----
+cColor softlight_color_c( cColor color, cColor extra );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/softlight_color.c[]
+----
+
+[id='hardlight_color_c']
+==== hardlight_color_c
+[source,c]
+----
+cColor hardlight_color_c( cColor color, cColor extra );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/hardlight_color.c[]
+----
+
+[id='difference_color_c']
+==== difference_color_c
+[source,c]
+----
+cColor difference_color_c( cColor color, cColor other );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/difference_color.c[]
+----
+
+[id='exclusion_color_c']
+==== exclusion_color_c
+[source,c]
+----
+cColor exclusion_color_c( cColor color, cColor other );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/exclusion_color.c[]
+----
+
+[id='average_color_c']
+==== average_color_c
+[source,c]
+----
+cColor average_color_c( cColor color, cColor other );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/average_color.c[]
+----
+
+[id='negation_color_c']
+==== negation_color_c
+[source,c]
+----
+cColor negation_color_c( cColor color, cColor other );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/negation_color.c[]
+----

@@ -19,48 +19,42 @@ struct cPixel
 };
 typedef struct cPixel cPixel;
 
-#define IMAGE_TYPE_C_( ImageType, VarImageType )                               \
+#define IMAGES_C_( ImageType, VarImageType )                                   \
 struct ImageType                                                               \
 {                                                                              \
-   void const* data;                                                           \
    int32_t w;                                                                  \
    int32_t h;                                                                  \
+   void const* data;                                                           \
 };                                                                             \
 typedef struct ImageType ImageType;                                            \
                                                                                \
 struct VarImageType                                                            \
 {                                                                              \
-   void* data;                                                                 \
    int32_t w;                                                                  \
    int32_t h;                                                                  \
+   void* data;                                                                 \
 };                                                                             \
 typedef struct VarImageType VarImageType;
 
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
- init
+ pixel
 *******************************************************************************/
 
 #define pixel_c_( X, Y )                                                       \
    ((cPixel){ .x=(X), .y=(Y) })
 
-CLINGO_API inline bool pixel_is_before_c( cPixel a, cPixel b )
-{
-   return a.x < b.x and a.y < b.y;
-}
-
-CLINGO_API inline bool pixel_is_after_c( cPixel a, cPixel b )
-{
-   return a.x > b.x and a.y > b.y;
-}
-
 /*******************************************************************************
- init
+ image
 *******************************************************************************/
 
 #define image_copy_c_( Image )                                                 \
-   { (Image).data, (Image).w, (Image).h }
+{                                                                              \
+   (Image).w,                                                                  \
+   (Image).h,                                                                  \
+   (Image).data                                                                \
+}
 
 CLINGO_API inline
 void* alloc_image_data_c( int32_t w, int32_t h, int64_t typeSize )
@@ -79,11 +73,11 @@ for ( int32_t (X) = 0; (X) < (Image).w; ++(X) )
 
 #define to_pixel_value_c_( Image, Type, Pixel )                                \
    to_pixel_value_c(                                                           \
-      (Image).data, (Image).w, (Image).h, sizeof_c_( Type ), (Pixel)           \
+      (Image).w, (Image).h, (Image).data, sizeof_c_( Type ), (Pixel)           \
    )
-CLINGO_API inline void const* to_pixel_value_c( void const* data,
-                                                int32_t w,
+CLINGO_API inline void const* to_pixel_value_c( int32_t w,
                                                 int32_t h,
+                                                void const* data,
                                                 int64_t typeSize,
                                                 cPixel pixel )
 {
@@ -103,11 +97,11 @@ CLINGO_API inline void const* to_pixel_value_c( void const* data,
 
 #define to_var_pixel_value_c_( Image, Type, Pixel )                            \
    to_var_pixel_value_c(                                                       \
-      (Image).data, (Image).w, (Image).h, sizeof_c_( Type ), (Pixel)           \
+      (Image).w, (Image).h, (Image).data, sizeof_c_( Type ), (Pixel)           \
    )
-CLINGO_API inline void* to_var_pixel_value_c( void* data,
-                                              int32_t w,
+CLINGO_API inline void* to_var_pixel_value_c( int32_t w,
                                               int32_t h,
+                                              void* data,
                                               int64_t typeSize,
                                               cPixel pixel )
 {

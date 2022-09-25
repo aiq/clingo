@@ -40,16 +40,4 @@ SLICE_DEF_C_(
    eq_hsv_c( (A), (B), FLT_EPSILON )
 CLINGO_API bool eq_hsv_c( cHsv a, cHsv b, float epsilon );
 
-#define read_hsv_c_( Sca, Hsv )                                                \
-   read_hsv_c( (Sca), (Hsv), "" )
-CLINGO_API bool read_hsv_c( cScanner sca[static 1],
-                            cHsv hsv[static 1],
-                            char const fmt[static 1] );
-
-#define write_hsv_c_( Rec, Hsv )                                               \
-   write_hsv_c( (Rec), (Hsv), "" )
-CLINGO_API bool write_hsv_c( cRecorder rec[static 1],
-                             cHsv hsv,
-                             char const fmt[static 1] );
-
 #endif

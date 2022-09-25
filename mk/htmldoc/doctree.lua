@@ -1,5 +1,8 @@
 local doctree = {
    [ "clingo" ] = {
+      [ "color" ] = {
+         "cCmyk.adoc",
+      },
       [ "container" ] = {
          "CBitVec.adoc",
          "CByteVec.adoc",

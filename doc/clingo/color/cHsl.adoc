@@ -1,5 +1,5 @@
-= cCmyk
-:xmpldir: {testroot}/clingo/color/cCmyk
+= cHsl
+:xmpldir: {testroot}/clingo/color/cHsl
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -13,18 +13,17 @@
 //******************************************************************************
 == Types and Definitions
 
-[id='cCmyk']
-==== cCmyk
+[id='cHsl']
+==== cHsl
 [source,c]
 ----
-struct cCmyk
+struct cHsl
 {
-   float cyan;
-   float magenta;
-   float yellow;
-   float key;
+   float hue;
+   float saturation;
+   float lightness;
 };
-typedef struct cCmyk cCmyk;
+typedef struct cHsl cHsl;
 ----
 
 
@@ -32,30 +31,30 @@ typedef struct cCmyk cCmyk;
 //******************************************************************* Generated
 === Generated
 
-[id='cCmykSlice']
-==== cCmykSlice
+[id='cHslSlice']
+==== cHslSlice
 [source,c]
 ----
-struct cCmykSlice
+struct cHslSlice
 {
    int64_t s;
-   cCmyk const* v;
+   cHsl const* v;
 };
-typedef struct cCmykSlice cCmykSlice;
+typedef struct cHslSlice cHslSlice;
 ----
 
 {Slice}
 
-[id='cVarCmykSlice']
-==== cVarCmykSlice
+[id='cVarHslSlice']
+==== cVarHslSlice
 [source,c]
 ----
-struct cVarCmykSlice
+struct cVarHslSlice
 {
    int64_t s;
-   cCmyk* v;
+   cHsl* v;
 };
-typedef struct cVarCmykSlice cVarCmykSlice;
+typedef struct cVarHslSlice cVarHslSlice;
 ----
 
 {Slice}
@@ -68,48 +67,26 @@ typedef struct cVarCmykSlice cVarCmykSlice;
 //********************************************************************* overall
 === overall
 
-[id='cmyk_c_']
-==== cmyk_c_
+[id='hsl_c_']
+==== hsl_c_
 [source,c]
 ----
-#define cmyk_c_( Cyan, Magenta, Yellow, Key )
+#define hsl_c_( Hue, Saturation, Lightness )
 ----
 
-Creates a cCmyk instance.
+Creates a cHsl instance.
 
-[id='cmyk_from_cmyk32_c']
-==== cmyk_from_cmyk32_c
+[id='eq_hsl_c']
+==== eq_hsl_c
 [source,c]
 ----
-cCmyk32 cmyk32_from_cmyk_c( cCmyk cmyk );
-----
-
-Converts a cCmyk value to a cCmyk32 value.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/cmyk_from_cmyk32.c[]
-----
-
-[id='cmyk_from_cmyk32_c']
-==== cmyk_from_cmyk32_c
-[source,c]
-----
-cCmyk cmyk_from_cmyk32_c( cCmyk32 cmyk32 );
-----
-
-[id='eq_cmyk_c']
-==== eq_cmyk_c
-[source,c]
-----
-#define eq_cmyk_c_( A, B )                                                     \
-   eq_cmyk_c( (A), (B), FLT_EPSILON )
-bool eq_cmyk_c( cCmyk a, cCmyk b, float epsilon );
+#define eq_hsl_c_( A, B )                                                      \
+   eq_hsl_c( (A), (B), FLT_EPSILON )
+bool eq_hsl_c( cHsl a, cHsl b, float epsilon );
 ----
 
 .Example
 [source,c]
 ----
-include::{xmpldir}/eq_cmyk.c[]
+include::{xmpldir}/eq_hsl.c[]
 ----

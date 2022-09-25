@@ -10,41 +10,6 @@
 
 extern inline bool eq_rgb24_c( cRgb24 a, cRgb24 b );
 
-bool read_rgb24_c( cScanner sca[static 1],
-                   cRgb24 rgb[static 1],
-                   char const fmt[static 1] )
-{
-   return false;
-}
-
-bool write_rgb24_c( cRecorder rec[static 1],
-                    cRgb24 rgb,
-                    char const fmt[static 1] )
-{
-   cChars format = c_c( fmt );
-
-   if ( is_empty_c_( format ) )
-   {
-      return write_c_( rec,
-         "rgb({u8},{u8},{u8})",
-         rgb.red, rgb.green, rgb.blue
-      );
-   }
-  /*
-  if ( is_empty_c_( format ) or char_slice_is_c( format, "css" ) )
-  {
-  }
-  else if ( char_slice_is_c( format, "dbg" ) )
-  {
-  }
-  else if ( char_slice_is_c( format, "hex" ) )
-  {
-  }
-  */
-
-  return false;
-}
-
 /*******************************************************************************
  
 *******************************************************************************/

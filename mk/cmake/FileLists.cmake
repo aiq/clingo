@@ -221,13 +221,9 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/color/cCmyk/cmyk_from_cmyk32.c
    ${TEST_DIR}/clingo/color/cCmyk/cmyk32_from_cmyk.c
    ${TEST_DIR}/clingo/color/cCmyk/eq_cmyk.c
-   #${TEST_DIR}/clingo/color/cCmyk/read_cmyk.c
-   #${TEST_DIR}/clingo/color/cCmyk/write_cmyk.c
 
    # cCmyk32
    #${TEST_DIR}/clingo/color/cCmyk32/eq_cmyk32.c
-   #${TEST_DIR}/clingo/color/cCmyk32/read_cmyk32.c
-   #${TEST_DIR}/clingo/color/cCmyk32/write_cmyk32.c
 
    # cColor
    ${TEST_DIR}/clingo/color/cColor/as_cmyk.c
@@ -256,27 +252,21 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/color/cColor/multiply_color.c
    ${TEST_DIR}/clingo/color/cColor/negation_color.c
    ${TEST_DIR}/clingo/color/cColor/overlay_color.c
-   #${TEST_DIR}/clingo/color/cColor/read_color.c
    ${TEST_DIR}/clingo/color/cColor/saturate_color.c
    ${TEST_DIR}/clingo/color/cColor/screen_color.c
    ${TEST_DIR}/clingo/color/cColor/softlight_color.c
    ${TEST_DIR}/clingo/color/cColor/spin_color.c
-   #${TEST_DIR}/clingo/color/cColor/write_color.c
 
    # cP3Creator
    ${TEST_DIR}/clingo/color/cP3Creator/cP3Creator-overview.c
 
    # cRgb
    #${TEST_DIR}/clingo/color/cRgb/eq_rgb.c
-   #${TEST_DIR}/clingo/color/cRgb/read_rgb.c
    #${TEST_DIR}/clingo/color/cRgb/rgb_from_rgb24.c
    #${TEST_DIR}/clingo/color/cRgb/rgb24_from_rgb.c
-   #${TEST_DIR}/clingo/color/cRgb/write_rgb.c
 
    # cRgb24
    #${TEST_DIR}/clingo/color/cRgb/eq_rgb24.c
-   #${TEST_DIR}/clingo/color/cRgb/read_rgb24.c
-   #${TEST_DIR}/clingo/color/cRgb/write_rgb24.c
 
    ################################################################### container
    # CBitVec
@@ -437,8 +427,6 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/chunk/exact_chunk.c
    ${TEST_DIR}/clingo/lang/chunk/next_chunk.c
    ${TEST_DIR}/clingo/lang/chunk/prev_chunk.c
-   ${TEST_DIR}/clingo/lang/chunk/STATIC_BACK_CHUNK.c
-   ${TEST_DIR}/clingo/lang/chunk/STATIC_FRONT_CHUNK.c
    ${TEST_DIR}/clingo/lang/chunk/valid_chunk.c
    # error
    ${TEST_DIR}/clingo/lang/error/reset_error_stack.c
@@ -508,8 +496,8 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/math/usub64.c
    ${TEST_DIR}/clingo/lang/math/usub8.c
    # slice
+   ${TEST_DIR}/clingo/lang/slice/atween.c
    ${TEST_DIR}/clingo/lang/slice/begin.c
-   ${TEST_DIR}/clingo/lang/slice/CAST_SLICE.c
    ${TEST_DIR}/clingo/lang/slice/end.c
    ${TEST_DIR}/clingo/lang/slice/first.c
    ${TEST_DIR}/clingo/lang/slice/for_each.c
@@ -518,28 +506,25 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/slice/is_empty.c
    ${TEST_DIR}/clingo/lang/slice/is_sub.c
    ${TEST_DIR}/clingo/lang/slice/last.c
-   ${TEST_DIR}/clingo/lang/slice/LEFT_SLICE.c
-   ${TEST_DIR}/clingo/lang/slice/MAKE_SLICE.c
-   ${TEST_DIR}/clingo/lang/slice/MID_SLICE.c
+   ${TEST_DIR}/clingo/lang/slice/left.c
+   ${TEST_DIR}/clingo/lang/slice/mid.c
    ${TEST_DIR}/clingo/lang/slice/nth.c
    ${TEST_DIR}/clingo/lang/slice/points_into.c
    ${TEST_DIR}/clingo/lang/slice/ptr_for.c
    ${TEST_DIR}/clingo/lang/slice/put.c
    ${TEST_DIR}/clingo/lang/slice/rbegin.c
    ${TEST_DIR}/clingo/lang/slice/rend.c
-   ${TEST_DIR}/clingo/lang/slice/RIGHT_SLICE.c
+   ${TEST_DIR}/clingo/lang/slice/right.c
    ${TEST_DIR}/clingo/lang/slice/scalars.c
    ${TEST_DIR}/clingo/lang/slice/SET_SLICE.c
    ${TEST_DIR}/clingo/lang/slice/slice.c
    ${TEST_DIR}/clingo/lang/slice/structs.c
-   ${TEST_DIR}/clingo/lang/slice/SUB_SLICE.c
+   ${TEST_DIR}/clingo/lang/slice/sub.c
    ${TEST_DIR}/clingo/lang/slice/TEMP_SLICE_DEF.c
    ${TEST_DIR}/clingo/lang/slice/valid_index.c
    # window
    ${TEST_DIR}/clingo/lang/window/next_window.c
    ${TEST_DIR}/clingo/lang/window/prev_window.c
-   ${TEST_DIR}/clingo/lang/window/STATIC_BACK_WINDOW.c
-   ${TEST_DIR}/clingo/lang/window/STATIC_FRONT_WINDOW.c
    ${TEST_DIR}/clingo/lang/window/valid_window.c
 
    ######################################################################### str

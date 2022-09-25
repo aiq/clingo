@@ -38,7 +38,7 @@ SLICE_DEF_C_(
    cVarColorSlice    // VarSliceType
 )
 
-IMAGE_TYPE_C_(
+IMAGES_C_(
    cColorImage,   // ImageType
    cVarColorImage // VarImageType
 )
@@ -105,7 +105,7 @@ CLINGO_API cRgb24 as_rgb24_c( cColor color );
 CLINGO_API cRgb as_rgb_c( cColor color );
 
 /*******************************************************************************
- compare
+ cmp
 *******************************************************************************/
 
 CLINGO_API inline bool eq_color_c( cColor a, cColor b )
@@ -119,7 +119,7 @@ CLINGO_API inline bool eq_rgb_color_c( cColor a, cColor b )
 }
 
 /*******************************************************************************
- channel information
+ alpha
 *******************************************************************************/
 
 CLINGO_API float color_alpha_c( cColor color );
@@ -150,10 +150,10 @@ CLINGO_API cColor mix_color_c( cColor color, cColor extra, float weight );
 
 CLINGO_API cColor greyscale_color_c( cColor color );
 
-#define contrast_color_c_( Color )                 \
-   contrast_color_c( (Color),                      \
-                     cCONTRAST_COLOR_DARK_,        \
-                     cCONTRAST_COLOR_LIGHT_,       \
+#define contrast_color_c_( Color )                                             \
+   contrast_color_c( (Color),                                                  \
+                     cCONTRAST_COLOR_DARK_,                                    \
+                     cCONTRAST_COLOR_LIGHT_,                                   \
                      cCONTRAST_COLOR_THRESHOLD_ )
 CLINGO_API cColor contrast_color_c( cColor color,
                                     cColor dark,
@@ -186,28 +186,12 @@ CLINGO_API cColor negation_color_c( cColor color, cColor other );
  io
 *******************************************************************************/
 
-#define read_color_c_( Sca, Color )                                            \
-   read_color_c( (Sca), (Color), "" )
-CLINGO_API bool read_color_c( cScanner sca[static 1],
-                              cColor color[static 1],
-                              char const fmt[static 1] );
-
-#define write_color_c_( Rec, Color )                                           \
-   write_color_c( (Rec), (Color), "" )
-CLINGO_API bool write_color_c( cRecorder rec[static 1],
-                               cColor color,
-                               char const fmt[static 1] );
-
-/*******************************************************************************
- io
-*******************************************************************************/
-
 #define heap_var_color_image_c_( W, H )                                        \
 (                                                                              \
    (cVarColorImage){                                                           \
-      .data=alloc_image_data_c( (W), (H), sizeof_c_( cColor ) ),               \
       .w=(W),                                                                  \
-      .h=(H)                                                                   \
+      .h=(H),                                                                  \
+      .data=alloc_image_data_c( (W), (H), sizeof_c_( cColor ) )                \
    }                                                                           \
 )
 

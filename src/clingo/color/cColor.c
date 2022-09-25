@@ -244,7 +244,7 @@ cRgb as_rgb_c( cColor color )
 }
 
 /*******************************************************************************
-
+ cmp
 *******************************************************************************/
 
 extern inline bool eq_color_c( cColor a, cColor b );
@@ -252,7 +252,7 @@ extern inline bool eq_color_c( cColor a, cColor b );
 extern inline bool eq_rgb_color_c( cColor a, cColor b );
 
 /*******************************************************************************
- channel information
+ alpha
 *******************************************************************************/
 
 float color_alpha_c( cColor color )
@@ -463,47 +463,6 @@ cColor negation_color_c( cColor x, cColor y )
    uint8_t b = u8round_( 255.0 - fabs( 255.0 - y.b - x.b ) );
 
    return color_c_( r, g, b, x.a );
-}
-
-/***********************************************************************************************************************
-
-***********************************************************************************************************************/
-
-/*
-b rgb
-c cmyk
-g rgb
-h hsl/hsv
-k cmyk
-l hsl
-m cmyk
-r rgb
-s hsl/hsv
-v hsv
-y cmyk
-
-RRGGBBAA RGB r rrr g ggg b bbb a aaa
-CCMMYYKK c ccc m mmm y yyy k kkk
-*/
-
-bool read_color_c( cScanner sca[static 1],
-                   cColor color[static 1],
-                   char const fmt[static 1] )
-{
-   return false;
-}
-
-bool write_color_c( cRecorder rec[static 1],
-                    cColor color,
-                    char const fmt[static 1] )
-{
-   cChars format = c_c( fmt );
-
-   if ( is_empty_c_( format ) )
-   {
-      return write_c_( rec, "#{u8:x(2r0)}{u8:x(2r0)}{u8:x(2r0)}{u8:x(2r0)}", color.r, color.g, color.b, color.a );
-   }
-   return false;
 }
 
 /*******************************************************************************

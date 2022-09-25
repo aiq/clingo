@@ -27,7 +27,7 @@ SLICE_DEF_C_(
    cVarRgb24Slice    // VarSliceType
 )
 
-IMAGE_TYPE_C_(
+IMAGES_C_(
    cRgb24Image,   // ImageType
    cVarRgb24Image // VarImageType
 )
@@ -67,9 +67,9 @@ CLINGO_API bool write_rgb24_c( cRecorder rec[static 1],
 #define heap_var_rgb24_image_c_( W, H )                                        \
 (                                                                              \
    (cVarRgb24Image){                                                           \
-      .data=alloc_image_data_c( (W), (H), sizeof_c_( cRgb24 ) ),               \
       .w=(W),                                                                  \
-      .h=(H)                                                                   \
+      .h=(H),                                                                  \
+      .data=alloc_image_data_c( (W), (H), sizeof_c_( cRgb24 ) )                \
    }                                                                           \
 )
 

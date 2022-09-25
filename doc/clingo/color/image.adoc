@@ -1,0 +1,71 @@
+= image
+
+
+//******************************************************************************
+//******************************************************************* Functions
+//******************************************************************************
+== Functions
+
+//*********************************************************************** pixel
+=== pixel
+
+[id='pixel_c_']
+==== pixel_c_
+[source,c]
+----
+#define pixel_c_( X, Y )
+----
+
+//*********************************************************************** image
+=== image
+
+[id='image_copy_c_']
+==== image_copy_c_
+[source,c]
+----
+#define image_copy_c_( Image )
+----
+
+[id='alloc_image_data_c']
+==== alloc_image_data_c
+[source,c]
+----
+void* alloc_image_data_c( int32_t w, int32_t h, int64_t typeSize )
+----
+
+[id='for_each_pixel_c_']
+==== for_each_pixel_c_
+[source,c]
+----
+#define for_each_pixel_c_( X, Y, Image )
+----
+
+[id='to_pixel_value_c']
+==== to_pixel_value_c
+[source,c]
+----
+#define to_pixel_value_c_( Image, Type, Pixel )                                \
+   to_pixel_value_c(                                                           \
+      (Image).w, (Image).h, (Image).data, sizeof_c_( Type ), (Pixel)           \
+   )
+void const* to_pixel_value_c( int32_t w,
+                              int32_t h,
+                              void const* data,
+                              int64_t typeSize,
+                              cPixel pixel );
+----
+
+[id='to_var_pixel_value_c']
+==== to_var_pixel_value_c
+[source,c]
+----
+#define to_var_pixel_value_c_( Image, Type, Pixel )                            \
+   to_var_pixel_value_c(                                                       \
+      (Image).w, (Image).h, (Image).data, sizeof_c_( Type ), (Pixel)           \
+   )
+void* to_var_pixel_value_c( int32_t w,
+                            int32_t h,
+                            void* data,
+                            int64_t typeSize,
+                            cPixel pixel );
+----

@@ -17,9 +17,14 @@ static inline bool set_error( cP3Creator creator[static 1], int err )
    return false;
 }
 
+static inline bool pixel_is_before( cPixel a, cPixel b )
+{
+   return a.x < b.x and a.y < b.y;
+}
+
 bool append_p3_pixel_c( cP3Creator creator[static 1], cRgb24 rgb )
 {
-   if ( not pixel_is_before_c( creator->itr, creator->end ) )
+   if ( not pixel_is_before( creator->itr, creator->end ) )
       return set_error( creator, ReachedEndCode_ );
 
    cRecorder* rec = &recorder_c_( 64 );

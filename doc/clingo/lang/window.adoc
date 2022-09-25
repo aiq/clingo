@@ -58,11 +58,11 @@ Initializes a window on the back of the Slice.
 The Size parameter defines the size of the window subslices.
 
 [id='front_window_c_']
- ==== front_window_c_
- [source,c]
- ----
- #define front_window_c_( Size, Slice )
- ----
+==== front_window_c_
+[source,c]
+----
+#define front_window_c_( Size, Slice )
+----
 
 Initializes a window on the front of the Slice.
 The Size parameter defines the size of the window subslices.

@@ -15,7 +15,7 @@ A chunk struct can also be viewed as slice because it has the attributes s
 
 image:chunk.svg[]
 
-In addition has a chunk the attributes favSize (favored size) and slice (the
+In addition has a chunk the attributes fav (favored size) and slice (the
 actual slice).
 
 This module defines code generation macros to generate typed chunk structs.
@@ -27,137 +27,49 @@ along the slice sequence.
 //******************************************************************************
 == Code Generation Macros
 
-//************************************************************************ init
-=== init
-
-[id='INIT_FRONT_CHUNK_C_']
-==== INIT_FRONT_CHUNK_C_
-[source,c]
-----
-#define INIT_FRONT_CHUNK_C_( FuncName, ChunkType, SliceType )
-----
-
-Generates a initialization function that sets the chunk on the front of a
-slice.
-The parameter s defines the size of the chunk subslices.
-The generated function has the following common signature:
-[source,c]
-----
-void FuncName( ChunkType chunk[static 1], int64_t s, SliceType slice );
-----
-
-[id='INIT_BACK_CHUNK_C_']
-==== INIT_BACK_CHUNK_C_
-[source,c]
-----
-#define INIT_FRONT_CHUNK_C_( FuncName, ChunkType, SliceType )
-----
-
-Generates a initialization function that sets the chunk on the back of a
-slice.
-The parameter s defines the size of the chunk subslices.
-The generated function has the following common signature.
-[source,c]
-----
-void FuncName( ChunkType chunk[static 1], int64_t s, SliceType slice );
-----
-
 //************************************************************************ type
 === type
 
-[id='CHUNK_DEF_C_']
-==== CHUNK_DEF_C_
+[id='CHUNK_C_']
+==== CHUNK_C_
 [source,c]
 ----
-#define CHUNK_DEF_C_( Type,
-                      ChunkType, SliceType, FuncSuffix,
-                      VarChunkType, VarSliceType, VarFuncSuffix )
+#define CHUNK_C_( Type, SliceType, ChunkType )
 ----
 
-Generates two chunk structs for slices with Type values.
-The struct ChunkType for the const sequence of SliceType and
-VarChunkType for the variable sequence of VarSliceType.
-The values FuncSuffix and VarFuncSuffix are used as postfix for the generated
-inline functions.
-
-The following call can be used in a .h or .c file.
-[source,c]
-----
-CHUNK_DEF_C_(
-   char,             // Type
-   cCharChunk,       // ChunkType
-   cChars,           // SliceType
-   char_chunk_c,     // FuncSuffix
-   cVarCharChunk,    // VarChunkType
-   cVarChars,        // VarSliceType
-   var_char_chunk_c  // VarFuncSuffix
-)
-----
+Generates a chunk struct for a slice with _Type_ values.
 The overview shows the generated structs and functions for the call.
-
-[options="header"]
-|====
-| | Const Data Chunk | Variable Data Chunk
-
-| struct
-| cCharChunk
-| cVarCharChunk
-
-| INIT_FRONT_CHUNK_C_
-| init_front_char_chunk_c
-| init_front_var_char_chunk_c
-
-| INIT_BACK_CHUNK_C_
-| init_back_char_chunk_c
-| init_back_var_char_chunk_c
-|====
-
-[id='CHUNK_IMPL_C_']
-==== CHUNK_IMPL_C_
-[source,c]
-----
-#define CHUNK_IMPL_C_( ChunkType, SliceType, FuncSuffix,
-                       VarChunkType, VarSliceType, VarFuncSuffix )
-----
-
-Generates the correspondent extern inline functions for the WINDOW_DEF_C_ macro.
-
-[id='STATIC_FRONT_CHUNK_C_']
-==== STATIC_FRONT_CHUNK_C_
-[source,c]
-----
-#define STATIC_FRONT_CHUNK_C_( Type, ChunkType, SliceType, FuncSuffix )
-----
-
-Generates a chunk struct and the corresponding static INIT_FRONT_CHUNK_C_
-function.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/STATIC_FRONT_CHUNK.c[]
-----
-
-[id='STATIC_BACK_CHUNK_C_']
-==== STATIC_BACK_CHUNK_C_
-[source,c]
-----
-#define STATIC_BACK_CHUNK_C_( Type, ChunkType, SliceType, FuncSuffix )
-----
-
-Generates a chunk struct and the corresponding static INIT_BACK_CHUNK_C_
-function.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/STATIC_BACK_CHUNK.c[]
-----
 
 //******************************************************************************
 //******************************************************************* Functions
 //******************************************************************************
 == Functions
+
+//************************************************************************ init
+=== init
+
+[id='back_chunk_c_']
+==== back_chunk_c_
+[source,c]
+----
+#define back_chunk_c_( Size, Slice )
+----
+
+Initializes a chunk on the back of the Slice.
+The Size parameter defines the size of the chunk subslices.
+
+[id='front_chunk_c_']
+==== front_chunk_c_
+[source,c]
+----
+#define front_chunk_c_( Size, Slice )
+----
+
+Initializes a chunk on the front of the Slice.
+The Size paramter defines the size of the chunk subslices.
+
+//************************************************************************* use
+=== use
 
 [id='exact_chunk_c_']
 ==== exact_chunk_c_
@@ -166,7 +78,7 @@ include::{xmpldir}/STATIC_BACK_CHUNK.c[]
 #define exact_chunk_c_( Chunk )
 ----
 
-Returns true if the chunk is valid and s equates to favSize.
+Returns true if the chunk is valid and s equates to fav.
 
 .Example
 [source,c]
