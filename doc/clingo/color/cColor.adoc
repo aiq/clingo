@@ -19,10 +19,15 @@
 ----
 struct cColor
 {
-
+   uint8_t r;
+   uint8_t g;
+   uint8_t b;
+   uint8_t a;
 };
 typedef struct cColor cColor;
 ----
+
+Structs that represents a color value.
 
 //******************************************************************* Generated
 === Generated
@@ -70,7 +75,8 @@ typedef struct cVarColorSlice cVarColorSlice;
 #define color_c_( Red, Green, Blue, Alpha )
 ----
 
-asdfsadf
+Creates a transparent color object from decimal red, green, blue and alpha
+(RGBA) values.
 
 [id='rgb_color_c']
 ==== rgb_color_c
@@ -79,7 +85,7 @@ asdfsadf
 cColor rgb_color_c( uint32_t raw );
 ----
 
-sadffsd
+Creates a cColor instance from a hex value in the following format RRGGBB.
 
 [id='rgba_color_c']
 ==== rgba_color_c
@@ -88,7 +94,7 @@ sadffsd
 cColor rgba_color_c( uint32_t raw );
 ----
 
-affdadgg
+Creates a cColor instance from a hex value in the following format RRGGBBAA.
 
 [id='argb_color_c']
 ==== argb_color_c
@@ -97,7 +103,7 @@ affdadgg
 cColor argb_color_c( uint32_t raw );
 ----
 
-adfdsag
+Creates a cColor instance from a hex value in the following format AARRGGBB.
 
 [id='alpha_color_c']
 ==== alpha_color_c
@@ -106,7 +112,7 @@ adfdsag
 cColor alpha_color_c( uint8_t red, uint32_t green, uint32_t blue, float alpha );
 ----
 
-asdfsdf
+Creats a cColor instance where the alpha value can be set as float (0.0 - 1.0).
 
 //************************************************************************ from
 === from
@@ -119,6 +125,8 @@ asdfsdf
    from_cmyk_c( cmyk_c_( (Cyan), (Magenta), (Yellow), (Key) ) )
 cColor from_cmyk_c( cCmyk cmyk );
 ----
+
+Creates a cColor value from a cCmyk value.
 
 .Example
 [source,c]
@@ -135,6 +143,8 @@ include::{xmpldir}/from_cmyk.c[]
 cColor from_cmyk32_c( cCmyk32 cmyk );
 ----
 
+Creates a cColor value from a cCmyk32 value.
+
 .Example
 [source,c]
 ----
@@ -149,6 +159,8 @@ include::{xmpldir}/from_cmyk32.c[]
    from_hsl_c( hsl_c_( (Hue), (Saturation), (Lightness) ) )
 cColor from_hsl_c( cHsl hsl );
 ----
+
+Creates a cColor value from a cHsl value.
 
 .Example
 [source,c]
@@ -165,6 +177,8 @@ include::{xmpldir}/from_hsl.c[]
 cColor from_hsv_c( cHsv hsv );
 ----
 
+Creates a cColor value from a cHsv value.
+
 .Example
 [source,c]
 ----
@@ -179,6 +193,8 @@ include::{xmpldir}/from_hsv.c[]
    from_rgb_c( rgb_c_( (Red), (Green), (Blue) ) )
 cColor from_rgb_c( cRgb rgb );
 ----
+
+Creates a cColor value from a cRgb value.
 
 .Example
 [source,c]
@@ -195,6 +211,8 @@ include::{xmpldir}/from_rgb.c[]
 cColor from_rgb24_c( cRgb24 rgb );
 ----
 
+Creates a cColor value from a cRgb24 value.
+
 //************************************************************************** as
 === as
 
@@ -204,6 +222,8 @@ cColor from_rgb24_c( cRgb24 rgb );
 ----
 cCmyk as_cmyk_c( cColor color );
 ----
+
+Coverts a cColor value to a cCmyk value.
 
 .Example
 [source,c]
@@ -218,6 +238,8 @@ include::{xmpldir}/as_cmyk.c[]
 cCmyk32 as_cmyk32_c( cColor color );
 ----
 
+Coverts a cColor value to a cCmyk32 value.
+
 .Example
 [source,c]
 ----
@@ -230,6 +252,8 @@ include::{xmpldir}/as_cmyk32.c[]
 ----
 cHsl as_hsl_c( cColor color );
 ----
+
+Coverts a cColor value to a cHsl value.
 
 .Example
 [source,c]
@@ -244,6 +268,8 @@ include::{xmpldir}/as_hsl.c[]
 cHsv as_hsv_c( cColor color );
 ----
 
+Coverts a cColor value to a cHsv value.
+
 .Example
 [source,c]
 ----
@@ -256,6 +282,8 @@ include::{xmpldir}/as_hsv.c[]
 ----
 cRgb as_rgb_c( cColor color );
 ----
+
+Coverts a cColor value to a cRgb value.
 
 .Example
 [source,c]
@@ -270,6 +298,8 @@ include::{xmpldir}/as_rgb.c[]
 cRgb24 as_rgb24_c( cColor color );
 ----
 
+Coverts a cColor value to a cRgb24 value.
+
 //************************************************************************* cmp
 === cmp
 
@@ -279,6 +309,8 @@ cRgb24 as_rgb24_c( cColor color );
 ----
 bool eq_color_c( cColor a, cColor b );
 ----
+
+Returns true if both cColor values are equal, otherwise false.
 
 .Example
 [source,c]
@@ -293,6 +325,8 @@ include::{xmpldir}/eq_color.c[]
 bool eq_rgb_color_c( cColor a, cColor b );
 ----
 
+Returns true if the RGB values of both cColor values are equal, otherwise false.
+
 //*********************************************************************** alpha
 === alpha
 
@@ -303,6 +337,8 @@ bool eq_rgb_color_c( cColor a, cColor b );
 float color_alpha_c( cColor color );
 ----
 
+Returns the alpha value as float (0.0 - 1.0).
+
 [id='set_color_alpha_c']
 ==== set_color_alpha_c
 [source,c]
@@ -310,12 +346,16 @@ float color_alpha_c( cColor color );
 cColor set_color_alpha_c( cColor color, float alpha );
 ----
 
+Sets the alpha value via float (0.0 - 1.0).
+
 [id='color_luma_c']
 ==== color_luma_c
 [source,c]
 ----
 float color_luma_c( cColor color );
 ----
+
+Calculates the luma (perceptual brightness) of a color object.
 
 .Example
 [source,c]
@@ -333,6 +373,8 @@ include::{xmpldir}/color_luma.c[]
 cColor saturate_color_c( cColor color, float amount );
 ----
 
+Increase the saturation of a color in the HSL color space by an absolute amount.
+
 .Example
 [source,c]
 ----
@@ -345,6 +387,8 @@ include::{xmpldir}/saturate_color.c[]
 ----
 cColor desaturate_color_c( cColor color, float amount );
 ----
+
+Decrease the saturation of a color in the HSL color space by an absolute amount.
 
 .Example
 [source,c]
@@ -359,6 +403,8 @@ include::{xmpldir}/desaturate_color.c[]
 cColor lighten_color_c( cColor color, float amount );
 ----
 
+Increase the lightness of a color in the HSL color space by an absolute amount.
+
 .Example
 [source,c]
 ----
@@ -371,6 +417,8 @@ include::{xmpldir}/lighten_color.c[]
 ----
 cColor darken_color_c( cColor color, float amount );
 ----
+
+Decrease the lightness of a color in the HSL color space by an absolute amount.
 
 .Example
 [source,c]
@@ -385,6 +433,9 @@ include::{xmpldir}/darken_color.c[]
 cColor fade_color_c( cColor color, float amount );
 ----
 
+Set the absolute opacity of a color.
+Can be applied to colors whether they already have an opacity value or not.
+
 .Example
 [source,c]
 ----
@@ -395,8 +446,12 @@ include::{xmpldir}/fade_color.c[]
 ==== spin_color_c
 [source,c]
 ----
-cColor spin_color_c( cColor color, float amount );
+cColor spin_color_c( cColor color, float angle );
 ----
+
+While the angle range is 0-360, it applies a mod 360 operation, so you can pass
+in much larger (or negative) values and they will wrap around e.g. angles of
+360 and 720 will produce the same result.
 
 .Example
 [source,c]
@@ -413,6 +468,9 @@ include::{xmpldir}/spin_color.c[]
 cColor mix_color_c( cColor color, cColor extra, float weight );
 ----
 
+Mix two colors together in variable proportion.
+Opacity is included in the calculations.
+
 .Example
 [source,c]
 ----
@@ -425,6 +483,8 @@ include::{xmpldir}/mix_color.c[]
 ----
 cColor greyscale_color_c( cColor color );
 ----
+
+Remove all saturation from a color in the HSL color space.
 
 .Example
 [source,c]
@@ -447,6 +507,8 @@ cColor contrast_color_c( cColor color,
                          float threshold );
 ----
 
+Choose which of two colors provides the greatest contrast with another.
+
 .Example
 [source,c]
 ----
@@ -463,6 +525,10 @@ include::{xmpldir}/contrast_color.c[]
 cColor multiply_color_c( cColor a, cColor b );
 ----
 
+Multiply two colors. Corresponding RGB channels from each of the two colors are
+multiplied together then divided by 255.
+The result is a darker color.
+
 .Example
 [source,c]
 ----
@@ -475,6 +541,9 @@ include::{xmpldir}/multiply_color.c[]
 ----
 cColor screen_color_c( cColor a, cColor b );
 ----
+
+Do the opposite of multiply.
+The result is a brighter color.
 
 .Example
 [source,c]
@@ -489,6 +558,9 @@ include::{xmpldir}/screen_color.c[]
 cColor overlay_color_c( cColor a, cColor b );
 ----
 
+Combines the effects of both multiply and screen.
+Conditionally make light channels lighter and dark channels darker.
+
 .Example
 [source,c]
 ----
@@ -501,6 +573,9 @@ include::{xmpldir}/overlay_color.c[]
 ----
 cColor softlight_color_c( cColor color, cColor extra );
 ----
+
+Similar to overlay but avoids pure black resulting in pure black, and pure
+white resulting in pure white.
 
 .Example
 [source,c]
@@ -515,6 +590,8 @@ include::{xmpldir}/softlight_color.c[]
 cColor hardlight_color_c( cColor color, cColor extra );
 ----
 
+The same as overlay but with the color roles reversed.
+
 .Example
 [source,c]
 ----
@@ -527,6 +604,11 @@ include::{xmpldir}/hardlight_color.c[]
 ----
 cColor difference_color_c( cColor color, cColor other );
 ----
+
+Subtracts the second color from the first color on a channel-by-channel basis.
+Negative values are inverted.
+Subtracting black results in no change; subtracting white results in color
+inversion.
 
 .Example
 [source,c]
@@ -541,6 +623,8 @@ include::{xmpldir}/difference_color.c[]
 cColor exclusion_color_c( cColor color, cColor other );
 ----
 
+A similar effect to difference with lower contrast.
+
 .Example
 [source,c]
 ----
@@ -553,6 +637,8 @@ include::{xmpldir}/exclusion_color.c[]
 ----
 cColor average_color_c( cColor color, cColor other );
 ----
+
+Compute the average of two colors on a per-channel (RGB) basis.
 
 .Example
 [source,c]
@@ -567,8 +653,41 @@ include::{xmpldir}/average_color.c[]
 cColor negation_color_c( cColor color, cColor other );
 ----
 
+Do the opposite effect to difference.
+
 .Example
 [source,c]
 ----
 include::{xmpldir}/negation_color.c[]
 ----
+
+//*********************************************************************** image
+=== image
+
+[id='heap_var_color_image_c_']
+==== heap_var_color_image_c_
+[source,c]
+----
+#define heap_var_color_image_c_( W, H )
+----
+
+Allocates the image data at the heap and assigns the memory to a new created
+color image.
+
+[id='get_color_pixel_c']
+==== get_color_pixel_c
+[source,c]
+----
+cColor get_color_pixel_c( cColorImage image, cPixel pixel );
+----
+
+Gets the color of a pixel in a color image.
+
+[id='set_color_pixel_c']
+==== set_color_pixel_c
+[source,c]
+----
+void set_color_pixel_c( cVarColorImage image, cPixel pixel, cColor color );
+----
+
+Sets the pixel in a color image.

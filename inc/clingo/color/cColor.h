@@ -183,7 +183,7 @@ CLINGO_API cColor average_color_c( cColor color, cColor other );
 CLINGO_API cColor negation_color_c( cColor color, cColor other );
 
 /*******************************************************************************
- io
+ image
 *******************************************************************************/
 
 #define heap_var_color_image_c_( W, H )                                        \

@@ -2,6 +2,14 @@ local doctree = {
    [ "clingo" ] = {
       [ "color" ] = {
          "cCmyk.adoc",
+         "cCmyk32.adoc",
+         "cColor.adoc",
+         "cHsl.adoc",
+         "cHsv.adoc",
+         "cP3Creator.adoc",
+         "cRgb.adoc",
+         "cRgb24.adoc",
+         "image.adoc",
       },
       [ "container" ] = {
          "CBitVec.adoc",
