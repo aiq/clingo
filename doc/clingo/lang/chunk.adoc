@@ -19,8 +19,8 @@ In addition has a chunk the attributes favSize (favored size) and slice (the
 actual slice).
 
 This module defines code generation macros to generate typed chunk structs.
-Also has this module macro functions to move a chunk struct along the slice
-sequence.
+Also has this module macro functions to init and use a chunk struct to move
+along the slice sequence.
 
 //******************************************************************************
 //****************************************************** Code Generation Macros
