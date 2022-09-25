@@ -374,52 +374,53 @@ bool read_date_c( cScanner sca[static 1],
    {
       fmt = C_DateFormat;
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
-   int64_t const oldPos = sca->pos;
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
+   int64_t const oldPos = fmtSca->pos;
 
    cOrdinalDate od = ordinal_date_c( -1, -1 );
    cWeekDate wd = week_date_c( -1, -1, -1 );
    cYmd ymd = ymd_c( -1, -1, -1 );
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
-                                                       : 0;
+      int64_t mark = fmtSca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
+                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'C' ) ) //------------------------------- C
+      mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'C' ) ) //------------------------------ C
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_read_day_of_year_c( sca, &od.day, n, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'D' ) ) //-------------------------- D
+      else if ( move_while_char_c( fmtSca, 'D' ) ) //------------------------- D
       {
-         res = intl_read_day_c( sca, &ymd.day, trace_scan_c_( sm ), spaces );
+         res = intl_read_day_c( sca, &ymd.day, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'E' ) ) //-------------------------- E
+      else if ( move_while_char_c( fmtSca, 'E' ) ) //------------------------- E
       {
-         res = intl_read_weekday_c( sca, &wd.day, trace_scan_c_( sm ) );
+         res = intl_read_weekday_c( sca, &wd.day, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'M' ) ) //-------------------------- M
+      else if ( move_while_char_c( fmtSca, 'M' ) ) //------------------------- M
       {
-         res = intl_read_month_c( sca, &ymd.month, trace_scan_c_( sm ), spaces );
+         res = intl_read_month_c( sca, &ymd.month, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'W' ) ) //-------------------------- W
+      else if ( move_while_char_c( fmtSca, 'W' ) ) //------------------------- W
       {
-         res = intl_read_week_c( sca, &wd.week, trace_scan_c_( sm ) );
+         res = intl_read_week_c( sca, &wd.week, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'X' ) ) //-------------------------- X
+      else if ( move_while_char_c( fmtSca, 'X' ) ) //------------------------- X
       {
-         res = intl_read_year_c( sca, &wd.year, trace_scan_c_( sm ), spaces );
+         res = intl_read_year_c( sca, &wd.year, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'Y' ) ) //-------------------------- Y
+      else if ( move_while_char_c( fmtSca, 'Y' ) ) //------------------------- Y
       {
-         res = intl_read_year_c( sca, &ymd.year, trace_scan_c_( sm ), spaces );
+         res = intl_read_year_c( sca, &ymd.year, fmtSca->pos - mark, spaces );
          od.year = ymd.year;
       }
       else
       {
-         res = intl_read_time_seperator_c( sca, sm->x );
-         trace_scan_c_( sm );
+         res = intl_read_time_seperator_c( sca, fmtSca );
       }
 
       if ( not res )
@@ -457,51 +458,52 @@ bool write_date_c( cRecorder rec[static 1],
    {
       fmt = C_DateFormat;
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t const oldPos = rec->pos;
 
    cOrdinalDate od = as_ordinal_date_c( date );
    cWeekDate wd = as_week_date_c( date );
    cYmd ymd = as_ymd_c( date );
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
-                                                       : 0;
+      int64_t mark = fmtSca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
+                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'C' ) ) //------------------------------- C
+      mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'C' ) ) //------------------------------ C
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_write_day_of_year_c( rec, od.day, n, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'D' ) ) //-------------------------- D
+      else if ( move_while_char_c( fmtSca, 'D' ) ) //------------------------- D
       {
-         res = intl_write_day_c( rec, ymd.day, trace_scan_c_( sm ), spaces );
+         res = intl_write_day_c( rec, ymd.day, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'E' ) ) //-------------------------- E
+      else if ( move_while_char_c( fmtSca, 'E' ) ) //------------------------- E
       {
-         res = intl_write_weekday_c( rec, wd.day, trace_scan_c_( sm ) );
+         res = intl_write_weekday_c( rec, wd.day, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'M' ) ) //-------------------------- M
+      else if ( move_while_char_c( fmtSca, 'M' ) ) //------------------------- M
       {
-         res = intl_write_month_c( rec, ymd.month, trace_scan_c_( sm ), spaces );
+         res = intl_write_month_c( rec, ymd.month, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'W' ) ) //-------------------------- W
+      else if ( move_while_char_c( fmtSca, 'W' ) ) //------------------------- W
       {
-         res = intl_write_week_c( rec, wd.week, trace_scan_c_( sm ) );
+         res = intl_write_week_c( rec, wd.week, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'X' ) ) //-------------------------- X
+      else if ( move_while_char_c( fmtSca, 'X' ) ) //------------------------- X
       {
-         res = intl_write_year_c( rec, wd.year, trace_scan_c_( sm ) );
+         res = intl_write_year_c( rec, wd.year, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'Y' ) ) //-------------------------- Y
+      else if ( move_while_char_c( fmtSca, 'Y' ) ) //------------------------- Y
       {
-         res = intl_write_year_c( rec, ymd.year, trace_scan_c_( sm ) );
+         res = intl_write_year_c( rec, ymd.year, fmtSca->pos - mark );
       }
       else
       {
-         res = intl_write_time_seperator_c( rec, sm->x );
-         trace_scan_c_( sm );
+         res = intl_write_time_seperator_c( rec, fmtSca );
       }
 
       if ( not res )

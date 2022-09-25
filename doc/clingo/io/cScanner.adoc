@@ -31,21 +31,6 @@ The pos value shows how much bytes are allready scanned.
 The space value tells how much bytes in the memory block are not scanned.
 The err value can be set to indicate the type of error that occurred.
 
-[id='cScanMarker']
-==== cScanMarker
-[source,c]
-----
-struct cScanMarker
-{
-   cScanner* x;
-   int64_t startPos;
-   int64_t lastPos;
-};
-typedef struct cScanMarker cScanMarker;
-----
-
-cScanMarker allows to trace how much byte of the memory block are scanned.
-
 //******************************************************************************
 //******************************************************************* Functions
 //******************************************************************************
@@ -861,65 +846,3 @@ bool scan_double_c( cScanner sca[static 1], double d[static 1] );
 
 Scans a double from the memory of the scanner.
 Returns true if the double value can be written, otherwise false.
-
-//********************************************************************** marker
-=== marker
-
-[id='scan_marker_c_"]
-==== scan_marker_c_
-[source,c]
-----
-#define scan_marker_c_( Sca )
-----
-
-Creates a marker for the scanner Sca.
-
-==== trace_scan_c
-[source,c]
-----
-#define trace_scan_c_( Sm )                                                    \
-   trace_scan_c( (Sm), false )
-int64_t trace_scan_c( cScanMarker sm[static 1], bool full );
-----
-
-The full value tells to return the number of bytes that are scanned since
-the creation of the marker(true) or since the last call of the function(false).
-
-==== traced_bytes_c
-[source,c]
-----
-#define traced_bytes_c_( Sm )                                                  \
-   traced_bytes_c( (Sm), false )
-cBytes traced_bytes_c( cScanMarker sm[static 1], bool full );
-----
-
-The full value tells to return the bytes that are scanned since the creation of
-the marker(true) or since the last call of the function(false).
-
-==== traced_chars_c
-[source,c]
-----
-#define traced_chars_c_( Sm )                                                  \
-   traced_chars_c( (Sm), false )
-cBytes traced_chars_c( cScanMarker sm[static 1], bool full );
-----
-
-The full value tells to return the chars that are scanned since the creation of
-the marker(true) or since the last call of the function(false).
-
-==== undo_scan_c
-[source,c]
-----
-bool undo_scan_c( cScanMarker sm[static 1] );
-----
-
-Moves the scanner back to the creation of the marker.
-
-==== undo_scan_error_c
-[source,c]
-----
-bool undo_scan_error_c( cScanMarker sm[static 1], int err );
-----
-
-Moves the scanner back to the creation of the marker, sets the err value on the
-scanner and returns allways false.

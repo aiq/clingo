@@ -230,11 +230,11 @@ static bool scan_value( cScanner sca[static 1], scanValue inp[static 1] )
    inp->hasDot = move_if_char_c( sca, '.' );
    if ( inp->hasDot )
    {
-      cScanMarker* marker = &scan_marker_c_( sca );
+      int64_t mark = sca->pos;
       if ( not read_int64_c_( sca, &(inp->nsecs) ) )return false;
       if ( inp->nsecs < 0 ) return false;
 
-      inp->nsecsDigits = trace_scan_c( marker, true );
+      inp->nsecsDigits = sca->pos - mark;
       if ( inp->nsecsDigits > 9 ) return false;
    }
    else
@@ -280,7 +280,7 @@ bool read_duration_c( cScanner sca[static 1],
    {
       fmt = C_DurationFormat;
    }
-   cScanMarker* smFmt = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t oldPos = sca->pos;
 
    fmtInfo info;
@@ -288,19 +288,19 @@ bool read_duration_c( cScanner sca[static 1],
                                              : 1;
    cDuration tmp = nsecs_c( 0 );
 
-   while ( smFmt->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
 
       scanValue inp;
       if ( not scan_value( sca, &inp ) )
          return not_able_to_read_value( sca, oldPos );
 
-      if ( inp.hasSep and not move_if_char_c( smFmt->x, ' ' ) )
+      if ( inp.hasSep and not move_if_char_c( fmtSca, ' ' ) )
          return not_able_to_read_value( sca, oldPos );
 
       if ( inp.hasDot )
       {
-         cChars tail = view_chars_c( smFmt->x, smFmt->x->space );
+         cChars tail = view_chars_c( fmtSca, fmtSca->space );
          if ( chars_is_c( tail, "*l" ) or chars_is_c( tail, "*U" ) )
          {
             if ( chars_is_any_c_( inp.type, "s", "S" ) )
@@ -352,7 +352,7 @@ bool read_duration_c( cScanner sca[static 1],
       else
       {
          //------------------------------------------------------------------ wW
-         if ( not init_info( smFmt->x, wWCheck, &info ) )
+         if ( not init_info( fmtSca, wWCheck, &info ) )
             return inv_err( sca, oldPos );
 
          if ( chars_is_c( inp.type, info.s ) )
@@ -364,7 +364,7 @@ bool read_duration_c( cScanner sca[static 1],
             return not_able_to_read_value( sca, oldPos );
 
          //------------------------------------------------------------------ dD
-         if ( not init_info( smFmt->x, dDCheck, &info ) )
+         if ( not init_info( fmtSca, dDCheck, &info ) )
             return inv_err( sca, oldPos );
 
          if ( chars_is_c( inp.type, info.s ) )
@@ -376,7 +376,7 @@ bool read_duration_c( cScanner sca[static 1],
             return not_able_to_read_value( sca, oldPos );
 
          //------------------------------------------------------------------ hH
-         if ( not init_info( smFmt->x, hHCheck, &info ) )
+         if ( not init_info( fmtSca, hHCheck, &info ) )
             return inv_err( sca, oldPos );
 
          if ( chars_is_c( inp.type, info.s ) )
@@ -388,7 +388,7 @@ bool read_duration_c( cScanner sca[static 1],
             return not_able_to_read_value( sca, oldPos );
 
          //------------------------------------------------------------------ mM
-         if ( not init_info( smFmt->x, mMCheck, &info ) )
+         if ( not init_info( fmtSca, mMCheck, &info ) )
             return inv_err( sca, oldPos );
 
          if ( chars_is_c( inp.type, info.s ) )
@@ -400,7 +400,7 @@ bool read_duration_c( cScanner sca[static 1],
             return not_able_to_read_value( sca, oldPos );
 
          //------------------------------------------------------------------ sS
-         if ( not init_info( smFmt->x, sSCheck, &info ) )
+         if ( not init_info( fmtSca, sSCheck, &info ) )
             return inv_err( sca, oldPos );
 
          if ( chars_is_c( inp.type, info.s ) )
@@ -412,7 +412,7 @@ bool read_duration_c( cScanner sca[static 1],
             return not_able_to_read_value( sca, oldPos );
 
          //------------------------------------------------------------------ iI
-         if ( not init_info( smFmt->x, iICheck, &info ) )
+         if ( not init_info( fmtSca, iICheck, &info ) )
             return inv_err( sca, oldPos );
 
          if ( chars_is_c( inp.type, info.s ) )
@@ -424,7 +424,7 @@ bool read_duration_c( cScanner sca[static 1],
             return not_able_to_read_value( sca, oldPos );
 
          //------------------------------------------------------------------ uU
-         if ( not init_info( smFmt->x, uUCheck, &info ) )
+         if ( not init_info( fmtSca, uUCheck, &info ) )
             return inv_err( sca, oldPos );
 
          if ( chars_is_c( inp.type, info.s ) )
@@ -436,7 +436,7 @@ bool read_duration_c( cScanner sca[static 1],
             return not_able_to_read_value( sca, oldPos );
 
          //------------------------------------------------------------------ nN
-         if ( not init_info( smFmt->x, nNCheck, &info ) )
+         if ( not init_info( fmtSca, nNCheck, &info ) )
             return inv_err( sca, oldPos );
 
          if ( chars_is_c( inp.type, info.s ) )
@@ -448,7 +448,7 @@ bool read_duration_c( cScanner sca[static 1],
             return not_able_to_read_value( sca, oldPos );
 
          //****************************************************************** *l
-         if ( move_if_chars_c_( smFmt->x, "*l" ) )
+         if ( move_if_chars_c_( fmtSca, "*l" ) )
          {
             cDuration val = chars_is_c( inp.type, "s" )  ? secs_c( inp.val )  :
                             chars_is_c( inp.type, "ms" ) ? msecs_c( inp.val ) :
@@ -463,7 +463,7 @@ bool read_duration_c( cScanner sca[static 1],
          }
 
          //****************************************************************** *U
-         if ( move_if_chars_c_( smFmt->x, "*U" ) )
+         if ( move_if_chars_c_( fmtSca, "*U" ) )
          {
             cDuration val = chars_is_c( inp.type, "S" )  ? secs_c( inp.val )  :
                             chars_is_c( inp.type, "MS" ) ? msecs_c( inp.val ) :

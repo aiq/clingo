@@ -157,7 +157,7 @@ bool read_rune_c( cScanner sca[static 1],
 
    fmt = ( *fmt == '\0' ) ? "s" : fmt;
 
-   cScanMarker* marker = &scan_marker_c_( sca );
+   int64_t const oldPos = sca->pos;
 
    once_c_( xdlfjk )
    {
@@ -226,7 +226,8 @@ bool read_rune_c( cScanner sca[static 1],
       return set_scanner_error_c( sca, c_InvalidFormatString );
    }
 
-   return undo_scan_error_c( marker, c_NotAbleToReadValue );
+   move_scanner_to_c( sca, oldPos );
+   return set_scanner_error_c( sca, c_NotAbleToReadValue );
 }
 
 /*******************************************************************************

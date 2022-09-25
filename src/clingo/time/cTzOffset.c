@@ -94,18 +94,19 @@ bool read_tz_offset_c( cScanner sca[static 1],
    {
       fmt = "oo";
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t const oldPos = sca->pos;
 
    bool res = true;
    {
-      if ( move_while_char_c( sm->x, 'o' ) )
+      int64_t mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'o' ) )
       {
-         res = intl_read_offset_c( sca, tz, trace_scan_c_( sm ), false );
+         res = intl_read_offset_c( sca, tz, fmtSca->pos - mark, false );
       }
-      else if ( move_while_char_c( sm->x, 'z' ) )
+      else if ( move_while_char_c( fmtSca, 'z' ) )
       {
-         res = intl_read_offset_c( sca, tz, trace_scan_c_( sm ), true );
+         res = intl_read_offset_c( sca, tz, fmtSca->pos - mark, true );
       }
       else
       {
@@ -129,18 +130,19 @@ bool write_tz_offset_c( cRecorder rec[static 1],
    {
       fmt = "oo";
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t const oldPos = rec->pos;
 
    bool res = true;
    {
-      if ( move_while_char_c( sm->x, 'o' ) ) //------------------------------- o
+      int64_t mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'o' ) ) //------------------------------ o
       {
-         res = intl_write_offset_c( rec, tz, trace_scan_c_( sm ), false );
+         res = intl_write_offset_c( rec, tz, fmtSca->pos - mark, false );
       }
-      else if ( move_while_char_c( sm->x, 'z' ) ) //-------------------------- z
+      else if ( move_while_char_c( fmtSca, 'z' ) ) //------------------------- z
       {
-         res = intl_write_offset_c( rec, tz, trace_scan_c_( sm ), true );
+         res = intl_write_offset_c( rec, tz, fmtSca->pos - mark, true );
       }
       else
       {

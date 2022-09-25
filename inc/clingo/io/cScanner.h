@@ -22,14 +22,6 @@ struct cScanner
 };
 typedef struct cScanner cScanner;
 
-struct cScanMarker
-{
-   cScanner* x;
-   int64_t   startPos;
-   int64_t   lastPos;
-};
-typedef struct cScanMarker cScanMarker;
-
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
@@ -373,55 +365,5 @@ CLINGO_API bool scan_uint64_c( cScanner sca[static 1], uint64_t u64[static 1] );
 
 CLINGO_API bool scan_float_c(  cScanner sca[static 1], float f[static 1] );
 CLINGO_API bool scan_double_c( cScanner sca[static 1], double d[static 1] );
-
-/*******************************************************************************
- marker
-*******************************************************************************/
-
-#define scan_marker_c_( Sca )                                                  \
-(                                                                              \
-   (cScanMarker){ .x=(Sca), .startPos=(Sca)->pos, .lastPos=(Sca)->pos }        \
-)
-
-#define trace_scan_c_( Sm )                                                    \
-   trace_scan_c( (Sm), false )
-CLINGO_API inline int64_t trace_scan_c( cScanMarker sm[static 1], bool full )
-{
-   must_exist_c_( sm );
-
-   int64_t const res = full ? sm->x->pos - sm->startPos
-                            : sm->x->pos - sm->lastPos;
-   sm->lastPos = sm->x->pos;
-   return res;
-}
-
-#define traced_bytes_c_( Sm )                                                  \
-   traced_bytes_c( (Sm), false )
-CLINGO_API inline cBytes traced_bytes_c( cScanMarker sm[static 1], bool full )
-{
-   must_exist_c_( sm );
-   return scanned_bytes_c( sm->x, trace_scan_c( sm, full ) );
-}
-
-#define traced_chars_c_( Sm )                                                  \
-   traced_chars_c( (Sm), false )
-CLINGO_API inline cChars traced_chars_c( cScanMarker sm[static 1], bool full )
-{
-   must_exist_c_( sm );
-   return scanned_chars_c( sm->x, trace_scan_c( sm, full ) );
-}
-
-CLINGO_API inline bool undo_scan_c( cScanMarker sm[static 1] )
-{
-   must_exist_c_( sm );
-   return move_scanner_to_c( sm->x, sm->startPos );
-}
-
-CLINGO_API inline bool undo_scan_error_c( cScanMarker sm[static 1], int err )
-{
-   must_exist_c_( sm );
-   undo_scan_c( sm );
-   return set_scanner_error_c( sm->x, err );
-}
 
 #endif

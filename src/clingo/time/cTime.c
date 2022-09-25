@@ -232,8 +232,8 @@ bool read_time_c( cScanner sca[static 1],
    {
       fmt = C_TimeFormat;
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
-   cScanMarker* marker = &scan_marker_c_( sca );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
+   int64_t const oldPos = sca->pos;
 
    cOrdinalDate od = ordinal_date_c( -1, -1 );
    cWeekDate wd = week_date_c( -1, -1, -1 );
@@ -241,95 +241,96 @@ bool read_time_c( cScanner sca[static 1],
    cHmsn hmsn = hmsn_c( 0, 0, 0, 0 );
    cTzOffset tz = utc_c();
    bool pm = false;
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
-                                                       : 0;
+      int64_t mark = sca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
+                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'C' ) ) //------------------------------- C
+      mark = sca->pos;
+      if ( move_while_char_c( fmtSca, 'C' ) ) //------------------------------ C
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_read_day_of_year_c( sca, &od.day, n, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'D' ) ) //-------------------------- D
+      else if ( move_while_char_c( fmtSca, 'D' ) ) //------------------------- D
       {
-         res = intl_read_day_c( sca, &ymd.day, trace_scan_c_( sm ), spaces );
+         res = intl_read_day_c( sca, &ymd.day, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'E' ) ) //-------------------------- E
+      else if ( move_while_char_c( fmtSca, 'E' ) ) //------------------------- E
       {
-         res = intl_read_weekday_c( sca, &wd.day, trace_scan_c_( sm ) );
+         res = intl_read_weekday_c( sca, &wd.day, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'M' ) ) //-------------------------- M
+      else if ( move_while_char_c( fmtSca, 'M' ) ) //------------------------- M
       {
-         res = intl_read_month_c( sca, &ymd.month, trace_scan_c_( sm ), spaces );
+         res = intl_read_month_c( sca, &ymd.month, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'W' ) ) //-------------------------- W
+      else if ( move_while_char_c( fmtSca, 'W' ) ) //------------------------- W
       {
-         res = intl_read_week_c( sca, &wd.week, trace_scan_c_( sm ) );
+         res = intl_read_week_c( sca, &wd.week, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'X' ) ) //-------------------------- X
+      else if ( move_while_char_c( fmtSca, 'X' ) ) //------------------------- X
       {
-         res = intl_read_year_c( sca, &wd.year, trace_scan_c_( sm ), spaces );
+         res = intl_read_year_c( sca, &wd.year, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'Y' ) ) //-------------------------- Y
+      else if ( move_while_char_c( fmtSca, 'Y' ) ) //------------------------- Y
       {
-         res = intl_read_year_c( sca, &ymd.year, trace_scan_c_( sm ), spaces );
+         res = intl_read_year_c( sca, &ymd.year, fmtSca->pos - mark, spaces );
          od.year = ymd.year;
       }
-      else if ( move_while_char_c( sm->x, 'h' ) ) //-------------------------- h
+      else if ( move_while_char_c( fmtSca, 'h' ) ) //------------------------- h
       {
-         res = intl_read_hour_c( sca, &hmsn.hour, trace_scan_c_( sm ), spaces );
+         res = intl_read_hour_c( sca, &hmsn.hour, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'k' ) ) //-------------------------- k
+      else if ( move_while_char_c( fmtSca, 'k' ) ) //------------------------- k
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_read_kitchen_hour_c( sca, &hmsn.hour, n, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'm' ) ) //-------------------------- m
+      else if ( move_while_char_c( fmtSca, 'm' ) ) //------------------------- m
       {
-         res = intl_read_min_c( sca, &hmsn.min, trace_scan_c_( sm ), spaces );
+         res = intl_read_min_c( sca, &hmsn.min, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 's' ) ) //-------------------------- s
+      else if ( move_while_char_c( fmtSca, 's' ) ) //------------------------- s
       {
-         res = intl_read_sec_c( sca, &hmsn.sec, trace_scan_c_( sm ), spaces );
+         res = intl_read_sec_c( sca, &hmsn.sec, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'i' ) ) //-------------------------- i
+      else if ( move_while_char_c( fmtSca, 'i' ) ) //------------------------- i
       {
-         res = intl_read_isec_c( sca, &hmsn.nsec, trace_scan_c_( sm ) );
+         res = intl_read_isec_c( sca, &hmsn.nsec, fmtSca->pos - mark );
          hmsn.nsec *= 1000*1000;
       }
-      else if ( move_while_char_c( sm->x, 'u' ) ) //-------------------------- u
+      else if ( move_while_char_c( fmtSca, 'u' ) ) //------------------------- u
       {
-         res = intl_read_usec_c( sca, &hmsn.nsec, trace_scan_c_( sm ) );
+         res = intl_read_usec_c( sca, &hmsn.nsec, fmtSca->pos - mark );
          hmsn.nsec *= 1000;
       }
-      else if ( move_while_char_c( sm->x, 'n' ) ) //-------------------------- n
+      else if ( move_while_char_c( fmtSca, 'n' ) ) //------------------------- n
       {
-         res = intl_read_nsec_c( sca, &hmsn.nsec, trace_scan_c_( sm ) );
+         res = intl_read_nsec_c( sca, &hmsn.nsec, fmtSca->pos - mark );
       }
-      else if ( move_if_chars_c_( sm->x, "ap" ) or
-                move_if_chars_c_( sm->x, "AP" ) )
+      else if ( move_if_chars_c_( fmtSca, "ap" ) or
+                move_if_chars_c_( fmtSca, "AP" ) )
       {
          res = intl_read_ap_c( sca, &pm );
       }
-      else if ( move_while_char_c( sm->x, 'o' ) ) //-------------------------- o
+      else if ( move_while_char_c( fmtSca, 'o' ) ) //------------------------- o
       {
-         res = intl_read_offset_c( sca, &tz, trace_scan_c_( sm ), false );
+         res = intl_read_offset_c( sca, &tz, fmtSca->pos - mark, false );
       }
-      else if ( move_while_char_c( sm->x, 'z' ) ) //-------------------------- z
+      else if ( move_while_char_c( fmtSca, 'z' ) ) //------------------------- z
       {
-         res = intl_read_offset_c( sca, &tz, trace_scan_c_( sm ), true );
+         res = intl_read_offset_c( sca, &tz, fmtSca->pos - mark, true );
       }
       else
       {
-         res = intl_read_time_seperator_c( sca, sm->x );
-         trace_scan_c_( sm );
+         res = intl_read_time_seperator_c( sca, fmtSca );
       }
 
       if ( not res )
       {
-         undo_scan_c( marker );
+         move_scanner_to_c( sca, oldPos );
          return false;
       }
    }
@@ -352,7 +353,7 @@ bool read_time_c( cScanner sca[static 1],
    }
    else
    {
-      undo_scan_c( marker );
+      move_scanner_to_c( sca, oldPos );
       return set_scanner_error_c( sca, c_NotAbleToReadValue );
    }
 
@@ -367,105 +368,106 @@ bool write_time_c( cRecorder rec[static 1],
    {
       fmt = C_TimeFormat;
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t const oldPos = rec->pos;
 
    cHmsn hmsn = get_hmsn_c( time );
    cYmd ymd = get_ymd_c( time );
    cOrdinalDate od = ordinal_date_from_ymd_c( ymd );
    cWeekDate wd = week_date_from_ymd_c( ymd );
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
-                                                       : 0;
+      int64_t mark = fmtSca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
+                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'C' ) ) //------------------------------- C
+      mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'C' ) ) //------------------------------ C
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_write_day_of_year_c( rec, od.day, n, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'D' ) ) //-------------------------- D
+      else if ( move_while_char_c( fmtSca, 'D' ) ) //------------------------- D
       {
-         res = intl_write_day_c( rec, ymd.day, trace_scan_c_( sm ), spaces );
+         res = intl_write_day_c( rec, ymd.day, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'E' ) ) //-------------------------- E
+      else if ( move_while_char_c( fmtSca, 'E' ) ) //------------------------- E
       {
-         res = intl_write_weekday_c( rec, wd.day, trace_scan_c_( sm ) );
+         res = intl_write_weekday_c( rec, wd.day, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'M' ) ) //-------------------------- M
+      else if ( move_while_char_c( fmtSca, 'M' ) ) //------------------------- M
       {
-         res = intl_write_month_c( rec, ymd.month, trace_scan_c_( sm ), spaces );
+         res = intl_write_month_c( rec, ymd.month, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'W' ) ) //-------------------------- W
+      else if ( move_while_char_c( fmtSca, 'W' ) ) //------------------------- W
       {
-         res = intl_write_week_c( rec, wd.week, trace_scan_c_( sm ) );
+         res = intl_write_week_c( rec, wd.week, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'X' ) ) //-------------------------- X
+      else if ( move_while_char_c( fmtSca, 'X' ) ) //------------------------- X
       {
-         res = intl_write_year_c( rec, wd.year, trace_scan_c_( sm ) );
+         res = intl_write_year_c( rec, wd.year, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'Y' ) ) //-------------------------- Y
+      else if ( move_while_char_c( fmtSca, 'Y' ) ) //------------------------- Y
       {
-         res = intl_write_year_c( rec, ymd.year, trace_scan_c_( sm ) );
+         res = intl_write_year_c( rec, ymd.year, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'h' ) ) //-------------------------- h
+      else if ( move_while_char_c( fmtSca, 'h' ) ) //------------------------- h
       {
-         res = intl_write_hour_c( rec, hmsn.hour, trace_scan_c_( sm ), spaces );
+         res = intl_write_hour_c( rec, hmsn.hour, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'k' ) ) //-------------------------- k
+      else if ( move_while_char_c( fmtSca, 'k' ) ) //------------------------- k
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_write_kitchen_hour_c( rec, hmsn.hour, n, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'm' ) ) //-------------------------- m
+      else if ( move_while_char_c( fmtSca, 'm' ) ) //------------------------- m
       {
-         res = intl_write_min_c( rec, hmsn.min, trace_scan_c_( sm ), spaces );
+         res = intl_write_min_c( rec, hmsn.min, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 's' ) ) //-------------------------- s
+      else if ( move_while_char_c( fmtSca, 's' ) ) //------------------------- s
       {
-         res = intl_write_sec_c( rec, hmsn.sec, trace_scan_c_( sm ), spaces );
+         res = intl_write_sec_c( rec, hmsn.sec, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'i' ) ) //-------------------------- i
+      else if ( move_while_char_c( fmtSca, 'i' ) ) //------------------------- i
       {
          int64_t const msecs = to_time_unit_c( hmsn.nsec, C_Nsec, C_Msec );
-         res = intl_write_msec_c( rec, msecs, trace_scan_c_( sm ) );
+         res = intl_write_msec_c( rec, msecs, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'u' ) ) //-------------------------- u
+      else if ( move_while_char_c( fmtSca, 'u' ) ) //------------------------- u
       {
          int64_t const usecs = to_time_unit_c( hmsn.nsec, C_Nsec, C_Usec );
-         res = intl_write_usec_c( rec, usecs, trace_scan_c_( sm ) );
+         res = intl_write_usec_c( rec, usecs, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'n' ) ) //-------------------------- n
+      else if ( move_while_char_c( fmtSca, 'n' ) ) //------------------------- n
       {
-         res = intl_write_nsec_c( rec, hmsn.nsec, trace_scan_c_( sm ) );
+         res = intl_write_nsec_c( rec, hmsn.nsec, fmtSca->pos - mark );
       }
-      else if ( move_if_chars_c_( sm->x, "ap" ) ) //------------------------- ap
+      else if ( move_if_chars_c_( fmtSca, "ap" ) ) //------------------------ ap
       {
          char const* val = ( hmsn.hour >= 12 ) ? "pm"
                                                : "am";
          res = record_chars_c_( rec, val );
       }
-      else if ( move_if_chars_c_( sm->x, "AP" ) ) //------------------------- AP
+      else if ( move_if_chars_c_( fmtSca, "AP" ) ) //------------------------ AP
       {
          char const* val = ( hmsn.hour >= 12 ) ? "PM"
                                                : "AM";
          res = record_chars_c_( rec, val );
       }
-      else if ( move_while_char_c( sm->x, 'o' ) ) //-------------------------- o
+      else if ( move_while_char_c( fmtSca, 'o' ) ) //------------------------- o
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_write_offset_c( rec, get_tz_offset_c( time ), n, false );
       }
-      else if ( move_while_char_c( sm->x, 'z' ) ) //-------------------------- z
+      else if ( move_while_char_c( fmtSca, 'z' ) ) //------------------------- z
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_write_offset_c( rec, get_tz_offset_c( time ), n , true );
       }
       else
       {
-         res = intl_write_time_seperator_c( rec, sm->x );
-         trace_scan_c_( sm );
+         res = intl_write_time_seperator_c( rec, fmtSca );
       }
 
       if ( not res )

@@ -45,28 +45,29 @@ bool read_month_day_c( cScanner sca[static 1],
    {
       fmt = "MMM._D";
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t oldPos = sca->pos;
 
    cMonthDay tmp = month_day_c( -1, -1 );
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
-                                                       : 0;
+      int64_t mark = fmtSca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
+                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'M' ) ) //------------------------------- M
+      mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'M' ) ) //------------------------------- M
       {
-         res = intl_read_month_c( sca, &tmp.month, trace_scan_c_( sm ), spaces );
+         res = intl_read_month_c( sca, &tmp.month, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'D' ) ) //-------------------------- D
+      else if ( move_while_char_c( fmtSca, 'D' ) ) //-------------------------- D
       {
-         res = intl_read_day_c( sca, &tmp.day, trace_scan_c_( sm ), spaces );
+         res = intl_read_day_c( sca, &tmp.day, fmtSca->pos - mark, spaces );
       }
       else
       {
-         res = intl_read_time_seperator_c( sca, sm->x );
-         trace_scan_c_( sm );
+         res = intl_read_time_seperator_c( sca, fmtSca );
       }
 
       if ( not res )
@@ -88,27 +89,29 @@ bool write_month_day_c( cRecorder rec[static 1],
    {
       fmt = "MMM._D";
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t oldPos = rec->pos;
 
-   while( sm->x->space > 0 )
+   while( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
-                                                       : 0;
+      int64_t mark = fmtSca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
+                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'D' ) ) //------------------------------- D
+      mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'D' ) ) //------------------------------- D
       {
-         res = intl_write_hour_c( rec, md.day, trace_scan_c_( sm ), spaces );
+         res = intl_write_hour_c( rec, md.day, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'M' ) ) //-------------------------- M
+      else if ( move_while_char_c( fmtSca, 'M' ) ) //-------------------------- M
       {
-         res = intl_write_month_c( rec, md.month, trace_scan_c_( sm ), spaces );
+         res = intl_write_month_c( rec, md.month, fmtSca->pos - mark, spaces );
       }
       else
       {
-         res = intl_write_time_seperator_c( rec, sm->x );
-         trace_scan_c_( sm );
+         res = intl_write_time_seperator_c( rec, fmtSca );
+         fmtSca->pos - mark;
       }
 
       if ( not res )

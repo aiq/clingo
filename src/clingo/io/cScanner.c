@@ -760,13 +760,3 @@ SCAN_FUNC_IMPL_( uint64_t, scan_uint64_c )
 
 SCAN_FUNC_IMPL_( float,    scan_float_c )
 SCAN_FUNC_IMPL_( double,   scan_double_c )
-
-/*******************************************************************************
- marker
-*******************************************************************************/
-
-extern inline int64_t trace_scan_c( cScanMarker sm[static 1], bool full );
-extern inline cBytes traced_bytes_c( cScanMarker sm[static 1], bool full );
-extern inline cChars traced_chars_c( cScanMarker sm[static 1], bool full );
-extern inline bool undo_scan_c( cScanMarker sm[static 1] );
-extern inline bool undo_scan_error_c( cScanMarker sm[static 1], int err );

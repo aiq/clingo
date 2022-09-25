@@ -76,57 +76,59 @@ bool read_hmsn_c( cScanner sca[static 1],
    {
       fmt = C_DaytimeFormat;
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t oldPos = sca->pos;
 
    cHmsn tmp = hmsn_c( 0, 0, 0, 0 );
    bool pm = false;
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
-                                                       : 0;
+      int64_t mark = sca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
+                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'h' ) ) //------------------------------- h
+      mark = sca->pos;
+      if ( move_while_char_c( fmtSca, 'h' ) ) //------------------------------ h
       {
-         res = intl_read_hour_c( sca, &tmp.hour, trace_scan_c_( sm ), spaces );
+         res = intl_read_hour_c( sca, &tmp.hour, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'k' ) ) //-------------------------- k
+      else if ( move_while_char_c( fmtSca, 'k' ) ) //------------------------- k
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_read_kitchen_hour_c( sca, &tmp.hour, n, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'm' ) ) //-------------------------- m
+      else if ( move_while_char_c( fmtSca, 'm' ) ) //------------------------- m
       {
-         res = intl_read_min_c( sca, &tmp.min, trace_scan_c_( sm ), spaces );
+         res = intl_read_min_c( sca, &tmp.min, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 's' ) ) //-------------------------- s
+      else if ( move_while_char_c( fmtSca, 's' ) ) //------------------------- s
       {
-         res = intl_read_sec_c( sca, &tmp.sec, trace_scan_c_( sm ), spaces );
+         res = intl_read_sec_c( sca, &tmp.sec, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'i' ) ) //-------------------------- i
+      else if ( move_while_char_c( fmtSca, 'i' ) ) //------------------------- i
       {
-         res = intl_read_isec_c( sca, &tmp.nsec, trace_scan_c_( sm ) );
+         res = intl_read_isec_c( sca, &tmp.nsec, fmtSca->pos - mark );
          tmp.nsec *= 1000*1000;
       }
-      else if ( move_while_char_c( sm->x, 'u' ) ) //-------------------------- u
+      else if ( move_while_char_c( fmtSca, 'u' ) ) //------------------------- u
       {
-         res = intl_read_usec_c( sca, &tmp.nsec, trace_scan_c_( sm ) );
+         res = intl_read_usec_c( sca, &tmp.nsec, fmtSca->pos - mark );
          tmp.nsec *= 1000;
       }
-      else if ( move_while_char_c( sm->x, 'n' ) ) //-------------------------- n
+      else if ( move_while_char_c( fmtSca, 'n' ) ) //------------------------- n
       {
-         res = intl_read_nsec_c( sca, &tmp.nsec, trace_scan_c_( sm ) );
+         res = intl_read_nsec_c( sca, &tmp.nsec, fmtSca->pos - mark );
       }
-      else if ( move_if_chars_c_( sm->x, "ap" ) or
-                move_if_chars_c_( sm->x, "AP" ) )
+      else if ( move_if_chars_c_( fmtSca, "ap" ) or
+                move_if_chars_c_( fmtSca, "AP" ) )
       {
          res = intl_read_ap_c( sca, &pm );
       }
       else
       {
-         res = intl_read_time_seperator_c( sca, sm->x );
-         trace_scan_c_( sm );
+         res = intl_read_time_seperator_c( sca, fmtSca );
+         fmtSca->pos - mark;
       }
 
       if ( not res )
@@ -158,53 +160,55 @@ bool write_hmsn_c( cRecorder rec[static 1],
    {
       fmt = C_DaytimeFormat;
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t oldPos = rec->pos;
 
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
+      int64_t mark = fmtSca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'h' ) ) //------------------------------- h
+      mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'h' ) ) //------------------------------ h
       {
-         res = intl_write_hour_c( rec, hmsn.hour, trace_scan_c_( sm ), spaces );
+         res = intl_write_hour_c( rec, hmsn.hour, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'k' ) ) //-------------------------- k
+      else if ( move_while_char_c( fmtSca, 'k' ) ) //------------------------- k
       {
-         int64_t n = trace_scan_c_( sm );
+         int64_t n = fmtSca->pos - mark;
          res = intl_write_kitchen_hour_c( rec, hmsn.hour, n, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'm' ) ) //-------------------------- m
+      else if ( move_while_char_c( fmtSca, 'm' ) ) //------------------------- m
       {
-         res = intl_write_min_c( rec, hmsn.min, trace_scan_c_( sm ), spaces );
+         res = intl_write_min_c( rec, hmsn.min, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 's' ) ) //-------------------------- s
+      else if ( move_while_char_c( fmtSca, 's' ) ) //------------------------- s
       {
-         res = intl_write_sec_c( rec, hmsn.sec, trace_scan_c_( sm ), spaces );
+         res = intl_write_sec_c( rec, hmsn.sec, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'i' ) ) //-------------------------- i
+      else if ( move_while_char_c( fmtSca, 'i' ) ) //------------------------- i
       {
          int64_t const msecs = to_time_unit_c( hmsn.nsec, C_Nsec, C_Msec );
-         res = intl_write_msec_c( rec, msecs, trace_scan_c_( sm ) );
+         res = intl_write_msec_c( rec, msecs, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'u' ) ) //-------------------------- u
+      else if ( move_while_char_c( fmtSca, 'u' ) ) //------------------------- u
       {
          int64_t const usecs = to_time_unit_c( hmsn.nsec, C_Nsec, C_Usec );
-         res = intl_write_usec_c( rec, usecs, trace_scan_c_( sm ) );
+         res = intl_write_usec_c( rec, usecs, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'n' ) ) //-------------------------- n
+      else if ( move_while_char_c( fmtSca, 'n' ) ) //------------------------- n
       {
-         res = intl_write_nsec_c( rec, hmsn.nsec, trace_scan_c_( sm ) );
+         res = intl_write_nsec_c( rec, hmsn.nsec, fmtSca->pos - mark );
       }
-      else if ( move_if_chars_c_( sm->x, "ap" ) ) //------------------------- ap
+      else if ( move_if_chars_c_( fmtSca, "ap" ) ) //------------------------ ap
       {
          char const* val = ( hmsn.hour >= 12 ) ? "pm"
                                                : "am";
          res = record_chars_c_( rec, val );
       }
-      else if ( move_if_chars_c_( sm->x, "AP" ) ) //------------------------- AP
+      else if ( move_if_chars_c_( fmtSca, "AP" ) ) //------------------------ AP
       {
          char const* val = ( hmsn.hour >= 12 ) ? "PM"
                                                : "AM";
@@ -212,8 +216,7 @@ bool write_hmsn_c( cRecorder rec[static 1],
       }
       else
       {
-         res = intl_write_time_seperator_c( rec, sm->x );
-         trace_scan_c_( sm );
+         res = intl_write_time_seperator_c( rec, fmtSca );
       }
 
       if ( not res )

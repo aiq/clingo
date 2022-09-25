@@ -117,32 +117,33 @@ bool read_week_date_c( cScanner sca[static 1],
    {
       fmt = C_IsoWeekDate;
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t const oldPos = sca->pos;
 
    cWeekDate tmp = week_date_c( -1, -1, -1 );
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      int64_t spaces = move_while_char_c( sm->x, '_' ) ? trace_scan_c_( sm )
-                                                       : 0;
+      int64_t mark = fmtSca->pos;
+      int64_t spaces = move_while_char_c( fmtSca, '_' ) ? fmtSca->pos - mark
+                                                        : 0;
 
-      if ( move_while_char_c( sm->x, 'X' ) )
+      mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'X' ) )
       {
-         res = intl_read_year_c( sca, &tmp.year, trace_scan_c_( sm ), spaces );
+         res = intl_read_year_c( sca, &tmp.year, fmtSca->pos - mark, spaces );
       }
-      else if ( move_while_char_c( sm->x, 'W' ) )
+      else if ( move_while_char_c( fmtSca, 'W' ) )
       {
-         res = intl_read_week_c( sca, &tmp.week, trace_scan_c_( sm ) );
+         res = intl_read_week_c( sca, &tmp.week, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'E' ) )
+      else if ( move_while_char_c( fmtSca, 'E' ) )
       {
-         res = intl_read_weekday_c( sca, &tmp.day, trace_scan_c_( sm ) );
+         res = intl_read_weekday_c( sca, &tmp.day, fmtSca->pos - mark );
       }
       else
       {
-         res = intl_read_time_seperator_c( sca, sm->x );
-         trace_scan_c_( sm );
+         res = intl_read_time_seperator_c( sca, fmtSca );
       }
 
       if ( not res )
@@ -169,28 +170,28 @@ bool write_week_date_c( cRecorder rec[static 1],
    {
       fmt = C_IsoWeekDate;
    }
-   cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
+   cScanner* fmtSca = &cstr_scanner_c_( fmt );
    int64_t const oldPos = rec->pos;
 
-   while ( sm->x->space > 0 )
+   while ( fmtSca->space > 0 )
    {
       bool res = true;
-      if ( move_while_char_c( sm->x, 'E' ) )
+      int64_t mark = fmtSca->pos;
+      if ( move_while_char_c( fmtSca, 'E' ) )
       {
-         res = intl_write_weekday_c( rec, wd.day, trace_scan_c_( sm ) );
+         res = intl_write_weekday_c( rec, wd.day, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'W' ) )
+      else if ( move_while_char_c( fmtSca, 'W' ) )
       {
-         res = intl_write_week_c( rec, wd.week, trace_scan_c_( sm ) );
+         res = intl_write_week_c( rec, wd.week, fmtSca->pos - mark );
       }
-      else if ( move_while_char_c( sm->x, 'X' ) )
+      else if ( move_while_char_c( fmtSca, 'X' ) )
       {
-         res = intl_write_year_c( rec, wd.year, trace_scan_c_( sm ) );
+         res = intl_write_year_c( rec, wd.year, fmtSca->pos - mark );
       }
       else
       {
-         res = intl_write_time_seperator_c( rec, sm->x );
-         trace_scan_c_( sm );
+         res = intl_write_time_seperator_c( rec, fmtSca );
       }
 
       if ( not res )
