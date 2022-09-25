@@ -33,21 +33,6 @@ The pos value shows how much bytes are allready set.
 The space value tells how much bytes in the memory block are not set.
 The err value can be set to indicate the type of error that occurred.
 
-[id='cRecordMarker']
-==== cRecordMarker
-[source,c]
-----
-struct cRecordMarker
-{
-   cRecorder* x;
-   int64_t startPos;
-   int64_t lastPos;
-};
-typedef struct cRecordMarker cRecordMarker;
-----
-
-cRecordMarker allows to trace how much bytes of the memory block are recorded.
-
 //******************************************************************************
 //******************************************************************* Functions
 //******************************************************************************
@@ -578,52 +563,6 @@ Returns true if all bytes of the double value can be written, otherwise false.
 ----
 include::{xmpldir}/record_double.c[]
 ----
-
-//********************************************************************** marker
-=== marker
-
-[id='record_marker_c_']
-==== record_marker_c_
-[source,c]
-----
-#define record_marker_c_( Rec )
-----
-
-Creates a marker for the recorder Rec.
-
-==== trace_full_record_c
-[source,c]
-----
-int64_t trace_record_c( cRecordMarker rm[static 1] );
-----
-
-Returns the number of bytes that are recorded since the creation of the marker.
-
-==== trace_record_c
-[source,c]
-----
-int64_t trace_record_c( cRecordMarker rm[static 1] );
-----
-
-Returns the number of bytes that are recorded since the last call of the
-function.
-
-==== undo_record_c
-[source,c]
-----
-bool undo_record_c( cRecordMarker rm[static 1] );
-----
-
-Moves the recorder back to the creation of the marker.
-
-==== undo_record_error_c
-[source,c]
-----
-bool undo_record_error_c( CRecordMarker rm[static 1], int err );
-----
-
-Moves the recorder back to the creation of the marker, sets the err value on the
-recorder and returns allways false.
 
 //************************************************************************ util
 === util

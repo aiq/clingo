@@ -536,7 +536,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
    }
 
    cChars const fmtCs = c_c( fmt );
-   cRecordMarker* marker = &record_marker_c_( rec );
+   int64_t const oldPos = rec->pos;
    // --------------------------------------------------------------------- list
    if ( chars_is_c( fmtCs, "list" ) )
    {
@@ -565,7 +565,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
          return true;
       }
 
-      undo_record_c( marker );
+      move_recorder_to_c( rec, oldPos );
       return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
 
@@ -597,7 +597,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
          return true;
       }
 
-      undo_record_c( marker );
+      move_recorder_to_c( rec, oldPos );
       return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
 
@@ -613,7 +613,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       }
       else
       {
-         undo_record_c( marker );
+         move_recorder_to_c( rec, oldPos );
          return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
       }
    }
@@ -715,7 +715,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
 
       if ( not res )
       {
-         undo_record_c( marker );
+         move_recorder_to_c( rec, oldPos );
          return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
       }
    }

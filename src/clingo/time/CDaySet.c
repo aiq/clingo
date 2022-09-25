@@ -414,7 +414,7 @@ bool write_day_set_c( cRecorder rec[static 1],
    }
 
    cChars const fmtCs = c_c( fmt );
-   cRecordMarker* marker = &record_marker_c_( rec );
+   int64_t const oldPos = rec->pos;
    // ---------------------------------------------------------------------- zip
    if ( chars_is_c( fmtCs, "zip" ) )
    {
@@ -452,7 +452,7 @@ bool write_day_set_c( cRecorder rec[static 1],
          return true;
       }
 
-      undo_record_c( marker );
+      move_recorder_to_c( rec, oldPos );
       return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
 
@@ -471,7 +471,7 @@ bool write_day_set_c( cRecorder rec[static 1],
       }
       else
       {
-         undo_record_c( marker );
+         move_recorder_to_c( rec, oldPos );
          return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
       }
    }
@@ -554,7 +554,7 @@ bool write_day_set_c( cRecorder rec[static 1],
       }
       if ( not res )
       {
-         undo_record_c( marker );
+         move_recorder_to_c( rec, oldPos );
          return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
       }
 

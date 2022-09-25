@@ -25,14 +25,6 @@ struct cRecorder
 };
 typedef struct cRecorder cRecorder;
 
-struct cRecordMarker
-{
-   cRecorder* x;
-   int64_t    startPos;
-   int64_t    lastPos;
-};
-typedef struct cRecordMarker cRecordMarker;
-
 /*******************************************************************************
 ******************************************************** Code Generation Macros
 *******************************************************************************/
@@ -282,47 +274,6 @@ CLINGO_API bool record_uint64_c( cRecorder rec[static 1], uint64_t u64 );
 
 CLINGO_API bool record_float_c( cRecorder rec[static 1], float f );
 CLINGO_API bool record_double_c( cRecorder rec[static 1], double d );
-
-/*******************************************************************************
- marker
-*******************************************************************************/
-
-#define record_marker_c_( Rec )                                                \
-(                                                                              \
-   (cRecordMarker){ .x=(Rec), .startPos=(Rec)->pos, .lastPos=(Rec)->pos }      \
-)
-
-CLINGO_API
-inline int64_t trace_full_record_c( cRecordMarker rm[static 1] )
-{
-   must_exist_c_( rm );
-   return rm->x->pos - rm->startPos;
-}
-
-CLINGO_API
-inline int64_t trace_record_c( cRecordMarker rm[static 1] )
-{
-   must_exist_c_( rm );
-
-   int64_t const res = rm->x->pos - rm->lastPos;
-   rm->lastPos = rm->x->pos;
-   return res;
-}
-
-CLINGO_API
-inline bool undo_record_c( cRecordMarker rm[static 1] )
-{
-   must_exist_c_( rm );
-   return move_recorder_to_c( rm->x, rm->startPos );
-}
-
-CLINGO_API
-inline bool undo_record_error_c( cRecordMarker rm[static 1], int err )
-{
-   must_exist_c_( rm );
-   undo_record_c( rm );
-   return set_recorder_error_c( rm->x, err );
-}
 
 /*******************************************************************************
  util

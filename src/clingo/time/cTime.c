@@ -368,7 +368,7 @@ bool write_time_c( cRecorder rec[static 1],
       fmt = C_TimeFormat;
    }
    cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
-   cRecordMarker* marker = &record_marker_c_( rec );
+   int64_t const oldPos = rec->pos;
 
    cHmsn hmsn = get_hmsn_c( time );
    cYmd ymd = get_ymd_c( time );
@@ -470,7 +470,7 @@ bool write_time_c( cRecorder rec[static 1],
 
       if ( not res )
       {
-         undo_record_c( marker );
+         move_recorder_to_c( rec, oldPos );
          return false;
       }
    }

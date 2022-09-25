@@ -275,13 +275,13 @@ bool write_double_c( cRecorder rec[static 1],
    else if ( chars_is_c( c_c( fmt ), "dbg" ) )
    {
       cDoubleInfo i = double_info_c( d );
-      cRecordMarker* rm = &record_marker_c_( rec );
+      int64_t const oldPos = rec->pos;
       bool ok = write_c_( rec, "{{ .sign={u8:x}", i.sign,
                                ", .exponent={u16:x}", i.exponent,
                                ", .mantissa={u64:x} }", i.mantissa );
       if ( not ok )
       {
-         undo_record_c( rm );
+         move_recorder_to_c( rec, oldPos );
       }
       return ok;
    }
@@ -303,13 +303,13 @@ bool write_float_c( cRecorder rec[static 1],
    else if ( chars_is_c( c_c( fmt ), "dbg" ) )
    {
       cFloatInfo i = float_info_c( f );
-      cRecordMarker* rm = &record_marker_c_( rec );
+      int64_t const oldPos = rec->pos;
       bool ok = write_c_( rec, "{{ .sign={u8:x}", i.sign,
                                ", .exponent={u8:x}", i.exponent,
                                ", .mantissa={u32:x} }", i.mantissa );
       if ( not ok )
       {
-         undo_record_c( rm );
+         move_recorder_to_c( rec, oldPos );
       }
       return ok;
    }

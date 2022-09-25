@@ -130,7 +130,7 @@ bool write_tz_offset_c( cRecorder rec[static 1],
       fmt = "oo";
    }
    cScanMarker* sm = &scan_marker_c_( &cstr_scanner_c_( fmt ) );
-   cRecordMarker* marker = &record_marker_c_( rec );
+   int64_t const oldPos = rec->pos;
 
    bool res = true;
    {
@@ -149,7 +149,7 @@ bool write_tz_offset_c( cRecorder rec[static 1],
    }
    if ( not res )
    {
-      undo_record_c( marker );
+      move_recorder_to_c( rec, oldPos );
       return false;
    }
 

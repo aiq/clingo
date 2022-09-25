@@ -228,15 +228,6 @@ RECORD_FUNC_IMPL_( float,    record_float_c )
 RECORD_FUNC_IMPL_( double,   record_double_c )
 
 /*******************************************************************************
- marker
-*******************************************************************************/
-
-extern inline int64_t trace_full_record_c( cRecordMarker rm[static 1] );
-extern inline int64_t trace_record_c( cRecordMarker rm[static 1] );
-extern inline bool undo_record_c( cRecordMarker rm[static 1] );
-extern inline bool undo_record_error_c( cRecordMarker rm[static 1], int err );
-
-/*******************************************************************************
 util
 *******************************************************************************/
 
