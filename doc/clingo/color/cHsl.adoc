@@ -1,12 +1,12 @@
 = cHsl
 :xmpldir: {testroot}/clingo/color/cHsl
 
+include::{docroot}/clingo/_tmpl/attr.adoc[]
+
 //******************************************************************************
 //******************************************************************** Overview
 //******************************************************************************
 == Overview
-
-
 
 //******************************************************************************
 //******************************************************* Types and Definitions
@@ -26,38 +26,23 @@ struct cHsl
 typedef struct cHsl cHsl;
 ----
 
-
+The cHsl struct can store a color from the HSL color space.
 
 //******************************************************************* Generated
 === Generated
 
 [id='cHslSlice']
 ==== cHslSlice
-[source,c]
-----
-struct cHslSlice
-{
-   int64_t s;
-   cHsl const* v;
-};
-typedef struct cHslSlice cHslSlice;
-----
-
-{Slice}
+:Slice-Type: cHsl const
+:Slice-Slice: cHslSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarHslSlice']
 ==== cVarHslSlice
 [source,c]
-----
-struct cVarHslSlice
-{
-   int64_t s;
-   cHsl* v;
-};
-typedef struct cVarHslSlice cVarHslSlice;
-----
-
-{Slice}
+:Slice-Type: cHsl
+:Slice-Slice: cVarHslSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

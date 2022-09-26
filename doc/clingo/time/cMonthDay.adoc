@@ -31,70 +31,15 @@ struct.
 
 [id='cMonthDaySlice']
 ==== cMonthDaySlice
-[source,c]
-----
-struct cMonthDaySlice
-{
-   int64_t s;
-   cMonthDay const* v;
-};
-typedef struct cMonthDaySlice cMonthDaySlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cMonthDaySlice month_day_slice_c( int64_t s, cMonthDay const* v );
-cMonthDaySlice make_month_day_slice_c( cMonthDay const* beg,
-                                       cMonthDay const* end );
-cMonthDaySlice empty_month_day_slice_c( void );
-/* sub */
-cMonthDaySlice left_month_day_slice_c( cMonthDaySlice slice, int64_t maxLen );
-cMonthDaySlice mid_month_day_slice_c( cMonthDaySlice slice, int64_t index );
-cMonthDaySlice right_month_day_slice_c( cMonthDaySlice slice, int64_t maxLen );
-cMonthDaySlice sub_month_day_slice_c( cMonthDaySlice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx);
-----
+:Slice-Type: cMonthDay const
+:Slice-Slice: cMonthDaySlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarMonthDaySlice']
 ==== cVarMonthDaySlice
-[source,c]
-----
-struct cVarMonthDaySlice
-{
-   int64_t s;
-   cMonthDay* v;
-};
-typedef struct cVarMonthDaySlice cVarMonthDaySlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarMonthDaySlice var_month_day_slice_c( int64_t s, cMonthDay* v );
-cVarMonthDaySlice make_var_month_day_slice_c( cMonthDay* beg, cMonthDay* end );
-cVarMonthDaySlice empty_var_month_day_slice_c( void );
-/* sub */
-cVarMonthDaySlice left_var_month_day_slice_c( cVarMonthDaySlice slice,
-                                              int64_t maxLen );
-cVarMonthDaySlice mid_var_month_day_slice_c( cVarMonthDaySlice slice,
-                                             int64_t index );
-cVarMonthDaySlice right_var_month_day_slice_c( cVarMonthDaySlice slice,
-                                               int64_t maxLen );
-cVarMonthDaySlice sub_var_month_day_slice_c( cVarMonthDaySlice slice,
-                                             int64_t begIdx,
-                                             int64_t endIdx);
-/* var slice */
-cVarMonthDaySlice as_var_month_day_slice_c( cVarMonthDaySlice slice );
-cVarMonthDaySlice cast_var_month_day_slice_c( cVarMonthDaySlice slice,
-                                              cMonthDaySlice sub );
-int64_t set_month_day_slice_c( cVarMonthDaySlice dst, cMonthDaySlice src );
-----
+:Slice-Type: cMonthDay
+:Slice-Slice: cVarMonthDaySlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

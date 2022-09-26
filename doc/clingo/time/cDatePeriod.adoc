@@ -1,7 +1,7 @@
 = cDatePeriod
 :xmpldir: ../../../test/clingo/time/cDatePeriod
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -32,74 +32,15 @@ Struct that represents a date period.
 
 [id='cDatePeriodSlice']
 ==== cDatePeriodSlice
-[source,c]
-----
-struct cDatePeriodSlice
-{
-   int64_t s;
-   cDatePeriod const* v;
-};
-typedef struct cDatePeriodSlice cDatePeriodSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cDatePeriodSlice date_period_slice_c( int64_t s, cDatePeriod const* v );
-cDatePeriodSlice make_date_period_slice_c( cDatePeriod const* beg,
-                                           cDatePeriod const* end );
-cDatePeriodSlice empty_date_period_slice_c( void );
-/* sub */
-cDatePeriodSlice left_date_period_slice_c( cDatePeriodSlice slice,
-                                           int64_t maxLen );
-cDatePeriodSlice mid_date_period_slice_c( cDatePeriodSlice slice,
-                                          int64_t index );
-cDatePeriodSlice right_date_period_slice_c( cDatePeriodSlice slice,
-                                            int64_t maxLen );
-cDatePeriodSlice sub_date_period_slice_c( cDatePeriodSlice slice,
-                                          int64_t begIdx,
-                                          int64_t endIdx);
-----
+:Slice-Type: cDatePeriod const
+:Slice-Slice: cDatePeriodSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarDatePeriodSlice']
 ==== cVarDatePeriodSlice
-[source,c]
-----
-struct cVarDatePeriodSlice
-{
-   int64_t s;
-   cDatePeriod* v;
-};
-typedef struct cVarDatePeriodSlice cVarDatePeriodSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarDatePeriodSlice var_date_period_slice_c( int64_t s, cDatePeriod* v );
-cVarDatePeriodSlice make_var_date_period_slice_c( cDatePeriod* beg,
-                                                  cDatePeriod* end );
-cVarDatePeriodSlice empty_var_date_period_slice_c( void );
-/* sub */
-cVarDatePeriodSlice left_var_date_period_slice_c( cVarDatePeriodSlice slice,
-                                                  int64_t maxLen );
-cVarDatePeriodSlice mid_var_date_period_slice_c( cVarDatePeriodSlice slice,
-                                                 int64_t index );
-cVarDatePeriodSlice right_var_date_period_slice_c( cVarDateSlice slice,
-                                                   int64_t maxLen );
-cVarDatePeriodSlice sub_var_date_period_slice_c( cVarDatePeriodSlice slice,
-                                                 int64_t begIdx,
-                                                 int64_t endIdx);
-/* var slice */
-cVarDatePeriodSlice as_var_date_slice_c( cVarDatePeriodSlice slice );
-cVarDatePeriodSlice cast_var_date_slice_c( cVarDatePeriodSlice slice,
-                                           cDatePeriodSlice sub );
-int64_t set_date_slice_c( cVarDatePeriodSlice dst, cDatePeriodSlice src );
-----
+:Slice-Type: cDatePeriod
+:Slice-Slice: cVarDatePeriodSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

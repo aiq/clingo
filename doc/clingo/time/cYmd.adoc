@@ -1,7 +1,7 @@
 = cYmd
 :xmpldir: ../../../test/clingo/time/cYmd
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -33,63 +33,15 @@ A cYmd struct represents a date via a year, month and day value.
 
 [id='cYmdSlice']
 ==== cYmdSlice
-[source,c]
-----
-struct cYmdSlice
-{
-   int64_t s;
-   cYmd const* v;
-};
-typedef struct cYmd cYmd;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cYmdSlice ymd_slice_c( int64_t s, cYmd const* v );
-cYmdSlice make_ymd_slice_c( cYmd const* beg, cYmd const* end );
-cYmdSlice empty_ymd_slice_c( void );
-/* sub */
-cYmdSlice left_ymd_slice_c( cYmdSlice slice, int64_t maxLen );
-cYmdSlice mid_ymd_slice_c( cYmdSlice slice, int64_t index );
-cYmdSlice right_ymd_slice_c( cYmdSlice slice, int64_t maxLen );
-cYmdSlice sub_ymd_slice_c( cYmdSlice slice, int64_t begIdx, int64_t endIdx );
-----
+:Slice-Type: cYmd const
+:Slice-Slice: cYmdSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarYmdSlice']
 ==== cVarYmdSlice
-[source,c]
-----
-struct cVarYmdSlice
-{
-   int64_t s;
-   cYmd* v;
-};
-typedef struct cVarYmdSlice cVarYmdSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarYmdSlice var_ymd_slice_c( int64_t s, cYmd* v );
-cVarYmdSlice make_var_ymd_slice_c( cYmd* beg, cYmd* end );
-cVarYmdSlice empty_var_ymd_slice_c( void );
-/* sub */
-cVarYmdSlice left_var_ymd_slice_c( cVarYmdSlice slice, int64_t maxLen );
-cVarYmdSlice mid_var_ymd_slice_c( cVarYmdSlice slice, int64_t index );
-cVarYmdSlice right_var_ymd_slcie_c( cVarYmdSlice slice, int64_t maxLen );
-cVarYmdSlice sub_var_ymd_slice_c( cVarYmdSlice slice,
-                                  int64_t begIdx,
-                                  int64_t endIdx );
-/* var slice */
-cYmdSlice as_ymd_slice_c( cVarYmdSlice slice );
-cVarYmdSlice cast_ymd_slice_c( cVarYmdSlice slice, cYmdSlice sub );
-int64_t set_ymd_slice_c( cVarYmdSlice dst, cYmdSlice src );
-----
+:Slice-Type: cYmd
+:Slice-Slice: cVarYmdSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

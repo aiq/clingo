@@ -1,7 +1,7 @@
 = float
 :xmpldir: {testroot}/clingo/type/float
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -35,169 +35,15 @@ cFloatInfo represents the three sections of a float value.
 
 [id='cFloatSlice']
 ==== cFloatSlice
-[source,c]
-----
-struct cFloatSlice
-{
-   int64_t s;
-   float const* v;
-};
-typedef struct cFloatSlice cFloatSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cFloatSlice float_slice_c( int64_t s, float const* v );
-cFloatSlice make_float_slice_c( float const* beg, float const* end );
-cFloatSlice empty_float_slice_c( void );
-/* sub */
-cFloatSlice left_float_slice_c( cFloatSlice slice, int64_t maxLen );
-cFloatSlice mid_float_slice_c( cFloatSlice slice, int64_t index );
-cFloatSlice right_float_slice_c( cFloatSlice slice, int64_t maxLen );
-cFloatSlice sub_float_slice_c( cFloatSlice slice,
-                               int64_t begIdx,
-                               int64_t endIdx );
-----
+:Slice-Type: float const
+:Slice-Slice: cFloatSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarFloatSlice']
 ==== cVarFloatSlice
-[source,c]
-----
-struct cVarFloatSlice
-{
-   int64_t s;
-   float* v;
-};
-typedef struct cVarFloatSlice cVarFloatSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarFloatSlice var_float_slice_c( int64_t s, float* v );
-cVarFloatSlice make_var_float_slice_c( float* beg, float* end );
-cVarFloatSlice empty_var_float_slice_c( void );
-/* sub */
-cVarFloatSlice left_var_float_slice_c( cVarFloatSlice slice, int64_t maxLen );
-cVarFloatSlice mid_var_float_slice_c( cVarFloatSlice slice, int64_t index );
-cVarFloatSlice right_var_float_slice_c( cVarFloatSlice slice, int64_t maxLen );
-cVarFloatSlice sub_var_float_slice_c( cVarFloatSlice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx );
-/* var slice */
-cFloatSlice as_float_slice_c( cVarFloatSlice slice );
-cFloatSlice cast_float_slice_c( cVarFloatSlice slice, cFloatSlice sub );
-int64_t set_float_slice_c( cVarFloatSlice dst, cFloatSlice src );
-----
-
-[id='cFloatChunk']
-==== cFloatChunk
-[source,c]
-----
-struct cFloatChunk
-{
-   int64_t s;
-   float const* v;
-   int64_t favSize;
-   cFloatSlice slice;
-};
-typedef struct cFloatChunk cFloatChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_float_chunk_c( cFloatChunk chunk[static 1],
-                              int64_t s,
-                              cFloatSlice slice );
-void init_front_float_chunk_c( cFloatChunk chunk[static 1],
-                               int64_t s,
-                               cFloatSlice slice );
-----
-
-[id='cVarFloatChunk']
-==== cVarFloatChunk
-[source,c]
-----
-struct cVarFloatChunk
-{
-   int64_t s;
-   float* v;
-   int64_t favSize;
-   cVarFloatSlice slice;
-};
-typedef struc cVarFloatChunk cVarFloatChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_float_chunk_c( cVarFloatChunk chunk[static 1],
-                                  int64_t s,
-                                  cVarFloatSlice slice );
-void init_front_var_float_chunk_c( cVarFloatChunk chunk[static 1],
-                                   int64_t s,
-                                   cVarFloatSlice slice );
-----
-
-[id='cFloatWindow']
-==== cFloatWindow
-[source,c]
-----
-struct cFloatWindow
-{
-   int64_t s;
-   float const* v;
-   int64_t favSize;
-   cFloatSlice slice;
-};
-typedef struct cFloatWindow cFloatWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_float_window_c( cFloatWindow window[static 1],
-                               int64_t s,
-                               cFloatSlice slice );
-void init_front_float_window_c( cFloatWindow window[static 1],
-                                int64_t s,
-                                cFloatSlice slice );
-----
-
-[id='cVarFloatWindow']
-==== cVarFloatWindow
-[source,c]
-----
-struct cVarFloatWindow
-{
-   int64_t s;
-   float* v;
-   int64_t favSize;
-   cVarFloatSlice slice;
-};
-typedef struct cVarFloatWindow cVarFloatWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_float_window_c( cVarFloatWindow window[static 1],
-                                   int64_t s,
-                                   cVarFloatSlice slice );
-void init_front_var_float_window_c( cVarFloatWindow window[static 1],
-                                    int64_t s,
-                                    cVarFloatSlice slice );
-----
+:Slice-Type: float
+:Slice-Slice: cVarFloatSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

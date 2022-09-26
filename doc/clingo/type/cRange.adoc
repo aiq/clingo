@@ -1,7 +1,7 @@
 = cRange
 :xmpldir: {testroot}/clingo/type/cRange
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -34,31 +34,15 @@ A cRange is bounded inclusively below and above [min..max].
 
 [id='cRangeSlice']
 ==== cRangeSlice
-[source,c]
-----
-struct cRangeSlice
-{
-   int64_t s;
-   cRange const* v;
-};
-typedef struct cRangeSlice cRangeSlice;
-----
-
-{Slice}
+:Slice-Type: cRange const
+:Slice-Slice: cRangeSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarRangeSlice']
 ==== cVarRangeSlice
-[source,c]
-----
-struct cVarRangeSlice
-{
-   int64_t s;
-   cRange* v;
-};
-typedef struct cVarRangeSlice cVarRangeSlice;
-----
-
-{Slice}
+:Slice-Type: cRange
+:Slice-Slice: cVarRangeSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

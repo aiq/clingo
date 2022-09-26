@@ -18,7 +18,6 @@ struct cHsv
    float saturation;
    float value;
 };
-
 typedef struct cHsv cHsv;
 
 SLICES_C_(

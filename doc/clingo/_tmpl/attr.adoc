@@ -1,12 +1,4 @@
-
-:Slice: Via the macros link:../lang/slice.html#SLICE_DEF_C_[SLICE_DEF_C_] and link:../lang/slice.html#SLICE_IMPL_C_[SLICE_IMPL_C_] declared and implemented struct. +
-The macros declare and implement also the following functions.
-
-:Chunk: Via the macros link:../lang/chunk.html#CHUNK_DEF_C_[CHUNK_DEF_C_] and link:../lang/chunk.html#CHUNK_IMPL_C_[CHUNK_IMPL_C_] declared and implemented struct. +
-The macros declare and implement also the following functions.
-
-:Window: Via the macros link:../lang/window.html#WINDOW_DEF_C_[WINDOW_DEF_C_] and link:../lang/window.html#WINDOW_IMPL_C_[WINDOW_IMPL_C_] declared and implemented struct. +
-The macros declare and implement also the following functions.
+:Slice: Via the macro link:{docroot}/clingo/lang/slice.html#SLICES_C_[SLICES_C_] declared struct.
 
 :CmpSlice: Via the macro link:../lang/algo.html#CMP_SLICE_C_[CMP_SLICE_C_] implemented function.
 :CountEq: Via the macro link:../lang/algo.html#COUNT_EQ_C_[COUNT_EQ_C_] implemented function.

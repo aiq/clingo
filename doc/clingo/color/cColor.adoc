@@ -1,12 +1,12 @@
 = cColor
 :xmpldir: {testroot}/clingo/color/cColor
 
+include::{docroot}/clingo/_tmpl/attr.adoc[]
+
 //******************************************************************************
 //******************************************************************** Overview
 //******************************************************************************
 == Overview
-
-
 
 //******************************************************************************
 //******************************************************* Types and Definitions
@@ -27,38 +27,23 @@ struct cColor
 typedef struct cColor cColor;
 ----
 
-Structs that represents a color value.
+Structs that represents a color value with a alpha channel.
+The color value is stored in the RGB color space.
 
 //******************************************************************* Generated
 === Generated
 
 [id='cColorSlice']
 ==== cColorSlice
-[source,c]
-----
-struct cColorSlice
-{
-   int64_t s;
-   cColor const* v;
-};
-typedef struct cColorSlice cColorSlice;
-----
-
-{Slice}
+:Slice-Type: cColor const
+:Slice-Slice: cColorSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarColorSlice']
 ==== cVarColorSlice
-[source,c]
-----
-struct cVarColorSlice
-{
-   int64_t s;
-   cColor* v;
-};
-typedef struct cVarColorSlice cVarColorSlice;
-----
-
-{Slice}
+:Slice-Type: cColor
+:Slice-Slice: cVarColorSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

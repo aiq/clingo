@@ -1,7 +1,7 @@
 = cOrdinalDate
 :xmpldir: ../../../test/clingo/time/cOrdinalDate
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -32,75 +32,15 @@ A cOrdinalDate struct represents a ordinal date.
 
 [id='cOrdinalDateSlice']
 ==== cOrdinalDateSlice
-[source,c]
-----
-struct cOrdinalDateSlice
-{
-   int64_t s;
-   cOrdinalDate const* v;
-};
-typedef struct cOrdinalDate cOrdinalDate;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cOrdinalDateSlice ordinal_date_slice_c( int64_t s, cOrdinalDate const* v );
-cOrdinalDateSlice make_ordinal_date_slice_c( cOrdinalDate const* beg,
-                                             cOrdinalDate const* end );
-cOrdinalDateSlice empty_ordinal_date_slice_c( void );
-/* sub */
-cOrdinalDateSlice left_ordinal_date_slice_c( cOrdinalDateSlice slice,
-                                             int64_t maxLen );
-cOrdinalDateSlice mid_ordinal_date_slice_c( cOrdinalDateSlice slice,
-                                            int64_t index );
-cOrdinalDateSlice right_ordinal_date_slice_c( cOrdinalDateSlice slice,
-                                              int64_t maxLen );
-cOrdinalDateSlice sub_ordinal_date_slice_c( cOrdinalDateSlice slice,
-                                            int64_t begIdx,
-                                            int64_t endIdx );
-----
+:Slice-Type: cOrdinalDate const
+:Slice-Slice: cOrdinalDateSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarOrdinalDateSlice']
 ==== cVarOrdinalDateSlice
-[source,c]
-----
-struct cVarOrdinalDateSlice
-{
-   int64_t s;
-   cOrdinalDate* v;
-};
-typedef struct cVarOrdinalDateSlice cVarOrdinalDateSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarOrdinalDateSlice var_ordinal_date_slice_c( int64_t s, cOrdinalDate* v );
-cVarOrdinalDateSlice make_var_ordinal_date_slice_c( cOrdinalDate* beg,
-                                                    cOrdinalDate* end );
-cVarOrdinalDateSlice empty_var_ordinal_date_slice_c( void );
-/* sub */
-cVarOrdinalDateSlice left_var_ordinal_date_slice_c( cVarOrdinalDateSlice slice,
-                                                    int64_t maxLen );
-cVarOrdinalDateSlice mid_var_ordinal_date_slice_c( cVarOrdinalDateSlice slice,
-                                                   int64_t index );
-cVarOrdinalDateSlice right_var_ordinal_date_slcie_c( cVarOrdinalDateSlice slice,
-                                                     int64_t maxLen );
-cVarOrdinalDateSlice sub_var_ordinal_date_slice_c( cVarOrdinalDateSlice slice,
-                                                   int64_t begIdx,
-                                                   int64_t endIdx );
-/* var slice */
-cOrdinalDateSlice as_ordinal_date_slice_c( cVarOrdinalDateSlice slice );
-cVarOrdinalDateSlice cast_ordinal_date_slice_c( cVarOrdinalDateSlice slice,
-                                                cOrdinalDateSlice sub );
-int64_t set_ordinal_date_slice_c( cVarOrdinalDateSlice dst,
-                                  cOrdinalDateSlice src );
-----
+:Slice-Type: cOrdinalDate
+:Slice-Slice: cVarOrdinalDateSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

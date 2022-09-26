@@ -30,69 +30,15 @@ day.
 
 [id='cDaytimeSlice']
 ==== cDaytimeSlice
-[source,c]
-----
-struct cDaytimeSlice
-{
-   int64_t s;
-   cDate const* v;
-};
-typedef struct cDaytimeSlice cDaytimeSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cDaytimeSlice daytime_slice_c( int64_t s, cDaytime const* v );
-cDaytimeSlice make_daytime_slice_c( cDaytime const* beg, cDaytime const* end );
-cDaytimeSlice empty_daytime_slice_c( void );
-/* sub */
-cDaytimeSlice left_daytime_slice_c( cDaytimeSlice slice, int64_t maxLen );
-cDaytimeSlice mid_daytime_slice_c( cDaytimeSlice slice, int64_t index );
-cDaytimeSlice right_daytime_slice_c( cDaytimeSlice slice, int64_t maxLen );
-cDaytimeSlice sub_daytime_slice_c( cDaytimeSlice slice,
-                                   int64_t begIdx,
-                                   int64_t endIdx);
-----
+:Slice-Type: cDaytime const
+:Slice-Slice: cDaytimeSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarDaytimeSlice']
 ==== cVarDaytimeSlice
-[source,c]
-----
-struct cVarDaytimeSlice
-{
-   int64_t s;
-   cDate* v;
-};
-typedef struct cVarDaytimeSlice cVarDaytimeSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarDaytimeSlice var_daytime_slice_c( int64_t s, cDaytime* v );
-cVarDaytimeSlice make_var_daytime_slice_c( cDaytime* beg, cDaytime* end );
-cVarDaytimeSlice empty_var_daytime_slice_c( void );
-/* sub */
-cVarDaytimeSlice left_var_daytime_slice_c( cVarDaytimeSlice slice,
-                                           int64_t maxLen );
-cVarDaytimeSlice mid_var_daytime_slice_c( cVarDaytimeSlice slice,
-                                          int64_t index );
-cVarDaytimeSlice right_var_daytime_slice_c( cVarDaytimeSlice slice,
-                                            int64_t maxLen );
-cVarDaytimeSlice sub_var_daytime_slice_c( cVarDaytimeSlice slice,
-                                          int64_t begIdx,
-                                          int64_t endIdx);
-/* var slice */
-cVarDaytimeSlice as_var_daytime_slice_c( cVarDaytimeSlice slice );
-cVarDaytimeSlice cast_var_daytime_slice_c( cVarDaytimeSlice slice,
-                                           cDaytimeSlice sub );
-int64_t set_daytime_slice_c( cVarDaytimeSlice dst, cDaytimeSlice src );
-----
+:Slice-Type: cDaytime
+:Slice-Slice: cVarDaytimeSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

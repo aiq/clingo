@@ -1,7 +1,7 @@
 = cChars
 :xmpldir: {testroot}/clingo/type/cChars
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -20,31 +20,15 @@ It is recommended to use cChars and cVarChars as alternative to a C-string.
 
 [id='cChars']
 ==== cChars
-[source,c]
-----
-struct cChars
-{
-   int64_t s;
-   char const* v;
-};
-typedef struct cChars cChars;
-----
-
-{Slice}
+:Slice-Type: char const
+:Slice-Slice: cChars
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarChars']
 ==== cVarChars
-[source,c]
-----
-struct cVarChars
-{
-   int64_t s;
-   char* v;
-};
-typedef struct cVarChars cVarChars;
-----
-
-{Slice}
+:Slice-Type: char
+:Slice-Slice: cVarChars
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

@@ -1,7 +1,7 @@
 = cTimestamp
 :xmpldir: ../../../test/clingo/time/cTimestamp
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -34,72 +34,15 @@ A cTimestamp value represents a moment in time.
 
 [id='cTimestampSlice']
 ==== cTimestampSlice
-[source,c]
-----
-struct cTimestampSlice
-{
-int64_t s;
-cTimestamp const* v;
-};
-typedef struct cTimestampSlice cTimestampSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cTimestampSlice timestamp_slice_c( int64_t s, cTimestamp const* v );
-cTimestampSlice make_timestamp_slice_c( cTimestamp const* beg,
-                                        cTimestamp const* end );
-cTimestampSlice empty_timestamp_slice_c( void );
-/* sub */
-cTimestampSlice left_timestamp_slice_c( cTimestampSlice slice, int64_t maxLen );
-cTimestampSlice mid_timestamp_slice_c( cTimestampSlice slice, int64_t index );
-cTimestampSlice right_timestamp_slice_c( cTimestampSlice slice,
-                                         int64_t maxLen );
-cTimestampSlice sub_timestamp_slice_c( cTimestampSlice slice,
-                                       int64_t begIdx,
-                                       int64_t endIdx);
-----
+:Slice-Type: cTimestamp const
+:Slice-Slice: cTimestampSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarTimestampSlice']
 ==== cVarTimestampSlice
-[source,c]
-----
-struct cVarTimestampSlice
-{
-int64_t s;
-cTimestamp* v;
-};
-typedef struct cVarTimestampSlice cVarTimestampSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarTimestampSlice var_timestamp_slice_c( int64_t s, cTimestamp* v );
-cVarTimestampSlice make_var_timestamp_slice_c( cTimestamp* beg,
-                                               cTimestamp* end );
-cVarTimestampSlice empty_var_timestamp_slice_c( void );
-/* sub */
-cVarTimestampSlice left_var_timestamp_slice_c( cVarTimestampSlice slice,
-                                               int64_t maxLen );
-cVarTimestampSlice mid_var_timestamp_slice_c( cVarTimestampSlice slice,
-                                              int64_t index );
-cVarTimestampSlice right_var_timestamp_slice_c( cVarTimestampSlice slice,
-                                                int64_t maxLen );
-cVarTimestampSlice sub_var_timestamp_slice_c( cVarTimestampSlice slice,
-                                              int64_t begIdx,
-                                              int64_t endIdx);
-/* var slice */
-cVarTimestampSlice as_var_timestamp_slice_c( cVarTimestampSlice slice );
-cVarTimestampSlice cast_var_timestamp_slice_c( cVarTimestampSlice slice,
-                                               cTimestampSlice sub );
-int64_t set_timestamp_slice_c( cVarTimestampSlice dst, cTimestampSlice src );
-----
+:Slice-Type: cTimestamp
+:Slice-Slice: cVarTimestampSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

@@ -1,7 +1,7 @@
 = bool
 :xmpldir: {testroot}/clingo/type/bool
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -20,31 +20,15 @@ Module with functions and types to work with bool values.
 
 [id='cBoolSlice']
 ==== cBoolSlice
-[source,c]
-----
-struct cBoolSlice
-{
-   int64_t s;
-   bool const* v;
-};
-typedef struct cBoolSlice cBoolSlice;
-----
-
-{Slice}
+:Slice-Type: bool const
+:Slice-Slice: cBoolSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarBoolSlice']
 ==== cVarBoolSlice
-[source,c]
-----
-struct cVarBoolSlice
-{
-   int64_t s;
-   bool* v;
-};
-typedef struct cVarBoolSlice cVarBoolSlice;
-----
-
-{Slice}
+:Slice-Type: bool
+:Slice-Slice: cVarBoolSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

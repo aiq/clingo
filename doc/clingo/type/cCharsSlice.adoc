@@ -1,7 +1,7 @@
 = cCharsSlice
 :xmpldir: {testroot}/clingo/type/cCharsSlice
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -20,167 +20,15 @@ It is recommended to use cChars and cVarChars as alternative to a C-string.
 
 [id='cCharsSlice']
 ==== cCharsSlice
-[source,c]
-----
-struct cCharsSlice
-{
-   int64_t s;
-   char const* v;
-};
-typedef struct cCharsSlice cCharsSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cCharsSlice chars_slice_c( int64_t s, cChars const* v );
-cCharsSlice make_chars_slice_c( cChars const* beg, cChars const* end );
-cCharsSlice empty_chars_slice_c( void );
-/* sub */
-cCharsSlice left_chars_slice_c( cCharsSlice slice, int64_t maxLen );
-cCharsSlice mid_chars_slice_c( cCharsSlice slice, int64_t index );
-cCharsSlice right_chars_slice_c( cCharsSlice slice, int64_t maxLen );
-cCharsSlice sub_chars_slice_c( cCharsSlice slice,
-                               int64_t begIdx,
-                               int64_t endIdx );
-----
+:Slice-Type: cChars const
+:Slice-Slice: cCharsSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarCharsSlice']
 ==== cVarCharsSlice
-[source,c]
-----
-struct cVarCharsSlice
-{
-   int64_t s;
-   char* v;
-};
-typedef struct cVarCharsSlice cVarCharsSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarCharsSlice var_chars_slice_c( int64_t s, cChars* v );
-cVarCharsSlice make_var_chars_slice_c( cChars* beg, cChars* end );
-cVarCharsSlice empty_var_chars_slice_c( void );
-/* sub */
-cVarCharsSlice left_var_chars_slice_c( cVarCharsSlice slice, int64_t maxLen );
-cVarCharsSlice mid_var_chars_slice_c( cVarCharsSlice slice, int64_t index );
-cVarCharsSlice right_var_slice_chars_c( cVarCharsSlice slice, int64_t maxLen );
-cVarCharsSlice sub_var_chars_slice_c( cVarCharsSlice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx );
-/* var slice */
-cCharsSlice as_chars_slice_c( cVarCharsSlice slice );
-cVarCharsSlice cast_chars_slice_c( cVarCharsSlice slice, cCharsSlice sub );
-int64_t set_var_chars_slice_c( cVarCharsSlice dst, cChars src );
-----
-
-[id='cCharsChunk']
-==== cCharsChunk
-[source,c]
-----
-struct cCharsChunk
-{
-   int64_t s;
-   cChars const* v;
-   int64_t favSize;
-   cCharsSlice slice;
-};
-typedef struct cCharsChunk cCharsChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_chars_chunk_c( cCharsChunk chunk[static 1],
-                              int64_t s,
-                              cCharsSlice slice );
-void init_front_chars_chunk_c( cCharsChunk chunk[static 1],
-                               int64_t s,
-                               cCharsSlice slice );
-----
-
-[id='cVarCharsChunk']
-==== cVarCharsChunk
-[source,c]
-----
-struct cVarCharsChunk
-{
-   int64_t s;
-   cChars* v;
-   int64_t favSize;
-   cVarCharsSlice slice;
-};
-typedef struct cVarCharsChunk cVarCharsChunk;
-----
-
-{Chunk}
-
-[source,c]
-----
-void init_back_var_chars_chunk_c( cVarCharsChunk chunk[static 1],
-                                  int64_t s,
-                                  cVarCharsSlice slice );
-void init_front_var_chars_chunk_c( cVarCharsChunk chunk[static 1],
-                                   int64_t s,
-                                   cVarCharsSlice slice );
-----
-
-[id='cCharsWindow']
-==== cCharsWindow
-[source,c]
-----
-struct cCharsWindow
-{
-   int64_t s;
-   cChars const* v;
-   cCharsSlice slice;
-};
-typedef struct cCharsWindow cCharsWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_chars_window_c( cCharsWindow window[static 1],
-                               int64_t s,
-                               cCharsSlice slice );
-void init_front_chars_window_c( cCharsWindow window[static 1],
-                                int64_t s,
-                                cCharsSlice slice );
-----
-
-[id='cVarCharsWindow']
-==== cVarCharsWindow
-[source,c]
-----
-struct cVarCharsWindow
-{
-   int64_t s;
-   cChars* v;
-   cVarCharsSlice slice;
-};
-typedef struct cVarCharsWindow cVarCharsWindow;
-----
-
-{Window}
-
-[source,c]
-----
-void init_back_var_chars_window_c( cVarCharsWindow window[static 1],
-                                   int64_t s,
-                                   cVarCharsSlice slice );
-void init_front_var_chars_window_c( cVarCharsWindow window[static 1],
-                                    int64_t s,
-                                    cVarCharsSlice slice );
-----
+:Slice-Type: cChars
+:Slice-Slice: cVarCharsSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

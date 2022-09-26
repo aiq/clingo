@@ -1,7 +1,7 @@
 = cDate
 :xmpldir: ../../../test/clingo/time/cDate
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -31,65 +31,15 @@ The cDate struct has just the attribute _v that represent the date value.
 
 [id='cDateSlice']
 ==== cDateSlice
-[source,c]
-----
-struct cDateSlice
-{
-   int64_t s;
-   cDate const* v;
-};
-typedef struct cDateSlice cDateSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cDateSlice date_slice_c( int64_t s, cDate const* v );
-cDateSlice make_date_slice_c( cDate const* beg, cDate const* end );
-cDateSlice empty_date_slice_c( void );
-/* sub */
-cDateSlice left_date_slice_c( cDateSlice slice, int64_t maxLen );
-cDateSlice mid_date_slice_c( cDateSlice slice, int64_t index );
-cDateSlice right_date_slice_c( cDateSlice slice, int64_t maxLen );
-cDateSlice sub_date_slice_c( cDateSlice slice,
-                             int64_t begIdx,
-                             int64_t endIdx);
-----
+:Slice-Type: cDate const
+:Slice-Slice: cDateSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarDateSlice']
 ==== cVarDateSlice
-[source,c]
-----
-struct cVarDateSlice
-{
-   int64_t s;
-   cDate* v;
-};
-typedef struct cVarDateSlice cVarDateSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarDateSlice var_date_slice_c( int64_t s, cDate* v );
-cVarDateSlice make_var_date_slice_c( cDate* beg, cDate* end );
-cVarDateSlice empty_var_date_slice_c( void );
-/* sub */
-cVarDateSlice left_var_date_slice_c( cVarDateSlice slice, int64_t maxLen );
-cVarDateSlice mid_var_date_slice_c( cVarDateSlice slice, int64_t index );
-cVarDateSlice right_var_date_slice_c( cVarDateSlice slice, int64_t maxLen );
-cVarDateSlice sub_var_date_slice_c( cVarDateSlice slice,
-                                    int64_t begIdx,
-                                    int64_t endIdx);
-/* var slice */
-cVarDateSlice as_var_date_slice_c( cVarDateSlice slice );
-cVarDateSlice cast_var_date_slice_c( cVarDateSlice slice, cDateSlice sub );
-int64_t set_date_slice_c( cVarDateSlice dst, cDateSlice src );
-----
+:Slice-Type: cDate
+:Slice-Slice: cVarDateSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

@@ -1,7 +1,7 @@
 = cRune
 :xmpldir: {testroot}/clingo/type/cRune
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -47,31 +47,15 @@ c_check_rune is the signature of a function to check a rune value.
 
 [id='cRuneSlice]
 ==== cRuneSlice
-[source,c]
-----
-struct cRuneSlice
-{
-   int64_t s;
-   cRune const* v;
-};
-typedef struct cRuneSlice cRuneSlice;
-----
-
-{Slice}
+:Slice-Type: cRune const
+:Slice-Slice: cRuneSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarRuneSlice']
 ==== cVarRuneSlice
-[source,c]
-----
-struct cVarRuneSlice
-{
-   int64_t s;
-   cRune* v;
-};
-typedef struct cVarRuneSlice cVarRuneSlice;
-----
-
-{Slice}
+:Slice-Type: cRune
+:Slice-Slice: cVarRuneSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

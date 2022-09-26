@@ -1,7 +1,7 @@
 = cBytes
 :xmpldir: {testroot}/clingo/type/cBytes
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -20,31 +20,15 @@ It is recommended to use cBytes and cVarBytes for data buffer.
 
 [id='cBytes']
 ==== cBytes
-[source,c]
-----
-struct cBytes
-{
-   int64_t s;
-   cByte const* v;
-};
-typedef struct cBytes cBytes;
-----
-
-{Slice}
+:Slice-Type: cByte const
+:Slice-Slice: cBytes
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarBytes']
 ==== cVarBytes
-[source,c]
-----
-struct cVarBytes
-{
-   int64_t s;
-   cByte* v;
-};
-typedef struct cVarBytes cVarBytes;
-----
-
-{Slice}
+:Slice-Type: cByte
+:Slice-Slice: cVarBytes
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

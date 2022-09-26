@@ -1,0 +1,11 @@
+[source,c,subs=attributes+]
+----
+struct {Slice-Slice}
+{
+   int64_t s;
+   {Slice-Type}* v;
+};
+typedef struct {Slice-Slice} {Slice-Slice};
+----
+
+Via the macro link:{docroot}/clingo/lang/slice.html#SLICES_C_[SLICES_C_] declared struct.

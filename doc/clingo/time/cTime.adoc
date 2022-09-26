@@ -1,7 +1,7 @@
 = cTime
 :xmpldir: ../../../test/clingo/time/cTime
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -33,65 +33,15 @@ The cTime struct has just the attriibutes _s, _n and _z that represent the time.
 
 [id='cTimeSlice']
 ==== cTimeSlice
-[source,c]
-----
-struct cTimeSlice
-{
-   int64_t s;
-   cTime const* v;
-};
-typedef struct cTimeSlice cTimeSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cTimeSlice time_slice_c( int64_t s, cTime const* v );
-cTimeSlice make_time_slice_c( cTime const* beg, cTime const* end );
-cTimeSlice empty_time_slice_c( void );
-/* sub */
-cTimeSlice left_time_slice_c( cTimeSlice slice, int64_t maxLen );
-cTimeSlice mid_time_slice_c( cTimeSlice slice, int64_t index );
-cTimeSlice right_time_slice_c( cTimeSlice slice, int64_t maxLen );
-cTimeSlice sub_time_slice_c( cTimeSlice slice,
-                             int64_t begIdx,
-                             int64_t endIdx);
-----
+:Slice-Type: cTime const
+:Slice-Slice: cTimeSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarTimeSlice']
 ==== cVarTimeSlice
-[source,c]
-----
-struct cVarTimeSlice
-{
-   int64_t s;
-   cTime* v;
-};
-typedef struct cVarTimeSlice cVarTimeSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarTimeSlice var_time_slice_c( int64_t s, cTime* v );
-cVarTimeSlice make_var_time_slice_c( cTime* beg, cTime* end );
-cVarTimeSlice empty_var_time_slice_c( void );
-/* sub */
-cVarTimeSlice left_var_time_slice_c( cVarTimeSlice slice, int64_t maxLen );
-cVarTimeSlice mid_var_time_slice_c( cVarTimeSlice slice, int64_t index );
-cVarTimeSlice right_var_time_slice_c( cVarTimeSlice slice, int64_t maxLen );
-cVarTimeSlice sub_var_time_slice_c( cVarTimeSlice slice,
-                                    int64_t begIdx,
-                                    int64_t endIdx);
-/* var slice */
-cVarTimeSlice as_var_time_slice_c( cVarTimeSlice slice );
-cVarTimeSlice cast_var_time_slice_c( cVarTimeSlice slice, cTimeSlice sub );
-int64_t set_time_slice_c( cVarTimeSlice dst, cTimeSlice src );
-----
+:Slice-Type: cTime
+:Slice-Slice: cVarTimeSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

@@ -1,7 +1,7 @@
 = char
 :xmpldir: {testroot}/clingo/type/char
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview

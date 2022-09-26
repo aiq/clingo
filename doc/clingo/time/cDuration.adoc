@@ -1,7 +1,7 @@
 = cDuration
 :xmpldir: ../../../test/clingo/time/cDuration
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -40,70 +40,15 @@ It should not be accessd directly.
 
 [id='cDurationSlice']
 ==== cDurationSlice
-[source,c]
-----
-struct cDurationSlice
-{
-int64_t s;
-cDuration const* v;
-};
-typedef struct cDurationSlice cDurationSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cDurationSlice duration_slice_c( int64_t s, cDuration const* v );
-cDurationSlice make_duration_slice_c( cDuration const* beg,
-                                      cDuration const* end );
-cDurationSlice emtpy_duration_slice_c( void );
-/* sub */
-cDurationSlice left_duration_slice_c( cDurationSlice slice, int64_t maxLen );
-cDurationSlice mid_duration_slice_c( cDurationSlice slice, int64_t index );
-cDurationSlice right_duration_slice_c( cDurationSlice slice, int64_t maxLen );
-cDurationSlice sub_duration_slice_c( cDurationSlice slice,
-                                     int64_t begIdx,
-                                     int64_t endIdx);
-----
+:Slice-Type: cDuration const
+:Slice-Slice: cDurationSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarDurationSlice']
 ==== cVarDurationSlice
-[source,c]
-----
-struct cVarDurationSlice
-{
-int64_t s;
-cDuration* v;
-};
-typedef struct cVarDurationSlice cVarDurationSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarDurationSlice var_duration_slice_c( int64_t s, cDuration* v );
-cVarDurationSlice make_var_duration_slice_c( cDuration* beg, cDuration* end );
-cVarDurationSlice empty_var_duration_slice_c( void );
-/* sub */
-cVarDurationSlice left_var_duration_slice_c( cVarDurationSlice slice,
-                                             int64_t maxLen );
-cVarDurationSlice mid_var_duration_slice_c( cVarDurationSlice slice,
-                                            int64_t index );
-cVarDurationSlice right_var_duration_slice_c( cVarDurationSlice slice,
-                                           int64_t maxLen );
-cVarDurationSlice sub_var_duration_slice_c( cVarDurationSlice slice,
-                                            int64_t begIdx,
-                                            int64_t endIdx);
-/* var slice */
-cVarDurationSlice as_var_duration_slice_c( cVarDurationSlice slice );
-cVarDurationSlice cast_var_duration_slice_c( cVarDurationSlice slice,
-                                             cDurationSlice sub );
-int64_t set_duration_slice_c( cVarDurationSlice dst, cDurationSlice src );
-----
+:Slice-Type: cDuration
+:Slice-Slice: cVarDurationSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //***************************************************************** Definitions
 === Definitions

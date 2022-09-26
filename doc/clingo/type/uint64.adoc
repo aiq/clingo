@@ -1,7 +1,7 @@
 = uint64
 :xmpldir: {testroot}/clingo/type/uint64
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -20,31 +20,15 @@ Module with functions and types to work with uint64_t values.
 
 [id='cUint64Slice']
 ==== cUint64Slice
-[source,c]
-----
-struct cUint64Slice
-{
-   int64_t s;
-   uint64_t const* v;
-};
-typedef struct cUint64Slice cUint64Slice;
-----
-
-{Slice}
+:Slice-Type: uint64_t const
+:Slice-Slice: cUint64Slice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarUint64Slice']
 ==== cVarUint64Slice
-[source,c]
-----
-struct cVarUint64Slice
-{
-   int64_t s;
-   uint64_t* v;
-};
-typedef struct cVarUint64Slice cVarUint64Slice;
-----
-
-{Slice}
+:Slice-Type: uint64_t
+:Slice-Slice: cVarUint64Slice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

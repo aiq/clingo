@@ -1,7 +1,7 @@
 = uint8
 :xmpldir: {testroot}/clingo/type/uint8
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -20,31 +20,15 @@ Module with functions and types to work with uint8_t values.
 
 [id='cUint8Slice']
 ==== cUint8Slice
-[source,c]
-----
-struct cUint8Slice
-{
-   int64_t s;
-   uint8_t const* v;
-};
-typedef struct cUint8Slice cUint8Slice;
-----
-
-{Slice}
+:Slice-Type: uint8_t const
+:Slice-Slice: cUint8Slice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarUint8Slice']
 ==== cVarUint8Slice
-[source,c]
-----
-struct cVarUint8Slice
-{
-   int64_t s;
-   uint8_t* v;
-};
-typedef struct cVarUint8Slice cVarUint8Slice;
-----
-
-{Slice}
+:Slice-Type: uint8_t
+:Slice-Slice: cVarUint8Slice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

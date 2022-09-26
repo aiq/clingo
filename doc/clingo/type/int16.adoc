@@ -1,7 +1,7 @@
 = int16
 :xmpldir: {testroot}/clingo/type/int16
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -20,31 +20,15 @@ Module with functions and types to work with int16_t values.
 
 [id='cInt16Slice']
 ==== cInt16Slice
-[source,c]
-----
-struct cInt16Slice
-{
-   int64_t s;
-   int16_t const* v;
-};
-typedef struct cInt16Slice cInt16Slice;
-----
-
-{Slice}
+:Slice-Type: int16_t const
+:Slice-Slice: cInt16Slice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarInt16Slice']
 ==== cVarInt16Slice
-[source,c]
-----
-struct cVarInt16Slice
-{
-   int64_t s;
-   int16_t* v;
-};
-typedef struct cVarInt16Slice cVarInt16Slice;
-----
-
-{Slice}
+:Slice-Type: int16_t
+:Slice-Slice: cVarInt16Slice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

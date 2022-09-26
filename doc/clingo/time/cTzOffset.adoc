@@ -1,7 +1,7 @@
 = cTzOffset
 :xmpldir: ../../../test/clingo/time/cTzOffset
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -33,71 +33,15 @@ A cTzOffset value represents the offset of a time zone.
 
 [id='cTzOffsetSlice']
 ==== cTzOffsetSlice
-[source,c]
-----
-struct cTzOffsetSlice
-{
-int64_t s;
-cTzOffset const* v;
-};
-typedef struct cTzOffsetSlice cTzOffsetSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cTzOffsetSlice tz_offset_slice_c( int64_t s, cTzOffset const* v );
-cTzOffsetSlice make_tz_offset_slice_c( cTzOffset const* beg,
-                                       cTzOffset const* end );
-cTzOffsetSlice empty_tz_offset_slice_c( void );
-/* sub */
-cTzOffsetSlice left_tz_offset_slice_c( cTzOffsetSlice slice, int64_t maxLen );
-cTzOffsetSlice mid_tz_offset_slice_c( cTzOffsetSlice slice, int64_t index );
-cTzOffsetSlice right_tz_offset_slice_c( cTzOffsetSlice slice, int64_t maxLen );
-cTzOffsetSlice sub_tz_offset_slice_c( cTzOffsetSlice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx);
-----
+:Slice-Type: cTzOffset const
+:Slice-Slice: cTzOffsetSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarTzOffsetSlice']
 ==== cVarTzOffsetSlice
-[source,c]
-----
-struct cVarTzOffsetSlice
-{
-int64_t s;
-cTzOffset* v;
-};
-typedef struct cVarTzOffsetSlice cVarTzOffsetSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarTzOffsetSlice var_tz_offset_slice_c( int64_t s, cTzOffset* v );
-cVarTzOffsetSlice make_var_tz_offset_slice_c( cTzOffset* beg,
-                                              cTzOffset* end );
-cVarTzOffsetSlice empty_var_tz_offset_slice_c( void );
-/* sub */
-cVarTzOffsetSlice left_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
-                                              int64_t maxLen );
-cVarTzOffsetSlice mid_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
-                                             int64_t index );
-cVarTzOffsetSlice right_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
-                                               int64_t maxLen );
-cVarTzOffsetSlice sub_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
-                                             int64_t begIdx,
-                                             int64_t endIdx);
-/* var slice */
-cVarTzOffsetSlice as_var_tz_offset_slice_c( cVarTzOffsetSlice slice );
-cVarTzOffsetSlice cast_var_tz_offset_slice_c( cVarTzOffsetSlice slice,
-                                              cTzOffsetSlice sub );
-int64_t set_tz_offset_slice_c( cVarTzOffsetSlice dst, cTzOffsetSlice src );
-----
+:Slice-Type: cTzOffset
+:Slice-Slice: cVarTzOffsetSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

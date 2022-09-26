@@ -33,31 +33,15 @@ attributes hour, min, sec and nsec.
 
 [id='cHmsnSlice']
 ==== cHmsnSlice
-[source,c]
-----
-struct cHmsnSlice
-{
-   int64_t s;
-   cHmsn const* v;
-};
-typedef struct cHmsnSlice cHmsnSlice;
-----
-
-{Slice}
+:Slice-Type: cHmsn const
+:Slice-Slice: cHmsnSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarHmsnSlice']
 ==== cVarHmsnSlice
-[source,c]
-----
-struct cVarHmsnSlice
-{
-   int64_t s;
-   cHmsn* v;
-};
-typedef struct cVarHmsnSlice cVarHmsnSlice;
-----
-
-{Slice}
+:Slice-Type: cHsmn
+:Slice-Slice: cVarHmsnSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

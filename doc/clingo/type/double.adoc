@@ -1,7 +1,7 @@
 = double
 :xmpldir: {testroot}/clingo/type/double
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -35,31 +35,15 @@ cDoubleInfo represents the three sections of a double value.
 
 [id='cDoubleSlice']
 ==== cDoubleSlice
-[source,c]
-----
-struct cDoubleSlice
-{
-   int64_t s;
-   double const* v;
-};
-typedef struct cDoubleSlice cDoubleSlice;
-----
-
-{Slice}
+:Slice-Type: double const
+:Slice-Slice: cDoubleSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarDoubleSlice']
 ==== cVarDoubleSlice
-[source,c]
-----
-struct cVarDoubleSlice
-{
-   int64_t s;
-   double* v;
-};
-typedef struct cVarDoubleSlice cVarDoubleSlice;
-----
-
-{Slice}
+:Slice-Type: double
+:Slice-Slice: cVarDoubleSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

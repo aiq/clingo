@@ -1,12 +1,12 @@
 = cCmyk32
 :xmpldir: {testroot}/clingo/color/cCmyk32
 
+include::{docroot}/clingo/_tmpl/attr.adoc[]
+
 //******************************************************************************
 //******************************************************************** Overview
 //******************************************************************************
 == Overview
-
-
 
 //******************************************************************************
 //******************************************************* Types and Definitions
@@ -27,38 +27,22 @@ struct cCmyk32
 typedef struct cCmyk32 cCmyk32;
 ----
 
-
+The cCmyl32 struct can store a color from the CMYK color space in 32 bits.
 
 //******************************************************************* Generated
 === Generated
 
 [id='cCmyk32Slice']
 ==== cCmyk32Slice
-[source,c]
-----
-struct cCmyk32Slice
-{
-   int64_t s;
-   cCmyk32 const* v;
-};
-typedef struct cCmyk32Slice cCmyk32Slice;
-----
-
-{Slice}
+:Slice-Type: cCmyk32 const
+:Slice-Slice: cCmyk32Slice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarCmyk32Slice']
 ==== cVarCmyk32Slice
-[source,c]
-----
-struct cVarCmyk32Slice
-{
-   int64_t s;
-   cCmyk32* v;
-};
-typedef struct cVarCmyk32Slice cVarCmyk32Slice;
-----
-
-{Slice}
+:Slice-Type: cCmyk32
+:Slice-Slice: cVarCmyk32Slice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

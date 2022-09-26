@@ -1,7 +1,7 @@
 = cWeekDate
 :xmpldir: ../../../test/clingo/time/cWeekDate
 
-include::_attr.adoc[]
+include::{docroot}/clingo/_tmpl/attr.adoc[]
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -33,71 +33,15 @@ A cWeekDate struct represents a week date.
 
 [id='cWeekDateSlice']
 ==== cWeekDateSlice
-[source,c]
-----
-struct cWeekDateSlice
-{
-   int64_t s;
-   cWeekDate const* v;
-};
-typedef struct cWeekDate cWeekDate;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cWeekDateSlice week_date_slice_c( int64_t s, cWeekDate const* v );
-cWeekDateSlice make_week_date_slice_c( cWeekDate const* beg,
-                                       cWeekDate const* end );
-cWeekDateSlice empty_week_date_slice_c( void );
-/* sub */
-cWeekDateSlice left_week_date_slice_c( cWeekDateSlice slice, int64_t maxLen );
-cWeekDateSlice mid_week_date_slice_c( cWeekDateSlice slice, int64_t index );
-cWeekDateSlice right_week_date_slice_c( cWeekDateSlice slice, int64_t maxLen );
-cWeekDateSlice sub_week_date_slice_c( cWeekDateSlice slice,
-                                      int64_t begIdx,
-                                      int64_t endIdx );
-----
+:Slice-Type: cWeekDate const
+:Slice-Slice: cWeekDateSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 [id='cVarWeekDateSlice']
 ==== cVarWeekDateSlice
-[source,c]
-----
-struct cVarWeekDateSlice
-{
-   int64_t s;
-   cWeekDate* v;
-};
-typedef struct cVarWeekDateSlice cVarWeekDateSlice;
-----
-
-{Slice}
-
-[source,c]
-----
-/* init */
-cVarWeekDateSlice var_week_date_slice_c( int64_t s, cWeekDate* v );
-cVarWeekDateSlice make_var_week_date_slice_c( cWeekDate* beg,
-                                              cWeekDate* end );
-cVarWeekDateSlice empty_var_week_date_slice_c( void );
-/* sub */
-cVarWeekDateSlice left_var_week_date_slice_c( cVarWeekDateSlice slice,
-                                              int64_t maxLen );
-cVarWeekDateSlice mid_var_week_date_slice_c( cVarWeekDateSlice slice,
-                                             int64_t index );
-cVarWeekDateSlice right_var_week_date_slcie_c( cVarWeekDateSlice slice,
-                                               int64_t maxLen );
-cVarWeekDateSlice sub_var_week_date_slice_c( cVarWeekDateSlice slice,
-                                             int64_t begIdx,
-                                             int64_t endIdx );
-/* var slice */
-cWeekDateSlice as_week_date_slice_c( cVarWeekDateSlice slice );
-cVarWeekDateSlice cast_week_date_slice_c( cVarWeekDateSlice slice,
-                                          cWeekDateSlice sub );
-int64_t set_week_date_slice_c( cVarWeekDateSlice dst, cWeekDateSlice src );
-----
+:Slice-Type: cWeekDate
+:Slice-Slice: cVarWeekDateSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

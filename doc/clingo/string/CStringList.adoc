@@ -33,7 +33,7 @@ typedef struct CStringList CStringList;
 :ObjVec-VecType: CStringList
 :ObjVec-ObjType: CString
 :ObjVec-FuncSuffix: string_list_c
-include::../_tmpl/ObjVec.adoc[]
+include::{docroot}/clingo/_tmpl/ObjVec.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions
