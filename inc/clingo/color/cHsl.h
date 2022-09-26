@@ -21,7 +21,7 @@ struct cHsl
 
 typedef struct cHsl cHsl;
 
-SLICE_DEF_C_(
+SLICES_C_(
    cHsl,             // Type
    cHslSlice,        // SliceType
    cVarHslSlice      // VarSliceType

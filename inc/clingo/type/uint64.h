@@ -13,7 +13,7 @@
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    uint64_t,            // Type
    cUint64Slice,        // SliceType
    cVarUint64Slice      // VarSliceType

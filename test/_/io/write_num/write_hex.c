@@ -4,7 +4,7 @@
 #include "clingo/type/uint64.h"
 #include "clingo/type/uint8.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       uint64_t val;

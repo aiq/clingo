@@ -12,7 +12,7 @@ char const* str =
 "very long line 5\n"
 "\n";
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    line,
    {
       char const* str;

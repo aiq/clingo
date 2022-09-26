@@ -17,7 +17,7 @@
  type
 *******************************************************************************/
 
-#define SLICE_DEF_C_( Type, SliceType, VarSliceType )                          \
+#define SLICES_C_( Type, SliceType, VarSliceType )                             \
 struct SliceType                                                               \
 {                                                                              \
    int64_t s;                                                                  \
@@ -36,7 +36,7 @@ typedef struct VarSliceType VarSliceType;
  temp
 *******************************************************************************/
 
-#define TEMP_SLICE_DEF_C_( Entry, EntryStruct )                                \
+#define TEMP_SLICE_C_( Entry, EntryStruct )                                \
 struct Entry                                                                   \
 EntryStruct;                                                                   \
 typedef struct Entry Entry;                                                    \
@@ -47,7 +47,7 @@ struct Entry##Slice                                                            \
 };                                                                             \
 typedef struct Entry##Slice Entry##Slice;
 
-#define TEMP_VAR_SLICE_DEF_C_( Entry, EntryStruct )                            \
+#define TEMP_VAR_SLICE_C_( Entry, EntryStruct )                            \
 struct Entry                                                                   \
 EntryStruct;                                                                   \
 typedef struct Entry Entry;                                                    \

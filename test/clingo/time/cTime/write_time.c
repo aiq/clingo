@@ -2,7 +2,7 @@
 #include "clingo/time/C_TimeFormats.h"
 #include "clingo/time/cTime.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       cTime time;

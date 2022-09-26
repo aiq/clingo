@@ -3,7 +3,7 @@
 #include "clingo/time/c_Weekday.h"
 #include "clingo/type/cChars.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       c_Weekday wd;

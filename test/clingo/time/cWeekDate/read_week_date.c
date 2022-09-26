@@ -3,7 +3,7 @@
 #include "clingo/lang/locale.h"
 #include "clingo/time/cWeekDate.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       char const* inp;

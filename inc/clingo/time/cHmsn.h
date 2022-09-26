@@ -24,7 +24,7 @@ typedef struct cHmsn cHmsn;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cHmsn,            // Type
    cHmsnSlice,       // SliceType
    cVarHmsnSlice     // VarSliceType

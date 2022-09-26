@@ -20,7 +20,7 @@ typedef struct cTzOffset cTzOffset;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cTzOffset,              // Type
    cTzOffsetSlice,         // SliceType
    cVarTzOffsetSlice       // VarSliceType

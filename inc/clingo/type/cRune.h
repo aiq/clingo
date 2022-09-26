@@ -30,7 +30,7 @@ typedef bool ( *c_check_rune )( cRune r );
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cRune,            // Type
    cRuneSlice,       // SliceType
    cVarRuneSlice     // VarSliceType

@@ -21,7 +21,7 @@ typedef struct cDatePeriod cDatePeriod;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cDatePeriod,            // Type
    cDatePeriodSlice,       // SliceType
    cVarDatePeriodSlice     // VarSliceType

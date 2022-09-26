@@ -8,7 +8,7 @@
 ********************************************************* Types and Definitions
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cChars,        // Type
    cCharsSlice,   // SliceType
    cVarCharsSlice // VarSliceType

@@ -21,7 +21,7 @@ struct cRgb24
 };
 typedef struct cRgb24 cRgb24;
 
-SLICE_DEF_C_(
+SLICES_C_(
    cRgb24,           // Type
    cRgb24Slice,      // SliceType
    cVarRgb24Slice    // VarSliceType

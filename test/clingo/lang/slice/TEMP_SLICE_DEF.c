@@ -1,7 +1,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/lang/slice.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       char const* input;

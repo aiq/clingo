@@ -13,7 +13,7 @@
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    uint32_t,            // Type
    cUint32Slice,        // SliceType
    cVarUint32Slice      // VarSliceType

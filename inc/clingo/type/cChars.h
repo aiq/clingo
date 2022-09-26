@@ -14,7 +14,7 @@
 
 typedef int ( *c_check_char )( int c );
 
-SLICE_DEF_C_(
+SLICES_C_(
    char,       // Type
    cChars,     // SliceType
    cVarChars   // VarSliceType

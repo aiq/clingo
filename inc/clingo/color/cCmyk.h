@@ -20,7 +20,7 @@ struct cCmyk
 };
 typedef struct cCmyk cCmyk;
 
-SLICE_DEF_C_(
+SLICES_C_(
    cCmyk,            // Type
    cCmykSlice,       // SliceType
    cVarCmykSlice     // VarSliceType

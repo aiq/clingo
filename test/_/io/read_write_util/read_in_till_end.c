@@ -1,7 +1,7 @@
 #include "_/io/read_write_util.h"
 #include "clingo/lang/expect.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_
    test,
    {
       char const* inp;

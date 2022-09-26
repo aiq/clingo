@@ -11,7 +11,7 @@ struct Point
 
 typedef struct Point Point;
 
-SLICE_DEF_C_(
+SLICES_C_(
    Point,
    PointSlice,
    VarPointSlice

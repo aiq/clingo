@@ -45,21 +45,6 @@ typedef struct cHmsnSlice cHmsnSlice;
 
 {Slice}
 
-[source,c]
-----
-/* init */
-cHmsnSlice hmsn_slice_c( int64_t s, cHmsn const* v );
-cHmsnSlice make_hmsn_slice_c( cHmsn const* beg, cHmsn const* end );
-cHmsnSlice empty_hmsn_slice_c( void );
-/* sub */
-cHmsnSlice left_hmsn_slice_c( cHmsnSlice slice, int64_t maxLen );
-cHmsnSlice mid_hmsn_slice_c( cHmsnSlice slice, int64_t index );
-cHmsnSlice right_hmsn_slice_c( cHmsnSlice slice, int64_t maxLen );
-cHmsnSlice sub_hmsn_slice_c( cHmsnSlice slice,
-                             int64_t begIdx,
-                             int64_t endIdx);
-----
-
 [id='cVarHmsnSlice']
 ==== cVarHmsnSlice
 [source,c]
@@ -73,25 +58,6 @@ typedef struct cVarHmsnSlice cVarHmsnSlice;
 ----
 
 {Slice}
-
-[source,c]
-----
-/* init */
-cVarHmsnSlice var_hmsn_slice_c( int64_t s, cHmsn* v );
-cVarHmsnSlice make_var_hmsn_slice_c( cHmsn* beg, cHmsn* end );
-cVarHmsnSlice empty_var_hmsn_slice_c( void );
-/* sub */
-cVarHmsnSlice left_var_hmsn_slice_c( cVarHmsnSlice slice, int64_t maxLen );
-cVarHmsnSlice mid_var_hmsn_slice_c( cVarHmsnSlice slice, int64_t index );
-cVarHmsnSlice right_var_hmsn_slice_c( cVarHmsnSlice slice, int64_t maxLen );
-cVarHmsnSlice sub_var_hmsn_slice_c( cVarHmsnSlice slice,
-                                    int64_t begIdx,
-                                    int64_t endIdx);
-/* var slice */
-cVarHmsnSlice as_var_hmsn_slice_c( cVarHmsnSlice slice );
-cVarHmsnSlice cast_var_hmsn_slice_c( cVarHmsnSlice slice, cHmsnSlice sub );
-int64_t set_hmsn_slice_c( cVarHmsnSlice dst, cHmsnSlice src );
-----
 
 //******************************************************************************
 //******************************************************************* Functions

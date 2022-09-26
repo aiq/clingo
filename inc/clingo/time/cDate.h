@@ -25,7 +25,7 @@ typedef struct cDate cDate;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cDate,            // Type
    cDateSlice,       // SliceType
    cVarDateSlice    // VarSliceType

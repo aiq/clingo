@@ -19,7 +19,7 @@ struct cDoubleInfo
 };
 typedef struct cDoubleInfo cDoubleInfo;
 
-SLICE_DEF_C_(
+SLICES_C_(
    double,              // Type
    cDoubleSlice,        // SliceType
    cVarDoubleSlice      // VarSliceType

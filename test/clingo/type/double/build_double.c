@@ -2,7 +2,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/type/double.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       uint8_t s;

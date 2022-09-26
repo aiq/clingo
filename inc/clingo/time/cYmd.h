@@ -20,7 +20,7 @@ struct cYmd
 };
 typedef struct cYmd cYmd;
 
-SLICE_DEF_C_(
+SLICES_C_(
    cYmd,             // Type
    cYmdSlice,        // SliceType
    cVarYmdSlice      // VarSliceType

@@ -24,7 +24,7 @@ typedef struct cDaytime cDaytime;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cDaytime,            // Type
    cDaytimeSlice,       // SliceType
    cVarDaytimeSlice     // VarSliceType

@@ -21,7 +21,7 @@ typedef struct cDuration cDuration;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cDuration,           // Type
    cDurationSlice,      // SliceType
    cVarDurationSlice    // VarSliceType

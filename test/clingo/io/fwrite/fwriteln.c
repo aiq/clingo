@@ -2,7 +2,7 @@
 #include "clingo/io/fwrite.h"
 #include "clingo/lang/expect.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       bool res;

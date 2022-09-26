@@ -2,7 +2,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/string/CDictionary.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    input,
    {
       CString* k;

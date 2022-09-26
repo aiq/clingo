@@ -5,7 +5,7 @@
 
 #include <ctype.h>
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       char const* inp;

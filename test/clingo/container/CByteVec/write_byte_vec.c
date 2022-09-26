@@ -1,7 +1,7 @@
 #include "clingo/container/CByteVec.h"
 #include "clingo/lang/expect.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       CByteVec* vec;

@@ -111,7 +111,6 @@ bool write_month_day_c( cRecorder rec[static 1],
       else
       {
          res = intl_write_time_seperator_c( rec, fmtSca );
-         fmtSca->pos - mark;
       }
 
       if ( not res )

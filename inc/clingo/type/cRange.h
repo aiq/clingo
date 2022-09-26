@@ -26,7 +26,7 @@ typedef struct cRange cRange;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cRange,           // Type
    cRangeSlice,      // SliceType
    cVarRangeSlice    // VarSliceType

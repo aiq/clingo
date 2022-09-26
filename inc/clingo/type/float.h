@@ -20,7 +20,7 @@ struct cFloatInfo
 };
 typedef struct cFloatInfo cFloatInfo;
 
-SLICE_DEF_C_(
+SLICES_C_(
    float,               // Type
    cFloatSlice,         // SliceType
    cVarFloatSlice       // VarSliceType

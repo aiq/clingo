@@ -10,7 +10,7 @@
 ********************************************************* Types and Definitions
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cByte,         // Type
    cBytes,        // SliceType
    cVarBytes      // VarSliceType

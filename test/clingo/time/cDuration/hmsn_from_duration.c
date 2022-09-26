@@ -1,7 +1,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/time/cDuration.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       cDuration dur;

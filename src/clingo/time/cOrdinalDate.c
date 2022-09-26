@@ -111,7 +111,6 @@ bool read_ordinal_date_c( cScanner sca[static 1],
       else
       {
          res = intl_read_time_seperator_c( sca, fmtSca );
-         fmtSca->pos - mark;
       }
 
       if ( not res )
@@ -161,7 +160,6 @@ bool write_ordinal_date_c( cRecorder rec[static 1],
       else
       {
          res = intl_write_time_seperator_c( rec, fmtSca );
-         fmtSca->pos - mark;
       }
 
       if ( not res )

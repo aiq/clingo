@@ -32,7 +32,7 @@ struct cColor
 };
 typedef struct cColor cColor;
 
-SLICE_DEF_C_(
+SLICES_C_(
    cColor,           // Type
    cColorSlice,      // SliceType
    cVarColorSlice    // VarSliceType

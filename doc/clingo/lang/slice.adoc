@@ -71,11 +71,11 @@ include::{xmpldir}/SET_SLICE.c[]
 //************************************************************************ type
 === type
 
-[id='SLICE_DEF_C_']
-==== SLICE_DEF_C_
+[id='SLICES_C_']
+==== SLICES_C_
 [source,c]
 ----
-#define SLICE_DEF_C_( Type, SliceType, VarSliceType )
+#define SLICES_C_( Type, SliceType, VarSliceType )
 ----
 
 Generates two slices for sequences with Type values.
@@ -85,7 +85,7 @@ sequences.
 The following call can be used in a .h or .c file.
 [source,c]
 ----
-SLICE_DEF_C_(
+SLICES_C_(
    int8_t,        // Type
    cInt8Slice,    // SliceType
    cVarInt8Slice  // VarSliceType
@@ -95,11 +95,11 @@ SLICE_DEF_C_(
 //************************************************************************ type
 === type
 
-[id='TEMP_SLICE_DEF_C_']
-==== TEMP_SLICE_DEF_C_
+[id='TEMP_SLICE_C_']
+==== TEMP_SLICE_C_
 [source,c]
 ----
-#define TEMP_SLICE_DEF_C_( Entry, EntryStruct )
+#define TEMP_SLICE_C_( Entry, EntryStruct )
 ----
 
 Generates a struct with the name Entry and a slice with the composed name
@@ -112,11 +112,11 @@ The Entry struct will have the in EntryStruct defined structure.
 include::{xmpldir}/TEMP_SLICE_DEF.c[]
 ----
 
-[id='TEMP_VAR_SLICE_DEF_C_']
-==== TEMP_VAR_SLICE_DEF_C_
+[id='TEMP_VAR_SLICE_C_
+==== TEMP_VAR_SLICE_C_
 [source,c]
 ----
-#define TEMP_VAR_SLICE_DEF_C_( Entry, EntryStruct )
+#define TEMP_VAR_SLICE_C_( Entry, EntryStruct )
 ----
 
 Generates a struct with the name Entry and a var slice with the composed name

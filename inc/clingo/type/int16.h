@@ -13,7 +13,7 @@
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    int16_t,             // Type
    cInt16Slice,         // SliceType
    cVarInt16Slice       // VarSliceType

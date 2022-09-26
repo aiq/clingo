@@ -1,7 +1,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/io/write_type.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       uint32_t val;

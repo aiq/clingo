@@ -28,7 +28,7 @@ typedef struct cTime cTime;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cTime,            // Type
    cTimeSlice,       // SliceType
    cVarTimeSlice     // VarSliceType

@@ -128,7 +128,6 @@ bool read_hmsn_c( cScanner sca[static 1],
       else
       {
          res = intl_read_time_seperator_c( sca, fmtSca );
-         fmtSca->pos - mark;
       }
 
       if ( not res )

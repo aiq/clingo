@@ -1,7 +1,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/time/c_Month.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       c_Month month;

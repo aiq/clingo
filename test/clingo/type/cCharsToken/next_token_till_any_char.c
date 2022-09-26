@@ -2,7 +2,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/type/cCharsToken.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       char const* text;

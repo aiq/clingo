@@ -2,7 +2,7 @@
 #include "clingo/lang/locale.h"
 #include "clingo/time/cMonthDay.h"
 
-TEMP_SLICE_DEF_C_(
+TEMP_SLICE_C_(
    test,
    {
       cMonthDay md;

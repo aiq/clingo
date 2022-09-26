@@ -20,7 +20,7 @@ typedef struct cTimestamp cTimestamp;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cTimestamp,             // Type
    cTimestampSlice,        // SliceType
    cVarTimestampSlice      // VarSliceType

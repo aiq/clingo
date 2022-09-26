@@ -12,7 +12,7 @@
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    int8_t,           // Type
    cInt8Slice,       // SliceType
    cVarInt8Slice     // VarSliceType

@@ -23,7 +23,7 @@ typedef struct cMonthDay cMonthDay;
  generated
 *******************************************************************************/
 
-SLICE_DEF_C_(
+SLICES_C_(
    cMonthDay,              // Type
    cMonthDaySlice,         // SliceType
    cVarMonthDaySlice       // VarSliceType
