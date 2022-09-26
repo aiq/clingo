@@ -30,26 +30,7 @@ struct CObjectVec;
 typedef struct CObjectVec CObjectVec;
 ----
 
-Via the macros link:vec.html#VAL_VEC_DEF_C_[VAL_VEC_DEF_C_] and
-link:vec.html#VAL_VEC_IMPL_C_[VAL_VEC_IMPL_C_] declared and implemented struct.
-The macros declare and implement also the following globals and functions.
-
-[source,c]
-----
-cMeta const C_ByteVecMeta;
-/* create */
-CObjectVec* make_object_vec_c( int64_t cap );
-CObjectVec* new_object_vec_c();
-/* manage */
-CObject* const* data_of_object_vec_c( CObjectVec const* vec );
-CObject** var_data_of_object_vec_c( CObjectVec* vec );
-bool resize_object_vec_c( CObjectVec* vec, int64_t cap );
-cVecInfo const* info_of_object_vec_c( CObjectVec const* vec );
-/* api */
-bool add_to_object_vec_c( CObjectVec* vec, CObject* val );
-bool add_array_to_object_vec_c( CObjectVec* vec, int64_t n, CObject* const* arr );
-CObject* get_from_object_vec_c( CObjectVec const* vec, int64_t pos );
-bool insert_into_object_vec_c( CObjectVec* vec, int64_t pos, CObject* val );
-bool remove_from_object_vec_c( CObjectVec* vec, int64_t pos );
-void set_on_object_vec_c( CObjectVec* vec, int64_t pos, cByte val );
-----
+:ObjVec-VecType: CObjectVec
+:ObjVec-ObjType: CObject
+:ObjVec-FuncSuffix: object_vec_c
+include::{docroot}/clingo/_tmpl/ObjVec.adoc[]

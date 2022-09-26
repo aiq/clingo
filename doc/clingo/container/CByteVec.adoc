@@ -30,30 +30,10 @@ struct CByteVec;
 typedef struct CByteVec CByteVec;
 ----
 
-Via the macros link:vec.html#VAL_VEC_DEF_C_[VAL_VEC_DEF_C_] and
-link:vec.html#VAL_VEC_IMPL_C_[VAL_VEC_IMPL_C_] declared and implemented struct.
-The macros declare and implement also the following globals and functions.
-
-[source,c]
-----
-cMeta const C_ByteVecMeta;
-/* create */
-CByteVec* make_byte_vec_c( int64_t cap );
-CByteVec* new_byte_vec_c();
-/* manage */
-cByte const* data_of_byte_vec_c( CByteVec const* vec );
-cByte* var_data_of_byte_vec_c( CByteVec* vec );
-bool resize_byte_vec_c( CByteVec* vec, int64_t cap );
-cVecInfo const* info_of_byte_vec_c( CByteVec const* vec );
-/* api */
-cByte* access_byte_vec_c( CByteVec* vec, int64_t pos );
-bool add_to_byte_vec_c( CByteVec* vec, cByte val );
-bool add_array_to_byte_vec_c( CByteVec* vec, int64_t n, cByte const* arr );
-cByte const* get_from_byte_vec_c( CByteVec const* vec, int64_t pos );
-bool insert_into_byte_vec_c( CByteVec* vec, int64_t pos, cByte val );
-bool remove_from_byte_vec_c( CByteVec* vec, int64_t post );
-void set_on_byte_vec_c( CByteVec* vec, int64_t pos, cByte val );
-----
+:ValVec-VecType: CByteVec
+:ValVec-ValType: cByte
+:ValVec-FuncSuffix: byte_vec_c
+include::{docroot}/clingo/_tmpl/ValVec.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

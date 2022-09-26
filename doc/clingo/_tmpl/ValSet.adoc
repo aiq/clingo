@@ -1,0 +1,22 @@
+Via the macros link:{docroot}/clingo/container/set.html#VAL_SET_DEF_C_[VAL_SET_DEF_C_] and
+link:{docroot}/clingo/container/set.html#VAL_SET_IMPL_C_[VAL_SET_IMPL_C_] declared and
+implemented struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c]
+----
+/* create */
+{ValSet-SetType}* make_{ValSet-FuncSuffix}( int64_t size, float maxLoadFactor );
+{ValSet-SetType}* new_{ValSet-FuncSuffix}( void );
+/* manage */
+cSetInfo const* info_of_{ValSet-FuncSuffix}( {ValSet-SetType} const* set );
+bool resize_{ValSet-FuncSuffix}( {ValSet-SetType}* set, int64_t cap );
+bool set_max_load_of_{ValSet-FuncSuffix}( {ValSet-SetType}* set );
+/* api */
+bool in_{ValSet-FuncSuffix}( {ValSet-SetType}* set, {ValSet-ValType} val );
+cSetItr next_in_{ValSet-FuncSuffix}( {ValSet-SetType} const* set,
+                             cSetItr itr,
+                             {ValSet-ValType} const* val[static 1] );
+bool remove_from_{ValSet-FuncSuffix}( {ValSet-SetType}* set, {ValSet-ValType} val );
+bool set_on_{ValSet-FuncSuffix}( {ValSet-SetType}* set, {ValSet-ValType} val );
+----

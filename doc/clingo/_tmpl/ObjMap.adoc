@@ -1,0 +1,31 @@
+Via the macros link:{docroot}/clingo/container/map.html#OBJ_OBJ_MAP_DEF_C_[OBJ_OBJ_MAP_DEF_C_] and
+link:{docroot}/clingo/container/map.html#OBJ_OBJ_MAP_IMPL_C_[OBJ_OBJ_MAP_IMPL_C_] declared and implemented
+struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c,subs=attributes+]
+----
+/* create */
+{ObjMap-MapType}* make_{ObjMap-FuncSuffix}( int64_t size, float maxLoad );
+{ObjMap-MapType}* new_{ObjMap-FuncSuffix}( void );
+/* manage */
+cMapInfo const* info_of_{ObjMap-FuncSuffix}( {ObjMap-MapType} const* map );
+bool resize_{ObjMap-FuncSuffix}( {ValMap-MapType}* map, int64_t cap );
+bool set_max_load_of_{ObjMap-FuncSuffix}( {ObjMap-MapType}* map, float maxLoad );
+/* iterate */
+cMapItr next_in_{ObjMap-FuncSuffix}( {ObjMap-MapType} const* map,
+                             cMapItr itr,
+                             {ObjMap-KeyType} const* key[static 1],
+                             {ObjMap-ValType} const* val[static 1 ]);
+cMapItr next_var_in_{ObjMap-FuncSuffix}( {ObjMap-MapType}* map,
+                                 cMapItr itr,
+                                 {ObjMap-KeyType} const* key[static 1],
+                                 {ObjMap-ValType}* val[static 1 ]);
+/* api */
+{ObjMap-ValType}* get_from_{ObjMap-FuncSuffix}( {ObjMap-MapType} const* map, {ValMap-KeyType} const* key );
+bool in_{ObjMap-FuncSuffix}( {ObjMap-MapType} const* map, {ObjMap-KeyType} const* key );
+bool remove_from_{ObjMap-FuncSuffix}( {ObjMap-MapType}* map, {ObjMap-KeyType} const* key );
+bool set_on_{ObjMap-FuncSuffix}( {ObjMap-MapType}* map,
+                         {ObjMap-KeyType}* key,
+                         {ObjMap-ValType}* val );
+----

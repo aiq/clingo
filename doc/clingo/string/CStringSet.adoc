@@ -30,27 +30,10 @@ struct CStringSet;
 typedef struct CStringSet CStringSet;
 ----
 
-Via the macros link:../container/set.html#OBJ_SET_DEF_C_[OBJ_SET_DEF_C_] and
-link:../container/set.html#OBJ_SET_IMPL_C_[OBJ_SET_IMPL_C_] declared and
-implemented struct.
-The macros declare and implement also the following globals and functions.
-
-[source,c]
-----
-cMeta const C_StringSetMeta;
-/* create */
-CStringSet* make_string_set_c( int64_t size, float maxLoad );
-CStringSet* new_string_set_c();
-/* manage */
-cSetInfo const* info_of_string_set_c( CStringSet const* set );
-bool resize_string_set_c( CStringSet* set, int64_t size );
-bool set_max_load_of_string_set_c( CStringSet* set, float maxLoad );
-/* api */
-bool in_string_set_c( CStringSet const* set, CString const* str );
-bool next_in_string_set_c( CStringSet const* set, cSetItr itr[static 1] );
-bool remove_from_string_set_c( CStringSet* set, CString const* str );
-bool set_on_string_set_c( CStringSet* set, CString* str );
-----
+:ObjSet-SetType: CStringSet
+:ObjSet-ObjType: CString
+:ObjSet-FuncSuffix: string_set_c
+include::{docroot}/clingo/_tmpl/ObjSet.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

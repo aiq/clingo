@@ -1,0 +1,32 @@
+Via the macros link:{docroot}/clingo/container/map.html#VAL_VAL_MAP_DEF_C_[VAL_VAL_MAP_DEF_C_] and
+link:{docroot}/clingo/container/map.html#VAL_VAL_MAP_IMPL_C_[VAL_VAL_MAP_IMPL_C_] declared and implemented
+struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c,subs=attributes+]
+----
+/* create */
+{ValMap-MapType}* make_{ValMap-FuncSuffix}( int64_t size, float maxLoad );
+{ValMap-MapType}* new_{ValMap-FuncSuffix}( void );
+/* manage */
+cMapInfo const* info_of_{ValMap-FuncSuffix}( {ValMap-MapType} const* map );
+bool resize_{ValMap-FuncSuffix}( {ValMap-MapType}* map, int64_t cap );
+bool set_max_load_of_{ValMap-FuncSuffix}( {ValMap-MapType}* map, float maxLoad );
+/* iterate */
+cMapItr next_in_{ValMap-FuncSuffix}( {ValMap-MapType} const* map,
+                             cMapItr itr,
+                             {ValMap-KeyType} const* key[static 1],
+                             {ValMap-ValType} const* val[static 1 ]);
+cMapItr next_var_in_{ValMap-FuncSuffix}( {ValMap-MapType}* map,
+                                 cMapItr itr,
+                                 {ValMap-KeyType} const* key[static 1],
+                                 {ValMap-ValType}* val[static 1 ]);
+/* api */
+{ValMap-ValType} const* get_from_{ValMap-FuncSuffix}( {ValMap-MapType}* map, {ValMap-KeyType} const* key );
+{ValMap-ValType}* get_var_from_{ValMap-FuncSuffix}( {ValMap-MapType}* map, {ValMap-KeyType} const* key );
+bool in_{ValMap-FuncSuffix}( {ValMap-MapType} const* map, {ValMap-KeyType}* key );
+bool remove_from_{ValMap-FuncSuffix}( {ValMap-MapType}* map, {ValMap-KeyType}* key );
+bool set_on_{ValMap-FuncSuffix}( {ValMap-MapType}* map,
+                         {ValMap-KeyType}* key,
+                         {ValMap-ValType}* val );
+----

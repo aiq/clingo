@@ -416,7 +416,7 @@ typedef struct MapType MapType;                                                \
 LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
 LibApi MapType* make_##FuncSuffix( int64_t size, float maxLoad );                     \
-LibApi MapType* new_##FuncSuffix();                                                   \
+LibApi MapType* new_##FuncSuffix( void );                                      \
 /**************************************/                                       \
 LibApi cMapInfo const* info_of_##FuncSuffix( MapType const* map );                    \
 LibApi bool resize_##FuncSuffix( MapType* map, int64_t size );                        \
@@ -558,7 +558,7 @@ typedef struct MapType MapType;                                                \
 LibApi extern cMeta const Meta;                                                       \
 /**************************************/                                       \
 LibApi MapType* make_##FuncSuffix( int64_t size, float maxLoad );                     \
-LibApi MapType* new_##FuncSuffix();                                                   \
+LibApi MapType* new_##FuncSuffix( void );                                      \
 /**************************************/                                       \
 LibApi cMapInfo const* info_of_##FuncSuffix( MapType const* map );                    \
 LibApi bool resize_##FuncSuffix( MapType* map, int64_t size );                        \

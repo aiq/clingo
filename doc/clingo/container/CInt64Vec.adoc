@@ -30,30 +30,10 @@ struct CInt64Vec;
 typedef struct CInt64Vec CInt64Vec;
 ----
 
-Via the macros link:vec.html#VAL_VEC_DEF_C_[VAL_VEC_DEF_C_] and
-link:vec.html#VAL_VEC_IMPL_C_[VAL_VEC_IMPL_C_] declared and implemented struct.
-The macros declare and implement also the following globals and functions.
-
-[source,c]
-----
-cMeta const C_Int64VecMeta;
-/* create */
-CInt64Vec* make_int64_vec_c( int64_t cap );
-CInt64Vec* new_int64_vec_c();
-/* manage */
-int64_t const* data_of_int64_vec_c( CInt64Vec const* vec );
-cVecInfo const* info_of_int64_vec_c( CInt64Vec const* vec );
-bool resize_int64_vec_c( CInt64Vec* vec, int64_t cap );
-int64_t* var_data_of_int64_vec_c( CInt64Vec* vec );
-/* api */
-bool add_to_int64_vec_c( CInt64Vec* vec, int64_t val );
-bool add_array_to_int64_vec_c( CInt64Vec* vec, int64_t n, int64_t const* arr );
-int64_t const* get_from_int64_vec_c( CInt64Vec const* vec, int64_t pos );
-int64_t* get_var_from_int64_vec_c( CInt64Vec* vec, int64_t pos );
-bool insert_into_int64_vec_c( CInt64Vec* vec, int64_t pos, int64_t val );
-bool remove_from_int64_vec_c( CInt64Vec* vec, int64_t pos );
-void set_on_int64_vec_c( CInt64Vec* vec, int64_t pos, int64_t val );
-----
+:ValVec-VecType: CInt64Vec
+:ValVec-ValType: int64_t
+:ValVec-FuncSuffix: int64_vec_c
+include::{docroot}/clingo/_tmpl/ValVec.adoc[]
 
 //********************************************************************* overall
 === overall

@@ -1,0 +1,20 @@
+Via the macros link:{docroot}/clingo/container/set.html#OBJ_SET_DEF_C_[OBJ_SET_DEF_C_] and
+link:{docroot}/clingo/container/set.html#OBJ_SET_IMPL_C_[OBJ_SET_IMPL_C_] declared and
+implemented struct.
+The macros declare and implement also the following globals and functions.
+
+[source,c,subs=attributes+]
+----
+/* create */
+{ObjSet-SetType}* make_{ObjSet-FuncSuffix}( int64_t size, float maxLoad );
+{ObjSet-SetType}* new_{ObjSet-FuncSuffix}( void );
+/* manage */
+cSetInfo const* info_of_{ObjSet-FuncSuffix}( {ObjSet-SetType} const* set );
+bool resize_{ObjSet-FuncSuffix}( {ObjSet-SetType}* set, int64_t size );
+bool set_max_load_of_{ObjSet-FuncSuffix}( {ObjSet-SetType}* set, float maxLoad );
+/* api */
+bool in_{ObjSet-FuncSuffix}( {ObjSet-SetType} const* set, {ObjSet-ObjType} const* str );
+bool next_in_{ObjSet-FuncSuffix}( {ObjSet-SetType} const* set, cSetItr itr[static 1] );
+bool remove_from_{ObjSet-FuncSuffix}( {ObjSet-SetType}* set, {ObjSet-ObjType} const* str );
+bool set_on_{ObjSet-FuncSuffix}( {ObjSet-SetType}* set, {ObjSet-ObjType}* str );
+----

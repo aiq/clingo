@@ -30,36 +30,8 @@ struct CInt64Map;
 typedef struct CInt64Map CInt64Map;
 ----
 
-Via the macros link:vec.html#VAL_VAL_MAP_DEF_C_[VAL_VAL_MAP_DEF_C_] and
-link:vec.html#VAL_VAL_MAP_IMPL_C_[VAL_VAL_MAP_IMPL_C_] declared and implemented
-struct.
-The macros declare and implement also the following globals and functions.
-
-[source,c]
-----
-cMeta const C_Int64MapMeta;
-/* create */
-CInt64Map* make_int64_map_c( int64_t size, float maxLoad );
-CInt64Map* new_int64_map_c();
-/* manage */
-cMapInfo const* info_of_int64_map_c( CInt64Map const* map );
-bool resize_int64_map_c( CInt64Map* map, int64_t cap );
-bool set_max_load_of_int64_map_c( CInt64Map* map, float maxLoad );
-/* iterate */
-cMapItr next_in_int64_map_c( CInt64Map const* map,
-                             cMapItr itr,
-                             int64_t const* key[static 1],
-                             int64_t const* val[static 1 ]);
-cMapItr next_var_in_int64_map_c( CInt64Map* map,
-                                 cMapItr itr,
-                                 int64_t const* key[static 1],
-                                 int64_t* val[static 1 ]);
-/* api */
-int64_t const* get_from_int64_map_c( CInt64Map const* map, int64_t const* key );
-bool in_int64_map_c( CInt64Map const* map, int64_t const* key );
-bool remove_from_int64_map_c( CInt64Map* map, int64_t const* key );
-bool set_on_int64_map_c( CInt64Map* map,
-                         int64_t const* key,
-                         int64_t const* val );
-----
-
+:ValMap-MapType: CInt64Map
+:ValMap-KeyType: int64_t
+:ValMap-ValType: int64_t
+:ValMap-FuncSuffix: int64_map_c
+include::{docroot}/clingo/_tmpl/ValMap.adoc[]

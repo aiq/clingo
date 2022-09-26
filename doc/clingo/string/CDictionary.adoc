@@ -30,30 +30,11 @@ struct CDictionary;
 typedef struct CDictionary CDictionary;
 ----
 
-Via the macros link:../container/map.html#OBJ_OBJ_MAP_DEF_C_[OBJ_OBJ_MAP_DEF_C_]
-and link:../container/map.html#OBJ_OBJ_MAP_IMPL_C_[OBJ_OBJ_MAP_IMPL_C_] declared
-and implemented struct.
-The macros declare and implement also the following globals and functions.
-
-[source,c]
-----
-cMeta const C_DictionaryMeta;
-/* create */
-CDictionary* make_dictionary_c( int64_t size, float maxLoad );
-CDictionary* new_dictionary_c();
-/* manage */
-cMapInfo const* info_of_dictionary_c( CDictionary const* map );
-bool resize_dictionary_c( CDictionary* map, int64_t cap );
-bool set_max_load_of_dictionary_c( CDictionary* map, float maxLoad );
-/* iterate */
-bool next_in_dictionary_c( CDictionary const* map, cMapItr itr[static 1] );
-bool next_var_in_dictionary_c( CDictionary* map, cVarMapItr itr[static 1] );
-/* api */
-int64_t const* get_from_dictionary_c( CDictionary const* map, int64_t const* key );
-bool in_dictionary_c( CDictionary const* map, int64_t const* key );
-bool remove_from_dictionary_c( CDictionary* map, int64_t const* key );
-bool set_on_dictionary_c( CDictionary* map, int64_t const* key, int64_t const* val );
-----
+:ObjMap-MapType: CDictionary
+:ObjMap-KeyType: CString
+:ObjMap-ValType: CString
+:ObjMap-FuncSuffix: dictionary_c
+include::{docroot}/clingo/_tmpl/ObjMap.adoc[]
 
 //******************************************************************************
 //******************************************************************* Functions

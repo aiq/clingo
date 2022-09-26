@@ -79,7 +79,7 @@ typedef struct SetType SetType;                                                \
 LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
 LibApi SetType* make_##FuncSuffix( int64_t size, float maxLoad );              \
-LibApi SetType* new_##FuncSuffix();                                            \
+LibApi SetType* new_##FuncSuffix( void );                                      \
 /**************************************/                                       \
 LibApi cSetInfo const* info_of_##FuncSuffix( SetType const* set );             \
 LibApi bool resize_##FuncSuffix( SetType* set, int64_t size );                 \
