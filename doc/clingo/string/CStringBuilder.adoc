@@ -1,5 +1,5 @@
 = CStringBuilder
-:xmpldir: ../../../test/clingo/string/CStringBuilder
+:xmpldir: {testroot}/clingo/string/CStringBuilder
 
 //******************************************************************************
 //******************************************************************** Overview

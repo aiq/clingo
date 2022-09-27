@@ -1,5 +1,5 @@
+#include "clingo/lang/algo.h"
 #include "clingo/lang/expect.h"
-#include "clingo/lang/slice.h"
 #include "clingo/type/cChars.h"
 
 #define expect_cs_( VarChars, Exp )                                            \

@@ -5,11 +5,12 @@
 #include "clingo/lang/func.h"
 #include "clingo/lang/math.h"
 #include "clingo/lang/mem.h"
+#include "clingo/lang/slice.h"
 
 /*******************************************************************************
-******************************************************** Code Generation Macros 
+********************************************************* Types and Definitions 
 ********************************************************************************
- init
+ type
 *******************************************************************************/
 
 struct cPixel
@@ -18,6 +19,18 @@ struct cPixel
    int32_t y;
 };
 typedef struct cPixel cPixel;
+
+SLICES_C_(
+   cPixel,           // Type
+   cPixelSlice,      // SliceType
+   cVarPixelSlice    // VarSliceType
+)
+
+/*******************************************************************************
+******************************************************** Code Generation Macros 
+********************************************************************************
+ init
+*******************************************************************************/
 
 #define IMAGES_C_( ImageType, VarImageType )                                   \
 struct ImageType                                                               \

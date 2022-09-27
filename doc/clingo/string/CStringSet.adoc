@@ -1,5 +1,5 @@
 = CStringSet
-:xmpldir: ../../../test/clingo/string/CStringSet
+:xmpldir: {testroot}/clingo/string/CStringSet
 
 //******************************************************************************
 //******************************************************************** Overview

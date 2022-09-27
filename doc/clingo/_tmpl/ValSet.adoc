@@ -3,7 +3,7 @@ link:{docroot}/clingo/container/set.html#VAL_SET_IMPL_C_[VAL_SET_IMPL_C_] declar
 implemented struct.
 The macros declare and implement also the following globals and functions.
 
-[source,c]
+[source,c,subs=attributes+]
 ----
 /* create */
 {ValSet-SetType}* make_{ValSet-FuncSuffix}( int64_t size, float maxLoadFactor );

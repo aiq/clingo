@@ -297,67 +297,6 @@ int64_t FuncName( SliceType slice, SliceType sub )                             \
  manipulate
 *******************************************************************************/
 
-#define INSERT_SLICE_C_(                                                       \
-   FuncName, VarSliceType, SliceType                                           \
-)                                                                              \
-int64_t FuncName( VarSliceType dst, int64_t index, SliceType src )             \
-{                                                                              \
-   if ( not valid_index_c_( dst, index ) )                                     \
-   {                                                                           \
-      return 0;                                                                \
-   }                                                                           \
-                                                                               \
-   if ( is_empty_c_( src ) )                                                   \
-   {                                                                           \
-      return 0;                                                                \
-   }                                                                           \
-                                                                               \
-   VarSliceType mid = (VarSliceType){ .s=dst.s-index, .v=dst.v+index };        \
-                                                                               \
-   if ( mid.s > src.s )                                                        \
-   {                                                                           \
-      VarSliceType tail = (VarSliceType){ .s=mid.s-src.s, .v=mid.v+src.s };    \
-      size_t size;                                                             \
-      if ( not int64_to_size_c( min_c_( tail.s, mid.s ), &size ) ) return 0;   \
-                                                                               \
-      memmove( tail.v, mid.v, size );                                          \
-   }                                                                           \
-                                                                               \
-   int64_t const n = min_c_( mid.s, src.s );                                   \
-   size_t size;                                                                \
-   if ( not int64_to_size_c( n, &size ) ) return 0;                            \
-                                                                               \
-   memmove( mid.v, src.v, size );                                              \
-   return n;                                                                   \
-}
-
-/******************************************************************************/
-
-#define INSERT_VAL_C_(                                                         \
-   FuncName, VarSliceType, ValueType, InsertType, DoDeref                      \
-)                                                                              \
-int64_t FuncName( VarSliceType slice, int64_t index, InsertType val )          \
-{                                                                              \
-   if ( not valid_index_c_( slice, index ) )                                   \
-   {                                                                           \
-      return 0;                                                                \
-   }                                                                           \
-                                                                               \
-   ValueType* dst = slice.v + index + 1;                                       \
-   ValueType* src = slice.v + index;                                           \
-   int64_t const n = ( ( slice.s - 1 ) - index ) * sizeof_c_( ValueType );     \
-   size_t size;                                                                \
-   if ( not int64_to_size_c( n, &size ) ) return 0;                            \
-                                                                               \
-   memmove( dst, src, size );                                                  \
-                                                                               \
-   *src = DoDeref(val);                                                        \
-                                                                               \
-   return 1;                                                                   \
-}
-
-/******************************************************************************/
-
 #define QSORT_C_(                                                              \
    FuncName, SliceType, ValueType, CmpFunc, DoDeref                            \
 )                                                                              \
@@ -525,7 +464,9 @@ void FuncName( SliceType slice, int64_t distance )                             \
    }                                                                           \
 }
 
-#define SET_C_( FuncName, VarSliceType, SliceType )                            \
+/******************************************************************************/
+
+#define SET_SLICE_C_( FuncName, VarSliceType, SliceType )                      \
 int64_t FuncName( VarSliceType dst, SliceType src )                            \
 {                                                                              \
    int64_t const n = min_c_( dst.s, src.s );                                   \

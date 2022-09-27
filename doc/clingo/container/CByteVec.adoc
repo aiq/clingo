@@ -1,5 +1,5 @@
 = CByteVec
-:xmpldir: ../../../test/clingo/container/CByteVec
+:xmpldir: {testroot}/clingo/container/CByteVec
 
 //******************************************************************************
 //******************************************************************** Overview

@@ -1,5 +1,5 @@
 = cDate
-:xmpldir: ../../../test/clingo/time/cDate
+:xmpldir: {testroot}/clingo/time/cDate
 
 include::{docroot}/clingo/_tmpl/attr.adoc[]
 

@@ -1,5 +1,5 @@
 = cRecorder
-:xmpldir: ../../../test/clingo/io/cRecorder
+:xmpldir: {testroot}/clingo/io/cRecorder
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -68,6 +68,15 @@ Creates a recorder with the allready allocated memory.
 ----
 
 Creates a recorder where all attributes are set to 0 and NULL.
+
+[id='recorder_copy_c_']
+==== recorder_copy_c_
+[source,c]
+----
+#define recorder_copy_c_( Rec )
+----
+
+Copies the recorder state without the error value.
 
 [id='recorder_c_']
 ==== recorder_c_

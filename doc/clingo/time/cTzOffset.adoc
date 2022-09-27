@@ -1,5 +1,5 @@
 = cTzOffset
-:xmpldir: ../../../test/clingo/time/cTzOffset
+:xmpldir: {testroot}/clingo/time/cTzOffset
 
 include::{docroot}/clingo/_tmpl/attr.adoc[]
 

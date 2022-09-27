@@ -1,5 +1,5 @@
 = cWeekDate
-:xmpldir: ../../../test/clingo/time/cWeekDate
+:xmpldir: {testroot}/clingo/time/cWeekDate
 
 include::{docroot}/clingo/_tmpl/attr.adoc[]
 

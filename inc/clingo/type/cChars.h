@@ -90,12 +90,6 @@ CLINGO_API char const* find_char_c( cChars chars, char val );
    index_of_chars_c( (Chars), c_c( Cstr ) )
 CLINGO_API int64_t index_of_chars_c( cChars chars, cChars sub );
 
-CLINGO_API int64_t insert_char_c( cVarChars chars, int64_t index, char c );
-
-#define insert_chars_c_( Chars, Index, Cstr )                                  \
-   insert_chars_c( (Chars), (Index), c_c( Cstr ) )
-CLINGO_API int64_t insert_chars_c( cVarChars dst, int64_t index, cChars src );
-
 CLINGO_API void qsort_chars_c( cVarChars chars );
 
 CLINGO_API void reverse_chars_c( cVarChars chars );

@@ -1,5 +1,5 @@
 = cYmd
-:xmpldir: ../../../test/clingo/time/cYmd
+:xmpldir: {testroot}/clingo/time/cYmd
 
 include::{docroot}/clingo/_tmpl/attr.adoc[]
 

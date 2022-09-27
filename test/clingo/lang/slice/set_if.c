@@ -8,10 +8,10 @@ int main( void )
 
    cVarInt64Slice slice4 = slice_c_( int64_t, 11, 22, 33, 44 );
    cVarInt64Slice slice3 = left_c_( cVarInt64Slice, slice4, 3 );
-   put_c_( slice3, 0, 10 );
-   put_c_( slice3, 1, 20 );
-   put_c_( slice3, 2, 30 );
-   put_c_( slice3, 3, 40 ); // out of slice range
+   set_if_c_( slice3, 0, 10 );
+   set_if_c_( slice3, 1, 20 );
+   set_if_c_( slice3, 2, 30 );
+   set_if_c_( slice3, 3, 40 ); // out of slice range
 
    expect_c_( slice4.v[ 0 ] == 10 );
    expect_c_( slice4.v[ 1 ] == 20 );

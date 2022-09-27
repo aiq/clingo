@@ -28,7 +28,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
    /* optional quote at begin --------------------------------------------- */ \
    if ( numFmt.quote )                                                         \
    {                                                                           \
-      put_c_( valBuf, len, *numFmt.quote );                                    \
+      set_if_c_( valBuf, len, *numFmt.quote );                                    \
       ++len;                                                                   \
    }                                                                           \
                                                                                \
@@ -110,7 +110,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
    /* optional quote at end ----------------------------------------------- */ \
    if ( numFmt.quote )                                                         \
    {                                                                           \
-      put_c_( valBuf, len, *numFmt.quote );                                    \
+      set_if_c_( valBuf, len, *numFmt.quote );                                    \
       ++len;                                                                   \
    }                                                                           \
    valBuf.s = len;                                                             \

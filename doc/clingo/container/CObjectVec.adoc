@@ -1,5 +1,5 @@
 = CObjectVec
-:xmpldir: ../../../test/clingo/container/CObjectVec
+:xmpldir: {testroot}/clingo/container/CObjectVec
 
 //******************************************************************************
 //******************************************************************** Overview

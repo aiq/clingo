@@ -1,5 +1,5 @@
 = cMonthDay
-:xmpldir: ../../../test/clingo/time/cMonthDay
+:xmpldir: {testroot}/clingo/time/cMonthDay
 
 //******************************************************************************
 //******************************************************************** Overview

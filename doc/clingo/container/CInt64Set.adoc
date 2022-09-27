@@ -1,5 +1,5 @@
 = CInt64Set
-:xmpldir: ../../../test/clingo/container/CInt64Set
+:xmpldir: {testroot}/clingo/container/CInt64Set
 
 //******************************************************************************
 //******************************************************************** Overview

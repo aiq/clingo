@@ -1,5 +1,5 @@
 = CInt64Map
-:xmpldir: ../../../test/clingo/container/CInt64Map
+:xmpldir: {testroot}/clingo/container/CInt64Map
 
 //******************************************************************************
 //******************************************************************** Overview

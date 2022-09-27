@@ -1,5 +1,5 @@
 = CByteVec
-:xmpldir: ../../../test/clingo/container/CInt64Vec
+:xmpldir: {testroot}/clingo/container/CInt64Vec
 
 //******************************************************************************
 //******************************************************************** Overview

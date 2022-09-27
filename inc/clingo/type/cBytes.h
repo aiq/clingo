@@ -152,8 +152,4 @@ CLINGO_API cByte const* find_byte_c( cBytes slice, cByte val );
 
 CLINGO_API int64_t index_of_bytes_c( cBytes slice, cBytes sub );
 
-CLINGO_API int64_t insert_byte_c( cVarBytes slice, int64_t index, cByte b );
-
-CLINGO_API int64_t insert_bytes_c( cVarBytes dst, int64_t index, cBytes src );
-
 #endif

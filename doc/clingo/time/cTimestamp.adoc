@@ -1,5 +1,5 @@
 = cTimestamp
-:xmpldir: ../../../test/clingo/time/cTimestamp
+:xmpldir: {testroot}/clingo/time/cTimestamp
 
 include::{docroot}/clingo/_tmpl/attr.adoc[]
 

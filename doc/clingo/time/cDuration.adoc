@@ -1,5 +1,5 @@
 = cDuration
-:xmpldir: ../../../test/clingo/time/cDuration
+:xmpldir: {testroot}/clingo/time/cDuration
 
 include::{docroot}/clingo/_tmpl/attr.adoc[]
 

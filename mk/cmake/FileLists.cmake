@@ -417,11 +417,10 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/algo/find_min.c
    ${TEST_DIR}/clingo/lang/algo/find_val.c
    ${TEST_DIR}/clingo/lang/algo/index_of_slice.c
-   ${TEST_DIR}/clingo/lang/algo/insert_slice.c
-   ${TEST_DIR}/clingo/lang/algo/insert_val.c
    ${TEST_DIR}/clingo/lang/algo/qsort.c
    ${TEST_DIR}/clingo/lang/algo/reverse.c
    ${TEST_DIR}/clingo/lang/algo/rotate.c
+   ${TEST_DIR}/clingo/lang/algo/set_slice.c
    ${TEST_DIR}/clingo/lang/algo/starts_with.c
    # chunk
    ${TEST_DIR}/clingo/lang/chunk/exact_chunk.c
@@ -501,7 +500,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/slice/end.c
    ${TEST_DIR}/clingo/lang/slice/first.c
    ${TEST_DIR}/clingo/lang/slice/for_each.c
-   ${TEST_DIR}/clingo/lang/slice/get.c
+   ${TEST_DIR}/clingo/lang/slice/get_if.c
    ${TEST_DIR}/clingo/lang/slice/index_of.c
    ${TEST_DIR}/clingo/lang/slice/is_empty.c
    ${TEST_DIR}/clingo/lang/slice/is_sub.c
@@ -511,12 +510,11 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/slice/nth.c
    ${TEST_DIR}/clingo/lang/slice/points_into.c
    ${TEST_DIR}/clingo/lang/slice/ptr_for.c
-   ${TEST_DIR}/clingo/lang/slice/put.c
    ${TEST_DIR}/clingo/lang/slice/rbegin.c
    ${TEST_DIR}/clingo/lang/slice/rend.c
    ${TEST_DIR}/clingo/lang/slice/right.c
    ${TEST_DIR}/clingo/lang/slice/scalars.c
-   ${TEST_DIR}/clingo/lang/slice/SET_SLICE.c
+   ${TEST_DIR}/clingo/lang/slice/set_if.c
    ${TEST_DIR}/clingo/lang/slice/slice.c
    ${TEST_DIR}/clingo/lang/slice/structs.c
    ${TEST_DIR}/clingo/lang/slice/sub.c

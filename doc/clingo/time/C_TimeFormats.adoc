@@ -1,5 +1,5 @@
 = C_TimeFormats
-:xmpldir: ../../../test/clingo/time/C_TimeFormats
+:xmpldir: {testroot}/clingo/time/C_TimeFormats
 
 //******************************************************************************
 //******************************************************************** Overview

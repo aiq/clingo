@@ -1,5 +1,5 @@
 = cStopwatch
-:xmpldir: ../../../test/clingo/time/cStopwatch
+:xmpldir: {testroot}/clingo/time/cStopwatch
 
 //******************************************************************************
 //******************************************************************** Overview

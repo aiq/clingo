@@ -1,5 +1,5 @@
 = CDictionary
-:xmpldir: ../../../test/clingo/string/CDictionary
+:xmpldir: {testroot}/clingo/string/CDictionary
 
 //******************************************************************************
 //******************************************************************** Overview

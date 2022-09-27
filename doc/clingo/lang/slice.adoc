@@ -45,29 +45,6 @@ viewed as a slice.
 [id='Code-Generation-Macros']
 == Code Generation Macros
 
-[id='SET_SLICE_C_']
-==== SET_SLICE_C_
-[source,c]
-----
-#define SET_SLICE_C_( FuncName, VarSliceType, SliceType )
-----
-
-Generates a function that allows to set the variable data with the values of a
-slice witch const data.
-The generated function has the following common signature:
-[source,c]
-----
-int64_t FuncName( VarSliceType dest, SliceType src )
-----
-The function set at most all values in dest, never more.
-The return value shows how many values are set.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/SET_SLICE.c[]
-----
-
 //************************************************************************ type
 === type
 
@@ -390,11 +367,11 @@ Returns the first value in the Slice.
 include::{xmpldir}/first.c[]
 ----
 
-[id='get_c_']
-==== get_c_
+[id='get_if_c_']
+==== get_if_c_
 [source,c]
 ----
-#define get_c_( Slice, Index, Def )
+#define get_if_c_( Slice, Index, Def )
 ----
 
 Returns the value at the Index position in the Slice.
@@ -403,7 +380,7 @@ If the Index is invalid will the Def value returned.
 .Example
 [source,c]
 ----
-include::{xmpldir}/get.c[]
+include::{xmpldir}/get_if.c[]
 ----
 
 [id='last_c_']
@@ -421,11 +398,11 @@ Returns the last value in the Slice.
 include::{xmpldir}/last.c[]
 ----
 
-[id='put_c_']
-==== put_c_
+[id='set_if_c_']
+==== set_if_c_
 [source,c]
 ----
-#define put_c_( Slice, Index, Value )
+#define set_if_c_( Slice, Index, Value )
 ----
 
 Updates the Value at the Index position in the Slice.
@@ -434,7 +411,7 @@ If the Index is invalid will no value be replaced.
 .Example
 [source,c]
 ----
-include::{xmpldir}/put.c[]
+include::{xmpldir}/set_if.c[]
 ----
 
 //************************************************************** pointer access

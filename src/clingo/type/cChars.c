@@ -103,20 +103,6 @@ INDEX_OF_SLICE_C_(
    do_deref_c_       // DoDeref
 )
 
-INSERT_VAL_C_(
-   insert_char_c,    // FuncName
-   cVarChars,        // VarSliceType
-   char,             // ValueType
-   char,             // InsertType
-   do_not_deref_c_   // DoDeref
-)
-
-INSERT_SLICE_C_(
-   insert_chars_c,   // FuncName
-   cVarChars,        // VarSliceType
-   cChars            // SliceType
-)
-
 QSORT_C_(
    qsort_chars_c, // FuncName
    cVarChars,     // SliceType
@@ -145,7 +131,7 @@ STARTS_WITH_C_(
    do_deref_c_          // DoDeref
 )
 
-SET_C_(
+SET_SLICE_C_(
    set_chars_c,   // FuncName
    cVarChars,     // VarSliceType
    cChars         // SliceType

@@ -1,5 +1,5 @@
 = cScanner
-:xmpldir: ../../../test/clingo/io/cScanner
+:xmpldir: {testroot}/clingo/io/cScanner
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -72,6 +72,15 @@ Creates a scanner to scan the assigned memory.
 ----
 
 Creates a scanner where all attributes are set to 0 and NULL.
+
+[id='scanner_copy_c_']
+==== scanner_copy_c_
+[source,c]
+----
+#define scanner_copy_c_( Sca )
+----
+
+Copies the scanner state without the error value.
 
 [id='sub_scanner_c_']
 ==== sub_scanner_c_

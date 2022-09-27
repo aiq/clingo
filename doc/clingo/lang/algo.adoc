@@ -1,5 +1,5 @@
 = algo
-:xmpldir: ../../../test/clingo/lang/algo
+:xmpldir: {testroot}/clingo/lang/algo
 
 :FuncName: the name of the generated function
 :SliceType1: the type of the slice
@@ -322,68 +322,6 @@ include::{xmpldir}/index_of_slice.c[]
 //****************************************************************** manipulate
 === manipulate
 
-[id='INSERT_SLICE_C_']
-==== INSERT_SLICE_C_
-[source,c]
-----
-#define INSERT_SLICE_C_(                                                       \
-   FuncName, VarSliceType, SliceType                                           \
-)
-----
-
-Generates a function that allows to insert the elements from the source slice
-into the destination slice.
-The existing values will be moved, the overhang values at the end will be
-removed.
-
-FuncName:: {FuncName}
-VarSliceType:: the type of the destination slice
-SliceType:: the type of the source slice
-
-The generated function returns 1 if the value is inserted, otherwise 0.
-[source,c]
-----
-int64_t FuncName( VarSliceType dst, int64_t index, SliceType src );
-----
-
-.Example
-[source,c]
-----
-include::{xmpldir}/insert_slice.c[]
-----
-
-[id='INSERT_VAL_C_']
-==== INSERT_VAL_C_
-[source,c]
-----
-#define INSERT_VAL_C_(                                                         \
-   FuncName, VarSliceType, ValueType, InsertType, DoDeref                      \
-)
-----
-
-Generates a function that allows to insert a value into a slice.
-The existing values will be moved, the overhang value at the end will be
-removed.
-
-FuncName:: {FuncName}
-VarSliceType:: {SliceType1}
-ValueType:: {ValueType1}
-InsertType:: the type of the parameter
-DoDeref:: can be "*" to dereference the pointer of the InsertType
-
-The generated function returns the number of elements that are inserted into the
-dst slice, otherwise 0.
-[source,c]
-----
-int64_t FuncName( VarSliceType slice, int64_t index, InsertType val );
-----
-
-.Example
-[source,c]
-----
-include::{xmpldir}/insert_val.c[]
-----
-
 [id='QSORT_C_']
 ==== QSORT_C_
 [source,c]
@@ -468,6 +406,36 @@ void FuncName( SliceType slice, int64_t distance );
 [source,c]
 ----
 include::{xmpldir}/rotate.c[]
+----
+
+[id='SET_SLICE_C_']
+==== SET_SLICE_C_
+[source,c]
+----
+#define SET_SLICE_C_(
+   FuncName, VarSliceType, SliceType
+)
+----
+
+Generates a function that allows to set the variable data with the values of a
+slice witch const data.
+
+FuncName:: {FuncName}
+VarSliceType:: the type of the destination slice
+SliceType:: the type of the source slice
+
+The generated function has the following common signature:
+[source,c]
+----
+int64_t FuncName( VarSliceType dest, SliceType src )
+----
+The function set at most all values in dest, never more.
+The return value shows how many values are set.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/set_slice.c[]
 ----
 
 //******************************************************************************

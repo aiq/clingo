@@ -72,5 +72,5 @@ bool eq_hsv_c( cHsv a, cHsv b, float epsilon );
 .Example
 [source,c]
 ----
-include::{xmpldir}/eq_hsl.c[]
+include::{xmpldir}/eq_hsv.c[]
 ----

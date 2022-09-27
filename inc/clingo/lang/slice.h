@@ -185,7 +185,7 @@ typedef struct Entry##Slice Entry##Slice;
    (Slice).v[ 0 ]                                                              \
 )
 
-#define get_c_( Slice, Index, Def )                                            \
+#define get_if_c_( Slice, Index, Def )                                         \
 (                                                                              \
    valid_index_c_( (Slice), (Index) )                                          \
       ? (Slice).v[ (Index) ]                                                   \
@@ -197,7 +197,7 @@ typedef struct Entry##Slice Entry##Slice;
    (Slice).v[ (Slice).s - 1 ]                                                  \
 )
 
-#define put_c_( Slice, Index, Value )                                          \
+#define set_if_c_( Slice, Index, Value )                                       \
 {                                                                              \
    if ( valid_index_c_( (Slice), (Index) ) )                                   \
       (Slice).v[ (Index) ] = (Value);                                          \

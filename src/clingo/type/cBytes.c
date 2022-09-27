@@ -320,20 +320,6 @@ INDEX_OF_SLICE_C_(
    do_deref_c_       // DoDeref
 )
 
-INSERT_VAL_C_(
-   insert_byte_c,    // FuncName
-   cVarBytes,        // VarSliceType
-   cByte,            // ValueType
-   cByte,            // InsertType
-   do_not_deref_c_   // DoDeref
-)
-
-INSERT_SLICE_C_(
-   insert_bytes_c,   // FuncName
-   cVarBytes,        // VarSliceType
-   cBytes            // SliceType
-)
-
 STARTS_WITH_C_(
    bytes_starts_with_c, // FuncName
    cBytes,              // SliceType
