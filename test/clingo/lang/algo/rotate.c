@@ -1,5 +1,5 @@
 #include "clingo/lang/expect.h"
-#include "clingo/type/cChars.h"
+#include "clingo/type/cChars.h" // rotate_chars_c
 
 #define expect_( VarChars, Exp )                                               \
    expect_c_(                                                                  \

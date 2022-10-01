@@ -1,5 +1,5 @@
 #include "clingo/lang/expect.h"
-#include "clingo/type/int32.h"
+#include "clingo/type/int32.h" // find_max_c
 
 int main( void )
 {

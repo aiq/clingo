@@ -1,5 +1,5 @@
 #include "clingo/lang/expect.h"
-#include "clingo/type/cChars.h"
+#include "clingo/type/cChars.h" // chars_starts_with_c
 
 int main( void )
 {

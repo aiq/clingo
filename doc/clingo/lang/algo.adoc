@@ -55,7 +55,7 @@ int FuncName( SliceType a, SliceType b );
 .Example
 [source,c]
 ----
-include::{xmpldir}/cmp_slice.c[]
+include::{xmpldir}/CMP_SLICE.c[]
 ----
 
 [id='COUNT_EQ_C_']
@@ -87,7 +87,7 @@ int64_t FuncName( SliceType slice, SearchType val );
 .Example
 [source,c]
 ----
-include::{xmpldir}/count_eq.c[]
+include::{xmpldir}/COUNT_EQ.c[]
 ----
 
 [id='ENDS_WITH_C_']
@@ -118,7 +118,7 @@ bool FuncName( SliceType slice, SliceType needle );
 .Example
 [source,c]
 ----
-include::{xmpldir}/ends_with.c[]
+include::{xmpldir}/ENDS_WITH.c[]
 ----
 
 [id='STARTS_WITH_C_']
@@ -149,7 +149,7 @@ bool FuncName( SliceType slice, SliceType needle );
 .Example
 [source,c]
 ----
-include::{xmpldir}/starts_with.c[]
+include::{xmpldir}/STARTS_WITH.c[]
 ----
 
 //************************************************************************ find
@@ -186,7 +186,7 @@ Type* FuncName( SliceType slice, SearchType val );
 .Example
 [source,c]
 ----
-include::{xmpldir}/bsearch.c[]
+include::{xmpldir}/BSEARCH.c[]
 ----
 
 [id='FIND_MAX_C_']
@@ -219,7 +219,7 @@ ValueType* FuncName( SliceType slice );
 .Example
 [source,c]
 ----
-include::{xmpldir}/find_max.c[]
+include::{xmpldir}/FIND_MAX.c[]
 ----
 
 [id='FIND_MIN_C_']
@@ -252,7 +252,7 @@ ValueType* FuncName( SliceType slice );
 .Example
 [source,c]
 ----
-include::{xmpldir}/find_min.c[]
+include::{xmpldir}/FIND_MIN.c[]
 ----
 
 [id='FIND_VAL_C_']
@@ -285,7 +285,7 @@ ValueType* FuncName( SliceType slice, SearchType val );
 .Example
 [source,c]
 ----
-include::{xmpldir}/find_val.c[]
+include::{xmpldir}/FIND_VAL.c[]
 ----
 
 [id='INDEX_OF_SLICE_C_']
@@ -316,7 +316,7 @@ int64_t FuncName( SliceType slice, SliceType sub );
 .Example
 [source,c]
 ----
-include::{xmpldir}/index_of_slice.c[]
+include::{xmpldir}/INDEX_OF_SLICE.c[]
 ----
 
 //****************************************************************** manipulate
@@ -349,7 +349,34 @@ void FuncName( SliceType slice );
 .Example
 [source,c]
 ----
-include::{xmpldir}/qsort.c[]
+include::{xmpldir}/QSORT.c[]
+----
+
+[id='REMOVE_C_']
+==== REMOVE_C_
+[source,c]
+----
+#define REMOVE_C_(
+   FuncName, SliceType, ValueType
+)
+----
+
+Generates a function that removes the element of the slice on a positon.
+
+FuncName:: {FuncName}
+SliceType:: the type of the slice
+ValueType:: the type of the elements in the slice
+
+The generated function has the following common signatues:
+[source,c]
+----
+bool FuncName( SliceType slice[static 1], int64_t pos );
+----
+
+.Example
+[source,c]
+----
+include::{xmpldir}/REMOVE.c[]
 ----
 
 [id='REVERSE_C_']
@@ -376,7 +403,7 @@ void FuncName( SliceType slice );
 .Example
 [source,c]
 ----
-include::{xmpldir}/reverse.c[]
+include::{xmpldir}/REVERSE.c[]
 ----
 
 [id='ROTATE_C_']
@@ -405,7 +432,7 @@ void FuncName( SliceType slice, int64_t distance );
 .Example
 [source,c]
 ----
-include::{xmpldir}/rotate.c[]
+include::{xmpldir}/ROTATE.c[]
 ----
 
 [id='SET_SLICE_C_']
@@ -435,7 +462,7 @@ The return value shows how many values are set.
 .Example
 [source,c]
 ----
-include::{xmpldir}/set_slice.c[]
+include::{xmpldir}/SET_SLICE.c[]
 ----
 
 //******************************************************************************

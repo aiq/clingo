@@ -1,5 +1,5 @@
 #include "clingo/lang/expect.h"
-#include "clingo/type/uint32.h"
+#include "clingo/type/uint32.h" // find_min_c
 
 int main( void )
 {

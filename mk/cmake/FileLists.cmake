@@ -21,6 +21,7 @@ set( INC_FILES
    ${INC_DIR}/clingo/container/CInt64Vec.h
    ${INC_DIR}/clingo/container/CInt64Set.h
    ${INC_DIR}/clingo/container/CObjectVec.h
+   ${INC_DIR}/clingo/container/deck.h
    ${INC_DIR}/clingo/container/map.h
    ${INC_DIR}/clingo/container/set.h
    ${INC_DIR}/clingo/container/vec.h
@@ -306,6 +307,10 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/container/map/benchmark-map.c
    ${TEST_DIR}/clingo/container/map/iterate_map.c
 
+   # pile
+   ${TEST_DIR}/clingo/container/pile/INSERT.c
+   ${TEST_DIR}/clingo/container/pile/PUT.c
+
    # set
    ${TEST_DIR}/clingo/container/set/iterate_set.c
 
@@ -409,19 +414,20 @@ set( TEST_FILES
 
    ######################################################################## lang
    # algo
-   ${TEST_DIR}/clingo/lang/algo/bsearch.c
-   ${TEST_DIR}/clingo/lang/algo/cmp_slice.c
-   ${TEST_DIR}/clingo/lang/algo/count_eq.c
-   ${TEST_DIR}/clingo/lang/algo/ends_with.c
-   ${TEST_DIR}/clingo/lang/algo/find_max.c
-   ${TEST_DIR}/clingo/lang/algo/find_min.c
-   ${TEST_DIR}/clingo/lang/algo/find_val.c
-   ${TEST_DIR}/clingo/lang/algo/index_of_slice.c
-   ${TEST_DIR}/clingo/lang/algo/qsort.c
-   ${TEST_DIR}/clingo/lang/algo/reverse.c
-   ${TEST_DIR}/clingo/lang/algo/rotate.c
-   ${TEST_DIR}/clingo/lang/algo/set_slice.c
-   ${TEST_DIR}/clingo/lang/algo/starts_with.c
+   ${TEST_DIR}/clingo/lang/algo/BSEARCH.c
+   ${TEST_DIR}/clingo/lang/algo/CMP_SLICE.c
+   ${TEST_DIR}/clingo/lang/algo/COUNT_EQ.c
+   ${TEST_DIR}/clingo/lang/algo/ENDS_WITH.c
+   ${TEST_DIR}/clingo/lang/algo/FIND_MAX.c
+   ${TEST_DIR}/clingo/lang/algo/FIND_MIN.c
+   ${TEST_DIR}/clingo/lang/algo/FIND_VAL.c
+   ${TEST_DIR}/clingo/lang/algo/INDEX_OF_SLICE.c
+   ${TEST_DIR}/clingo/lang/algo/QSORT.c
+   ${TEST_DIR}/clingo/lang/algo/REMOVE.c
+   ${TEST_DIR}/clingo/lang/algo/REVERSE.c
+   ${TEST_DIR}/clingo/lang/algo/ROTATE.c
+   ${TEST_DIR}/clingo/lang/algo/SET_SLICE.c
+   ${TEST_DIR}/clingo/lang/algo/STARTS_WITH.c
    # chunk
    ${TEST_DIR}/clingo/lang/chunk/exact_chunk.c
    ${TEST_DIR}/clingo/lang/chunk/next_chunk.c

@@ -111,6 +111,12 @@ QSORT_C_(
    do_deref_c_    // DoDeref
 )
 
+REMOVE_C_(
+   remove_char_c, // FuncName
+   cVarChars,     // SliceType
+   char           // ValueType
+)
+
 REVERSE_C_(
    reverse_chars_c,  // FuncName
    cVarChars,        // SliceType

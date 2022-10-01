@@ -92,6 +92,8 @@ CLINGO_API int64_t index_of_chars_c( cChars chars, cChars sub );
 
 CLINGO_API void qsort_chars_c( cVarChars chars );
 
+CLINGO_API bool remove_char_c( cVarChars chars[static 1], int64_t pos );
+
 CLINGO_API void reverse_chars_c( cVarChars chars );
 
 CLINGO_API void rotate_chars_c( cVarChars chars, int64_t distance );

@@ -1,6 +1,6 @@
 #include "clingo/lang/algo.h"
 #include "clingo/lang/expect.h"
-#include "clingo/type/cChars.h"
+#include "clingo/type/cChars.h" // set_chars_c
 
 #define expect_cs_( VarChars, Exp )                                            \
    expect_c_(                                                                  \

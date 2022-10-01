@@ -1,6 +1,6 @@
 #include "clingo/io/cRecorder.h"
 #include "clingo/lang/expect.h"
-#include "clingo/type/char.h"
+#include "clingo/type/char.h" // qsort_chars_c
 
 #define expect_( VarChars, Exp )                                               \
    expect_c_(                                                                  \

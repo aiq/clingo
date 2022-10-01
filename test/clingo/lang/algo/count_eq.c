@@ -1,5 +1,5 @@
 #include "clingo/lang/expect.h"
-#include "clingo/type/cChars.h"
+#include "clingo/type/cChars.h" // count_eq_char_c
 
 int main( void )
 {

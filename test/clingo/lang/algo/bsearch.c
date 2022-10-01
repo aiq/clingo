@@ -7,7 +7,9 @@ int main( void )
 
    tap_note_c( "even slice test" );
    {
-      cInt32Slice evenSlice = slice_c_( int32_t, -30, -20, -10, 0, 10, 20, 30, 40 );
+      cInt32Slice evenSlice = slice_c_( int32_t,
+         -30, -20, -10, 0, 10, 20, 30, 40
+      );
       int32_t val = -30;
       for ( int64_t index = 0; index < evenSlice.s; ++index )
       {
