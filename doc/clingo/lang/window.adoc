@@ -37,7 +37,6 @@ along the slice sequence.
 ----
 
 Generates a window struct for a slice with _Type_ values.
-The overview shows the generated structs and functions for the call.
 
 //******************************************************************************
 //******************************************************************* Functions

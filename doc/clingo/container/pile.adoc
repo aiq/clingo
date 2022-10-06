@@ -1,0 +1,99 @@
+= pile
+:xmpldir: {testroot}/clingo/container/pile
+
+//******************************************************************************
+//******************************************************************** Overview
+//******************************************************************************
+== Overview
+
+A pile is a struct that can grow and if *s* reaches *cap*.
+
+A pile struct can also be viewed as slice because it has the attributes *s*
+(sequence length) and *v* (points to the first value).
+
+//******************************************************************************
+//****************************************************** Code Generation Macros
+//******************************************************************************
+== Code Generation Macros
+
+//************************************************************************* mem
+=== mem
+
+[id='ALLOC_PILE_C_']
+==== ALLOC_PILE_C_
+[source,c]
+----
+#define ALLOC_PILE_C_(
+   FuncName, PileType, Type
+)
+----
+
+Generates a function that sets the pile values with new allocated memory.
+The generated function has the following common signature:
+[source,c]
+----
+bool FuncName( PileType pile[static 1], int64_t size );
+----
+
+[id='REALLOC_PILE_C_']
+==== REALLOC_PILE_C_
+[source,c]
+----
+#define REALLOC_PILE_C_(
+   FuncName, PileType, Type
+)
+----
+
+Geneartes a function that reallocs the memory of a pile.
+The generated function has the following common signature:
+[source,c]
+----
+bool FuncName( PileType pile[static 1], int64_t size );
+----
+
+//****************************************************************** manipulate
+=== manipulate
+
+[id='INSERT_C_']
+==== INSERT_C_
+[source,c]
+----
+#define INSERT_C_(
+   FuncName, PileType, Type, InsertType, DoDeref, ReallocFunc
+)
+----
+
+Generates a function that allows to insert a value into a pile.
+The generated function has the following common signature:
+[source,c]
+----
+bool FuncName( PileType pile[static 1], int64_t pos, InsertType val );
+----
+
+[id='PUT_C_']
+==== PUT_C_
+[source,c]
+----
+#define PUT_C_(
+   FuncName, PileType, PushType, DoDeref, ReallocFunc
+)
+----
+
+Generates a function that puts a value at the end of a pile.
+The generated function has the following common signature:
+[source,c]
+----
+bool FuncName( PileType pile[static 1], PushType val );
+----
+
+//************************************************************************ type
+=== type
+
+[id='PILE_C_']
+==== PILE_C_
+[souce,c]
+----
+#define PILE_C_( Type, PileType )
+----
+
+Generates a pile struct for a Type values.

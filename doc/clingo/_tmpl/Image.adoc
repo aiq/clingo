@@ -1,0 +1,13 @@
+[source,c,subs=attributes+]
+----
+struct {Image-ImageType}
+{
+   int32_t w;
+   int32_t h;
+   {Image-PtrType}* v;
+};
+typedef struct {Image-ImageType} {Image-ImageType};
+----
+
+Via the macro link:{docroot}/clingo/color/image.html#IMAGES_C_[IMAGES_C_]
+generated struct.
