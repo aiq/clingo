@@ -122,12 +122,15 @@ bool put_##FuncSuffix( PileType pile[static 1], ParaType val );
 /**********************************************************/
 
 #define PILE_IMPL_C_( Type, PileType, FuncSuffix, ParaType, DoDeref )          \
-ALLOC_PILE_C_( alloc_##FuncSuffix, PileType, Type )                            \
-REALLOC_PILE_C_( realloc_##FuncSuffix, PileType, Type )                        \
+ALLOC_PILE_C_( alloc_pile_of_##FuncSuffix, PileType, Type )                    \
+REALLOC_PILE_C_( realloc_pile_of_##FuncSuffix, PileType, Type )                \
 INSERT_C_(                                                                     \
-   insert_##FuncSuffix, PileType, Type, ParaType, DoDeref, realloc_##FuncSuffix\
+   insert_##FuncSuffix, PileType, Type, ParaType, DoDeref,                     \
+   realloc_pile_of_##FuncSuffix                                                \
 )                                                                              \
-PUT_C_( put_##FuncSuffix, PileType, ParaType, DoDeref, realloc_##FuncSuffix )
+PUT_C_(                                                                        \
+   put_##FuncSuffix, PileType, ParaType, DoDeref, realloc_pile_of_##FuncSuffix \
+)
 
 /**********************************************************/
 
@@ -136,13 +139,15 @@ PUT_C_( put_##FuncSuffix, PileType, ParaType, DoDeref, realloc_##FuncSuffix )
 )                                                                              \
 PILE_C_( Type, PileType )                                                      \
                                                                                \
-static Attr ALLOC_PILE_C_( alloc_##FuncSuffix, PileType, Type )                \
-static Attr REALLOC_PILE_C_( realloc_##FuncSuffix, PileType, Type )            \
+static Attr ALLOC_PILE_C_( alloc_pile_of_##FuncSuffix, PileType, Type )        \
+static Attr REALLOC_PILE_C_( realloc_pile_of_##FuncSuffix, PileType, Type )    \
 static Attr INSERT_C_(                                                         \
-   insert_##FuncSuffix, PileType, Type, ParaType, DoDeref, realloc_##FuncSuffix\
+   insert_##FuncSuffix, PileType, Type, ParaType, DoDeref,                     \
+   realloc_pile_of_##FuncSuffix                                                \
 )                                                                              \
 static Attr PUT_C_(                                                            \
-   put_##FuncSuffix, PileType, Type, ParaType, DoDeref, realloc_##FuncSuffix   \
+   put_##FuncSuffix, PileType, Type, ParaType, DoDeref,                        \
+   realloc_pile_of_##FuncSuffix                                                \
 )
 
 /*******************************************************************************
