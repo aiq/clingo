@@ -150,6 +150,20 @@ static Attr PUT_C_(                                                            \
    realloc_pile_of_##FuncSuffix                                                \
 )
 
+#define STATIC_REF_PILE_IMPL_C_(                                               \
+   Attr, Type, PileType, FuncSuffix                                            \
+)                                                                              \
+STATIC_PILE_IMPL_C_(                                                           \
+   Attr, Type, PileType, FuncSuffix, Type const*, do_deref_c_                  \
+)
+
+#define STATIC_VAL_PILE_IMPL_C_(                                               \
+   Attr, Type, PileType, FuncSuffix                                            \
+)                                                                              \
+STATIC_PILE_IMPL_C_(                                                           \
+   Attr, Type, PileType, FuncSuffix, Type, do_not_deref_c_                     \
+)
+
 /*******************************************************************************
 ********************************************************************* Functions 
 ********************************************************************************
