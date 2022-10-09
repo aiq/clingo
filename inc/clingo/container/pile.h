@@ -76,8 +76,8 @@ bool FuncName( PileType pile[static 1], int64_t pos, InsertType val )          \
 
 /******************************************************************************/
 
-#define PUT_C_( FuncName, PileType, PushType, DoDeref, ReallocFunc )          \
-bool FuncName( PileType pile[static 1], PushType val )                         \
+#define PUT_C_( FuncName, PileType, ParaType, DoDeref, ReallocFunc )           \
+bool FuncName( PileType pile[static 1], ParaType val )                         \
 {                                                                              \
    if ( pile->s == pile->cap )                                                 \
    {                                                                           \
@@ -146,7 +146,7 @@ static Attr INSERT_C_(                                                         \
    realloc_pile_of_##FuncSuffix                                                \
 )                                                                              \
 static Attr PUT_C_(                                                            \
-   put_##FuncSuffix, PileType, Type, ParaType, DoDeref,                        \
+   put_##FuncSuffix, PileType, ParaType, DoDeref,                              \
    realloc_pile_of_##FuncSuffix                                                \
 )
 
