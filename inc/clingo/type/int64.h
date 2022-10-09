@@ -118,10 +118,16 @@ CLINGO_API bool prod_int64_c( cInt64Slice slice, int64_t res[static 1] );
 
 CLINGO_API void qsort_int64_slice_c( cVarInt64Slice slice );
 
+CLINGO_API bool remove_int64_c( cVarInt64Slice slice[static 1], int64_t pos );
+
 CLINGO_API void reverse_int64_slice_c( cVarInt64Slice slice );
 
 CLINGO_API void rotate_int64_slice_c( cVarInt64Slice slice, int64_t distance );
 
 CLINGO_API bool sum_int64_c( cInt64Slice slice, int64_t res[static 1] );
+
+CLINGO_API bool take_int64_c( cVarInt64Slice slice[static 1],
+                              int64_t pos,
+                              int64_t val[static 1] );
 
 #endif

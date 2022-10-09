@@ -327,3 +327,15 @@ STARTS_WITH_C_(
    cmp_byte_c,          // CmpFunc
    do_deref_c_          // DoDeref
 )
+
+REMOVE_C_(
+   remove_byte_c, // FuncName
+   cVarBytes,     // SliceType
+   cByte          // ValueByte
+)
+
+TAKE_C_(
+   take_byte_c,   // FuncName
+   cVarBytes,     // SliceType
+   cByte          // ValueType
+)

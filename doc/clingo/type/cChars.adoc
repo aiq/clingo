@@ -230,6 +230,14 @@ void qsort_chars_c( cVarChars chars );
 
 {Qsort}
 
+==== remove_char_c
+[source,c]
+----
+bool remove_char_c( cVarChars chars[static 1], int64_t pos );
+----
+
+{Remove}
+
 ==== reverse_chars_c
 [source,c]
 ----
@@ -245,6 +253,14 @@ void rotate_chars_c( cVarChars chars, int64_t distance );
 ----
 
 {Rotate}
+
+==== take_char_c
+[source,c]
+----
+bool take_char_c( cVarChars chars[static 1], int64_t pos, char val[static 1] );
+----
+
+{Take}
 
 //************************************************************************ trim
 === trim

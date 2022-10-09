@@ -98,6 +98,12 @@ QSORT_C_(
    do_deref_c_          // DoDeref
 )
 
+REMOVE_C_(
+   remove_int32_c,   // FuncName
+   cVarInt32Slice,   // SliceType
+   int32_t           // ValueType
+)
+
 REVERSE_C_(
    reverse_int32_slice_c,  // FuncName
    cVarInt32Slice,         // SliceType
@@ -116,4 +122,10 @@ SUM_C_(
    int32_t,       // ValueType
    int64_t,       // ResType
    iadd64_c       // AddFunc
+)
+
+TAKE_C_(
+   take_int32_c,     // FuncName
+   cVarInt32Slice,   // SliceType
+   int32_t           // ValueType
 )

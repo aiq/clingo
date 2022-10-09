@@ -1,9 +1,9 @@
 #include "clingo/lang/expect.h"
 #include "clingo/type/cChars.h" // remove_char_c
 
-#define expect_( Deck, Cstr )                                                  \
+#define expect_( VarSlice, Cstr )                                              \
    expect_c_(                                                                  \
-      chars_is_c( as_c_( cChars, (Deck) ), (Cstr) )                            \
+      chars_is_c( as_c_( cChars, (VarSlice) ), (Cstr) )                        \
    )
 
 int main( void )

@@ -101,10 +101,16 @@ CLINGO_API bool prod_int32_c( cInt32Slice slice, int64_t res[static 1] );
 
 CLINGO_API void qsort_int32_slice_c( cVarInt32Slice slice );
 
+CLINGO_API bool remove_int32_c( cVarInt32Slice slice[static 1], int64_t pos );
+
 CLINGO_API void reverse_int32_slice_c( cVarInt32Slice slice );
 
 CLINGO_API void rotate_int32_slice_c( cVarInt32Slice slice, int64_t distance );
 
 CLINGO_API bool sum_int32_c( cInt32Slice slice, int64_t res[static 1] );
+
+CLINGO_API bool take_int32_c( cVarInt32Slice slice[static 1],
+                              int64_t pos,
+                              int32_t val[static 1] );
 
 #endif

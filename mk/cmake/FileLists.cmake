@@ -428,6 +428,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/algo/ROTATE.c
    ${TEST_DIR}/clingo/lang/algo/SET_SLICE.c
    ${TEST_DIR}/clingo/lang/algo/STARTS_WITH.c
+   ${TEST_DIR}/clingo/lang/algo/TAKE.c
    # chunk
    ${TEST_DIR}/clingo/lang/chunk/exact_chunk.c
    ${TEST_DIR}/clingo/lang/chunk/next_chunk.c

@@ -104,6 +104,12 @@ QSORT_C_(
    do_deref_c_          // DoDeref
 )
 
+REMOVE_C_(
+   remove_int64_c,   // FuncName
+   cVarInt64Slice,   // SliceType
+   int64_t           // ValueType
+)
+
 REVERSE_C_(
    reverse_int64_slice_c,  // FuncName
    cVarInt64Slice,         // SliceType
@@ -122,4 +128,10 @@ SUM_C_(
    int64_t,       // ValueType
    int64_t,       // ResType
    iadd64_c       // AddFunc
+)
+
+TAKE_C_(
+   take_int64_c,     // FuncName
+   cVarInt64Slice,   // SliceType
+   int64_t           // ValueType
 )

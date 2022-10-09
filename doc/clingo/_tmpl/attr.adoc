@@ -1,28 +1,30 @@
 :Slice: Via the macro link:{docroot}/clingo/lang/slice.html#SLICES_C_[SLICES_C_] declared struct.
 
-:CmpSlice: Via the macro link:../lang/algo.html#CMP_SLICE_C_[CMP_SLICE_C_] implemented function.
-:CountEq: Via the macro link:../lang/algo.html#COUNT_EQ_C_[COUNT_EQ_C_] implemented function.
-:EndsWith: Via the macro link:../lang/algo.html#ENDS_WITH_C_[ENDS_WITH_C_] implemented function.
-:StartsWith: Via the macro link:../lang/algo.html#STARTS_WITH_C_[STARTS_WITH_C_] implemented function.
+:CmpSlice: Via the macro link:{docroot}/clingo/lang/algo.html#CMP_SLICE_C_[CMP_SLICE_C_] implemented function.
+:CountEq: Via the macro link:{docroot}/clingo/lang/algo.html#COUNT_EQ_C_[COUNT_EQ_C_] implemented function.
+:EndsWith: Via the macro link:{docroot}/clingo/lang/algo.html#ENDS_WITH_C_[ENDS_WITH_C_] implemented function.
+:StartsWith: Via the macro link:{docroot}/clingo/lang/algo.html#STARTS_WITH_C_[STARTS_WITH_C_] implemented function.
 
-:Bsearch: Via the macro link:../lang/algo.html#BSEARCH_C_[BSEARCH_C_] implemented function.
-:FindMax: Via the macro link:../lang/algo.html#FIND_MAX_C_[FIND_MAX_C_] implemented function.
-:FindMin: Via the macro link:../lang/algo.html#FIND_MIN_C_[FIND_MIN_C_] implemented function.
-:FindVal: Via the macro link:../lang/algo.html#FIND_VAL_C_[FIND_VAL_C_] implemented function.
-:IndexOfSlice: Via the macro link:../lang/algo.html#INDEX_OF_SLICE_C_[INDEX_OF_SLICE_C_] implemented function.
+:Bsearch: Via the macro link:{docroot}/clingo/lang/algo.html#BSEARCH_C_[BSEARCH_C_] implemented function.
+:FindMax: Via the macro link:{docroot}/clingo/lang/algo.html#FIND_MAX_C_[FIND_MAX_C_] implemented function.
+:FindMin: Via the macro link:{docroot}/clingo/lang/algo.html#FIND_MIN_C_[FIND_MIN_C_] implemented function.
+:FindVal: Via the macro link:{docroot}/clingo/lang/algo.html#FIND_VAL_C_[FIND_VAL_C_] implemented function.
+:IndexOfSlice: Via the macro link:{docroot}/clingo/lang/algo.html#INDEX_OF_SLICE_C_[INDEX_OF_SLICE_C_] implemented function.
 
-:InsertSlice: Via the macro link:../lang/algo.html#INSERT_SLICE_C_[INSERT_SLICE_C_] implemented function.
-:InsertVal: Via the macro link:../lang/algo.html#INSERT_VAL_C_[INSERT_VAL_C_] implemented function.
-:Qsort: Via the macro link:../lang/algo.html#QSORT_C_[QSORT_C_] implemented function.
-:Reverse: Via the macro link:../lang/algo.html#REVERSE_C_[REVERSE_C_] implemented function.
-:Rotate: Via the macro link:../lang/algo.html#ROTATE_C_[ROTATE_C_] implemented function.
+:InsertSlice: Via the macro link:{docroot}/clingo/lang/algo.html#INSERT_SLICE_C_[INSERT_SLICE_C_] implemented function.
+:InsertVal: Via the macro link:{docroot}/clingo/lang/algo.html#INSERT_VAL_C_[INSERT_VAL_C_] implemented function.
+:Qsort: Via the macro link:{docroot}/clingo/lang/algo.html#QSORT_C_[QSORT_C_] implemented function.
+:Remove: Via the macro link:{docroot}/clingo/lang/algo.html#REMOVE_C_[REMOVE_C_] implemented function.
+:Reverse: Via the macro link:{docroot}/clingo/lang/algo.html#REVERSE_C_[REVERSE_C_] implemented function.
+:Rotate: Via the macro link:{docroot}/clingo/lang/algo.html#ROTATE_C_[ROTATE_C_] implemented function.
+:Take: Via the macro link:{docroot}/clingo/lang/algo.html#TAKE_C_[TAKE_C_] implemented function.
 
 :Prod: Builds the product all values in the slice and saves the result in res. +
 Return false if a overflow occures, otherwise true.
 :Sum: Builds the sum of all values in the slice and saves the result in res. +
 Returns false if a overflow occures, otherwise true.
 
-:Conv: Via the macro link:../lang/math.html#CONV_C_[CONV_C_] implemented function.
+:Conv: Via the macro link:{docroot}/clingo/lang/math.html#CONV_C_[CONV_C_] implemented function.
 
 :Swap: Returns val with a changed byte order.
 :SwapFrom: Changes the byte order of val from a known order to the system order if necessary.

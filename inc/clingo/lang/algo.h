@@ -419,13 +419,16 @@ bool FuncName( SliceType slice[static 1], int64_t pos )                        \
 {                                                                              \
    must_be_in_range_c_( 0, pos, slice->s );                                    \
                                                                                \
-   void* dst = slice->v + pos;                                                 \
-   void* src = slice->v + pos + 1;                                             \
-   int64_t n = ( ( slice->s - 1 ) - pos ) * sizeof_c_( ValueType );            \
-   size_t size;                                                                \
-   if ( not int64_to_size_c( n, &size ) ) return false;                        \
+   if ( pos < slice->s-1 )                                                     \
+   {                                                                           \
+      void* dst = slice->v + pos;                                              \
+      void* src = slice->v + pos + 1;                                          \
+      int64_t n = ( ( slice->s - 1 ) - pos ) * sizeof_c_( ValueType );         \
+      size_t size;                                                             \
+      if ( not int64_to_size_c( n, &size ) ) return false;                     \
                                                                                \
-   memmove( dst, src, size );                                                  \
+      memmove( dst, src, size );                                               \
+   }                                                                           \
    slice->s -= 1;                                                              \
    return true;                                                                \
 }
@@ -498,6 +501,31 @@ int64_t FuncName( VarSliceType dst, SliceType src )                            \
       dst.v[i] = src.v[i];                                                     \
    }                                                                           \
    return n;                                                                   \
+}
+
+/******************************************************************************/
+
+#define TAKE_C_(                                                               \
+   FuncName, SliceType, ValueType                                              \
+)                                                                              \
+bool FuncName( SliceType slice[static 1], int64_t pos, ValueType val[static 1] )\
+{                                                                              \
+   must_be_in_range_c_( 0, pos, slice->s );                                    \
+                                                                               \
+   *val = slice->v[pos];                                                       \
+                                                                               \
+   if ( pos < slice->s-1 )                                                     \
+   {                                                                           \
+      void* dst = slice->v + pos;                                              \
+      void* src = slice->v + pos + 1;                                          \
+      int64_t n = ( ( slice->s - 1 ) - pos ) * sizeof_c_( ValueType );         \
+      size_t size;                                                             \
+      if ( not int64_to_size_c( n, &size ) ) return false;                     \
+                                                                               \
+      memmove( dst, src, size );                                               \
+   }                                                                           \
+   slice->s -= 1;                                                              \
+   return true;                                                                \
 }
 
 /**********++*******************************************************************

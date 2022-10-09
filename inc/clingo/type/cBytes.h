@@ -152,4 +152,10 @@ CLINGO_API cByte const* find_byte_c( cBytes slice, cByte val );
 
 CLINGO_API int64_t index_of_bytes_c( cBytes slice, cBytes sub );
 
+CLINGO_API bool remove_byte_c( cVarBytes bytes[static 1], int64_t pos );
+
+CLINGO_API bool take_byte_c( cVarBytes bytes[static 1],
+                             int64_t pos,
+                             cByte val[static 1] );
+
 #endif

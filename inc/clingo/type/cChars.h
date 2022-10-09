@@ -100,7 +100,11 @@ CLINGO_API void rotate_chars_c( cVarChars chars, int64_t distance );
 
 #define set_chars_c_( Chars, Cstr )                                            \
    set_chars_c( (Chars), c_c( Cstr ) )
-CLINGO_API int64_t set_chars_c( cVarChars dst, cChars src ); 
+CLINGO_API int64_t set_chars_c( cVarChars dst, cChars src );
+
+CLINGO_API bool take_char_c( cVarChars chars[static 1],
+                             int64_t pos,
+                             char val[static 1] );
 
 /*******************************************************************************
  trim

@@ -286,3 +286,19 @@ int64_t insert_bytes_c( cVarBytes dst, int64_t index, cBytes src );
 ----
 
 {InsertSlice}
+
+==== remove_byte_c
+[source,c]
+----
+bool remove_byte_c( cVarBytes bytes[static 1], int64_t pos );
+----
+
+{Remove}
+
+==== take_byte_c
+[source,c]
+----
+bool take_byte_c( cVarBytes bytes[static 1], int64_t pos, cByte val[static 1] );
+----
+
+{Take}

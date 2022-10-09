@@ -212,6 +212,14 @@ void qsort_int32_slice_c( cVarInt32Slice slice );
 
 {Qsort}
 
+==== remove_int32_c
+[source,c]
+----
+bool remove_int32_c( cVarInt32Slice slice[static 1], int64_t pos );
+----
+
+{Remove}
+
 ==== reverse_int32_slice_c
 [source,c]
 ----
@@ -235,3 +243,13 @@ bool sum_int32_c( cInt32Slice slice, int64_t res[static 1] );
 ----
 
 {Sum}
+
+==== take_int64_c
+[source,c]
+----
+bool take_int32_c( cVarInt32Slice slice[static 1],
+                   int64_t pos,
+                   int32_t val[static 1] );
+----
+
+{Take}
