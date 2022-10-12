@@ -122,7 +122,7 @@ LibApi bool realloc_pile_of_##FuncSuffix(                                      \
 );                                                                             \
 LibApi bool insert_##FuncSuffix(                                               \
    PileType pile[static 1], int64_t pos, ParaType val                          \
-)                                                                              \
+);                                                                             \
 LibApi bool put_##FuncSuffix( PileType pile[static 1], ParaType val );
 
 /**********************************************************/
