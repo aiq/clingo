@@ -111,13 +111,19 @@ struct PileType                                                                \
 };                                                                             \
 typedef struct PileType PileType;
 
-#define PILE_DEF_C_( Type, PileType, FuncSuffix, ParaType )                    \
+#define PILE_DEF_C_( LibApi, Type, PileType, FuncSuffix, ParaType )            \
 PILE_C_( Type, PileType )                                                      \
                                                                                \
-bool alloc_pile_of_##FuncSuffix( PileType pile[static 1], int64_t size );      \
-bool realloc_pile_of_##FuncSuffix( PileType pile[static 1], int64_t size );    \
-bool insert_##FuncSuffix( PileType pile[static 1], int64_t pos, ParaType val ) \
-bool put_##FuncSuffix( PileType pile[static 1], ParaType val );
+LibApi bool alloc_pile_of_##FuncSuffix(                                        \
+   PileType pile[static 1], int64_t size                                       \
+);                                                                             \
+LibApi bool realloc_pile_of_##FuncSuffix(                                      \
+   PileType pile[static 1], int64_t size                                       \
+);                                                                             \
+LibApi bool insert_##FuncSuffix(                                               \
+   PileType pile[static 1], int64_t pos, ParaType val                          \
+)                                                                              \
+LibApi bool put_##FuncSuffix( PileType pile[static 1], ParaType val );
 
 /**********************************************************/
 
