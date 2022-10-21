@@ -125,6 +125,16 @@ Meta is a pointer to the shared cMeta instance.
 //******************************************************************* lifecycle
 === lifecycle
 
+==== new_object_c
+[source,c]
+----
+#define new_object_c_( Type, Meta )                                            \
+   new_object_c( sizeof_c_( Type ), Meta )
+CObject* new_object_c( int64_t size, cMeta const meta[static 1] );
+----
+
+Allocates a CObject instance with a default cObjectInfo value.
+
 ==== alloc_object_c
 [source,c]
 ----

@@ -66,6 +66,11 @@ typedef struct cObjectInfo cObjectInfo;
  lifecycle
 *******************************************************************************/
 
+#define new_object_c_( Type, Meta )                                            \
+   new_object_c( sizeof_c_( Type ), Meta )
+CLINGO_API
+CObject* new_object_c( int64_t size, cMeta const meta[static 1] );
+
 #define alloc_object_c_( Type, Info )                                          \
    alloc_object_c( sizeof_c_( Type ), Info )
 CLINGO_API

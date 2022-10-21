@@ -62,8 +62,7 @@ static CDaySet* build_day_set( cDatePeriod period )
 {
    int64_t days = date_period_days_c( period );
 
-   cObjectInfo const info = default_object_info_c_( &C_DaySetMeta );
-   CDaySet* result = alloc_object_c_( CDaySet, &info );
+   CDaySet* result = new_object_c_( CDaySet, &C_DaySetMeta );
    if( result == NULL )
    {
       return NULL;

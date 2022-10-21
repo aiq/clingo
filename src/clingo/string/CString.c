@@ -61,8 +61,7 @@ CString* adopt_cstr_c( char cstr[static 1] )
       return NULL;
    }
 
-   cObjectInfo const info = default_object_info_c_( &C_StringMeta );
-   CString* result = alloc_object_c_( CString, &info );
+   CString* result = new_object_c_( CString, &C_StringMeta );
    if ( result == NULL )
    {
       return NULL;
@@ -119,8 +118,7 @@ CString* make_string_c( cChars chars )
       return NULL;
    }
 
-   cObjectInfo const info = default_object_info_c_( &C_StringMeta );
-   CString* result = alloc_object_c_( CString, &info );
+   CString* result = new_object_c_( CString, &C_StringMeta );
    if ( result == NULL )
    {
       return NULL;

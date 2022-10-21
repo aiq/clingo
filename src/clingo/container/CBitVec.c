@@ -130,8 +130,7 @@ CBitVec* new_bit_vec_c( int64_t n )
 {
    must_be_positive_c_( n );
 
-   cObjectInfo const info = default_object_info_c_( &C_BitVecMeta );
-   CBitVec* result = alloc_object_c_( CBitVec, &info );
+   CBitVec* result = new_object_c_( CBitVec, &C_BitVecMeta );
 
    if( result == NULL )
    {

@@ -34,8 +34,8 @@ CStringBuilder* make_string_builder_c( int64_t cap )
 {
    must_be_positive_c_( cap );
 
-   cObjectInfo const info = default_object_info_c_( &C_StringBuilderMeta );
-   CStringBuilder* result = alloc_object_c_( CStringBuilder, &info );
+   CStringBuilder* result = new_object_c_( CStringBuilder,
+                                           &C_StringBuilderMeta );
    if ( result == NULL )
    {
       return NULL;

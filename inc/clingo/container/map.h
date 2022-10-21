@@ -43,8 +43,7 @@ MapType* make_##FuncSuffix( int64_t size, float maxLoad )                      \
 {                                                                              \
    must_be_positive_c_( size );                                                \
                                                                                \
-   cObjectInfo const info = default_object_info_c_( &Meta );                   \
-   MapType* result = alloc_object_c_( MapType, &info );                        \
+   MapType* result = new_object_c_( MapType, &Meta );                          \
    if ( result == NULL )                                                       \
    {                                                                           \
       return NULL;                                                             \

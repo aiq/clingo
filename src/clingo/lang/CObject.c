@@ -18,6 +18,12 @@ static CObject* shift_to_object( cObjectInfo *info )
 
 *******************************************************************************/
 
+CObject* new_object_c( int64_t size, cMeta const meta[static 1] )
+{
+   cObjectInfo const info = default_object_info_c_( meta );
+   return alloc_object_c( size, &info );
+}
+
 CObject* alloc_object_c( int64_t size, cObjectInfo const info[static 1] )
 {
    must_be_positive_c_( size );

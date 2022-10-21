@@ -33,8 +33,7 @@ VecType* make_##FuncSuffix( int64_t cap )                                      \
 {                                                                              \
    must_be_positive_c_( cap );                                                 \
                                                                                \
-   cObjectInfo const info = default_object_info_c_( &Meta );                   \
-   VecType* result = alloc_object_c_( VecType, &info );                        \
+   VecType* result = new_object_c_( VecType, &Meta );                          \
    if ( result == NULL )                                                       \
    {                                                                           \
       return NULL;                                                             \
@@ -460,8 +459,7 @@ VecType* build_##FuncSuffix( int64_t cap, int64_t count, ValType* data )       \
    must_be_positive_c_( count );                                               \
    must_exist_c_( data );                                                      \
                                                                                \
-   cObjectInfo const info = default_object_info_c_( &Meta );                   \
-   VecType* result = alloc_object_c_( VecType, &info );                        \
+   VecType* result = new_object_c_( VecType, &Meta );                          \
    if ( result == NULL )                                                       \
    {                                                                           \
       return NULL;                                                             \
