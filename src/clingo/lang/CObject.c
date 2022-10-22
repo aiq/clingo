@@ -38,10 +38,10 @@ CObject* alloc_object_c( int64_t size, cObjectInfo const info[static 1] )
    return shift_to_object( objInfo );
 }
 
-CObject* custom_object_c( void* mem, cMeta const meta[static 1] )
+CObject* init_object_c( void* mem, cObjectInfo const info[static 1] )
 {
    cObjectInfo* objInfo = mem;
-   *objInfo = object_info_c_( meta, 0 );
+   *objInfo = *info;
    return shift_to_object( objInfo );
 }
 
@@ -104,6 +104,11 @@ CObject* retain_c( CObject* obj )
    }
 
    return obj;
+}
+
+CObject* stack_object_c( void* mem, cMeta const meta[static 1] )
+{
+   return init_object_c( mem, &object_info_c_( meta, c_Cleanup ) );
 }
 
 CObject* touch_c( CObject* obj )

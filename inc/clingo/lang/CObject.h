@@ -77,7 +77,7 @@ CLINGO_API
 CObject* alloc_object_c( int64_t size, cObjectInfo const info[static 1] );
 
 CLINGO_API
-CObject* custom_object_c( void* mem, cMeta const meta[static 1] );
+CObject* init_object_c( void* mem, cObjectInfo const info[static 1] );
 
 CLINGO_API
 uint32_t references_c( CObject const* obj );
@@ -98,6 +98,11 @@ CObject* release_c( CObject* obj );
 
 CLINGO_API
 CObject* retain_c( CObject* obj );
+
+#define stack_object_c_( Type, Meta )                                          \
+   stack_object_c( stack_mem_c_( sizeof_object_c_( Type ) ), (Meta) )
+CLINGO_API
+CObject* stack_object_c( void* mem, cMeta const meta[static 1] );
 
 CLINGO_API
 CObject* touch_c( CObject* obj );

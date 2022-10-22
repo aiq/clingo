@@ -1,4 +1,5 @@
 = CObject
+:xmpldir: {testroot}/clingo/lang/CObject
 
 //******************************************************************************
 //******************************************************************** Overview
@@ -146,13 +147,13 @@ CObject* alloc_object_c( int64_t size, cObjectInfo const info[static 1] );
 Allocates a CObject instance with the required overhead for the cObjectInfo
 instance.
 
-==== custom_object_c
+==== init_object_c
 [source,c]
 ----
-CObject* custom_object_c( void* mem, cMeta const meta[static 1] );
+CObject* init_object_c( void* mem, cObjectInfo const info[static 1] );
 ----
 
-Initialises allocated memory as object that will not be released.
+Initialises reserved memory as object with a specific info.
 
 ==== references_c
 [source,c]
@@ -196,6 +197,22 @@ The obj value can be NULL, this allows to chain method calls.
 [source,c]
 ----
 CString* str = retain_c( new_string_c( "test" ) );
+----
+
+==== stack_object_c
+[source,c]
+----
+#define stack_object_c_( Type, Meta )                                          \
+   stack_object_c( stack_mem_c_( sizeof_object_c_( Type ) ), (Meta) )
+CObject* stack_object_c( void* mem, cMeta const meta[static 1] );
+----
+
+Initialises reserved memory as object that will not be released.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/stack_object.c[]
 ----
 
 ==== touch_c

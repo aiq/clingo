@@ -86,7 +86,8 @@ CString* empty_string_c()
 {
    if ( emptyString == NULL )
    {
-      emptyString = custom_object_c( emptyStringBuffer, &C_StringMeta );
+      cObjectInfo* info = &object_info_c_( &C_StringMeta, 0 );
+      emptyString = init_object_c( emptyStringBuffer, info );
       if ( emptyString == NULL )
       {
          return NULL;
