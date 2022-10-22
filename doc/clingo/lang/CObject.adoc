@@ -199,12 +199,12 @@ The obj value can be NULL, this allows to chain method calls.
 CString* str = retain_c( new_string_c( "test" ) );
 ----
 
-==== stack_object_c
+==== let_object_c
 [source,c]
 ----
-#define stack_object_c_( Type, Meta )                                          \
-   stack_object_c( stack_mem_c_( sizeof_object_c_( Type ) ), (Meta) )
-CObject* stack_object_c( void* mem, cMeta const meta[static 1] );
+#define let_object_c_( Type, Meta )                                            \
+   let_object_c( stack_mem_c_( sizeof_object_c_( Type ) ), (Meta) )
+CObject* let_object_c( void* mem, cMeta const meta[static 1] );
 ----
 
 Initialises reserved memory as object that will not be released.
@@ -212,7 +212,7 @@ Initialises reserved memory as object that will not be released.
 .Example
 [source,c]
 ----
-include::{xmpldir}/stack_object.c[]
+include::{xmpldir}/let_object.c[]
 ----
 
 ==== touch_c

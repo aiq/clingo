@@ -435,7 +435,7 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/lang/chunk/prev_chunk.c
    ${TEST_DIR}/clingo/lang/chunk/valid_chunk.c
    # CObject
-   ${TEST_DIR}/clingo/lang/CObject/stack_object.c
+   ${TEST_DIR}/clingo/lang/CObject/let_object.c
    # error
    ${TEST_DIR}/clingo/lang/error/reset_error_stack.c
    ${TEST_DIR}/clingo/lang/error/write_error.c

@@ -22,7 +22,7 @@ int main( void )
 {
    init_tap_c_();
 
-   Counter* counter = stack_object_c_( Counter, &CounterMeta );
+   Counter* counter = let_object_c_( Counter, &CounterMeta );
    expect_c_( counter->val == 0 );
 
    release_c( counter );
