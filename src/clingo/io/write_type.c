@@ -484,7 +484,7 @@ bool write_bytes_c( cRecorder rec[static 1],
    return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
-bool record_escaped_char( cRecorder rec[static 1], char c )
+static inline bool record_escaped_char( cRecorder rec[static 1], char c )
 {
    switch ( c )
    {
