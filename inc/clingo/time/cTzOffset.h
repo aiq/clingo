@@ -1,5 +1,5 @@
-#ifndef CLINGO_TIME_CTZ_OFFSET_H
-#define CLINGO_TIME_CTZ_OFFSET_H
+#ifndef CLINGO_TIME_CTZOFFSET_H
+#define CLINGO_TIME_CTZOFFSET_H
 
 #include "clingo/apidecl.h"
 #include "clingo/time/cDuration.h"

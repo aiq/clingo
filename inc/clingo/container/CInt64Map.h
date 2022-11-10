@@ -1,5 +1,5 @@
-#ifndef CLINGO_CONTAINER_CINT64_MAP_H
-#define CLINGO_CONTAINER_CINT64_MAP_H
+#ifndef CLINGO_CONTAINER_CINT64MAP_H
+#define CLINGO_CONTAINER_CINT64MAP_H
 
 #include "clingo/apidecl.h"
 #include "clingo/container/map.h"

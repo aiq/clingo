@@ -1,5 +1,5 @@
-#ifndef CLINGO_TIME_CWEEK_DATE_H
-#define CLINGO_TIME_CWEEK_DATE_H
+#ifndef CLINGO_TIME_CWEEKDATE_H
+#define CLINGO_TIME_CWEEKDATE_H
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"

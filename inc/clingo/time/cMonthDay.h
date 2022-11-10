@@ -1,5 +1,5 @@
-#ifndef CLINGO_TIME_CMONTH_DAY_H
-#define CLINGO_TIME_CMONTH_DAY_H
+#ifndef CLINGO_TIME_CMONTHDAY_H
+#define CLINGO_TIME_CMONTHDAY_H
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"

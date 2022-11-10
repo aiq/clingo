@@ -1,5 +1,5 @@
-#ifndef CLINGO_STR_CSTRING_BUILDER_H
-#define CLINGO_STR_CSTRING_BUILDER_H
+#ifndef CLINGO_STRING_CSTRINGBUILDER_H
+#define CLINGO_STRING_CSTRINGBUILDER_H
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"

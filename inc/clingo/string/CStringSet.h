@@ -1,5 +1,5 @@
-#ifndef CLINGO_STR_CSTRING_SET_H
-#define CLINGO_STR_CSTRING_SET_H
+#ifndef CLINGO_STRING_CSTRINGSET_H
+#define CLINGO_STRING_CSTRINGSET_H
 
 #include "clingo/apidecl.h"
 #include "clingo/container/set.h"

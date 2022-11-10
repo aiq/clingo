@@ -1,5 +1,5 @@
-#ifndef CLINGO_STR_CSTRING_H
-#define CLINGO_STR_CSTRING_H
+#ifndef CLINGO_STRING_CSTRING_H
+#define CLINGO_STRING_CSTRING_H
 
 #include "clingo/apidecl.h"
 #include "clingo/lang/CObject.h"

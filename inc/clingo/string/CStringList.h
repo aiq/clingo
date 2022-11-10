@@ -1,5 +1,5 @@
-#ifndef CLINGO_STR_CSTRING_LIST_H
-#define CLINGO_STR_CSTRING_LIST_H
+#ifndef CLINGO_STRING_CSTRINGLIST_H
+#define CLINGO_STRING_CSTRINGLIST_H
 
 #include "clingo/apidecl.h"
 #include "clingo/container/vec.h"

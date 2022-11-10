@@ -1,5 +1,5 @@
-#ifndef CLINGO_IO_WRITE_TYPE_H
-#define CLINGO_IO_WRITE_TYPE_H
+#ifndef CLINGO_IO_WRITETYPE_H
+#define CLINGO_IO_WRITETYPE_H
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"

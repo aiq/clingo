@@ -1,5 +1,5 @@
-#ifndef CLINGO_TIME_CDAY_SET_H
-#define CLINGO_TIME_CDAY_SET_H
+#ifndef CLINGO_TIME_CDAYSET_H
+#define CLINGO_TIME_CDAYSET_H
 
 #include "clingo/apidecl.h"
 #include "clingo/lang/CObject.h"

@@ -1,5 +1,5 @@
-#ifndef CLINGO_TYPE_CCHARS_SLICE_H
-#define CLINGO_TYPE_CCHARS_SLICE_H
+#ifndef CLINGO_TYPE_CCHARSSLICE_H
+#define CLINGO_TYPE_CCHARSSLICE_H
 
 #include "clingo/apidecl.h"
 #include "clingo/type/cChars.h"

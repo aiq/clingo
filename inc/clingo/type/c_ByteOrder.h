@@ -1,5 +1,5 @@
-#ifndef CLINGO_LANG_C_BYTE_ORDER_H
-#define CLINGO_LANG_C_BYTE_ORDER_H
+#ifndef CLINGO_LANG_CBYTEORDER_H
+#define CLINGO_LANG_CBYTEORDER_H
 
 #include <stdbool.h>
 #include <stdint.h>

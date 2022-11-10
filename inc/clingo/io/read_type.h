@@ -1,5 +1,5 @@
-#ifndef CLINGO_IO_READ_TYPE_H
-#define CLINGO_IO_READ_TYPE_H
+#ifndef CLINGO_IO_READTYPE_H
+#define CLINGO_IO_READTYPE_H
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cScanner.h"

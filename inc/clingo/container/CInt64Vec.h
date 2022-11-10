@@ -1,5 +1,5 @@
-#ifndef CLINGO_CONTAINER_CINT64_VEC_H
-#define CLINGO_CONTAINER_CINT64_VEC_H
+#ifndef CLINGO_CONTAINER_CINT64VEC_H
+#define CLINGO_CONTAINER_CINT64VEC_H
 
 #include "clingo/apidecl.h"
 #include "clingo/container/vec.h"

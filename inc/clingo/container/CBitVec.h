@@ -1,5 +1,5 @@
-#ifndef CLINGO_CONTAINER_CBIT_VEC_H
-#define CLINGO_CONTAINER_CBIT_VEC_H
+#ifndef CLINGO_CONTAINER_CBITVEC_H
+#define CLINGO_CONTAINER_CBITVEC_H
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"

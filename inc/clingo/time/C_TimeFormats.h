@@ -1,5 +1,5 @@
-#ifndef CLINGO_TIME_CDATE_FORMATS_H
-#define CLINGO_TIME_CDATE_FORMATS_H
+#ifndef CLINGO_TIME_CDATEFORMATS_H
+#define CLINGO_TIME_CDATEFORMATS_H
 
 #include "clingo/apidecl.h"
 #include "clingo/type/char.h"

@@ -1,5 +1,5 @@
-#ifndef CLINGO_LANG_CRUNE_RANGE_H
-#define CLINGO_LANG_CRUNE_RANGE_H
+#ifndef CLINGO_LANG_CRUNERANGE_H
+#define CLINGO_LANG_CRUNERANGE_H
 
 #include "clingo/apidecl.h"
 #include "clingo/type/cRune.h"

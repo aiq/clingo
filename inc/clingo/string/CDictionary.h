@@ -1,5 +1,5 @@
-#ifndef CLINGO_STR_CDICTIONARY_H
-#define CLINGO_STR_CDICTIONARY_H
+#ifndef CLINGO_STRING_CDICTIONARY_H
+#define CLINGO_STRING_CDICTIONARY_H
 
 #include "clingo/apidecl.h"
 #include "clingo/container/map.h"

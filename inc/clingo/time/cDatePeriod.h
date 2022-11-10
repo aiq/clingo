@@ -1,5 +1,5 @@
-#ifndef CLINGO_TIME_CDATE_PERIOD_H
-#define CLINGO_TIME_CDATE_PERIOD_H
+#ifndef CLINGO_TIME_CDATEPERIOD_H
+#define CLINGO_TIME_CDATEPERIOD_H
 
 #include "clingo/apidecl.h"
 #include "clingo/time/cDate.h"

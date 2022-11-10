@@ -1,5 +1,5 @@
-#ifndef CLINGO_CONTAINER_CINT64_SET_H
-#define CLINGO_CONTAINER_CINT64_SET_H
+#ifndef CLINGO_CONTAINER_CINT64SET_H
+#define CLINGO_CONTAINER_CINT64SET_H
 
 #include "clingo/apidecl.h"
 #include "clingo/container/set.h"

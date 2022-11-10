@@ -1,5 +1,5 @@
-#ifndef CLINGO_IO_C_READ_WRITE_ERROR_H
-#define CLINGO_IO_C_READ_WRITE_ERROR_H
+#ifndef CLINGO_IO_CIMPEXPERROR_H
+#define CLINGO_IO_CIMPEXPERROR_H
 
 #include "clingo/apidecl.h"
 #include "clingo/lang/error.h"

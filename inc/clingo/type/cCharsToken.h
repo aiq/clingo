@@ -1,5 +1,5 @@
-#ifndef CLINGO_TYPE_CCHARS_TOKEN_H
-#define CLINGO_TYPE_CCHARS_TOKEN_H
+#ifndef CLINGO_TYPE_CCHARSTOKEN_H
+#define CLINGO_TYPE_CCHARSTOKEN_H
 
 #include "clingo/apidecl.h"
 #include "clingo/type/cChars.h"

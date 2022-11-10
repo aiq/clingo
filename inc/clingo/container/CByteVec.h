@@ -1,5 +1,5 @@
-#ifndef CLINGO_CONTAINER_CBYTE_VEC_H
-#define CLINGO_CONTAINER_CBYTE_VEC_H
+#ifndef CLINGO_CONTAINER_CBYTEVEC_H
+#define CLINGO_CONTAINER_CBYTEVEC_H
 
 #include "clingo/apidecl.h"
 #include "clingo/container/vec.h"

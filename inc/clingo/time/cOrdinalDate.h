@@ -1,5 +1,5 @@
-#ifndef CLINGO_TIME_CORDINAL_DATE_H
-#define CLINGO_TIME_CORDINAL_DATE_H
+#ifndef CLINGO_TIME_CORDINALDATE_H
+#define CLINGO_TIME_CORDINALDATE_H
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
