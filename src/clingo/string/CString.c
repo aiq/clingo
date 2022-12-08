@@ -82,7 +82,7 @@ CString* adopt_cstr_c( char cstr[static 1] )
 
 /**************************************/
 
-CString* empty_string_c()
+CString* empty_string_c( void )
 {
    if ( emptyString == NULL )
    {

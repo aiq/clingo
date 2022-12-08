@@ -26,7 +26,7 @@ typedef struct CString CString;
 
 CLINGO_API CString* adopt_cstr_c( char cstr[static 1] );
 
-CLINGO_API CString* empty_string_c();
+CLINGO_API CString* empty_string_c( void );
 
 CLINGO_API CString* make_string_c( cChars chars );
 
