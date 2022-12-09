@@ -27,6 +27,7 @@ bool init_write_float_format_c( cWriteNumFormat numFmt[static 1],
    cScanner* sca = &cstr_scanner_c_( fmt );
    numFmt->sign = parse_sign_flag_c( sca );
    numFmt->type = parse_float_format_type_c( sca );
+   numFmt->decimal = parse_decimal_c( sca );
    numFmt->precision = parse_precision_value_c( sca );
    numFmt->quote = parse_quote_value_c( sca );
    read_in_cell_c( sca, &numFmt->cell );
@@ -43,6 +44,7 @@ void dump_write_num_format_c( cWriteNumFormat const* fmt )
    printf( "memory:     %s\n", fmt->memory ? "true" : "false" );
    printf( "type:       %c\n", fmt->type );
    printf( "quote:      %s\n", fmt->quote );
+   printf( "decimal:    %c\n", fmt->decimal );
    printf( "precision:  %i\n", fmt->precision );
    printf( "cell:\n" );
    printf( "   orient:  %i\n", fmt->cell.orient );
@@ -145,28 +147,31 @@ bool parse_memory_flag_c( cScanner* sca )
    return false;
 }
 
+char parse_decimal_c( cScanner* sca )
+{
+   must_exist_c_( sca );
+
+   if ( move_if_char_c( sca, '.' ) )
+   {
+      return '.';
+   }
+   else if ( move_if_char_c( sca, ',' ) )
+   {
+      return ',';
+   }
+
+   return '.';
+}
+
 int16_t parse_precision_value_c( cScanner* sca )
 {
    must_exist_c_( sca );
 
-   if ( sca->space >= 2 ) // at least ".1"
+   int16_t val = 0;
+   int64_t size = read_int16_c_( sca, &val );
+   if ( size > 0 )
    {
-      const char* c = sca->mem;
-      if ( *c == '.' )
-      {
-         move_scanner_c( sca, 1 ); // skip "."
-
-         int16_t val = 0;
-         int64_t size = read_int16_c_( sca, &val );
-         if ( size >= 0 )
-         {
-            return val;
-         }
-         else
-         {
-            move_scanner_c( sca, -1 ); // return to start position
-         }
-      }
+      return val;
    }
 
    return -1;

@@ -224,7 +224,7 @@ The function will use \'f' as default type.
 .precision
 [cols="1,9"]
 |===
-|.n |this is the number of digits to be printed after the decimal point
+|.n |this is the number of digits to be printed after the decimal point(.n) or comma(,n)
 |===
 
 

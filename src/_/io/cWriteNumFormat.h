@@ -16,6 +16,7 @@ struct cWriteNumFormat
    bool memory;
    char type;
    char const* quote;
+   char decimal;
    int16_t precision;
    cCell cell;
 };
@@ -48,6 +49,8 @@ char const* parse_quote_value_c( cScanner* sca );
 bool parse_sign_flag_c( cScanner* sca );
 
 bool parse_memory_flag_c( cScanner* sca );
+
+char parse_decimal_c( cScanner* sca );
 
 int16_t parse_precision_value_c( cScanner* sca );
 

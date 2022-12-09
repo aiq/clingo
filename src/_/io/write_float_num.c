@@ -81,6 +81,12 @@ bool write_float_num_c( cRecorder rec[static 1],
    }
    valBuf.s = len;
 
+   for_each_c_( char*, c, valBuf )
+   {
+      if ( *c == '.' or *c == ',' )
+         *c = numFmt.decimal;
+   }
+
    // write the value in cell or plain -----------------------------------------
    cChars valChars = as_c_( cChars, valBuf );
    if ( numFmt.cell.size > 0 )
