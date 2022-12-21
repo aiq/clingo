@@ -14,6 +14,18 @@ extern inline bool is_utf8_tail_c( char c );
 extern inline int8_t utf8_length_c( char c );
 
 /*******************************************************************************
+ utf16
+*******************************************************************************/
+
+extern inline bool is_high_utf16_surrogate_c( uint16_t val );
+
+extern inline bool is_low_utf16_surrogate_c( uint16_t val );
+
+extern inline uint32_t utf16_to_utf32_c( uint16_t val, uint16_t low );
+
+extern inline uint16_t utf32_to_utf16_c( uint32_t val, uint16_t low[static 1] );
+
+/*******************************************************************************
  init
 *******************************************************************************/
 
@@ -88,6 +100,11 @@ cRune rune_c( char const cstr[static 1] )
    }
 
    return null_rune_c();
+}
+
+cRune surrogate_rune_c( uint16_t high, uint16_t low )
+{
+   return utf32_rune_c( utf16_to_utf32_c( high, low ) );
 }
 
 cRune utf16_rune_c( uint16_t val )

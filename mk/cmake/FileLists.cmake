@@ -807,7 +807,9 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/type/cRune/sub_runes.c
    ${TEST_DIR}/clingo/type/cRune/utf8_length.c
    ${TEST_DIR}/clingo/type/cRune/utf16_rune.c
+   ${TEST_DIR}/clingo/type/cRune/utf16_to_utf32.c
    ${TEST_DIR}/clingo/type/cRune/utf32_rune.c
+   ${TEST_DIR}/clingo/type/cRune/utf32_to_utf16.c
    # cRuneRange
    ${TEST_DIR}/clingo/type/cRuneRange/cRuneRange-overview.c
    # double

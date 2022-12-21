@@ -8,6 +8,7 @@
 #include "clingo/type/cByte.h"
 #include "clingo/type/cChars.h"
 #include "clingo/type/uint8.h"
+#include "clingo/type/uint16.h"
 
 /*******************************************************************************
 ********************************************************* Types and Definitions
@@ -76,6 +77,43 @@ CLINGO_API inline int8_t utf8_length_c( char c )
 }
 
 /*******************************************************************************
+ utf16
+*******************************************************************************/
+
+CLINGO_API inline bool is_high_utf16_surrogate_c( uint16_t val )
+{
+   return in_range_c_( 0xd800, val, 0xdbff );
+}
+
+CLINGO_API inline bool is_low_utf16_surrogate_c( uint16_t val )
+{
+   return in_range_c_( 0xdc00, val, 0xdfff );
+}
+
+CLINGO_API inline uint32_t utf16_to_utf32_c( uint16_t high, uint16_t low )
+{
+   if ( is_high_utf16_surrogate_c( high ) )
+   {
+      return ( high - 0xd800 ) * 0x400 + ( low - 0xdc00 ) + 0x10000;
+   }
+
+   return high;
+}
+
+CLINGO_API inline uint16_t utf32_to_utf16_c( uint32_t val,
+                                             uint16_t low[static 1] )
+{
+   if ( val > 0xffff )
+   {
+      uint16_t high = ( uint16_c_( val - 0x10000 ) / 0x400 ) + 0xd800;
+      *low = ( uint16_c_( val - 0x10000 ) % 0x400 ) + 0xdc00;
+      return high;
+   }
+
+   return uint16_c_( val );
+}
+
+/*******************************************************************************
  init
 *******************************************************************************/
 
@@ -92,6 +130,8 @@ CLINGO_API inline cRune null_rune_c()
 }
 
 CLINGO_API cRune rune_c( char const cstr[static 1] );
+
+CLINGO_API cRune surrogate_rune_c( uint16_t high, uint16_t low );
 
 CLINGO_API cRune utf16_rune_c( uint16_t val );
 

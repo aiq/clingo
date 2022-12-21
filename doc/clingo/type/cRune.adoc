@@ -110,6 +110,54 @@ An invalid c value leads to the result 0.
 include::{xmpldir}/utf8_length.c[]
 ----
 
+//*********************************************************************** utf16
+=== utf16
+
+==== is_high_utf16_surrogate_c
+[source,c]
+----
+bool is_high_utf16_surrogate_c( uint16_t val );
+----
+
+Returns true if the value represents a UTF-16 high surrogate value.
+
+==== is_low_utf16_surrogate_c
+[source,c]
+----
+bool is_low_utf16_surrogate_c( uint16_t val );
+----
+
+Returns true if the value represents a UTF-16 low surrogate value.
+
+==== utf16_to_utf32_c
+[source,c]
+----
+uint32_t utf16_to_utf32_c( uint16_t high, uint16_t low );
+----
+
+Converts a UTF-16 surrogate pair to an UTF-32 value.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/utf16_to_utf32.c[]
+----
+
+==== utf32_to_utf16_c
+[source,c]
+----
+uint16_t utf32_to_utf16_c( uint32_t val, uint16_t low[static 1] );
+----
+
+Converts a UTF-32 in to a UTF-16 surrogate pair.
+The function returns the high surrogate and writes the low surrogate into low.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/utf32_to_utf16.c[]
+----
+
 //************************************************************************ init
 === init
 
