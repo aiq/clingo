@@ -91,6 +91,11 @@ inline void* realloc_array_c( void* ptr, int64_t num, int64_t size )
  general
 *******************************************************************************/
 
+#define buf_c_( Type )                                                         \
+(                                                                              \
+   (Type[1]){}                                                                 \
+)
+
 #define stack_mem_c_( Size )                                                   \
 (                                                                              \
    (void*)((uint8_t[]){ [(Size)-1]=0 })                                        \

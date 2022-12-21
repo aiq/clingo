@@ -121,6 +121,24 @@ The function has three possible return values:
 //********************************************************************* general
 === general
 
+[id='buf_c_']
+==== buf_c_
+[source,c]
+----
+#define buf_c_( Type )
+----
+
+Creates a pointer to a unutilized value of Type.
+
+[id='stack_mem_c_']
+==== stack_mem_c_
+[source,c]
+----
+#define stack_mem_c_( Size )
+----
+
+Allows to create a fix number of bytes on the stack.
+
 [id='ref_c_']
 ==== ref_c_
 [source,c]
