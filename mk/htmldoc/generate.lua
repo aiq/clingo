@@ -518,7 +518,7 @@ end
 
 local function logodiv( path ) --> html
    local img = '<img src="'..path..'" alt="clingo-logo.svg">'
-   return '<div id="logo-area">'..ahref( img, "https://clingo.aiq.dk/" )..'</div>'
+   return '<div id="logo-area">'..ahref( img, "https://code.aiq.dk/clingo/" )..'</div>'
 end
 
 local function tochtml( adoc, logopath ) --> html

@@ -1,7 +1,7 @@
 = clingo
 
 clingo is a standard library for C.
-You can explore the documentation at the https://clingo.aiq.dk/[website].
+You can explore the documentation at the https://code.aiq.dk/clingo/[website].
 
 == Build & Test
 
