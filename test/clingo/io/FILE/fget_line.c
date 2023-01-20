@@ -46,7 +46,7 @@ int main( void )
 
    int64_t i = 0;
    int32_t const n = 8;
-   cVarChars buf = char_buffer_c_( n );
+   cVarChars buf = var_chars_c_( n );
    bool fin = false;
    while ( fget_line_c( file, n, &buf, &fin ) )
    {

@@ -47,11 +47,11 @@ cChars c_c( char const cstr[static 1] );
 Function to create a chars value from a C-string.
 The '\0' from the c string will not be an element of chars.
 
-[id='char_buffer_c_']
-==== char_buffer_c_
+[id='var_chars_c_']
+==== var_chars_c_
 [source,c]
 ----
-#define char_buffer_c_( Size )
+#define var_chars_c_( Size )
 ----
 
 Macro function that initializes a cVarChars that can store Size values.

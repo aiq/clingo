@@ -31,7 +31,7 @@ CLINGO_API inline cChars c_c( char const cstr[static 1] )
    return (cChars){ (int64_t)strlen( cstr ), cstr };
 }
 
-#define char_buffer_c_( Size )                                                 \
+#define var_chars_c_( Size )                                                   \
 (                                                                              \
    (cVarChars)scalars_c_( (Size), char )                                       \
 )

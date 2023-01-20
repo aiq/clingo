@@ -33,7 +33,7 @@ int main( void )
    require_c_( file != NULL );
    for_each_c_( test const*, t, tests )
    {
-      cVarChars buf = char_buffer_c_( 128 );
+      cVarChars buf = var_chars_c_( 128 );
       bool fin = false;
       fget_line_c( file, 128, &buf, &fin );
       bool res = chars_is_c( as_c_( cChars, buf ), t->exp );

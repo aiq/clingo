@@ -22,7 +22,7 @@ SLICES_C_(
  overall
 *******************************************************************************/
 
-#define byte_buffer_c_( Size )                                                 \
+#define var_bytes_c_( Size )                                                   \
 (                                                                              \
    (cVarBytes)scalars_c_( (Size), cByte )                                      \
 )

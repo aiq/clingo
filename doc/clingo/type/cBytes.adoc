@@ -38,11 +38,11 @@ include::{docroot}/clingo/_tmpl/Slice.adoc[]
 //********************************************************************* overall
 === overall
 
-[id='byte_buffer_c_']
-==== byte_buffer_c_
+[id='var_bytes_c_']
+==== var_bytes_c_
 [source,c]
 ----
-#define byte_buffer_c_( Size )
+#define var_bytes_c_( Size )
 ----
 
 Macro function that initalizes a cVarBytes that can store Size values.

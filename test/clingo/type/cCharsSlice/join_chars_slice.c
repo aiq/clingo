@@ -8,7 +8,7 @@ int main( void )
 {
    init_tap_c_();
 
-   cVarChars buf = char_buffer_c_( 128 );
+   cVarChars buf = var_chars_c_( 128 );
    cCharsSlice slice = cs_c_( "abc", "def", "gh", "ij", "klmn", "opq" );
 
    expect_( join_chars_slice_c_( slice, "", buf ),

@@ -40,7 +40,7 @@ CLINGO_API inline FILE* open_file_c( cChars path,
                                      char const mode[static 1],
                                      cErrorStack es[static 1] )
 {
-   cVarChars buf = char_buffer_c_( 4099 );
+   cVarChars buf = var_chars_c_( 4099 );
    char const* cstrPath = make_cstr_c( buf, path );
    if ( cstrPath == NULL )
    {
@@ -67,7 +67,7 @@ CLINGO_API inline FILE* open_file_c( cChars path,
 
 CLINGO_API inline bool remove_file_c( cChars path, cErrorStack es[static 1] )
 {
-   cVarChars buf = char_buffer_c_( 4099 );
+   cVarChars buf = var_chars_c_( 4099 );
    char const* cstrPath = make_cstr_c( buf, path );
    if ( cstrPath == NULL )
    {
