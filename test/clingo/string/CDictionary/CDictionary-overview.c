@@ -31,7 +31,7 @@ int main( void )
 
    CString const* key;
    CString const* val;
-   iterate_map_c_( itr, key, val, dict, next_in_dictionary_c )
+   iterate_map_c_( itr, &key, &val, dict, next_in_dictionary_c )
    {
       cRecorder* rec = &recorder_c_( 128 );
       write_c_( rec, "{s} -> {s}", scstr_c( key ), scstr_c( val ) );

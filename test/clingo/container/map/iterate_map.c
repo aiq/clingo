@@ -16,7 +16,7 @@ int main( void )
    int64_t res = 0;
    int64_t const* key;
    int64_t const* val;
-   iterate_map_c_( itr, key, val, map, next_in_int64_map_c )
+   iterate_map_c_( itr, &key, &val, map, next_in_int64_map_c )
    {
       res += *key * *val;
    }    

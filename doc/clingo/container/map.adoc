@@ -518,7 +518,7 @@ Returns true if a map is empty, otherwise false.
 ==== iterate_map_c_
 [source,c]
 ----
-#define iterate_map_c_( Itr, KeyPtr, ValPtr, Map, Func )
+#define iterate_map_c_( Itr, KeyPop, ValPop, Map, Func )
 ----
 
 Macro function to define a for statement to iterate over all elements in a map.

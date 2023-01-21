@@ -718,11 +718,11 @@ CLINGO_API inline bool map_is_empty_c( cMapInfo const info[static 1] )
  itr
 *******************************************************************************/
 
-#define iterate_map_c_( Itr, KeyPtr, ValPtr, Map, Func )                       \
+#define iterate_map_c_( Itr, KeyPop, ValPop, Map, Func )                       \
 for (                                                                          \
-   cMapItr Itr = Func( Map, start_map_itr_c(), &KeyPtr, &ValPtr );             \
+   cMapItr Itr = Func( Map, start_map_itr_c(), KeyPop, ValPop );               \
    map_itr_is_valid_c( Itr );                                                  \
-   Itr = Func( Map, Itr, &KeyPtr, &ValPtr )                                    \
+   Itr = Func( Map, Itr, KeyPop, ValPop )                                      \
 )
 
 CLINGO_API inline cMapItr start_map_itr_c()

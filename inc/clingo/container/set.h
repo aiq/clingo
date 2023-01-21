@@ -292,11 +292,11 @@ CLINGO_API inline bool set_is_empty_c( cSetInfo const info[static 1] )
  itr
 *******************************************************************************/
 
-#define iterate_set_c_( Itr, ValPtr, Map, Func )                               \
+#define iterate_set_c_( Itr, ValPop, Map, Func )                               \
 for (                                                                          \
-   cSetItr Itr = Func( Map, start_map_itr_c(), &ValPtr );                      \
+   cSetItr Itr = Func( Map, start_map_itr_c(), ValPop );                       \
    map_itr_is_valid_c( Itr );                                                  \
-   Itr = Func( Map, Itr, &ValPtr )                                             \
+   Itr = Func( Map, Itr, ValPop )                                              \
 )
 
 CLINGO_API inline cSetItr start_set_itr_c()

@@ -15,7 +15,7 @@ int main( void )
 
    int64_t res = 0;
    int64_t const* val;
-   iterate_set_c_( itr, val, set, next_in_int64_set_c )
+   iterate_set_c_( itr, &val, set, next_in_int64_set_c )
    {
       res += *val;
    }

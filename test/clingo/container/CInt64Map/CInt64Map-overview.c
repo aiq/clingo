@@ -15,7 +15,7 @@ void print_map( CInt64Map const* map )
 {
    int64_t const* key;
    int64_t const* val;
-   iterate_map_c_( itr, key, val, map, next_in_int64_map_c )
+   iterate_map_c_( itr, &key, &val, map, next_in_int64_map_c )
    {
       cRecorder* rec = &recorder_c_( 128 );
       write_c_( rec, "({i64}/{i64}/{i64}) ", itr, *key, *val );
