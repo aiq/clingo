@@ -357,7 +357,7 @@ bool move_to_rune_match_c( cScanner sca[static 1], c_check_rune check )
 
    cChars unscanned = unscanned_chars_c_( sca );
    cRune r;
-   iterate_runes_c_( itr, r, unscanned )
+   iterate_runes_c_( itr, &r, unscanned )
    {
       if ( check( r ) )
       {
@@ -377,7 +377,7 @@ bool move_to_in_range_c( cScanner sca[static 1], cRuneRange range )
    {
       cChars unscanned = unscanned_chars_c_( sca );
       cRune r;
-      iterate_runes_c_( itr, r, unscanned )
+      iterate_runes_c_( itr, &r, unscanned )
       {
          offset = index_of_c_( unscanned, itr );
          if ( in_rune_range_c( range, r ) )
@@ -498,7 +498,7 @@ bool move_while_any_rune_c( cScanner sca[static 1], cChars set )
    {
       cChars unscanned = unscanned_chars_c_( sca );
       cRune r;
-      iterate_runes_c_( itr, r, unscanned )
+      iterate_runes_c_( itr, &r, unscanned )
       {
          offset = index_of_c_( unscanned, itr );
          if ( not find_rune_c( set, r ) )
@@ -521,7 +521,7 @@ bool move_while_rune_c( cScanner sca[static 1], cRune r )
    {
       cChars unscanned = unscanned_chars_c_( sca );
       cRune tmp;
-      iterate_runes_c_( itr, tmp, unscanned )
+      iterate_runes_c_( itr, &tmp, unscanned )
       {
          offset = index_of_c_( unscanned, itr );
          if ( not eq_rune_c( r, tmp ) )
@@ -544,7 +544,7 @@ bool move_while_rune_match_c( cScanner sca[static 1], c_check_rune check )
    {
       cChars unscanned = unscanned_chars_c_( sca );
       cRune r;
-      iterate_runes_c_( itr, r, unscanned )
+      iterate_runes_c_( itr, &r, unscanned )
       {
          offset = index_of_c_( unscanned, itr );
          if ( not check( r ) )
@@ -566,7 +566,7 @@ bool move_while_in_range_c( cScanner sca[static 1], cRuneRange range )
    {
       cChars unscanned = unscanned_chars_c_( sca );
       cRune r;
-      iterate_runes_c_( itr, r, unscanned )
+      iterate_runes_c_( itr, &r, unscanned )
       {
          offset = index_of_c_( unscanned, itr );
          if ( not in_rune_range_c( range, r ) )

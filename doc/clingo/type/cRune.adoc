@@ -414,7 +414,7 @@ include::{xmpldir}/nth_rune.c[]
 ==== iterate_runes_c_
 [source,c]
 ----
-#define iterate_runes_c_( Itr, Rune, Chars )
+#define iterate_runes_c_( Itr, RunePtr, Chars )
 ----
 
 Macro function to define a for statement to iterate over all runes in chars.

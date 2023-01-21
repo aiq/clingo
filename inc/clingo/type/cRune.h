@@ -193,10 +193,10 @@ CLINGO_API char const* nth_rune_c( cChars chars, int64_t n );
  itr
 *******************************************************************************/
 
-#define iterate_runes_c_( Itr, Rune, Chars )                                   \
-   for ( char const* Itr = next_rune_c( Chars, NULL, &Rune );                  \
+#define iterate_runes_c_( Itr, RunePtr, Chars )                                \
+   for ( char const* Itr = next_rune_c( Chars, NULL, RunePtr );                \
          Itr != NULL;                                                          \
-         Itr = next_rune_c( Chars, Itr, &Rune ) )
+         Itr = next_rune_c( Chars, Itr, RunePtr ) )
 CLINGO_API
 inline char const* next_rune_c( cChars chars,
                                 char const* itr,

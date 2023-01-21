@@ -302,7 +302,7 @@ cVarRuneSlice fill_rune_slice_c( cVarRuneSlice dst, cChars src )
 
    cRune r;
    int64_t i = 0;
-   iterate_runes_c_( itr, r, src )
+   iterate_runes_c_( itr, &r, src )
    {   
       dst.v[i] = r;
       if ( i == dst.s ) break;
@@ -317,10 +317,10 @@ cVarRuneSlice fill_rune_slice_c( cVarRuneSlice dst, cChars src )
 char const* find_any_rune_c( cChars chars, cChars set )
 {
    cRune out;
-   iterate_runes_c_( outItr, out, chars )
+   iterate_runes_c_( outItr, &out, chars )
    {
       cRune in;
-      iterate_runes_c_( inItr, in, set )
+      iterate_runes_c_( inItr, &in, set )
       {
          if ( eq_rune_c( out, in ) )
          {
@@ -334,7 +334,7 @@ char const* find_any_rune_c( cChars chars, cChars set )
 char const* find_rune_c( cChars chars, cRune r )
 {
    cRune tmp;
-   iterate_runes_c_( itr, tmp, chars )
+   iterate_runes_c_( itr, &tmp, chars )
    {
       if ( eq_rune_c( r, tmp ) )
       {
