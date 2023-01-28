@@ -4,32 +4,6 @@
  create
 *******************************************************************************/
 
-cStringBuilder* make_string_builder_c( int64_t cap )
-{
-   must_be_positive_c_( cap );
-
-   cStringBuilder* result = new_object_c_( cStringBuilder,
-                                           &C_StringBuilderMeta );
-   if ( result == NULL )
-   {
-      return NULL;
-   }
-
-   if ( not alloc_recorder_mem_c( &(result->rec), cap + 1 ) )
-   {
-      release_c( result );
-      return NULL;
-   }
-   result->len = 0;
-
-   return result;
-}
-
-cStringBuilder* new_string_builder_c()
-{
-   return make_string_builder_c( 256 );
-}
-
 bool init_string_builder_c( cStringBuilder b[static 1], int64_t cap )
 {
    if ( not alloc_recorder_mem_c( &(b->rec), cap + 1 ) )
