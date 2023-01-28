@@ -6,30 +6,32 @@ int main( void )
 {
    init_tap_c_();
 
-   CStringBuilder* builder = retain_c( make_string_builder_c( 10 ) );
+   cStringBuilder* b = &(cStringBuilder){0};
+   init_string_builder_c( b, 10 );
    cRecorder* rec = &recorder_c_( 128 );
 
-   expect_c_( string_builder_cap_c( builder ) == 10 );
-   expect_c_( string_builder_space_c( builder ) == 10 );
+   expect_c_( string_builder_cap_c( b ) == 10 );
+   expect_c_( string_builder_space_c( b ) == 10 );
 
-   expect_c_( append_cstr_c( builder, "a " ) );
-   expect_c_( append_rune_c( builder, rune_c( "⌂" ) ) );
-   expect_c_( append_cstr_c( builder, " with " ) );
+   expect_c_( append_cstr_c( b, "a " ) );
+   expect_c_( append_rune_c( b, rune_c( "⌂" ) ) );
+   expect_c_( append_cstr_c( b, " with " ) );
 
    write_int8_c_( rec, 2 );
-   expect_c_( append_recorded_c( builder, rec ) );
-   expect_c_( append_cstr_c( builder, " Windows" ) );
-   expect_c_( append_char_c( builder, '!' ) );
+   expect_c_( append_recorded_c( b, rec ) );
+   expect_c_( append_cstr_c( b, " Windows" ) );
+   expect_c_( append_char_c( b, '!' ) );
 
-   cChars built = built_chars_c( builder );
+   cChars built = built_chars_c( b );
    expect_c_( chars_is_c( built, "a ⌂ with 2 Windows!" ) );
 
-   CString* str = turn_into_string_c( builder );
+   CString* str = turn_into_string_c( b );
    expect_c_( string_is_c( str, "a ⌂ with 2 Windows!" ) );
-   expect_c_( string_builder_cap_c( builder ) == 0 );
-   expect_c_( string_builder_byte_length_c( builder ) == 0 );
+   expect_c_( string_builder_cap_c( b ) == 0 );
+   expect_c_( string_builder_byte_length_c( b ) == 0 );
+   expect_c_( b->rec.mem == NULL );
 
-   release_all_c_( builder, str );
+   release_all_c_( str );
 
    return finish_tap_c_();
 }

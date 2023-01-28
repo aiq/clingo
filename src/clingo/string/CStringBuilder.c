@@ -4,25 +4,14 @@
 
 *******************************************************************************/
 
-struct CStringBuilder
-{
-   cRecorder rec;
-   int64_t len;
-};
-
 static inline void cleanup( void* instance )
 {
-   CStringBuilder* builder = instance;
-   reset_recorder_c( &(builder->rec) );
-
-   if ( builder->rec.mem )
-   {
-      free( builder->rec.mem );
-   }
+   cStringBuilder* b = instance;
+   cleanup_string_builder_c( b );
 }
 
 cMeta const C_StringBuilderMeta = {
-   .desc = stringify_c_( CStringBuilder ),
+   .desc = stringify_c_( cStringBuilder ),
    .cleanup = &cleanup
 };
 
@@ -30,11 +19,11 @@ cMeta const C_StringBuilderMeta = {
  create
 *******************************************************************************/
 
-CStringBuilder* make_string_builder_c( int64_t cap )
+cStringBuilder* make_string_builder_c( int64_t cap )
 {
    must_be_positive_c_( cap );
 
-   CStringBuilder* result = new_object_c_( CStringBuilder,
+   cStringBuilder* result = new_object_c_( cStringBuilder,
                                            &C_StringBuilderMeta );
    if ( result == NULL )
    {
@@ -51,39 +40,56 @@ CStringBuilder* make_string_builder_c( int64_t cap )
    return result;
 }
 
-CStringBuilder* new_string_builder_c()
+cStringBuilder* new_string_builder_c()
 {
    return make_string_builder_c( 256 );
+}
+
+bool init_string_builder_c( cStringBuilder b[static 1], int64_t cap )
+{
+   if ( not alloc_recorder_mem_c( &(b->rec), cap + 1 ) )
+   {
+      return false;
+   }
+   b->len = 0;
+
+   return b;
+}
+
+void cleanup_string_builder_c( cStringBuilder b[static 1] )
+{
+   reset_recorder_c( &(b->rec) );
+
+   if ( b->rec.mem )
+   {
+      free( b->rec.mem );
+   }
 }
 
 /*******************************************************************************
  manage
 *******************************************************************************/
 
-void reset_string_builder_c( CStringBuilder* builder )
+void reset_string_builder_c( cStringBuilder b[static 1] )
 {
-   must_exist_c_( builder );
+   if ( recorder_cap_c( &(b->rec) ) == 0 ) return;
 
-   if ( recorder_cap_c( &(builder->rec) ) == 0 ) return;
-
-   reset_recorder_c( &(builder->rec) );
-   builder->len = 0;
+   reset_recorder_c( &(b->rec) );
+   b->len = 0;
    {
-      char* tmp = builder->rec.mem;
+      char* tmp = b->rec.mem;
       *tmp = '\0';
    }
 }
 
-bool resize_string_builder_c( CStringBuilder* builder, int64_t cap )
+bool resize_string_builder_c( cStringBuilder b[static 1], int64_t cap )
 {
-   must_exist_c_( builder );
-
-   if ( cap < builder->rec.pos + 1 )
+   if ( cap < b->rec.pos + 1 )
    {
       return false;
    }
 
-   if ( not realloc_recorder_mem_c( &(builder->rec), cap + 1 ) )
+   if ( not realloc_recorder_mem_c( &(b->rec), cap + 1 ) )
    {
       return false;
    }
@@ -91,65 +97,50 @@ bool resize_string_builder_c( CStringBuilder* builder, int64_t cap )
    return true;
 }
 
-int64_t string_builder_byte_length_c( CStringBuilder const* builder )
+int64_t string_builder_byte_length_c( cStringBuilder const b[static 1] )
 {
-   must_exist_c_( builder );
-
-   return builder->rec.pos;
+   return b->rec.pos;
 }
 
-int64_t string_builder_cap_c( CStringBuilder const* builder )
+int64_t string_builder_cap_c( cStringBuilder const b[static 1] )
 {
-   must_exist_c_( builder );
-
-   int64_t cap = recorder_cap_c( &(builder->rec) );
+   int64_t cap = recorder_cap_c( &(b->rec) );
    return cap > 0 ? ( cap - 1 ) : 0;
 }
 
-int64_t string_builder_length_c( CStringBuilder const* builder )
+int64_t string_builder_length_c( cStringBuilder const b[static 1] )
 {
-   must_exist_c_( builder );
-
-   return builder->len;
+   return b->len;
 }
 
-int64_t string_builder_space_c( CStringBuilder const* builder )
+int64_t string_builder_space_c( cStringBuilder const b[static 1] )
 {
-   must_exist_c_( builder );
-
-   return builder->rec.space - 1;
+   return b->rec.space - 1;
 }
 
 /*******************************************************************************
  access
 *******************************************************************************/
 
-cChars built_chars_c( CStringBuilder const* builder )
+cChars built_chars_c( cStringBuilder const b[static 1] )
 {
-   must_exist_c_( builder );
-
-   cRecorder const* rec = &(builder->rec);
+   cRecorder const* rec = &(b->rec);
    return recorded_chars_c( rec );
 }
 
-char const* built_cstr_c( const CStringBuilder* builder )
+char const* built_cstr_c( const cStringBuilder b[static 1] )
 {
-   must_exist_c_( builder );
-
-   cRecorder const* rec = &(builder->rec);
+   cRecorder const* rec = &(b->rec);
    return recorder_cap_c( rec ) > 0 ? recorded_chars_c( rec ).v :
                                       "";
 }
 
-CString* turn_into_string_c( CStringBuilder* builder )
+CString* turn_into_string_c( cStringBuilder b[static 1] )
 {
-   must_exist_c_( builder );
-
-   cRecorder* rec = &(builder->rec);
+   cRecorder* rec = &(b->rec);
 
    if ( not realloc_recorder_mem_c( rec, rec->pos + 1 ) )
    {
-      printf( "not able to resize\n" );
       return NULL;
    }
 
@@ -165,7 +156,7 @@ CString* turn_into_string_c( CStringBuilder* builder )
 
    rec->mem = NULL;
    rec->space = 0;
-   builder->len = 0;
+   b->len = 0;
    return res;
 }
 
@@ -173,14 +164,13 @@ CString* turn_into_string_c( CStringBuilder* builder )
  append
 *******************************************************************************/
 
-static bool append( CStringBuilder* builder, cChars chars, int64_t len )
+static bool append( cStringBuilder b[static 1], cChars chars, int64_t len )
 {
-   cRecorder* rec = &(builder->rec);
+   cRecorder* rec = &(b->rec);
 
    if ( is_empty_c_( chars ) )
    {
       return true;
-      return builder;
    }
 
    if ( rec->space < chars.s+1 )
@@ -203,22 +193,18 @@ static bool append( CStringBuilder* builder, cChars chars, int64_t len )
       *tmp = '\0';
    }
 
-   builder->len = len;
+   b->len = len;
 
    return true;
 }
 
-bool append_char_c( CStringBuilder* builder, char c )
+bool append_char_c( cStringBuilder b[static 1], char c )
 {
-   must_exist_c_( builder );
-
-   return append( builder, (cChars){ 1, &c }, 1 );
+   return append( b, (cChars){ 1, &c }, 1 );
 }
 
-bool append_chars_c( CStringBuilder* builder, cChars chars )
+bool append_chars_c( cStringBuilder b[static 1], cChars chars )
 {
-   must_exist_c_( builder );
-
    if ( is_empty_c_( chars ) )
    {
       return true;
@@ -230,33 +216,30 @@ bool append_chars_c( CStringBuilder* builder, cChars chars )
       return false;
    }
 
-   return append( builder, chars, len );
+   return append( b, chars, len );
 }
 
 extern inline
-bool append_cstr_c( CStringBuilder* builder, char const cstr[static 1] );
+bool append_cstr_c( cStringBuilder b[static 1], char const cstr[static 1] );
 
 extern inline
-bool append_recorded_c( CStringBuilder* builder, cRecorder rec[static 1] );
+bool append_recorded_c( cStringBuilder b[static 1], cRecorder rec[static 1] );
 
-bool append_rune_c( CStringBuilder* builder, cRune rune )
+bool append_rune_c( cStringBuilder b[static 1], cRune rune )
 {
-   must_exist_c_( builder );
-
    if ( not rune_is_valid_c( rune ) )
    {
       return false;
    }
 
    cChars cs = { rune_size_c( rune ), rune.c };
-   return append( builder, cs, 1 );
+   return append( b, cs, 1 );
 }
 
-bool append_string_c( CStringBuilder* builder, CString const* str )
+bool append_string_c( cStringBuilder b[static 1], CString const* str )
 {
-   must_exist_c_( builder );
    must_exist_c_( str );
 
-   return append( builder, scs_c( str ), string_length_c( str ) );
+   return append( b, scs_c( str ), string_length_c( str ) );
 }
 
