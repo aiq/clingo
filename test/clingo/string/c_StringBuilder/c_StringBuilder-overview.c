@@ -1,6 +1,6 @@
 #include "clingo/io/write_type.h"
 #include "clingo/lang/expect.h"
-#include "clingo/string/CStringBuilder.h"
+#include "clingo/string/cStringBuilder.h"
 
 int main( void )
 {

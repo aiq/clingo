@@ -52,7 +52,7 @@ set( INC_FILES
 
    ${INC_DIR}/clingo/string/CDictionary.h
    ${INC_DIR}/clingo/string/CString.h
-   ${INC_DIR}/clingo/string/CStringBuilder.h
+   ${INC_DIR}/clingo/string/cStringBuilder.h
    ${INC_DIR}/clingo/string/CStringList.h
    ${INC_DIR}/clingo/string/CStringSet.h
 
@@ -157,7 +157,7 @@ set( SRC_FILES
 
    ${SRC_DIR}/clingo/string/CDictionary.c
    ${SRC_DIR}/clingo/string/CString.c
-   ${SRC_DIR}/clingo/string/CStringBuilder.c
+   ${SRC_DIR}/clingo/string/cStringBuilder.c
    ${SRC_DIR}/clingo/string/CStringList.c
    ${SRC_DIR}/clingo/string/CStringSet.c
 
@@ -555,8 +555,8 @@ set( TEST_FILES
    ${TEST_DIR}/clingo/string/CString/string_is_empty.c
    ${TEST_DIR}/clingo/string/CString/string_length.c
    ${TEST_DIR}/clingo/string/CString/sub_string.c
-   # CStringBuilder
-   ${TEST_DIR}/clingo/string/CStringBuilder/CStringBuilder-overview.c
+   # cStringBuilder
+   ${TEST_DIR}/clingo/string/cStringBuilder/cStringBuilder-overview.c
    # CStringList
    ${TEST_DIR}/clingo/string/CStringList/count_string_list_chars.c
    ${TEST_DIR}/clingo/string/CStringList/count_string_list_runes.c

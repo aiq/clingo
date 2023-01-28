@@ -11,7 +11,7 @@ Module that defines the cStringBuilder and functions to build a string.
 .Example
 [source,c]
 ----
-include::{xmpldir}/CStringBuilder-overview.c[]
+include::{xmpldir}/cStringBuilder-overview.c[]
 ----
 
 //******************************************************************************

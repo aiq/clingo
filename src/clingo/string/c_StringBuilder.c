@@ -1,19 +1,4 @@
-#include "clingo/string/CStringBuilder.h"
-
-/*******************************************************************************
-
-*******************************************************************************/
-
-static inline void cleanup( void* instance )
-{
-   cStringBuilder* b = instance;
-   cleanup_string_builder_c( b );
-}
-
-cMeta const C_StringBuilderMeta = {
-   .desc = stringify_c_( cStringBuilder ),
-   .cleanup = &cleanup
-};
+#include "clingo/string/cStringBuilder.h"
 
 /*******************************************************************************
  create
