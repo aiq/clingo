@@ -10,7 +10,7 @@ int main( void )
    println_scope_c_( rec, 256 )
    {
       write_week_date_c_( rec, wd );
-      record_endl_c( rec );
+      record_char_c( rec, '\n' );
       write_date_c_( rec, res );
    }
    expect_c_( eq_date_c( res, date_c( 2008, c_Sep, 26 ) ) );

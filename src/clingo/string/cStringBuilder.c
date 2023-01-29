@@ -132,24 +132,9 @@ static bool append( cStringBuilder b[static 1], cChars chars, int64_t len )
       return true;
    }
 
-   if ( rec->space < chars.s+1 )
-   {
-      int64_t oldSize = imax64_c( recorder_cap_c( rec ), chars.s );
-      int64_t const newSize = oldSize * 2;
-      if ( not realloc_recorder_mem_c( rec, newSize ) )
-      {
-         return false;
-      }
-   }
-
-   if ( not record_chars_c( rec, chars ) )
+   if ( not exrecord_terminated_c( rec, chars ) )
    {
       return false;
-   }
-
-   {
-      char* tmp = rec->mem;
-      *tmp = '\0';
    }
 
    b->len = len;

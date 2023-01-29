@@ -128,12 +128,12 @@ inline bool intl_write_month_c( cRecorder rec[static 1],
    else if ( fmt == 3 and spaces == 0 )
    {
       buf = get_month_abbrev_c( month, buf );
-      res = record_mem_c( rec, buf.v, buf.s );
+      res = record_mem_c( rec, buf.s, buf.v );
    }
    else if ( fmt == 4 and spaces == 0 )
    {
       buf = get_month_name_c( month, buf );
-      res = record_mem_c( rec, buf.v, buf.s );
+      res = record_mem_c( rec, buf.s, buf.v );
    }
    else
    {
@@ -178,11 +178,11 @@ inline bool intl_write_weekday_c( cRecorder rec[static 1],
          break;
       case 3:
          buf = get_weekday_abbrev_c( wd, buf );
-         res = record_mem_c( rec, buf.v, buf.s );
+         res = record_mem_c( rec, buf.s, buf.v );
          break;
       case 4:
          buf = get_weekday_name_c( wd, buf );
-         res = record_mem_c( rec, buf.v, buf.s );
+         res = record_mem_c( rec, buf.s, buf.v );
          break;
       default:
          return set_recorder_error_c( rec, c_InvalidFormatString );

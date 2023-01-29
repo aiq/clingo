@@ -93,8 +93,8 @@ extern inline cVarChars recorded_var_chars_c( cRecorder rec[static 1] );
 *******************************************************************************/
 
 extern inline bool record_mem_c( cRecorder rec[static 1],
-                                 void const* mem,
-                                 int64_t len );
+                                 int64_t len,
+                                 void const* mem );
 extern inline bool record_bytes_c( cRecorder rec[static 1], cBytes bytes );
 extern inline bool record_chars_c( cRecorder rec[static 1], cChars chars );
 
@@ -127,16 +127,6 @@ bool record_chars_slice_c( cRecorder rec[static 1],
 extern inline bool record_cstr_c( cRecorder rec[static 1],
                                   char const str[static 1] );
 
-bool record_endl_c( cRecorder rec[static 1] )
-{
-   return record_char_c( rec, '\n' );
-}
-
-bool record_ends_c( cRecorder rec[static 1] )
-{
-   return record_char_c( rec, '\0' );
-}
-
 bool record_pad_c( cRecorder rec[static 1], char c, int64_t n )
 {
    if ( not in_range_c_( 0, n, rec->space ) ) return false;
@@ -152,6 +142,9 @@ bool record_pad_c( cRecorder rec[static 1], char c, int64_t n )
 
    return true;
 }
+
+extern inline bool record_terminated_c( cRecorder rec[static 1],
+                                        cChars chars );
 
 bool recordf_c( cRecorder rec[static 1], char const format[static 1], ... )
 {
@@ -174,6 +167,18 @@ bool recordf_c( cRecorder rec[static 1], char const format[static 1], ... )
    move_recorder_c( rec, res );
    return res;
 }
+
+/*******************************************************************************
+ exrecord
+*******************************************************************************/
+
+extern inline bool exrecord_mem_c( cRecorder rec[static 1],
+                                   int64_t len,
+                                   void const* mem );
+extern inline bool exrecord_bytes_c( cRecorder rec[static 1], cBytes bytes );
+extern inline bool exrecord_chars_c( cRecorder rec[static 1], cChars chars );
+extern inline bool exrecord_terminated_c( cRecorder rec[static 1],
+                                          cChars chars );
 
 /*******************************************************************************
 
@@ -211,7 +216,7 @@ bool record_rune_c( cRecorder rec[static 1], cRune r )
       return set_recorder_error_c( rec, c_NotAbleToRecordValue );
    }
 
-   return record_mem_c( rec, r.c, rune_size_c( r ) );
+   return record_mem_c( rec, rune_size_c( r ), r.c );
 }
 
 RECORD_FUNC_IMPL_( int8_t,   record_int8_c )
@@ -252,7 +257,7 @@ char* turn_into_cstr_c( cRecorder rec[static 1] )
 
    if ( rec->space > 0 )
    {
-      record_ends_c( rec );
+      record_char_c( rec, '\0' );
    }
    else
    {

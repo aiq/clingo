@@ -549,7 +549,7 @@ bool write_day_set_c( cRecorder rec[static 1],
             res &= record_char_c( rec, c );
             wd = next_weekday_c( wd );
          }
-         res &= record_endl_c( rec );
+         res &= record_char_c( rec, '\n' );
       }
       if ( not res )
       {

@@ -53,7 +53,7 @@
    jot_call_c_( jot_type_c_, Rec, __VA_ARGS__ )
 
 #define jotln_c_( Rec, ... )                                                   \
-   jot_c_( Rec, __VA_ARGS__ ) and record_endl_c( Rec )
+   jot_c_( Rec, __VA_ARGS__ ) and record_char_c( Rec, '\n' )
 
 // --------------------------------------------------------- generated functions
 

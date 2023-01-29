@@ -308,28 +308,10 @@ Returns true if all char values can be written, otherwise false.
 include::{xmpldir}/record_cstr.c[]
 ----
 
-==== record_endl_c
-[source,c]
-----
-bool record_endl_c( cRecorder rec[static 1] );
-----
-
-Writes a new-line char to the memory of the recorder.
-Returns true if the char value can be written, otherwise false.
-
-==== record_ends_c
-[source,c]
-----
-bool record_ends_c( cRecorder rec[static 1] );
-----
-
-Writes a null char to the memory of the recorder.
-Returns true if the char value can be written, otherwise false.
-
 ==== record_mem_c
 [source,c]
 ----
-bool record_mem_c( cRecorder rec[static 1], void const* mem, int64_t len );
+bool record_mem_c( cRecorder rec[static 1], int64_t len, void const* mem );
 ----
 
 Writes with the value len defined number of bytes to the memory of the recorder.
@@ -374,6 +356,62 @@ The format string follows the same specifications as format in printf.
 ----
 include::{xmpldir}/recordf.c[]
 ----
+
+==== record_terminated_c
+[source,c]
+----
+bool record_terminated_c( cRecorder rec[static 1], cChars chars );
+----
+
+Writes the char values of the chars to the memory of the recorder and appends a
+null char at the end.
+The null char will not be part of the recorded.
+Returns true if all char values can be written, otherwise false.
+
+//******************************************************************** exrecord
+=== exrecord
+
+==== exrecord_bytes_c
+[source,c]
+----
+bool exrecord_bytes_c( cRecorder rec[static 1], cBytes bytes );
+----
+
+Writes the byte values of the byte slice to the memory of the recorder.
+Extends via reallocs the memory if more space is needed.
+Returns true if all byte values can be written, otherwise false.
+
+==== exrecord_chars_c
+[source,c]
+----
+bool exrecord_chars_c( cRecorder rec[static 1], cChars chars );
+----
+
+Writes the char values of the char slice to the memory of the recorder.
+Extends via reallocs the memory if more space is needed.
+Returns true if all char values can be written, otherwise false.
+
+==== exrecord_mem_c
+[source,c]
+----
+bool exrecord_mem_c( cRecorder rec[static 1], int64_t len, void const* mem );
+----
+
+Writes the char values of the char slice to the memory of the recorder.
+Extends via reallocs the memory if more space is needed.
+Returns true if all char values can be written, otherwise false.
+
+==== exrecord_terminated_c
+[source,c]
+----
+bool exrecord_terminated_c( cRecorder rec[static 1], cChars chars );
+----
+
+Writes the char values of the chars to the memory of the recorder and appends a
+null char at the end.
+The null char will not be part of the recorded.
+Extends via reallocs the memory if more space is needed.
+Returns true if all char values can be written, otherwise false.
 
 //***************************************************************** record type
 === record type

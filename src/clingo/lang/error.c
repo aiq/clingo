@@ -200,7 +200,7 @@ bool push_text_error_c( cErrorStack es[static 1], int n, ... )
    va_end( list );
    if ( res == false ) return false;
 
-   if ( not record_ends_c( rec ) ) return false;
+   if ( not record_char_c( rec, '\0' ) ) return false;
 
    es->space = rec->space;
    es->mem = rec->mem;

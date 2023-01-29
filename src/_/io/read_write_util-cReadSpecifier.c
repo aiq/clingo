@@ -89,7 +89,7 @@ bool read_in_read_specifier_c( cScanner sca[static 1],
          }
          if ( ok and is_last_token_c( &tok ) )
          {
-            ok = record_ends_c( rec );
+            ok = record_char_c( rec, '\0' );
          }         
          if ( not ok )
          {

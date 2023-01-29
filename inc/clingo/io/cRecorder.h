@@ -192,8 +192,8 @@ inline cVarChars recorded_var_chars_c( cRecorder rec[static 1] )
 *******************************************************************************/
 CLINGO_API
 inline bool record_mem_c( cRecorder rec[static 1],
-                          void const* mem,
-                          int64_t len )
+                          int64_t len,
+                          void const* mem )
 {
    if ( len > rec->space ) return false;
 
@@ -211,7 +211,7 @@ inline bool record_mem_c( cRecorder rec[static 1],
 CLINGO_API
 inline bool record_bytes_c( cRecorder rec[static 1], cBytes slice )
 {
-   return record_mem_c( rec, slice.v, slice.s );
+   return record_mem_c( rec, slice.s, slice.v );
 }
 
 #define record_chars_c_( Rec, Cstr )                                           \
@@ -219,7 +219,7 @@ inline bool record_bytes_c( cRecorder rec[static 1], cBytes slice )
 CLINGO_API
 inline bool record_chars_c( cRecorder rec[static 1], cChars chars )
 {
-   return record_mem_c( rec, chars.v, chars.s );
+   return record_mem_c( rec, chars.s, chars.v );
 }
 
 #define record_chars_slice_c_( Rec, Slice, Sep )                               \
@@ -236,23 +236,77 @@ inline bool record_cstr_c( cRecorder rec[static 1],
    int64_t size = 0;
    if ( uint64_to_int64_c( strlen( str ), &size ) )
    {
-      return record_mem_c( rec, str, size + 1 );
+      return record_mem_c( rec, size + 1, str );
    }
 
    return false;
 }
 
 CLINGO_API
-bool record_endl_c( cRecorder rec[static 1] );
-
-CLINGO_API
-bool record_ends_c( cRecorder rec[static 1] );
-
-CLINGO_API
 bool record_pad_c( cRecorder rec[static 1], char c, int64_t n );
 
 CLINGO_API
+inline bool record_terminated_c( cRecorder rec[static 1],
+                                 cChars chars )
+{
+   if ( chars.s+1 > rec->space ) return false;
+
+   record_mem_c( rec, chars.s, chars.v );
+   char* tmp = rec->mem;
+   *tmp = '\0';
+
+   return true;
+}
+
+CLINGO_API
 bool recordf_c( cRecorder rec[static 1], char const format[static 1], ... );
+
+/*******************************************************************************
+ exrecord
+*******************************************************************************/
+
+CLINGO_API inline bool exrecord_mem_c( cRecorder rec[static 1],
+                                       int64_t len,
+                                       void const* mem )
+{
+   if ( len > rec->space )
+   {
+      int64_t oldSize = imax64_c( recorder_cap_c( rec ), len );
+      int64_t const newSize = oldSize * 2;
+      if ( not realloc_recorder_mem_c( rec, newSize ) )
+      {
+         return false;
+      }
+   }
+
+   return record_mem_c( rec, len, mem );
+}
+
+CLINGO_API inline bool exrecord_bytes_c( cRecorder rec[static 1], cBytes bytes )
+{
+   return exrecord_mem_c( rec, bytes.s, bytes.v );
+}
+
+CLINGO_API inline bool exrecord_chars_c( cRecorder rec[static 1], cChars chars )
+{
+   return exrecord_mem_c( rec, chars.s, chars.v );
+}
+
+CLINGO_API inline bool exrecord_terminated_c( cRecorder rec[static 1],
+                                              cChars chars )
+{
+   if ( chars.s+1 > rec->space )
+   {
+      int64_t oldSize = imax64_c( recorder_cap_c( rec ), chars.s+1 );
+      int64_t const newSize = oldSize * 2;
+      if ( not realloc_recorder_mem_c( rec, newSize ) )
+      {
+         return false;
+      }
+   }
+
+   return record_terminated_c( rec, chars );
+}
 
 /*******************************************************************************
  record type

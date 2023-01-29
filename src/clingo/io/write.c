@@ -247,7 +247,7 @@ bool writeln_impl_c( cRecorder rec[static 1],
       return false;
    }
 
-   if ( not record_endl_c( rec ) )
+   if ( not record_char_c( rec, '\n' ) )
    {
       return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
    }
