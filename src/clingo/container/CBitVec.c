@@ -737,7 +737,7 @@ static inline int64_t count_bit_str( cScanner sca[static 1],
          endPos = sca->pos;
          ++num;
       }
-      else if ( move_if_char_match_c( sca, isspace ) )
+      else if ( move_if_char_match_c( sca, char_is_space_c ) )
       {
          // nothing to do
       }
@@ -780,21 +780,21 @@ static inline int64_t count_list_size( cScanner sca[static 1],
    uint32_t num = 0;
    while ( true )
    {
-      move_while_char_match_c( sca, isspace );
+      move_while_char_match_c( sca, char_is_space_c );
       if ( not read_uint32_c_( sca, &num ) ) break;
 
       endPos = sca->pos;
 
-      move_while_char_match_c( sca, isspace );
+      move_while_char_match_c( sca, char_is_space_c );
       if ( move_if_char_c( sca, '-' ) )
       {
-         move_while_char_match_c( sca, isspace );
+         move_while_char_match_c( sca, char_is_space_c );
          if ( not read_uint32_c_( sca, &num ) ) break;
 
          endPos = sca->pos;
       }
 
-      move_while_char_match_c( sca, isspace );
+      move_while_char_match_c( sca, char_is_space_c );
       if ( not move_if_char_c( sca, ',') ) break;
    }
    int64_t len = endPos - oldPos;
@@ -808,13 +808,13 @@ static inline void read_list( cScanner sca[static 1], CBitVec* vec )
    while ( sca->space > 0 )
    {
       uint32_t min = 0;
-      move_while_char_match_c( sca, isspace );
+      move_while_char_match_c( sca, char_is_space_c );
       if ( !read_uint32_c_( sca, &min ) ) must_be_c_( false );
 
-      move_while_char_match_c( sca, isspace );
+      move_while_char_match_c( sca, char_is_space_c );
       if ( move_if_char_c( sca, '-' ) )
       {
-         move_while_char_match_c( sca, isspace );
+         move_while_char_match_c( sca, char_is_space_c );
          uint32_t max = 0;
          if ( !read_uint32_c_( sca, &max ) ) must_be_c_( false );
 
@@ -826,7 +826,7 @@ static inline void read_list( cScanner sca[static 1], CBitVec* vec )
          set_on_bit_vec_c( vec, min, 1 );
       }
 
-      move_while_char_match_c( sca, isspace );
+      move_while_char_match_c( sca, char_is_space_c );
       move_if_char_c( sca, ',' );
    }
 }

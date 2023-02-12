@@ -18,7 +18,7 @@ int main( void )
    init_tap_c_();
 
    testSlice tests = slice_c_( test,
-      t_( "..!Hello, clingo!..", ispunct, "Hello, clingo!.." )
+      t_( "..!Hello, clingo!..", char_is_punct_c, "Hello, clingo!.." )
    );
 
    for_each_c_( test const*, t, tests )

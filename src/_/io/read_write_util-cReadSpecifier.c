@@ -56,7 +56,7 @@ bool read_in_read_specifier_c( cScanner sca[static 1],
    spec->withDst = not move_if_char_c( sca, '!' ); // ----------------- withDst
 
    char const* typeStr = sca->mem; // ------------------------------------ type
-   if ( not move_while_char_match_c( sca, isalnum ) )
+   if ( not move_while_char_match_c( sca, char_is_alnum_c ) )
    {
       move_scanner_to_c( sca, initPos );
       return false;

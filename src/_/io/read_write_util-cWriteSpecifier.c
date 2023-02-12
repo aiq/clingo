@@ -24,7 +24,7 @@ bool read_in_write_specifier_c( cScanner sca[static 1],
    }
 
    char const* typeStr = sca->mem; // ------------------------------------ type
-   if ( not move_while_char_match_c( sca, isalnum ) )
+   if ( not move_while_char_match_c( sca, char_is_alnum_c ) )
    {
       move_scanner_to_c( sca, initPos );
       return false;

@@ -9,21 +9,21 @@
 
 *******************************************************************************/
 
-static inline c_check_char getCommandFunc( int c )
+static inline c_check_char getCommandFunc( char c )
 {
    switch ( c )
    {
-      case 'a': return isalpha;
-      case 'c': return iscntrl;
-      case 'd': return isdigit;
-      case 'g': return isgraph;
-      case 'l': return islower;
-      case 'o': return isprint;
-      case 'p': return ispunct;
-      case 's': return isspace;
-      case 'u': return isupper;
-      case 'w': return isalnum;
-      case 'x': return isxdigit;
+      case 'a': return char_is_alpha_c;
+      case 'c': return char_is_cntrl_c;
+      case 'd': return char_is_digit_c;
+      case 'g': return char_is_graph_c;
+      case 'l': return char_is_lower_c;
+      case 'o': return char_is_print_c;
+      case 'p': return char_is_punct_c;
+      case 's': return char_is_space_c;
+      case 'u': return char_is_upper_c;
+      case 'w': return char_is_alnum_c;
+      case 'x': return char_is_hex_c;
          break;
       default:
          return NULL;
@@ -31,13 +31,13 @@ static inline c_check_char getCommandFunc( int c )
    }
 }
 
-static inline int validCommandType( int c )
+static inline bool validCommandType( char c )
 {
    return c == '/' or
           c == '[';
 }
 
-static inline int validCommandOp( int c )
+static inline bool validCommandOp( char c )
 {
    return c == '=' or
           c == '*' or
@@ -46,7 +46,7 @@ static inline int validCommandOp( int c )
           c == '?';
 }
 
-static inline int validCommandFunc( int c )
+static inline bool validCommandFunc( char c )
 {
    return getCommandFunc( c ) != NULL;
 }

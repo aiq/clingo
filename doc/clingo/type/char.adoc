@@ -108,3 +108,95 @@ The function return -1 if the char does not represent a valid octal value.
 include::{xmpldir}/oct_char_value.c[]
 ----
 
+//*********************************************************************** check
+=== check
+
+==== char_is_alnum_c
+[source,c]
+----
+bool char_is_alnum_c( char c );
+----
+
+Checks whether c is either a decimal digit or an uppercase or lowercase ascii
+letter.
+
+==== char_is_alpha_c
+[source,c]
+----
+bool char_is_alpha_c( char c );
+----
+
+Checks whether c is either an uppercase or lowercase ascii letter.
+
+==== char_is_cntrl_c
+[source,c]
+----
+bool char_is_cntrl_c( char c );
+----
+
+Checks whether c is a control character.
+
+==== char_is_digit_c
+[source,c]
+----
+bool char_is_digit_c( char c );
+----
+
+Checks whether c is a decimal digit character.
+
+==== char_is_graph_c
+[source,c]
+----
+bool char_is_graph_c( char c );
+----
+
+Checks whether c is a ascii character with graphical representation.
+
+==== char_is_hex_c
+[source,c]
+----
+bool char_is_hex_c( char c );
+----
+
+Checks whether c is a hexdecimal digit character.
+
+==== char_is_lower_c
+[source,c]
+----
+bool char_is_lower_c( char c );
+----
+
+Checks whether c is a lowercase letter.
+
+==== char_is_print_c
+[source,c]
+----
+bool char_is_print_c( char c );
+----
+
+A printable character is a character that occupies a printing position on a
+display.
+
+==== char_is_punct_c
+[source,c]
+----
+bool char_is_punct_c( char c );
+----
+
+Checks whether c is a punctuation character.
+
+==== char_is_space_c
+[source,c]
+----
+bool char_is_space_c( char c );
+----
+
+Checks whether c is a white-space character.
+
+==== char_is_upper_c
+[source,c]
+----
+bool char_is_upper_c( char c );
+----
+
+Checks if parameter c is an uppercase alphabetic letter.
