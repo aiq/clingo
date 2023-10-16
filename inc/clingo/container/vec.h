@@ -383,7 +383,7 @@ typedef struct VecType VecType;                                                \
 LibApi extern cMeta const Meta;                                                \
 /**************************************/                                       \
 LibApi VecType* make_##FuncSuffix( int64_t cap );                              \
-LibApi VecType* new_##FuncSuffix();                                            \
+LibApi VecType* new_##FuncSuffix( void );                                      \
 /**************************************/                                       \
 LibApi ValType const* data_of_##FuncSuffix( VecType const* vec );              \
 LibApi ValType* var_data_of_##FuncSuffix( VecType* vec );                      \

@@ -15,7 +15,7 @@ int main( void )
 {
    init_tap_c_();
 
-   CByteVec* vec = new_byte_vec_c( 2 );
+   CByteVec* vec = make_byte_vec_c( 2 );
    for ( cByte byte = 0x00; byte < 32; ++byte )
    {
       require_c_( add_to_byte_vec_c( vec, byte ) );
