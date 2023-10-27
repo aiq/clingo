@@ -48,18 +48,6 @@ CLINGO_API inline bool eq_rgb24_c( cRgb24 a, cRgb24 b )
           a.blue  == b.blue;
 }
 
-#define read_rgb24_c_( Sca, Rgb )                                              \
-   read_rgb24_c( (Sca), (Rgb), "" )
-CLINGO_API bool read_rgb24_c( cScanner sca[static 1],
-                              cRgb24 rgb[static 1],
-                              char const fmt[static 1] );
-
-#define write_rgb24_c_( Rec, Rgb )                                             \
-   write_rgb24_c( (Rec), (Rgb), "" )
-CLINGO_API bool write_rgb24_c( cRecorder rec[static 1],
-                               cRgb24 rgb,
-                               char const fmt[static 1] );
-
 /*******************************************************************************
  
 *******************************************************************************/

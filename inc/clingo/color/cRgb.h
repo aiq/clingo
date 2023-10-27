@@ -44,16 +44,4 @@ CLINGO_API cRgb24 rgb24_from_rgb_c( cRgb rgb );
    eq_rgb_c( (A), (B), FLT_EPSILON )
 CLINGO_API bool eq_rgb_c( cRgb a, cRgb b, float epsilon );
 
-#define read_rgb_c_( Sca, Rgb )                                                \
-   read_rgb_c( (Sca), (Rgb), "" )
-CLINGO_API bool read_rgb_c( cScanner sca[static 1],
-                            cRgb rgb[static 1],
-                            char const fmt[static 1] );
-
-#define write_rgb_c_( Rec, Rgb )                                               \
-   write_rgb_c( (Rec), (Rgb), "" )
-CLINGO_API bool write_rgb_c( cRecorder rec[static 1],
-                             cRgb rgb,
-                             char const fmt[static 1] );
-
 #endif

@@ -45,16 +45,4 @@ CLINGO_API inline bool eq_cmyk32_c( cCmyk32 a, cCmyk32 b )
           a.key     == b.key;
 }
 
-#define read_cmyk32_c_( Sca, Cmyk )                                            \
-   read_cmyk32_c( (Sca), (Cmyk), "" )
-CLINGO_API bool read_cmyk32_c( cScanner sca[static 1],
-                               cCmyk32 cmyk[static 1],
-                               char const fmt[static 1] );
-
-#define write_cmyk32_c_( Rec, Cmyk )                                           \
-   write_cmyk32_c( (Rec), (Cmyk), "" )
-CLINGO_API bool write_cmyk32_c( cRecorder rec[static 1],
-                                cCmyk32 cmyk,
-                                char const fmt[static 1] );
-
 #endif
