@@ -8,7 +8,6 @@ int main( void )
 
    cStringBuilder* b = &(cStringBuilder){0};
    init_string_builder_c( b, 10 );
-   cRecorder* rec = &recorder_c_( 128 );
 
    expect_c_( string_builder_cap_c( b ) == 10 );
    expect_c_( string_builder_space_c( b ) == 10 );
@@ -17,6 +16,11 @@ int main( void )
    expect_c_( append_rune_c( b, rune_c( "⌂" ) ) );
    expect_c_( append_cstr_c( b, " with " ) );
 
+   expect_c_( string_builder_length_c( b ) == 9 );
+   expect_c_( string_builder_byte_length_c( b ) == 11 );
+   cStringBuilderMark mark = mark_string_builder_c( b );
+
+   cRecorder* rec = &recorder_c_( 128 );
    write_int8_c_( rec, 2 );
    expect_c_( append_recorded_c( b, rec ) );
    expect_c_( append_cstr_c( b, " Windows" ) );
@@ -25,8 +29,16 @@ int main( void )
    cChars built = built_chars_c( b );
    expect_c_( chars_is_c( built, "a ⌂ with 2 Windows!" ) );
 
+   expect_c_( string_builder_length_c( b ) == 19 );
+   expect_c_( string_builder_byte_length_c( b ) == 21 );
+   expect_c_( reset_string_builder_to_c( b, mark ) );
+   expect_c_( string_builder_length_c( b ) == 9 );
+   expect_c_( string_builder_byte_length_c( b ) == 11 );
+   
+   expect_c_( append_cstr_c( b, "1 door!" ) );
+
    CString* str = turn_into_string_c( b );
-   expect_c_( string_is_c( str, "a ⌂ with 2 Windows!" ) );
+   expect_c_( string_is_c( str, "a ⌂ with 1 door!" ) );
    expect_c_( string_builder_cap_c( b ) == 0 );
    expect_c_( string_builder_byte_length_c( b ) == 0 );
    expect_c_( b->rec.mem == NULL );

@@ -29,6 +29,16 @@ typedef struct cStringBuilder cStringBuilder
 
 Abstract type that represents a string builder.
 
+[id='cStringBuilderMark']
+==== cStrignBuilderMark
+[source,c]
+----
+struct cStringBuilderMark
+typedef struct cStringBuilderMark cStringBuilderMark;
+----
+
+Abstract type to mark a position where the builder can be reset to.
+
 //******************************************************************************
 //******************************************************************* Functions
 //******************************************************************************
@@ -106,6 +116,24 @@ int64_ string_builder_space_c( cStringBuilder b[static 1] );
 ----
 
 Returns the number of bytes that are not allready used.
+
+//************************************************************************ mark
+== mark
+
+==== mark_string_builder_c
+----
+cStringBuilderMark mark_string_builder_c( cStringBuilder b[static 1] );
+----
+
+Returns the current position of the string builder.
+
+==== reset_string_builder_to_c
+----
+bool reset_string_builder_to_c( cStringBuilder b[static 1],
+                                cStringBuilderMark mark );
+----
+
+Resets the string builder to a postion.
 
 //********************************************************************** access
 === access

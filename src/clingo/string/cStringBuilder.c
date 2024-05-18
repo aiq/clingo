@@ -78,6 +78,32 @@ int64_t string_builder_space_c( cStringBuilder const b[static 1] )
 }
 
 /*******************************************************************************
+ mark
+*******************************************************************************/
+
+cStringBuilderMark mark_string_builder_c( cStringBuilder b[static 1] )
+{
+   return (cStringBuilderMark){
+      .pos = b->rec.pos,
+      .len = b->len
+   };
+}
+
+bool reset_string_builder_to_c( cStringBuilder b[static 1],
+                                cStringBuilderMark mark )
+{
+   if ( not in_range_c_( 0, mark.len, b->len ) )
+      return false;
+
+   if ( not move_recorder_to_c( &b->rec, mark.pos ) )
+      return false;
+
+   b->len = mark.len;
+
+   return true;
+}
+
+/*******************************************************************************
  access
 *******************************************************************************/
 
