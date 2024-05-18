@@ -137,7 +137,7 @@ static bool append( cStringBuilder b[static 1], cChars chars, int64_t len )
       return false;
    }
 
-   b->len = len;
+   b->len += len;
 
    return true;
 }
