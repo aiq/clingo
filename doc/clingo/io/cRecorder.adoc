@@ -338,25 +338,6 @@ Returns true if the writing can be executed, otherwise false.
 include::{xmpldir}/record_pad.c[]
 ----
 
-==== recordf_c
-[source,c]
-----
-bool recordf_c( cRecorder rec[static 1], char const format[static 1], ... );
-----
-
-Writes a custom text(format) to the memory of the recorder.
-If format includes format specifiers (subsequences beginning with %), the
-additional arguments following format are formatted and inserted in the
-resulting string replacing their respective specifiers.
-
-The format string follows the same specifications as format in printf.
-
-.Example
-[source,c]
-----
-include::{xmpldir}/recordf.c[]
-----
-
 ==== record_terminated_c
 [source,c]
 ----

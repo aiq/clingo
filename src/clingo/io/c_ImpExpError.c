@@ -21,7 +21,7 @@ static bool note_imp_exp_error( cRecorder rec[static 1], cError const* err )
    }
    if ( msg == NULL )
    {
-      return recordf_c( rec, "unknown read write error code: %i", errd->errc );
+      return write_c_( rec, "unknown read write error code: {i64}", errd->errc );
    }
 
    return record_chars_c_( rec, msg );

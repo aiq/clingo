@@ -119,23 +119,20 @@ bool write_range_c( cRecorder rec[static 1],
 
    if ( unscanned_is_c( sca, "dbg" ) )
    {
-      return recordf_c( rec, "{ .min=%"PRIi64", .max=%"PRIi64" }", rng.min,
-                                                                   rng.max )
-         ? true
-         : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+      return write_c_( rec, "{{ .min={i64}, .max={i64} }", rng.min, rng.max );
    }
 
-   char const* fmtStr = "[%"PRIi64"%s%"PRIi64"]";
+   char const* fmtStr = "[{i64}{s}{i64}]";
    if ( sca->space != 0 )
    {
       if ( move_if_chars_c_( sca, "co" ) )
       {
-         fmtStr = "[%"PRIi64"%s%"PRIi64")";
+         fmtStr = "[{i64}{s}{i64})";
          rng = closed_open_range_c_( rng.min, rng.max );
       }
       else if ( move_if_chars_c_( sca, "oc" ) )
       {
-         fmtStr = "(%"PRIi64"%s%"PRIi64"]";
+         fmtStr = "({i64}{s}{i64}]";
          rng = open_closed_range_c_( rng.min, rng.max );
       }
       else if ( move_if_char_c( sca, 'c' ) )
@@ -144,7 +141,7 @@ bool write_range_c( cRecorder rec[static 1],
       }
       else if ( move_if_char_c( sca, 'o' ) )
       {
-         fmtStr = "(%"PRIi64"%s%"PRIi64")";
+         fmtStr = "({i64}{s}{i64})";
          rng = open_range_c_( rng.min, rng.max );
       }
    }
@@ -179,9 +176,7 @@ bool write_range_c( cRecorder rec[static 1],
       return set_recorder_error_c( rec, c_InvalidFormatString );
    }
 
-   return recordf_c( rec, fmtStr, rng.min, delimiter, rng.max )
-      ? true
-      : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   return write_c_( rec, fmtStr, rng.min, delimiter, rng.max );
 }
 
 bool write_rune_c( cRecorder rec[static 1],
@@ -554,14 +549,14 @@ bool write_chars_c( cRecorder rec[static 1],
 }
 
 bool write_cstr_c( cRecorder rec[static 1],
-                   char const str[static 1],
+                   char const cstr[static 1],
                    char const fmt[static 1] )
 {
    must_exist_c_( rec );
-   must_exist_c_( str );
+   must_exist_c_( cstr );
    must_exist_c_( fmt );
 
-   return write_chars_c( rec, c_c( str ), fmt );
+   return write_chars_c( rec, c_c( cstr ), fmt );
 }
 
 bool write_recorded_c( cRecorder rec[static 1],

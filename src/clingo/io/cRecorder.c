@@ -146,28 +146,6 @@ bool record_pad_c( cRecorder rec[static 1], char c, int64_t n )
 extern inline bool record_terminated_c( cRecorder rec[static 1],
                                         cChars chars );
 
-bool recordf_c( cRecorder rec[static 1], char const format[static 1], ... )
-{
-   must_exist_c_( rec );
-   must_exist_c_( format );
-   
-   size_t size;
-   if ( not int64_to_size_c( rec->space, &size ) ) return false;
-
-   va_list args;
-   va_start( args, format );
-   int res = vsnprintf( rec->mem, size, format, args );
-   va_end( args );
-
-   if ( res < 0 )
-   {
-      return false;
-   }
-
-   move_recorder_c( rec, res );
-   return res;
-}
-
 /*******************************************************************************
  exrecord
 *******************************************************************************/

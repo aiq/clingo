@@ -152,17 +152,17 @@ bool write_bytes_c( cRecorder rec[static 1],
                     char const fmt[static 1] );
 
 #define write_chars_c_( Rec, Chars )                                           \
-   write_chars_c( (Rec), (Slice), "" )
+   write_chars_c( (Rec), (Chars), "" )
 CLINGO_API
 bool write_chars_c( cRecorder rec[static 1],
                     cChars chars,
                     char const fmt[static 1] );
 
 #define write_cstr_c_( Rec, Str )                                              \
-   write_cstr_c_( (Rec), (Str), "" )
+   write_cstr_c( (Rec), (Str), "" )
 CLINGO_API
 bool write_cstr_c( cRecorder rec[static 1],
-                   char const str[static 1],
+                   char const cstr[static 1],
                    char const fmt[static 1] );
 
 #define write_recorded_c_( Rec, Src )                                          \

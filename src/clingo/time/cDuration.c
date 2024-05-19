@@ -5,6 +5,7 @@
 #include "clingo/io/read.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
+#include "clingo/io/write_type.h"
 #include "clingo/time/C_TimeFormats.h"
 #include "clingo/type/cCharsSlice.h"
 #include "clingo/type/int8.h"
@@ -502,6 +503,10 @@ static bool record_sep( cScanner fmt[static 1], cRecorder rec[static 1] )
    }
    return true;
 }
+static bool write_dur_part( cRecorder rec[static 1], int64_t val, char const* suffix )
+{
+   return write_int64_c_( rec, val ) and write_cstr_c_( rec ,suffix );
+}
 bool write_duration_c( cRecorder rec[static 1],
                        cDuration dur,
                        char const fmt[static 1] )
@@ -515,7 +520,6 @@ bool write_duration_c( cRecorder rec[static 1],
 
    fmtInfo info;
    int64_t oldPos = rec->pos;
-   char const* fstr = "%"PRIi64"%s";
    once_c_( xyz )
    {
       //------------------------------------------------------------------- sign
@@ -530,7 +534,7 @@ bool write_duration_c( cRecorder rec[static 1],
       if ( do_write( info.n, as_weeks_c( dur ) ) )
       {
          cDuration v = truncate_duration_c( dur, C_Week, &dur );
-         if ( not recordf_c( rec, fstr, as_weeks_c( v ), info.s ) ) break;
+         if ( not write_dur_part( rec, as_weeks_c( v ), info.s ) ) break;
       }
       if ( not record_sep( sca, rec ) ) break;
 
@@ -539,7 +543,7 @@ bool write_duration_c( cRecorder rec[static 1],
       if ( do_write( info.n, as_days_c( dur ) ) )
       {
          cDuration v = truncate_duration_c( dur, C_Day, &dur );
-         if ( not recordf_c( rec, fstr, as_days_c( v ), info.s ) ) break;
+         if ( not write_dur_part( rec, as_days_c( v ), info.s ) ) break;
       }
       if ( not record_sep( sca, rec ) ) break;
 
@@ -548,7 +552,7 @@ bool write_duration_c( cRecorder rec[static 1],
       if ( do_write( info.n, as_hours_c( dur ) ) )
       {
          cDuration v = truncate_duration_c( dur, C_Hour, &dur );
-         if ( not recordf_c( rec, fstr, as_hours_c( v ), info.s ) ) break;
+         if ( not write_dur_part( rec, as_hours_c( v ), info.s ) ) break;
       }
       if ( not record_sep( sca, rec ) ) break;
 
@@ -557,7 +561,7 @@ bool write_duration_c( cRecorder rec[static 1],
       if ( do_write( info.n, as_mins_c( dur ) ) )
       {
          cDuration v = truncate_duration_c( dur, C_Min, &dur );
-         if ( not recordf_c( rec, fstr, as_mins_c( v ), info.s ) ) break;
+         if ( not write_dur_part( rec, as_mins_c( v ), info.s ) ) break;
       }
       if ( not record_sep( sca, rec ) ) break;
 
@@ -582,23 +586,23 @@ bool write_duration_c( cRecorder rec[static 1],
       if ( do_write( info.n, as_secs_c( dur ) ) )
       {
          cDuration v = truncate_duration_c( dur, C_Sec, &dur );
-         if ( not recordf_c( rec, "%"PRIi64, as_secs_c( v ) ) ) break;
+         if ( not write_int64_c_( rec, as_secs_c( v ) ) ) break;
          if ( info.n == 2 and move_if_char_c( sca, '.' ) )
          {
             if ( move_if_any_char_c_( sca, "iI" ) )
             {
                int64_t i = as_msecs_c( dur );
-               if ( not intl_write_xsec_c( rec, i, true, ".%03d" ) ) break;
+               if ( not intl_write_xsec_c( rec, i, true, ".{i64:(3r0)}" ) ) break;
             }
             else if ( move_if_any_char_c_( sca, "uU" ) )
             {
                int64_t u = as_usecs_c( dur );
-               if ( not intl_write_xsec_c( rec, u, true, ".%06d" ) ) break;
+               if ( not intl_write_xsec_c( rec, u, true, ".{i64:(6r0)}" ) ) break;
             }
             else if ( move_if_any_char_c_( sca, "nN" ) )
             {
                int64_t n = as_nsecs_c( dur );
-               if ( not intl_write_xsec_c( rec, n, true, ".%09d" ) ) break;
+               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(9r0)}" ) ) break;
             }
             else
             {
@@ -618,18 +622,18 @@ bool write_duration_c( cRecorder rec[static 1],
       if ( do_write( info.n, as_msecs_c( dur ) ) )
       {
          cDuration v = truncate_duration_c( dur, C_Msec, &dur );
-         if ( not recordf_c( rec, "%"PRIi64, as_msecs_c( v ) ) ) break;
+         if ( not write_int64_c_( rec, as_msecs_c( v ) ) ) break;
          if ( info.n == 2 and move_if_char_c( sca, '.' ) )
          {
             if ( move_if_any_char_c_( sca, "uU" ) )
             {
                int64_t u = as_usecs_c( dur );
-               if ( not intl_write_xsec_c( rec, u, true, ".%03d" ) ) break;
+               if ( not intl_write_xsec_c( rec, u, true, ".{i64:(3r0)}" ) ) break;
             }
             else if ( move_if_any_char_c_( sca, "nN" ) )
             {
                int64_t n = as_nsecs_c( dur );
-               if ( not intl_write_xsec_c( rec, n, true, ".%06d" ) ) break;
+               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(6r0)}" ) ) break;
             }
             else
             {
@@ -649,13 +653,13 @@ bool write_duration_c( cRecorder rec[static 1],
       if ( do_write( info.n, as_usecs_c( dur ) ) )
       {
          cDuration v = truncate_duration_c( dur, C_Usec, &dur );
-         if ( not recordf_c( rec, "%"PRIi64, as_usecs_c( v ) ) ) break;
+         if ( not write_int64_c_( rec, as_usecs_c( v ) ) ) break;
          if ( info.n == 2 and move_if_char_c( sca, '.' ) )
          {
             if ( move_if_any_char_c_( sca, "nN" ) )
             {
                int64_t n = as_nsecs_c( dur );
-               if ( not intl_write_xsec_c( rec, n, true, ".%03d" ) ) break;
+               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(3r0)}" ) ) break;
             }
             else
             {
@@ -674,7 +678,7 @@ bool write_duration_c( cRecorder rec[static 1],
       if ( not init_info( sca, nNCheck, &info ) ) return rec_err( rec, oldPos );
       if ( do_write( info.n, as_nsecs_c( dur ) ) )
       {
-         if ( not recordf_c( rec, fstr, as_nsecs_c( dur ), info.s ) ) break; 
+         if ( not write_dur_part( rec, as_nsecs_c( dur ), info.s ) ) break; 
       }
 
       if ( sca->space > 0 ) return rec_err( rec, oldPos );

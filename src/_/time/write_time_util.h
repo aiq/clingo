@@ -21,7 +21,7 @@ inline bool intl_write_xsec_c( cRecorder rec[static 1],
                                char const fmt[static 1] )
 {
    cRecorder* r = &recorder_c_( 32 );
-   recordf_c( r, fmt, val );
+   write_c_( r, fmt, val );
    cChars cs = recorded_chars_c( r );
    if ( trim )
    {
@@ -57,26 +57,20 @@ inline bool intl_write_day_c( cRecorder rec[static 1],
                               int64_t fmt,
                               int64_t spaces )
 {
-   bool res = false;
    if ( fmt == 1 and spaces == 0 )
    {
-      res = recordf_c( rec, "%d", day );
+      return write_int8_c( rec, day, "" );
    }
    else if ( fmt == 2 and spaces == 0 )
    {
-      res = recordf_c( rec, "%02d", day );
+      return write_int8_c( rec, day, "(2r0)" );
    }
    else if ( fmt == 1 and spaces == 1 )
    {
-      res = recordf_c( rec, "% 2d", day );
-   }
-   else
-   {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return write_int8_c( rec, day, "(2r )" );
    }
 
-   return res ? true
-              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   return set_recorder_error_c( rec, c_InvalidFormatString );
 }
 
 inline bool intl_write_day_of_year_c( cRecorder rec[static 1],
@@ -84,26 +78,20 @@ inline bool intl_write_day_of_year_c( cRecorder rec[static 1],
                                       int64_t fmt,
                                       int64_t spaces )
 {
-   bool res = false;
    if ( fmt == 1 and spaces == 0 )
    {
-      res = recordf_c( rec, "%d", dayOfYear );
+      return write_int16_c( rec, dayOfYear, "" );
    }
    else if ( fmt == 1 and spaces == 2 )
    {
-      res = recordf_c( rec, "% 3d", dayOfYear );
+      return write_int16_c( rec, dayOfYear, "(3r )");
    }
    else if ( fmt == 3 and spaces == 0 )
    {
-      res = recordf_c( rec, "%03d", dayOfYear );
-   }
-   else
-   {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return write_int16_c( rec, dayOfYear, "(3r0)" );
    }
 
-   return res ? true
-              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   return set_recorder_error_c( rec, c_InvalidFormatString );
 }
 
 inline bool intl_write_month_c( cRecorder rec[static 1],
@@ -112,36 +100,30 @@ inline bool intl_write_month_c( cRecorder rec[static 1],
                                 int64_t spaces )
 {
    cVarChars buf = scalars_c_( 32, char );
-   bool res = false;
    if ( fmt == 1 and spaces == 0 )
    {
-      res = recordf_c( rec, "%d", month );
+      return write_int64_c( rec, month, "" );
    }
    else if ( fmt == 2 and spaces == 0 )
    {
-      res = recordf_c( rec, "%02d", month );
+      return write_int64_c( rec, month, "(2r0)" );
    }
    else if ( fmt == 1 and spaces == 1 )
    {
-      res = recordf_c( rec, "% 2d", month );
+      return write_int64_c( rec, month, "(2r )" );
    }
    else if ( fmt == 3 and spaces == 0 )
    {
       buf = get_month_abbrev_c( month, buf );
-      res = record_mem_c( rec, buf.s, buf.v );
+      return record_mem_c( rec, buf.s, buf.v );
    }
    else if ( fmt == 4 and spaces == 0 )
    {
       buf = get_month_name_c( month, buf );
-      res = record_mem_c( rec, buf.s, buf.v );
+      return record_mem_c( rec, buf.s, buf.v );
    }
-   else
-   {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
-   }
-
-   return res ? true
-              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   
+   return set_recorder_error_c( rec, c_InvalidFormatString );
 }
 
 inline bool intl_write_week_c( cRecorder rec[static 1],
@@ -149,19 +131,25 @@ inline bool intl_write_week_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    bool res = false;
+   int64_t oldPos = rec->pos;
    switch ( fmt )
    {
       case 2:
-         res = recordf_c( rec, "W%d", week );
+         res = record_char_c( rec, 'W' ) and write_int64_c( rec, week, "" );
          break;
       case 3:
-         res = recordf_c( rec, "W%02d", week );
+         res = record_char_c( rec, 'W' ) and write_int64_c( rec, week, "(2r0)" );
          break;
       default:
          return set_recorder_error_c( rec, c_InvalidFormatString );
    }
-   return res ? true
-              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+
+   if ( not res )
+   {
+      move_recorder_to_c( rec, oldPos );
+   } 
+
+   return res;
 }
 
 inline bool intl_write_weekday_c( cRecorder rec[static 1],
@@ -170,45 +158,38 @@ inline bool intl_write_weekday_c( cRecorder rec[static 1],
 {
    cVarChars buf = scalars_c_( 32, char );
 
-   bool res = false;
-   switch ( fmt )
+   if ( fmt == 1 )
    {
-      case 1:
-         res = recordf_c( rec, "%d", wd );
-         break;
-      case 3:
-         buf = get_weekday_abbrev_c( wd, buf );
-         res = record_mem_c( rec, buf.s, buf.v );
-         break;
-      case 4:
-         buf = get_weekday_name_c( wd, buf );
-         res = record_mem_c( rec, buf.s, buf.v );
-         break;
-      default:
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+      return write_int64_c( rec, wd, "" );
    }
-   return res ? true
-              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   else if ( fmt == 3 )
+   {
+      buf = get_weekday_abbrev_c( wd, buf );
+      return record_mem_c( rec, buf.s, buf.v );
+   }
+   else if ( fmt == 4 )
+   {
+      buf = get_weekday_name_c( wd, buf );
+      return record_mem_c( rec, buf.s, buf.v );
+   }
+   
+   return set_recorder_error_c( rec, c_InvalidFormatString );
 }
 
 inline bool intl_write_year_c( cRecorder rec[static 1],
                                int32_t year,
                                int64_t fmt )
 {
-   bool res = false;
-   switch ( fmt )
+   if ( fmt == 2 )
    {
-      case 2:
-         res = recordf_c( rec, "%02d", year_in_century_c( year ) );
-         break;
-      case 4:
-         res = recordf_c( rec, "%04d", year );
-         break;
-      default:
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+      return write_int32_c( rec, year_in_century_c( year ), "(2r0)" );
    }
-   return res ? true
-              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   else if ( fmt == 4 )
+   {
+      return write_int32_c( rec, year, "(4r0)" );
+   }
+
+   return set_recorder_error_c( rec, c_InvalidFormatString );
 }
 
 /*******************************************************************************
@@ -220,26 +201,20 @@ inline bool intl_write_hour_c( cRecorder rec[static 1],
                                int64_t fmt,
                                int64_t spaces )
 {
-   bool res = false;
    if ( fmt == 1 and spaces == 0 )
    {
-      res = recordf_c( rec, "%d", hour );
+      return write_int32_c( rec, hour, "" );
    }
    else if ( fmt == 2 and spaces == 0 )
    {
-      res = recordf_c( rec, "%02d", hour );
+      return write_int32_c( rec, hour, "(2r0)" );
    }
    else if ( fmt == 1 and spaces == 1 )
    {
-      res = recordf_c( rec, "% 2d", hour );
-   }
-   else
-   {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return write_int32_c( rec, hour, "(2r )" );
    }
 
-   return res ? true
-              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   return set_recorder_error_c( rec, c_InvalidFormatString );
 }
 
 inline bool intl_write_kitchen_hour_c( cRecorder rec[static 1],
@@ -273,7 +248,7 @@ inline bool intl_write_msec_c( cRecorder rec[static 1],
    if ( fmt != 1 and fmt != 3 )
       return set_recorder_error_c( rec, c_InvalidFormatString );
 
-   return intl_write_xsec_c( rec, msec, ( fmt == 1 ), "%03d" );
+   return intl_write_xsec_c( rec, msec, ( fmt == 1 ), "{i64:(3r0)}" );
 }
 
 inline bool intl_write_usec_c( cRecorder rec[static 1],
@@ -283,7 +258,7 @@ inline bool intl_write_usec_c( cRecorder rec[static 1],
    if ( fmt != 1 and fmt != 3 )
       return set_recorder_error_c( rec, c_InvalidFormatString );
 
-   return intl_write_xsec_c( rec, usec, ( fmt == 1 ), "%06d" );
+   return intl_write_xsec_c( rec, usec, ( fmt == 1 ), "{i64:(6r0)}" );
 }
 
 inline bool intl_write_nsec_c( cRecorder rec[static 1],
@@ -293,7 +268,7 @@ inline bool intl_write_nsec_c( cRecorder rec[static 1],
    if ( fmt != 1 and fmt != 3 )
       return set_recorder_error_c( rec, c_InvalidFormatString );
 
-   return intl_write_xsec_c( rec, nsec, ( fmt == 1 ), "%09d" );
+   return intl_write_xsec_c( rec, nsec, ( fmt == 1 ), "{i64:(9r0)}" );
 }
 
 inline bool intl_write_offset_c( cRecorder rec[static 1],
@@ -309,34 +284,28 @@ inline bool intl_write_offset_c( cRecorder rec[static 1],
    if ( not iabs8_c( t.min, &(t.min) ) )
       return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 
-   bool res = false;
    if ( z and t.hour == 0 and t.min == 0 )
    {
-      res = record_char_c( rec, 'Z' );
+      return record_char_c( rec, 'Z' );
    }
    else if ( fmt == 1 and t.min == 0 )
    {
-      res = recordf_c( rec, "%c%02d", sign, t.hour );
+      return write_c_( rec, "{c}{i32:(2r0)}", sign, t.hour );
    }
    else if ( fmt == 1 and t.min != 0 )
    {
-      res = recordf_c( rec, "%c%02d:%02d", sign, t.hour, t.min );
+      return write_c_( rec, "{c}{i32:(2r0)}:{i8:(2r0)}", sign, t.hour, t.min );
    }
    else if ( fmt == 2 )
    {
-      res = recordf_c( rec, "%c%02d:%02d", sign, t.hour, t.min );
+      return write_c_( rec, "{c}{i32:(2r0)}:{i8:(2r0)}", sign, t.hour, t.min );
    }
    else if ( fmt == 4 )
    {
-      res = recordf_c( rec, "%c%02d%02d", sign, t.hour, t.min );
+      return write_c_( rec, "{c}{i32:(2r0)}{i8:(2r0)}", sign, t.hour, t.min );
    }
-   else
-   {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
-   }
-
-   return res ? true
-              : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+   
+   return set_recorder_error_c( rec, c_InvalidFormatString );
 }
 
 #endif

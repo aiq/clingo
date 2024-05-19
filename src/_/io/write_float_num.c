@@ -3,6 +3,7 @@
 #include "_/io/cWriteNumFormat.h"
 #include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/write.h"
+#include "clingo/io/write_type.h"
 
 /*******************************************************************************
    "+f.3q(20r_)"
@@ -49,7 +50,8 @@ bool write_float_num_c( cRecorder rec[static 1],
       // optional precision ----------------------------------------------------
       if ( numFmt.precision >= 0 )
       {
-         recordf_c( recFmt, ".%i", numFmt.precision );
+         record_char_c( recFmt, '.' );
+         write_int16_c_( recFmt, numFmt.precision );
       }
 
       // type ------------------------------------------------------------------
