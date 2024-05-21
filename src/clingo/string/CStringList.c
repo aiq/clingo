@@ -149,12 +149,11 @@ CString* join_string_list_c( CStringList const* list, cChars sep )
 
    // create recorder
    int64_t const memSize = strLen + sepLen + 1;
-   char* mem = alloc_c( memSize );
-   if ( mem == NULL )
+   cRecorder* rec = &dyn_heap_recorder_c_( memSize );
+   if ( rec->mem == NULL )
    {
       return NULL;
    }
-   cRecorder* rec = &make_recorder_c_( memSize, mem );
 
    // record the result
    CString const* first = get_from_string_list_c( list, 0 );
@@ -165,8 +164,7 @@ CString* join_string_list_c( CStringList const* list, cChars sep )
       CString const* str = get_from_string_list_c( list, i );
       record_chars_c( rec, scs_c( str ) );
    }
-   record_char_c( rec, '\0' );
 
-   return adopt_cstr_c( mem );
+   return adopt_cstr_c( turn_into_cstr_c( rec ) );
 }
 

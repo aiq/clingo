@@ -124,7 +124,7 @@ int64_t index_of_any_chars_c( cChars chars, cCharsSlice slice )
 
 cChars join_chars_slice_c( cCharsSlice slice, cChars sep, cVarChars buf )
 {
-   cRecorder* rec = &make_recorder_c_( buf.s, buf.v );
+   cRecorder* rec = &make_fix_recorder_c_( buf.s, buf.v );
    record_chars_slice_c( rec, slice, sep );
    return recorded_chars_c( rec );
 }

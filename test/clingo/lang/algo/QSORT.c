@@ -24,7 +24,7 @@ int main( void )
 
    //----------------------------------------- sort slice with many equal values
 
-   cRecorder* rec = &make_recorder_c_( chars.s, chars.v );
+   cRecorder* rec = &make_fix_recorder_c_( chars.s, chars.v );
    times_c_( 4, xyz )
    {
       record_chars_c_( rec, "abcdefghijklmnopqrstuvwxyz" );

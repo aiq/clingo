@@ -193,7 +193,7 @@ cErrorType const C_TextError = {
 
 bool push_text_error_c( cErrorStack es[static 1], int n, ... )
 {
-   cRecorder* rec = &make_recorder_c_( es->space, es->mem );
+   cRecorder* rec = &make_fix_recorder_c_( es->space, es->mem );
    va_list list;
    va_start( list, n );
    bool res = write_list_c( rec, n, list );

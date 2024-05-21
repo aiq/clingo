@@ -55,6 +55,9 @@ void free_recorder_mem_c( cRecorder rec[static 1] )
 
 extern inline int64_t recorder_cap_c( cRecorder const rec[static 1] );
 
+extern inline bool ensure_recorder_space_c( cRecorder rec[static 1],
+                                            int64_t size );
+
 /*******************************************************************************
 
 *******************************************************************************/

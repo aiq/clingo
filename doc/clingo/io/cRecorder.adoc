@@ -31,6 +31,8 @@ cRecorder allows to record data on a memory block.
 The mem pointer points to the next byte that will be set.
 The pos value shows how much bytes are allready set.
 The space value tells how much bytes in the memory block are not set.
+The dyn value tells how the recorder should work if it needs more space.
+If dyn is true will the recorder try to realloc to write the values.
 The err value can be set to indicate the type of error that occurred.
 
 //******************************************************************************
@@ -41,24 +43,43 @@ The err value can be set to indicate the type of error that occurred.
 //************************************************************************ init
 === init
 
-[id='heap_recorder_c_']
-==== heap_recorder_c_
+[id='dyn_heap_recorder_c_']
+==== dyn_heap_recorder_c_
 [source,c]
 ----
-#define heap_recorder_c_( Size )
+#define dyn_heap_recorder_c_( Size )
 ----
 
 Allocates a byte array at the heap and assigns the memory to a new created
-recorder.
+recorder where dyn is true.
 
-[id='make_recorder_c_']
-==== make_recorder_c_
+[id='fix_heap_recorder_c_']
+==== fix_heap_recorder_c_
+[source,c]
+----
+#define fix_heap_recorder_c_( Size )
+----
+
+Allocates a byte array at the heap and assigns the memory to a new created
+recorder where dyn is false.
+
+[id='make_dyn_recorder_c_']
+==== make_dyn_recorder_c_
 [source,c]
 ----
 #define make_recorder_c_( Size, Memory )
 ----
 
-Creates a recorder with the allready allocated memory.
+Creates a recorder with the allready allocated memory where dyn is true.
+
+[id='make_fix_recorder_c_']
+==== make_fix_recorder_c_
+[source,c]
+----
+#define make_recorder_c_( Size, Memory )
+----
+
+Creates a recorder with the allready allocated memory where dyn is false.
 
 [id='null_recorder_c_']
 ==== null_recorder_c_
@@ -69,15 +90,6 @@ Creates a recorder with the allready allocated memory.
 
 Creates a recorder where all attributes are set to 0 and NULL.
 
-[id='recorder_copy_c_']
-==== recorder_copy_c_
-[source,c]
-----
-#define recorder_copy_c_( Rec )
-----
-
-Copies the recorder state without the error value.
-
 [id='recorder_c_']
 ==== recorder_c_
 [source,c]
@@ -86,6 +98,7 @@ Copies the recorder state without the error value.
 ----
 
 Allocates a byte array at the stack and assigns the memory to the recorder.
+The dyn value is false.
 
 //************************************************************************* mem
 === mem
@@ -104,6 +117,14 @@ If the allocation fails returns the function false, otherwise true.
 ----
 include::{xmpldir}/alloc_recorder_mem.c[]
 ----
+
+==== ensure_recorder_space_c
+[source,c]
+----
+bool ensure_recorder_space_c( cRecorder rec[static 1], int64_t size );
+----
+
+Util function that ensures that the recorder has enough space to store the required values.
 
 ==== realloc_recorder_mem_c
 [source,c]

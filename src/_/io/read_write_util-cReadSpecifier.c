@@ -73,8 +73,8 @@ bool read_in_read_specifier_c( cScanner sca[static 1],
          return false;
       }
       cCharsSlice set = cs_c_( "^^", "^}" );      
-      cRecorder* rec = &make_recorder_c_( cMaxSpecifierFormatLength_+1,
-                                          spec->fmt );
+      cRecorder* rec = &make_fix_recorder_c_( cMaxSpecifierFormatLength_+1,
+                                              spec->fmt );
       cCharsToken tok;
       init_chars_token_c( &tok, tmpChars );
       while ( next_token_till_any_c( &tok, set ) )

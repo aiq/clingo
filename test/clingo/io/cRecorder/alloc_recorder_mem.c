@@ -11,6 +11,7 @@ int main( void )
    expect_c_( rec->pos == 0 );
    expect_c_( rec->space == 5 );
    expect_c_( rec->mem != NULL );
+   expect_c_( rec->dyn == false );
 
    expect_c_( not record_chars_c_( rec, "abcdef" ) ); // to large
 
