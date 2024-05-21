@@ -150,18 +150,6 @@ extern inline bool record_terminated_c( cRecorder rec[static 1],
                                         cChars chars );
 
 /*******************************************************************************
- exrecord
-*******************************************************************************/
-
-extern inline bool exrecord_mem_c( cRecorder rec[static 1],
-                                   int64_t len,
-                                   void const* mem );
-extern inline bool exrecord_bytes_c( cRecorder rec[static 1], cBytes bytes );
-extern inline bool exrecord_chars_c( cRecorder rec[static 1], cChars chars );
-extern inline bool exrecord_terminated_c( cRecorder rec[static 1],
-                                          cChars chars );
-
-/*******************************************************************************
 
 *******************************************************************************/
 

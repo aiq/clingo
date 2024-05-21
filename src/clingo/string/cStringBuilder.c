@@ -10,6 +10,7 @@ bool init_string_builder_c( cStringBuilder b[static 1], int64_t cap )
    {
       return false;
    }
+   b->rec.dyn = true;
    b->len = 0;
 
    return b;
@@ -158,7 +159,7 @@ static bool append( cStringBuilder b[static 1], cChars chars, int64_t len )
       return true;
    }
 
-   if ( not exrecord_terminated_c( rec, chars ) )
+   if ( not record_terminated_c( rec, chars ) )
    {
       return false;
    }
