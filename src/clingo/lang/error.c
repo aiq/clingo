@@ -47,23 +47,6 @@ cErrorData const* get_error_data_c( cError const* err )
    return err + 1;
 }
 
-bool write_error_c( cRecorder rec[static 1],
-                    cError const *err,
-                    char const fmt[static 1] )
-{
-   if ( err == NULL ) return record_chars_c_( rec, "no error" );
-   
-   bool res = err->type->note( rec, err );
-   err = err->sub;
-   while ( res and err != NULL )
-   {
-      res &= record_chars_c_( rec, ": " );
-      res &= err->type->note( rec, err );
-      err = err->sub;
-   }
-   return res;
-}
-
 /*******************************************************************************
  stack
 *******************************************************************************/

@@ -131,21 +131,6 @@ int64_t error_depth_c( cError const err* );
 
 Counts how much cError variables are chained together..
 
-[id='write_error_c']
-==== write_error_c
-[source,c]
-----
-#define write_error_c_( Rec, Err )                                             \
-   write_error_c( (Rec), (Err), "" )
-bool write_error_c( cRecorder rec[static 1],
-                    cError const *err,
-                    char const fmt[static 1] );
-----
-
-Writes the error into a recorder.
-The default format writes the error notes of all chained errors and
-concatenates them with ": ".
-
 //************************************************************************ stack
 === stack
 

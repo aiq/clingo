@@ -2,6 +2,7 @@
 #define CLINGO_IO_WRITETYPE_H
 
 #include "clingo/apidecl.h"
+#include "clingo/lang/error.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
 #include "clingo/type/bool.h"
@@ -43,6 +44,13 @@ CLINGO_API
 bool write_char_c( cRecorder rec[static 1],
                    char c,
                    char const fmt[static 1] );
+
+#define write_error_c_( Rec, Err )                                             \
+   write_error_c( (Rec), (Err), "" )
+CLINGO_API bool write_error_c( cRecorder rec[static 1],
+                               cError const *err,
+                               char const fmt[static 1] );
+
 
 #define write_range_c_( Rec, Rng )                                             \
    write_range_c( (Rec), (Rng), "" )

@@ -98,12 +98,6 @@ int64_t error_depth_c( cError const* err );
 
 CLINGO_API cErrorData const* get_error_data_c( cError const* err );
 
-#define write_error_c_( Rec, Err )                                             \
-   write_error_c( (Rec), (Err), "" )
-CLINGO_API bool write_error_c( cRecorder rec[static 1],
-                               cError const *err,
-                               char const fmt[static 1] );
-
 /*******************************************************************************
  stack
 *******************************************************************************/

@@ -108,6 +108,23 @@ bool write_char_c( cRecorder rec[static 1],
       : set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
+bool write_error_c( cRecorder rec[static 1],
+                    cError const *err,
+                    char const fmt[static 1] )
+{
+   if ( err == NULL ) return record_chars_c_( rec, "no error" );
+   
+   bool res = err->type->note( rec, err );
+   err = err->sub;
+   while ( res and err != NULL )
+   {
+      res &= record_chars_c_( rec, ": " );
+      res &= err->type->note( rec, err );
+      err = err->sub;
+   }
+   return res;
+}
+
 bool write_range_c( cRecorder rec[static 1],
                     cRange rng,
                     char const fmt[static 1] )
