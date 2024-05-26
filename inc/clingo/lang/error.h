@@ -10,7 +10,7 @@
 #include <string.h>
 
 #include "clingo/apidecl.h"
-#include "clingo/io/cRecorder.h"
+#include "clingo/io/cWriter.h"
 #include "clingo/lang/mem.h"
 
 /*******************************************************************************
@@ -18,10 +18,10 @@
 *******************************************************************************/
 
 #define SINGLE_ERROR_TYPE_C_( Type, NoteFunc, Note )                           \
-static bool NoteFunc( cRecorder rec[static 1], cError const* err )             \
+static bool NoteFunc( cWriter w, cError const* err )                           \
 {                                                                              \
    must_be_c_( err->type == &Type );                                           \
-   return record_chars_c_( rec, Note );                                        \
+   return do_write_c_( w, "{s}", Note );                                       \
 }                                                                              \
 cErrorType const Type = {                                                      \
    .desc = stringify_c_( Type ),                                               \
@@ -29,11 +29,11 @@ cErrorType const Type = {                                                      \
 };
 
 #define QUOTE_LIT_ERROR_TYPE_C_( Type, NoteFunc, WriteText, PushFunc )         \
-static bool NoteFunc( cRecorder rec[static 1], cError const* err )             \
+static bool NoteFunc( cWriter w, cError const* err )                           \
 {                                                                              \
    must_be_c_( err->type == &Type );                                           \
    cLitErrorData const* errd = get_error_data_c( err );                        \
-   return write_c_( rec, WriteText, errd->str );                               \
+   return do_write_c_( w, WriteText, errd->str );                              \
 }                                                                              \
 cErrorType const Type = {                                                      \
    .desc = stringify_c_( Type ),                                               \
@@ -56,7 +56,7 @@ typedef void cErrorData;
 struct cError;
 typedef struct cError cError;
 
-typedef bool ( *c_note_error )( cRecorder rec[static 1], cError const* err );
+typedef bool ( *c_note_error )( cWriter w, cError const* err );
 
 struct cErrorType
 {
@@ -97,6 +97,8 @@ CLINGO_API
 int64_t error_depth_c( cError const* err );
 
 CLINGO_API cErrorData const* get_error_data_c( cError const* err );
+
+CLINGO_API bool note_error_c( cWriter w, cError const* err );
 
 /*******************************************************************************
  stack

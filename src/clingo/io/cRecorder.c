@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "clingo/io/c_ImpExpError.h"
+#include "clingo/io/write.h"
 #include "clingo/type/uint64.h"
 
 /*******************************************************************************
@@ -73,6 +74,36 @@ extern inline void reset_recorder_c( cRecorder rec[static 1] );
 extern inline bool set_recorder_error_c( cRecorder rec[static 1], int err );
 
 extern inline int clear_recorder_error_c( cRecorder rec[static 1] );
+
+/*******************************************************************************
+ interfaces
+*******************************************************************************/
+
+static bool recorder_output_func( void* o, cBytes data )
+{
+   cRecorder* rec = o;
+   return record_bytes_c( rec, data );
+}
+
+cOutput recorder_as_output( cRecorder rec[static 1] )
+{
+   return (cOutput){ .i=rec, .f=recorder_output_func };
+}
+
+static bool recorder_writer_func( void* w, int n, ... )
+{
+   cRecorder* rec = w;
+   va_list list;
+   va_start( list, n );
+   bool res = write_list_c( rec, n, list );
+   va_end( list );
+   return res;
+}
+
+cWriter recorder_as_writer_c( cRecorder rec[static 1] )
+{
+   return (cWriter){ .i=rec, .f=recorder_writer_func };
+}
 
 /*******************************************************************************
  access

@@ -113,13 +113,14 @@ bool write_error_c( cRecorder rec[static 1],
                     char const fmt[static 1] )
 {
    if ( err == NULL ) return record_chars_c_( rec, "no error" );
-   
-   bool res = err->type->note( rec, err );
+
+   cWriter w = recorder_as_writer_c( rec );
+   bool res = err->type->note( w, err );
    err = err->sub;
    while ( res and err != NULL )
    {
       res &= record_chars_c_( rec, ": " );
-      res &= err->type->note( rec, err );
+      res &= err->type->note( w, err );
       err = err->sub;
    }
    return res;

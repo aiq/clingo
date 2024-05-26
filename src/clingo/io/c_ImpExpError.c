@@ -9,7 +9,7 @@
  Definitions
 *******************************************************************************/
 
-static bool note_imp_exp_error( cRecorder rec[static 1], cError const* err )
+static bool note_imp_exp_error( cWriter w, cError const* err )
 {
    cReadWriteErrorData const* errd = get_error_data_c( err );
    char const* msg = NULL;
@@ -21,10 +21,10 @@ static bool note_imp_exp_error( cRecorder rec[static 1], cError const* err )
    }
    if ( msg == NULL )
    {
-      return write_c_( rec, "unknown read write error code: {i64}", errd->errc );
+      return do_write_c_( w, "unknown read write error code: {i64}", errd->errc );
    }
 
-   return record_chars_c_( rec, msg );
+   return do_write_c_( w, "{s}", msg );
 }
 
 cErrorType const C_ImpExpError = {

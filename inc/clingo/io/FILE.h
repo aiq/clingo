@@ -100,6 +100,14 @@ CLINGO_API inline FILE* wopen_file_c( cChars path, cErrorStack es[static 1] )
 CLINGO_API int64_t file_size_c( FILE* file );
 
 /*******************************************************************************
+ func structs
+*******************************************************************************/
+
+CLINGO_API cOutput file_as_output_c( FILE* file );
+
+CLINGO_API cWriter file_as_writer_c( FILE* file );
+
+/*******************************************************************************
  fread
 *******************************************************************************/
 

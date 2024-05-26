@@ -5,6 +5,8 @@
 #include <stdio.h>
 
 #include "clingo/apidecl.h"
+#include "clingo/io/cOutput.h"
+#include "clingo/io/cWriter.h"
 #include "clingo/lang/mem.h"
 #include "clingo/type/cBytes.h"
 #include "clingo/type/cChars.h"
@@ -15,6 +17,18 @@
 /*******************************************************************************
 ********************************************************* Types and Definitions
 *******************************************************************************/
+
+#define cRECORDER_ERROR_CODE_                                                  \
+   XMAP_C_( c_NotEnughRecorderSpace, 1, "not enough recorder space " )         \
+   XMAP_C_( c_NotAbleIncreaseRecorderSpace, 2, "not able to increase recorder space") \
+   XMAP_C_( c_ToLargeWriteFormat, 3, "to large write format" ) \
+   XMAP_C_( c_InvalidWriteFormat, 4, "invalid write format" )
+
+#define XMAP_C_( N, I, T ) N = I,
+enum c_RecorderErrorCode { cRECORDER_ERROR_CODE_ };
+#undef XMAP_C_
+typedef enum c_RecorderErrorCode c_RecorderErrorCode;
+
 struct cRecorder
 {
    int64_t pos;
@@ -24,10 +38,6 @@ struct cRecorder
    int     err;
 };
 typedef struct cRecorder cRecorder;
-
-/*******************************************************************************
-******************************************************** Code Generation Macros
-*******************************************************************************/
 
 /*******************************************************************************
 ********************************************************************* Functions
@@ -88,6 +98,14 @@ CLINGO_API inline int clear_recorder_error_c( cRecorder rec[static 1] )
 }
 
 /*******************************************************************************
+ func structs
+*******************************************************************************/
+
+CLINGO_API cOutput recorder_as_output_c( cRecorder rec[static 1] );
+
+CLINGO_API cWriter recorder_as_writer_c( cRecorder rec[static 1] );
+
+/*******************************************************************************
  mem
 *******************************************************************************/
 
@@ -111,14 +129,15 @@ CLINGO_API inline bool ensure_recorder_space_c( cRecorder rec[static 1],
 {
    if ( rec->space >= size ) return true;
 
-   if ( not rec->dyn ) return set_recorder_error_c( rec, 1 );
+   if ( not rec->dyn )
+      return set_recorder_error_c( rec, c_NotEnughRecorderSpace );
 
    size = imax64_c( recorder_cap_c( rec ), size );
    if ( not imul64_c( size, 2, &size ) )
       return false;
 
    if ( not realloc_recorder_mem_c( rec, size ) )
-      return false;
+      return set_recorder_error_c( rec, c_NotAbleIncreaseRecorderSpace );
 
    return true;
 }

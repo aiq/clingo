@@ -2,7 +2,9 @@
 
 #include <limits.h>
 
+#include "clingo/io/fwrite.h"
 #include "clingo/io/write.h"
+#include "clingo/io/print.h"
 
 /*******************************************************************************
 ********************************************************* Types and Definitions 
@@ -25,17 +27,17 @@ SINGLE_ERROR_TYPE_C_(
    "unexpected EOF"
 )
 
-static bool note_file_error_c( cRecorder rec[static 1], cError const* err )
+static bool note_file_error( cWriter w, cError const* err )
 {
    cFileErrorData const* errd = get_error_data_c( err );
    char* errStr = strerror( errd->number );
    if ( errStr == NULL ) return false;
 
-   return record_chars_c_( rec, errStr );
+   return do_write_c_( w, "{s}", errStr );
 }
 cErrorType const C_FileError = {
    .desc = stringify_c_( C_FileError ),
-   .note = &note_file_error_c
+   .note = &note_file_error
 };
 
 /*******************************************************************************
@@ -81,6 +83,37 @@ int64_t file_size_c( FILE* file )
    if ( fseek( file, pos, SEEK_SET ) != 0 ) return -1;
 
    return res;
+}
+
+/*******************************************************************************
+ func structs
+*******************************************************************************/
+
+static bool file_output_func( void* o, cBytes data )
+{
+   FILE* file = o;
+   return fput_bytes_c( file, data );
+}
+
+cOutput file_as_output_c( FILE* file )
+{
+   return (cOutput){ .i=file, .f=file_output_func };
+}
+
+static bool file_writer_func( void* w, int n, ... )
+{
+   cErrorStack* es = &error_stack_c_( 128 );
+   FILE* file = w;
+   va_list list;
+   va_start( list, n );
+   bool res = fwrite_list_c( file, es, n, list );
+   va_end( list );
+   return res;
+}
+
+CLINGO_API cWriter file_as_writer_c( FILE* file )
+{
+   return (cWriter){ .i=file, .f=file_writer_func };
 }
 
 /*******************************************************************************
