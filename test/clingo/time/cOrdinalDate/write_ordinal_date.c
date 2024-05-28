@@ -1,4 +1,3 @@
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/write.h"
 #include "clingo/lang/expect.h"
 #include "clingo/time/cOrdinalDate.h"
@@ -22,7 +21,7 @@ int main( void )
    testSlice tests = slice_c_( test,
       t_( od, cNoError_, "YYYY-CCC", "2014-023" ),
       t_( od, cNoError_, "YY/C", "14/23" ),
-      t_( od, c_InvalidFormatString, "YYYY-CC", "" ),
+      t_( od, c_InvalidWriteFormat, "YYYY-CC", "" ),
       t_( od, cNoError_, "YYYY-DDD", "2014-DDD" )
    );
 

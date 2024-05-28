@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "clingo/apidecl.h"
+#include "clingo/lang/error.h"
 #include "clingo/lang/mem.h"
 #include "clingo/type/cBytes.h"
 #include "clingo/type/cCharsSlice.h"
@@ -12,6 +13,27 @@
 /*******************************************************************************
 ********************************************************* Types and Definitions
 *******************************************************************************/
+
+#define cSCANNER_ERROR_CODE_                                                   \
+   XMAP_C_( c_EndOfScanner,         1, "end of scanner" )                      \
+   XMAP_C_( c_IncompleteScanValue,  2, "incomplete scan value" )               \
+   XMAP_C_( c_ToLargeReadFormat,    3, "to large read format" )                \
+   XMAP_C_( c_InvalidReadFormat,    4, "invalid read format" )                 \
+   XMAP_C_( c_ReadAllocError,       5, "read allocation errro" )               \
+   XMAP_C_( c_NotAbleToReadValue,   6, "not able to read value" )
+
+#define XMAP_C_( N, I, T ) N = I,
+enum c_ScannerErrorCode { cSCANNER_ERROR_CODE_ };
+#undef XMAP_C_
+typedef enum c_ScannerErrorCode c_ScannerErrorCode;
+
+struct cScannerErrorData
+{
+   int code;
+};
+typedef struct cScannerErrorData cScannerErrorData;
+
+CLINGO_API extern cErrorType const C_ScannerError;
 
 struct cScanner
 {
@@ -365,5 +387,12 @@ CLINGO_API bool scan_uint64_c( cScanner sca[static 1], uint64_t u64[static 1] );
 
 CLINGO_API bool scan_float_c(  cScanner sca[static 1], float f[static 1] );
 CLINGO_API bool scan_double_c( cScanner sca[static 1], double d[static 1] );
+
+/*******************************************************************************
+ error
+*******************************************************************************/
+
+CLINGO_API bool push_scanner_error_c( cErrorStack es[static 1],
+                                      cScanner const sca[static 1] );
 
 #endif

@@ -1,7 +1,36 @@
 #include "clingo/io/cScanner.h"
 
-#include "clingo/io/c_ImpExpError.h"
+#include "clingo/io/write.h"
 #include "clingo/lang/func.h"
+
+/*******************************************************************************
+********************************************************* Types and Definitions 
+*******************************************************************************
+
+*******************************************************************************/
+
+static bool note_scanner_error( cRecorder rec[static 1], cError const* err )
+{
+   cScannerErrorData const* data = get_error_data_c( err );
+   char const* msg = NULL;
+   switch ( data->code )
+   {
+      #define XMAP_C_( N, I, T ) case N: msg = T;
+         cSCANNER_ERROR_CODE_
+      #undef XMAP_C_
+   }
+   if ( msg == NULL )
+   {
+      return write_c_( rec, "unknown scanner error code: {i64}", data->code );
+   }
+
+   return record_chars_c_( rec, msg );
+}
+cErrorType const C_ScannerError = {
+   .desc = stringify_c_( C_ScannerError ),
+   .note = &note_scanner_error
+};
+
 
 /*******************************************************************************
  move
@@ -709,7 +738,7 @@ bool FuncName( cScanner sca[static 1], Type val[static 1] )                    \
    int64_t const size = sizeof_c_( Type );                                     \
    if ( size > sca->space )                                                    \
    {                                                                           \
-      return set_scanner_error_c( sca, c_NotAbleToScanValue );                 \
+      return set_scanner_error_c( sca, c_IncompleteScanValue );                \
    }                                                                           \
                                                                                \
    Type const* ptr = sca->mem;                                                 \
@@ -730,7 +759,7 @@ bool scan_rune_c( cScanner sca[static 1], cRune r[static 1] )
 
    if ( sca->space == 0 )
    {
-      return set_scanner_error_c( sca, c_NotAbleToScanValue );
+      return set_scanner_error_c( sca, c_EndOfScanner );
    }
 
    char const* ptr = sca->mem;
@@ -738,7 +767,7 @@ bool scan_rune_c( cScanner sca[static 1], cRune r[static 1] )
    int64_t len = utf8_length_c( *ptr );
    if ( len > sca->space )
    {
-      return set_scanner_error_c( sca, c_IncompleteValue );
+      return set_scanner_error_c( sca, c_IncompleteScanValue );
    }
 
    *r = rune_c( ptr );
@@ -760,3 +789,14 @@ SCAN_FUNC_IMPL_( uint64_t, scan_uint64_c )
 
 SCAN_FUNC_IMPL_( float,    scan_float_c )
 SCAN_FUNC_IMPL_( double,   scan_double_c )
+
+/*******************************************************************************
+ error
+*******************************************************************************/
+
+bool push_scanner_error_c( cErrorStack es[static 1],
+                           cScanner const sca[static 1] )
+{
+   cScannerErrorData d = { .code=sca->err };
+   return push_error_c( es, &C_ScannerError, &d, sizeof_c_( cScannerErrorData ) );
+}

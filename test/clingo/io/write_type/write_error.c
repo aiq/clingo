@@ -1,8 +1,7 @@
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/FILE.h"
+#include "clingo/io/write_type.h"
 #include "clingo/lang/error.h"
 #include "clingo/lang/expect.h"
-#include "clingo/io/print.h"
 
 #define expect_recorded_( Rec, Exp )                                           \
 {                                                                              \
@@ -21,14 +20,13 @@ int main( void )
 
    push_error_c_( es, &C_Eof );
    push_lit_error_c( es, "file error" );
-   push_import_error_c( es, "some type" );
    push_text_error_c_( es, "a custom text {i64}", 256 );
    write_error_c( rec, es->err, "" );
-   expect_recorded_( rec, "a custom text 256: not able to import 'some type': file error: EOF" );
+   expect_recorded_( rec, "a custom text 256: file error: EOF" );
 
    push_invalid_value_error_c( es, "other type" );
    write_error_c( rec, es->err, "" );
-   expect_recorded_( rec, "invalid 'other type' value: a custom text 256: not able to import 'some type': file error: EOF" );
+   expect_recorded_( rec, "invalid 'other type' value: a custom text 256: file error: EOF" );
 
    return finish_tap_c_();
 }

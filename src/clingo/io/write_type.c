@@ -5,7 +5,6 @@
 #include "_/io/WRITE_INT.h"
 #include "_/io/WRITE_UINT.h"
 #include "_/io/write_num.h"
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
 
@@ -38,7 +37,7 @@ bool write_bool_c( cRecorder rec[static 1],
    }
    else
    {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return record_chars_c_( rec, txt )
@@ -70,7 +69,7 @@ bool write_byte_c( cRecorder rec[static 1],
       return write_uint8_c( rec, byte, "B(8r0)" );
    }
 
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 bool write_char_c( cRecorder rec[static 1],
@@ -100,7 +99,7 @@ bool write_char_c( cRecorder rec[static 1],
    }
    else
    {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return recRes
@@ -114,13 +113,12 @@ bool write_error_c( cRecorder rec[static 1],
 {
    if ( err == NULL ) return record_chars_c_( rec, "no error" );
 
-   cWriter w = recorder_as_writer_c( rec );
-   bool res = err->type->note( w, err );
+   bool res = err->type->note( rec, err );
    err = err->sub;
    while ( res and err != NULL )
    {
       res &= record_chars_c_( rec, ": " );
-      res &= err->type->note( w, err );
+      res &= err->type->note( rec, err );
       err = err->sub;
    }
    return res;
@@ -185,13 +183,13 @@ bool write_range_c( cRecorder rec[static 1],
       }
       else
       {
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
    }
 
    if ( sca->space > 0 )
    {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    return write_c_( rec, fmtStr, rng.min, delimiter, rng.max );
@@ -263,7 +261,7 @@ bool write_rune_c( cRecorder rec[static 1],
          return true;
       }
 
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    move_recorder_to_c( rec, oldPos );
@@ -432,14 +430,14 @@ bool write_bytes_c( cRecorder rec[static 1],
       uint8_t tmp = 1;
       if ( read_uint8_c_( sca, &tmp ) == 0 )
       {
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
       chunkLen = int64_c_( tmp );
    }
 
    if ( sca->space != 0 )
    {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    int64_t const oldPos = rec->pos;
@@ -523,7 +521,7 @@ bool write_chars_c( cRecorder rec[static 1],
    }
    if ( not cstr_is_any_char_c_( fmt, "qQes" ) )
    {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    int64_t const oldPos = rec->pos;
@@ -599,7 +597,7 @@ bool write_recorded_c( cRecorder rec[static 1],
       return write_bytes_c( rec, recorded_bytes_c( src ), sca->mem );
    }
 
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 bool write_unscanned_c( cRecorder rec[static 1],
@@ -624,5 +622,5 @@ bool write_unscanned_c( cRecorder rec[static 1],
       return write_bytes_c( rec, unscanned_bytes_c_( sca ), fmtSca->mem );
    }
 
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }

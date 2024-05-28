@@ -3,7 +3,6 @@
 #include "_/time/read_time_util.h"
 #include "_/time/util.h"
 #include "_/time/write_time_util.h"
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/type/int32.h"
 
 /*******************************************************************************
@@ -110,7 +109,7 @@ bool read_tz_offset_c( cScanner sca[static 1],
       }
       else
       {
-         return set_scanner_error_c( sca, c_InvalidFormatString );
+         return set_scanner_error_c( sca, c_InvalidReadFormat );
       }
    }
    if ( not res )
@@ -146,7 +145,7 @@ bool write_tz_offset_c( cRecorder rec[static 1],
       }
       else
       {
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
    }
    if ( not res )

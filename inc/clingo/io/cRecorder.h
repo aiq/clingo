@@ -6,7 +6,8 @@
 
 #include "clingo/apidecl.h"
 #include "clingo/io/cOutput.h"
-#include "clingo/io/cWriter.h"
+#include "clingo/io/cPen.h"
+#include "clingo/lang/error.h"
 #include "clingo/lang/mem.h"
 #include "clingo/type/cBytes.h"
 #include "clingo/type/cChars.h"
@@ -19,15 +20,24 @@
 *******************************************************************************/
 
 #define cRECORDER_ERROR_CODE_                                                  \
-   XMAP_C_( c_NotEnughRecorderSpace, 1, "not enough recorder space " )         \
+   XMAP_C_( c_NotEnoughRecorderSpace, 1, "not enough recorder space " )        \
    XMAP_C_( c_NotAbleIncreaseRecorderSpace, 2, "not able to increase recorder space") \
-   XMAP_C_( c_ToLargeWriteFormat, 3, "to large write format" ) \
-   XMAP_C_( c_InvalidWriteFormat, 4, "invalid write format" )
+   XMAP_C_( c_ToLargeWriteFormat, 3, "to large write format" )                 \
+   XMAP_C_( c_InvalidWriteFormat, 4, "invalid write format" )                  \
+   XMAP_C_( c_NotAbleToRecordValue, 5, "not able to record value" )
 
 #define XMAP_C_( N, I, T ) N = I,
 enum c_RecorderErrorCode { cRECORDER_ERROR_CODE_ };
 #undef XMAP_C_
 typedef enum c_RecorderErrorCode c_RecorderErrorCode;
+
+struct cRecorderErrorData
+{
+   int code;
+};
+typedef struct cRecorderErrorData cRecorderErrorData;
+
+CLINGO_API extern cErrorType const C_RecorderError;
 
 struct cRecorder
 {
@@ -48,36 +58,39 @@ typedef struct cRecorder cRecorder;
 #define dyn_heap_recorder_c_( Size )                                           \
 (                                                                              \
    (cRecorder)                                                                 \
-   { .pos=0, .space=(Size), .mem=alloc_c(Size), .dyn=true, .err=0 }            \
+   { .pos=0, .space=(Size), .mem=alloc_c(Size), .dyn=true, .err=cNoError_ }    \
 )
 
 #define fix_heap_recorder_c_( Size )                                           \
 (                                                                              \
    (cRecorder)                                                                 \
-   { .pos=0, .space=(Size), .mem=alloc_c(Size), .dyn=false, .err=0 }           \
+   { .pos=0, .space=(Size), .mem=alloc_c(Size), .dyn=false, .err=cNoError_ }   \
 )
 
 #define make_dyn_recorder_c_( Size, Memory )                                   \
 (                                                                              \
    (cRecorder)                                                                 \
-   { .pos=0, .space=(Size), .mem=(Memory), .dyn=true, .err=0 }                 \
+   { .pos=0, .space=(Size), .mem=(Memory), .dyn=true, .err=cNoError_ }         \
 )
 
 #define make_fix_recorder_c_( Size, Memory )                                   \
 (                                                                              \
    (cRecorder)                                                                 \
-   { .pos=0, .space=(Size), .mem=(Memory), .dyn=false, .err=0 }                \
+   { .pos=0, .space=(Size), .mem=(Memory), .dyn=false, .err=cNoError_ }        \
 )
 
 #define null_recorder_c_()                                                     \
 (                                                                              \
-   (cRecorder){ .pos=0, .space=0, .mem=NULL, .dyn=false, .err=0 }              \
+   (cRecorder){ .pos=0, .space=0, .mem=NULL, .dyn=false, .err=cNoError_ }      \
 )
 
 #define recorder_c_( Size )                                                    \
 (                                                                              \
    (cRecorder)                                                                 \
-   { .pos=0, .space=(Size), .mem=stack_mem_c_( Size ), .dyn=false, .err=0 }    \
+   {                                                                           \
+      .pos=0, .space=(Size), .mem=stack_mem_c_( Size ), .dyn=false,            \
+      .err=cNoError_                                                           \
+   }                                                                           \
 )
 
 /*******************************************************************************
@@ -130,7 +143,7 @@ CLINGO_API inline bool ensure_recorder_space_c( cRecorder rec[static 1],
    if ( rec->space >= size ) return true;
 
    if ( not rec->dyn )
-      return set_recorder_error_c( rec, c_NotEnughRecorderSpace );
+      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 
    size = imax64_c( recorder_cap_c( rec ), size );
    if ( not imul64_c( size, 2, &size ) )
@@ -348,5 +361,12 @@ for (                                                                          \
 )
 
 CLINGO_API char* turn_into_cstr_c( cRecorder rec[static 1] );
+
+/*******************************************************************************
+ error
+*******************************************************************************/
+
+CLINGO_API bool push_recorder_error_c( cErrorStack es[static 1],
+                                       cRecorder const rec[static 1] );
 
 #endif

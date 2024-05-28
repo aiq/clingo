@@ -3,7 +3,6 @@
 
 #include "_/io/cWriteNumFormat.h"
 #include "_/io/write_num.h"
-#include "clingo/io/c_ImpExpError.h"
 
 #define WRITE_UINT_C_(                                                         \
    Type, FuncName, Dec                                                         \
@@ -19,7 +18,7 @@ bool FuncName( cRecorder rec[static 1],                                        \
    cWriteNumFormat numFmt;                                                     \
    if ( not init_write_int_format_c( &numFmt, fmt ) )                          \
    {                                                                           \
-      return set_recorder_error_c( rec, c_InvalidFormatString );               \
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );                \
    }                                                                           \
                                                                                \
    cVarChars valBuf = scalars_c_( cWRITE_NUM_VALUE_BUF_SIZE_, char );          \

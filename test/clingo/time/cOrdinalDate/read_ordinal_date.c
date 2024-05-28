@@ -1,4 +1,3 @@
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/read.h"
 #include "clingo/lang/expect.h"
 #include "clingo/time/cOrdinalDate.h"

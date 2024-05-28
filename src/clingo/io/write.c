@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 #include "_/io/read_write_util.h"
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/jot.h"
 #include "clingo/io/write_type.h"
 
@@ -196,7 +195,7 @@ bool write_impl_c( cRecorder rec[static 1],
          {
             if ( rec->err == cNoError_ )
             {
-               set_recorder_error_c( rec, c_InvalidFormatString );
+               set_recorder_error_c( rec, c_InvalidWriteFormat );
             }
             return false;
          }

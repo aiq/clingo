@@ -1,4 +1,3 @@
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/write.h"
 #include "clingo/lang/error.h"
 #include "clingo/lang/expect.h"
@@ -42,7 +41,7 @@ int main( void )
 
    //**************************************************************** withErrors
    testSlice withErrors = slice_c_( test,
-      t_( wd, "XX/W", "", c_InvalidFormatString )
+      t_( wd, "XX/W", "", c_InvalidWriteFormat )
    );
 
    for_each_c_( test const*, t, withErrors )

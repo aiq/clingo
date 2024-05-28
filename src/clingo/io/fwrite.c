@@ -1,7 +1,6 @@
 #include "clingo/io/fwrite.h"
 
 #include "_/io/read_write_util.h"
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/FILE.h"
 
 /*******************************************************************************
@@ -92,7 +91,7 @@ bool fwrite_impl_c( FILE* file,
             if ( rec->err == cNoError_ )
             {
                cleanup_fwrite_impl_c( rec, initCap );
-               return set_recorder_error_c( rec, c_InvalidFormatString );
+               return set_recorder_error_c( rec, c_InvalidWriteFormat );
             }
             if ( rec->err == c_NotEnoughRecorderSpace )
             {

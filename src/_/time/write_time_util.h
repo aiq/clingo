@@ -1,7 +1,6 @@
 #ifndef CLINGO_INTERN_WRITE_TIME_UTIL_H
 #define CLINGO_INTERN_WRITE_TIME_UTIL_H
 
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
 #include "clingo/time/c_Month.h"
@@ -70,7 +69,7 @@ inline bool intl_write_day_c( cRecorder rec[static 1],
       return write_int8_c( rec, day, "(2r )" );
    }
 
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 inline bool intl_write_day_of_year_c( cRecorder rec[static 1],
@@ -91,7 +90,7 @@ inline bool intl_write_day_of_year_c( cRecorder rec[static 1],
       return write_int16_c( rec, dayOfYear, "(3r0)" );
    }
 
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 inline bool intl_write_month_c( cRecorder rec[static 1],
@@ -123,7 +122,7 @@ inline bool intl_write_month_c( cRecorder rec[static 1],
       return record_mem_c( rec, buf.s, buf.v );
    }
    
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 inline bool intl_write_week_c( cRecorder rec[static 1],
@@ -141,7 +140,7 @@ inline bool intl_write_week_c( cRecorder rec[static 1],
          res = record_char_c( rec, 'W' ) and write_int64_c( rec, week, "(2r0)" );
          break;
       default:
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    if ( not res )
@@ -173,7 +172,7 @@ inline bool intl_write_weekday_c( cRecorder rec[static 1],
       return record_mem_c( rec, buf.s, buf.v );
    }
    
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 inline bool intl_write_year_c( cRecorder rec[static 1],
@@ -189,7 +188,7 @@ inline bool intl_write_year_c( cRecorder rec[static 1],
       return write_int32_c( rec, year, "(4r0)" );
    }
 
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 /*******************************************************************************
@@ -214,7 +213,7 @@ inline bool intl_write_hour_c( cRecorder rec[static 1],
       return write_int32_c( rec, hour, "(2r )" );
    }
 
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 inline bool intl_write_kitchen_hour_c( cRecorder rec[static 1],
@@ -246,7 +245,7 @@ inline bool intl_write_msec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
    return intl_write_xsec_c( rec, msec, ( fmt == 1 ), "{i64:(3r0)}" );
 }
@@ -256,7 +255,7 @@ inline bool intl_write_usec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
    return intl_write_xsec_c( rec, usec, ( fmt == 1 ), "{i64:(6r0)}" );
 }
@@ -266,7 +265,7 @@ inline bool intl_write_nsec_c( cRecorder rec[static 1],
                                int64_t fmt )
 {
    if ( fmt != 1 and fmt != 3 )
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
    return intl_write_xsec_c( rec, nsec, ( fmt == 1 ), "{i64:(9r0)}" );
 }
@@ -305,7 +304,7 @@ inline bool intl_write_offset_c( cRecorder rec[static 1],
       return write_c_( rec, "{c}{i32:(2r0)}{i8:(2r0)}", sign, t.hour, t.min );
    }
    
-   return set_recorder_error_c( rec, c_InvalidFormatString );
+   return set_recorder_error_c( rec, c_InvalidWriteFormat );
 }
 
 #endif

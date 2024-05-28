@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
@@ -597,24 +596,16 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       }
 
       move_recorder_to_c( rec, oldPos );
-      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
+      return false;
    }
 
    // ---------------------------------------------------------------------- dbg
    if ( chars_is_c( fmtCs, "dbg" ) )
    {
-      if ( write_c_( rec, "{{ .numOfBits={i64}", vec->numOfBits,
-                          ", .numOfBytes={i64}", vec->numOfBytes,
-                          ", .bitMask={b:b}", vec->bitMask,
-                          " }" ) )
-      {
-         return true;
-      }
-      else
-      {
-         move_recorder_to_c( rec, oldPos );
-         return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
-      }
+      return write_c_( rec, "{{ .numOfBits={i64}", vec->numOfBits,
+                            ", .numOfBytes={i64}", vec->numOfBytes,
+                            ", .bitMask={b:b}", vec->bitMask,
+                            " }" );
    }
 
    // ------------------------------------------------------------------- format
@@ -634,7 +625,7 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       }
       else
       {
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
    }
 
@@ -657,14 +648,14 @@ bool write_bit_vec_c( cRecorder rec[static 1],
       uint8_t tmp = 10;
       if ( not read_uint8_c_( sca, &tmp ) )
       {
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
       chunkLen = int64_c_( tmp );
    }
 
    if ( sca->space > 0 ) // ------------------------------------------- fullScan
    {
-      return set_recorder_error_c( rec, c_InvalidFormatString );
+      return set_recorder_error_c( rec, c_InvalidWriteFormat );
    }
 
    // -------------------------------------------------------------------- write
@@ -927,7 +918,7 @@ bool read_bit_vec_c( cScanner sca[static 1],
       cScanner* subSca = &sub_scanner_c_( sca, len );
       *vec = new_bit_vec_c( size );
       if ( vec == NULL )
-         return set_scanner_error_c( sca, c_InternalAllocError );
+         return set_scanner_error_c( sca, c_ReadAllocError );
 
       read_bit_str( subSca, *vec );
       move_scanner_c( sca, len );
@@ -944,7 +935,7 @@ bool read_bit_vec_c( cScanner sca[static 1],
       cScanner* subSca = &sub_scanner_c_( sca, len );
       *vec = new_bit_vec_c( size );
       if ( vec == NULL )
-         return set_scanner_error_c( sca, c_InternalAllocError );
+         return set_scanner_error_c( sca, c_ReadAllocError );
 
       read_list( subSca, *vec );
       move_scanner_c( sca, len );
@@ -961,12 +952,12 @@ bool read_bit_vec_c( cScanner sca[static 1],
       cScanner* subSca = &sub_scanner_c_( sca, len );
       *vec = new_bit_vec_c( size );
       if ( vec == NULL )
-         return set_scanner_error_c( sca, c_InternalAllocError );
+         return set_scanner_error_c( sca, c_ReadAllocError );
 
       read_zip( subSca, *vec );
       move_scanner_c( sca, len );
       return true;
    }
 
-  return set_scanner_error_c( sca, c_InvalidFormatString );
+  return set_scanner_error_c( sca, c_InvalidReadFormat );
 }

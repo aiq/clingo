@@ -1,7 +1,6 @@
 #include "clingo/io/print.h"
 
 #include "_/io/read_write_util.h"
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/FILE.h"
 #include "clingo/io/fwrite.h"
 

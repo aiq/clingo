@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 #include "clingo/container/CBitVec.h"
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/print.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
@@ -489,7 +488,7 @@ bool write_day_set_c( cRecorder rec[static 1],
       }
       else
       {
-         return set_recorder_error_c( rec, c_InvalidFormatString );
+         return set_recorder_error_c( rec, c_InvalidWriteFormat );
       }
    }
 

@@ -3,9 +3,36 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "clingo/io/c_ImpExpError.h"
 #include "clingo/io/write.h"
 #include "clingo/type/uint64.h"
+
+/*******************************************************************************
+********************************************************* Types and Definitions 
+*******************************************************************************
+
+*******************************************************************************/
+
+static bool note_recorder_error( cRecorder rec[static 1], cError const* err )
+{
+   cRecorderErrorData const* errd = get_error_data_c( err );
+   char const* msg = NULL;
+   switch ( errd->code )
+   {
+      #define XMAP_C_( N, I, T ) case N: msg = T;
+         cRECORDER_ERROR_CODE_
+      #undef XMAP_C_
+   }
+   if ( msg == NULL )
+   {
+      return write_c_( rec, "unknown recorder error code: {i64}", errd->code );
+   }
+
+   return record_chars_c_( rec, msg );
+}
+cErrorType const C_RecorderError = {
+   .desc = stringify_c_( C_RecorderError ),
+   .note = &note_recorder_error
+};
 
 /*******************************************************************************
 ********************************************************************* Functions
@@ -268,4 +295,15 @@ char* turn_into_cstr_c( cRecorder rec[static 1] )
 
    reset_recorder_c( rec );
    return rec->mem;
+}
+
+/*******************************************************************************
+ error
+*******************************************************************************/
+
+bool push_recorder_error_c( cErrorStack es[static 1],
+                            cRecorder const rec[static 1] )
+{
+   cRecorderErrorData d = { .code=rec->err };
+   return push_error_c( es, &C_RecorderError, &d, sizeof_c_( cRecorderErrorData ) );
 }
