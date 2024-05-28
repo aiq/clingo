@@ -4,7 +4,6 @@
 #include "clingo/io/write.h"
 #include "clingo/lang/func.h"
 #include "clingo/lang/mem.h"
-#include "clingo/io/print.h"
 
 /*******************************************************************************
 ********************************************************* Types and Definitions
@@ -47,21 +46,6 @@ cErrorData const* get_error_data_c( cError const* err )
 
    return err + 1;
 }
-
- bool note_error_c( cWriter w, cError const* err )
- {
-   if ( err == NULL ) return do_write_c_( w, "no error" );
-
-   bool res = err->type->note( w, err );
-   err = err->sub;
-   while ( res and err != NULL )
-   {
-      res &= do_write_c_( w, ": " );
-      res &= err->type->note( w, err );
-      err = err->sub;
-   }
-   return res;
- }
 
 /*******************************************************************************
  stack
@@ -138,14 +122,14 @@ void reset_error_stack_c( cErrorStack es[static 1] )
  error types
 *******************************************************************************/
 
-static bool note_errno_error( cWriter w, cError const* err )
+static bool note_errno_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_ErrnoError );
    cErrnoErrorData const* errd = get_error_data_c( err );
    char* errStr = strerror( errd->number );
    if ( errStr == NULL ) return false;
 
-   return do_write_c_( w, "{s}", errStr );
+   return record_chars_c_( rec, errStr );
 }
 cErrorType const C_ErrnoError = {
    .desc = stringify_c_( C_ErrnoError ),
@@ -160,11 +144,11 @@ bool push_errno_error_c( cErrorStack es[static 1], int number )
 
 /******************************************************************************/
 
-static bool note_lit_error( cWriter w, cError const* err )
+static bool note_lit_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_LitError );
    cLitErrorData const* errd = get_error_data_c( err );
-   return do_write_c_( w, "{s}", errd->str );
+   return record_chars_c_( rec, errd->str );
 }
 cErrorType const C_LitError = {
    .desc = stringify_c_( C_LitError ),
@@ -179,11 +163,11 @@ bool push_lit_error_c( cErrorStack es[static 1], char const str[static 1] )
 
 /******************************************************************************/
 
-static bool note_text_error( cWriter w, cError const* err )
+static bool note_text_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_TextError );
    cTextErrorData const* errd = get_error_data_c( err );
-   return do_write_c_( w, "{s}", errd->str );
+   return record_chars_c_( rec, errd->str );
 }
 cErrorType const C_TextError = {
    .desc = stringify_c_( C_TextError ),

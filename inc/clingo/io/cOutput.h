@@ -7,7 +7,7 @@
 ********************************************************* Types and Definitions 
 *******************************************************************************/
 
-#define do_output_c_( Output, Bytes )                                          \
+#define output_c_( Output, Bytes )                                             \
    (Output).f( (Output).i, (Bytes) )
 
 typedef bool ( *c_output )( void* o, cBytes data );

@@ -90,7 +90,7 @@ cOutput recorder_as_output( cRecorder rec[static 1] )
    return (cOutput){ .i=rec, .f=recorder_output_func };
 }
 
-static bool recorder_writer_func( void* w, int n, ... )
+static bool recorder_pen_func( void* w, int n, ... )
 {
    cRecorder* rec = w;
    va_list list;
@@ -100,9 +100,9 @@ static bool recorder_writer_func( void* w, int n, ... )
    return res;
 }
 
-cWriter recorder_as_writer_c( cRecorder rec[static 1] )
+cPen recorder_as_pen_c( cRecorder rec[static 1] )
 {
-   return (cWriter){ .i=rec, .f=recorder_writer_func };
+   return (cPen){ .i=rec, .f=recorder_pen_func };
 }
 
 /*******************************************************************************

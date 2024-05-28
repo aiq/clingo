@@ -27,13 +27,13 @@ SINGLE_ERROR_TYPE_C_(
    "unexpected EOF"
 )
 
-static bool note_file_error( cWriter w, cError const* err )
+static bool note_file_error( cRecorder rec[static 1], cError const* err )
 {
    cFileErrorData const* errd = get_error_data_c( err );
    char* errStr = strerror( errd->number );
    if ( errStr == NULL ) return false;
 
-   return do_write_c_( w, "{s}", errStr );
+   return write_cstr_c_( rec, errStr );
 }
 cErrorType const C_FileError = {
    .desc = stringify_c_( C_FileError ),
@@ -100,7 +100,7 @@ cOutput file_as_output_c( FILE* file )
    return (cOutput){ .i=file, .f=file_output_func };
 }
 
-static bool file_writer_func( void* w, int n, ... )
+static bool file_pen_func( void* w, int n, ... )
 {
    cErrorStack* es = &error_stack_c_( 128 );
    FILE* file = w;
@@ -111,9 +111,9 @@ static bool file_writer_func( void* w, int n, ... )
    return res;
 }
 
-CLINGO_API cWriter file_as_writer_c( FILE* file )
+CLINGO_API cPen file_as_pen_c( FILE* file )
 {
-   return (cWriter){ .i=file, .f=file_writer_func };
+   return (cPen){ .i=file, .f=file_pen_func };
 }
 
 /*******************************************************************************

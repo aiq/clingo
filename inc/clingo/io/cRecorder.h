@@ -103,7 +103,7 @@ CLINGO_API inline int clear_recorder_error_c( cRecorder rec[static 1] )
 
 CLINGO_API cOutput recorder_as_output_c( cRecorder rec[static 1] );
 
-CLINGO_API cWriter recorder_as_writer_c( cRecorder rec[static 1] );
+CLINGO_API cPen recorder_as_pen_c( cRecorder rec[static 1] );
 
 /*******************************************************************************
  mem
