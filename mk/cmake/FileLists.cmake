@@ -76,7 +76,6 @@ aux_source_directory( ${TEST_DIR}/clingo/lang/window TEST_FILES )
 ## string
 aux_source_directory( ${TEST_DIR}/clingo/string/CDictionary TEST_FILES )
 aux_source_directory( ${TEST_DIR}/clingo/string/CString TEST_FILES )
-aux_source_directory( ${TEST_DIR}/clingo/string/cStringBuilder TEST_FILES )
 aux_source_directory( ${TEST_DIR}/clingo/string/CStringList TEST_FILES )
 
 ## time

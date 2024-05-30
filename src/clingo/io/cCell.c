@@ -29,7 +29,7 @@ bool read_in_cell_c( cScanner sca[static 1], cCell cell[static 1] )
       return false;
    }
 
-   bool readOrient = sca->space > 0; // --------------------------------- orient
+   bool readOrient = sca->space > 0; // --------------------------------- 
    if ( readOrient )
    {
       const char* ptr = sca->mem;

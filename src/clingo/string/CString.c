@@ -82,6 +82,28 @@ CString* adopt_cstr_c( char cstr[static 1] )
 
 /**************************************/
 
+CString* adopt_recorded_c( cRecorder rec[static 1] )
+{
+   if ( not realloc_recorder_mem_c( rec, rec->pos + 1 ) )
+   {
+      return NULL;
+   }
+
+   int64_t oldPos = rec->pos;
+   char* cstr = turn_into_cstr_c( rec );
+   CString* res = adopt_cstr_c( cstr );
+   if ( res == NULL )
+   {
+      move_recorder_to_c( rec, oldPos );
+      return NULL;
+   }
+
+   *rec = null_recorder_c_();
+   return res;
+}
+
+/**************************************/
+
 CString* empty_string_c( void )
 {
    if ( emptyString == NULL )

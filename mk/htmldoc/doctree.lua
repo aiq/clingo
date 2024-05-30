@@ -51,7 +51,6 @@ local doctree = {
       [ "string" ] = {
          "CDictionary.adoc",
          "CString.adoc",
-         "CStringBuilder.adoc",
          "CStringList.adoc",
          "CStringSet.adoc",
       },

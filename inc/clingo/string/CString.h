@@ -2,6 +2,7 @@
 #define CLINGO_STRING_CSTRING_H
 
 #include "clingo/apidecl.h"
+#include "clingo/io/cRecorder.h"
 #include "clingo/lang/CObject.h"
 #include "clingo/type/char.h"
 #include "clingo/type/cRange.h"
@@ -26,6 +27,8 @@ typedef struct CString CString;
 
 CLINGO_API CString* adopt_cstr_c( char cstr[static 1] );
 
+CLINGO_API CString* adopt_recorded_c( cRecorder rec[static 1] );
+
 CLINGO_API CString* empty_string_c( void );
 
 CLINGO_API CString* make_string_c( cChars chars );
@@ -33,6 +36,8 @@ CLINGO_API CString* make_string_c( cChars chars );
 CLINGO_API CString* new_string_c( char const cstr[static 1] );
 
 CLINGO_API CString* lit_c( char const cstr[static 1] );
+
+CLINGO_API CString* adopt_recorded_c( cRecorder rec[static 1] );
 
 /*******************************************************************************
  prop

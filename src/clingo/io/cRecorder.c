@@ -217,10 +217,7 @@ bool FuncName( cRecorder rec[static 1], Type val )                             \
    must_exist_c_( rec );                                                       \
                                                                                \
    int64_t const size = sizeof_c_( Type );                                     \
-   if ( size > rec->space )                                                    \
-   {                                                                           \
-     return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );             \
-   }                                                                           \
+   if ( not ensure_recorder_space_c( rec, size ) ) return false;               \
                                                                                \
    Type* ptr = rec->mem;                                                       \
    ptr[ 0 ] = val;                                                             \
