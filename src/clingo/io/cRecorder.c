@@ -279,11 +279,7 @@ char* turn_into_cstr_c( cRecorder rec[static 1] )
 {
    if ( recorder_cap_c( rec ) == 0 ) return NULL;
 
-   if ( rec->space > 0 )
-   {
-      record_char_c( rec, '\0' );
-   }
-   else
+   if ( not record_char_c( rec, '\0' ) )
    {
       char const* cstr = rec->mem;
       --cstr;
