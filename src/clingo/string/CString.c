@@ -50,14 +50,12 @@ CString* adopt_cstr_c( char cstr[static 1] )
    cChars chars = c_c( cstr );
    if ( chars.s == 0 )
    {
-      free( cstr );
       return empty_string_c();
    }
 
    int64_t len = count_runes_c( chars );
    if ( len < 0 )
    {
-      free (cstr );
       return NULL;
    }
 
