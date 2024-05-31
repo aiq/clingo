@@ -55,13 +55,13 @@ typedef struct cRecorder cRecorder;
  init
 *******************************************************************************/
 
-#define dyn_heap_recorder_c_( Size )                                           \
+#define dyn_recorder_c_( Size )                                                \
 (                                                                              \
    (cRecorder)                                                                 \
    { .pos=0, .space=(Size), .mem=alloc_c(Size), .dyn=true, .err=cNoError_ }    \
 )
 
-#define fix_heap_recorder_c_( Size )                                           \
+#define fix_recorder_c_( Size )                                                \
 (                                                                              \
    (cRecorder)                                                                 \
    { .pos=0, .space=(Size), .mem=alloc_c(Size), .dyn=false, .err=cNoError_ }   \

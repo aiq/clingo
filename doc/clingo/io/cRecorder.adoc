@@ -43,8 +43,8 @@ The err value can be set to indicate the type of error that occurred.
 //************************************************************************ init
 === init
 
-[id='dyn_heap_recorder_c_']
-==== dyn_heap_recorder_c_
+[id='dyn_recorder_c_']
+==== dyn_recorder_c_
 [source,c]
 ----
 #define dyn_heap_recorder_c_( Size )
@@ -53,11 +53,11 @@ The err value can be set to indicate the type of error that occurred.
 Allocates a byte array at the heap and assigns the memory to a new created
 recorder where dyn is true.
 
-[id='fix_heap_recorder_c_']
-==== fix_heap_recorder_c_
+[id='fix_recorder_c_']
+==== fix_recorder_c_
 [source,c]
 ----
-#define fix_heap_recorder_c_( Size )
+#define fix_recorder_c_( Size )
 ----
 
 Allocates a byte array at the heap and assigns the memory to a new created

@@ -149,7 +149,7 @@ CString* join_string_list_c( CStringList const* list, cChars sep )
 
    // create recorder
    int64_t const memSize = strLen + sepLen + 1;
-   cRecorder* rec = &dyn_heap_recorder_c_( memSize );
+   cRecorder* rec = &dyn_recorder_c_( memSize );
    if ( rec->mem == NULL )
    {
       return NULL;

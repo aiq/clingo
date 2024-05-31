@@ -6,7 +6,7 @@ int main( void )
 {
    init_tap_c_();
 
-   cRecorder* rec = &dyn_heap_recorder_c_( 10 );
+   cRecorder* rec = &dyn_recorder_c_( 10 );
 
    expect_c_( recorder_cap_c( rec ) == 10 );
    expect_c_( rec->space == 10 );
