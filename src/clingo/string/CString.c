@@ -209,7 +209,7 @@ int64_t string_byte_length_c( CString const* str )
    return str->chars.s;
 }
 
-cChars scs_c( CString const* str )
+cChars sc_c( CString const* str )
 {
    must_exist_c_( str );
    return str->chars;

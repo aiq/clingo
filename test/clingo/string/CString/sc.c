@@ -6,7 +6,7 @@ int main( void )
    init_tap_c_();
 
    CString* s = lit_c( "foobar" );
-   cChars chars = scs_c( s );
+   cChars chars = sc_c( s );
    expect_c_( chars_is_c( chars, "foobar" ) );
 
    release_c( s );

@@ -127,10 +127,10 @@ int64_t string_byte_length_c( CString const* str );
 Returns the number of bytes a string requires, without the '\0' character at the
 end.
 
-==== scs_c
+==== sc_c
 [source,c]
 ----
-cChars scs_c( CString const* str );
+cChars sc_c( CString const* str );
 ----
 
 Returns the internal C string as chars.
@@ -138,7 +138,7 @@ Returns the internal C string as chars.
 .Example
 [source,c]
 ----
-include::{xmpldir}/scs.c[]
+include::{xmpldir}/sc.c[]
 ----
 
 ==== scstr_c
