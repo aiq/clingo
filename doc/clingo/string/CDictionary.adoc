@@ -41,6 +41,48 @@ include::{docroot}/clingo/_tmpl/ObjMap.adoc[]
 //******************************************************************************
 == Functions
 
+=== macros
+
+[id='in_dictionary_c_']
+==== in_dictionary_c_
+[source,c]
+----
+#define in_dictionary_c_( Dict, Key )                                          \
+   chars_in_dictionary_c( (Dict), c_c( Key) )
+----
+
+Macro function that wraps in_dictionary_c.
+
+[id='get_from_dictionary_c_']
+==== get_from_dictionary_c_
+[source,c]
+----
+#define get_from_dictionary_c_( Dict, Key )                                    \
+   get_via_chars_from_dictionary_c( (Dict), c_c( Key ) )
+----
+
+Macro function that wraps get_from_dictionary_c.
+
+[id='remove_from_dictionary_c_']
+==== remove_from_dictionary_c_
+[source,c]
+----
+#define remove_from_dictionary_c_( Dict, Key )                                 \
+   remove_via_chars_from_dictionary_c( (Dict), c_c( Key ) )
+----
+
+Macro function that wraps remove_from_dictionary_c.
+
+[id='set_on_dictionary_c_']
+==== set_on_dictionary_c_
+[source,c]
+----
+#define set_on_dictionary_c_( Dict, Key, Val )                                 \
+   set_via_chars_on_dictionary_c( (Dict), c_c( Key ), c_c( Val ) )
+----
+
+Macro function that wraps set_on_dictionary_c.
+
 //************************************************************************ wrap
 === wrap
 
@@ -48,14 +90,6 @@ include::{docroot}/clingo/_tmpl/ObjMap.adoc[]
 [source,c]
 ----
 bool chars_in_dictionary_c( CDictionary* dict, cChars key );
-----
-
-Util function that wraps in_dictionary_c.
-
-==== cstr_in_dictionary_c
-[source,c]
-----
-bool cstr_in_dictionary_c( CDictionary* dict, char const key[static 1] );
 ----
 
 Util function that wraps in_dictionary_c.
@@ -68,15 +102,6 @@ CString* get_via_chars_from_dictionary_c( CDictionary* dict, cChars key );
 
 Util function that wraps get_from_dictionary_c.
 
-==== get_via_cstr_from_dictionary_c
-[source,c]
-----
-CString* get_via_cstr_from_dictionary_c( CDictionary* dict,
-                                         char const key[static 1] );
-----
-
-Util function that wraps get_from_dictionary_c.
-
 ==== remove_via_chars_from_dictionary_c
 [source,c]
 ----
@@ -85,30 +110,10 @@ bool remove_via_chars_from_dictionary_c( CDictionary* dict, cChars key );
 
 Util function that wraps remove_from_dictionary_c.
 
-==== remove_via_cstr_from_dictionary_c
+==== set_via_chars_on_dictionary_c
 [source,c]
 ----
-bool remove_via_cstr_from_dictionary_c( CDictionary* dict,
-                                        char const key[static 1] );
-----
-
-Util function that wraps remove_from_dictionary_c.
-
-==== set_chars_on_dictionary_c
-[source,c]
-----
-bool set_chars_on_dictionary_c( CDictionary* dict, cChars key, cChars val );
+bool set_via_chars_on_dictionary_c( CDictionary* dict, cChars key, cChars val );
 ----
 
 Util function that wraps set_on_dictionary_c.
-
-==== set_cstr_on_dictionary_c
-[source,c]
-----
-bool set_cstr_on_dictionary_c( CDictionary* dict,
-                               char const key[static 1],
-                               char const val[static 1] );
-----
-
-Util function that wraps set_on_dictionary_c.
-

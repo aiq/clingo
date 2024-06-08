@@ -38,7 +38,7 @@ int main( void )
       println_recorded_c( rec );
    }
 
-   require_c_( remove_via_cstr_from_dictionary_c( dict, "France" ) );
+   require_c_( remove_from_dictionary_c_( dict, "France" ) );
 
    release_c( dict );
 
