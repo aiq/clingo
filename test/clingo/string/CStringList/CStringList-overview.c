@@ -41,10 +41,14 @@ int main( void )
    CString* joined = join_string_list_c_( list, " " );
    expect_str_( joined, "abc def bang BOOM bang !?" );
 
+   sort_string_list_c( list );
+   CString* sorted = join_string_list_c_( list, " - " );
+   expect_str_( sorted, "!? - BOOM - abc - bang - bang - def" );
+
    resize_string_list_c( list, info->count );
    expect_c_( info->cap == info->count );
 
-   release_all_c_( list, joined );
+   release_all_c_( list, joined, sorted );
 
    return finish_tap_c_();
 }

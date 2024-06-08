@@ -178,3 +178,11 @@ by the given separator (sep).
 ----
 include::{xmpldir}/join_string_list.c[]
 ----
+
+==== sort_string_list_c
+[source,c]
+----
+void sort_string_list_c( CStringList* list );
+----
+
+Sorts the entries in a string list using the cmp_string_c function.

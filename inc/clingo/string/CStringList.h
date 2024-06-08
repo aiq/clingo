@@ -121,4 +121,6 @@ CLINGO_API int64_t count_string_list_runes_c( CStringList const* list );
    join_string_list_c( (List), c_c( CStr ) )
 CLINGO_API CString* join_string_list_c( CStringList const* list, cChars sep );
 
+CLINGO_API void sort_string_list_c( CStringList* list );
+
 #endif

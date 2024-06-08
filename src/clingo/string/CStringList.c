@@ -168,3 +168,28 @@ CString* join_string_list_c( CStringList const* list, cChars sep )
    return adopt_cstr_c( turn_into_cstr_c( rec ) );
 }
 
+SLICES_C_(
+   CString*,      // Type
+   tmpStrings,    // SliceType
+   tmpVarStrings  // VarSliceType
+)
+
+VAR_SLICE_OF_VEC_C_(
+   string_list_c, // FuncSuffix
+   CStringList,   // VecType
+   tmpVarStrings  // SliceType
+)
+
+QSORT_C_(
+   sort_string_list, // FuncName
+   tmpVarStrings,    // FuncName
+   CString*,         // ValueType
+   cmp_string_c,     // CmpFunc
+   do_deref_c_       // DoDeref
+)
+
+void sort_string_list_c( CStringList* list )
+{
+   tmpVarStrings slc = var_slice_of_string_list_c( list );
+   sort_string_list( slc );
+}
