@@ -48,7 +48,7 @@ include::{docroot}/clingo/_tmpl/ObjMap.adoc[]
 [source,c]
 ----
 #define in_dictionary_c_( Dict, Key )                                          \
-   chars_in_dictionary_c( (Dict), c_c( Key) )
+   via_chars_in_dictionary_c( (Dict), c_c( Key) )
 ----
 
 Macro function that wraps in_dictionary_c.
@@ -86,10 +86,10 @@ Macro function that wraps set_on_dictionary_c.
 //************************************************************************ wrap
 === wrap
 
-==== chars_in_dictionary_c
+==== via_chars_in_dictionary_c
 [source,c]
 ----
-bool chars_in_dictionary_c( CDictionary* dict, cChars key );
+bool via_chars_in_dictionary_c( CDictionary* dict, cChars key );
 ----
 
 Util function that wraps in_dictionary_c.

@@ -24,7 +24,7 @@ OBJ_OBJ_MAP_IMPL_C_(
  wrap
 *******************************************************************************/
 
-extern inline bool chars_in_dictionary_c( CDictionary* dict, cChars key );
+extern inline bool via_chars_in_dictionary_c( CDictionary* dict, cChars key );
 
 extern inline CString* get_via_chars_from_dictionary_c( CDictionary* dict,
                                                         cChars key );

@@ -27,7 +27,7 @@ OBJ_OBJ_MAP_DEF_C_(
 *******************************************************************************/
 
 #define in_dictionary_c_( Dict, Key )                                          \
-   chars_in_dictionary_c( (Dict), c_c( Key) )
+   via_chars_in_dictionary_c( (Dict), c_c( Key) )
 
 #define get_from_dictionary_c_( Dict, Key )                                    \
    get_via_chars_from_dictionary_c( (Dict), c_c( Key ) )
@@ -42,7 +42,7 @@ OBJ_OBJ_MAP_DEF_C_(
 
 *******************************************************************************/
 
-CLINGO_API inline bool chars_in_dictionary_c( CDictionary* dict, cChars key )
+CLINGO_API inline bool via_chars_in_dictionary_c( CDictionary* dict, cChars key )
 {
    must_exist_c_( dict );
 
