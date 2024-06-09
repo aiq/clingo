@@ -180,7 +180,7 @@ VAR_SLICE_OF_VEC_C_(
    tmpVarStrings  // SliceType
 )
 
-QSORT_C_(
+static QSORT_C_(
    sort_string_list, // FuncName
    tmpVarStrings,    // FuncName
    CString*,         // ValueType
