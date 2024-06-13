@@ -37,6 +37,25 @@ tokenize.
 //************************************************************************ init
 === init
 
+[id='chars_token_c_']
+==== chars_token_c_
+[source,c]
+----
+#define chars_token_c_( Chars )
+----
+
+Creates a cCharsToken with chars.
+
+[id='cstr_token_c_']
+==== cstr_token_c_
+[source,c]
+----
+#define cstr_token_c_( Cstr )
+----
+
+Creates a cCharsToken with a C string.
+The '\0' at the end of the string will be ignored.
+
 ==== init_chars_token_c
 [source,c]
 ----
@@ -147,18 +166,37 @@ include::{xmpldir}/next_token_till_rune.c[]
 [source,c]
 ----
 #define next_token_till_rune_c_( Tok, Cstr )                                   \
-   next_token_till_rune_c( (Tok), c_c( Cstr ) )
+   next_token_till_rune_c( (Tok), rune_c( Cstr ) )
 bool next_token_till_rune_c( cCharsToken tok[static 1], cRune deli );
 ----
 
 Moves tok to the next token in the text that is split via deli value.
 The function returns false if no other token exist in the text.
 
-
 .Example
 [source,c]
 ----
 include::{xmpldir}/next_token_till_rune.c[]
+----
+
+//***************************************************************** next preset
+
+=== next preset
+
+==== next_line_token_c
+[source,c]
+----
+bool next_line_token_c( cCharsToken tok[static 1] )
+----
+
+Moves tok to the next line token.
+The function interpretes \n and \r\n as deli values.
+The function returns false if no other line token exist in the text.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/next_line_token.c[]
 ----
 
 //************************************************************************ prop

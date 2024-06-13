@@ -100,6 +100,23 @@ bool next_token_till_any_rune_c( cCharsToken tok[static 1], cChars set )
 }
 
 /*******************************************************************************
+ next presets
+*******************************************************************************/
+
+bool next_line_token_c( cCharsToken tok[static 1] )
+{
+   if ( not next_token_till_char_c( tok, '\n' ) )
+      return false;
+
+   if ( tok->x.s > 0 and last_c_( tok->x ) == '\r' )
+   {
+      tok->x.s -= 1;
+   }
+
+   return true;
+}
+
+/*******************************************************************************
  prop
 *******************************************************************************/
 
