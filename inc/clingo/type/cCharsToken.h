@@ -23,6 +23,16 @@ typedef struct cCharsToken cCharsToken;
  init
 *******************************************************************************/
 
+#define chars_token_c_( Chars )                                                \
+(                                                                              \
+   (cCharsToken){ .x=(cChars){ 0, (Chars).v }, .tail=(Chars) }                 \
+)
+
+#define cstr_token_c_( Cstr )                                                  \
+(                                                                              \
+   (cCharsToken){ .x=(cChars){ 0, (Cstr) }, .tail=c_c( Cstr ) }                \
+)
+
 CLINGO_API
 inline void init_chars_token_c( cCharsToken tok[static 1], cChars chars )
 {

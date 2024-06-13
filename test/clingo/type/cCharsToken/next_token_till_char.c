@@ -26,8 +26,7 @@ int main( void )
    {
       cRecorder* rec = &recorder_c_( 128 );
 
-      cCharsToken tok;
-      init_cstr_token_c( &tok, t->text );
+      cCharsToken tok = cstr_token_c_( t->text );
       while ( next_token_till_char_c( &tok, t->c ) )
       {
          if ( t->ignoreEmpty and is_empty_c_( tok.x ) ) continue;
