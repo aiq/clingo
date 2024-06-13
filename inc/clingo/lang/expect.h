@@ -80,7 +80,7 @@ int finish_tap_c( bool withPlan );
 
 #define abort_tap_c_()                                                         \
 {                                                                              \
-   tap_c_( false, C_TapDesc, "abort at line " xstringify_c_( __LINE__ ) );            \
+   tap_c_( false, C_TapDesc, "abort at line " xstringify_c_( __LINE__ ) );     \
    exit( finish_tap_c_() );                                                    \
 }
 

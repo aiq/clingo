@@ -6,6 +6,7 @@
 
 #include "clingo/type/cCharsToken.h"
 #include "clingo/io/fwrite.h"
+#include "clingo/io/print.h"
 
 /*******************************************************************************
  global test context
@@ -38,12 +39,22 @@ void init_tap_c( const char name[static 1], FILE* output )
    C_Success = 0;
    C_Failure = 0;
 
-   fprintf( C_LogFile, "# %s\n", name );
+   cErrorStack* es = &error_stack_c_( 128 );
+   if ( not fwriteln_c_( C_LogFile, es, "# {s}", name ) )
+   {
+      println_c_( "abort at tap init: {e}", es->err );
+      exit( finish_tap_c_() );
+   }
 }
 
 void tap_plan_c( int64_t n )
 {
-   fprintf( C_LogFile, "1..%"PRIi64"\n", n );
+   cErrorStack* es = &error_stack_c_( 128 );
+   if ( not fwriteln_c_( C_LogFile, es, "1..{i64}", n ) )
+   {
+      println_c_( "abort at tap plan: {e}", es->err );
+      exit( finish_tap_c_() );
+   }
 }
 
 static void intl_tap( bool result, int n, va_list list )
@@ -52,14 +63,22 @@ static void intl_tap( bool result, int n, va_list list )
    if ( result )
    {
       C_Success += 1;
-      fwrite_c_( C_LogFile, es, "ok {i64}", test_number() );
+      if ( not fwrite_c_( C_LogFile, es, "ok {i64}", test_number() ) )
+      {
+         println_c_( "abort at test {i64}: {e}", test_number(), es->err );
+         exit( finish_tap_c_() );
+      }
       fwriteln_list_c( C_LogFile, es, n, list );
    }
    else
    {
       C_Failure += 1;
       fwrite_c_( C_LogFile, es, "not ok {i64}", test_number() );
-      fwriteln_list_c( C_LogFile, es, n, list );
+      if ( not fwriteln_list_c( C_LogFile, es, n, list ) )
+      {
+         println_c_( "abort at test {i64}: {e}", test_number(), es->err );
+         exit( finish_tap_c_() );
+      }
    }
 }
 
@@ -74,17 +93,15 @@ bool tap_c( bool result, int n, ... )
 
 void tap_note_c( char const note[static 1] )
 {
-   cCharsToken tok;
-   init_cstr_token_c( &tok, note );
-   while ( next_token_till_char_c( &tok, '\n' ) )
+   cErrorStack* es = &error_stack_c_( 128 );
+   cCharsToken tok = cstr_token_c_( note );
+   while ( next_line_token_c( &tok ) )
    {
-      fputc( '#', C_LogFile );
-      fputc( ' ', C_LogFile );
-      for_each_c_( char const*, c, tok.x )
+      if ( not fwriteln_c_( C_LogFile, es, "# {cs}", tok.x ) )
       {
-         fputc( *c, C_LogFile );
+         println_c_( "abort at note before {i64}: {e}", test_number()+1, es->err );
+         exit( finish_tap_c_() );
       }
-      fputc( '\n', C_LogFile );
    }
 }
 
