@@ -32,7 +32,7 @@ int main( void )
       bool res = write_recorded_c( rec, t->src, t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "test with fmt: \"%s\"", t->fmt );
+      tap_c_( res, C_TapDesc, "test with fmt: {s:Q}", t->fmt );
    }
 
    return finish_tap_c_();

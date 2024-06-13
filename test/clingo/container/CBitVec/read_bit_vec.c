@@ -35,7 +35,7 @@ int main( void )
       CBitVec* vec;
       if ( not read_bit_vec_c( sca, &vec, t->fmt ) )
       {
-         tap_descf_c( false, "%s", t->txt );
+         tap_c_( false, C_TapDesc, "{s}", t->txt );
          continue;
       }
 
@@ -46,7 +46,7 @@ int main( void )
                  unscanned_is_c( sca, t->tail );
       release_c( vec );
 
-      tap_descf_c( res, "%s", t->txt );
+      tap_desc_c_( res, "{s}", t->txt );
    }
 
    return finish_tap_c_();

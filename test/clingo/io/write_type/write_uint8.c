@@ -46,7 +46,7 @@ int main( void )
       bool res = write_uint8_c( rec, t.val, t.fmt );
       res &= recorded_is_c( rec, t.exp );
 
-      tap_descf_c( res, "test at index %"PRIi64, i );
+      tap_c_( res, C_TapDesc, "test at index {i64}", i );
    }
 
    return finish_tap_c_();

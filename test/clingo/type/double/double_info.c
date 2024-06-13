@@ -30,12 +30,7 @@ int main( void )
       res &= ( info.exponent == t->e );
       res &= ( info.mantissa == t->m );
 
-      cRecorder* rec = &recorder_c_( 256 );
-      {
-         char const* fmt = "{d} -> {u8:x} / {u16:x} / {u64:x}";
-         write_c_( rec, fmt, t->val, t->s, t->e, t->m );
-      }
-      tap_descf_c( res, "%s", turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "{d} -> {u8:x} / {u16:x} / {u64:x}", t->val, t->s, t->e, t->m );
    }
 
    return finish_tap_c_();

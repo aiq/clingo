@@ -5,10 +5,15 @@
 #include <stdlib.h>
 
 #include "clingo/type/cCharsToken.h"
+#include "clingo/io/fwrite.h"
 
 /*******************************************************************************
  global test context
 *******************************************************************************/
+
+char const* C_TapDesc = " - ";
+char const* C_TapSkip = " # SKIP ";
+char const* C_TapTodo = " # TODO ";
 
 static FILE* C_LogFile = NULL;
 static int C_Success = 0;
@@ -41,42 +46,30 @@ void tap_plan_c( int64_t n )
    fprintf( C_LogFile, "1..%"PRIi64"\n", n );
 }
 
-void tap_c( bool result )
+static void intl_tap( bool result, int n, va_list list )
 {
+   cErrorStack* es = &error_stack_c_( 128 );
    if ( result )
    {
       C_Success += 1;
-      fprintf( C_LogFile, "ok %i\n", test_number() );
+      fwrite_c_( C_LogFile, es, "ok {i64}", test_number() );
+      fwriteln_list_c( C_LogFile, es, n, list );
    }
    else
    {
       C_Failure += 1;
-      fprintf( C_LogFile, "not ok %i\n", test_number() );
+      fwrite_c_( C_LogFile, es, "not ok {i64}", test_number() );
+      fwriteln_list_c( C_LogFile, es, n, list );
    }
 }
 
-void tap_desc_c( bool result, char const desc[static 1] )
+bool tap_c( bool result, int n, ... )
 {
-   return tap_descf_c( result, "%s", desc );
-}
-
-void tap_descf_c( bool result, char const format[static 1], ... )
-{
-   if ( result )
-   {
-      C_Success += 1;
-      fprintf( C_LogFile, "ok %i - ", test_number() );
-   }
-   else
-   {
-      C_Failure += 1;
-      fprintf( C_LogFile, "not ok %i - ", test_number() );
-   }
-   va_list args;
-   va_start( args, format );
-   vfprintf( C_LogFile, format, args );
-   va_end( args );
-   putc( '\n', C_LogFile );
+   va_list list;
+   va_start( list, n );
+   intl_tap( result, n, list );
+   va_end( list );
+   return result;
 }
 
 void tap_note_c( char const note[static 1] )
@@ -92,34 +85,6 @@ void tap_note_c( char const note[static 1] )
          fputc( *c, C_LogFile );
       }
       fputc( '\n', C_LogFile );
-   }
-}
-
-void tap_skip_c( bool result, char const reason[static 1] )
-{
-   if ( result )
-   {
-      C_Success += 1;
-      fprintf( C_LogFile, "ok %i # skip %s\n", test_number(), reason );
-   }
-   else
-   {
-      C_Failure += 1;
-      fprintf( C_LogFile, "not ok %i # skip %s\n", test_number(), reason );
-   }
-}
-
-void tap_todo_c( bool result, char const explanation[static 1] )
-{
-   if ( result )
-   {
-      C_Success += 1;
-      fprintf( C_LogFile, "ok %i # TODO %s\n", test_number(), explanation );
-   }
-   else
-   {
-      C_Failure += 1;
-      fprintf( C_LogFile, "not ok %i # TODO %s\n", test_number(), explanation );
    }
 }
 

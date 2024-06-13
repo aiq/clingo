@@ -36,7 +36,7 @@ int main( void )
       cDate const date = date_c( t->year, t->month, t->day );
       int64_t const jd = as_julian_day_c( date );
 
-      tap_descf_c( jd == t->jd, "%d.%d.%d", t->year, t->month, t->day );
+      tap_desc_c_( jd == t->jd, "{i64}.{i64}.{i64}", t->year, t->month, t->day );
    }
 
    return finish_tap_c_();

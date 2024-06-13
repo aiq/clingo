@@ -9,6 +9,10 @@
 #include "clingo/apidecl.h"
 #include "clingo/lang/func.h"
 
+extern char const* C_TapDesc;
+extern char const* C_TapSkip;
+extern char const* C_TapTodo;
+
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
@@ -17,29 +21,24 @@
 
 #define init_tap_c_()                                                          \
    init_tap_c( __FILE__, stdout )
-CLINGO_API
-void init_tap_c( char const name[static 1], FILE* output );
+CLINGO_API void init_tap_c( char const name[static 1], FILE* output );
 
-CLINGO_API
-void tap_plan_c( int64_t n );
+CLINGO_API void tap_plan_c( int64_t n );
 
-CLINGO_API
-void tap_c( bool result );
+#define tap_c_( Result, ... )                                                  \
+   tap_c( (Result), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+CLINGO_API bool tap_c( bool result, int n, ... );
 
-CLINGO_API
-void tap_desc_c( bool result, char const desc[static 1] );
+#define tap_desc_c_( Result, ... )                                             \
+   tap_c_( (Result), C_TapDesc, __VA_ARGS__ )
 
-CLINGO_API
-void tap_descf_c( bool result, char const format[static 1], ... );
+#define tap_skip_c_( Result, ... )                                             \
+   tap_c_( (Result), C_TapSkip, __VA_ARGS__ )
 
-CLINGO_API
-void tap_note_c( char const note[static 1] );
+#define tap_todo_c_( Result, ... )                                             \
+   tap_c_( (Result), C_TapTodo, __VA_ARGS__ )
 
-CLINGO_API
-void tap_skip_c( bool result, char const reason[static 1] );
-
-CLINGO_API
-void tap_todo_c( bool result, char const explanation[static 1] );
+CLINGO_API void tap_note_c( char const note[static 1] );
 
 #define finish_tap_c_()                                                        \
    finish_tap_c( true )
@@ -51,7 +50,7 @@ int finish_tap_c( bool withPlan );
 *******************************************************************************/
 
 #define expect_c_( Result )                                                    \
-   tap_desc_c( (Result), "at line " xstringify_c_( __LINE__ ) )
+   tap_c_( (Result), C_TapDesc, "at line ", xstringify_c_( __LINE__ ) )
 
 /*******************************************************************************
  check cmp results
@@ -81,7 +80,7 @@ int finish_tap_c( bool withPlan );
 
 #define abort_tap_c_()                                                         \
 {                                                                              \
-   tap_desc_c( false, "abort at line " xstringify_c_( __LINE__ ) );            \
+   tap_c_( false, C_TapDesc, "abort at line " xstringify_c_( __LINE__ ) );            \
    exit( finish_tap_c_() );                                                    \
 }
 

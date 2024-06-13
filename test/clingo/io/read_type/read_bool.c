@@ -50,7 +50,7 @@ int main( void )
       bool res = read_bool_c( sca, &val, t.fmt ) == t.expReturn;
       res &= val == t.expVal;
 
-      tap_descf_c( res, "test at index %"PRIi64, i );
+      tap_desc_c_( res, "test at index {i64}", i );
    }
 
    return finish_tap_c_();

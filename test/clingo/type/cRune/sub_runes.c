@@ -29,7 +29,7 @@ int main( void )
       cChars chars = c_c( t->input );
       cChars sub = sub_runes_c( chars, t->begIdx, t->endIdx );
       bool res = chars_is_c( sub, t->exp );
-      tap_descf_c( res, "test '%s' -> '%s'", t->input, t->exp );
+      tap_desc_c_( res, "test {s:q} -> {s:q}", t->input, t->exp );
    }
 
    return finish_tap_c_();

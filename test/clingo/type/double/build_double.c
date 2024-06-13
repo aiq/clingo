@@ -33,7 +33,7 @@ int main( void )
          char const* fmt = "{u8:x} / {u16:x} / {u64:x} -> {d}";
          write_c_( rec, fmt, t->s, t->e, t->m, t->exp );
       }
-      tap_desc_c( res, turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "{rec}", rec );
    }
 
    return finish_tap_c_();

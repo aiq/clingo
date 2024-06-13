@@ -31,7 +31,7 @@ int main( void )
 
       cRecorder* rec = &recorder_c_( 32 );
       write_ymd_c_( rec, ymd );
-      tap_descf_c( res, "%s -> %s", t->fmt, turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "{s} -> {rec}", t->fmt, rec );
    }
 
    return finish_tap_c_();

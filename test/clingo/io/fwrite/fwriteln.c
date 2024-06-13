@@ -37,7 +37,7 @@ int main( void )
       bool fin = false;
       fget_line_c( file, 128, &buf, &fin );
       bool res = chars_is_c( as_c_( cChars, buf ), t->exp );
-      tap_desc_c( res, t->exp );
+      tap_c_( res, C_TapDesc, "{s}", t->exp );
    }
    require_c_( close_file_c( file, es ) );
 

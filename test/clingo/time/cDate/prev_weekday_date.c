@@ -29,7 +29,7 @@ int main( void )
 
       cRecorder* rec = &recorder_c_( 16 );
       write_date_c_( rec, date );
-      tap_desc_c( res, turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "{rec}", rec );
    }
 
    return finish_tap_c_();

@@ -31,7 +31,7 @@ int main( void )
       bool res = write_month_day_c( rec, t->md, t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "test: %s", t->exp );
+      tap_desc_c_( res, "test: {s}", t->exp );
    }
 
    return finish_tap_c_();

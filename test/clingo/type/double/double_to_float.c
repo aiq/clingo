@@ -28,7 +28,7 @@ int main( void )
       float f;
       bool res = double_to_float_c( t->d, &f );
 
-      tap_descf_c( res == t->exp, "%f", t->d );
+      tap_desc_c_( res == t->exp, "{f}", t->d );
    }
 
    return finish_tap_c_();

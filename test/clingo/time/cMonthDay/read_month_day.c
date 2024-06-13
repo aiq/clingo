@@ -29,7 +29,7 @@ int main( void )
       bool res = read_month_day_c( sca, &md, t->fmt );
       res &= eq_c( cmp_month_day_c( md, t->exp ) );
 
-      tap_descf_c( res, "res: %s, with %s", t->inp, t->fmt );
+      tap_desc_c_( res, "res: {s}, with {s}", t->inp, t->fmt );
    }
 
    return finish_tap_c_();

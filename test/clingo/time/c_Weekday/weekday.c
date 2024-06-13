@@ -28,8 +28,8 @@ int main( void )
    {
       bool res = weekday_c( t->year, t->month, t->day ) == t->exp;
 
-      tap_descf_c( res, "test: %d.%d.%d -> %s",
-                   t->year, t->month, t->day, stringify_weekday_c( t->exp ) );
+      tap_desc_c_( res, "test {i64}.{i64}.{i64}", t->year, t->month, t->day,
+                        " -> {s}", stringify_weekday_c( t->exp ) );
    }
 
    return finish_tap_c_();

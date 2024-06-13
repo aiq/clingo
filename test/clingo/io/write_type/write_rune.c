@@ -47,7 +47,7 @@ int main( void )
       bool res = write_rune_c( rec, rune_c( t->r ), t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "test '%s' / '%s' / '%s'", t->r, t->fmt, t->exp );
+      tap_c_( res, C_TapDesc, "test {s:q} / {s:q} / {s:q}", t->r, t->fmt, t->exp );
    }
 
    return finish_tap_c_();

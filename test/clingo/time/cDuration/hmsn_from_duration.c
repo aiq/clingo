@@ -28,7 +28,7 @@ int main( void )
       cHmsn x = hmsn_from_duration_c( t->dur );
 
       bool res = eq_c( cmp_hmsn_c( x, t->exp ) );
-      tap_descf_c( res, "%d:%d:%d.%d", x.hour, x.min, x.sec, x.nsec );
+      tap_desc_c_( res, "{i64}:{i64}:{i64}:{i64}", x.hour, x.min, x.sec, x.nsec );
    }
 
    return finish_tap_c_();

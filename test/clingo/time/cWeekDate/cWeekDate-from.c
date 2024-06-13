@@ -53,7 +53,7 @@ int main( void )
          write_week_date_c_( rec, wd );
 
          bool res = eq_c( cmp_week_date_c( wd, t->wd ) );
-         tap_desc_c( res, turn_into_cstr_c( rec ) );
+         tap_desc_c_( res, "{rec}", rec );
       }
       {  //----------------------------------------------- ymd_from_week_date_c
          cYmd ymd = ymd_from_week_date_c( t->wd );
@@ -61,7 +61,7 @@ int main( void )
          write_ymd_c_( rec, ymd );
 
          bool res = eq_c( cmp_ymd_c( ymd, t->ymd ) );
-         tap_desc_c( res, turn_into_cstr_c( rec ) );
+         tap_desc_c_( res, "{rec}", rec );
       }
    }
 

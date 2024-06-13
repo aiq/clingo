@@ -33,8 +33,8 @@ int main( void )
    {
       c_Month const res = first_month_of_quarter_c( t->month );
 
-      tap_descf_c( res == t->exp, "%s -> %s", stringify_month_c( t->month ),
-                                              stringify_month_c( res ) );
+      tap_desc_c_( res == t->exp, "{s}", stringify_month_c( t->month ),
+                                  " -> {s}", stringify_month_c( res ) );
    }
 
    return finish_tap_c_();

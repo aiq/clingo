@@ -43,7 +43,7 @@ int main( void )
       bool res = write_byte_vec_c( rec, t->vec, t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "test format: \"%s\"", t->fmt );
+      tap_desc_c_( res, "test format: {s:Q}", t->fmt );
    }
 
    release_c( vec );

@@ -33,7 +33,8 @@ int main( void )
       bool res = write_tz_offset_c( rec, t->tz, t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "'%s' -> '%s'", t->fmt, turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "{s:q} -> {rec}", t->fmt, rec );
+
    }
 
    return finish_tap_c_();

@@ -34,7 +34,7 @@ int main( void )
       bool res = write_ymd_c( rec, t->ymd, t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "test: %s -> %s", t->fmt, t->exp );
+      tap_desc_c_( rec, "test: {s} -> {s}", t->fmt, t->exp );
    }
 
    return finish_tap_c_();

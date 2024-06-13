@@ -36,7 +36,7 @@ int main( void )
       bool res = write_week_date_c( rec, t->wd, t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "test: %s -> %s", t->fmt, t->exp );
+      tap_desc_c_( res, "test: {s} -> {s}", t->fmt, t->exp );
    }
 
    //**************************************************************** withErrors
@@ -52,7 +52,7 @@ int main( void )
       res &= ( rec->err == t->err );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "test: %s -> %s", t->fmt, t->exp );
+      tap_desc_c_( res, "test: {s} -> {s}", t->fmt, t->exp );
    }
 
    return finish_tap_c_();

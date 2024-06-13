@@ -47,7 +47,7 @@ int main( void )
       bool res = write_day_set_c( rec, t->set, t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "test '%s' -> \n%s", t->fmt, turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "test {s:q} -> \n{rec}", t->fmt, rec );
    }
 
    release_c( ds );

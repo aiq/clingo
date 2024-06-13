@@ -35,7 +35,7 @@ int main( void )
       bool res = write_float_c( rec, t.val, t.fmt );
       res &= recorded_is_c( rec, t.exp );
 
-      tap_descf_c( res, "test: %s", turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "test: {rec}", rec );
    }
 
    return finish_tap_c_();

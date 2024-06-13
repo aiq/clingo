@@ -26,7 +26,7 @@ int main( void )
       cChars cs = trim_char_match_c( c_c( t->inp ), t->check );
       bool res = chars_is_c( cs, t->exp );
 
-      tap_descf_c( res, "'%s' -> '%s'", t->inp, t->exp );
+      tap_desc_c_( res, "{s:q} -> {s:q}", t->inp, t->exp );
    }
 
    return finish_tap_c_();

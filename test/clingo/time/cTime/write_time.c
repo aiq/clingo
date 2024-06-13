@@ -30,7 +30,7 @@ int main( void )
       bool res = write_time_c( rec, t->time, t->fmt );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_descf_c( res, "%s -> %s", t->fmt, turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "{s} -> {rec}", t->fmt, rec );
    }
 
    return finish_tap_c_();

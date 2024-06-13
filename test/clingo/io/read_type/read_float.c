@@ -30,7 +30,7 @@ int main( void )
       res &= read_float_c( sca, &f, t->fmt );
       res &= eq_float_c_( f, t->exp );
 
-      tap_descf_c( res, "%s + \"%s\" -> %f", t->str, t->fmt, f );
+      tap_desc_c_( res, "{s} + {s:Q} -> {f}", t->str, t->fmt, f );
    }
 
    return finish_tap_c_();

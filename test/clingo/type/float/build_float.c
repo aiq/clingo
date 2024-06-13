@@ -27,7 +27,7 @@ int main( void )
 
       bool res = ( f == t->exp );
 
-      tap_descf_c( res, "%x / %x / %x -> %f", t->s, t->e, t->m, t->exp );
+      tap_desc_c_( res, "{u8:x} / {u8:x} / {u32:x} -> {f}", t->s, t->e, t->m, t->exp );
    }
 
    return finish_tap_c_();

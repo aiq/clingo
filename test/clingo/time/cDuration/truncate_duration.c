@@ -43,7 +43,7 @@ int main( void )
 
       bool res = eq_duration_c( dur, t->exp ) and
                  eq_duration_c( tail, t->expTail );
-      tap_descf_c( res, "" );
+      tap_c_( res, "" );
    }
 
    return finish_tap_c_();

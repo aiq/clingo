@@ -25,7 +25,7 @@ int main( void )
    {
       int64_t years = years_between_dates_c( t->a, t->b );
 
-      tap_descf_c( years == t->exp, "years: %"PRIi64, years );
+      tap_desc_c_( years == t->exp, "years: {i64}", years );
    }
 
    return finish_tap_c_();

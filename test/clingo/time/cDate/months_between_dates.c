@@ -29,7 +29,7 @@ int main( void )
    {
       int64_t months = months_between_dates_c( t->a, t->b );
 
-      tap_descf_c( months == t->exp, "months: %"PRIi64, months );
+      tap_desc_c_( months == t->exp, "months: {i64}", months );
    }
 
    return finish_tap_c_();

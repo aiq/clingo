@@ -29,7 +29,7 @@ int main( void )
 
       cRecorder* rec = &recorder_c_( 32 );
       write_time_c_( rec, time );
-      tap_descf_c( res, "%s", turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "{rec}", rec );
    }
 
    return finish_tap_c_();

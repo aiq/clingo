@@ -36,7 +36,7 @@ int main( void )
       res &= chars_is_c( chars, t->expChars );
       res &= unscanned_is_c( sca, t->expUnscanned );
 
-      tap_descf_c( res, "%s on %s", t->fmt, t->str );
+      tap_desc_c_( res, "{s} on {s}", t->fmt, t->str );
    }
 
    return finish_tap_c_();

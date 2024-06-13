@@ -25,7 +25,7 @@ int main( void )
    {
       int64_t days = days_between_dates_c( t->a, t->b );
 
-      tap_descf_c( days == t->exp, "days: %"PRIi64, days );
+      tap_desc_c_( days == t->exp, "test at index {i64}", days );
    }
 
    return finish_tap_c_();

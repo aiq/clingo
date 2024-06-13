@@ -30,7 +30,7 @@ int main( void )
       
       pjotln_c_( xyz, 128, c_c( t->inp ), " ", cs );
 
-      tap_descf_c( res, "'%s' -> '%s'", t->inp, t->exp );
+      tap_desc_c_( res, "{s:q} -> {s:q}", t->inp, t->exp );
    }
 
    return finish_tap_c_();

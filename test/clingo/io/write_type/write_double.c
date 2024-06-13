@@ -115,7 +115,7 @@ int main( void )
       bool res = write_double_c( rec, t.val, t.fmt );
       res &= recorded_is_c( rec, t.exp );
 
-      tap_descf_c( res, "fmt: %s / exp: %s / got: %s", t.fmt, t.exp, turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "fmt: {s} / exp: {s} / got: {rec}", t.fmt, t.exp, rec );
    }
 
    return finish_tap_c_();

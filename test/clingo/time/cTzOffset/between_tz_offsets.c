@@ -36,7 +36,7 @@ int main( void )
 
       cRecorder* rec = &recorder_c_( 256 );
       write_duration_c_( rec, dur );
-      tap_descf_c( res, "test: %s", turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "test: {rec}", rec );
    }
 
    return finish_tap_c_();

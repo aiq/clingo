@@ -27,7 +27,7 @@ int main( void )
    {
       bool res = ( t->dur._v == t->exp );
 
-      tap_descf_c( res, "test: %"PRIi64, index_of_c_( tests, t ) );
+      tap_desc_c_( res, "test: {i64}", index_of_c_( tests, t ) );
    }
 
    return finish_tap_c_();

@@ -47,7 +47,7 @@ int main( void )
    {
       cDuration dur = add_duration_c( t->a, t->b );
 
-      tap_desc_c( eq_duration_c( dur, t->exp ), t->desc );
+      tap_desc_c_( eq_duration_c( dur, t->exp ), "{s}", t->desc );
    }
 
    return finish_tap_c_();

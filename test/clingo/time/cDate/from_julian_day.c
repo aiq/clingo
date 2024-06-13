@@ -33,9 +33,8 @@ int main( void )
    {
       cDate date = from_julian_day_c( t->jd );
       bool res = eq_c( cmp_ymd_c( as_ymd_c( date ), t->exp ) );
-      //bool res = eq_date_c( date, t->exp );
 
-      tap_descf_c( res, "%"PRIi64, t->jd );
+      tap_desc_c_( res, "test at index {i64}", t->jd );
    }
 
    return finish_tap_c_();

@@ -40,7 +40,7 @@ int main( void )
          record_chars_c_( rec, " -> " );
          write_date_c_( rec, period.last );
       }
-      tap_descf_c( res, turn_into_cstr_c( rec ) );
+      tap_desc_c_( res, "{rec}", rec );
    }
 
    return finish_tap_c_();

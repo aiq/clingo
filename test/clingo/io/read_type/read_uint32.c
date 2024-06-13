@@ -38,7 +38,7 @@ int main( void )
       bool res = read_uint32_c( sca, &val, t.fmt );
       res &= val == t.exp;
 
-      tap_descf_c( res, "test at index %"PRIi64, i );
+      tap_c_( res, C_TapDesc, "test at index {i64}", i );
    }
 
    return finish_tap_c_();

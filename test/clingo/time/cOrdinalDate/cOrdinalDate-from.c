@@ -32,7 +32,7 @@ int main( void )
          write_ordinal_date_c_( rec, od );
 
          bool res = eq_c( cmp_ordinal_date_c( od, t->od ) );
-         tap_desc_c( res, turn_into_cstr_c( rec ) );
+         tap_desc_c_( res, "{rec}", rec );
       }
       {  //-------------------------------------------- ymd_from_ordinal_date_c
          cYmd ymd = ymd_from_ordinal_date_c( t->od );
@@ -40,7 +40,7 @@ int main( void )
          write_ymd_c_( rec, ymd );
 
          bool res = eq_c( cmp_ymd_c( ymd, t->ymd ) );
-         tap_desc_c( res, turn_into_cstr_c( rec ) );
+         tap_desc_c_( res, "{rec}", rec );
       }
    }
 

@@ -29,15 +29,15 @@ int main( void )
 
       cDate date = get_date_c( t->time );
       write_date_c_( rec, date );
-      tap_descf_c( eq_date_c( date, t->date ), turn_into_cstr_c( rec ) );
+      tap_desc_c_( eq_date_c( date, t->date ), "{rec}", rec );
 
       cDaytime dt = get_daytime_c( t->time );
       write_daytime_c_( rec, dt );
-      tap_descf_c( eq_daytime_c( dt, t->daytime ), turn_into_cstr_c( rec ) );
+      tap_desc_c_( eq_daytime_c( dt, t->daytime ), "{rec}", rec );
 
       cTzOffset tz = get_tz_offset_c( t->time );
       write_tz_offset_c_( rec, tz );
-      tap_descf_c( eq_tz_offset_c( tz, t->tz ), turn_into_cstr_c( rec ) );
+      tap_desc_c_( eq_tz_offset_c( tz, t->tz ), "{rec}", rec );
    }
 
    return finish_tap_c_();

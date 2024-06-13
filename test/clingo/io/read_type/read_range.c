@@ -29,7 +29,7 @@ int main( void )
       bool res = read_range_c( sca, &dst, "" );
       res &= eq_range_c( dst, t->exp );
 
-      tap_descf_c( res, "test %s", t->str );
+      tap_desc_c_( res, "test {s}", t->str );
    }
 
    return finish_tap_c_();

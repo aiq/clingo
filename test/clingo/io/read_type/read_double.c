@@ -31,7 +31,7 @@ int main( void )
       res &= read_double_c( sca, &d, t->fmt );
       res &= eq_double_c( d, t->exp, t->diff );
 
-      tap_descf_c( res, "%s + \"%s\" -> %f", t->str, t->fmt, d );
+      tap_desc_c_( res, "{s} + {s:Q} -> {d}", t->str, t->fmt, d );
    }
 
    return finish_tap_c_();

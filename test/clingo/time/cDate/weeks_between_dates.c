@@ -25,7 +25,7 @@ int main( void )
    {
       int64_t weeks = weeks_between_dates_c( t->a, t->b );
 
-      tap_descf_c( weeks == t->exp, "weeks: %"PRIi64, weeks );
+      tap_desc_c_( weeks == t->exp, "weeks: {i64}", weeks );
    }
 
    return finish_tap_c_();

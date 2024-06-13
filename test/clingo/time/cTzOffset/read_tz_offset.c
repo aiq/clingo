@@ -34,7 +34,7 @@ int main( void )
       bool res = read_tz_offset_c( sca, &tz, t->fmt );
       res &= eq_c( cmp_tz_offset_c( tz, t->exp ) );
 
-      tap_descf_c( res, "test: %s with %s", t->str, t->fmt );
+      tap_desc_c_( res, "test: {s} with {s}", t->str, t->fmt );
    }
 
    return finish_tap_c_();

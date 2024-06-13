@@ -57,7 +57,7 @@ int main( void )
       bool res = write_bit_vec_c( rec, t.vec, t.fmt );
       res &= recorded_is_c( rec, t.exp );
 
-      tap_descf_c( res, "test '%s' at %"PRIi64, t.fmt, i );
+      tap_desc_c_( res, "test {s:q} at {i64}", t.fmt, i );
    }
 
    release_all_c_( vec1, vec2 );

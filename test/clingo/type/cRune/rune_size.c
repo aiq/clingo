@@ -28,7 +28,7 @@ int main( void )
       test t = tests.v[i];
       cRune r = rune_c( t.input );
       int8_t res = rune_size_c( r );
-      tap_descf_c( res == t.exp, "test at index %"PRIi64, i );
+      tap_desc_c_( res == t.exp, "test at index {i64}", i );
    }
 
    return finish_tap_c_();

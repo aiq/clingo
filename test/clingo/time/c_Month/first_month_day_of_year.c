@@ -36,9 +36,9 @@ int main( void )
       int16_t days;
 
       days = first_month_day_of_year_c( t->month, false );
-      tap_descf_c( days == t->expF, "%s no leap year: %d", monthStr, days );
+      tap_desc_c_( days == t->expF, "{s} no leap year: {i16}", monthStr, days );
       days = first_month_day_of_year_c( t->month, true );
-      tap_descf_c( days == t->expT, "%s leap year: %d", monthStr, days );
+      tap_desc_c_( days == t->expT, "{s} leap year: {i16}", monthStr, days );
    }
 
    return finish_tap_c_();

@@ -41,7 +41,7 @@ int main( void )
          }
       }
       bool res = recorded_is_c( rec, t->exp );
-      tap_descf_c( res, "test expected: %s", t->exp );
+      tap_desc_c_( res, "test expected: {s}", t->exp );
    }
 
    return finish_tap_c_();

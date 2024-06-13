@@ -29,7 +29,7 @@ int main( void )
       bool res = eq_daytime_c( dt, t->exp );
   
       cHmsn t = as_hmsn_c( dt ); 
-      tap_descf_c( res, "%d:%d:%d", t.hour, t.min, t.sec );
+      tap_desc_c_( res, "{i64}:{i64}:{i64}", t.hour, t.min, t.sec );
    }
 
    return finish_tap_c_();

@@ -50,7 +50,9 @@ int main( void )
       res &= rune_is_c( r, t->exp );
       res &= unscanned_is_c( sca,  t->unscanned );
 
-      tap_descf_c( res, "test '%s' + '%s' -> '%s'", t->inp, t->fmt, t->exp );
+      tap_c_( res, C_TapDesc, "test {s:q}", t->inp,
+                              " + {s:q}", t->fmt,
+                              " -> {s:q}", t->exp );
    }
 
    return finish_tap_c_();

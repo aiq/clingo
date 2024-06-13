@@ -30,7 +30,7 @@ int main( void )
       cChars chars = c_c( stringify_weekday_c( t->wd ) );
       bool res = chars_is_c( chars, t->exp );
 
-      tap_descf_c( res, "test %s", t->exp );
+      tap_desc_c_( res, "test {s}", t->exp );
    }
 
    return finish_tap_c_();

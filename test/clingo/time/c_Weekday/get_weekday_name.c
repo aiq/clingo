@@ -35,7 +35,7 @@ int main( void )
       cChars chars = as_c_( cChars, varChars );
       bool res = chars_is_c( chars, t->exp );
 
-      tap_descf_c( res, "test %s", t->exp );
+      tap_desc_c_( res, "test expected: {s}", t->exp );
    }
 
    return finish_tap_c_();

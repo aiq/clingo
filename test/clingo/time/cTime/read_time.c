@@ -31,7 +31,7 @@ int main( void )
       bool res = read_time_c( sca, &time, t->fmt );
       res = eq_time_c( time, t->exp );
 
-      tap_descf_c( res, "%s", t->inp );
+      tap_desc_c_( res, "{s}", t->inp );
    }
 
    return finish_tap_c_();

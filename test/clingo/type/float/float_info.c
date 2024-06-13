@@ -29,7 +29,7 @@ int main( void )
       res &= info.exponent == t->e;
       res &= info.mantissa == t->m;
 
-      tap_descf_c( res, "%f -> %x / %x / %x", t->val, t->s, t->e, t->m );
+      tap_desc_c_( res, "{f} -> {u8:x} / {u8:x} / {u32:x}", t->val, t->s, t->e, t->m );
    }
 
    return finish_tap_c_();

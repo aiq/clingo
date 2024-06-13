@@ -25,7 +25,7 @@ int main( void )
       cChars cs = trim_any_char_right_c_( c_c( t->inp ), t->set );
       bool res = chars_is_c( cs, t->exp );
 
-      tap_descf_c( res, "'%s' -> '%s' -> '%s'", t->inp, t->set, t->exp );
+      tap_desc_c_( res, "{s:q} -> {s:q} -> {s:q}", t->inp, t->set, t->exp );
    }
 
    return finish_tap_c_();
