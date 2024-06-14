@@ -41,19 +41,38 @@ The line tells how many tests will be run, or how many tests have run.
 ==== tap_c
 [source,c]
 ----
-void tap_c( bool result );
+#define tap_c_( Result, ... )                                                  \
+   tap_c( (Result), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
+void tap_c( bool result, int n, ... );
 ----
 
 Adds a test line to the TAP stream.
 If the parameter is true writes the function "ok", otherwise "not ok".
+It append the ... values as string to the line using the format syntax from fwrite_c.
+Use C_TapDesc, C_TapSkip or C_TapTodo as marker.
 
-==== tap_desc_c
+.Example
 [source,c]
 ----
-void tap_desc_c( bool result, char const desc[static 1] );
+include::{xmpldir}/tap.c[]
 ----
 
-Adds a test line with an additional description(desc) to the TAP stream.
+[id='tap_desc_c_']
+==== tap_desc_c_
+[source,c]
+----
+#define tap_desc_c_( Result, ... )
+----
+
+Adds a test line with an additional description(...) to the TAP stream.
+It uses the format syntax from fwrite_c.
+You can also use C_TapSkip and C_TapTodo to mark derectives.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/tap_desc.c[]
+----
 
 ==== tap_descf_c
 [source,c]
@@ -82,7 +101,14 @@ Adds a note to the TAP stream.
 void tap_skip_c( bool result, char const reason[static 1] );
 ----
 
-Adds a skip directive to the TAP stream.
+Util function to add a SKIP directive to the TAP stream.
+It uses the format syntax from fwrite_c.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/tap_skip.c[]
+----
 
 ==== tap_todo_c
 [source,c]
@@ -90,7 +116,14 @@ Adds a skip directive to the TAP stream.
 void tap_todo_c( bool result, char const explanation[static 1] );
 ----
 
-Adds a TODO directive to the TAP stream.
+Util function to add a TODO directive to the TAP stream.
+It uses the format syntax from fwrite_c.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/tap_todo.c[]
+----
 
 ==== finish_tap_c
 [source,c]

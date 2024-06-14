@@ -9,6 +9,12 @@
 #include "clingo/apidecl.h"
 #include "clingo/lang/func.h"
 
+/*******************************************************************************
+********************************************************* Types and Definitions 
+*******************************************************************************
+
+*******************************************************************************/
+
 extern char const* C_TapDesc;
 extern char const* C_TapSkip;
 extern char const* C_TapTodo;
@@ -80,7 +86,7 @@ int finish_tap_c( bool withPlan );
 
 #define abort_tap_c_()                                                         \
 {                                                                              \
-   tap_c_( false, C_TapDesc, "abort at line " xstringify_c_( __LINE__ ) );     \
+   tap_desc_c_( false, "abort at line " xstringify_c_( __LINE__ ) );           \
    exit( finish_tap_c_() );                                                    \
 }
 

@@ -9,28 +9,32 @@
 int main( void )
 {
    cErrorStack* es = &error_stack_c_( 1024 );
-   FILE* f = open_file_c_( "tmp_expect", "w+b", es );
+   FILE* f = open_file_c_( "tmp_tap_desc", "w+b", es );
 
    init_tap_c( "test session", f );
-   tap_note_c( "expect_c_" );
-   expect_c_( true );
-   expect_c_( false );
+   tap_note_c( "tap_desc_c_" );
+   tap_desc_c_( true, "some description" );
+   tap_desc_c_( true, "some description", C_TapSkip, "surprise" );
+   tap_desc_c_( false, "some description", C_TapTodo, "no time" );
+   tap_desc_c_( false, "{i64} description about {s}", 1, "tests" );
    finish_tap_c_();
 
    cVarChars inp = heap_slice_c_( file_size_c( f ), char );
    fseek( f, 0, SEEK_SET );
    fget_chars_c( f, &inp );
    close_file_c( f, es );
-   remove_file_c_( "tmp_expect", es );
+   remove_file_c_( "tmp_tap_desc", es );
 
    init_tap_c_();
 
    cCharsToken* tok = &chars_token_c_( as_c_( cChars, inp ) );
    expect_line_( tok, "# test session" );
-   expect_line_( tok, "# expect_c_" );
-   expect_line_( tok, "ok 1 - at line 16" );
-   expect_line_( tok, "not ok 2 - at line 17" );
-   expect_line_( tok, "1..2" );
+   expect_line_( tok, "# tap_desc_c_" );
+   expect_line_( tok, "ok 1 - some description" );
+   expect_line_( tok, "ok 2 - some description # SKIP surprise" );
+   expect_line_( tok, "not ok 3 - some description # TODO no time" );
+   expect_line_( tok, "not ok 4 - 1 description about tests" );
+   expect_line_( tok, "1..4" );
    expect_line_( tok, "" );
    expect_c_( not next_line_token_c( tok ) );
 
