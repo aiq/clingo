@@ -36,6 +36,8 @@ typedef struct cFileErrorData cFileErrorData;
 
 CLINGO_API bool close_file_c( FILE* file, cErrorStack es[static 1] );
 
+#define open_file_c_( Path, Mode, Es )                                         \
+   open_file_c( c_c( Path ), (Mode), (Es) )
 CLINGO_API inline FILE* open_file_c( cChars path,
                                      char const mode[static 1],
                                      cErrorStack es[static 1] )
@@ -65,6 +67,8 @@ CLINGO_API inline FILE* open_file_c( cChars path,
    return file;
 }
 
+#define remove_file_c_( Path, Es )                                             \
+   remove_file_c( c_c( Path ), (Es) )
 CLINGO_API inline bool remove_file_c( cChars path, cErrorStack es[static 1] )
 {
    cVarChars buf = var_chars_c_( 4099 );
@@ -83,11 +87,15 @@ CLINGO_API inline bool remove_file_c( cChars path, cErrorStack es[static 1] )
    return true;
 }
 
+#define ropen_file_c_( Path, Es )                                              \
+   ropen_file_c( c_c( Path ), (Es) )
 CLINGO_API inline FILE* ropen_file_c( cChars path, cErrorStack es[static 1] )
 {
    return open_file_c( path, "rb", es );
 }
 
+#define wopen_file_c_( Path, Es )                                              \
+   wopen_file_c( c_c( Path ), (Es) )
 CLINGO_API inline FILE* wopen_file_c( cChars path, cErrorStack es[static 1] )
 {
    return open_file_c( path, "wb", es );
