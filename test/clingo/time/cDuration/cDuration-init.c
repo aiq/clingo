@@ -23,11 +23,12 @@ int main( void )
           11*C_Hour + 20*C_Min + 51*C_Sec + 123456*C_Usec )
    );
 
-   for_each_c_( test const*, t, tests )
+   times_c_( tests.s, i )
    {
-      bool res = ( t->dur._v == t->exp );
+      test t = tests.v[i];
+      bool res = ( t.dur._v == t.exp );
 
-      tap_desc_c_( res, "test: {i64}", index_of_c_( tests, t ) );
+      tap_desc_c_( res, "test: {i64}", i );
    }
 
    return finish_tap_c_();

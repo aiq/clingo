@@ -23,7 +23,7 @@ int main( void )
       t_( "yes", 1 )
    );
 
-   for ( int64_t i = 0; i < tests.s; ++i )
+   times_c_( tests.s, i )
    {
       test t = tests.v[i];
       cRune r = rune_c( t.input );
