@@ -112,7 +112,7 @@ static bool recorder_output_func( void* o, cBytes data )
    return record_bytes_c( rec, data );
 }
 
-cOutput recorder_as_output( cRecorder rec[static 1] )
+cOutput recorder_output( cRecorder rec[static 1] )
 {
    return (cOutput){ .i=rec, .f=recorder_output_func };
 }
@@ -127,7 +127,7 @@ static bool recorder_pen_func( void* w, int n, ... )
    return res;
 }
 
-cPen recorder_as_pen_c( cRecorder rec[static 1] )
+cPen recorder_pen_c( cRecorder rec[static 1] )
 {
    return (cPen){ .i=rec, .f=recorder_pen_func };
 }

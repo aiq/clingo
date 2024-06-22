@@ -95,7 +95,7 @@ static bool file_output_func( void* o, cBytes data )
    return fput_bytes_c( file, data );
 }
 
-cOutput file_as_output_c( FILE* file )
+cOutput file_output_c( FILE* file )
 {
    return (cOutput){ .i=file, .f=file_output_func };
 }
@@ -111,7 +111,7 @@ static bool file_pen_func( void* w, int n, ... )
    return res;
 }
 
-CLINGO_API cPen file_as_pen_c( FILE* file )
+CLINGO_API cPen file_pen_c( FILE* file )
 {
    return (cPen){ .i=file, .f=file_pen_func };
 }

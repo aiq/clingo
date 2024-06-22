@@ -10,7 +10,7 @@ int main( void )
 
    cRecorder* rec = &recorder_c_( 256 );
 
-   cPen p = recorder_as_pen_c( rec );
+   cPen p = recorder_pen_c( rec );
 
    bool res = pen_c_( p, "this is {i64} large text about {s:q}", 1, "nothing" );
 
