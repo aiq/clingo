@@ -592,17 +592,17 @@ bool write_duration_c( cRecorder rec[static 1],
             if ( move_if_any_char_c_( sca, "iI" ) )
             {
                int64_t i = as_msecs_c( dur );
-               if ( not intl_write_xsec_c( rec, i, true, ".{i64:(3r0)}" ) ) break;
+               if ( not intl_write_xsec_c( rec, i, true, ".{i64:(3>0)}" ) ) break;
             }
             else if ( move_if_any_char_c_( sca, "uU" ) )
             {
                int64_t u = as_usecs_c( dur );
-               if ( not intl_write_xsec_c( rec, u, true, ".{i64:(6r0)}" ) ) break;
+               if ( not intl_write_xsec_c( rec, u, true, ".{i64:(6>0)}" ) ) break;
             }
             else if ( move_if_any_char_c_( sca, "nN" ) )
             {
                int64_t n = as_nsecs_c( dur );
-               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(9r0)}" ) ) break;
+               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(9>0)}" ) ) break;
             }
             else
             {
@@ -628,12 +628,12 @@ bool write_duration_c( cRecorder rec[static 1],
             if ( move_if_any_char_c_( sca, "uU" ) )
             {
                int64_t u = as_usecs_c( dur );
-               if ( not intl_write_xsec_c( rec, u, true, ".{i64:(3r0)}" ) ) break;
+               if ( not intl_write_xsec_c( rec, u, true, ".{i64:(3>0)}" ) ) break;
             }
             else if ( move_if_any_char_c_( sca, "nN" ) )
             {
                int64_t n = as_nsecs_c( dur );
-               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(6r0)}" ) ) break;
+               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(6>0)}" ) ) break;
             }
             else
             {
@@ -659,7 +659,7 @@ bool write_duration_c( cRecorder rec[static 1],
             if ( move_if_any_char_c_( sca, "nN" ) )
             {
                int64_t n = as_nsecs_c( dur );
-               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(3r0)}" ) ) break;
+               if ( not intl_write_xsec_c( rec, n, true, ".{i64:(3>0)}" ) ) break;
             }
             else
             {

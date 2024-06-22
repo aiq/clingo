@@ -16,10 +16,10 @@ int main( void )
    init_tap_c_();
 
    testSlice tests = slice_c_( test,
-      t_( cell_c_( 6, -1, '.' ), "abc", "abc..." ),
-      t_( cell_c_( 6, 0, '_' ), "cde", "__cde_" ),
-      t_( cell_c_( 6, 1, ' ' ), "def", "   def" ),
-      t_( cell_c_( 4, 1, '+' ), "abcdef", "abcd" )
+      t_( cell_c_( 6, '<', '.' ), "abc", "abc..." ),
+      t_( cell_c_( 6, '=', '_' ), "cde", "__cde_" ),
+      t_( cell_c_( 6, '>', ' ' ), "def", "   def" ),
+      t_( cell_c_( 4, '>', '+' ), "abcdef", "abcd" )
    );
 
    for ( int64_t i = 0; i < tests.s; ++i )

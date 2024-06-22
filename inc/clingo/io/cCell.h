@@ -26,12 +26,10 @@ typedef struct cCell cCell;
    (cCell){ .size=(Size), .orient=(Orient), .pad=(Pad) }                       \
 )
 
-CLINGO_API
-bool read_in_cell_c( cScanner sca[static 1], cCell cell[static 1] );
+CLINGO_API bool scan_cell_c( cScanner sca[static 1], cCell cell[static 1] );
 
-CLINGO_API
-bool write_ascii_into_cell_c( cRecorder rec[static 1],
-                              cChars ascii,
-                              cCell const cell[static 1] );
+CLINGO_API bool write_ascii_into_cell_c( cRecorder rec[static 1],
+                                         cChars ascii,
+                                         cCell const cell[static 1] );
 
 #endif

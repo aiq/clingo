@@ -54,19 +54,19 @@ bool write_byte_c( cRecorder rec[static 1],
 
    if ( *fmt == '\0' or cstr_is_char_c( fmt, 'x' ) )
    {
-      return write_uint8_c( rec, byte, "x(2r0)" );
+      return write_uint8_c( rec, byte, "x(2>0)" );
    }
    else if ( cstr_is_char_c( fmt, 'X' ) )
    {
-      return write_uint8_c( rec, byte, "X(2r0)" );
+      return write_uint8_c( rec, byte, "X(2>0)" );
    }
    else if ( cstr_is_char_c( fmt, 'b' ) )
    {
-      return write_uint8_c( rec, byte, "b(8ro)" );
+      return write_uint8_c( rec, byte, "b(8>o)" );
    }
    else if ( cstr_is_char_c( fmt, 'B' ) )
    {
-      return write_uint8_c( rec, byte, "B(8r0)" );
+      return write_uint8_c( rec, byte, "B(8>0)" );
    }
 
    return set_recorder_error_c( rec, c_InvalidWriteFormat );
@@ -224,7 +224,7 @@ bool write_rune_c( cRecorder rec[static 1],
          else
          {
             if ( !record_chars_c_( rec, "U+" ) or
-                 !write_uint32_c( rec, u32, "X(4r0)" ) )
+                 !write_uint32_c( rec, u32, "X(4>0)" ) )
                break;
          }
          return true;

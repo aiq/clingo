@@ -36,7 +36,7 @@ int main( void )
       t_( 0xFFFFFFFFFFFFFFFF, "q", "'18446744073709551615'" ),
       t_( 0xF0E1D2C3B, "xQ", "\"f0e1d2c3b\"" ),
    // cell
-      t_( 0xabcdef0123, "xq(6r-)", "'abcde" )
+      t_( 0xabcdef0123, "xq(6>-)", "'abcde" )
    );
 
    for ( int64_t i = 0; i < tests.s; ++i )

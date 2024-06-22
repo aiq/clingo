@@ -62,11 +62,11 @@ inline bool intl_write_day_c( cRecorder rec[static 1],
    }
    else if ( fmt == 2 and spaces == 0 )
    {
-      return write_int8_c( rec, day, "(2r0)" );
+      return write_int8_c( rec, day, "(2>0)" );
    }
    else if ( fmt == 1 and spaces == 1 )
    {
-      return write_int8_c( rec, day, "(2r )" );
+      return write_int8_c( rec, day, "(2> )" );
    }
 
    return set_recorder_error_c( rec, c_InvalidWriteFormat );
@@ -83,11 +83,11 @@ inline bool intl_write_day_of_year_c( cRecorder rec[static 1],
    }
    else if ( fmt == 1 and spaces == 2 )
    {
-      return write_int16_c( rec, dayOfYear, "(3r )");
+      return write_int16_c( rec, dayOfYear, "(3> )");
    }
    else if ( fmt == 3 and spaces == 0 )
    {
-      return write_int16_c( rec, dayOfYear, "(3r0)" );
+      return write_int16_c( rec, dayOfYear, "(3>0)" );
    }
 
    return set_recorder_error_c( rec, c_InvalidWriteFormat );
@@ -105,11 +105,11 @@ inline bool intl_write_month_c( cRecorder rec[static 1],
    }
    else if ( fmt == 2 and spaces == 0 )
    {
-      return write_int64_c( rec, month, "(2r0)" );
+      return write_int64_c( rec, month, "(2>0)" );
    }
    else if ( fmt == 1 and spaces == 1 )
    {
-      return write_int64_c( rec, month, "(2r )" );
+      return write_int64_c( rec, month, "(2> )" );
    }
    else if ( fmt == 3 and spaces == 0 )
    {
@@ -137,7 +137,7 @@ inline bool intl_write_week_c( cRecorder rec[static 1],
          res = record_char_c( rec, 'W' ) and write_int64_c( rec, week, "" );
          break;
       case 3:
-         res = record_char_c( rec, 'W' ) and write_int64_c( rec, week, "(2r0)" );
+         res = record_char_c( rec, 'W' ) and write_int64_c( rec, week, "(2>0)" );
          break;
       default:
          return set_recorder_error_c( rec, c_InvalidWriteFormat );
@@ -181,11 +181,11 @@ inline bool intl_write_year_c( cRecorder rec[static 1],
 {
    if ( fmt == 2 )
    {
-      return write_int32_c( rec, year_in_century_c( year ), "(2r0)" );
+      return write_int32_c( rec, year_in_century_c( year ), "(2>0)" );
    }
    else if ( fmt == 4 )
    {
-      return write_int32_c( rec, year, "(4r0)" );
+      return write_int32_c( rec, year, "(4>0)" );
    }
 
    return set_recorder_error_c( rec, c_InvalidWriteFormat );
@@ -206,11 +206,11 @@ inline bool intl_write_hour_c( cRecorder rec[static 1],
    }
    else if ( fmt == 2 and spaces == 0 )
    {
-      return write_int32_c( rec, hour, "(2r0)" );
+      return write_int32_c( rec, hour, "(2>0)" );
    }
    else if ( fmt == 1 and spaces == 1 )
    {
-      return write_int32_c( rec, hour, "(2r )" );
+      return write_int32_c( rec, hour, "(2> )" );
    }
 
    return set_recorder_error_c( rec, c_InvalidWriteFormat );
@@ -247,7 +247,7 @@ inline bool intl_write_msec_c( cRecorder rec[static 1],
    if ( fmt != 1 and fmt != 3 )
       return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
-   return intl_write_xsec_c( rec, msec, ( fmt == 1 ), "{i64:(3r0)}" );
+   return intl_write_xsec_c( rec, msec, ( fmt == 1 ), "{i64:(3>0)}" );
 }
 
 inline bool intl_write_usec_c( cRecorder rec[static 1],
@@ -257,7 +257,7 @@ inline bool intl_write_usec_c( cRecorder rec[static 1],
    if ( fmt != 1 and fmt != 3 )
       return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
-   return intl_write_xsec_c( rec, usec, ( fmt == 1 ), "{i64:(6r0)}" );
+   return intl_write_xsec_c( rec, usec, ( fmt == 1 ), "{i64:(6>0)}" );
 }
 
 inline bool intl_write_nsec_c( cRecorder rec[static 1],
@@ -267,7 +267,7 @@ inline bool intl_write_nsec_c( cRecorder rec[static 1],
    if ( fmt != 1 and fmt != 3 )
       return set_recorder_error_c( rec, c_InvalidWriteFormat );
 
-   return intl_write_xsec_c( rec, nsec, ( fmt == 1 ), "{i64:(9r0)}" );
+   return intl_write_xsec_c( rec, nsec, ( fmt == 1 ), "{i64:(9>0)}" );
 }
 
 inline bool intl_write_offset_c( cRecorder rec[static 1],
@@ -289,19 +289,19 @@ inline bool intl_write_offset_c( cRecorder rec[static 1],
    }
    else if ( fmt == 1 and t.min == 0 )
    {
-      return write_c_( rec, "{c}{i32:(2r0)}", sign, t.hour );
+      return write_c_( rec, "{c}{i32:(2>0)}", sign, t.hour );
    }
    else if ( fmt == 1 and t.min != 0 )
    {
-      return write_c_( rec, "{c}{i32:(2r0)}:{i8:(2r0)}", sign, t.hour, t.min );
+      return write_c_( rec, "{c}{i32:(2>0)}:{i8:(2>0)}", sign, t.hour, t.min );
    }
    else if ( fmt == 2 )
    {
-      return write_c_( rec, "{c}{i32:(2r0)}:{i8:(2r0)}", sign, t.hour, t.min );
+      return write_c_( rec, "{c}{i32:(2>0)}:{i8:(2>0)}", sign, t.hour, t.min );
    }
    else if ( fmt == 4 )
    {
-      return write_c_( rec, "{c}{i32:(2r0)}{i8:(2r0)}", sign, t.hour, t.min );
+      return write_c_( rec, "{c}{i32:(2>0)}{i8:(2>0)}", sign, t.hour, t.min );
    }
    
    return set_recorder_error_c( rec, c_InvalidWriteFormat );

@@ -6,13 +6,13 @@
 ********************************************************************* Functions
 *******************************************************************************/
 
-bool read_in_cell_c( cScanner sca[static 1], cCell cell[static 1] )
+bool scan_cell_c( cScanner sca[static 1], cCell cell[static 1] )
 {
    must_exist_c_( sca );
    must_exist_c_( cell );
 
    cell->size = 0;
-   cell->orient = -1;
+   cell->orient = '<';
    cell->pad = ' ';
 
    cScanner backUp = *sca;
@@ -33,19 +33,19 @@ bool read_in_cell_c( cScanner sca[static 1], cCell cell[static 1] )
    if ( readOrient )
    {
       const char* ptr = sca->mem;
-      if ( *ptr == 'l' )
+      if ( *ptr == '<' )
       {
-         cell->orient = -1;
+         cell->orient = '<';
          move_scanner_c( sca, 1 );
       }
-      else if ( *ptr == 'r' )
+      else if ( *ptr == '>' )
       {
-         cell->orient = 1;
+         cell->orient = '>';
          move_scanner_c( sca, 1 );
       }
-      else if ( *ptr == 'c' )
+      else if ( *ptr == '=' )
       {
-         cell->orient = 0;
+         cell->orient = '=';
          move_scanner_c( sca, 1 );
       }
       else // no orient value
@@ -89,11 +89,11 @@ static inline int64_t left_space( int64_t space,
       return 0;
    }
 
-   if ( orient < 0 ) // left
+   if ( orient == '<' ) // left
    {
       return 0;
    }
-   else if ( orient > 0 ) // right
+   else if ( orient == '>' ) // right
    {
       return space -size;
    }
@@ -150,5 +150,3 @@ bool write_ascii_into_cell_c( cRecorder rec[static 1],
 
    return res;
 }
-
-

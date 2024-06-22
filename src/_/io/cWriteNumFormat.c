@@ -16,7 +16,7 @@ bool init_write_int_format_c( cWriteNumFormat numFmt[static 1],
    numFmt->memory = parse_memory_flag_c( sca );
    numFmt->type = parse_int_format_type_c( sca );
    numFmt->quote = parse_quote_value_c( sca );
-   read_in_cell_c( sca, &numFmt->cell );
+   scan_cell_c( sca, &numFmt->cell );
 
    return sca->space == 0;
 }
@@ -30,7 +30,7 @@ bool init_write_float_format_c( cWriteNumFormat numFmt[static 1],
    numFmt->decimal = parse_decimal_c( sca );
    numFmt->precision = parse_precision_value_c( sca );
    numFmt->quote = parse_quote_value_c( sca );
-   read_in_cell_c( sca, &numFmt->cell );
+   scan_cell_c( sca, &numFmt->cell );
 
    return sca->space == 0;
 }
@@ -47,7 +47,7 @@ void dump_write_num_format_c( cWriteNumFormat const* fmt )
    printf( "decimal:    %c\n", fmt->decimal );
    printf( "precision:  %i\n", fmt->precision );
    printf( "cell:\n" );
-   printf( "   orient:  %i\n", fmt->cell.orient );
+   printf( "   orient:  %c\n", fmt->cell.orient );
    printf( "   size:    %i\n", fmt->cell.size );
    printf( "   pad:     '%c'\n", fmt->cell.pad );
    printf( "------------------------\n" );

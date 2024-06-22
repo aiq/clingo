@@ -15,9 +15,9 @@ int main( void )
    init_tap_c_();
 
    testSlice tests = slice_c_( test,
-      t_( "(8c )", cell_c_( 8, 0, ' ' ) ),
-      t_( "(16l-)", cell_c_( 16, -1, '-' ) ),
-      t_( "(256r.)", cell_c_( 256, 1, '.' ) )
+      t_( "(8= )", cell_c_( 8, '=', ' ' ) ),
+      t_( "(16<-)", cell_c_( 16, '<', '-' ) ),
+      t_( "(256>.)", cell_c_( 256, '>', '.' ) )
    );
 
    for ( int64_t i = 0; i < tests.s; ++i )
@@ -26,7 +26,7 @@ int main( void )
       cScanner *sca = &cstr_scanner_c_( t.str );
       cCell cell;
 
-      bool res = read_in_cell_c( sca, &cell );
+      bool res = scan_cell_c( sca, &cell );
       res &= cell.orient == t.exp.orient;
       res &= cell.size == t.exp.size;
       res &= cell.pad == t.exp.pad;
