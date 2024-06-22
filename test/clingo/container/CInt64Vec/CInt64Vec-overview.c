@@ -33,6 +33,8 @@ int main( void )
    insert_into_int64_vec_c( vec, 3, 350 );
    expect_c_( info->count == 6 );
 
+   expect_c_( remove_from_int64_vec_c( vec, 2 ) );
+
    cRecorder* rec = &recorder_c_( 128 );
    {
       cInt64Slice slice = slice_of_int64_vec_c( vec );
@@ -45,7 +47,7 @@ int main( void )
          }
       }
    }
-   expect_c_( recorded_is_c( rec, "100 200 300 350 400 555" ) );
+   expect_c_( recorded_is_c( rec, "100 200 350 400 555" ) );
 
    resize_int64_vec_c( vec, info->count );
    expect_c_( info->cap == info->count );

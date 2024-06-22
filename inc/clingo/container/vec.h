@@ -260,7 +260,7 @@ bool remove_from_##FuncSuffix( VecType* vec, int64_t pos )                     \
    Release( vec->data[ pos ] );                                                \
                                                                                \
    memmove( dst, src, size );                                                  \
-   vec->i.count - 1;                                                           \
+   vec->i.count -= 1;                                                          \
                                                                                \
    return true;                                                                \
 }

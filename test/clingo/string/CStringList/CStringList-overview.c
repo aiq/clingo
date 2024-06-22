@@ -45,10 +45,14 @@ int main( void )
    CString* sorted = join_string_list_c_( list, " - " );
    expect_str_( sorted, "!? - BOOM - abc - bang - bang - def" );
 
+   expect_c_( remove_from_string_list_c( list, 2 ) );
+   CString* reduced = join_string_list_c_( list, "_" );
+   expect_str_( reduced, "!?_BOOM_bang_bang_def" );
+
    resize_string_list_c( list, info->count );
    expect_c_( info->cap == info->count );
 
-   release_all_c_( list, joined, sorted );
+   release_all_c_( list, joined, sorted, reduced );
 
    return finish_tap_c_();
 }
