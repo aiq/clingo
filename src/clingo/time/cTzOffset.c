@@ -156,3 +156,9 @@ bool write_tz_offset_c( cRecorder rec[static 1],
 
    return true;
 }
+
+static TAPE_C_( tape_func, cTzOffset, write_tz_offset_c, do_deref_c_ )
+cTape tz_offset_tape_c( cTzOffset const* tz )
+{
+   return (cTape){ .i=tz, .f=tape_func };
+}

@@ -101,4 +101,8 @@ CLINGO_API bool write_daytime_c( cRecorder rec[static 1],
                       cDaytime dt,
                       char const fmt[static 1] );
 
+#define daytime_tape_c_( Dt )                                                  \
+   daytime_tape_c( ref_c_( cDaytime, (Dt) ) )
+CLINGO_API cTape daytime_tape_c( cDaytime const* dt );
+
 #endif

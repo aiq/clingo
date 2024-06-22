@@ -2,6 +2,7 @@
 
 #include "_/time/read_time_util.h"
 #include "_/time/write_time_util.h"
+#include "clingo/lang/algo.h"
 #include "clingo/time/C_TimeFormats.h"
 #include "clingo/time/cOrdinalDate.h"
 #include "clingo/type/int8.h"
@@ -202,4 +203,10 @@ bool write_week_date_c( cRecorder rec[static 1],
    }
 
    return true;
+}
+
+static TAPE_C_( tape_func, cWeekDate, write_week_date_c, do_deref_c_ )
+cTape week_date_tape_c( cWeekDate const* wd )
+{
+   return (cTape){ .i=wd, .f=tape_func };
 }

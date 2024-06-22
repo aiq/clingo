@@ -94,16 +94,20 @@ CLINGO_API bool time_is_valid_c( cTime time );
  io
 *******************************************************************************/
 
-#define read_time_c_( Sca, Date )                                              \
-   read_time_c( (Sca), (Date), "" )
+#define read_time_c_( Sca, Time )                                              \
+   read_time_c( (Sca), (Time), "" )
 CLINGO_API bool read_time_c( cScanner sca[static 1],
                              cTime time[static 1],
                              char const fmt[static 1] );
 
-#define write_time_c_( Rec, Date )                                             \
-   write_time_c( (Rec), (Date), "" )
+#define write_time_c_( Rec, Time )                                             \
+   write_time_c( (Rec), (Time), "" )
 CLINGO_API bool write_time_c( cRecorder rec[static 1],
                               cTime time,
                               char const fmt[static 1] );
+
+#define time_tape_c_( Time )                                                   \
+   time_tape_c( ref_c_( cTime, (Time) ) )
+CLINGO_API cTape time_tape_c( cTime const* time );
 
 #endif

@@ -2,6 +2,7 @@
 
 #include "_/time/read_time_util.h"
 #include "_/time/write_time_util.h"
+#include "clingo/lang/algo.h"
 #include "clingo/type/int16.h"
 #include "clingo/type/int32.h"
 
@@ -172,3 +173,8 @@ bool write_ordinal_date_c( cRecorder rec[static 1],
    return true;
 }
 
+static TAPE_C_( tape_func, cOrdinalDate, write_ordinal_date_c, do_deref_c_ )
+cTape ordinal_date_tape_c( cOrdinalDate const* od )
+{
+   return (cTape){ .i=od, .f=tape_func };
+}

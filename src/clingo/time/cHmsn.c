@@ -2,6 +2,7 @@
 
 #include "_/time/read_time_util.h"
 #include "_/time/write_time_util.h"
+#include "clingo/lang/algo.h"
 #include "clingo/time/cDuration.h"
 #include "clingo/time/C_TimeFormats.h"
 #include "clingo/type/int8.h"
@@ -226,4 +227,10 @@ bool write_hmsn_c( cRecorder rec[static 1],
    }
 
    return true;
+}
+
+static TAPE_C_( tape_func, cHmsn, write_hmsn_c, do_deref_c_ )
+cTape hmsn_tape_c( cHmsn const* hmsn )
+{
+   return (cTape){ .i=hmsn, .f=tape_func };
 }

@@ -99,4 +99,8 @@ CLINGO_API bool write_tz_offset_c( cRecorder rec[static 1],
                         cTzOffset tz,
                         char const fmt[static 1] );
 
+#define tz_offset_tape_c_( Tz)                                                 \
+   tz_offset_tape_c( ref_c_( cTzOffset, (Tz) ) )
+CLINGO_API cTape tz_offset_tape_c( cTzOffset const* tz );
+
 #endif

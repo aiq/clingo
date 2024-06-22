@@ -122,4 +122,8 @@ CLINGO_API bool write_date_c( cRecorder rec[static 1],
                    cDate date,
                    char const fmt[static 1] );
 
+#define date_tape_c_( Date )                                                   \
+   date_tape_c( ref_c_( cDate, (Date) ) )
+CLINGO_API cTape date_tape_c( cDate const* date );
+
 #endif

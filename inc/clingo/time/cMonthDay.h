@@ -55,4 +55,8 @@ CLINGO_API bool write_month_day_c( cRecorder rec[static 1],
                         cMonthDay md,
                         char const fmt[static 1] );
 
+#define month_day_tape_c_( Md )                                                \
+   month_day_tape_c( ref_c_( cMonthDay, (Md) ) )
+CLINGO_API cTape month_day_tape_c( cMonthDay const* md );
+
 #endif

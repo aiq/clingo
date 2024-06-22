@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "clingo/container/CBitVec.h"
+#include "clingo/lang/algo.h"
 #include "clingo/io/print.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
@@ -560,4 +561,10 @@ bool write_day_set_c( cRecorder rec[static 1],
    }
 
    return true;
+}
+
+static TAPE_C_( tape_func, CDaySet, write_day_set_c, do_not_deref_c_ )
+cTape day_set_tape_c( CDaySet const* set )
+{
+   return (cTape){ .i=set, .f=tape_func };
 }

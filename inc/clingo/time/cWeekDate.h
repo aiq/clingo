@@ -4,6 +4,7 @@
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
+#include "clingo/io/cTape.h"
 #include "clingo/time/c_Weekday.h"
 #include "clingo/time/cYmd.h"
 
@@ -66,5 +67,9 @@ CLINGO_API bool read_week_date_c( cScanner sca[static 1],
 CLINGO_API bool write_week_date_c( cRecorder rec[static 1],
                         cWeekDate wd,
                         char const fmt[static 1] );
+
+#define week_date_tape_c_( Wd )                                                \
+   week_date_tape_c( ref_c_( cWeekDate, (Wd) ) )
+CLINGO_API cTape week_date_tape_c( cWeekDate const* wd );
 
 #endif

@@ -61,4 +61,8 @@ CLINGO_API bool write_ordinal_date_c( cRecorder rec[static 1],
                            cOrdinalDate od,
                            char const fmt[static 1] );
 
+#define ordinal_date_tape_c_( Od )                                             \
+   ordinal_date_tape_c( ref_c_( cOrdinalDate, (Od) ) )
+CLINGO_API cTape ordinal_date_tape_c( cOrdinalDate const* od );
+
 #endif

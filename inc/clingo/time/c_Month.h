@@ -4,6 +4,7 @@
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
+#include "clingo/io/cTape.h"
 #include "clingo/time/year.h"
 
 /*******************************************************************************
@@ -103,5 +104,9 @@ CLINGO_API
 bool write_month_c( cRecorder rec[static 1],
                     c_Month month,
                     char const fmt[static 1] );
+
+#define month_tape_c_( Month )                                                 \
+   month_tape_c( ref_c_( c_Month, (Month) ))
+CLINGO_API cTape month_tape_c( c_Month const* month );
 
 #endif

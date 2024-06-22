@@ -3,6 +3,7 @@
 #include "_/time/read_time_util.h"
 #include "_/time/util.h"
 #include "_/time/write_time_util.h"
+#include "clingo/lang/algo.h"
 #include "clingo/time/C_TimeFormats.h"
 #include <time.h>
 
@@ -514,4 +515,10 @@ bool write_date_c( cRecorder rec[static 1],
    }
 
    return true;
+}
+
+static TAPE_C_( tape_func, cDate, write_date_c, do_deref_c_ )
+cTape date_tape_c( cDate const* date )
+{
+   return (cTape){ .i=date, .f=tape_func };
 }

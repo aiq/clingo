@@ -1,5 +1,6 @@
 #include "clingo/time/cDaytime.h"
 
+#include "clingo/lang/algo.h"
 #include "clingo/time/C_TimeFormats.h"
 
 /*******************************************************************************
@@ -130,3 +131,8 @@ bool write_daytime_c( cRecorder rec[static 1],
    return write_hmsn_c( rec, as_hmsn_c( dt ), fmt );
 }
 
+static TAPE_C_( tape_func, cDaytime, write_daytime_c, do_deref_c_ )
+cTape daytime_tape_c( cDaytime const* dt )
+{
+   return (cTape){ .i=dt, .f=tape_func };
+}

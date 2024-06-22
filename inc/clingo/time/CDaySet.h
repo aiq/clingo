@@ -96,4 +96,6 @@ CLINGO_API bool write_day_set_c( cRecorder rec[static 1],
                       CDaySet const* set,
                       char const fmt[static 1] );
 
+CLINGO_API cTape day_set_tape_c( CDaySet const* set );
+
 #endif

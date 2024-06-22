@@ -4,6 +4,7 @@
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
+#include "clingo/io/cTape.h"
 
 /*******************************************************************************
 ********************************************************* Types and Definitions
@@ -62,5 +63,9 @@ CLINGO_API bool read_hmsn_c( cScanner sca[static 1],
 CLINGO_API bool write_hmsn_c( cRecorder rec[static 1],
                    cHmsn hmsn,
                    char const fmt[static 1] );
+
+#define hmsn_tape_c_( Hmsn )                                                   \
+   hmsn_tape_c( ref_c_( cHmsn, (Hmsn) ) )
+CLINGO_API cTape hmsn_tape_c( cHmsn const* hmsn );
 
 #endif

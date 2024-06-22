@@ -2,6 +2,7 @@
 
 #include "_/time/read_time_util.h"
 #include "_/time/write_time_util.h"
+#include "clingo/lang/algo.h"
 #include "clingo/type/int8.h"
 
 /*******************************************************************************
@@ -121,4 +122,10 @@ bool write_month_day_c( cRecorder rec[static 1],
    }
 
    return true;
+}
+
+static TAPE_C_( tape_func, cMonthDay, write_month_day_c, do_deref_c_ )
+cTape month_day_tape_c( cMonthDay const* md )
+{
+   return (cTape){ .i=md, .f=tape_func };
 }

@@ -1,5 +1,6 @@
 #include "clingo/io/write.h"
 #include "clingo/lang/expect.h"
+#include "clingo/time/cDuration.h"
 
 int main( void )
 {
@@ -12,14 +13,16 @@ int main( void )
       "but both are in range {rng:c}{s}\n", closed_range_c_( 0, 64 ), "BOOM!",
       "{{really}\n", "BOOM!\n",
       "{cs:q}\n", c_c( "_" ),
-      "that is so {bool}", true
+      "that is so {bool}\n", true,
+      "and took {t:hhmmss}", duration_tape_c_( duration_c( 3, 59, 47, 0 ) )
    ) );
    expect_c_( recorded_is_c( rec,
       "'64' is more as \"3\" but both are in range [0..64]BOOM!\n"
       "{really}\n"
       "BOOM!\n"
       "'_'\n"
-      "that is so true" ));
+      "that is so true\n"
+      "and took 3h59m47s" ) );
 
    reset_recorder_c( rec );
    expect_c_( write_c_( rec, "res = {bool}", true ) );

@@ -2,6 +2,7 @@
 #define CLINGO_TIME_CDURATION_H
 
 #include "clingo/apidecl.h"
+#include "clingo/io/cTape.h"
 #include "clingo/lang/mem.h"
 #include "clingo/time/cHmsn.h"
 
@@ -143,5 +144,9 @@ CLINGO_API bool read_duration_c( cScanner sca[static 1],
 CLINGO_API bool write_duration_c( cRecorder rec[static 1],
                        cDuration dur,
                        char const fmt[static 1] );
+
+#define duration_tape_c_( Dur )              \
+   duration_tape_c( ref_c_( cDuration, (Dur) ) )
+CLINGO_API cTape duration_tape_c( cDuration const* dur );
 
 #endif

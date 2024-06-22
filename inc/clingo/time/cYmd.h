@@ -4,6 +4,7 @@
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
+#include "clingo/io/cTape.h"
 #include "clingo/time/c_Month.h"
 
 /*******************************************************************************
@@ -57,5 +58,9 @@ CLINGO_API bool read_ymd_c( cScanner sca[static 1],
 CLINGO_API bool write_ymd_c( cRecorder rec[static 1],
                   cYmd ymd,
                   char const fmt[static 1] );
+
+#define ymd_tape_c_( Ymd )                                                     \
+   ymd_tape_c( ref_c_( cYmd, (Ymd) ) )
+CLINGO_API cTape ymd_tape_c( cYmd const* ymd );
 
 #endif

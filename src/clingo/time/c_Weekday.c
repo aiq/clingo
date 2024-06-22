@@ -131,3 +131,9 @@ bool write_weekday_c( cRecorder rec[static 1],
    return ( n != slc.s ) ? set_recorder_error_c( rec, c_InvalidWriteFormat )
                          : intl_write_weekday_c( rec, wd, n );
 }
+
+static TAPE_C_( tape_func, c_Weekday, write_weekday_c, do_deref_c_ )
+cTape weekday_tape_c( c_Weekday const* wd )
+{
+   return (cTape){ .i=wd, .f=tape_func };
+}

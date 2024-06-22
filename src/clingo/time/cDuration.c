@@ -5,6 +5,7 @@
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
+#include "clingo/lang/algo.h"
 #include "clingo/time/C_TimeFormats.h"
 #include "clingo/type/cCharsSlice.h"
 #include "clingo/type/int8.h"
@@ -688,3 +689,8 @@ bool write_duration_c( cRecorder rec[static 1],
    return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
+static TAPE_C_( tape_func, cDuration, write_duration_c, do_deref_c_ )
+cTape duration_tape_c( cDuration const* dur )
+{
+   return (cTape){ .i=dur, .f=tape_func };
+}
