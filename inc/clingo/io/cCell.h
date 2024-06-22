@@ -12,7 +12,7 @@
 struct cCell
 {
    int16_t size;
-   int8_t orient;
+   char orient;
    char pad;
 };
 typedef struct cCell cCell;

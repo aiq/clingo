@@ -15,6 +15,8 @@ int main( void )
    init_tap_c_();
 
    testSlice tests = slice_c_( test,
+      t_( "(8)", cell_c_( 8, '<', ' ' ) ),
+      t_( "(12<)", cell_c_( 12, '<', ' ' ) ),
       t_( "(8= )", cell_c_( 8, '=', ' ' ) ),
       t_( "(16<-)", cell_c_( 16, '<', '-' ) ),
       t_( "(256>.)", cell_c_( 256, '>', '.' ) )

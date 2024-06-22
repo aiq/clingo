@@ -6,6 +6,30 @@
 ********************************************************************* Functions
 *******************************************************************************/
 
+static inline bool scan_cell_internals( cScanner sca[static 1],
+                                        cCell cell[static 1] )
+{
+   if ( read_int16_c_( sca, &cell->size ) == 0 ) // --------------------- number
+      return false;
+
+   if ( sca->space == 0 )
+      return true;
+
+   if ( not scan_char_c( sca, &cell->orient ) )
+      return false;
+
+   if ( not in_range_c_( '<', cell->orient, '>' ) )
+      return false;
+
+   if ( sca->space == 0 )
+      return true;
+
+   if ( not scan_char_c( sca, &cell->pad ) )
+      return false;
+
+   return sca->space == 0;
+}
+
 bool scan_cell_c( cScanner sca[static 1], cCell cell[static 1] )
 {
    must_exist_c_( sca );
@@ -23,58 +47,21 @@ bool scan_cell_c( cScanner sca[static 1], cCell cell[static 1] )
       return false;
    }
 
-   if ( read_int16_c_( sca, &cell->size ) == 0 ) // --------------------- number
+   cScanner cellSca = *sca;
+   if ( not move_to_char_c( sca, ')' ) )
+   {
+      *sca = backUp;
+      return false;
+   }
+   cellSca.space -= sca->space;
+
+   if ( not scan_cell_internals( &cellSca, cell ) )
    {
       *sca = backUp;
       return false;
    }
 
-   bool readOrient = sca->space > 0; // --------------------------------- 
-   if ( readOrient )
-   {
-      const char* ptr = sca->mem;
-      if ( *ptr == '<' )
-      {
-         cell->orient = '<';
-         move_scanner_c( sca, 1 );
-      }
-      else if ( *ptr == '>' )
-      {
-         cell->orient = '>';
-         move_scanner_c( sca, 1 );
-      }
-      else if ( *ptr == '=' )
-      {
-         cell->orient = '=';
-         move_scanner_c( sca, 1 );
-      }
-      else // no orient value
-      {
-         readOrient = false;
-      }
-   }
-   if ( not readOrient )
-   {
-      *sca = backUp;
-      return false;
-   }
-
-   if ( sca->space > 0 ) // ------------------------------------------------ pad
-   {
-      scan_char_c( sca, &cell->pad );
-   }
-   else
-   {
-      *sca = backUp;
-      return false;
-   }
-
-   if ( not move_if_char_c( sca, ')' ) ) // ---------------------------------- )
-   {
-      *sca = backUp;
-      return false;
-   }
-
+   move_scanner_c( sca, 1 ); // ---------------------------------------------- )
    return true;
 }
 
