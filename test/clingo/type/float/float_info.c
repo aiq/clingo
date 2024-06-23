@@ -20,7 +20,7 @@ int main( void )
       t_( 3.14f, 0, 0x80, 0x48F5C3 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cFloatInfo info = float_info_c( t->val );
 

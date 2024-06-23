@@ -7,11 +7,11 @@ int main( void )
 
    uint16_t res = 0;
 
-   expect_c_( usub16_c( 45112, 12345, &res ) );
-   expect_c_( res == 32767 );
+   expect_at_c_( usub16_c( 45112, 12345, &res ) );
+   expect_at_c_( res == 32767 );
 
-   expect_c_( not usub16_c( 127, 128, &res ) );
-   expect_c_( res == 32767 );
+   expect_at_c_( not usub16_c( 127, 128, &res ) );
+   expect_at_c_( res == 32767 );
 
    return finish_tap_c_();
 }

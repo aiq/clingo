@@ -12,26 +12,26 @@ int main( void )
 
    // -------------------------------- value is written in the system byte order
    float const* recVal = rec->mem;
-   expect_c_( record_float_c( rec, val ), 4 );
-   expect_c_( rec->pos == 4 );
-   expect_c_( rec->space == 9 );
-   expect_c_( *recVal == val );
+   expect_at_c_( record_float_c( rec, val ), 4 );
+   expect_at_c_( rec->pos == 4 );
+   expect_at_c_( rec->space == 9 );
+   expect_at_c_( *recVal == val );
 
    // ----------------------------------------- write with a specific byte order
    float const bigVal = swap_float_to_c( val, c_BigEndian );
    float const littleVal = swap_float_to_c( val, c_LittleEndian );
 
    float const* recBig = rec->mem;
-   expect_c_( record_float_c( rec, bigVal ) );
+   expect_at_c_( record_float_c( rec, bigVal ) );
    float const* recLittle = rec->mem;
-   expect_c_( record_float_c( rec, littleVal ) );
+   expect_at_c_( record_float_c( rec, littleVal ) );
 
-   expect_c_( *recBig != *recLittle );
+   expect_at_c_( *recBig != *recLittle );
 
    // --------------------------------------- try to record without enough space
-   expect_c_( not record_float_c( rec, 4.5f ) );
-   expect_c_( rec->pos == 12 );
-   expect_c_( rec->space == 1 );
+   expect_at_c_( not record_float_c( rec, 4.5f ) );
+   expect_at_c_( rec->pos == 12 );
+   expect_at_c_( rec->space == 1 );
 
    return finish_tap_c_();
 }

@@ -9,9 +9,9 @@ int main( void )
 
    set_on_day_set_c( daySet, date_c( 2014, 2, 27 ) );
 
-   expect_c_( in_day_set_c( daySet, date_c( 2014, 2, 27 ) ) );
-   expect_c_( not day_set_is_empty_c( daySet ) );
-   expect_c_( count_days_c( daySet ) == 1 );
+   expect_at_c_( in_day_set_c( daySet, date_c( 2014, 2, 27 ) ) );
+   expect_at_c_( not day_set_is_empty_c( daySet ) );
+   expect_at_c_( count_days_c( daySet ) == 1 );
 
    release_c( daySet );
 

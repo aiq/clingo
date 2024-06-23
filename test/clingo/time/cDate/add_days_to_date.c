@@ -8,10 +8,10 @@ int main( void )
    cDate date = date_c( 2011, c_Mar, 31 );
 
    cDate res = add_days_to_date_c( date, 20 );
-   expect_c_( eq_date_c( res, date_c( 2011, c_Apr, 20 ) ) );
+   expect_at_c_( eq_date_c( res, date_c( 2011, c_Apr, 20 ) ) );
 
    res = add_days_to_date_c( date, -11 );
-   expect_c_( eq_date_c( res, date_c( 2011, c_Mar, 20 ) ) );
+   expect_at_c_( eq_date_c( res, date_c( 2011, c_Mar, 20 ) ) );
 
    return finish_tap_c_();
 }

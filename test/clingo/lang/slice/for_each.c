@@ -1,6 +1,8 @@
+#include "clingo/io/cRecorder.h"
+#include "clingo/io/write.h"
 #include "clingo/lang/expect.h"
 #include "clingo/lang/slice.h"
-#include "clingo/type/cChars.h"
+#include "clingo/type/cCharsSlice.h"
 
 int main( void )
 {
@@ -8,23 +10,15 @@ int main( void )
 
    cVarChars buf = scalars_c_( 8, char );
 
-   bool flag = true;
-   for_each_c_( char*, c, buf )
+   cCharsSlice words = cs_c_( "link", "zelda", "mario", "samus" );
+
+   cRecorder* rec = &recorder_c_( 1024 );
+   for_each_c_( i, cChars const*, word, words )
    {
-      if ( flag )
-      {
-         *c = '+';
-         flag = false;
-      }
-      else
-      {
-         *c = '.';
-         flag = true;
-      }
+      write_c_( rec, "[{i64}:{cs:q}]", i, *word );
    }
 
-   cChars slc = as_c_( cChars, buf );
-   expect_c_( chars_is_c( slc, "+.+.+.+." ) );
+   expect_at_c_( recorded_is_c( rec, "[0:'link'][1:'zelda'][2:'mario'][3:'samus']" ) );
 
    return finish_tap_c_();
 }

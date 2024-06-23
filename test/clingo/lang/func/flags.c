@@ -21,15 +21,15 @@ int main( void )
 
    uint8_t config = 0;
 
-   expect_c_( not has_c_( config, c_1|c_2|c_3|c_4|c_5|c_6|c_7|c_8 ) );
+   expect_at_c_( not has_c_( config, c_1|c_2|c_3|c_4|c_5|c_6|c_7|c_8 ) );
 
    config = set_c_( config, c_1|c_2|c_3|c_6|c_7 );
-   expect_c_( has_c_( config, c_1|c_2|c_3|c_6|c_7 ) );
-   expect_c_( not has_c_( config, c_4|c_5|c_8 ) );
+   expect_at_c_( has_c_( config, c_1|c_2|c_3|c_6|c_7 ) );
+   expect_at_c_( not has_c_( config, c_4|c_5|c_8 ) );
 
    config = unset_c_( config, c_2|c_3|c_7 );
-   expect_c_( has_c_( config, c_1|c_6 ) );
-   expect_c_( not has_c_( config, c_2|c_3|c_4|c_5|c_7|c_8 ) );
+   expect_at_c_( has_c_( config, c_1|c_6 ) );
+   expect_at_c_( not has_c_( config, c_2|c_3|c_4|c_5|c_7|c_8 ) );
 
    return finish_tap_c_();
 }

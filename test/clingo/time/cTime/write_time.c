@@ -23,7 +23,7 @@ int main( void )
           "YY.MM.DD", "21.06.12" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 64 );
 

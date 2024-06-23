@@ -21,12 +21,12 @@ int main( void )
    );
 
    cColor base = rgb_color_c( 0xaabbcc );
-   for_each_c_( test const*, t, tests )
+   for_each_c_( i, test const*, t, tests )
    {
       cColor c = set_color_alpha_c( base, t->alpha );
       c = fade_color_c( c, t->fade );
       float res = color_alpha_c( c );
-      expect_c_( eq_float_c( res, t->exp, 0.005f ) );
+      expect_c_( i, eq_float_c( res, t->exp, 0.005f ) );
    }
 
    return finish_tap_c_();

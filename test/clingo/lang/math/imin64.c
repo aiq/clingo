@@ -5,7 +5,7 @@ int main( void )
 {
    init_tap_c_();
 
-   expect_c_( imin64_c( -98765432101, 123123123123 ) == -98765432101 );
+   expect_at_c_( imin64_c( -98765432101, 123123123123 ) == -98765432101 );
 
    return finish_tap_c_();
 }

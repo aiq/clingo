@@ -13,7 +13,7 @@ int main( void )
       record_char_c( rec, '\n' );
       write_date_c_( rec, res );
    }
-   expect_c_( eq_date_c( res, date_c( 2008, c_Sep, 26 ) ) );
+   expect_at_c_( eq_date_c( res, date_c( 2008, c_Sep, 26 ) ) );
 
    return finish_tap_c_();
 }

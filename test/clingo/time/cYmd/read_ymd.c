@@ -21,7 +21,7 @@ int main( void )
       t_( "5-7-2001", "D-M-YYYY", ymd_c( 2001, 7, 5 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->inp );
 

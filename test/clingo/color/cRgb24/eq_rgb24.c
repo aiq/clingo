@@ -8,8 +8,8 @@ int main( void )
    cRgb24 c1 = { 90, 46, 75 };
    cRgb24 c2 = { 87, 75, 25 };
 
-   expect_c_(  eq_rgb24_c( c1, c1 ) );
-   expect_c_( !eq_rgb24_c( c1, c2 ) );
+   expect_at_c_(  eq_rgb24_c( c1, c1 ) );
+   expect_at_c_( !eq_rgb24_c( c1, c2 ) );
 
    return finish_tap_c_();
 }

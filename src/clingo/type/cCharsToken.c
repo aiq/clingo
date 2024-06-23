@@ -42,7 +42,7 @@ bool next_token_till_any_c( cCharsToken tok[static 1], cCharsSlice set )
    for ( ; beg < end; ++beg )
    {
       cChars sub = atween_c_( beg, end );
-      for_each_c_( cChars const*, any, set )
+      each_c_( cChars const*, any, set )
       {
          if ( chars_starts_with_c( sub, *any ) )
          {

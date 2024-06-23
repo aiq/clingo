@@ -2,7 +2,7 @@
 #include "clingo/string/CStringList.h"
 
 #define expect_str_( Str, Exp )                                                \
-   expect_c_( string_is_c( (Str), (Exp) ) )
+   expect_at_c_( string_is_c( (Str), (Exp) ) )
 
 int main( void )
 {

@@ -3,7 +3,7 @@
 #include "clingo/type/cChars.h"
 
 #define expect_( Str, Exp )                                                    \
-   expect_c_( chars_is_c( c_c( Str ), (Exp) ) )
+   expect_at_c_( chars_is_c( c_c( Str ), (Exp) ) )
 
 int main( void )
 {

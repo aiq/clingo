@@ -9,10 +9,10 @@ int main( void )
 
    compl_bytes_c( as_c_( cBytes, slice ), slice );
 
-   expect_c_( slice.v[ 0 ] == 0xf0 );
-   expect_c_( slice.v[ 1 ] == 0x3c );
-   expect_c_( slice.v[ 2 ] == 0xa2 );
-   expect_c_( slice.v[ 3 ] == 0xef );
+   expect_at_c_( slice.v[ 0 ] == 0xf0 );
+   expect_at_c_( slice.v[ 1 ] == 0x3c );
+   expect_at_c_( slice.v[ 2 ] == 0xa2 );
+   expect_at_c_( slice.v[ 3 ] == 0xef );
 
    return finish_tap_c_();
 }

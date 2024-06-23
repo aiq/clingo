@@ -2,7 +2,7 @@
 #include "clingo/type/cRune.h"
 
 #define expect_( Rune, Exp )                                                   \
-   expect_c_(                                                                  \
+   expect_at_c_(                                                                  \
       rune_is_c( (Rune), (Exp) )                                               \
    )
 

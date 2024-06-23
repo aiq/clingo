@@ -11,7 +11,7 @@ int main( void )
    set_on_day_set_c( daySet, date_c( 2014, 2, 13 ) );
 
    cDate exp = date_c( 2014, 2, 13 );
-   expect_c_( eq_date_c( first_in_day_set_c( daySet ), exp ) );
+   expect_at_c_( eq_date_c( first_in_day_set_c( daySet ), exp ) );
 
    release_c( daySet );
 

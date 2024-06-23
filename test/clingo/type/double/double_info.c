@@ -21,7 +21,7 @@ int main( void )
       t_( 3.14, 0, 0x400, 0x91eb851eb851f )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDoubleInfo info = double_info_c( t->val );
 

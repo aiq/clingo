@@ -2,7 +2,7 @@
 #include "clingo/type/cChars.h" // reverse_chars_c
 
 #define expect_( VarChars, Exp )                                               \
-   expect_c_(                                                                  \
+   expect_at_c_(                                                                  \
       chars_is_c( as_c_( cChars, VarChars ), (Exp) )                           \
    )
 

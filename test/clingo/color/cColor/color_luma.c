@@ -21,11 +21,11 @@ int main( void )
       t_( from_hsl_c_( 90.0f, 1.0f, 0.5f ), 0.82f )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       float luma = color_luma_c( t->color );
       bool res = eq_float_c( luma, t->exp, 0.005 );
-      expect_c_( res );
+      expect_at_c_( res );
    }
 
    return finish_tap_c_();

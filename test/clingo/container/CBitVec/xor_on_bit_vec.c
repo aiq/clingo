@@ -9,7 +9,7 @@ int main( void )
    CBitVec* b = bit_vec_from_cstr_c( "0011" );
 
    xor_on_bit_vec_c( a, b );
-   expect_c_( bit_vec_is_c_( a, "0110" ) );
+   expect_at_c_( bit_vec_is_c_( a, "0110" ) );
 
    release_all_c_( a, b );
 

@@ -22,7 +22,7 @@ int main( void )
       t_( "9038.213", "", 9038.213f )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->str );
       float f = 0.0f;

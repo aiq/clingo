@@ -145,7 +145,17 @@ stream.
 ==== expect_c_
 [source,c]
 ----
-#define expect_c_( Result )
+#define expect_c_( Index, Result )
+----
+
+Macro function that adds a test line with a generated description to the TAP
+stream.
+
+[id='expect_at_c_']
+==== expect_at_c_
+[source,c]
+----
+#define expect_at_c_( Result )
 ----
 
 Macro function that adds a test line with a generated description to the TAP
@@ -154,7 +164,7 @@ stream.
 .Example
 [source,c]
 ----
-include::{xmpldir}/expect.c[]
+include::{xmpldir}/expect_at.c[]
 ----
 
 // *****************************************************************************

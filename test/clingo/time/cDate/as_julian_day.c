@@ -31,7 +31,7 @@ int main( void )
       t_( 2014, c_May, 20, 2456798 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDate const date = date_c( t->year, t->month, t->day );
       int64_t const jd = as_julian_day_c( date );

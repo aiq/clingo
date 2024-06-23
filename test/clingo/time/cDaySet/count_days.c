@@ -7,12 +7,12 @@ int main( void )
 
    CDaySet* ds = new_day_set_c();
 
-   expect_c_( day_set_is_empty_c( ds ) );
-   expect_c_( count_days_c( ds ) == 0 );
+   expect_at_c_( day_set_is_empty_c( ds ) );
+   expect_at_c_( count_days_c( ds ) == 0 );
 
-   expect_c_( set_on_day_set_c( ds, date_c( 2014, 10, 3 ) ) );
+   expect_at_c_( set_on_day_set_c( ds, date_c( 2014, 10, 3 ) ) );
 
-   expect_c_( count_days_c( ds) == 1 );
+   expect_at_c_( count_days_c( ds) == 1 );
 
    release_c( ds );
 

@@ -8,13 +8,13 @@ int main( void )
    CString* s = lit_c( "Pineapple" );
 
    CString* pineapple = new_mid_string_c( s, 0 );
-   expect_c_( string_is_c( pineapple, "Pineapple" ) );
+   expect_at_c_( string_is_c( pineapple, "Pineapple" ) );
 
    CString* apple = new_mid_string_c( s, 4 );
-   expect_c_( string_is_c( apple, "apple" ) );
+   expect_at_c_( string_is_c( apple, "apple" ) );
 
    CString* empty = new_mid_string_c( s, 1024 ); // to high value
-   expect_c_( string_is_empty_c( empty ) );
+   expect_at_c_( string_is_empty_c( empty ) );
 
    release_all_c_( s, pineapple, apple );
 

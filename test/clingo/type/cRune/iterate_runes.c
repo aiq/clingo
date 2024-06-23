@@ -17,9 +17,9 @@ int main( void )
       record_rune_c( rec, r );
    }
 
-   expect_c_( recorded_is_c( ascii, " yes this is a  and !" ));
+   expect_at_c_( recorded_is_c( ascii, " yes this is a  and !" ));
    println_recorded_c( ascii );
-   expect_c_( recorded_is_c( unicode, "®𝄞€" ));
+   expect_at_c_( recorded_is_c( unicode, "®𝄞€" ));
 
    return finish_tap_c_();
 }

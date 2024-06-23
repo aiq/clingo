@@ -8,7 +8,7 @@ int main( void )
    CBitVec* vec = bit_vec_from_cstr_c( "0101" );
 
    compl_on_bit_vec_c( vec );
-   expect_c_( bit_vec_is_c_( vec, "1010" ) );
+   expect_at_c_( bit_vec_is_c_( vec, "1010" ) );
 
    release_all_c_( vec );
 

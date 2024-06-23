@@ -8,8 +8,8 @@ int main( void )
    cColor black = rgb_color_c( 0x000000 );
    cColor white = rgb_color_c( 0xffffff );
 
-   expect_c_(  eq_color_c( black, black ) );
-   expect_c_( !eq_color_c( black, white ) );
+   expect_at_c_(  eq_color_c( black, black ) );
+   expect_at_c_( !eq_color_c( black, white ) );
 
    return finish_tap_c_();
 }

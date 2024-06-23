@@ -11,7 +11,7 @@ int main( void )
       ++count;
    }
 
-   expect_c_( count == 1 );
+   expect_at_c_( count == 1 );
 
    return finish_tap_c_();
 }

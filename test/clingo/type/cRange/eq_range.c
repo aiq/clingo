@@ -8,8 +8,8 @@ int main( void )
    cRange a = { .min=22, .max=55 };
    cRange b = { .min=22, .max=53 };
 
-   expect_c_( eq_range_c( a, a ) );
-   expect_c_( not eq_range_c( a, b ) );
+   expect_at_c_( eq_range_c( a, a ) );
+   expect_at_c_( not eq_range_c( a, b ) );
 
    return finish_tap_c_();
 }

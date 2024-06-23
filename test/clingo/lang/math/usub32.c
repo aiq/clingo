@@ -7,11 +7,11 @@ int main( void )
 
    uint32_t res = 0;
 
-   expect_c_( usub32_c( 2147483647, 1234567890, &res ) );
-   expect_c_( res == 912915757 );
+   expect_at_c_( usub32_c( 2147483647, 1234567890, &res ) );
+   expect_at_c_( res == 912915757 );
 
-   expect_c_( not usub32_c( 0, 1, &res ) );
-   expect_c_( res == 912915757 );
+   expect_at_c_( not usub32_c( 0, 1, &res ) );
+   expect_at_c_( res == 912915757 );
 
    return finish_tap_c_();
 }

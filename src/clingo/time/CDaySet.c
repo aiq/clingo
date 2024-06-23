@@ -288,7 +288,7 @@ bool set_many_on_day_set_c( CDaySet* set, cDateSlice slice )
       if ( not rearrange_day_set( set, reqPeriod ) ) return false;
    }
 
-   for_each_c_( cDate const*, date, slice )
+   each_c_( cDate const*, date, slice )
    {
       set_on_day_set_c( set, *date );
    }

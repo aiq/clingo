@@ -7,8 +7,8 @@ int main( void )
 
    cChars chars = c_c( "clingo" );
 
-   expect_c_(  chars_is_c( chars, "clingo" ) );
-   expect_c_( !chars_is_c( chars, "Clingo" ) );
+   expect_at_c_(  chars_is_c( chars, "clingo" ) );
+   expect_at_c_( !chars_is_c( chars, "Clingo" ) );
 
    return finish_tap_c_();
 }

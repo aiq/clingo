@@ -14,20 +14,20 @@ int main( void )
 
    // -------------------------------------------------------------- valid cases
    window = (cCharWindow)front_window_c_( 1, slice );
-   expect_c_( valid_window_c_( window ) );
+   expect_at_c_( valid_window_c_( window ) );
 
    window = (cCharWindow)front_window_c_( 2, slice );
-   expect_c_( valid_window_c_( window ) );
+   expect_at_c_( valid_window_c_( window ) );
 
    window = (cCharWindow)front_window_c_( 3, slice );
-   expect_c_( valid_window_c_( window ) );
+   expect_at_c_( valid_window_c_( window ) );
 
    // ------------------------------------------------------------ invalid cases
    window = (cCharWindow)front_window_c_( 0, slice );
-   expect_c_( not valid_window_c_( window ) );
+   expect_at_c_( not valid_window_c_( window ) );
 
    window = (cCharWindow)front_window_c_( 4, slice );
-   expect_c_( not valid_window_c_( window ) );
+   expect_at_c_( not valid_window_c_( window ) );
 
    // ---------------------------------------------------------- iteration -next
    cRecorder* rec = &recorder_c_( 32 );
@@ -37,7 +37,7 @@ int main( void )
       record_chars_c( rec, as_c_( cChars, window ) );
       next_window_c_( window );
    }
-   expect_c_( recorded_is_c( rec, "abbccddeef" ) );
+   expect_at_c_( recorded_is_c( rec, "abbccddeef" ) );
 
    // ---------------------------------------------------------- iteration -prev
    reset_recorder_c( rec );
@@ -47,7 +47,7 @@ int main( void )
       record_chars_c( rec, as_c_( cChars, window ) );
       prev_window_c_( window );
    }
-   expect_c_( recorded_is_c( rec, "efdecdbcab" ) );
+   expect_at_c_( recorded_is_c( rec, "efdecdbcab" ) );
 
    return finish_tap_c_();
 }

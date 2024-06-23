@@ -18,7 +18,7 @@ int main( void )
       t_( ymd_c( 2021,  4, 29 ), ordinal_date_c( 2021, 119 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 32 );
       write_ordinal_date_c_( rec, t->od );

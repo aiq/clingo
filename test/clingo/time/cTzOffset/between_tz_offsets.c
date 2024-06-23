@@ -28,7 +28,7 @@ int main( void )
       t_( almt, pst, hours_c( -14 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDuration dur = between_tz_offsets_c( t->a, t->b );
 

@@ -55,14 +55,14 @@ int main( void )
       t_( ymd_tape_c_( ymd_c( 1954, c_Aug, 6 ) ), "{t:YY/MM/DD}", "54/08/06" )
    );
 
-   for_each_c_( test const*, t, tests )
+   for_each_c_( i, test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 1024 );
 
       bool res = write_c_( rec, t->fmt, t->tape );
       res &= recorded_is_c( rec, t->exp );
 
-      tap_desc_c_( res, "exp: {s} / got: {rec}", t->exp, rec );
+      expect_c_( i, res );
    }
 
    release_all_c_( em2024 );

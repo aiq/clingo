@@ -40,7 +40,7 @@ int main( void )
       t_( "🪓", "htmlx", "&#x1FA93;" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 16 );
 

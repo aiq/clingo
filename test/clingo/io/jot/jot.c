@@ -7,10 +7,10 @@ int main()
 
    cRecorder* rec = &recorder_c_( 1024 );
 
-   expect_c_( jotln_c_( rec, "boah: ", 128, c_c( " >= " ), 12 ) );
-   expect_c_( jotln_c_( rec, "the result value is: ", bool_c_( true ), "!" ) );
+   expect_at_c_( jotln_c_( rec, "boah: ", 128, c_c( " >= " ), 12 ) );
+   expect_at_c_( jotln_c_( rec, "the result value is: ", bool_c_( true ), "!" ) );
 
-   expect_c_( jot_c_( rec,
+   expect_at_c_( jot_c_( rec,
       "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",  //  13
       "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",  //  26
       "\n",                                                             //  27
@@ -45,7 +45,7 @@ int main()
    ) );
    jot_c_( rec, "the result value is: ", true, "!" );
 
-   expect_c_( recorded_is_c( rec, "boah: 128 >= 12\n"
+   expect_at_c_( recorded_is_c( rec, "boah: 128 >= 12\n"
                                   "the result value is: true!\n"
                                   "abcdefghijklmnopqrstuvwxyz\n"
                                   "_+_+_+_+_+_+_\n"

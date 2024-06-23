@@ -62,7 +62,7 @@ QSORT_C_(
 int64_t count_chars_slice_c( cCharsSlice slice )
 {
    int64_t result = 0;
-   for_each_c_( cChars const*, chars, slice )
+   each_c_( cChars const*, chars, slice )
    {
       result += chars->s;
    }
@@ -72,7 +72,7 @@ int64_t count_chars_slice_c( cCharsSlice slice )
 int64_t count_chars_slice_runes_c( cCharsSlice slice )
 {
    int64_t result = 0;
-   for_each_c_( cChars const*, chars, slice )
+   each_c_( cChars const*, chars, slice )
    {
       int64_t tmp = count_runes_c( *chars );
       if ( tmp < 0 ) return -1;
@@ -88,7 +88,7 @@ int64_t count_chars_slice_runes_c( cCharsSlice slice )
 
 bool chars_ends_with_any_c( cChars chars, cCharsSlice slice )
 {
-   for_each_c_( cChars const*, any, slice )
+   each_c_( cChars const*, any, slice )
    {
       if ( chars_ends_with_c( chars, *any ) ) return true;
    }
@@ -99,7 +99,7 @@ extern inline bool chars_is_any_c( cChars chars, cCharsSlice slice );
 
 bool chars_starts_with_any_c( cChars chars, cCharsSlice slice )
 {
-   for_each_c_( cChars const*, any, slice )
+   each_c_( cChars const*, any, slice )
    {
       if ( chars_starts_with_c( chars, *any ) ) return true;
    }

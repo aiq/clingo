@@ -82,7 +82,7 @@ bool write_float_num_c( cRecorder rec[static 1],
    }
    valBuf.s = len;
 
-   for_each_c_( char*, c, valBuf )
+   each_c_( char*, c, valBuf )
    {
       if ( *c == '.' or *c == ',' )
          *c = numFmt.decimal;

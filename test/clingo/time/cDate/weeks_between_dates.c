@@ -21,7 +21,7 @@ int main( void )
       t_( a, date_c( 2012, c_May, 15 ),   5 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       int64_t weeks = weeks_between_dates_c( t->a, t->b );
 

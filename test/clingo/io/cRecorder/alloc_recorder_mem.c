@@ -7,15 +7,15 @@ int main( void )
 
    cRecorder* rec = &null_recorder_c_();
 
-   expect_c_( alloc_recorder_mem_c( rec, 5 ) );
-   expect_c_( rec->pos == 0 );
-   expect_c_( rec->space == 5 );
-   expect_c_( rec->mem != NULL );
-   expect_c_( rec->dyn == false );
+   expect_at_c_( alloc_recorder_mem_c( rec, 5 ) );
+   expect_at_c_( rec->pos == 0 );
+   expect_at_c_( rec->space == 5 );
+   expect_at_c_( rec->mem != NULL );
+   expect_at_c_( rec->dyn == false );
 
-   expect_c_( not record_chars_c_( rec, "abcdef" ) ); // to large
+   expect_at_c_( not record_chars_c_( rec, "abcdef" ) ); // to large
 
-   expect_c_( record_chars_c_( rec, "abcde" ) );
+   expect_at_c_( record_chars_c_( rec, "abcde" ) );
 
    free_recorder_mem_c( rec );
 

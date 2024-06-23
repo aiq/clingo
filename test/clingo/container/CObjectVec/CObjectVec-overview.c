@@ -19,7 +19,7 @@ int main( void )
    add_to_object_vec_c( gc, new_int64_set_c() );
    add_to_object_vec_c( gc, new_int64_vec_c() );
 
-   expect_c_( info->count == 5 );
+   expect_at_c_( info->count == 5 );
 
    release_c( gc );
 

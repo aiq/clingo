@@ -22,18 +22,17 @@ int main( void )
       t_( "(256>.)", cell_c_( 256, '>', '.' ) )
    );
 
-   for ( int64_t i = 0; i < tests.s; ++i )
+   for_each_c_( i, test const*, t, tests )
    {
-      test t = tests.v[i];
-      cScanner *sca = &cstr_scanner_c_( t.str );
+      cScanner *sca = &cstr_scanner_c_( t->str );
       cCell cell;
 
       bool res = scan_cell_c( sca, &cell );
-      res &= cell.orient == t.exp.orient;
-      res &= cell.size == t.exp.size;
-      res &= cell.pad == t.exp.pad;
+      res &= cell.orient == t->exp.orient;
+      res &= cell.size == t->exp.size;
+      res &= cell.pad == t->exp.pad;
 
-      tap_desc_c_( res, "test at index {i64}", i );
+      expect_c_( i, res );
    }
 
    return finish_tap_c_();

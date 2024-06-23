@@ -5,7 +5,7 @@ int main( void )
 {
    init_tap_c_();
 
-   expect_c_( swap_uint16_c( 0x2080 ) ==
+   expect_at_c_( swap_uint16_c( 0x2080 ) ==
                              0x8020 );
 
    return finish_tap_c_();

@@ -52,12 +52,12 @@ int main( void )
    {
        cChars chars = as_c_( cChars, buf );
        line l = lines.v[i];
-       expect_c_( chars_is_c( chars, l.str ) );
-       expect_c_( fin == l.fin );
+       expect_at_c_( chars_is_c( chars, l.str ) );
+       expect_at_c_( fin == l.fin );
        ++i;
    }
 
-   expect_c_( feof( file ) != 0 );
+   expect_at_c_( feof( file ) != 0 );
 
    require_c_( close_file_c( file, es ) );
    require_c_( remove_file_c( path, es ) );

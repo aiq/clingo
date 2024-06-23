@@ -28,7 +28,7 @@ int main( void )
       t_( "_2i_+_+_+3z+_+", "zip", "o11o1o1o1o oo1o1", "" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->txt );
 

@@ -29,7 +29,7 @@ int main( void )
           "AlBeGa..ZeEtThIoKaLaMyNy.OmPiRhSi.YpPhChPsOm" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 128 );
 

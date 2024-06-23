@@ -14,7 +14,7 @@ int main( void )
       for ( int64_t index = 0; index < evenSlice.s; ++index )
       {
          int32_t const* ptr = bsearch_int32_c( evenSlice, val );
-         expect_c_( index_of_c_( evenSlice, ptr ) == index );
+         expect_at_c_( index_of_c_( evenSlice, ptr ) == index );
          val += 10;
       }
    }
@@ -26,7 +26,7 @@ int main( void )
       for ( int64_t index = 0; index < oddSlice.s; ++index )
       {
          int32_t const* ptr = bsearch_int32_c( oddSlice, val );
-         expect_c_( index_of_c_( oddSlice, ptr ) == index );
+         expect_at_c_( index_of_c_( oddSlice, ptr ) == index );
          val += 10;
       }
    }

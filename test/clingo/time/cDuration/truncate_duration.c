@@ -36,7 +36,7 @@ int main( void )
           duration_c( 0, 15, 30, 918273645 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDuration tail;
       cDuration dur = truncate_duration_c( t->dur, t->fac, &tail );

@@ -20,7 +20,7 @@ int main( void )
       }
    }
 
-   expect_c_( recorded_is_c( rec, "hello, hello, hello!" ) );
+   expect_at_c_( recorded_is_c( rec, "hello, hello, hello!" ) );
 
    return finish_tap_c_();
 }

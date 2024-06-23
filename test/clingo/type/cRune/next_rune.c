@@ -10,14 +10,14 @@ int main( void )
    char const* itr;
 
    itr = next_rune_c( chars, NULL, &r );
-   expect_c_( rune_is_c( r, "®" ) );
+   expect_at_c_( rune_is_c( r, "®" ) );
 
    itr = next_rune_c( chars, itr, &r );
-   expect_c_( rune_is_c( r, " " ) );
+   expect_at_c_( rune_is_c( r, " " ) );
    expect_eq_c_( strcmp( " yes this is a 𝄞 and €!", itr ) );
 
    itr = next_rune_c( chars, itr, &r );
-   expect_c_( rune_is_c( r, "y" ) );
+   expect_at_c_( rune_is_c( r, "y" ) );
    expect_eq_c_( strcmp( "yes this is a 𝄞 and €!", itr ) );
 
    return finish_tap_c_();

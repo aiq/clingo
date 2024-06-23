@@ -11,13 +11,13 @@ int main( void )
    slice.v[2] = c_c( "" );
    slice.v[3] = c_c( "" );
    
-   expect_c_( count_chars_slice_c( as_c_( cCharsSlice, slice ) ) == 16 );
+   expect_at_c_( count_chars_slice_c( as_c_( cCharsSlice, slice ) ) == 16 );
 
    slice.v[2] = c_c( "€uro" ); // 6
-   expect_c_( count_chars_slice_c( as_c_( cCharsSlice, slice ) ) == 22 );
+   expect_at_c_( count_chars_slice_c( as_c_( cCharsSlice, slice ) ) == 22 );
 
    slice.v[3] = c_c( "🚀" ); // 4
-   expect_c_( count_chars_slice_c( as_c_( cCharsSlice, slice ) ) == 26 );
+   expect_at_c_( count_chars_slice_c( as_c_( cCharsSlice, slice ) ) == 26 );
 
    return finish_tap_c_();
 }

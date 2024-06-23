@@ -447,14 +447,29 @@ Returns a pointer to the element past the last element of the sequence.
 include::{xmpldir}/end.c[]
 ----
 
+[id='each_c_']
+==== each_c_
+[source,c]
+----
+#define each_c_( Type, Itr, Slice )
+----
+
+Macro function to define a for statement to iterate over all elements in Slice.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/each.c[]
+----
+
 [id='for_each_c_']
 ==== for_each_c_
 [source,c]
 ----
-#define for_each_c_( Type, Itr, Slice )
+#define for_each_c_( N, Type, Itr, Slice )
 ----
 
-Macro function to define a for statement to iterate over all elements in Slice.
+Macro function to define a for statement to iterate over all elements in Slice and gives also the index.
 
 .Example
 [source,c]

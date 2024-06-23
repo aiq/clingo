@@ -28,7 +28,7 @@ int main( void )
    record_pad_c( rec, '_', 2 );
    move_recorder_c( rec, 10 );
 
-   expect_c_( recorded_is_c( rec, "__ ++XX++ __" ) );
+   expect_at_c_( recorded_is_c( rec, "__ ++XX++ __" ) );
 
    return finish_tap_c_();
 }

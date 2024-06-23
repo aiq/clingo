@@ -24,7 +24,7 @@ int main( void )
       t_( "2014-DDD.1", "YYYY-DDD.C", ordinal_date_c( 2014, 1 ), cNoError_ )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->inp );
 
@@ -42,7 +42,7 @@ int main( void )
       t_( "", "YYYY-CC", ordinal_date_c( 1970, 1 ), c_NotAbleToReadValue )
    );
 
-   for_each_c_( test const*, t, withErrors )
+   each_c_( test const*, t, withErrors )
    {
       cScanner* sca = &cstr_scanner_c_( t->inp );
 

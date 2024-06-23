@@ -167,7 +167,7 @@ CBitVec* copy_bit_vec_c( CBitVec const* vec )
 CBitVec* bit_vec_from_chars_c( cChars chars )
 {
    int64_t count = 0;
-   for_each_c_( char const*, c, chars )
+   each_c_( char const*, c, chars )
    {
       if ( is_bit_char( *c ) )
       {
@@ -183,7 +183,7 @@ CBitVec* bit_vec_from_chars_c( cChars chars )
    if ( vec == NULL ) return NULL;
 
    int64_t i = 0;
-   for_each_c_( char const*, c, chars )
+   each_c_( char const*, c, chars )
    {
       if ( is_bit_char( *c ) )
       {
@@ -452,7 +452,7 @@ bool bit_vec_is_c( CBitVec* vec, cChars chars )
    int64_t vecSize = bit_vec_size_c( vec );
 
    int64_t i = 0;
-   for_each_c_( char const*, c, chars )
+   each_c_( char const*, c, chars )
    {
       if( *c == 'o' or *c == '0' or *c == '1' )
       {

@@ -19,7 +19,7 @@ int main( void )
       t_( "..!Hello, clingo!..", "!.", "Hello, clingo!.." )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cChars cs = trim_any_char_left_c_( c_c( t->inp ), t->set );
       bool res = chars_is_c( cs, t->exp );

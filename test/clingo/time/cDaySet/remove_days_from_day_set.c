@@ -16,16 +16,16 @@ int main( void )
    set_date_period_on_day_set_c( dirty, p2 );
 
    remove_days_from_day_set_c( daySet, dirty );
-   expect_c_( count_days_c( daySet ) == 4 );
-   expect_c_( in_day_set_c( daySet, date_c( 2014, 12, 1 ) ) );
-   expect_c_( in_day_set_c( daySet, date_c( 2014, 12, 3 ) ) );
-   expect_c_( in_day_set_c( daySet, date_c( 2014, 12, 6 ) ) );
-   expect_c_( in_day_set_c( daySet, date_c( 2014, 12, 9 ) ) );
+   expect_at_c_( count_days_c( daySet ) == 4 );
+   expect_at_c_( in_day_set_c( daySet, date_c( 2014, 12, 1 ) ) );
+   expect_at_c_( in_day_set_c( daySet, date_c( 2014, 12, 3 ) ) );
+   expect_at_c_( in_day_set_c( daySet, date_c( 2014, 12, 6 ) ) );
+   expect_at_c_( in_day_set_c( daySet, date_c( 2014, 12, 9 ) ) );
 
    CDaySet* empty = new_day_set_c();
 
    remove_days_from_day_set_c( daySet, empty );
-   expect_c_( count_days_c( daySet ) == 4 );
+   expect_at_c_( count_days_c( daySet ) == 4 );
 
    release_all_c_( daySet, dirty, empty );
 

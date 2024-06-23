@@ -13,10 +13,10 @@ int main( void )
    set_if_c_( slice3, 2, 30 );
    set_if_c_( slice3, 3, 40 ); // out of slice range
 
-   expect_c_( slice4.v[ 0 ] == 10 );
-   expect_c_( slice4.v[ 1 ] == 20 );
-   expect_c_( slice4.v[ 2 ] == 30 );
-   expect_c_( slice4.v[ 3 ] == 44 ); // not set
+   expect_at_c_( slice4.v[ 0 ] == 10 );
+   expect_at_c_( slice4.v[ 1 ] == 20 );
+   expect_at_c_( slice4.v[ 2 ] == 30 );
+   expect_at_c_( slice4.v[ 3 ] == 44 ); // not set
 
    return finish_tap_c_();
 }

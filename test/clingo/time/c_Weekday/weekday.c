@@ -24,7 +24,7 @@ int main( void )
       t_( 2012, c_Apr,  8, c_Sun )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       bool res = weekday_c( t->year, t->month, t->day ) == t->exp;
 

@@ -23,7 +23,7 @@ int main( void )
           date_c( 1983, c_Dec, 1 ), daytime_c(  2, 34, 56, 0 ), tz_c( +400 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 32 );
 

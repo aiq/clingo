@@ -14,10 +14,10 @@ int main( void )
    cChars fire = right_c_( cChars, chars, 4 );
    cChars windAndFire = mid_c_( cChars, chars, 7 );
 
-   expect_c_( is_sub_c_( chars, earth ) );
-   expect_c_( is_sub_c_( chars, wind ) );
-   expect_c_( is_sub_c_( chars, fire ) );
-   expect_c_( is_sub_c_( chars, windAndFire ) );
+   expect_at_c_( is_sub_c_( chars, earth ) );
+   expect_at_c_( is_sub_c_( chars, wind ) );
+   expect_at_c_( is_sub_c_( chars, fire ) );
+   expect_at_c_( is_sub_c_( chars, windAndFire ) );
 
    return finish_tap_c_();
 }

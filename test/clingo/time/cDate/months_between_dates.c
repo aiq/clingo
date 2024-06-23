@@ -25,7 +25,7 @@ int main( void )
       t_( a, date_c( 2014, c_Dec,  1 ),  31 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       int64_t months = months_between_dates_c( t->a, t->b );
 

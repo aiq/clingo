@@ -7,7 +7,7 @@ int main( void )
 
    CBitVec* vec = new_bit_vec_c( 15 );
 
-   expect_c_( bit_vec_is_c_( vec, "0000 0000 0000 000" ) );
+   expect_at_c_( bit_vec_is_c_( vec, "0000 0000 0000 000" ) );
 
    set_on_bit_vec_c( vec, 0, 1 );
    set_on_bit_vec_c( vec, 3, 1 );
@@ -17,11 +17,11 @@ int main( void )
    set_on_bit_vec_c( vec, 11, 1 );
    set_on_bit_vec_c( vec, 14, 1 );
 
-   expect_c_( bit_vec_is_c_( vec, "1001 1001 0011 001" ) );
+   expect_at_c_( bit_vec_is_c_( vec, "1001 1001 0011 001" ) );
 
    set_on_bit_vec_c( vec, 19, 1 );
 
-   expect_c_( bit_vec_is_c_( vec, "1001 1001 0011 0010 0001" ) );
+   expect_at_c_( bit_vec_is_c_( vec, "1001 1001 0011 0010 0001" ) );
    
    release_c( vec );
 

@@ -9,11 +9,11 @@ int main( void )
 
    // ----------------------------------------------------------------- uint16_t
    uint16_t u16 = 255;  // UINT8_MAX
-   expect_c_( uint64_to_uint8_c( u16, &u8 ) );
-   expect_c_( u8 == 255 );
+   expect_at_c_( uint64_to_uint8_c( u16, &u8 ) );
+   expect_at_c_( u8 == 255 );
 
    ++u16;   // 256
-   expect_c_( not uint64_to_uint8_c( u16, &u8 ) );
+   expect_at_c_( not uint64_to_uint8_c( u16, &u8 ) );
 
    return finish_tap_c_();
 }

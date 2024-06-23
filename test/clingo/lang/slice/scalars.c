@@ -11,10 +11,10 @@ int main( void )
    slice.v[ 1 ] = 100;
    slice.v[ 2 ] = 200;
 
-   expect_c_( slice.s == 3 );
-   expect_c_( slice.v[ 0 ] == -10 );
-   expect_c_( slice.v[ 1 ] == 100 );
-   expect_c_( slice.v[ 2 ] == 200 );
+   expect_at_c_( slice.s == 3 );
+   expect_at_c_( slice.v[ 0 ] == -10 );
+   expect_at_c_( slice.v[ 1 ] == 100 );
+   expect_at_c_( slice.v[ 2 ] == 200 );
 
    // wrong code we acces the memory outside the array
    // slice.v[ 3 ] = 999;

@@ -29,7 +29,7 @@ int main( void )
       t_( wd, "XX/WW/PPP", "14/W7/PPP", cNoError_ )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 32 );
 
@@ -44,7 +44,7 @@ int main( void )
       t_( wd, "XX/W", "", c_InvalidWriteFormat )
    );
 
-   for_each_c_( test const*, t, withErrors )
+   each_c_( test const*, t, withErrors )
    {
       cRecorder* rec = &recorder_c_( 32 );
 

@@ -4,7 +4,7 @@
 
 #define expect_recorded_( Rec, Exp )                                           \
 {                                                                              \
-   expect_c_(                                                                  \
+   expect_at_c_(                                                                  \
       recorded_is_c( (Rec), (Exp) )                                            \
    );                                                                          \
    reset_recorder_c( Rec );                                                    \
@@ -18,21 +18,21 @@ int main( void )
    void const* mem = es->mem;
 
    reset_error_stack_c( es );
-   expect_c_( mem == es->mem );
+   expect_at_c_( mem == es->mem );
 
    push_error_c_( es, &C_Eof );
-   expect_c_( mem != es->mem );
+   expect_at_c_( mem != es->mem );
 
    reset_error_stack_c( es );
-   expect_c_( mem == es->mem );
+   expect_at_c_( mem == es->mem );
 
    push_lit_error_c( es, "file error" );
    push_invalid_value_error_c( es, "other type" );
    push_error_c_( es, &C_Eof );
-   expect_c_( mem != es->mem );
+   expect_at_c_( mem != es->mem );
 
    reset_error_stack_c( es );
-   expect_c_( mem == es->mem );
+   expect_at_c_( mem == es->mem );
 
    return finish_tap_c_();
 }

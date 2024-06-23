@@ -3,7 +3,7 @@
 #include "clingo/type/char.h" // qsort_chars_c
 
 #define expect_( VarChars, Exp )                                               \
-   expect_c_(                                                                  \
+   expect_at_c_(                                                                  \
       chars_is_c( as_c_( cChars, VarChars ), (Exp) )                           \
    )
 
@@ -33,7 +33,7 @@ int main( void )
 
    qsort_chars_c( abcx4 );
 
-   expect_c_( recorded_is_c( rec, "aaaabbbbccccddddeeeeffffgggghhhhiiii"
+   expect_at_c_( recorded_is_c( rec, "aaaabbbbccccddddeeeeffffgggghhhhiiii"
                                   "jjjjkkkkllllmmmmnnnnooooppppqqqq"
                                   "rrrrssssttttuuuuvvvvwwwwxxxxyyyyzzzz" ) );
 

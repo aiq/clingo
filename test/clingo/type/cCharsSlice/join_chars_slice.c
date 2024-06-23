@@ -2,7 +2,7 @@
 #include "clingo/type/cCharsSlice.h"
 
 #define expect_( Res, Exp )                                                    \
-   expect_c_( chars_is_c( (Res), (Exp) ) )
+   expect_at_c_( chars_is_c( (Res), (Exp) ) )
 
 int main( void )
 {

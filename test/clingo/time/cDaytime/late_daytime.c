@@ -9,8 +9,8 @@ int main( void )
    cDaytime b = daytime_c_( 13, 37, 58 );
    cDaytime n = null_daytime_c();
 
-   expect_c_( eq_daytime_c( late_daytime_c( a, b ), a ) );
-   expect_c_( eq_daytime_c( late_daytime_c( n, b ), b ) );
+   expect_at_c_( eq_daytime_c( late_daytime_c( a, b ), a ) );
+   expect_at_c_( eq_daytime_c( late_daytime_c( n, b ), b ) );
 
    return finish_tap_c_();
 }

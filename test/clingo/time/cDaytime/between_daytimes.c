@@ -11,8 +11,8 @@ int main( void )
    cDuration dur = duration_c( 7, 42, 39, 0 );
    cDuration rud = invert_duration_c( dur );
 
-   expect_c_( eq_duration_c( between_daytimes_c( a, b ), rud ) );
-   expect_c_( eq_duration_c( between_daytimes_c( b, a ), dur ) );
+   expect_at_c_( eq_duration_c( between_daytimes_c( a, b ), rud ) );
+   expect_at_c_( eq_duration_c( between_daytimes_c( b, a ), dur ) );
 
    return finish_tap_c_();
 }

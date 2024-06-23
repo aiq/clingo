@@ -21,7 +21,7 @@ int main( void )
       t_( "ананас", 0, "" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cChars chars = c_c( t->input );
       cChars left = left_runes_c( chars, t->maxLen );

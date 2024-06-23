@@ -2,7 +2,7 @@
 #include "clingo/type/cChars.h" // take_char_c
 
 #define expect_( VarSlice, Cstr )                                              \
-   expect_c_(                                                                  \
+   expect_at_c_(                                                                  \
       chars_is_c( as_c_( cChars, (VarSlice) ), (Cstr) )                        \
    )
 
@@ -16,15 +16,15 @@ int main( void )
    char val;
    take_char_c( &slice, 5, &val );
    expect_( slice, "+ab-c" );
-   expect_c_( val == 'x' );
+   expect_at_c_( val == 'x' );
 
    take_char_c( &slice, 0, &val );
    expect_( slice, "ab-c" );
-   expect_c_( val == '+' );
+   expect_at_c_( val == '+' );
 
    take_char_c( &slice, 2, &val );
    expect_( slice, "abc" );
-   expect_c_( val == '-' );
+   expect_at_c_( val == '-' );
 
    return finish_tap_c_();
 }

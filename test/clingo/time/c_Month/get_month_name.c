@@ -33,7 +33,7 @@ int main( void )
       t_( c_Dec, "December" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cVarChars varChars = scalars_c_( 16, char );
       varChars = get_month_name_c( t->month, varChars );

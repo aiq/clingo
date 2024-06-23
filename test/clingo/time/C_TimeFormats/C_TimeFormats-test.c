@@ -30,7 +30,7 @@ int main( void )
       t_( time, C_Rfc3339TimeNano,  "2006-01-02T15:04:05.0-07:00" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 64 );
 

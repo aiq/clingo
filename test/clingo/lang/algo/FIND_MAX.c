@@ -8,8 +8,8 @@ int main( void )
    cInt32Slice slice = slice_c_( int32_t, 50, 123456, 99, 123456, -65 );
 
    int32_t const* max = max_int32_c( slice );
-   expect_c_( index_of_c_( slice, max ) == 1 );
-   expect_c_( *max == 123456 );
+   expect_at_c_( index_of_c_( slice, max ) == 1 );
+   expect_at_c_( *max == 123456 );
 
    return finish_tap_c_();
 }

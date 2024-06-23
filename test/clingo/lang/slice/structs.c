@@ -27,13 +27,13 @@ int main( void )
    slice.v[ 2 ].x = -55;
    slice.v[ 2 ].y = 666;
 
-   expect_c_( slice.s == 3 );
-   expect_c_( slice.v[ 0 ].x ==    1 );
-   expect_c_( slice.v[ 0 ].y ==  200 );
-   expect_c_( slice.v[ 1 ].x == 3000 );
-   expect_c_( slice.v[ 1 ].y ==   44 );
-   expect_c_( slice.v[ 2 ].x ==  -55 );
-   expect_c_( slice.v[ 2 ].y ==  666 );
+   expect_at_c_( slice.s == 3 );
+   expect_at_c_( slice.v[ 0 ].x ==    1 );
+   expect_at_c_( slice.v[ 0 ].y ==  200 );
+   expect_at_c_( slice.v[ 1 ].x == 3000 );
+   expect_at_c_( slice.v[ 1 ].y ==   44 );
+   expect_at_c_( slice.v[ 2 ].x ==  -55 );
+   expect_at_c_( slice.v[ 2 ].y ==  666 );
 
    // wrong code we acces the memory outside the array
    // slice.v[ 3 ] = (Point){ .x=999 };

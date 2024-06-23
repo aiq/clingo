@@ -39,7 +39,7 @@ int main( void )
       t_( ymd_c( 2008, c_Sep, 26 ), week_date_c( 2008, 39, c_Fri ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 32 );
       write_week_date_c_( rec, t->wd );

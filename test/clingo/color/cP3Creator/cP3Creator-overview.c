@@ -80,7 +80,7 @@ int main( void )
 
    cVarChars p3 = read_text_file_c( path, es );
 
-   expect_c_( chars_is_c( as_c_( cChars, p3 ), expP3 ) );
+   expect_at_c_( chars_is_c( as_c_( cChars, p3 ), expP3 ) );
 
    remove_file_c( path, es );
    free_all_c_( varImage.data, p3.v );

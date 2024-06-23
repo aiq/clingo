@@ -23,7 +23,7 @@ int main( void )
       t_( "03:04:15.0 pm", "kk:mm:ss.u ap", hmsn_c( 15, 4, 15, 0 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->str );
 

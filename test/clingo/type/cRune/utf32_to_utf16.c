@@ -21,12 +21,12 @@ int main( void )
       t_( 0x2605, 0x2605, 0x0 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       uint16_t low = 0;
       uint16_t high = utf32_to_utf16_c( t->inp, &low );
-      expect_c_( t->val == high );
-      expect_c_( t->low == low );
+      expect_at_c_( t->val == high );
+      expect_at_c_( t->low == low );
    }
 
    return finish_tap_c_();

@@ -3,7 +3,7 @@
 #include "clingo/type/cCharsSlice.h"
 
 #define expect_( Rec, Exp )                                                    \
-   expect_c_( recorded_is_c( (Rec), (Exp) ) )
+   expect_at_c_( recorded_is_c( (Rec), (Exp) ) )
 
 int main( void )
 {
@@ -13,15 +13,15 @@ int main( void )
 
    cCharsSlice slice = cs_c_( "abc", "def", "gh", "ij", "klmn", "opq" );
 
-   expect_c_( record_chars_slice_c_( rec, slice, "" ) );
+   expect_at_c_( record_chars_slice_c_( rec, slice, "" ) );
    expect_( rec, "abcdefghijklmnopq" );
    reset_recorder_c( rec );
 
-   expect_c_( record_chars_slice_c_( rec, slice, "-" ) );
+   expect_at_c_( record_chars_slice_c_( rec, slice, "-" ) );
    expect_( rec, "abc-def-gh-ij-klmn-opq" );
    reset_recorder_c( rec );
 
-   expect_c_( record_chars_slice_c_( rec, slice, " - " ) );
+   expect_at_c_( record_chars_slice_c_( rec, slice, " - " ) );
    expect_( rec, "abc - def - gh - ij - klmn - opq" );
    reset_recorder_c( rec );
 

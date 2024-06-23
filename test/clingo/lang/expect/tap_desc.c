@@ -36,7 +36,7 @@ int main( void )
    expect_line_( tok, "not ok 4 - 1 description about tests" );
    expect_line_( tok, "1..4" );
    expect_line_( tok, "" );
-   expect_c_( not next_line_token_c( tok ) );
+   expect_at_c_( not next_line_token_c( tok ) );
 
    return finish_tap_c_();
 }

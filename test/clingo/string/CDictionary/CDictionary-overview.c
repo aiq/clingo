@@ -23,7 +23,7 @@ int main( void )
       i_( lit_c( "France" ), lit_c( "Frankreich" ) ),
       i_( lit_c( "Germany" ), lit_c( "Alemania" ) )
    );
-   for_each_c_( input const* ,i, inputs )
+   each_c_( input const* ,i, inputs )
    {
       require_c_( i->k and i->v );
       require_c_( set_on_dictionary_c( dict, i->k, i->v ) );

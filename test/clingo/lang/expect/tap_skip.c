@@ -32,7 +32,7 @@ int main( void )
    expect_line_( tok, "not ok 2 # SKIP " );
    expect_line_( tok, "1..2" );
    expect_line_( tok, "" );
-   expect_c_( not next_line_token_c( tok ) );
+   expect_at_c_( not next_line_token_c( tok ) );
 
    return finish_tap_c_();
 }

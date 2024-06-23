@@ -28,11 +28,11 @@ int main( void )
       t_( base, rgb_color_c( 0x0000ff ), rgb_color_c( 0x0000ff ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   for_each_c_( i, test const*, t, tests )
    {
       cColor hard = hardlight_color_c( t->a, t->b );
       bool res = eq_color_c( hard, t->exp );
-      expect_c_( res );
+      expect_c_( i, res );
    }
 
    return finish_tap_c_();

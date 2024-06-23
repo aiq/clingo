@@ -23,7 +23,7 @@ int main( void )
       t_( "129038.213", "", 129038.213, 0.00001 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->str );
       double d = 0.0;

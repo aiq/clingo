@@ -28,7 +28,7 @@ int main( void )
       t_( "I am müller", "{[+ z}", "I am m", "üller" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->str );
       cChars chars = (cChars)empty_c_();

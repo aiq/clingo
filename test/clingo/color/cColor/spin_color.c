@@ -20,11 +20,11 @@ int main( void )
       t_( from_hsl_c_( 10.0f, 0.9f, 0.5f ), -20.0f, rgb_color_c( 0xf20d33 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   for_each_c_( i, test const*, t, tests )
    {
       cColor spinned = spin_color_c( t->color, t->angle );
       bool res = eq_color_c( spinned, t->exp );
-      expect_c_( res );
+      expect_c_( i, res );
    }
 
    return finish_tap_c_();

@@ -12,9 +12,9 @@ int main( void )
    cDatePeriod p3 = date_period_c( date_c( 2014, 3, 12 ),
                                    date_c( 2014, 3, 20 ) );
 
-   expect_c_(  date_periods_overlap_c( p1, p2 ) );
-   expect_c_(  date_periods_overlap_c( p2, p3 ) );
-   expect_c_( !date_periods_overlap_c( p1, p3 ) );
+   expect_at_c_(  date_periods_overlap_c( p1, p2 ) );
+   expect_at_c_(  date_periods_overlap_c( p2, p3 ) );
+   expect_at_c_( !date_periods_overlap_c( p1, p3 ) );
 
    return finish_tap_c_();
 }

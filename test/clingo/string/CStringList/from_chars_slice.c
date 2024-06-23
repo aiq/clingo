@@ -9,7 +9,7 @@ int main( void )
    CStringList* list = from_chars_slice_c( slice );
 
    CString* str = join_string_list_c_( list, "." );
-   expect_c_( string_is_c( str, "abc.def.gh.ij.klmn.opq" ) );
+   expect_at_c_( string_is_c( str, "abc.def.gh.ij.klmn.opq" ) );
 
    release_all_c_( list, str );
 

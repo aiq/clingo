@@ -21,7 +21,7 @@ int main( void )
       t_( a, date_c( 2012, c_May, 11 ),  33 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       int64_t days = days_between_dates_c( t->a, t->b );
 

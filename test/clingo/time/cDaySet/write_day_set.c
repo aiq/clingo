@@ -40,7 +40,7 @@ int main( void )
                   "2021.07:    .1 1. .11.. .1 ..... .. ..... .. ..... .\n" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 1024 );
 

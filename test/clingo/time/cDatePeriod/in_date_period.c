@@ -8,12 +8,12 @@ int main( void )
    cDatePeriod period = date_period_c( date_c( 2014, 3, 3 ),
                                        date_c( 2014, 3, 9 ) );
 
-   expect_c_( !in_date_period_c( period, null_date_c() ) );
-   expect_c_( !in_date_period_c( period, date_c( 2014, 3,  2 ) ) );
-   expect_c_(  in_date_period_c( period, date_c( 2014, 3,  3 ) ) );
-   expect_c_(  in_date_period_c( period, date_c( 2014, 3,  5 ) ) );
-   expect_c_(  in_date_period_c( period, date_c( 2014, 3,  9 ) ) );
-   expect_c_( !in_date_period_c( period, date_c( 2014, 3, 10 ) ) );
+   expect_at_c_( !in_date_period_c( period, null_date_c() ) );
+   expect_at_c_( !in_date_period_c( period, date_c( 2014, 3,  2 ) ) );
+   expect_at_c_(  in_date_period_c( period, date_c( 2014, 3,  3 ) ) );
+   expect_at_c_(  in_date_period_c( period, date_c( 2014, 3,  5 ) ) );
+   expect_at_c_(  in_date_period_c( period, date_c( 2014, 3,  9 ) ) );
+   expect_at_c_( !in_date_period_c( period, date_c( 2014, 3, 10 ) ) );
 
    return finish_tap_c_();
 }

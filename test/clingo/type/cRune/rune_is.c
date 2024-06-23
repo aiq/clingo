@@ -7,8 +7,8 @@ int main( void )
 
    cRune umbrella = rune_c( "☂" );
 
-   expect_c_(  rune_is_c( umbrella, "☂" ) );
-   expect_c_( !rune_is_c( umbrella, "y" ) );
+   expect_at_c_(  rune_is_c( umbrella, "☂" ) );
+   expect_at_c_( !rune_is_c( umbrella, "y" ) );
 
    return finish_tap_c_();
 }

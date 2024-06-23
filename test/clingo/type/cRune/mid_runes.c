@@ -21,7 +21,7 @@ int main( void )
       t_( "ананас", 6, "" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cChars chars = c_c( t->input );
       cChars mid = mid_runes_c( chars, t->index );

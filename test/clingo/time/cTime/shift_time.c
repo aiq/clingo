@@ -21,7 +21,7 @@ int main( void )
           tz_c( +200 ), date_c( 2021, c_Jun, 13 ), daytime_c( 1, 0, 0, 0 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cTime time = shift_time_c( t->time, t->tz );
       bool res = eq_date_c( get_date_c( time ), t->date ) and

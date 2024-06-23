@@ -19,8 +19,8 @@ int main( void )
          ++count;
          record_rune_c( rec, rune );
       }
-      expect_c_( count == 9 );
-      expect_c_( recorded_is_c( rec, "a ☀, no ☂" ) );
+      expect_at_c_( count == 9 );
+      expect_at_c_( recorded_is_c( rec, "a ☀, no ☂" ) );
       reset_recorder_c( rec );
    }
 
@@ -35,8 +35,8 @@ int main( void )
          ++count;
          record_rune_c( rec, rune );
       }
-      expect_c_( count == 8 );
-      expect_c_( recorded_is_c( rec, "a ☀, no " ) );
+      expect_at_c_( count == 8 );
+      expect_at_c_( recorded_is_c( rec, "a ☀, no " ) );
       reset_recorder_c( rec );
    }
 

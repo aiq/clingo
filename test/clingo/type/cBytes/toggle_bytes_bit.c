@@ -14,8 +14,8 @@ int main( void )
    toggle_bytes_bit_c( slice, 10 );
    toggle_bytes_bit_c( slice, 13 );
 
-   expect_c_( slice.v[ 0 ] == 0xa2 ); // 0-7   -> 1010 0010
-   expect_c_( slice.v[ 1 ] == 0xdb ); // 8-15  -> 1101 1011
+   expect_at_c_( slice.v[ 0 ] == 0xa2 ); // 0-7   -> 1010 0010
+   expect_at_c_( slice.v[ 1 ] == 0xdb ); // 8-15  -> 1101 1011
 
    return finish_tap_c_();
 }

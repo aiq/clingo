@@ -31,7 +31,7 @@ bool add_chars_slice_to_string_list_c( CStringList* list, cCharsSlice slice )
 
    int64_t n = 0;
    bool ok = true;
-   for_each_c_( cChars const*, chars, slice )
+   each_c_( cChars const*, chars, slice )
    {
       CString* str = retain_c( make_string_c( *chars ) );
       ok = ( str != NULL );

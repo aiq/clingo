@@ -28,7 +28,7 @@ int main( void )
       t_( c_Sun, "Sunday" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cVarChars varChars = scalars_c_( 16, char );
       varChars = get_weekday_name_c( t->wd, varChars );

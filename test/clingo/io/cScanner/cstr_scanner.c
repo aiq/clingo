@@ -8,7 +8,7 @@ int main( void )
    cScanner* sca = &cstr_scanner_c_( "scan a string" );
 
    cChars chars = unscanned_chars_c_( sca );
-   expect_c_( chars_is_c( chars, "scan a string" ) );
+   expect_at_c_( chars_is_c( chars, "scan a string" ) );
 
    return finish_tap_c_();
 }

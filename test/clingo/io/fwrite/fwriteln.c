@@ -31,7 +31,7 @@ int main( void )
 
    file = open_file_c( path, "rb", es );
    require_c_( file != NULL );
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cVarChars buf = var_chars_c_( 128 );
       bool fin = false;

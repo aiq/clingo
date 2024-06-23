@@ -25,7 +25,7 @@ int main( void )
       t_( c_Sun, "c_Sun" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cChars chars = c_c( stringify_weekday_c( t->wd ) );
       bool res = chars_is_c( chars, t->exp );

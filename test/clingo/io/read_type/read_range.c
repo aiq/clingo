@@ -21,7 +21,7 @@ int main( void )
       t_( "(64..256)", open_range_c_( 64, 256 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->str );
 

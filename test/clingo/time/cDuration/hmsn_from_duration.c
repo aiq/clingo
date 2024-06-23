@@ -23,7 +23,7 @@ int main( void )
           hmsn_c( -2, -34, -56, -987654321 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cHmsn x = hmsn_from_duration_c( t->dur );
 

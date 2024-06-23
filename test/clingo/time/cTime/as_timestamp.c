@@ -22,10 +22,10 @@ int main( void )
           unix_timestamp_c( secs_c( 978307200 ) ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cTimestamp res = as_timestamp_c( t->inp );
-      expect_c_( eq_timestamp_c( res, t->exp ) );
+      expect_at_c_( eq_timestamp_c( res, t->exp ) );
    }
 
    return finish_tap_c_();

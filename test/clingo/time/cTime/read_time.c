@@ -23,7 +23,7 @@ int main( void )
           make_time_c( 2021, c_Jun, 12, 0, 0, 0, 0, utc_c() ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->inp );
 

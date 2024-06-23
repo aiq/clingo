@@ -133,7 +133,7 @@ bool move_if_any_chars_c( cScanner sca[static 1], cCharsSlice slice )
    must_exist_c_( sca );
 
    cChars unscanned = unscanned_chars_c_( sca );
-   for_each_c_( cChars const*, any, slice )
+   each_c_( cChars const*, any, slice )
    {
       if ( chars_starts_with_c( unscanned, *any ) )
       {

@@ -30,7 +30,7 @@ int main( void )
       t_( c_Dec, 31, 31 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       char const* monthStr = stringify_month_c( t->month );
       int8_t days;

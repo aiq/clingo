@@ -17,11 +17,11 @@ int main( void )
                                    date_c( 2014, 12, 5 ),
                                    date_c( 2014, 12, 9 ) );
 
-   expect_c_( days_in_day_set_c( fullSet, subSet ) );
-   expect_c_( not days_in_day_set_c( subSet, fullSet ) );
+   expect_at_c_( days_in_day_set_c( fullSet, subSet ) );
+   expect_at_c_( not days_in_day_set_c( subSet, fullSet ) );
 
    CDaySet* emptySet = new_day_set_c();
-   expect_c_( days_in_day_set_c( fullSet, emptySet ) );
+   expect_at_c_( days_in_day_set_c( fullSet, emptySet ) );
 
    release_all_c_( fullSet, subSet, emptySet );
 

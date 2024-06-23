@@ -23,7 +23,7 @@ int main( void )
       t_( 0.1, false )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       float f;
       bool res = double_to_float_c( t->d, &f );

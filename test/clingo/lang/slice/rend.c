@@ -9,19 +9,19 @@ int main( void )
    cChars abc = c_c( "xabc" );
    abc.v++;
    abc.s--;
-   expect_c_( *rend_c_( abc ) == 'x' );
+   expect_at_c_( *rend_c_( abc ) == 'x' );
 
    char const* itr = rend_c_( abc );
-   expect_c_( *itr == 'x' );
+   expect_at_c_( *itr == 'x' );
 
    itr++;
-   expect_c_( *itr == 'a' );
+   expect_at_c_( *itr == 'a' );
 
    itr++;
-   expect_c_( *itr == 'b' );
+   expect_at_c_( *itr == 'b' );
 
    itr++;
-   expect_c_( itr == rbegin_c_( abc ) );
+   expect_at_c_( itr == rbegin_c_( abc ) );
 
    return finish_tap_c_();
 }

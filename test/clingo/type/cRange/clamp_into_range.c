@@ -7,8 +7,8 @@ int main( void )
 
    cRange range = { .min = 6, .max = 99 };
 
-   expect_c_( clamp_into_range_c( range, 1 ) == 6 );
-   expect_c_( clamp_into_range_c( range, 128 ) == 99 );
+   expect_at_c_( clamp_into_range_c( range, 1 ) == 6 );
+   expect_at_c_( clamp_into_range_c( range, 128 ) == 99 );
 
    return finish_tap_c_();
 }

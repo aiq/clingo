@@ -31,11 +31,11 @@ int main( void )
       )
    );
 
-   for_each_c_( test const*, t, tests )
+   for_each_c_( i, test const*, t, tests )
    {
       cColor mixed = mix_color_c( t->color, t->extra, t->weight );
       bool res = eq_color_c( mixed, t->exp );
-      expect_c_( res );
+      expect_c_( i, res );
    }
 
    return finish_tap_c_();

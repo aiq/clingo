@@ -5,11 +5,11 @@ int main( void )
 {
    init_tap_c_();
 
-   expect_c_(  ordinal_date_is_valid_c( ordinal_date_c( 2014, 365 ) ) );
-   expect_c_( !ordinal_date_is_valid_c( ordinal_date_c( 2014, 366 ) ) );
+   expect_at_c_(  ordinal_date_is_valid_c( ordinal_date_c( 2014, 365 ) ) );
+   expect_at_c_( !ordinal_date_is_valid_c( ordinal_date_c( 2014, 366 ) ) );
 
-   expect_c_(  ordinal_date_is_valid_c( ordinal_date_c( 2012, 366 ) ) );
-   expect_c_( !ordinal_date_is_valid_c( ordinal_date_c( 2012, 367 ) ) );
+   expect_at_c_(  ordinal_date_is_valid_c( ordinal_date_c( 2012, 366 ) ) );
+   expect_at_c_( !ordinal_date_is_valid_c( ordinal_date_c( 2012, 367 ) ) );
 
    return finish_tap_c_();
 }

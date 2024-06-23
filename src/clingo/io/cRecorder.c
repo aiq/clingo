@@ -263,7 +263,7 @@ util
 void print_recorded_c( cRecorder rec[static 1] )
 {
    cChars recorded = recorded_chars_c( rec );
-   for_each_c_( char const*, c, recorded )
+   each_c_( char const*, c, recorded )
    {
       putchar( *c );
    }

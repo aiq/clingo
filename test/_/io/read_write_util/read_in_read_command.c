@@ -29,7 +29,7 @@ int main( void )
       tr_( "{[+ z}", '[', '+', rune_range_c( " ", "z" ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->inp );
       cReadCommand cmd;

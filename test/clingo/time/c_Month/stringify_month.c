@@ -29,7 +29,7 @@ int main( void )
       t_( c_Dec, "c_Dec" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cChars chars = c_c( stringify_month_c( t->month ) );
       bool res = chars_is_c( chars, t->exp );

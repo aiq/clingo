@@ -9,13 +9,13 @@ int main( void )
 
    add_cstr_to_string_list_c( list, "simple" ); // 6
    add_cstr_to_string_list_c( list, "ascii text" ); // 10
-   expect_c_( count_string_list_chars_c( list ) == 16 );
+   expect_at_c_( count_string_list_chars_c( list ) == 16 );
 
    add_cstr_to_string_list_c( list, "€uro" ); // 6
-   expect_c_( count_string_list_chars_c( list ) == 22 );
+   expect_at_c_( count_string_list_chars_c( list ) == 22 );
 
    add_cstr_to_string_list_c( list, "🚀" ); // 4
-   expect_c_( count_string_list_chars_c( list ) == 26 );
+   expect_at_c_( count_string_list_chars_c( list ) == 26 );
 
    release_c( list );
 

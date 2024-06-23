@@ -7,7 +7,7 @@ int main( void )
 
    #define foo 123
    #define bar 789
-   expect_c_( xconcat2_c_( foo, bar ) == 123789 );
+   expect_at_c_( xconcat2_c_( foo, bar ) == 123789 );
 
    return finish_tap_c_();
 }

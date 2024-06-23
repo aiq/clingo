@@ -13,8 +13,8 @@ int main( void )
 
    CString* str = adopt_cstr_c( cstr );
 
-   expect_c_( string_is_c( str, "abc" ) );
-   expect_c_( scstr_c( str ) == cstr );
+   expect_at_c_( string_is_c( str, "abc" ) );
+   expect_at_c_( scstr_c( str ) == cstr );
 
    release_c( str );
 

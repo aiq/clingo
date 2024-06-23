@@ -11,10 +11,10 @@ int main( void )
 
    xor_bytes_c( a, b, result );
 
-   expect_c_( result.v[ 0 ] == 0x1f );
-   expect_c_( result.v[ 1 ] == 0x9e );
-   expect_c_( result.v[ 2 ] == 0x52 );
-   expect_c_( result.v[ 3 ] == 0xd3 );
+   expect_at_c_( result.v[ 0 ] == 0x1f );
+   expect_at_c_( result.v[ 1 ] == 0x9e );
+   expect_at_c_( result.v[ 2 ] == 0x52 );
+   expect_at_c_( result.v[ 3 ] == 0xd3 );
 
    return finish_tap_c_();
 }

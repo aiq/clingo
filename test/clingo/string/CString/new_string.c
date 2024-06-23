@@ -9,8 +9,8 @@ int main( void )
 
    CString* str = new_string_c( cstr );
 
-   expect_c_( string_is_c( str, "a string text" ) );
-   expect_c_( scstr_c( str ) != cstr );
+   expect_at_c_( string_is_c( str, "a string text" ) );
+   expect_at_c_( scstr_c( str ) != cstr );
 
    release_c( str );
 

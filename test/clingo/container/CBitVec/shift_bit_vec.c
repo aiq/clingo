@@ -2,7 +2,7 @@
 #include "clingo/lang/expect.h"
 
 #define expect_( Vec, BinStr )                                                 \
-   expect_c_( bit_vec_is_c_( (Vec), (BinStr) ) )
+   expect_at_c_( bit_vec_is_c_( (Vec), (BinStr) ) )
 
 int main( void )
 {
@@ -10,7 +10,7 @@ int main( void )
 
    { // ------------------------------------------------------------ short shift
       CBitVec* vec = bit_vec_from_cstr_c( "00010111" );
-      expect_c_( bit_vec_size_c( vec ) == 8 );
+      expect_at_c_( bit_vec_size_c( vec ) == 8 );
 
       shift_bit_vec_c( vec, -1, 0 );
       expect_( vec, "00101110" );
@@ -29,7 +29,7 @@ int main( void )
    { // -------------------------------------------------------------- big shift
       CBitVec* vec = bit_vec_from_cstr_c( "00001111 00001111 00001111"
                                           "00001111 00001111 0000" );
-      expect_c_( bit_vec_size_c( vec ) == 44 );
+      expect_at_c_( bit_vec_size_c( vec ) == 44 );
 
       shift_bit_vec_c( vec, -5, 1 );
       expect_( vec, "11100001 11100001 11100001"

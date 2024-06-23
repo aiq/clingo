@@ -11,10 +11,10 @@ int main( void )
 
    bitand_bytes_c( a, b, result );
 
-   expect_c_( result.v[ 0 ] == 0x00 );
-   expect_c_( result.v[ 1 ] == 0x41 );
-   expect_c_( result.v[ 2 ] == 0x0d );
-   expect_c_( result.v[ 3 ] == 0x00 );
+   expect_at_c_( result.v[ 0 ] == 0x00 );
+   expect_at_c_( result.v[ 1 ] == 0x41 );
+   expect_at_c_( result.v[ 2 ] == 0x0d );
+   expect_at_c_( result.v[ 3 ] == 0x00 );
 
    return finish_tap_c_();
 }

@@ -17,7 +17,7 @@ cDatePeriod determine_date_period_c( cDateSlice slice )
    cDate first = first_c_( slice );
    cDate last = first;
 
-   for_each_c_( cDate const*, d, slice )
+   each_c_( cDate const*, d, slice )
    {
       first = early_date_c( first, *d );
       last = late_date_c( last, *d );

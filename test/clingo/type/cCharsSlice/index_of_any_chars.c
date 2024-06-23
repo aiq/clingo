@@ -9,13 +9,13 @@ int main( void )
    int64_t idx = 0;
 
    idx = index_of_any_chars_c_( chars, "def", "fgh", "abc" ); // ----------- abc
-   expect_c_( idx == 0 );
+   expect_at_c_( idx == 0 );
 
    idx = index_of_any_chars_c_( chars, "def", "fgh" ); // ------------------ def
-   expect_c_( idx == 3 );
+   expect_at_c_( idx == 3 );
 
    idx = index_of_any_chars_c_( chars, "fght", "adcg" ); // --------------------
-   expect_c_( idx == -1 );
+   expect_at_c_( idx == -1 );
 
    return finish_tap_c_();
 }

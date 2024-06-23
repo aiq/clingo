@@ -21,10 +21,10 @@ int main( void )
       t_( 0x2605, 0x0, 0x2605 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       uint32_t val = utf16_to_utf32_c( t->h, t->l );
-      expect_c_( val == t->exp );
+      expect_at_c_( val == t->exp );
    }
 
    return finish_tap_c_();

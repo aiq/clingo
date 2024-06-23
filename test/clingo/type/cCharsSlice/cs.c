@@ -7,10 +7,10 @@ int main( void )
 
    cCharsSlice slc = cs_c_( "abc", "def", "gol" );
 
-   expect_c_( slc.s == 3 );
-   expect_c_( chars_is_c( slc.v[0], "abc" ) );
-   expect_c_( chars_is_c( slc.v[1], "def" ) );
-   expect_c_( chars_is_c( slc.v[2], "gol" ) );
+   expect_at_c_( slc.s == 3 );
+   expect_at_c_( chars_is_c( slc.v[0], "abc" ) );
+   expect_at_c_( chars_is_c( slc.v[1], "def" ) );
+   expect_at_c_( chars_is_c( slc.v[2], "gol" ) );
 
    return finish_tap_c_();
 }

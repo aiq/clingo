@@ -14,7 +14,7 @@ int main( void )
 
    cDatePeriod period = day_set_period_c( ds );
    cDatePeriod exp = make_date_period_c( 2014, 12, 24, 2014, 12, 31 );
-   expect_c_( eq_date_period_c( period, exp ) );
+   expect_at_c_( eq_date_period_c( period, exp ) );
 
    release_c( ds );
 

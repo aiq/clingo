@@ -5,7 +5,7 @@ int main( void )
 {
    init_tap_c_();
 
-   expect_c_( umin8_c( 37, 213 ) == 37 );
+   expect_at_c_( umin8_c( 37, 213 ) == 37 );
 
    return finish_tap_c_();
 }

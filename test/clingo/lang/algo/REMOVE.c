@@ -2,7 +2,7 @@
 #include "clingo/type/cChars.h" // remove_char_c
 
 #define expect_( VarSlice, Cstr )                                              \
-   expect_c_(                                                                  \
+   expect_at_c_(                                                                  \
       chars_is_c( as_c_( cChars, (VarSlice) ), (Cstr) )                        \
    )
 

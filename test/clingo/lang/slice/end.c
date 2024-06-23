@@ -8,19 +8,19 @@ int main( void )
 
    cChars abc = c_c( "abcx" );
    abc.s--;
-   expect_c_( *end_c_( abc ) == 'x' );
+   expect_at_c_( *end_c_( abc ) == 'x' );
 
    char const* iter = end_c_( abc );
-   expect_c_( *iter == 'x' );
+   expect_at_c_( *iter == 'x' );
 
    --iter;
-   expect_c_( *iter == 'c' );
+   expect_at_c_( *iter == 'c' );
 
    --iter;
-   expect_c_( *iter == 'b' );
+   expect_at_c_( *iter == 'b' );
 
    --iter;
-   expect_c_( iter == begin_c_( abc ) );
+   expect_at_c_( iter == begin_c_( abc ) );
 
    return finish_tap_c_();
 }

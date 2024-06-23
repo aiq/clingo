@@ -20,16 +20,16 @@ int main( void )
    }
 
    set_days_on_day_set_c( daySet, salt );
-   expect_c_( count_days_c( daySet ) == 10 );
-   expect_c_( in_day_set_c( daySet, date_c( 2014, 12,  7 ) ) );
-   expect_c_( in_day_set_c( daySet, date_c( 2014, 12, 11 ) ) );
-   expect_c_( in_day_set_c( daySet, date_c( 2014, 12, 12 ) ) );
+   expect_at_c_( count_days_c( daySet ) == 10 );
+   expect_at_c_( in_day_set_c( daySet, date_c( 2014, 12,  7 ) ) );
+   expect_at_c_( in_day_set_c( daySet, date_c( 2014, 12, 11 ) ) );
+   expect_at_c_( in_day_set_c( daySet, date_c( 2014, 12, 12 ) ) );
 
 
    CDaySet* empty = new_day_set_c();
 
    set_days_on_day_set_c( daySet, empty );
-   expect_c_( count_days_c( daySet ) == 10 );
+   expect_at_c_( count_days_c( daySet ) == 10 );
 
    release_all_c_( daySet, salt, empty );
 

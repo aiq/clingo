@@ -22,7 +22,7 @@ int main( void )
       t_( date, c_Fri, date_c( 2014, c_Mar, 21 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDate date = prev_weekday_date_c( t->base, t->wd );
       bool res = eq_date_c( date, t->exp );

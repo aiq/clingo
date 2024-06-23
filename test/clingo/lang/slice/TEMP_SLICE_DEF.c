@@ -20,10 +20,10 @@ int main( void )
    );
 
    for ( int64_t i = 0; i < tests.s; ++i )
+   for_each_c_( i, test const*, t, tests )
    {
-      test t = tests.v[i];
-      int res = atoi( t.input );
-      tap_desc_c_( res, "test at index {i64}", i );
+      int val = atoi( t->input );
+      expect_c_( i, t->exp == val );
    }
 
    return finish_tap_c_();

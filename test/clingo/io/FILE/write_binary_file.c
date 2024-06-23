@@ -13,14 +13,14 @@ int main( void )
    {
       bytes.v[i] = byte_c_( i );
    }
-   expect_c_( write_binary_file_c( path, as_c_( cBytes, bytes ), es ) );
+   expect_at_c_( write_binary_file_c( path, as_c_( cBytes, bytes ), es ) );
 
    cVarBytes res = read_binary_file_c( path, es );
    require_c_( not is_invalid_c_( res ) );
 
    expect_eq_c_( cmp_bytes_c( as_c_( cBytes, res ), as_c_( cBytes, bytes ) ) );
 
-   expect_c_( remove_file_c( path, es ) );
+   expect_at_c_( remove_file_c( path, es ) );
    free( res.v );
 
    return finish_tap_c_();

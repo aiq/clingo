@@ -43,7 +43,7 @@ int main( void )
           duration_c( 0, 59, 54, 0 ), "add -30s" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDuration dur = add_duration_c( t->a, t->b );
 

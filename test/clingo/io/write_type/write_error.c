@@ -5,7 +5,7 @@
 
 #define expect_recorded_( Rec, Exp )                                           \
 {                                                                              \
-   expect_c_(                                                                  \
+   expect_at_c_(                                                                  \
       recorded_is_c( (Rec), (Exp) )                                            \
    );                                                                          \
    reset_recorder_c( Rec );                                                    \

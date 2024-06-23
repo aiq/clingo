@@ -23,15 +23,15 @@ int main( void )
    );
 
    for ( int64_t i = 0; i < tests.s; ++i )
+   for_each_c_( i, test const*, t, tests )
    {
-      test t = tests.v[i];
       cRecorder* rec = &recorder_c_( 128 );
 
-      bool res = write_ascii_into_cell_c( rec, c_c( t.ascii ), &t.cell );
-      res &= rec->pos == t.cell.size;
-      res &= recorded_is_c( rec, t.exp );
+      bool res = write_ascii_into_cell_c( rec, c_c( t->ascii ), &t->cell );
+      res &= rec->pos == t->cell.size;
+      res &= recorded_is_c( rec, t->exp );
 
-      tap_c_( res, C_TapDesc, "test at index {i64}", i );
+      expect_c_( i, res );
    }
 
    return finish_tap_c_();

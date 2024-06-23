@@ -14,8 +14,8 @@ int main( void )
 
    bool res = pen_c_( p, "this is {i64} large text about {s:q}", 1, "nothing" );
 
-   expect_c_( res );
-   expect_c_( recorded_is_c( rec, "this is 1 large text about 'nothing'" ) );
+   expect_at_c_( res );
+   expect_at_c_( recorded_is_c( rec, "this is 1 large text about 'nothing'" ) );
 
    return finish_tap_c_();
 }

@@ -23,13 +23,13 @@ int main( void )
    init_tap_c_();
 
    Counter* counter = let_object_c_( Counter, &CounterMeta );
-   expect_c_( counter->val == 0 );
+   expect_at_c_( counter->val == 0 );
 
    release_c( counter );
-   expect_c_( counter->val == 1 );
+   expect_at_c_( counter->val == 1 );
 
    release_c( counter );
-   expect_c_( counter->val == 2 );
+   expect_at_c_( counter->val == 2 );
 
    return finish_tap_c_();
 }

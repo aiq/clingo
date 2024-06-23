@@ -21,7 +21,7 @@ int main( void )
       t_( "..!Hello, clingo!..", char_is_punct_c, "Hello, clingo" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cChars cs = trim_char_match_c( c_c( t->inp ), t->check );
       bool res = chars_is_c( cs, t->exp );

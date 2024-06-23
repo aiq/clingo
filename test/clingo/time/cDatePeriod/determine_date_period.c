@@ -28,7 +28,7 @@ int main( void )
       )
    );
    
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDatePeriod period = determine_date_period_c( t->inp );
 

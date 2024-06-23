@@ -7,8 +7,8 @@ int main( void )
 
    cRange rng = open_range_c_( -3, 3 );
 
-   expect_c_( rng.min == -2 );
-   expect_c_( rng.max == 2 );
+   expect_at_c_( rng.min == -2 );
+   expect_at_c_( rng.max == 2 );
 
    return finish_tap_c_();
 }

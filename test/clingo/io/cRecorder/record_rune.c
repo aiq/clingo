@@ -6,11 +6,11 @@ int main( void )
    init_tap_c_();
 
    cRecorder* rec = &recorder_c_( 10 );
-   expect_c_( record_rune_c( rec, rune_c( "🥛" ) ) );
-   expect_c_( record_rune_c( rec, rune_c( "🔑" ) ) );
-   expect_c_( not record_rune_c( rec, rune_c( "📊" ) ) );
+   expect_at_c_( record_rune_c( rec, rune_c( "🥛" ) ) );
+   expect_at_c_( record_rune_c( rec, rune_c( "🔑" ) ) );
+   expect_at_c_( not record_rune_c( rec, rune_c( "📊" ) ) );
 
-   expect_c_( recorded_is_c( rec, "🥛🔑" ) );
+   expect_at_c_( recorded_is_c( rec, "🥛🔑" ) );
 
    return finish_tap_c_();
 }

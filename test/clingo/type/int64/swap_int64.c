@@ -5,7 +5,7 @@ int main( void )
 {
    init_tap_c_();
 
-   expect_c_( swap_int64_c( 0x0123456789abcdef ) ==
+   expect_at_c_( swap_int64_c( 0x0123456789abcdef ) ==
                             0xefcdab8967452301 );
 
    return finish_tap_c_();

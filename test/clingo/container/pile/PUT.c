@@ -9,7 +9,7 @@ static PUT_C_(
 )
 
 #define expect_( Pile, Cstr )                                                  \
-   expect_c_(                                                                  \
+   expect_at_c_(                                                                  \
       chars_is_c( as_c_( cChars, (Pile) ), (Cstr) )                            \
    )
 

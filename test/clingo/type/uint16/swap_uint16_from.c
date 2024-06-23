@@ -9,10 +9,10 @@ int main( void )
    c_ByteOrder othOrder = system_order_is_c( c_BigEndian ) ? c_LittleEndian
                                                            : c_BigEndian;
 
-   expect_c_( swap_uint16_from_c( 0x2080, sysOrder ) ==
+   expect_at_c_( swap_uint16_from_c( 0x2080, sysOrder ) ==
                                   0x2080 );
 
-   expect_c_( swap_uint16_from_c( 0x2080, othOrder ) ==
+   expect_at_c_( swap_uint16_from_c( 0x2080, othOrder ) ==
                                   0x8020 );
 
    return finish_tap_c_();

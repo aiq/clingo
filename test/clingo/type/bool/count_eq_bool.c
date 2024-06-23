@@ -7,8 +7,8 @@ int main( void )
 
    cBoolSlice s01010 = slice_c_( bool, false, true, false, true, false );
 
-   expect_c_( count_eq_bool_c( s01010, true  ) == 2 );
-   expect_c_( count_eq_bool_c( s01010, false ) == 3 );
+   expect_at_c_( count_eq_bool_c( s01010, true  ) == 2 );
+   expect_at_c_( count_eq_bool_c( s01010, false ) == 3 );
 
    return finish_tap_c_();
 }

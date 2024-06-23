@@ -21,7 +21,7 @@ int main( void )
       t_( a, date_c( 2020, c_Jan, 19 ),   7 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       int64_t years = years_between_dates_c( t->a, t->b );
 

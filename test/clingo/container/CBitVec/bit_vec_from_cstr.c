@@ -12,11 +12,11 @@ int main( void )
    CBitVec* vec = bit_vec_from_cstr_c( bitStr );
    CBitVec* low = bit_vec_from_cstr_c( lowStr );
 
-   expect_c_( bit_vec_size_c( vec ) == 24 );
-   expect_c_( bit_vec_is_c_( vec, bitStr ) );
-   expect_c_( bit_vec_is_c_( vec, lowStr ) );
-   expect_c_( eq_bit_vec_c( vec, low ) );
-   expect_c_( not bit_vec_is_c_( vec, invStr ) );
+   expect_at_c_( bit_vec_size_c( vec ) == 24 );
+   expect_at_c_( bit_vec_is_c_( vec, bitStr ) );
+   expect_at_c_( bit_vec_is_c_( vec, lowStr ) );
+   expect_at_c_( eq_bit_vec_c( vec, low ) );
+   expect_at_c_( not bit_vec_is_c_( vec, invStr ) );
 
    release_all_c_( vec, low );
 

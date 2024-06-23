@@ -9,22 +9,22 @@ int main( void )
    int64_t idx = 0;
 
    idx = index_of_chars_c( chars, c_c( "abc" ) ); // ---------------------- abc
-   expect_c_( idx == 0 );
+   expect_at_c_( idx == 0 );
 
    idx = index_of_chars_c_( chars, "cdef" ); // --------------------------- cdef
-   expect_c_( idx == 2 );
+   expect_at_c_( idx == 2 );
 
    idx = index_of_chars_c_( chars, "defgh" ); // ------------------------- defgh
-   expect_c_( idx == 3 );
+   expect_at_c_( idx == 3 );
 
    idx = index_of_chars_c_( chars, "h" ); // --------------------------------- h
-   expect_c_( idx == 7 );
+   expect_at_c_( idx == 7 );
 
    idx = index_of_chars_c_( chars, "BCD" ); // ----------------------------- BCD
-   expect_c_( idx == -1 );
+   expect_at_c_( idx == -1 );
 
    idx = index_of_chars_c_( chars, "ghij" ); // --------------------------- ghij
-   expect_c_( idx == -1 );
+   expect_at_c_( idx == -1 );
 
    return finish_tap_c_();
 }

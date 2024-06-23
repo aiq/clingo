@@ -26,7 +26,7 @@ int main( void )
       t_( tz_c( 0 ), "z", "Z" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 32 );
 

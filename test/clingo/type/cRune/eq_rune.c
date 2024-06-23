@@ -8,9 +8,9 @@ int main( void )
    cRune x = rune_c( "x" );
    cRune snowman = rune_c( "☃" ); // U+2603
 
-   expect_c_(  eq_rune_c( x, x ) );
-   expect_c_(  eq_rune_c( snowman, snowman ) );
-   expect_c_( !eq_rune_c( x, snowman ) );
+   expect_at_c_(  eq_rune_c( x, x ) );
+   expect_at_c_(  eq_rune_c( snowman, snowman ) );
+   expect_at_c_( !eq_rune_c( x, snowman ) );
 
    return finish_tap_c_();
 }

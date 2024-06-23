@@ -7,9 +7,9 @@ int main( void )
 
    CBitVec* vec = bit_vec_from_cstr_c( "00100010" );
 
-   expect_c_( rfind_index_of_bit_c( vec, 1, 7 ) == 6 );
-   expect_c_( rfind_index_of_bit_c( vec, 0, 3 ) == 3 );
-   expect_c_( rfind_index_of_bit_c( vec, 1, 3 ) == 2 );
+   expect_at_c_( rfind_index_of_bit_c( vec, 1, 7 ) == 6 );
+   expect_at_c_( rfind_index_of_bit_c( vec, 0, 3 ) == 3 );
+   expect_at_c_( rfind_index_of_bit_c( vec, 1, 3 ) == 2 );
 
    release_c( vec );
 

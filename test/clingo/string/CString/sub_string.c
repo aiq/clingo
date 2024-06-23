@@ -8,16 +8,16 @@ int main( void )
    CString* s = lit_c( "Pineapple" );
 
    cChars app = sub_string_c( s, 4, 7 );
-   expect_c_( chars_is_c( app, "app" ) );
+   expect_at_c_( chars_is_c( app, "app" ) );
 
    cChars apple = sub_string_c( s, 4, 9 );
-   expect_c_( chars_is_c( apple, "apple" ) );
+   expect_at_c_( chars_is_c( apple, "apple" ) );
 
    cChars neap = sub_string_c( s, 2, 6 );
-   expect_c_( chars_is_c( neap, "neap" ) );
+   expect_at_c_( chars_is_c( neap, "neap" ) );
 
    cChars empty = sub_string_c( s, 5, 16 );
-   expect_c_( is_empty_c_( empty ) );
+   expect_at_c_( is_empty_c_( empty ) );
 
    release_c( s );
 

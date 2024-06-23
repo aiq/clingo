@@ -29,7 +29,7 @@ int main( void )
       t_( c_Dec, c_Oct )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       c_Month const res = first_month_of_quarter_c( t->month );
 

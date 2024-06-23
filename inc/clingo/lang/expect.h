@@ -55,30 +55,33 @@ int finish_tap_c( bool withPlan );
  checks
 *******************************************************************************/
 
-#define expect_c_( Result )                                                    \
+#define expect_at_c_( Result )                                                 \
    tap_c_( (Result), C_TapDesc, "at line ", xstringify_c_( __LINE__ ) )
+
+#define expect_c_( Index, Result )                                             \
+   tap_c_( (Result), C_TapDesc, "test {i64}.", (Index)+1, " at line ", xstringify_c_( __LINE__ ) )
 
 /*******************************************************************************
  check cmp results
 *******************************************************************************/
 
 #define expect_diff_c_( Result )                                               \
-   expect_c_( diff_c( Result ) )
+   expect_at_c_( diff_c( Result ) )
 
 #define expect_eq_c_( Result )                                                 \
-   expect_c_( eq_c( Result ) )
+   expect_at_c_( eq_c( Result ) )
 
 #define expect_gt_c_( Result )                                                 \
-   expect_c_( gt_c( Result ) )
+   expect_at_c_( gt_c( Result ) )
 
 #define expect_gte_c_( Result )                                                \
-   expect_c_( gte_c( Result ) )
+   expect_at_c_( gte_c( Result ) )
 
 #define expect_lt_c_( Result )                                                 \
-   expect_c_( lt_c( Result ) )
+   expect_at_c_( lt_c( Result ) )
 
 #define expect_lte_c_( Result )                                                \
-   expect_c_( lte_c( Result ) )
+   expect_at_c_( lte_c( Result ) )
 
 /*******************************************************************************
  control flow

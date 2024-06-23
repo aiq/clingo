@@ -684,7 +684,7 @@ CLINGO_API inline int64_t fibonacci_hash_index_c( uint64_t hash, uint8_t shift )
 CLINGO_API inline uint64_t combine_hashes_c( cUint64Slice hashes )
 {
    uint64_t hash = 17;
-   for_each_c_( uint64_t const*, oth, hashes )
+   each_c_( uint64_t const*, oth, hashes )
    {
       hash = hash * 37 + *oth;
    }

@@ -76,9 +76,9 @@ ENDS_WITH_C_(
 
 char const* find_any_char_c( cChars chars, cChars set )
 {
-   for_each_c_( char const*, outItr, chars )
+   each_c_( char const*, outItr, chars )
    {
-      for_each_c_( char const*, inItr, set )
+      each_c_( char const*, inItr, set )
       {
          if ( *outItr == *inItr ) return outItr;
       }

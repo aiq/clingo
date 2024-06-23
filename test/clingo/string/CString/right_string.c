@@ -8,16 +8,16 @@ int main()
    CString* s = lit_c( "Pineapple" );
 
    cChars apple = right_string_c( s, 5 );
-   expect_c_( chars_is_c( apple, "apple" ) );
+   expect_at_c_( chars_is_c( apple, "apple" ) );
 
    cChars pineapple = right_string_c( s, 9 );
-   expect_c_( chars_is_c( pineapple, "Pineapple" ) );
+   expect_at_c_( chars_is_c( pineapple, "Pineapple" ) );
 
    pineapple = right_string_c( s, 1024 );
-   expect_c_( chars_is_c( pineapple, "Pineapple" ) );
+   expect_at_c_( chars_is_c( pineapple, "Pineapple" ) );
 
    cChars empty = right_string_c( s, 0 );
-   expect_c_( is_empty_c_( empty ) );
+   expect_at_c_( is_empty_c_( empty ) );
 
    release_c( s );
 

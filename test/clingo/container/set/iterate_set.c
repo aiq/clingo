@@ -19,7 +19,7 @@ int main( void )
    {
       res += *val;
    }
-   expect_c_( res == 1234 );
+   expect_at_c_( res == 1234 );
 
    release_c( set );
 

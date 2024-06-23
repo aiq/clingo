@@ -25,7 +25,7 @@ int main( void )
       t_( "3s", "", secs_c( 3 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cScanner* sca = &cstr_scanner_c_( t->str );
 

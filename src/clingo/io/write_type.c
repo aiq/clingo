@@ -546,7 +546,7 @@ bool write_chars_c( cRecorder rec[static 1],
       {
          if ( not record_char_c( rec, '"' ) ) break;
 
-         for_each_c_( char const*, c, chars )
+         each_c_( char const*, c, chars )
          {
             if ( not record_escaped_char( rec, *c ) ) break;
          }

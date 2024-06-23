@@ -29,7 +29,7 @@ int main( void )
       t_( 2456798, ymd_c( 2014, c_May, 20 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDate date = from_julian_day_c( t->jd );
       bool res = eq_c( cmp_ymd_c( as_ymd_c( date ), t->exp ) );

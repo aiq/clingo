@@ -9,8 +9,8 @@ int main( void )
 
    CString* str = lit_c( cstr );
 
-   expect_c_( string_is_c( str, "banjo" ) );
-   expect_c_( scstr_c( str ) == cstr );
+   expect_at_c_( string_is_c( str, "banjo" ) );
+   expect_at_c_( scstr_c( str ) == cstr );
 
    release_c( str );
 

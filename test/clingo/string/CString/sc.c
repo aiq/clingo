@@ -7,7 +7,7 @@ int main( void )
 
    CString* s = lit_c( "foobar" );
    cChars chars = sc_c( s );
-   expect_c_( chars_is_c( chars, "foobar" ) );
+   expect_at_c_( chars_is_c( chars, "foobar" ) );
 
    release_c( s );
 

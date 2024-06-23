@@ -32,16 +32,15 @@ int main( void )
       t_( "32-blocks", "", 32 )
    );
 
-   for ( int64_t i = 0; i < tests.s; ++i )
+   for_each_c_( i, test const*, t, tests )
    {
-      test t = tests.v[i];
-      cScanner* sca = &cstr_scanner_c_( t.str );
+      cScanner* sca = &cstr_scanner_c_( t->str );
 
       int8_t val;
-      bool res = read_int8_c( sca, &val, t.fmt );
-      res &= val == t.exp;
+      bool res = read_int8_c( sca, &val, t->fmt );
+      res &= val == t->exp;
 
-      tap_desc_c_( res, "test at index {i64}", i );
+      expect_c_( i, res );
    }
 
    return finish_tap_c_();

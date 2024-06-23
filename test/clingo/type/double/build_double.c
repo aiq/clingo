@@ -21,7 +21,7 @@ int main( void )
       t_( 1, 0x400, 0x91eb851eb851f, -3.14 )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDoubleInfo info = { t->s, t->e, t->m };
       double d = build_double_c( info );

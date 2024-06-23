@@ -38,7 +38,7 @@ int main( void )
       t_( max, "*U", "9223372036.854775807S" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cRecorder* rec = &recorder_c_( 64 );
 

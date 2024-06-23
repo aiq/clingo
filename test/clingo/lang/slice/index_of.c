@@ -9,22 +9,22 @@ int main( void )
    cChars abc = c_c( "abc" );
 
    char const* ptr = NULL;
-   expect_c_( index_of_c_( abc, ptr ) == -1 );
+   expect_at_c_( index_of_c_( abc, ptr ) == -1 );
 
    ptr = begin_c_( abc );
-   expect_c_( index_of_c_( abc, ptr ) == 0 );
+   expect_at_c_( index_of_c_( abc, ptr ) == 0 );
 
    ptr++;
-   expect_c_( index_of_c_( abc, ptr ) == 1 );
+   expect_at_c_( index_of_c_( abc, ptr ) == 1 );
 
    ptr = rbegin_c_( abc );
-   expect_c_( index_of_c_( abc, ptr ) == 2 );
+   expect_at_c_( index_of_c_( abc, ptr ) == 2 );
 
    ptr = end_c_( abc );
-   expect_c_( index_of_c_( abc, ptr ) == -1 );
+   expect_at_c_( index_of_c_( abc, ptr ) == -1 );
 
    ptr = rend_c_( abc );
-   expect_c_( index_of_c_( abc, ptr ) == -1 );
+   expect_at_c_( index_of_c_( abc, ptr ) == -1 );
 
    return finish_tap_c_();
 }

@@ -9,10 +9,10 @@ int main( void )
    c_ByteOrder othOrder = system_order_is_c( c_BigEndian ) ? c_LittleEndian
                                                            : c_BigEndian;
 
-   expect_c_( swap_int64_to_c( 0x0123456789abcdef, sysOrder ) ==
+   expect_at_c_( swap_int64_to_c( 0x0123456789abcdef, sysOrder ) ==
                                0x0123456789abcdef );
 
-   expect_c_( swap_int64_to_c( 0x0123456789abcdef, othOrder ) ==
+   expect_at_c_( swap_int64_to_c( 0x0123456789abcdef, othOrder ) ==
                                0xefcdab8967452301 );
 
    return finish_tap_c_();

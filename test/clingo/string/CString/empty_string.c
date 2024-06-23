@@ -10,14 +10,14 @@ int main( void )
    CString* e3 = new_string_c( "" );
    CString* e4 = make_string_c( (cChars)empty_c_() );
 
-   expect_c_( string_is_empty_c( e1 ) );
-   expect_c_( string_is_empty_c( e2 ) );
-   expect_c_( string_is_empty_c( e3 ) );
-   expect_c_( string_is_empty_c( e4 ) );
+   expect_at_c_( string_is_empty_c( e1 ) );
+   expect_at_c_( string_is_empty_c( e2 ) );
+   expect_at_c_( string_is_empty_c( e3 ) );
+   expect_at_c_( string_is_empty_c( e4 ) );
 
-   expect_c_( e1 == e2 );
-   expect_c_( e2 == e3 );
-   expect_c_( e3 == e4 );
+   expect_at_c_( e1 == e2 );
+   expect_at_c_( e2 == e3 );
+   expect_at_c_( e3 == e4 );
 
    return finish_tap_c_();
 }

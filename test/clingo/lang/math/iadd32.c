@@ -7,17 +7,17 @@ int main( void )
 
    int32_t res = 0;
 
-   expect_c_( iadd32_c( 65535, 123456789, &res ) );
-   expect_c_( res == 123522324 );
+   expect_at_c_( iadd32_c( 65535, 123456789, &res ) );
+   expect_at_c_( res == 123522324 );
 
-   expect_c_( iadd32_c( -16156565, 546648, &res ) );
-   expect_c_( res == -15609917 );
+   expect_at_c_( iadd32_c( -16156565, 546648, &res ) );
+   expect_at_c_( res == -15609917 );
 
-   expect_c_( not iadd32_c( INT32_MAX, 1, &res ) );
-   expect_c_( res == -15609917 );
+   expect_at_c_( not iadd32_c( INT32_MAX, 1, &res ) );
+   expect_at_c_( res == -15609917 );
 
-   expect_c_( not iadd32_c( INT32_MIN, -1, &res ) );
-   expect_c_( res == -15609917 );
+   expect_at_c_( not iadd32_c( INT32_MIN, -1, &res ) );
+   expect_at_c_( res == -15609917 );
 
    return finish_tap_c_();
 }

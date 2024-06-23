@@ -23,7 +23,7 @@ int main( void )
       t_( daytime_c_( 10, 39, 44 ),   secs_c( 23 ), daytime_c_( 10, 40,  7 ) )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cDaytime dt = add_to_daytime_c( t->base, t->dur );
       bool res = eq_daytime_c( dt, t->exp );

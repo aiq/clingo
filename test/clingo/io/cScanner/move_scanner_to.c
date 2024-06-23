@@ -3,8 +3,8 @@
 
 #define expect_( Sca, Left, Right )                                            \
 {                                                                              \
-   expect_c_( chars_is_c( scanned_chars_c_( Sca ), (Left) ) );                 \
-   expect_c_( chars_is_c( unscanned_chars_c_( Sca ), (Right) ) );              \
+   expect_at_c_( chars_is_c( scanned_chars_c_( Sca ), (Left) ) );                 \
+   expect_at_c_( chars_is_c( unscanned_chars_c_( Sca ), (Right) ) );              \
 }
 
 int main()

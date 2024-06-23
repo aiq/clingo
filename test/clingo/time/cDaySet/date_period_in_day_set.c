@@ -12,13 +12,13 @@ int main( void )
    set_on_day_set_c( ds, date_c( 2014, 12, 26 ) );
 
    cDatePeriod holyNight = single_date_period_c( date_c( 2014, 12, 24 ) );
-   expect_c_( date_period_in_day_set_c( ds, holyNight ) );
+   expect_at_c_( date_period_in_day_set_c( ds, holyNight ) );
 
    cDatePeriod holiday = make_date_period_c( 2014, 12, 24, 2014, 12, 26 );
-   expect_c_( date_period_in_day_set_c( ds, holiday ) );
+   expect_at_c_( date_period_in_day_set_c( ds, holiday ) );
 
    cDatePeriod lastDays = make_date_period_c( 2014, 12, 24, 2014, 12, 31 );
-   expect_c_( not date_period_in_day_set_c( ds, lastDays ) );
+   expect_at_c_( not date_period_in_day_set_c( ds, lastDays ) );
 
    release_c( ds );
 

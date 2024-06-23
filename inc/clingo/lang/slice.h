@@ -221,7 +221,7 @@ typedef struct Entry##Slice Entry##Slice;
       : (Slice).v + (Slice).s                                                  \
 )
 
-#define for_each_c_( Type, Itr, Slice )                                        \
+#define each_c_( Type, Itr, Slice )                                        \
 for ( Type (Itr) = begin_c_( Slice ); (Itr) < end_c_( Slice ); ++(Itr) )
 
 #define index_of_c_( Slice, Ptr )                                              \
@@ -230,6 +230,10 @@ for ( Type (Itr) = begin_c_( Slice ); (Itr) < end_c_( Slice ); ++(Itr) )
       ? (Ptr) - (Slice).v                                                      \
       : -1                                                                     \
 )
+
+#define for_each_c_( N, Type, Itr, Slice )                                     \
+for ( int64_t (N) =  0; (N) < (Slice).s; )                                     \
+for ( Type (Itr) = (Slice).v+(N); (Itr) == (Slice).v+(N); ++(N) )
 
 #define nth_c_( Slice, N )                                                     \
 (                                                                              \

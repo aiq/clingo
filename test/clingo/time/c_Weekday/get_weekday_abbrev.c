@@ -28,7 +28,7 @@ int main( void )
       t_( c_Sun, "Sun" )
    );
 
-   for_each_c_( test const*, t, tests )
+   each_c_( test const*, t, tests )
    {
       cVarChars varChars = scalars_c_( 16, char );
       varChars = get_weekday_abbrev_c( t->wd, varChars );
