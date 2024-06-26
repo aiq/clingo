@@ -218,6 +218,8 @@ inline char const* next_rune_c( cChars chars,
  chars
 *******************************************************************************/
 
+CLINGO_API bool chars_runes_match_c( cChars chars, c_check_rune check );
+
 CLINGO_API int64_t count_runes_c( cChars chars );
 
 CLINGO_API cVarRuneSlice fill_rune_slice_c( cVarRuneSlice dst, cChars src );
@@ -229,6 +231,8 @@ CLINGO_API char const* find_any_rune_c( cChars chars, cChars set );
 #define find_rune_c_( Chars, Cstr )                                            \
    find_rune_c( (Chars), rune_c( Cstr ) )
 CLINGO_API char const* find_rune_c( cChars chars, cRune r );
+
+CLINGO_API char const* find_rune_match_c( cChars chars, c_check_rune check );
 
 CLINGO_API cChars left_runes_c( cChars chars, int64_t maxLen );
 

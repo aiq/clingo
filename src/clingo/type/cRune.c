@@ -273,6 +273,17 @@ char const* nth_rune_c( cChars chars, int64_t n )
  algo
 *******************************************************************************/
 
+bool chars_runes_match_c( cChars chars, c_check_rune check )
+{
+   cRune tmp;
+   iterate_runes_c_( itr, &tmp, chars )
+   {
+      if ( not check( tmp ) )
+         return false;
+   }
+   return true;
+}
+
 int64_t count_runes_c( cChars chars )
 {
    int64_t result = 0;
@@ -323,9 +334,7 @@ char const* find_any_rune_c( cChars chars, cChars set )
       iterate_runes_c_( inItr, &in, set )
       {
          if ( eq_rune_c( out, in ) )
-         {
             return outItr;
-         }
       }
    }
    return NULL;
@@ -337,9 +346,18 @@ char const* find_rune_c( cChars chars, cRune r )
    iterate_runes_c_( itr, &tmp, chars )
    {
       if ( eq_rune_c( r, tmp ) )
-      {
          return itr;
-      }
+   }
+   return NULL;
+}
+
+char const* find_rune_match_c( cChars chars, c_check_rune check )
+{
+   cRune tmp;
+   iterate_runes_c_( itr, &tmp, chars )
+   {
+      if ( check( tmp ) )
+         return itr;
    }
    return NULL;
 }

@@ -443,6 +443,20 @@ include::{xmpldir}/next_rune.c[]
 //*********************************************************************** slice
 === char slice
 
+==== chars_runes_match_c
+[source,c]
+----
+bool chars_runes_match_c( cChars chars, c_check_rune check );
+----
+
+Function that returns true when all runes pass the check, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/chars_runes_match.c[]
+----
+
 ==== count_runes_c
 [source,c]
 ----
@@ -504,6 +518,21 @@ that equals r.
 [source,c]
 ----
 include::{xmpldir}/find_rune.c[]
+----
+
+==== find_rune_match_c
+[source,c]
+----
+char const* find_rune_match_c( cChars chars, c_check_rune check );
+----
+
+Returns a pointer to the first char of a UTF-8 encoded code point in a chars
+that pass the check.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_rune_match.c[]
 ----
 
 ==== left_runes_c
