@@ -58,7 +58,7 @@ bool write_format_arg_c( cRecorder rec[static 1],
 {
    if ( is_empty_c_( type ) )
    {
-      return 0;
+      return false;
    }
 
    if ( type.v[0] == 'i' )
@@ -79,7 +79,8 @@ bool write_format_arg_c( cRecorder rec[static 1],
       {
          return write_int32_c( rec, va_arg( *list, int32_t ), fmt );
       }
-      else if ( chars_is_c( type, "i64" ) )
+      else if ( chars_is_c( type, "i64" ) or
+                chars_is_c( type, "i" ) )
       {
          return write_int64_c( rec, va_arg( *list, int64_t ), fmt );
       }
@@ -102,7 +103,8 @@ bool write_format_arg_c( cRecorder rec[static 1],
       {
          return write_uint32_c( rec, va_arg( *list, uint32_t ), fmt );
       }
-      else if ( chars_is_c( type, "u64" ) )
+      else if ( chars_is_c( type, "u64" ) or
+                chars_is_c( type, "u" ) )
       {
          return write_uint64_c( rec, va_arg( *list, uint64_t ), fmt );
       }
@@ -200,9 +202,8 @@ bool write_impl_c( cRecorder rec[static 1],
          if ( not write_arg( rec, &list, specifier.type, specifier.fmt ) )
          {
             if ( rec->err == cNoError_ )
-            {
                set_recorder_error_c( rec, c_InvalidWriteFormat );
-            }
+
             return false;
          }
       }
@@ -226,9 +227,7 @@ bool write_list_c( cRecorder rec[static 1], int n, va_list list )
    return write_impl_c( rec, write_format_arg_c, n, list );
 }
 
-bool write_c( cRecorder rec[static 1],
-              int n,
-              ... )
+bool write_c( cRecorder rec[static 1], int n, ... )
 {
    va_list list;
    va_start( list, n );
@@ -246,18 +245,8 @@ bool writeln_impl_c( cRecorder rec[static 1],
                    int n,
                    va_list list )
 {
-   bool ok = write_impl_c( rec, write_arg, n, list );
-   if ( not ok )
-   {
-      return false;
-   }
-
-   if ( not record_char_c( rec, '\n' ) )
-   {
-      return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
-   }
-
-   return true;
+   return write_impl_c( rec, write_arg, n, list ) and
+          record_char_c( rec, '\n' );
 }
 
 bool writeln_list_c( cRecorder rec[static 1], int n, va_list list )
@@ -265,9 +254,7 @@ bool writeln_list_c( cRecorder rec[static 1], int n, va_list list )
    return writeln_impl_c( rec, write_format_arg_c, n, list );
 }
 
-bool writeln_c( cRecorder rec[static 1],
-              int n,
-              ... )
+bool writeln_c( cRecorder rec[static 1], int n, ... )
 {
    va_list list;
    va_start( list, n );
