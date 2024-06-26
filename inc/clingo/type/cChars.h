@@ -36,6 +36,8 @@ CLINGO_API inline cChars c_c( char const cstr[static 1] )
 
 CLINGO_API bool chars_is_c( cChars chars, char const cstr[static 1] );
 
+CLINGO_API bool chars_match_c( cChars chars, c_check_char check );
+
 #define cstr_is_any_char_c_( Cstr, Set )                                       \
    cstr_is_any_char_c( (Cstr), c_c( Set ) )
 CLINGO_API
@@ -83,6 +85,8 @@ CLINGO_API int64_t count_eq_char_c( cChars chars, char val );
 CLINGO_API char const* find_any_char_c( cChars chars, cChars set );
 
 CLINGO_API char const* find_char_c( cChars chars, char val );
+
+CLINGO_API char const* find_char_match_c( cChars chars, c_check_char check );
 
 #define index_of_chars_c_( Chars, Cstr )                                       \
    index_of_chars_c( (Chars), c_c( Cstr ) )

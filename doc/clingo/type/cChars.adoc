@@ -71,6 +71,20 @@ The check ignores the '\0' of the c string.
 include::{xmpldir}/chars_is.c[]
 ----
 
+==== chars_match_c
+[source,c]
+----
+bool chars_match_c( cChars chars, c_check_char check );
+----
+
+Function that returns true when all character pass the check, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/chars_match.c[]
+----
+
 ==== cstr_is_c
 [source,c]
 ----
@@ -193,6 +207,20 @@ char const* find_char_c( cChars chars, char val );
 ----
 
 {FindVal}
+
+==== find_char_match_c
+[source,c]
+----
+char const* find_char_match_c( cChars chars, c_check_char check );
+----
+
+Returns a pointer to the first charcharacter that pass the check.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/find_char_match.c[]
+----
 
 ==== index_of_chars_c
 [source,c]

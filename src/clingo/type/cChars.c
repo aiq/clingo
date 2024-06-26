@@ -21,6 +21,16 @@ bool chars_is_c( cChars chars, char const cstr[static 1] )
    return eq_c( cmp_chars_c( chars, c_c( cstr ) ) );
 }
 
+bool chars_match_c( cChars chars, c_check_char check )
+{
+   each_c_( char const*, c, chars )
+   {
+      if ( not check( *c ) )
+         return false;
+   }
+   return true;
+}
+
 bool cstr_is_any_char_c( char const cstr[static 1], cChars set )
 {
    char const* found = find_char_c( set, *cstr );
@@ -94,6 +104,16 @@ FIND_VAL_C_(
    cmp_char_c,    // CmpFunc
    do_deref_c_    // DoDeref
 )
+
+char const* find_char_match_c( cChars chars, c_check_char check )
+{
+   each_c_( char const*, c, chars )
+   {
+      if ( check( *c ) )
+         return c;
+   }
+   return NULL;
+}
 
 INDEX_OF_SLICE_C_(
    index_of_chars_c, // FuncName
