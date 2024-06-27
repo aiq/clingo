@@ -42,10 +42,7 @@ CLINGO_API bool write_list_c( cRecorder rec[static 1], int n, va_list list );
 
 #define write_c_( Rec, ... )                                                   \
    write_c( (Rec), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
-CLINGO_API
-bool write_c( cRecorder rec[static 1],
-              int n,
-              ... );
+CLINGO_API bool write_c( cRecorder rec[static 1], int n, ... );
 
 /*******************************************************************************
  writeln
@@ -60,9 +57,6 @@ CLINGO_API bool writeln_list_c( cRecorder rec[static 1], int n, va_list list );
 
 #define writeln_c_( Rec, ... )                                                 \
    writeln_c( (Rec), nargs_c_( __VA_ARGS__ ), __VA_ARGS__ )
-CLINGO_API
-bool writeln_c( cRecorder rec[static 1],
-                int n,
-                ... );
+CLINGO_API bool writeln_c( cRecorder rec[static 1], int n, ... );
 
 #endif
