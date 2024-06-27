@@ -46,14 +46,18 @@ int main( void )
    );
 
    for ( int64_t i = 0; i < tests.s; ++i )
+   for_each_c_( i, test const*, t, tests )
    {
-      test t = tests.v[i];
       cRecorder* rec = &recorder_c_( 128 );
 
-      bool res = write_int8_c( rec, t.val, t.fmt );
-      res &= recorded_is_c( rec, t.exp );
+      bool res = write_int8_c( rec, t->val, t->fmt );
+      res &= recorded_is_c( rec, t->exp );
 
-      tap_desc_c_( res, "test at index {i64}", i );
+      expect_block_c_( i, res )
+      {
+         tap_exp_line_c_( "{s}", t->exp );
+         tap_got_line_c_( "{rec}", rec );
+      }
    }
 
    return finish_tap_c_();

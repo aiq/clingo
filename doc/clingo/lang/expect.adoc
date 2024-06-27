@@ -128,7 +128,7 @@ include::{xmpldir}/tap_todo.c[]
 ==== finish_tap_c
 [source,c]
 ----
-#define finish_tap_c_()                                                        \
+#define finish_tap_with_plan_c()                                                        \
    finish_tap_c( true )
 int finish_tap_c( bool withPlan );
 ----
@@ -139,7 +139,103 @@ stream.
 
 // *****************************************************************************
 
+=== block
+
+[id='tap_block_begin_c']
+==== tap_block_begin_c
+[source,c]
+----
+bool tap_block_begin_c( void );
+----
+
+Writes the beginning(---) of a TAP block to the stream and returns allways true.
+
+[id='tap_block_end_c']
+==== tap_block_end_c
+[source,c]
+----
+bool tap_block_end_c( void );
+----
+
+Writes the end(...) of a TAP block to the stream and returns allways false.
+
+[id='tap_block_c_']
+==== tap_block_c_
+[source,c]
+----
+#define tap_block_c_( Ok )
+----
+
+Macro function that allows to create a TAP block scope if Ok is false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/tap_block.c[]
+----
+
+[id='tap_line_c']
+==== tap_line_c
+[source,c]
+----
+#define tap_line_c_( K, ... )                                                  \
+   tap_line_c( (K), nargs_c_( __VA_ARGS__  ), __VA_ARGS__ )
+void tap_line_c( char const k[static 1], int n, ... );
+----
+
+Allows the create a TAP block key-value-pair.
+You can use the same format that write_c uses.
+
+[id='tap_msg_line_c_']
+==== tap_msg_line_c_
+[source,c]
+----
+#define tap_msg_line_c_( ... )
+----
+
+Macro util functions for key-value-pair with "message" as key.
+
+[id='tap_exp_line_c_']
+==== tap_exp_line_c_
+[source,c]
+----
+#define tap_msg_line_c_( ... )
+----
+
+Macro util functions for key-value-pair with "expected" as key.
+
+[id='tap_got_line_c_']
+==== tap_got_line_c_
+[source,c]
+----
+#define tap_got_line_c_( ... )
+----
+
+Macro util functions for key-value-pair with "got" as key.
+
+// *****************************************************************************
+
 === checks
+
+[id='expect_block_c_']
+==== expect_block_c_
+[source,c]
+----
+#define expect_block_c_( Index, Result )
+----
+
+Macro function that adds a test line with a generated description to the TAP
+stream and makes a TAP block that can be filled.
+
+[id='expect_block_at_c_']
+==== expect_block_at_c_
+[source,c]
+----
+#define expect_block_at_c_( Result )
+----
+
+Macro function that adds a test line with a generated description to the TAP
+stream and makes a TAP block that can be filled.
 
 [id='expect_c_']
 ==== expect_c_

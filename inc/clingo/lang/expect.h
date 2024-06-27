@@ -48,12 +48,46 @@ CLINGO_API void tap_note_c( char const note[static 1] );
 
 #define finish_tap_c_()                                                        \
    finish_tap_c( true )
-CLINGO_API
-int finish_tap_c( bool withPlan );
+CLINGO_API int finish_tap_c( bool withPlan );
+
+/*******************************************************************************
+ block
+*******************************************************************************/
+
+bool tap_block_begin_c( void );
+
+bool tap_block_end_c( void );
+
+#define tap_block_c_( Ok )                                                     \
+if ( not (Ok) )                                                                \
+for (                                                                          \
+   bool makeBlock = tap_block_begin_c();                                       \
+   makeBlock;                                                                  \
+   makeBlock = tap_block_end_c()                                               \
+)
+
+#define tap_line_c_( K, ... )                                                  \
+   tap_line_c( (K), nargs_c_( __VA_ARGS__  ), __VA_ARGS__ )
+void tap_line_c( char const k[static 1], int n, ... );
+
+#define tap_msg_line_c_( ... )            \
+   tap_line_c_( "message", __VA_ARGS__ )
+
+#define tap_exp_line_c_( ... )            \
+   tap_line_c_( "expected", __VA_ARGS__ )
+
+#define tap_got_line_c_( ... )            \
+   tap_line_c_( "got", __VA_ARGS__ )
 
 /*******************************************************************************
  checks
 *******************************************************************************/
+
+#define expect_block_at_c_( Result )                                           \
+   tap_block_c_( expect_at_c_( Result ) )
+
+#define expect_block_c_( Index, Result )                                       \
+   tap_block_c_( expect_c_( (Index), (Result) ) )
 
 #define expect_at_c_( Result )                                                 \
    tap_c_( (Result), C_TapDesc, "at line ", xstringify_c_( __LINE__ ) )
