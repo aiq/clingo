@@ -616,7 +616,8 @@ char* turn_into_cstr_c( cRecorder rec[static 1] );
 
 Records if necessary a null character, moves the recorder to the beginning and
 returns the recorded memory as C string.
-Returns NULL if the function can not finish the memory with a null character.
+Returns an empty C string if the function can not finish the memory with a
+null character.
 
 .Example
 [source,c]

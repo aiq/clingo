@@ -122,12 +122,9 @@ CLINGO_API cPen recorder_pen_c( cRecorder rec[static 1] );
  mem
 *******************************************************************************/
 
-CLINGO_API
-bool alloc_recorder_mem_c( cRecorder rec[static 1], int64_t size );
-CLINGO_API
-bool realloc_recorder_mem_c( cRecorder rec[static 1], int64_t size );
-CLINGO_API
-void free_recorder_mem_c( cRecorder rec[static 1] );
+CLINGO_API bool alloc_recorder_mem_c( cRecorder rec[static 1], int64_t size );
+CLINGO_API bool realloc_recorder_mem_c( cRecorder rec[static 1], int64_t size );
+CLINGO_API void free_recorder_mem_c( cRecorder rec[static 1] );
 
 CLINGO_API
 inline int64_t recorder_cap_c( cRecorder const rec[static 1] )
@@ -195,6 +192,7 @@ inline void reset_recorder_c( cRecorder rec[static 1] )
 /*******************************************************************************
  recorded
 *******************************************************************************/
+
 CLINGO_API
 inline cBytes recorded_bytes_c( cRecorder const rec[static 1] )
 {

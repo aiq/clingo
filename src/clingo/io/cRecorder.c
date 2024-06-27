@@ -275,16 +275,20 @@ void println_recorded_c( cRecorder rec[static 1] )
    putchar( '\n' );
 }
 
+static inline bool finish_cstr( cRecorder rec[static 1] )
+{
+   cChars recorded = recorded_chars_c( rec );
+   if ( not is_empty_c_( recorded ) and
+        last_c_( recorded ) == '\0' )
+      return true;
+
+   return record_char_c( rec, '\0' );
+}
+
 char* turn_into_cstr_c( cRecorder rec[static 1] )
 {
-   if ( recorder_cap_c( rec ) == 0 ) return NULL;
-
-   if ( not record_char_c( rec, '\0' ) )
-   {
-      char const* cstr = rec->mem;
-      --cstr;
-      if ( *cstr != '\0' ) return NULL;
-   }
+   if ( not finish_cstr( rec ) )
+      return "";
 
    reset_recorder_c( rec );
    return rec->mem;

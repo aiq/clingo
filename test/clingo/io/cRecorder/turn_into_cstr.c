@@ -10,7 +10,7 @@ int main( void )
 
    rec = &null_recorder_c_();
    cstr = turn_into_cstr_c( rec );
-   expect_at_c_( cstr == NULL );
+   expect_eq_c_( strcmp( cstr, "" ) );
 
    rec = &recorder_c_( 4 );
    cstr = turn_into_cstr_c( rec );
@@ -30,7 +30,7 @@ int main( void )
 
    record_chars_c_( rec, "abcd" );
    cstr = turn_into_cstr_c( rec );
-   expect_at_c_( cstr == NULL );
+   expect_eq_c_( strcmp( cstr, "" ) );
 
    return finish_tap_c_();
 }
