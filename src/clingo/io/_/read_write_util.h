@@ -1,5 +1,5 @@
-#ifndef CLINGO_INTERN_IO_READ_WRITE_UTIL_H
-#define CLINGO_INTERN_IO_READ_WRITE_UTIL_H
+#ifndef CLINGO_IO_INTERN_READ_WRITE_UTIL_H
+#define CLINGO_IO_INTERN_READ_WRITE_UTIL_H
 
 #include "clingo/io/cScanner.h"
 #include "clingo/type/char.h"

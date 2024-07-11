@@ -1,6 +1,6 @@
-#include "_/io/write_num.h"
+#include "write_num.h"
 
-#include "_/io/cWriteNumFormat.h"
+#include "cWriteNumFormat.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
 

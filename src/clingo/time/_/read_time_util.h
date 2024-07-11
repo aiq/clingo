@@ -1,5 +1,5 @@
-#ifndef CLINGO_INTERN_READ_TIME_UTIL_H
-#define CLINGO_INTERN_READ_TIME_UTIL_H
+#ifndef CLINGO_TIME_INTERN_READ_TIME_UTIL_H
+#define CLINGO_TIME_INTERN_READ_TIME_UTIL_H
 
 #include "clingo/io/read.h"
 #include "clingo/io/read_type.h"

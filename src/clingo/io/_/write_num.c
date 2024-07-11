@@ -1,4 +1,4 @@
-#include "_/io/write_num.h"
+#include "write_num.h"
 
 #include <iso646.h>
 #include <stdio.h>

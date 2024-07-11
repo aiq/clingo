@@ -1,8 +1,8 @@
-#ifndef CLINGO_INTERN_IO_WRITE_UINT_H
-#define CLINGO_INTERN_IO_WRITE_UINT_H
+#ifndef CLINGO_IO_INTERN_WRITE_UINT_H
+#define CLINGO_IO_INTERN_WRITE_UINT_H
 
-#include "_/io/cWriteNumFormat.h"
-#include "_/io/write_num.h"
+#include "cWriteNumFormat.h"
+#include "write_num.h"
 
 #define WRITE_UINT_C_(                                                         \
    Type, FuncName, Dec                                                         \

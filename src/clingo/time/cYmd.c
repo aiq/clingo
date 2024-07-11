@@ -1,7 +1,7 @@
 #include "clingo/time/cYmd.h"
 
-#include "_/time/read_time_util.h"
-#include "_/time/write_time_util.h"
+#include "_/read_time_util.h"
+#include "_/write_time_util.h"
 #include "clingo/io/read.h"
 #include "clingo/lang/algo.h"
 #include "clingo/time/C_TimeFormats.h"

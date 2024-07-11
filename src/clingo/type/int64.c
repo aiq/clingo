@@ -1,7 +1,7 @@
 #include "clingo/type/int64.h"
 
-#include "_/algo/prod.h"
-#include "_/algo/sum.h"
+#include "_/prod.h"
+#include "_/sum.h"
 #include "clingo/lang/algo.h"
 
 /*******************************************************************************

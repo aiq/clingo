@@ -1,8 +1,8 @@
 #include "clingo/time/cTime.h"
 
-#include "_/time/util.h"
-#include "_/time/read_time_util.h"
-#include "_/time/write_time_util.h"
+#include "_/util.h"
+#include "_/read_time_util.h"
+#include "_/write_time_util.h"
 #include "clingo/lang/algo.h"
 #include "clingo/time/C_TimeFormats.h"
 #include "clingo/type/int32.h"

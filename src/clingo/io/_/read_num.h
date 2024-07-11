@@ -1,5 +1,5 @@
-#ifndef CLINGO_INTERN_IO_READ_NUM_H
-#define CLINGO_INTERN_IO_READ_NUM_H
+#ifndef CLINGO_IO_INTERN_READ_NUM_H
+#define CLINGO_IO_INTERN_READ_NUM_H
 
 #include <inttypes.h>
 #include <iso646.h>

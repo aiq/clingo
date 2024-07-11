@@ -2,9 +2,9 @@
 
 #include <stdio.h>
 
-#include "_/io/WRITE_INT.h"
-#include "_/io/WRITE_UINT.h"
-#include "_/io/write_num.h"
+#include "_/WRITE_INT.h"
+#include "_/WRITE_UINT.h"
+#include "_/write_num.h"
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
 

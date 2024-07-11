@@ -3,8 +3,8 @@
 #include <iso646.h>
 #include <stdint.h>
 
-#include "_/algo/prod.h"
-#include "_/algo/sum.h"
+#include "_/prod.h"
+#include "_/sum.h"
 #include "clingo/lang/algo.h"
 #include "clingo/lang/func.h"
 #include "clingo/type/uint8.h"

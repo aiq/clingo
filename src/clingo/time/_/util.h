@@ -1,5 +1,5 @@
-#ifndef CLINGO_INTERN_TIME_UTIL_H
-#define CLINGO_INTERN_TIME_UTIL_H
+#ifndef CLINGO_TIME_INTERN_UTIL_H
+#define CLINGO_TIME_INTERN_UTIL_H
 
 #include <time.h>
 #include <stdbool.h>

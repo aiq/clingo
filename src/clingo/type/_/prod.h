@@ -1,5 +1,5 @@
-#ifndef CLINGO_ALGO_PROD_H
-#define CLINGO_ALGO_PROD_H
+#ifndef CLINGO_TYPE_INTERN_PROD_H
+#define CLINGO_TYPE_INTERN_PROD_H
 
 #include "clingo/lang/slice.h"
 

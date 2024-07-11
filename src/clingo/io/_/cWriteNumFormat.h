@@ -1,5 +1,5 @@
-#ifndef CLINGO_INTERN_WRITE_NUM_FORMAT_H
-#define CLINGO_INTERN_WRITE_NUM_FORMAT_H
+#ifndef CLINGO_IO_INTERN_CWRITENUMFORMAT_H
+#define CLINGO_IO_INTERN_CWRITENUMFORMAT_H
 
 #include "clingo/io/cCell.h"
 #include "clingo/io/cScanner.h"

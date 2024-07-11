@@ -1,5 +1,5 @@
-#ifndef CLINGO_INTERN_IO_WRITE_NUM_H
-#define CLINGO_INTERN_IO_WRITE_NUM_H
+#ifndef CLINGO_IO_INTERN_WRITE_NUM_H
+#define CLINGO_IO_INTERN_WRITE_NUM_H
 
 #include <inttypes.h>
 

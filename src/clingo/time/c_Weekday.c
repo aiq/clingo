@@ -2,8 +2,8 @@
 
 #include <time.h>
 
-#include "_/time/read_time_util.h"
-#include "_/time/write_time_util.h"
+#include "_/read_time_util.h"
+#include "_/write_time_util.h"
 #include "clingo/type/int8.h"
 #include "clingo/type/int16.h"
 #include "clingo/type/int64.h"

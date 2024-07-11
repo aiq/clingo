@@ -1,5 +1,5 @@
-#ifndef CLINGO_INTERN_WRITE_TIME_UTIL_H
-#define CLINGO_INTERN_WRITE_TIME_UTIL_H
+#ifndef CLINGO_TIME_INTERN_WRITE_TIME_UTIL_H
+#define CLINGO_TIME_INTERN_WRITE_TIME_UTIL_H
 
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"

@@ -1,4 +1,4 @@
-#include "_/io/cWriteNumFormat.h"
+#include "cWriteNumFormat.h"
 
 #include "clingo/io/read_type.h"
 

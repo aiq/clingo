@@ -1,6 +1,6 @@
 #include "clingo/io/fwrite.h"
 
-#include "_/io/read_write_util.h"
+#include "_/read_write_util.h"
 #include "clingo/io/FILE.h"
 
 /*******************************************************************************

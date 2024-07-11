@@ -1,5 +1,5 @@
-#ifndef CLINGO_INTERN_COLOR_UTIL_H
-#define CLINGO_INTERN_COLOR_UTIL_H
+#ifndef CLINGO_COLOR_INTERN_UTIL_H
+#define CLINGO_COLOR_INTERN_UTIL_H
 
 #include "clingo/type/float.h"
 #include "clingo/type/uint8.h"

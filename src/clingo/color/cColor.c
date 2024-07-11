@@ -3,7 +3,7 @@
 #include <iso646.h>
 #include <stdlib.h>
 
-#include "_/color/color_util.h"
+#include "_/color_util.h"
 #include "clingo/io/write.h"
 
 /*******************************************************************************

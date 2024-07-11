@@ -1,7 +1,7 @@
 #include "clingo/io/read.h"
 
 #include <ctype.h>
-#include "_/io/read_write_util.h"
+#include "_/read_write_util.h"
 #include "clingo/io/read_type.h"
 
 /*******************************************************************************

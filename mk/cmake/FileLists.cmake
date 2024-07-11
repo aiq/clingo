@@ -5,15 +5,14 @@
 set( SRC_FILES
    ${SRC_DIR}/clingo/requirements.c
 )
-aux_source_directory( ${SRC_DIR}/_/io SRC_FILES )
-aux_source_directory( ${SRC_DIR}/_/time SRC_FILES )
-
 aux_source_directory( ${SRC_DIR}/clingo/color SRC_FILES )
 aux_source_directory( ${SRC_DIR}/clingo/container SRC_FILES )
 aux_source_directory( ${SRC_DIR}/clingo/io SRC_FILES )
+aux_source_directory( ${SRC_DIR}/clingo/io/_ SRC_FILES )
 aux_source_directory( ${SRC_DIR}/clingo/lang SRC_FILES )
 aux_source_directory( ${SRC_DIR}/clingo/string SRC_FILES )
 aux_source_directory( ${SRC_DIR}/clingo/time SRC_FILES )
+aux_source_directory( ${SRC_DIR}/clingo/time/_ SRC_FILES )
 aux_source_directory( ${SRC_DIR}/clingo/type SRC_FILES )
 
 ################################################################################
