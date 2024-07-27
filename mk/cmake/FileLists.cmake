@@ -32,7 +32,7 @@ set( TEST_FILES
 ## color
 aux_source_directory( ${TEST_DIR}/clingo/color/cCmyk TEST_FILES )
 aux_source_directory( ${TEST_DIR}/clingo/color/cColor TEST_FILES )
-aux_source_directory( ${TEST_DIR}/clingo/color/cP3Creator TEST_FILES )
+aux_source_directory( ${TEST_DIR}/clingo/color/cP3Builder TEST_FILES )
 aux_source_directory( ${TEST_DIR}/clingo/color/cRgb24 TEST_FILES )
 
 ## container

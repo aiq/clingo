@@ -1,4 +1,4 @@
-#include "clingo/color/cP3Creator.h"
+#include "clingo/color/cP3Builder.h"
 #include "clingo/io/FILE.h"
 #include "clingo/io/print.h"
 #include "clingo/lang/expect.h"
@@ -64,26 +64,18 @@ int main( void )
    cVarRgb24Image varImage = create_image();
    cRgb24Image image = image_copy_c_( varImage );
 
-   cChars path = c_c( "cP3Creator-overview.ppm" );
    cErrorStack* es = &error_stack_c_( 1024 );
-   FILE* file = open_file_c( path, "w", es );
 
-   cP3Creator* creator = &start_p3_creator_( file, image.w, image.h );
-   for_each_pixel_c_( x, y, image )
-   {
-      cRgb24 rgb = get_rgb24_pixel_c( image, pixel_c_( x, y ) );
-      append_p3_pixel_c( creator, rgb );
-   }
+   cP3Builder b;
+   init_p3_builder_c( &b, image.w, image.h );
+   add_p3_image_c( &b, image );
 
-   close_file_c( file, es );
+   expect_at_c_( recorded_is_c( b.rec, expP3 ) );
 
+   cleanup_p3_builder_c( &b );
 
-   cVarChars p3 = read_text_file_c( path, es );
-
-   expect_at_c_( chars_is_c( as_c_( cChars, p3 ), expP3 ) );
-
-   remove_file_c( path, es );
-   free_all_c_( varImage.data, p3.v );
+   write_p3_file_c( c_c( "cP3Creator-overview.ppm" ), image, es );
+   free_all_c_( varImage.data );
 
    return finish_tap_c_();
 }

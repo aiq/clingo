@@ -129,7 +129,7 @@ CLINGO_API bool fget_line_c( FILE* file,
                              bool fin[static 1] );
 
 /*******************************************************************************
- fwrite
+ fput
 *******************************************************************************/
 
 CLINGO_API bool fput_bytes_c( FILE* file, cBytes bytes );
