@@ -336,6 +336,8 @@ CLINGO_API bool record_uint64_c( cRecorder rec[static 1], uint64_t u64 );
 CLINGO_API bool record_float_c( cRecorder rec[static 1], float f );
 CLINGO_API bool record_double_c( cRecorder rec[static 1], double d );
 
+CLINGO_API bool record_pointer_c( cRecorder rec[static 1], void const* ptr );
+
 /*******************************************************************************
  util
 *******************************************************************************/

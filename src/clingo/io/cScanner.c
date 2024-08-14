@@ -790,6 +790,8 @@ SCAN_FUNC_IMPL_( uint64_t, scan_uint64_c )
 SCAN_FUNC_IMPL_( float,    scan_float_c )
 SCAN_FUNC_IMPL_( double,   scan_double_c )
 
+SCAN_FUNC_IMPL_( void*,    scan_pointer_c )
+
 /*******************************************************************************
  error
 *******************************************************************************/

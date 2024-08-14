@@ -568,6 +568,21 @@ Returns true if all bytes of the double value can be written, otherwise false.
 include::{xmpldir}/record_double.c[]
 ----
 
+==== record_pointer_c
+[source,c]
+----
+bool record_pointer_c( cRecorder rec[static 1], void const* val );
+----
+
+Writes the pointer to the memory of the recorder.
+Returns true if all bytes of the pointer value can be written, otherwise false.
+
+.Example
+[source,c]
+----
+include::{xmpldir}/record_pointer.c[]
+----
+
 //************************************************************************ util
 === util
 

@@ -855,3 +855,15 @@ bool scan_double_c( cScanner sca[static 1], double d[static 1] );
 
 Scans a double from the memory of the scanner.
 Returns true if the double value can be written, otherwise false.
+
+==== scan_pointer_c
+[source,c]
+----
+#define scan_pointer_c_( Sca, Ptr )                                            \
+   scan_pointer_c( (Sca), (void**)(Ptr) )
+bool scan_pointer_c( cScanner sca[static 1], void** ptr );
+----
+
+Scans a pointer from the memory of the scanner.
+Returns true if the pointer value can be written, otherwise false.
+

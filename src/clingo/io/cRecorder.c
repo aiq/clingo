@@ -253,8 +253,10 @@ RECORD_FUNC_IMPL_( uint16_t, record_uint16_c )
 RECORD_FUNC_IMPL_( uint32_t, record_uint32_c )
 RECORD_FUNC_IMPL_( uint64_t, record_uint64_c )
 
-RECORD_FUNC_IMPL_( float,    record_float_c )
-RECORD_FUNC_IMPL_( double,   record_double_c )
+RECORD_FUNC_IMPL_( float,  record_float_c )
+RECORD_FUNC_IMPL_( double, record_double_c )
+
+RECORD_FUNC_IMPL_( void const*,  record_pointer_c )
 
 /*******************************************************************************
 util

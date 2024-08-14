@@ -388,6 +388,10 @@ CLINGO_API bool scan_uint64_c( cScanner sca[static 1], uint64_t u64[static 1] );
 CLINGO_API bool scan_float_c(  cScanner sca[static 1], float f[static 1] );
 CLINGO_API bool scan_double_c( cScanner sca[static 1], double d[static 1] );
 
+#define scan_pointer_c_( Sca, Ptr )                                            \
+   scan_pointer_c( (Sca), (void**)(Ptr) )
+CLINGO_API bool scan_pointer_c( cScanner sca[static 1], void** ptr );
+
 /*******************************************************************************
  error
 *******************************************************************************/
