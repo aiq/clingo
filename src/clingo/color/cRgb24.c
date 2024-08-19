@@ -14,22 +14,18 @@ extern inline bool eq_rgb24_c( cRgb24 a, cRgb24 b );
  
 *******************************************************************************/
 
-cRgb24 get_rgb24_pixel_c( cRgb24Image image, cPixel pixel )
-{
-   uint8_t const* data = to_pixel_value_c_( image, cRgb24, pixel );
-   must_exist_c_( data );
+GET_IMAGE_PIXEL_C_( get_rgb24_pixel_c, cRgb24Image, cRgb24 )
 
-   return rgb24_c_( data[0], data[1], data[2] );
-}
+IMAGE_HAS_PIXEL_C_( has_rgb24_pixel_c, cRgb24Image )
 
-void set_rgb24_pixel_c( cVarRgb24Image image,
-                        cPixel pixel,
-                        cRgb24 rgb )
-{
-   uint8_t* data = to_var_pixel_value_c_( image, cRgb24, pixel );
-   must_exist_c_( data );
+SET_IMAGE_PIXEL_C_( set_rgb24_pixel_c, cVarRgb24Image, cRgb24 )
 
-   data[0] = rgb.red;
-   data[1] = rgb.green;
-   data[2] = rgb.blue;
-}
+/*******************************************************************************
+ 
+*******************************************************************************/
+
+DRAW_IMAGE_LINE_C_( draw_rgb24_line_c, cVarRgb24Image, cRgb24 )
+
+DRAW_IMAGE_RECT_C_( draw_rgb24_rect_c, cVarRgb24Image, cRgb24 )
+
+FILL_IMAGE_RECT_C_( fill_rgb24_rect_c, cVarRgb24Image, cRgb24 )

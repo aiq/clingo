@@ -197,8 +197,29 @@ CLINGO_API cColor negation_color_c( cColor color, cColor other );
 
 CLINGO_API cColor get_color_pixel_c( cColorImage image, cPixel pixel );
 
-CLINGO_API void set_color_pixel_c( cVarColorImage image,
+CLINGO_API bool has_color_pixel_c( cColorImage image, cPixel pixel );
+
+CLINGO_API bool set_color_pixel_c( cVarColorImage image,
                                    cPixel pixel,
+                                   cColor color );
+
+/*******************************************************************************
+ image
+*******************************************************************************/
+
+CLINGO_API bool draw_color_line_c( cVarColorImage image,
+                                   cPixel beg,
+                                   cPixel end,
+                                   cColor color );
+
+CLINGO_API bool draw_color_rect_c( cVarColorImage image,
+                                   cPixel a,
+                                   cPixel b,
+                                   cColor color );
+
+CLINGO_API bool fill_color_rect_c( cVarColorImage image,
+                                   cPixel a,
+                                   cPixel b,
                                    cColor color );
 
 #endif

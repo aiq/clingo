@@ -114,7 +114,7 @@ bool add_p3_pixel_c( cP3Builder b[static 1], cRgb24 rgb )
    }
    else
    {
-      record_chars_c_( rec, "  " );
+      record_chars_c_( rec, " " );
    }
 
    if ( not record_chars_c( b->rec, recorded_chars_c( rec ) ) )

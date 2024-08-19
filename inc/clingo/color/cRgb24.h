@@ -63,8 +63,29 @@ CLINGO_API inline bool eq_rgb24_c( cRgb24 a, cRgb24 b )
 
 CLINGO_API cRgb24 get_rgb24_pixel_c( cRgb24Image image, cPixel pixel );
 
-CLINGO_API void set_rgb24_pixel_c( cVarRgb24Image image,
+CLINGO_API bool has_rgb24_pixel_c( cRgb24Image image, cPixel pixel );
+
+CLINGO_API bool set_rgb24_pixel_c( cVarRgb24Image image,
                                    cPixel pixel,
+                                   cRgb24 rgb );
+
+/*******************************************************************************
+ 
+*******************************************************************************/
+
+CLINGO_API bool draw_rgb24_line_c( cVarRgb24Image image,
+                                   cPixel beg,
+                                   cPixel end,
+                                   cRgb24 rgb24 );
+
+CLINGO_API bool draw_rgb24_rect_c( cVarRgb24Image image,
+                                   cPixel a,
+                                   cPixel b,
+                                   cRgb24 rgb );
+
+CLINGO_API bool fill_rgb24_rect_c( cVarRgb24Image image,
+                                   cPixel a,
+                                   cPixel b,
                                    cRgb24 rgb );
 
 #endif

@@ -22,6 +22,18 @@ The cPixel struct can store the coordinates of a pixel inside an image.
 //******************************************************************* Generated
 === Generated
 
+[id='cPixelSlice']
+==== cPixelSlice
+:Slice-Type: cPixel const
+:Slice-Slice: cPixelSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
+
+[id='cVarPixelSlice']
+==== cVarPixelSlice
+:Slice-Type: cPixel
+:Slice-Slice: cVarPixelSlice
+include::{docroot}/clingo/_tmpl/Slice.adoc[]
+
 //******************************************************************************
 //******************************************************************* Functions
 //******************************************************************************

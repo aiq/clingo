@@ -468,23 +468,19 @@ cColor negation_color_c( cColor x, cColor y )
 /*******************************************************************************
  io
 *******************************************************************************/
-cColor get_color_pixel_c( cColorImage image, cPixel pixel )
-{
-   uint8_t const* data = to_pixel_value_c_( image, cRgb24, pixel );
-   must_exist_c_( data );
 
-   return color_c_( data[0], data[1], data[2], data[3] );
-}
+GET_IMAGE_PIXEL_C_( get_color_pixel_c, cColorImage, cColor )
 
-void set_color_pixel_c( cVarColorImage image,
-                        cPixel pixel,
-                        cColor color )
-{
-   uint8_t* data = to_var_pixel_value_c_( image, cRgb24, pixel );
-   must_exist_c_( data );
+IMAGE_HAS_PIXEL_C_( has_color_pixel_c, cColorImage )
 
-   data[0] = color.r;
-   data[1] = color.g;
-   data[2] = color.b;
-   data[3] = color.a;
-}
+SET_IMAGE_PIXEL_C_( set_color_pixel_c, cVarColorImage, cColor )
+
+/*******************************************************************************
+ io
+*******************************************************************************/
+
+DRAW_IMAGE_LINE_C_( draw_color_line_c, cVarColorImage, cColor )
+
+DRAW_IMAGE_RECT_C_( draw_color_rect_c, cVarColorImage, cColor )
+
+FILL_IMAGE_RECT_C_( fill_color_rect_c, cVarColorImage, cColor )
