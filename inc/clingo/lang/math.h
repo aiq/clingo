@@ -215,6 +215,21 @@ CLINGO_API inline MAX_C_( umax16_c,   uint16_t )
 CLINGO_API inline MAX_C_( umax32_c,   uint32_t )
 CLINGO_API inline MAX_C_( umax64_c,   uint64_t )
 
+#define max_c_( A, B )                                                         \
+   _Generic( ( (A) + (B) ),                                                    \
+      int8_t: imax8_c,                                                         \
+      int16_t: imax16_c,                                                       \
+      int32_t: imax32_c,                                                       \
+      int64_t: imax64_c,                                                       \
+      uint8_t: umax8_c,                                                        \
+      uint16_t: umax16_c,                                                      \
+      uint32_t: umax32_c,                                                      \
+      uint64_t: umax64_c,                                                      \
+      float: fmaxf,                                                            \
+      double: fmax,                                                            \
+      long double: fmaxl                                                       \
+   )( (A), (B) )
+
 /*******************************************************************************
  min
 *******************************************************************************/
