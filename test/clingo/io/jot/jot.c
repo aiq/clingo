@@ -1,5 +1,6 @@
 #include "clingo/io/jot.h"
 #include "clingo/lang/expect.h"
+#include "clingo/time/cDate.h"
 
 int main()
 {
@@ -43,7 +44,8 @@ int main()
       "\n",                                                             // 250
       1, 2, 3, 4                                                        // 254
    ) );
-   jot_c_( rec, "the result value is: ", true, "!" );
+   jotln_c_( rec, "the result value is: ", true, "!" );
+   jot_c_( rec, "on ", date_tape_c_( date_c( 2024, c_Aug, 23 ) ), "!!!" );
 
    expect_at_c_( recorded_is_c( rec, "boah: 128 >= 12\n"
                                   "the result value is: true!\n"
@@ -59,7 +61,10 @@ int main()
                                   "0123456789\n"
                                   "_+_+_+_+_+_+_\n"
                                   "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n"
-                                  "1234the result value is: 1!" ) );
+                                  "1234the result value is: 1!\n"
+                                  "on 2024-08-23!!!" ) );
+
+   println_recorded_c( rec );
 
    return finish_tap_c_();
 }

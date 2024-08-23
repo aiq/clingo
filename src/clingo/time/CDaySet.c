@@ -520,7 +520,7 @@ bool write_day_set_c( cRecorder rec[static 1],
       
       bool res = true;
       {
-         res &= write_ymd_c( rec, ymd, "YYYY.MM:" );
+         res &= write_ymd_c( rec, ymd, "YYYY-MM:" );
 
          c_Weekday wd = c_Mon;
          while ( res and wd != firstWd )

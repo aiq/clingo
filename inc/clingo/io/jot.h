@@ -31,7 +31,10 @@
    cChars: write_chars_c,                                                      \
    char*: write_cstr_c,                                                        \
    char const*: write_cstr_c,                                                  \
+                                                                               \
    cError const*: write_error_c,                                               \
+   cTape: write_tape_c,                                                        \
+                                                                               \
    cRecorder*: write_recorded_c,                                               \
    cRecorder const*: write_recorded_c,                                         \
    cScanner*: write_unscanned_c,                                               \

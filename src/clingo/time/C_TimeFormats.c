@@ -6,7 +6,7 @@
  date definitions
 *******************************************************************************/
 
-char const*const C_DateFormat       = "YYYY.MM.DD";
+char const*const C_DateFormat       = "YYYY-MM-DD";
 char const*const C_TextDate         = "EEE MMM _D YYYY";
 char const*const C_IsoDate          = "YYYY-MM-DD";
 char const*const C_IsoOrdinalDate   = "YYYY-CCC";
@@ -31,7 +31,7 @@ char const*const C_DurationFormat   = "wdhm*l";
  time definitions
 *******************************************************************************/
 
-char const*const C_TimeFormat       = "YYYY.MM.DD hh:mm:ss oooo";
+char const*const C_TimeFormat       = "YYYY-MM-DDThh:mm:ss.nzz";
 char const*const C_IsoTime          = "YYYY-MM-DDThh:mm:ssoooo";
 char const*const C_Rfc2822Time      = "EEE, DD MMM YYYY hh:mm:sszzzz";
 

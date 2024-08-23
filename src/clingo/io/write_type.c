@@ -268,6 +268,13 @@ bool write_rune_c( cRecorder rec[static 1],
    return set_recorder_error_c( rec, c_NotEnoughRecorderSpace );
 }
 
+bool write_tape_c( cRecorder rec[static 1],
+                   cTape tape,
+                   char const fmt[static 1] )
+{
+   return tape_c_( rec, tape, fmt );
+}
+
 /*******************************************************************************
 
 *******************************************************************************/

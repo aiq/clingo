@@ -43,7 +43,7 @@ int main( void )
       t_( month_tape_c_( c_Nov ), "{t:MMMM}", "November" ),
       t_( weekday_tape_c_( c_Fri ), "{t}", "Fri" ),
       t_( date_tape_c_( date_c( 2013, c_Apr, 1 ) ), "{t:YY-MM-DD}", "13-04-01" ),
-      t_( day_set_tape_c( em2024 ), "{t:zip}", "2024.06.14(13i2z4i2z2i2z2i3z+)" ),
+      t_( day_set_tape_c( em2024 ), "{t:zip}", "2024-06-14(13i2z4i2z2i2z2i3z+)" ),
       t_( daytime_tape_c_( daytime_c( 15, 9, 0, 0 ) ), "{t:_k:mmAP}", " 3:09PM" ),
       t_( duration_tape_c_( duration_c( 72, 3, 0, 3456789 ) ), "{t}", "3d3m3.456789ms" ),
       t_( hmsn_tape_c_( hmsn_c( 18, 3, 12, 10234567 ) ), "{t:h:m:s}", "18:3:12" ),

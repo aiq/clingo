@@ -17,6 +17,7 @@ int main( void )
 
    cDate apr01 = date_c( 2013, c_Apr, 1 );
    testSlice tests = slice_c_( test,
+      t_( apr01, "", "2013-04-01" ),
       t_( apr01, "YYYYMMDD", "20130401" ),
       t_( apr01, "YY-M-D", "13-4-1" )
    );

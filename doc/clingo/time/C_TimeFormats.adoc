@@ -26,7 +26,7 @@ include::{xmpldir}/C_TimeFormats-test.c[]
 ==== C_DateFormat
 [source,c]
 ----
-char const*const C_DateFormat = "YYYY.MM.DD";
+char const*const C_DateFormat = "YYYY-MM-DD";
 ----
 
 The definition of the default format to read or write a cDate value.
@@ -129,7 +129,7 @@ The definition of the default format to read or write a cDuration value.
 ==== C_TimeFormat
 [source,c]
 ----
-char const*const C_TimeFormat = "YYYY.MM.DD hh:mm:ss oooo";
+char const*const C_TimeFormat = "YYYY-MM-DDThh:mm:ss.nzz";
 ----
 
 The definition of the default format to read or write a cTime value.

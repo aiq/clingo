@@ -5,6 +5,7 @@
 #include "clingo/lang/error.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
+#include "clingo/io/cTape.h"
 #include "clingo/type/bool.h"
 #include "clingo/type/cRange.h"
 #include "clingo/type/double.h"
@@ -51,7 +52,6 @@ CLINGO_API bool write_error_c( cRecorder rec[static 1],
                                cError const *err,
                                char const fmt[static 1] );
 
-
 #define write_range_c_( Rec, Rng )                                             \
    write_range_c( (Rec), (Rng), "" )
 CLINGO_API
@@ -64,6 +64,13 @@ bool write_range_c( cRecorder rec[static 1],
 CLINGO_API
 bool write_rune_c( cRecorder rec[static 1],
                    cRune rune,
+                   char const fmt[static 1] );
+
+#define write_tape_c_( Rec, Tape )                                             \
+   write_tape_c( (Rec), (Tape), "" )
+CLINGO_API
+bool write_tape_c( cRecorder rec[static 1],
+                   cTape tape,
                    char const fmt[static 1] );
 
 /*******************************************************************************

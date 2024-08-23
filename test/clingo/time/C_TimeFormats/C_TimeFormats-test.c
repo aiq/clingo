@@ -19,7 +19,7 @@ int main( void )
    cTime time = make_time_c( 2006, c_Jan, 2, 15, 4, 5, 0, tz_c( -700 ) );
    testSlice tests = slice_c_( test,
    // date
-      t_( time, C_DateFormat, "2006.01.02" ),
+      t_( time, C_DateFormat, "2006-01-02" ),
    // daytime
       t_( time, C_KitchenTime, " 3:04PM" ),
    // time
