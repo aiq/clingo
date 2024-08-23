@@ -102,7 +102,7 @@ typedef struct Entry##Slice Entry##Slice;
 
 #define slice_c_( Type, ... )                                                  \
 {                                                                              \
-   .s=nargs_c_( __VA_ARGS__ ),                                                 \
+   .s=( sizeof( (Type[]){ __VA_ARGS__ } ) / sizeof( Type ) ),                  \
    .v=(Type[]){ __VA_ARGS__ }                                                  \
 }
 
