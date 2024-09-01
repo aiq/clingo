@@ -1,7 +1,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/lang/slice.h"
 #include "clingo/type/cChars.h"
-#include "clingo/type/int16.h" // for cInt16Slice
+#include "clingo/type/int16.h" // for cInt16s
 
 int main( void )
 {
@@ -19,10 +19,10 @@ int main( void )
    cChars nullSlice = mid_c_( cChars, chars, chars.s );
    expect_at_c_( is_empty_c_( nullSlice ) );
 
-   // -------------------------------------------------------------- cInt16Slice
-   cInt16Slice int16s = slice_c_( int16_t, 8, -16, 128, -1024, 512 );
+   // -------------------------------------------------------------- cInt16s
+   cInt16s int16s = slice_c_( int16_t, 8, -16, 128, -1024, 512 );
 
-   cInt16Slice two = mid_c_( cInt16Slice, int16s, 3 );
+   cInt16s two = mid_c_( cInt16s, int16s, 3 );
    expect_at_c_( two.s == 2 );
    expect_at_c_( two.v[ 0 ] == -1024 );
    expect_at_c_( two.v[ 1 ] == 512 );

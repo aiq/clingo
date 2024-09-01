@@ -1,12 +1,12 @@
 #include "clingo/lang/expect.h"
 #include "clingo/lang/slice.h"
-#include "clingo/type/int64.h" // for cInt64Slice
+#include "clingo/type/int64.h" // for cInt64s
 
 int main( void )
 {
    init_tap_c_();
 
-   cVarInt64Slice slice = scalars_c_( 3, int64_t );
+   cVarInt64s slice = scalars_c_( 3, int64_t );
    slice.v[ 0 ] = -10;
    slice.v[ 1 ] = 100;
    slice.v[ 2 ] = 200;

@@ -5,7 +5,7 @@ int main( void )
 {
    init_tap_c_();
 
-   cInt32Slice slice = slice_c_( int32_t, 50, 123456, 99, 123456, -65 );
+   cInt32s slice = slice_c_( int32_t, 50, 123456, 99, 123456, -65 );
 
    int32_t const* max = max_int32_c( slice );
    expect_at_c_( index_of_c_( slice, max ) == 1 );

@@ -23,15 +23,15 @@ VAL_VEC_DEF_C_(
 
 #define add_many_to_int64_vec_c_( Vec, ... )                                   \
    add_many_to_int64_vec_c(                                                    \
-      (Vec), (cInt64Slice)slice_c_( int64_t, __VA_ARGS__ )                     \
+      (Vec), (cInt64s)slice_c_( int64_t, __VA_ARGS__ )                         \
    )
-CLINGO_API inline bool add_many_to_int64_vec_c( CInt64Vec* vec, cInt64Slice many )
+CLINGO_API inline bool add_many_to_int64_vec_c( CInt64Vec* vec, cInt64s many )
 {
    return add_array_to_int64_vec_c( vec, many.s, many.v );
 }
 
-CLINGO_API cInt64Slice slice_of_int64_vec_c( CInt64Vec const* vec );
+CLINGO_API cInt64s slice_of_int64_vec_c( CInt64Vec const* vec );
 
-CLINGO_API cVarInt64Slice var_slice_of_int64_vec_c( CInt64Vec* vec );
+CLINGO_API cVarInt64s var_slice_of_int64_vec_c( CInt64Vec* vec );
 
 #endif

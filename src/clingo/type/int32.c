@@ -33,7 +33,7 @@ extern inline int32_t swap_int32_to_c( int32_t val, c_ByteOrder order );
 
 BSEARCH_C_(
    bsearch_int32_c,  // FuncName
-   cInt32Slice,      // SliceType
+   cInt32s,      // SliceType
    int32_t const,    // ValueType
    int32_t,          // SearchType
    cmp_int32_c,      // CmpFunc
@@ -41,8 +41,8 @@ BSEARCH_C_(
 )
 
 CMP_SLICE_C_(
-   cmp_int32_slice_c,   // FuncName
-   cInt32Slice,         // SliceType
+   cmp_int32s_c,   // FuncName
+   cInt32s,         // SliceType
    int32_t const,       // ValueType
    cmp_int32_c,         // CmpFunc
    do_deref_c_          // DoDeref
@@ -50,7 +50,7 @@ CMP_SLICE_C_(
 
 COUNT_EQ_C_(
    count_eq_int32_c, // FuncName
-   cInt32Slice,      // SliceType
+   cInt32s,      // SliceType
    int32_t const,    // ValueType
    int32_t,          // SearchType
    cmp_int32_c,      // CmpFunc
@@ -59,7 +59,7 @@ COUNT_EQ_C_(
 
 FIND_VAL_C_(
    find_int32_c,  // FuncName
-   cInt32Slice,   // SliceType
+   cInt32s,   // SliceType
    int32_t const, // ValueType
    int32_t,       // SearchType
    cmp_int32_c,   // CmpFunc
@@ -68,7 +68,7 @@ FIND_VAL_C_(
 
 FIND_MAX_C_(
    max_int32_c,   // FuncName
-   cInt32Slice,   // SliceType
+   cInt32s,   // SliceType
    int32_t const, // ValueType
    cmp_int32_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -76,7 +76,7 @@ FIND_MAX_C_(
 
 FIND_MIN_C_(
    min_int32_c,   // FuncName
-   cInt32Slice,   // SliceType
+   cInt32s,   // SliceType
    int32_t const, // ValueType
    cmp_int32_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -84,15 +84,15 @@ FIND_MIN_C_(
 
 PROD_C_(
    prod_int32_c,  // FuncName
-   cInt32Slice,   // SliceType
+   cInt32s,   // SliceType
    int32_t,       // ValueType
    int64_t,       // ResType
    imul64_c       // MulFunc
 )
 
 QSORT_C_(
-   qsort_int32_slice_c, // FuncName
-   cVarInt32Slice,      // SliceType
+   qsort_int32s_c, // FuncName
+   cVarInt32s,      // SliceType
    int32_t,             // ValueType
    cmp_int32_c,         // CmpFunc
    do_deref_c_          // DoDeref
@@ -100,25 +100,25 @@ QSORT_C_(
 
 REMOVE_C_(
    remove_int32_c,   // FuncName
-   cVarInt32Slice,   // SliceType
+   cVarInt32s,   // SliceType
    int32_t           // ValueType
 )
 
 REVERSE_C_(
-   reverse_int32_slice_c,  // FuncName
-   cVarInt32Slice,         // SliceType
+   reverse_int32s_c,  // FuncName
+   cVarInt32s,         // SliceType
    int32_t                 // ValueType
 )
 
 ROTATE_C_(
-   rotate_int32_slice_c,   // FuncName
-   cVarInt32Slice,         // SliceType
+   rotate_int32s_c,   // FuncName
+   cVarInt32s,         // SliceType
    int32_t                 // ValueType
 )
 
 SUM_C_(
    sum_int32_c,   // FuncName
-   cInt32Slice,   // SliceType
+   cInt32s,   // SliceType
    int32_t,       // ValueType
    int64_t,       // ResType
    iadd64_c       // AddFunc
@@ -126,6 +126,6 @@ SUM_C_(
 
 TAKE_C_(
    take_int32_c,     // FuncName
-   cVarInt32Slice,   // SliceType
+   cVarInt32s,   // SliceType
    int32_t           // ValueType
 )

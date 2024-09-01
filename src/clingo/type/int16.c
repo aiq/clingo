@@ -32,8 +32,8 @@ extern inline int16_t swap_int16_to_c( int16_t val, c_ByteOrder order );
 *******************************************************************************/
 
 CMP_SLICE_C_(
-   cmp_int16_slice_c,   // FuncName
-   cInt16Slice,         // SliceType
+   cmp_int16s_c,   // FuncName
+   cInt16s,             // SliceType
    int16_t const,       // ValueType
    cmp_int16_c,         // CmpFunc
    do_deref_c_          // DoDeref
@@ -41,7 +41,7 @@ CMP_SLICE_C_(
 
 COUNT_EQ_C_(
    count_eq_int16_c, // FuncName
-   cInt16Slice,      // SliceType
+   cInt16s,          // SliceType
    int16_t const,    // ValueType
    int16_t,          // SearchType
    cmp_int16_c,      // CmpFunc
@@ -50,7 +50,7 @@ COUNT_EQ_C_(
 
 FIND_VAL_C_(
    find_int16_c,  // FuncName
-   cInt16Slice,   // SliceType
+   cInt16s,       // SliceType
    int16_t const, // ValueType
    int16_t,       // SearchType
    cmp_int16_c,   // CmpFunc
@@ -59,7 +59,7 @@ FIND_VAL_C_(
 
 FIND_MAX_C_(
    max_int16_c,   // FuncName
-   cInt16Slice,   // SliceType
+   cInt16s,       // SliceType
    int16_t const, // ValueType
    cmp_int16_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -67,7 +67,7 @@ FIND_MAX_C_(
 
 FIND_MIN_C_(
    min_int16_c,   // FuncName
-   cInt16Slice,   // SliceType
+   cInt16s,   // SliceType
    int16_t const, // ValueType
    cmp_int16_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -75,35 +75,35 @@ FIND_MIN_C_(
 
 PROD_C_(
    prod_int16_c,  // FuncName
-   cInt16Slice,   // SliceType
+   cInt16s,       // SliceType
    int16_t,       // ValueType
    int64_t,       // ResType
    imul64_c       // MulFunc
 )
 
 QSORT_C_(
-   qsort_int16_slice_c, // FuncName
-   cVarInt16Slice,      // SliceType
+   qsort_int16s_c, // FuncName
+   cVarInt16s,          // SliceType
    int16_t,             // ValueType
    cmp_int16_c,         // CmpFunc
    do_deref_c_          // DoDeref
 )
 
 REVERSE_C_(
-   reverse_int16_slice_c,  // FuncName
-   cVarInt16Slice,         // SliceType
+   reverse_int16s_c,  // FuncName
+   cVarInt16s,             // SliceType
    int16_t                 // ValueType
 )
 
 ROTATE_C_(
-   rotate_int16_slice_c,   // FuncName
-   cVarInt16Slice,         // SliceType
+   rotate_int16s_c,   // FuncName
+   cVarInt16s,             // SliceType
    int16_t                 // ValueType
 )
 
 SUM_C_(
    sum_int16_c,   // FuncName
-   cInt16Slice,   // SliceType
+   cInt16s,       // SliceType
    int16_t,       // ValueType
    int64_t,       // ResType
    iadd64_c       // AddFunc

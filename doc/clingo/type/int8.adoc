@@ -18,16 +18,16 @@ Module with functions and types to work with int8_t values.
 //******************************************************************* Generated
 === Generated
 
-[id='cInt8Slice']
-==== cInt8Slice
+[id='cInt8s']
+==== cInt8s
 :Slice-Type: int8_t const
-:Slice-Slice: cInt8Slice
+:Slice-Slice: cInt8s
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
-[id='cVarInt8Slice']
-==== cVarInt8Slice
+[id='cVarInt8s']
+==== cVarInt8s
 :Slice-Type: int8_t
-:Slice-Slice: cVarInt8Slice
+:Slice-Slice: cVarInt8s
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
@@ -103,10 +103,10 @@ include::{xmpldir}/uint64_to_int8.c[]
 //************************************************************************ algo
 === algo
 
-==== cmp_int8_slice_c
+==== cmp_int8s_c
 [source,c]
 ----
-int64_t cmp_int8_slice_c( cInt8Slice a, cInt8Slice b );
+int64_t cmp_int8s_c( cInt8s a, cInt8s b );
 ----
 
 {CmpSlice}
@@ -114,7 +114,7 @@ int64_t cmp_int8_slice_c( cInt8Slice a, cInt8Slice b );
 ==== count_eq_int8_c
 [source,c]
 ----
-int64_t count_eq_int8_c( cInt8Slice slice, int8_t val );
+int64_t count_eq_int8_c( cInt8s slice, int8_t val );
 ----
 
 {CountEq}
@@ -122,7 +122,7 @@ int64_t count_eq_int8_c( cInt8Slice slice, int8_t val );
 ==== find_int8_c
 [source,c]
 ----
-int8_t const* find_int8_c( cInt8Slice slice, int8_t val );
+int8_t const* find_int8_c( cInt8s slice, int8_t val );
 ----
 
 {FindVal}
@@ -130,7 +130,7 @@ int8_t const* find_int8_c( cInt8Slice slice, int8_t val );
 ==== max_int8_c
 [source,c]
 ----
-int8_t const* max_int8_c( cInt8Slice slice );
+int8_t const* max_int8_c( cInt8s slice );
 ----
 
 {FindMax}
@@ -138,7 +138,7 @@ int8_t const* max_int8_c( cInt8Slice slice );
 ==== min_int8_c
 [source,c]
 ----
-int8_t const* min_int8_c( cInt8Slice slice );
+int8_t const* min_int8_c( cInt8s slice );
 ----
 
 {FindMin}
@@ -146,31 +146,31 @@ int8_t const* min_int8_c( cInt8Slice slice );
 ==== prod_int8_c
 [source,c]
 ----
-bool prod_int8_c( cInt8Slice slice, int64_t res [static 1] );
+bool prod_int8_c( cInt8s slice, int64_t res [static 1] );
 ----
 
 {Prod}
 
-==== qsort_int8_slice_c
+==== qsort_int8s_c
 [source,c]
 ----
-void qsort_int8_slice_c( cVarInt8Slice slice );
+void qsort_int8s_c( cVarInt8s slice );
 ----
 
 {Qsort}
 
-==== reverse_int8_slice_c
+==== reverse_int8s_c
 [source,c]
 ----
-void reverse_int8_slice_c( cVarInt8Slice slice );
+void reverse_int8s_c( cVarInt8s slice );
 ----
 
 {Reverse}
 
-==== rotate_int8_slice_c
+==== rotate_int8s_c
 [source,c]
 ----
-void rotate_var_int8_slice_c( cVarInt8Slice slice, int64_t distance );
+void rotate_var_int8s_c( cVarInt8s slice, int64_t distance );
 ----
 
 {Rotate}
@@ -178,7 +178,7 @@ void rotate_var_int8_slice_c( cVarInt8Slice slice, int64_t distance );
 ==== sum_int8_c
 [source,c]
 ----
-bool sum_int8_c( cInt8Slice slice, int64_t res[static 1] );
+bool sum_int8_c( cInt8s slice, int64_t res[static 1] );
 ----
 
 {Sum}

@@ -38,8 +38,8 @@ extern inline uint32_t next_pow2_uint32_c( uint32_t val );
 *******************************************************************************/
 
 CMP_SLICE_C_(
-   cmp_uint32_slice_c,  // FuncName
-   cUint32Slice,        // SliceType
+   cmp_uint32s_c,  // FuncName
+   cUint32s,        // SliceType
    uint32_t const,      // ValueType
    cmp_uint32_c,        // CmpFunc
    do_deref_c_          // DoDeref
@@ -47,7 +47,7 @@ CMP_SLICE_C_(
 
 COUNT_EQ_C_(
    count_eq_uint32_c,   // FuncName
-   cUint32Slice,        // SliceType
+   cUint32s,        // SliceType
    uint32_t const,      // ValueType
    uint32_t,            // SearchType
    cmp_uint32_c,        // CmpFunc
@@ -56,7 +56,7 @@ COUNT_EQ_C_(
 
 FIND_VAL_C_(
    find_uint32_c,    // FuncName
-   cUint32Slice,     // SliceType
+   cUint32s,     // SliceType
    uint32_t const,   // ValueType
    uint32_t,         // SearchType
    cmp_uint32_c,     // CmpFunc
@@ -65,7 +65,7 @@ FIND_VAL_C_(
 
 FIND_MAX_C_(
    max_uint32_c,     // FuncName
-   cUint32Slice,     // SliceType
+   cUint32s,     // SliceType
    uint32_t const,   // ValueType
    cmp_uint32_c,     // CmpFunc
    do_deref_c_       // DoDeref
@@ -73,7 +73,7 @@ FIND_MAX_C_(
 
 FIND_MIN_C_(
    min_uint32_c,     // FuncName
-   cUint32Slice,     // SliceType
+   cUint32s,     // SliceType
    uint32_t const,   // ValueType
    cmp_uint32_c,     // CmpFunc
    do_deref_c_       // DoDeref
@@ -81,35 +81,35 @@ FIND_MIN_C_(
 
 PROD_C_(
    prod_uint32_c, // FuncName
-   cUint32Slice,  // SliceType
+   cUint32s,  // SliceType
    uint32_t,      // ValueType
    uint64_t,      // ResType
    umul64_c       // MulFunc
 )
 
 QSORT_C_(
-   qsort_uint32_slice_c,   // FuncName
-   cVarUint32Slice,        // SliceType
+   qsort_uint32s_c,   // FuncName
+   cVarUint32s,        // SliceType
    uint32_t,               // ValueType
    cmp_uint32_c,           // CmpFunc
    do_deref_c_             // DoDeref
 )
 
 REVERSE_C_(
-   reverse_uint32_slice_c, // FuncName
-   cVarUint32Slice,        // SliceType
+   reverse_uint32s_c, // FuncName
+   cVarUint32s,        // SliceType
    uint32_t                // ValueType
 )
 
 ROTATE_C_(
-   rotate_uint32_slice_c,  // FuncName
-   cVarUint32Slice,        // SliceType
+   rotate_uint32s_c,  // FuncName
+   cVarUint32s,        // SliceType
    uint32_t                // ValueType
 )
 
 SUM_C_(
    sum_uint32_c,  // FuncName
-   cUint32Slice,  // SliceType
+   cUint32s,  // SliceType
    uint32_t,      // ValueType
    uint64_t,      // ResType
    uadd64_c       // AddFunc

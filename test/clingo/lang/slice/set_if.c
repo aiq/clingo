@@ -1,13 +1,13 @@
 #include "clingo/lang/expect.h"
 #include "clingo/lang/slice.h"
-#include "clingo/type/int64.h" // for cInt64Slice
+#include "clingo/type/int64.h" // for cInt64s
 
 int main( void )
 {
    init_tap_c_();
 
-   cVarInt64Slice slice4 = slice_c_( int64_t, 11, 22, 33, 44 );
-   cVarInt64Slice slice3 = left_c_( cVarInt64Slice, slice4, 3 );
+   cVarInt64s slice4 = slice_c_( int64_t, 11, 22, 33, 44 );
+   cVarInt64s slice3 = left_c_( cVarInt64s, slice4, 3 );
    set_if_c_( slice3, 0, 10 );
    set_if_c_( slice3, 1, 20 );
    set_if_c_( slice3, 2, 30 );

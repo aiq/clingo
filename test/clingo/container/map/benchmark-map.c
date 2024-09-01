@@ -45,7 +45,7 @@ cBenchmark* set_int64_map( int64_t n )
 {
    static cBenchmark b = benchmark_c_( "set int64 map" );
 
-   cVarInt64Slice ints = heap_slice_c_( n, int64_t );
+   cVarInt64s ints = heap_slice_c_( n, int64_t );
    srand( 123 );
    times_c_( n, i )
    {

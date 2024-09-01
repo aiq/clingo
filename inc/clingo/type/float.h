@@ -22,8 +22,8 @@ typedef struct cFloatInfo cFloatInfo;
 
 SLICES_C_(
    float,               // Type
-   cFloatSlice,         // SliceType
-   cVarFloatSlice       // VarSliceType
+   cFloats,         // SliceType
+   cVarFloats       // VarSliceType
 )
 
 /*******************************************************************************
@@ -75,14 +75,22 @@ CLINGO_API float unpack_float_c( uint32_t u );
 
 *******************************************************************************/
 
-CLINGO_API float const* find_float_c( cFloatSlice slice, float f );
+CLINGO_API float const* find_float_c( cFloats slice, float f );
 
-CLINGO_API float const* max_float_c( cFloatSlice slice );
+CLINGO_API float const* max_float_c( cFloats slice );
 
-CLINGO_API float const* min_float_c( cFloatSlice slice );
+CLINGO_API float const* min_float_c( cFloats slice );
 
-CLINGO_API bool prod_float_c( cFloatSlice slice, float res[static 1] );
+CLINGO_API bool prod_float_c( cFloats slice, float res[static 1] );
 
-CLINGO_API bool sum_float_c( cFloatSlice slice, float res[static 1] );
+CLINGO_API bool sum_float_c( cFloats slice, float res[static 1] );
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+#define trunc_float_c_( F )                                                    \
+   trunc_float_c( (F), NULL )
+CLINGO_API float trunc_float_c( float f, float* diff );
 
 #endif

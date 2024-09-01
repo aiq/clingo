@@ -43,9 +43,9 @@ include::{docroot}/clingo/_tmpl/ValVec.adoc[]
 ----
 #define add_many_to_int64_vec_c_( Vec, ... )                                   \
    add_many_to_int64_vec_c(                                                    \
-      (Vec), (cInt64Slice)slice_c_( int64_t, __VA_ARGS__ )                     \
+      (Vec), (cInt64s)slice_c_( int64_t, __VA_ARGS__ )                     \
    )
-bool add_many_to_int64_vec_c( CInt64Vec* vec, cInt64Slice many );
+bool add_many_to_int64_vec_c( CInt64Vec* vec, cInt64s many );
 ----
 
 Adds all int64_t values from the slice to the int64_t vector.
@@ -53,7 +53,7 @@ Adds all int64_t values from the slice to the int64_t vector.
 ==== slice_of_int64_vec_c
 [source,c]
 ----
-cInt64Slice slice_of_int64_vec_c( CInt64Vec const* vec );
+cInt64s slice_of_int64_vec_c( CInt64Vec const* vec );
 ----
 
 Via the macro link:vec.html#SLICE_OF_VEC_C_[SLICE_OF_VEC_C_] implemented function.
@@ -61,7 +61,7 @@ Via the macro link:vec.html#SLICE_OF_VEC_C_[SLICE_OF_VEC_C_] implemented functio
 ==== var_slice_of_int64_vec_c
 [source,c]
 ----
-cVarInt64Slice var_slice_of_int64_vec_c( CInt64Vec* vec );
+cVarInt64s var_slice_of_int64_vec_c( CInt64Vec* vec );
 ----
 
 Via the macro link:vec.html#VAR_SLICE_OF_VEC_C_[VAR_SLICE_OF_VEC_C_] implemented function.

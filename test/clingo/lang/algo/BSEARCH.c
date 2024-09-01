@@ -7,7 +7,7 @@ int main( void )
 
    tap_note_c( "even slice test" );
    {
-      cInt32Slice evenSlice = slice_c_( int32_t,
+      cInt32s evenSlice = slice_c_( int32_t,
          -30, -20, -10, 0, 10, 20, 30, 40
       );
       int32_t val = -30;
@@ -21,7 +21,7 @@ int main( void )
 
    tap_note_c( "odd slice test" );
    {
-      cInt32Slice oddSlice = slice_c_( int32_t, -30, -20, -10, 0, 10, 20, 30 );
+      cInt32s oddSlice = slice_c_( int32_t, -30, -20, -10, 0, 10, 20, 30 );
       int32_t val = -30;
       for ( int64_t index = 0; index < oddSlice.s; ++index )
       {

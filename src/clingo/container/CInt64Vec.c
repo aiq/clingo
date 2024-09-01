@@ -17,16 +17,16 @@ VAL_VEC_IMPL_C_(
  overall
 *******************************************************************************/
 
-extern inline bool add_many_to_int64_vec_c( CInt64Vec* vec, cInt64Slice many );
+extern inline bool add_many_to_int64_vec_c( CInt64Vec* vec, cInt64s many );
 
 SLICE_OF_VEC_C_(
    int64_vec_c,   // FuncSuffix
    CInt64Vec,     // VecType
-   cInt64Slice    // SliceType
+   cInt64s    // SliceType
 )
 
 VAR_SLICE_OF_VEC_C_(
    int64_vec_c,   // FuncSuffix
    CInt64Vec,     // VecType
-   cVarInt64Slice // SliceType
+   cVarInt64s // SliceType
 )

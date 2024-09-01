@@ -14,9 +14,9 @@
 *******************************************************************************/
 
 SLICES_C_(
-   int32_t,             // Type
-   cInt32Slice,         // SliceType
-   cVarInt32Slice       // VarSliceType
+   int32_t,    // Type
+   cInt32s,    // SliceType
+   cVarInt32s  // VarSliceType
 )
 
 /*******************************************************************************
@@ -85,31 +85,31 @@ CLINGO_API inline int32_t swap_int32_to_c( int32_t val, c_ByteOrder order )
  algo
 *******************************************************************************/
 
-CLINGO_API int32_t const* bsearch_int32_c( cInt32Slice slice, int32_t val );
+CLINGO_API int32_t const* bsearch_int32_c( cInt32s slice, int32_t val );
 
-CLINGO_API int cmp_int32_slice_c( cInt32Slice a, cInt32Slice b );
+CLINGO_API int cmp_int32s_c( cInt32s a, cInt32s b );
 
-CLINGO_API int64_t count_eq_int32_c( cInt32Slice slice, int32_t val );
+CLINGO_API int64_t count_eq_int32_c( cInt32s slice, int32_t val );
 
-CLINGO_API int32_t const* find_int32_c( cInt32Slice slice, int32_t val );
+CLINGO_API int32_t const* find_int32_c( cInt32s slice, int32_t val );
 
-CLINGO_API int32_t const* max_int32_c( cInt32Slice slice );
+CLINGO_API int32_t const* max_int32_c( cInt32s slice );
 
-CLINGO_API int32_t const* min_int32_c( cInt32Slice slice );
+CLINGO_API int32_t const* min_int32_c( cInt32s slice );
 
-CLINGO_API bool prod_int32_c( cInt32Slice slice, int64_t res[static 1] );
+CLINGO_API bool prod_int32_c( cInt32s slice, int64_t res[static 1] );
 
-CLINGO_API void qsort_int32_slice_c( cVarInt32Slice slice );
+CLINGO_API void qsort_int32s_c( cVarInt32s slice );
 
-CLINGO_API bool remove_int32_c( cVarInt32Slice slice[static 1], int64_t pos );
+CLINGO_API bool remove_int32_c( cVarInt32s slice[static 1], int64_t pos );
 
-CLINGO_API void reverse_int32_slice_c( cVarInt32Slice slice );
+CLINGO_API void reverse_int32s_c( cVarInt32s slice );
 
-CLINGO_API void rotate_int32_slice_c( cVarInt32Slice slice, int64_t distance );
+CLINGO_API void rotate_int32s_c( cVarInt32s slice, int64_t distance );
 
-CLINGO_API bool sum_int32_c( cInt32Slice slice, int64_t res[static 1] );
+CLINGO_API bool sum_int32_c( cInt32s slice, int64_t res[static 1] );
 
-CLINGO_API bool take_int32_c( cVarInt32Slice slice[static 1],
+CLINGO_API bool take_int32_c( cVarInt32s slice[static 1],
                               int64_t pos,
                               int32_t val[static 1] );
 

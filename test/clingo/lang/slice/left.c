@@ -1,7 +1,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/lang/slice.h"
 #include "clingo/type/cChars.h"
-#include "clingo/type/int64.h" // for cInt64Slice
+#include "clingo/type/int64.h" // for cInt64s
 
 int main( void )
 {
@@ -19,10 +19,10 @@ int main( void )
    cChars empty = left_c_( cChars, chars, 0 );
    expect_at_c_( is_empty_c_( empty ) );
 
-   // -------------------------------------------------------------- cInt64Slice
-   cInt64Slice int64s = slice_c_( int64_t, 123, -456, 789, 369, 246 );
+   // -------------------------------------------------------------- cInt64s
+   cInt64s int64s = slice_c_( int64_t, 123, -456, 789, 369, 246 );
 
-   cInt64Slice three = left_c_( cInt64Slice, int64s, 3 );
+   cInt64s three = left_c_( cInt64s, int64s, 3 );
    expect_at_c_( three.s == 3 );
    expect_at_c_( three.v[ 0 ] == 123 );
    expect_at_c_( three.v[ 2 ] == 789 );

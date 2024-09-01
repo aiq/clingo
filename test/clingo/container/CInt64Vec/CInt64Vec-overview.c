@@ -37,7 +37,7 @@ int main( void )
 
    cRecorder* rec = &recorder_c_( 128 );
    {
-      cInt64Slice slice = slice_of_int64_vec_c( vec );
+      cInt64s slice = slice_of_int64_vec_c( vec );
       each_c_( int64_t const*, i, slice )
       {
          write_int64_c_( rec, *i );

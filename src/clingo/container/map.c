@@ -16,7 +16,7 @@ extern inline float calculate_load_c( int64_t cap, int64_t count );
 
 extern inline int64_t fibonacci_hash_index_c( uint64_t hash, uint8_t shift );
 
-extern inline uint64_t compine_hashes_c( cUint64Slice hashes );
+extern inline uint64_t compine_hashes_c( cUint64s hashes );
 
 /*******************************************************************************
  info

@@ -14,9 +14,9 @@
 *******************************************************************************/
 
 SLICES_C_(
-   uint32_t,            // Type
-   cUint32Slice,        // SliceType
-   cVarUint32Slice      // VarSliceType
+   uint32_t,   // Type
+   cUint32s,   // SliceType
+   cVarUint32s // VarSliceType
 )
 
 /*******************************************************************************
@@ -97,24 +97,24 @@ CLINGO_API inline uint32_t next_pow2_uint32_c( uint32_t val )
  algo
 *******************************************************************************/
 
-CLINGO_API int cmp_uint32_slice_c( cUint32Slice a, cUint32Slice b );
+CLINGO_API int cmp_uint32s_c( cUint32s a, cUint32s b );
 
-CLINGO_API int64_t count_eq_uint32_c( cUint32Slice slice, uint32_t val );
+CLINGO_API int64_t count_eq_uint32_c( cUint32s slice, uint32_t val );
 
-CLINGO_API uint32_t const* find_uint32_c( cUint32Slice slice, uint32_t val );
+CLINGO_API uint32_t const* find_uint32_c( cUint32s slice, uint32_t val );
 
-CLINGO_API uint32_t const* max_uint32_c( cUint32Slice slice );
+CLINGO_API uint32_t const* max_uint32_c( cUint32s slice );
 
-CLINGO_API uint32_t const* min_uint32_c( cUint32Slice slice );
+CLINGO_API uint32_t const* min_uint32_c( cUint32s slice );
 
-CLINGO_API bool prod_uint32_c( cUint32Slice slice, uint64_t res[static 1] );
+CLINGO_API bool prod_uint32_c( cUint32s slice, uint64_t res[static 1] );
 
-CLINGO_API void qsort_uint32_slice_c( cVarUint32Slice slice );
+CLINGO_API void qsort_uint32s_c( cVarUint32s slice );
 
-CLINGO_API void reverse_uint32_slice_c( cVarUint32Slice slice );
+CLINGO_API void reverse_uint32s_c( cVarUint32s slice );
 
-CLINGO_API void rotate_uint32_slice_c( cVarUint32Slice slice, int64_t distance );
+CLINGO_API void rotate_uint32s_c( cVarUint32s slice, int64_t distance );
 
-CLINGO_API bool sum_uint32_c( cUint32Slice slice, uint64_t res[static 1] );
+CLINGO_API bool sum_uint32_c( cUint32s slice, uint64_t res[static 1] );
 
 #endif

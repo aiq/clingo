@@ -14,9 +14,9 @@
 *******************************************************************************/
 
 SLICES_C_(
-   int64_t,             // Type
-   cInt64Slice,         // SliceType
-   cVarInt64Slice       // VarSliceType
+   int64_t,    // Type
+   cInt64s,    // SliceType
+   cVarInt64s  // VarSliceType
 )
 
 /*******************************************************************************
@@ -102,31 +102,31 @@ CLINGO_API inline int64_t next_pow2_int64_c( int64_t val )
  algo
 *******************************************************************************/
 
-CLINGO_API int64_t const* bsearch_int64_c( cInt64Slice slice, int64_t val );
+CLINGO_API int64_t const* bsearch_int64_c( cInt64s slice, int64_t val );
 
-CLINGO_API int cmp_int64_slice_c( cInt64Slice a, cInt64Slice b );
+CLINGO_API int cmp_int64s_c( cInt64s a, cInt64s b );
 
-CLINGO_API int64_t count_eq_int64_c( cInt64Slice slice, int64_t val );
+CLINGO_API int64_t count_eq_int64_c( cInt64s slice, int64_t val );
 
-CLINGO_API int64_t const* find_int64_c( cInt64Slice slice, int64_t val );
+CLINGO_API int64_t const* find_int64_c( cInt64s slice, int64_t val );
 
-CLINGO_API int64_t const* max_int64_c( cInt64Slice slice );
+CLINGO_API int64_t const* max_int64_c( cInt64s slice );
 
-CLINGO_API int64_t const* min_int64_c( cInt64Slice slice );
+CLINGO_API int64_t const* min_int64_c( cInt64s slice );
 
-CLINGO_API bool prod_int64_c( cInt64Slice slice, int64_t res[static 1] );
+CLINGO_API bool prod_int64_c( cInt64s slice, int64_t res[static 1] );
 
-CLINGO_API void qsort_int64_slice_c( cVarInt64Slice slice );
+CLINGO_API void qsort_int64s_c( cVarInt64s slice );
 
-CLINGO_API bool remove_int64_c( cVarInt64Slice slice[static 1], int64_t pos );
+CLINGO_API bool remove_int64_c( cVarInt64s slice[static 1], int64_t pos );
 
-CLINGO_API void reverse_int64_slice_c( cVarInt64Slice slice );
+CLINGO_API void reverse_int64s_c( cVarInt64s slice );
 
-CLINGO_API void rotate_int64_slice_c( cVarInt64Slice slice, int64_t distance );
+CLINGO_API void rotate_int64s_c( cVarInt64s slice, int64_t distance );
 
-CLINGO_API bool sum_int64_c( cInt64Slice slice, int64_t res[static 1] );
+CLINGO_API bool sum_int64_c( cInt64s slice, int64_t res[static 1] );
 
-CLINGO_API bool take_int64_c( cVarInt64Slice slice[static 1],
+CLINGO_API bool take_int64_c( cVarInt64s slice[static 1],
                               int64_t pos,
                               int64_t val[static 1] );
 

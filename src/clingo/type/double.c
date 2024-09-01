@@ -109,7 +109,7 @@ double unpack_double_c( uint64_t u )
 
 FIND_VAL_C_(
    find_double_c, // FuncName
-   cDoubleSlice,  // SliceType
+   cDoubles,  // SliceType
    double const,  // ValueType
    double,        // SearchType
    cmp_double_c,  // CmpFunc
@@ -118,7 +118,7 @@ FIND_VAL_C_(
 
 FIND_MAX_C_(
    max_double_c,  // FuncName
-   cDoubleSlice,  // SliceType
+   cDoubles,  // SliceType
    double const,  // ValueType
    cmp_double_c,  // CmpFunc
    do_deref_c_    // DoDeref
@@ -126,7 +126,7 @@ FIND_MAX_C_(
 
 FIND_MIN_C_(
    min_double_c,  // FuncName
-   cDoubleSlice,  // SliceType
+   cDoubles,  // SliceType
    double const,  // ValueType
    cmp_double_c,  // CmpFunc
    do_deref_c_    // DoDeref
@@ -140,7 +140,7 @@ static bool mul_func( double a, double b, double res[static 1] )
 
 PROD_C_(
    prod_double_c, // FuncName
-   cDoubleSlice,  // SliceType
+   cDoubles,  // SliceType
    double,        // ValueType
    double,        // ResType
    mul_func       // MulFunc
@@ -154,9 +154,22 @@ static bool add_func( double a, double b, double res[static 1] )
 
 SUM_C_(
    sum_double_c,  // FuncName
-   cDoubleSlice,  // SliceType
+   cDoubles,  // SliceType
    double,        // ValueType
    double,        // ResType
    add_func       // AddFunc
 )
 
+/*******************************************************************************
+
+*******************************************************************************/
+
+double trunc_double_c( double d, double* diff )
+{
+   double res = trunc( d );
+   if ( diff != NULL )
+   {
+      *diff = d - res;
+   }
+   return res;
+}

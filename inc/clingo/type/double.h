@@ -21,8 +21,8 @@ typedef struct cDoubleInfo cDoubleInfo;
 
 SLICES_C_(
    double,              // Type
-   cDoubleSlice,        // SliceType
-   cVarDoubleSlice      // VarSliceType
+   cDoubles,        // SliceType
+   cVarDoubles      // VarSliceType
 )
 
 /*******************************************************************************
@@ -76,14 +76,22 @@ CLINGO_API double unpack_double_c( uint64_t u );
  algo
 *******************************************************************************/
 
-CLINGO_API double const* find_double_c( cDoubleSlice, double val );
+CLINGO_API double const* find_double_c( cDoubles, double val );
 
-CLINGO_API double const* max_double_c( cDoubleSlice slice );
+CLINGO_API double const* max_double_c( cDoubles slice );
 
-CLINGO_API double const* min_double_c( cDoubleSlice slice );
+CLINGO_API double const* min_double_c( cDoubles slice );
 
-CLINGO_API bool prod_double_c( cDoubleSlice slice, double res[static 1] );
+CLINGO_API bool prod_double_c( cDoubles slice, double res[static 1] );
 
-CLINGO_API bool sum_double_c( cDoubleSlice slice, double res[static 1] );
+CLINGO_API bool sum_double_c( cDoubles slice, double res[static 1] );
+
+/*******************************************************************************
+
+*******************************************************************************/
+
+#define trunc_double_c_( D )                                                   \
+   trunc_double_c( (D), NULL )
+CLINGO_API double trunc_double_c( double d, double* diff );
 
 #endif

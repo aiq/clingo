@@ -14,9 +14,9 @@
 *******************************************************************************/
 
 SLICES_C_(
-   uint16_t,            // Type
-   cUint16Slice,        // SliceType
-   cVarUint16Slice      // VarSliceType
+   uint16_t,   // Type
+   cUint16s,   // SliceType
+   cVarUint16s // VarSliceType
 )
 
 /*******************************************************************************
@@ -78,24 +78,24 @@ CLINGO_API inline uint16_t swap_uint16_to_c( uint16_t val, c_ByteOrder order )
  algo
 *******************************************************************************/
 
-CLINGO_API int cmp_uint16_slice_c( cUint16Slice a, cUint16Slice b );
+CLINGO_API int cmp_uint16s_c( cUint16s a, cUint16s b );
 
-CLINGO_API int64_t count_eq_uint16_c( cUint16Slice slice, uint16_t val );
+CLINGO_API int64_t count_eq_uint16_c( cUint16s slice, uint16_t val );
 
-CLINGO_API uint16_t const* find_uint16_c( cUint16Slice slice, uint16_t val );
+CLINGO_API uint16_t const* find_uint16_c( cUint16s slice, uint16_t val );
 
-CLINGO_API uint16_t const* max_uint16_c( cUint16Slice slice );
+CLINGO_API uint16_t const* max_uint16_c( cUint16s slice );
 
-CLINGO_API uint16_t const* min_uint16_c( cUint16Slice slice );
+CLINGO_API uint16_t const* min_uint16_c( cUint16s slice );
 
-CLINGO_API bool prod_uint16_c( cUint16Slice slice, uint64_t res[static 1] );
+CLINGO_API bool prod_uint16_c( cUint16s slice, uint64_t res[static 1] );
 
-CLINGO_API void qsort_uint16_slice_c( cVarUint16Slice slice );
+CLINGO_API void qsort_uint16s_c( cVarUint16s slice );
 
-CLINGO_API void reverse_uint16_slice_c( cVarUint16Slice slice );
+CLINGO_API void reverse_uint16s_c( cVarUint16s slice );
 
-CLINGO_API void rotate_uint16_slice_c( cVarUint16Slice slice, int64_t distance );
+CLINGO_API void rotate_uint16s_c( cVarUint16s slice, int64_t distance );
 
-CLINGO_API bool sum_uint16_c( cUint16Slice slice, uint64_t res[static 1] );
+CLINGO_API bool sum_uint16_c( cUint16s slice, uint64_t res[static 1] );
 
 #endif

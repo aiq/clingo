@@ -33,16 +33,16 @@ cDoubleInfo represents the three sections of a double value.
 //******************************************************************* Generated
 === Generated
 
-[id='cDoubleSlice']
-==== cDoubleSlice
+[id='cDoubles']
+==== cDoubles
 :Slice-Type: double const
-:Slice-Slice: cDoubleSlice
+:Slice-Slice: cDoubles
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
-[id='cVarDoubleSlice']
-==== cVarDoubleSlice
+[id='cVarDoubles']
+==== cVarDoubles
 :Slice-Type: double
-:Slice-Slice: cVarDoubleSlice
+:Slice-Slice: cVarDoubles
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
@@ -207,7 +207,7 @@ include::{xmpldir}/unpack_double.c[]
 ==== find_double_c
 [source,c]
 ----
-double const* find_double_c( cDoubleSlice slice, double d );
+double const* find_double_c( cDoubles slice, double d );
 ----
 
 {FindVal}
@@ -215,7 +215,7 @@ double const* find_double_c( cDoubleSlice slice, double d );
 ==== max_double_c
 [source,c]
 ----
-double const* max_double_c( cDoubleSlice slice );
+double const* max_double_c( cDoubles slice );
 ----
 
 {FindMax}
@@ -223,7 +223,7 @@ double const* max_double_c( cDoubleSlice slice );
 ==== min_double_c
 [source,c]
 ----
-double const* min_double_c( cDoubleSlice slice );
+double const* min_double_c( cDoubles slice );
 ----
 
 {FindMin}
@@ -231,7 +231,7 @@ double const* min_double_c( cDoubleSlice slice );
 ==== prod_double_c
 [source,c]
 ----
-bool prod_double_c( cDoubleSlice slice, double res[static 1] );
+bool prod_double_c( cDoubles slice, double res[static 1] );
 ----
 
 {Prod}
@@ -239,7 +239,7 @@ bool prod_double_c( cDoubleSlice slice, double res[static 1] );
 ==== sum_double_c
 [source,c]
 ----
-bool sum_double_c( cDoubleSlice slice, double res[static 1] );
+bool sum_double_c( cDoubles slice, double res[static 1] );
 ----
 
 {Sum}

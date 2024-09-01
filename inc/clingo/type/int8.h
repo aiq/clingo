@@ -13,9 +13,9 @@
 *******************************************************************************/
 
 SLICES_C_(
-   int8_t,           // Type
-   cInt8Slice,       // SliceType
-   cVarInt8Slice     // VarSliceType
+   int8_t,     // Type
+   cInt8s,     // SliceType
+   cVarInt8s   // VarSliceType
 )
 
 /*******************************************************************************
@@ -58,24 +58,24 @@ CLINGO_API inline CONV_C_(
  algo
 *******************************************************************************/
 
-CLINGO_API int cmp_int8_slice_c( cInt8Slice a, cInt8Slice b );
+CLINGO_API int cmp_int8s_c( cInt8s a, cInt8s b );
 
-CLINGO_API int64_t count_eq_int8_c( cInt8Slice slice, int8_t val );
+CLINGO_API int64_t count_eq_int8_c( cInt8s slice, int8_t val );
 
-CLINGO_API int8_t const* find_int8_c( cInt8Slice slice, int8_t val );
+CLINGO_API int8_t const* find_int8_c( cInt8s slice, int8_t val );
 
-CLINGO_API int8_t const* max_int8_c( cInt8Slice slice );
+CLINGO_API int8_t const* max_int8_c( cInt8s slice );
 
-CLINGO_API int8_t const* min_int8_c( cInt8Slice slice );
+CLINGO_API int8_t const* min_int8_c( cInt8s slice );
 
-CLINGO_API bool prod_int8_c( cInt8Slice slice, int64_t res[static 1] );
+CLINGO_API bool prod_int8_c( cInt8s slice, int64_t res[static 1] );
 
-CLINGO_API void qsort_int8_slice_c( cVarInt8Slice slice );
+CLINGO_API void qsort_int8s_c( cVarInt8s slice );
 
-CLINGO_API void reverse_int8_slice_c( cVarInt8Slice slice );
+CLINGO_API void reverse_int8s_c( cVarInt8s slice );
 
-CLINGO_API void rotate_int8_slice_c( cVarInt8Slice slice, int64_t distance );
+CLINGO_API void rotate_int8s_c( cVarInt8s slice, int64_t distance );
 
-CLINGO_API bool sum_int8_c( cInt8Slice slice, int64_t res[static 1] );
+CLINGO_API bool sum_int8_c( cInt8s slice, int64_t res[static 1] );
 
 #endif

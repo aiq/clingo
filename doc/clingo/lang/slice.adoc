@@ -31,8 +31,8 @@ to variable data.
 | cVarChars
 
 | int8_t
-| cInt8Slice
-| cVarInt8Slice
+| cInt8s
+| cVarInt8s
 |====
 
 This module defines code generation macros to generate typed slice structs.
@@ -64,8 +64,8 @@ The following call can be used in a .h or .c file.
 ----
 SLICES_C_(
    int8_t,        // Type
-   cInt8Slice,    // SliceType
-   cVarInt8Slice  // VarSliceType
+   cInt8s,    // SliceType
+   cVarInt8s  // VarSliceType
 )
 ----
 

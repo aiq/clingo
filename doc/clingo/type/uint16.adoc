@@ -18,16 +18,16 @@ Module with functions and types to work with uint16_t values.
 //******************************************************************* Generated
 === Generated
 
-[id='cUint16Slice']
-==== cUint16Slice
+[id='cUint16s']
+==== cUint16s
 :Slice-Type: uint16_t const
-:Slice-Slice: cUint16Slice
+:Slice-Slice: cUint16s
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
-[id='cVarUint16Slice']
-==== cVarUint16Slice
+[id='cVarUint16s']
+==== cVarUint16s
 :Slice-Type: uint16_t
-:Slice-Slice: cVarUint16Slice
+:Slice-Slice: cVarUint16s
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
@@ -148,10 +148,10 @@ include::{xmpldir}/swap_uint16_to.c[]
 //************************************************************************ algo
 === algo
 
-==== cmp_uint16_slice_c
+==== cmp_uint16s_c
 [source,c]
 ----
-int cmp_uint16_slice_c( cUint16Slice a, cUint16Slice b );
+int cmp_uint16s_c( cUint16s a, cUint16s b );
 ----
 
 {CmpSlice}
@@ -159,7 +159,7 @@ int cmp_uint16_slice_c( cUint16Slice a, cUint16Slice b );
 ==== count_eq_uint16_c
 [source,c]
 ----
-int64_t count_eq_uint16_c( cUint16Slice slice, uint16_t val );
+int64_t count_eq_uint16_c( cUint16s slice, uint16_t val );
 ----
 
 {CountEq}
@@ -167,7 +167,7 @@ int64_t count_eq_uint16_c( cUint16Slice slice, uint16_t val );
 ==== find_uint16_c
 [source,c]
 ----
-uint16_t const* find_uint16_c( cUint16Slice slice, uint16_t val );
+uint16_t const* find_uint16_c( cUint16s slice, uint16_t val );
 ----
 
 {FindVal}
@@ -175,7 +175,7 @@ uint16_t const* find_uint16_c( cUint16Slice slice, uint16_t val );
 ==== max_uint16_c
 [source,c]
 ----
-uint16_t const* max_uint16_c( cUint16Slice slice );
+uint16_t const* max_uint16_c( cUint16s slice );
 ----
 
 {FindMax}
@@ -183,7 +183,7 @@ uint16_t const* max_uint16_c( cUint16Slice slice );
 ==== min_uint16_c
 [source,c]
 ----
-uint16_t const* min_uint16_c( cUint16Slice slice );
+uint16_t const* min_uint16_c( cUint16s slice );
 ----
 
 {FindMin}
@@ -191,31 +191,31 @@ uint16_t const* min_uint16_c( cUint16Slice slice );
 ==== prod_uint16_c
 [source,c]
 ----
-bool prod_uint16_c( cUint16Slice slice, uint64_t res[static 1] );
+bool prod_uint16_c( cUint16s slice, uint64_t res[static 1] );
 ----
 
 {Prod}
 
-==== qsort_uint16_slice_c
+==== qsort_uint16s_c
 [source,c]
 ----
-void qsort_uint16_slice_c( cVarUint16Slice slice );
+void qsort_uint16s_c( cVarUint16s slice );
 ----
 
 {Qsort}
 
-==== reverse_uint16_slice_c
+==== reverse_uint16s_c
 [source,c]
 ----
-void reverse_uint16_slice_c( cVarUint16Slice slice );
+void reverse_uint16s_c( cVarUint16s slice );
 ----
 
 {Reverse}
 
-==== rotate_uint16_slice_c
+==== rotate_uint16s_c
 [source,c]
 ----
-void rotate_uint16_slice_c( cVarUint16Slice slice, int64_t distance );
+void rotate_uint16s_c( cVarUint16s slice, int64_t distance );
 ----
 
 {Rotate}
@@ -223,7 +223,7 @@ void rotate_uint16_slice_c( cVarUint16Slice slice, int64_t distance );
 ==== sum_uint16_c
 [source,c]
 ----
-bool sum_uint16_c( cUint16Slice slice, uint64_t res[static 1] );
+bool sum_uint16_c( cUint16s slice, uint64_t res[static 1] );
 ----
 
 {Sum}

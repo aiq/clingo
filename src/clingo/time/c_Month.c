@@ -56,9 +56,9 @@ int8_t days_per_month_c( c_Month month, bool leapYear )
 
 int16_t first_month_day_of_year_c( c_Month month, bool leapYear )
 {
-   cInt8Slice slice = leapYear
-      ? (cInt8Slice){ month - 1, DaysPerMonthInLeapYear }
-      : (cInt8Slice){ month - 1, DaysPerMonth };
+   cInt8s slice = leapYear
+      ? (cInt8s){ month - 1, DaysPerMonthInLeapYear }
+      : (cInt8s){ month - 1, DaysPerMonth };
 
    int64_t sum = 0;
    sum_int8_c( slice, &sum );

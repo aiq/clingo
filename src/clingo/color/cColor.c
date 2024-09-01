@@ -152,7 +152,7 @@ cCmyk32 as_cmyk32_c( cColor color )
 cCmyk as_cmyk_c( cColor color )
 {
    cRgb rgb = as_rgb_c( color );
-   cFloatSlice rgbFloats =  slice_c_( float, rgb.red, rgb.green, rgb.blue );
+   cFloats rgbFloats =  slice_c_( float, rgb.red, rgb.green, rgb.blue );
    cCmyk fcmyk;
    fcmyk.key     = 1.0f - *max_float_c( rgbFloats );
    fcmyk.cyan    = ( 1.0f - rgb.red   - fcmyk.key ) / ( 1.0f - fcmyk.key );
@@ -164,7 +164,7 @@ cCmyk as_cmyk_c( cColor color )
 cHsl as_hsl_c( cColor color )
 {
    cRgb rgb = as_rgb_c( color );
-   cFloatSlice floats = slice_c_( float, rgb.red, rgb.green, rgb.blue );
+   cFloats floats = slice_c_( float, rgb.red, rgb.green, rgb.blue );
    float max = *max_float_c( floats );
    float min = *min_float_c( floats );
    float delta = max - min;
@@ -200,7 +200,7 @@ cHsl as_hsl_c( cColor color )
 cHsv as_hsv_c( cColor color )
 {
    cRgb rgb = as_rgb_c( color );
-   cFloatSlice floats = slice_c_( float, rgb.red, rgb.green, rgb.blue );
+   cFloats floats = slice_c_( float, rgb.red, rgb.green, rgb.blue );
    float max = *max_float_c( floats );
    float min = *min_float_c( floats );
    float delta = max - min;

@@ -478,7 +478,7 @@ Fibonacci Hash function.
 ==== combine_hashes_c
 [source,c]
 ----
-uint64_t combine_hashes_c( cUint64Slice hashes );
+uint64_t combine_hashes_c( cUint64s hashes );
 ----
 
 Combines single hash values to one hash value.

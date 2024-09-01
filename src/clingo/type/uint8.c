@@ -24,8 +24,8 @@ extern inline bool uint64_to_uint8_c( uint64_t src, uint8_t dest[static 1] );
 *******************************************************************************/
 
 CMP_SLICE_C_(
-   cmp_uint8_slice_c,   // FuncName
-   cUint8Slice,         // SliceType
+   cmp_uint8s_c,   // FuncName
+   cUint8s,         // SliceType
    uint8_t const,       // ValueType
    cmp_uint8_c,         // CmpFunc
    do_deref_c_          // DoDeref
@@ -33,7 +33,7 @@ CMP_SLICE_C_(
 
 COUNT_EQ_C_(
    count_eq_uint8_c, // FuncName
-   cUint8Slice,      // SliceType
+   cUint8s,      // SliceType
    uint8_t const,    // ValueType
    uint8_t,          // SearchType
    cmp_uint8_c,      // CmpFunc
@@ -42,7 +42,7 @@ COUNT_EQ_C_(
 
 FIND_VAL_C_(
    find_uint8_c,  // FuncName
-   cUint8Slice,   // SliceType
+   cUint8s,   // SliceType
    uint8_t const, // ValueType
    uint8_t,       // SearchType
    cmp_uint8_c,   // CmpFunc
@@ -51,7 +51,7 @@ FIND_VAL_C_(
 
 FIND_MAX_C_(
    max_uint8_c,   // FuncName
-   cUint8Slice,   // SliceType
+   cUint8s,   // SliceType
    uint8_t const, // ValueType
    cmp_uint8_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -59,7 +59,7 @@ FIND_MAX_C_(
 
 FIND_MIN_C_(
    min_uint8_c,   // FuncName
-   cUint8Slice,   // SliceType
+   cUint8s,   // SliceType
    uint8_t const, // ValueType
    cmp_uint8_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -67,35 +67,35 @@ FIND_MIN_C_(
 
 PROD_C_(
    prod_uint8_c,  // FuncName
-   cUint8Slice,   // SliceType
+   cUint8s,   // SliceType
    uint8_t,       // ValueType
    uint64_t,      // ResType
    umul64_c       // MulFunc
 )
 
 QSORT_C_(
-   qsort_uint8_slice_c, // FuncName
-   cVarUint8Slice,      // SliceType
+   qsort_uint8s_c, // FuncName
+   cVarUint8s,      // SliceType
    uint8_t,             // ValueType
    cmp_uint8_c,         // CmpFunc
    do_deref_c_          // DoDeref
 )
 
 REVERSE_C_(
-   reverse_uint8_slice_c,  // FuncName
-   cVarUint8Slice,         // SliceType
+   reverse_uint8s_c,  // FuncName
+   cVarUint8s,         // SliceType
    uint8_t                 // ValueType
 )
 
 ROTATE_C_(
-   rotate_uint8_slice_c,   // FuncName
-   cVarUint8Slice,         // SliceType
+   rotate_uint8s_c,   // FuncName
+   cVarUint8s,         // SliceType
    uint8_t                 // ValueType
 )
 
 SUM_C_(
    sum_uint8_c,   // FuncName
-   cUint8Slice,   // SliceType
+   cUint8s,   // SliceType
    uint8_t,       // ValueType
    uint64_t,      // ResType
    uadd64_c       // AddFunc

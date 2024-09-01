@@ -33,16 +33,16 @@ cFloatInfo represents the three sections of a float value.
 //******************************************************************* Generated
 === Generated
 
-[id='cFloatSlice']
-==== cFloatSlice
+[id='cFloats']
+==== cFloats
 :Slice-Type: float const
-:Slice-Slice: cFloatSlice
+:Slice-Slice: cFloats
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
-[id='cVarFloatSlice']
-==== cVarFloatSlice
+[id='cVarFloats']
+==== cVarFloats
 :Slice-Type: float
-:Slice-Slice: cVarFloatSlice
+:Slice-Slice: cVarFloats
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
@@ -191,7 +191,7 @@ include::{xmpldir}/unpack_float.c[]
 ==== find_float_c
 [source,c]
 ----
-float const* find_float_c( cFloatSlice slice, float f );
+float const* find_float_c( cFloats slice, float f );
 ----
 
 {FindVal}
@@ -199,7 +199,7 @@ float const* find_float_c( cFloatSlice slice, float f );
 ==== max_float_c
 [source,c]
 ----
-float const* max_float_c( cFloatSlice slice );
+float const* max_float_c( cFloats slice );
 ----
 
 {FindMax}
@@ -207,7 +207,7 @@ float const* max_float_c( cFloatSlice slice );
 ==== min_float_c
 [source,c]
 ----
-float const* min_float_c( cFloatSlice slice );
+float const* min_float_c( cFloats slice );
 ----
 
 {FindMin}
@@ -215,7 +215,7 @@ float const* min_float_c( cFloatSlice slice );
 ==== prod_float_c
 [source,c]
 ----
-bool prod_float_c( cFloatSlice slice, float res[static 1] );
+bool prod_float_c( cFloats slice, float res[static 1] );
 ----
 
 {Prod}
@@ -223,7 +223,7 @@ bool prod_float_c( cFloatSlice slice, float res[static 1] );
 ==== sum_float_c
 [source,c]
 ----
-bool sum_float_c( cFloatSlice slice, float res[static 1] );
+bool sum_float_c( cFloats slice, float res[static 1] );
 ----
 
 {Sum}

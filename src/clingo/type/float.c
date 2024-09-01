@@ -102,7 +102,7 @@ float unpack_float_c( uint32_t u )
 
 FIND_VAL_C_(
    find_float_c,  // FuncName
-   cFloatSlice,   // SliceType
+   cFloats,   // SliceType
    float const,   // ValueType
    float,         // SearchType
    cmp_float_c,   // CmpFunc
@@ -111,7 +111,7 @@ FIND_VAL_C_(
 
 FIND_MAX_C_(
    max_float_c,   // FuncName
-   cFloatSlice,   // SliceType
+   cFloats,   // SliceType
    float const,   // ValueType
    cmp_float_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -119,7 +119,7 @@ FIND_MAX_C_(
 
 FIND_MIN_C_(
    min_float_c,   // FuncName
-   cFloatSlice,   // SliceType
+   cFloats,   // SliceType
    float const,   // ValueType
    cmp_float_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -133,7 +133,7 @@ static bool mul_func( float a, float b, float res[static 1] )
 
 PROD_C_(
    prod_float_c,  // FuncName
-   cFloatSlice,   // SliceType
+   cFloats,   // SliceType
    float,         // ValueType
    float,         // ResType
    mul_func       // MulFunc
@@ -147,10 +147,22 @@ static bool add_func( float a, float b, float res[static 1] )
 
 SUM_C_(
    sum_float_c,   // FuncName
-   cFloatSlice,   // SliceType
+   cFloats,   // SliceType
    float,         // ValueType
    float,         // ResType
    add_func       // AddFunc
 )
 
+/*******************************************************************************
 
+*******************************************************************************/
+
+float trunc_float_c( float f, float* diff )
+{
+   float res = truncf( f );
+   if ( diff != NULL )
+   {
+      *diff = f - res;
+   }
+   return res;
+}

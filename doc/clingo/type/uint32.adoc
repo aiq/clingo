@@ -18,16 +18,16 @@ Module with functions and types to work with uint32_t values.
 //******************************************************************* Generated
 === Generated
 
-[id='cUint32Slice']
-==== cUint32Slice
+[id='cUint32s']
+==== cUint32s
 :Slice-Type: uint32_t const
-:Slice-Slice: cUint32Slice
+:Slice-Slice: cUint32s
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
-[id='cVarUint32Slice']
-==== cVarUint32Slice
+[id='cVarUint32s']
+==== cVarUint32s
 :Slice-Type: uint32_t
-:Slice-Slice: cVarUint32Slice
+:Slice-Slice: cVarUint32s
 include::{docroot}/clingo/_tmpl/Slice.adoc[]
 
 //******************************************************************************
@@ -165,10 +165,10 @@ include::{xmpldir}/next_pow2_uint32.c[]
 //************************************************************************ algo
 === algo
 
-==== cmp_uint32_slice_c
+==== cmp_uint32s_c
 [source,c]
 ----
-int cmp_uint32_slice_c( cUint32Slice a, cUint32Slice b );
+int cmp_uint32s_c( cUint32s a, cUint32s b );
 ----
 
 {CmpSlice}
@@ -176,7 +176,7 @@ int cmp_uint32_slice_c( cUint32Slice a, cUint32Slice b );
 ==== count_eq_uint32_c
 [source,c]
 ----
-int64_t count_eq_uint32_c( cUint32Slice slice, uint32_t val );
+int64_t count_eq_uint32_c( cUint32s slice, uint32_t val );
 ----
 
 {CountEq}
@@ -184,7 +184,7 @@ int64_t count_eq_uint32_c( cUint32Slice slice, uint32_t val );
 ==== find_uint32_c
 [source,c]
 ----
-uint32_t const* find_uint32_c( cUint32Slice slice, uint32_t val );
+uint32_t const* find_uint32_c( cUint32s slice, uint32_t val );
 ----
 
 {FindVal}
@@ -192,7 +192,7 @@ uint32_t const* find_uint32_c( cUint32Slice slice, uint32_t val );
 ==== max_uint32_c
 [source,c]
 ----
-uint32_t const* max_uint32_c( cUint32Slice slice );
+uint32_t const* max_uint32_c( cUint32s slice );
 ----
 
 {FindMax}
@@ -200,7 +200,7 @@ uint32_t const* max_uint32_c( cUint32Slice slice );
 ==== min_uint32_c
 [source,c]
 ----
-uint32_t const* min_uint32_c( cUint32Slice slice );
+uint32_t const* min_uint32_c( cUint32s slice );
 ----
 
 {FindMin}
@@ -208,31 +208,31 @@ uint32_t const* min_uint32_c( cUint32Slice slice );
 ==== prod_uint32_c
 [source,c]
 ----
-bool prod_uint32_c( cUint32Slice slice, uint64_t res[static 1] );
+bool prod_uint32_c( cUint32s slice, uint64_t res[static 1] );
 ----
 
 {Prod}
 
-==== qsort_uint32_slice_c
+==== qsort_uint32s_c
 [source,c]
 ----
-void qsort_uint32_slice_c( cVarUint32Slice slice );
+void qsort_uint32s_c( cVarUint32s slice );
 ----
 
 {Qsort}
 
-==== reverse_uint32_slice_c
+==== reverse_uint32s_c
 [source,c]
 ----
-void reverse_uint32_slice_c( cVarUint32Slice slice );
+void reverse_uint32s_c( cVarUint32s slice );
 ----
 
 {Reverse}
 
-==== rotate_uint32_slice_c
+==== rotate_uint32s_c
 [source,c]
 ----
-void rotate_uint32_slice_c( cVarUint32Slice slice, int64_t distance );
+void rotate_uint32s_c( cVarUint32s slice, int64_t distance );
 ----
 
 {Rotate}
@@ -240,7 +240,7 @@ void rotate_uint32_slice_c( cVarUint32Slice slice, int64_t distance );
 ==== sum_uint32_c
 [source,c]
 ----
-bool sum_uint32_c( cUint32Slice slice, uint64_t res[static 1] );
+bool sum_uint32_c( cUint32s slice, uint64_t res[static 1] );
 ----
 
 {Sum}

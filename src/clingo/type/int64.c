@@ -39,7 +39,7 @@ extern inline int64_t next_pow2_int64_c( int64_t val );
 
 BSEARCH_C_(
    bsearch_int64_c,  // FuncName
-   cInt64Slice,      // SliceType
+   cInt64s,      // SliceType
    int64_t const,    // ValueType
    int64_t,          // SearchType
    cmp_int64_c,      // CmpFunc
@@ -47,8 +47,8 @@ BSEARCH_C_(
 )
 
 CMP_SLICE_C_(
-   cmp_int64_slice_c,   // FuncName
-   cInt64Slice,         // SliceType
+   cmp_int64s_c,   // FuncName
+   cInt64s,         // SliceType
    int64_t const,       // ValueType
    cmp_int64_c,         // ValueType
    do_deref_c_          // DoDeref
@@ -56,7 +56,7 @@ CMP_SLICE_C_(
 
 COUNT_EQ_C_(
    count_eq_int64_c, // FuncName
-   cInt64Slice,      // SliceType
+   cInt64s,      // SliceType
    int64_t const,    // ValueType
    int64_t,          // SearchType
    cmp_int64_c,      // CmpFunc
@@ -65,7 +65,7 @@ COUNT_EQ_C_(
 
 FIND_MAX_C_(
    max_int64_c,   // FuncName
-   cInt64Slice,   // SliceType
+   cInt64s,   // SliceType
    int64_t const, // ValueType
    cmp_int64_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -73,7 +73,7 @@ FIND_MAX_C_(
 
 FIND_MIN_C_(
    min_int64_c,   // FuncName
-   cInt64Slice,   // SliceType
+   cInt64s,   // SliceType
    int64_t const, // ValueType
    cmp_int64_c,   // CmpFunc
    do_deref_c_    // DoDeref
@@ -81,7 +81,7 @@ FIND_MIN_C_(
 
 FIND_VAL_C_(
    find_int64_c,  // FuncName
-   cInt64Slice,   // SliceType
+   cInt64s,   // SliceType
    int64_t const, // ValueType
    int64_t,       // SearchType
    cmp_int64_c,   // CmpFunc
@@ -90,15 +90,15 @@ FIND_VAL_C_(
 
 PROD_C_(
    prod_int64_c,  // FuncName
-   cInt64Slice,   // SliceType
+   cInt64s,   // SliceType
    int64_t,       // ValueType
    int64_t,       // ResType
    imul64_c       // MulFunc
 )
 
 QSORT_C_(
-   qsort_int64_slice_c, // FuncName
-   cVarInt64Slice,      // SliceType
+   qsort_int64s_c, // FuncName
+   cVarInt64s,      // SliceType
    int64_t,             // ValueType
    cmp_int64_c,         // CmpFunc
    do_deref_c_          // DoDeref
@@ -106,25 +106,25 @@ QSORT_C_(
 
 REMOVE_C_(
    remove_int64_c,   // FuncName
-   cVarInt64Slice,   // SliceType
+   cVarInt64s,   // SliceType
    int64_t           // ValueType
 )
 
 REVERSE_C_(
-   reverse_int64_slice_c,  // FuncName
-   cVarInt64Slice,         // SliceType
+   reverse_int64s_c,  // FuncName
+   cVarInt64s,         // SliceType
    int64_t                 // ValueType
 )
 
 ROTATE_C_(
-   rotate_int64_slice_c,   // FuncName
-   cVarInt64Slice,         // SliceType
+   rotate_int64s_c,   // FuncName
+   cVarInt64s,         // SliceType
    int64_t                 // ValueType
 )
 
 SUM_C_(
    sum_int64_c,   // FuncName
-   cInt64Slice,   // SliceType
+   cInt64s,   // SliceType
    int64_t,       // ValueType
    int64_t,       // ResType
    iadd64_c       // AddFunc
@@ -132,6 +132,6 @@ SUM_C_(
 
 TAKE_C_(
    take_int64_c,     // FuncName
-   cVarInt64Slice,   // SliceType
+   cVarInt64s,   // SliceType
    int64_t           // ValueType
 )
