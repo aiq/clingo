@@ -22,13 +22,13 @@ endfunction( set_default_flags )
 # custom functions
 ################################################################################
 
-function( add_tests TestFiles IncDirs LinkLibs )
+function( add_tests Project TestFiles IncDirs LinkLibs )
    foreach( TestFile IN LISTS TestFiles )
       get_filename_component( Test ${TestFile} NAME_WE )
-      add_executable( ${Test} ${TestFile} )
-      target_include_directories( ${Test} PUBLIC ${IncDirs} )
-      target_link_libraries( ${Test} PRIVATE ${LinkLibs} )
+      add_executable( "${Project}-${Test}"  ${TestFile} )
+      target_include_directories( "${Project}-${Test}" PUBLIC ${IncDirs} )
+      target_link_libraries( "${Project}-${Test}" PRIVATE ${LinkLibs} )
 
-      add_test( NAME ${Test} COMMAND ${Test} )
+      add_test( NAME "${Project}-${Test}" COMMAND "${Project}-${Test}" )
    endforeach()
 endfunction( add_tests )
