@@ -21,9 +21,9 @@ typedef struct cTimestamp cTimestamp;
 *******************************************************************************/
 
 SLICES_C_(
-   cTimestamp,             // Type
-   cTimestampSlice,        // SliceType
-   cVarTimestampSlice      // VarSliceType
+   cTimestamp,    // Type
+   cTimestamps,   // SliceType
+   cVarTimestamps // VarSliceType
 )
 
 /*******************************************************************************

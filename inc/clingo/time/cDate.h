@@ -26,9 +26,9 @@ typedef struct cDate cDate;
 *******************************************************************************/
 
 SLICES_C_(
-   cDate,            // Type
-   cDateSlice,       // SliceType
-   cVarDateSlice    // VarSliceType
+   cDate,      // Type
+   cDates,     // SliceType
+   cVarDates   // VarSliceType
 )
 
 /*******************************************************************************

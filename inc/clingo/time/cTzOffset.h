@@ -21,9 +21,9 @@ typedef struct cTzOffset cTzOffset;
 *******************************************************************************/
 
 SLICES_C_(
-   cTzOffset,              // Type
-   cTzOffsetSlice,         // SliceType
-   cVarTzOffsetSlice       // VarSliceType
+   cTzOffset,     // Type
+   cTzOffsets,    // SliceType
+   cVarTzOffsets  // VarSliceType
 )
 
 /*******************************************************************************

@@ -4,7 +4,7 @@
 TEMP_SLICE_C_(
    test,
    {
-      cDateSlice inp;
+      cDates inp;
       cDatePeriod exp;
    }
 )
@@ -15,7 +15,7 @@ int main( void )
    init_tap_c_();
 
    testSlice tests = slice_c_( test,
-      t_( (cDateSlice)empty_c_(), null_date_period_c() ),
+      t_( (cDates)empty_c_(), null_date_period_c() ),
       t_(
          slice_c_( cDate, date_c( 2020, 11, 30 ) ),
          single_date_period_c( date_c( 2020, 11, 30 ) )

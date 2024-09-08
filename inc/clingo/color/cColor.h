@@ -33,9 +33,9 @@ struct cColor
 typedef struct cColor cColor;
 
 SLICES_C_(
-   cColor,           // Type
-   cColorSlice,      // SliceType
-   cVarColorSlice    // VarSliceType
+   cColor,     // Type
+   cColors,    // SliceType
+   cVarColors  // VarSliceType
 )
 
 IMAGES_C_(

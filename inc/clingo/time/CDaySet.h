@@ -73,8 +73,8 @@ CLINGO_API bool set_date_period_on_day_set_c( CDaySet* set, cDatePeriod period )
 CLINGO_API bool set_days_on_day_set_c( CDaySet* set, CDaySet const* days );
 
 #define set_many_on_day_set_c_( Set, ... )                                     \
-   set_many_on_day_set_c( (Set), (cDateSlice)slice_c_( cDate, __VA_ARGS__ ) )
-CLINGO_API bool set_many_on_day_set_c( CDaySet* set, cDateSlice slice );
+   set_many_on_day_set_c( (Set), (cDates)slice_c_( cDate, __VA_ARGS__ ) )
+CLINGO_API bool set_many_on_day_set_c( CDaySet* set, cDates dates );
 
 CLINGO_API bool set_on_day_set_c( CDaySet* set, cDate date );
 

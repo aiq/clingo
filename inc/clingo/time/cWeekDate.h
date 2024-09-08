@@ -27,9 +27,9 @@ typedef struct cWeekDate cWeekDate;
 *******************************************************************************/
 
 SLICES_C_(
-   cWeekDate,              // Type
-   cWeekDateSlice,         // SliceType
-   cVarWeekDateSlice       // VarSliceType
+   cWeekDate,     // Type
+   cWeekDates,    // SliceType
+   cVarWeekDates  // VarSliceType
 )
 
 /*******************************************************************************

@@ -22,9 +22,9 @@ typedef struct cDatePeriod cDatePeriod;
 *******************************************************************************/
 
 SLICES_C_(
-   cDatePeriod,            // Type
-   cDatePeriodSlice,       // SliceType
-   cVarDatePeriodSlice     // VarSliceType
+   cDatePeriod,      // Type
+   cDatePeriods,     // SliceType
+   cVarDatePeriods   // VarSliceType
 )
 
 /*******************************************************************************
@@ -36,7 +36,7 @@ CLINGO_API inline cDatePeriod date_period_c( cDate first, cDate last )
    return (cDatePeriod){ .first = first, .last = last };
 }
 
-CLINGO_API cDatePeriod determine_date_period_c( cDateSlice slice );
+CLINGO_API cDatePeriod determine_date_period_c( cDates slice );
 
 CLINGO_API
 inline cDatePeriod make_date_period_c( int64_t y1, int64_t m1, int64_t d1,

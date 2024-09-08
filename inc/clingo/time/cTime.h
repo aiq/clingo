@@ -29,9 +29,9 @@ typedef struct cTime cTime;
 *******************************************************************************/
 
 SLICES_C_(
-   cTime,            // Type
-   cTimeSlice,       // SliceType
-   cVarTimeSlice     // VarSliceType
+   cTime,      // Type
+   cTimes,     // SliceType
+   cVarTimes   // VarSliceType
 )
 
 /*******************************************************************************

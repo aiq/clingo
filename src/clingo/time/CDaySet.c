@@ -278,9 +278,9 @@ bool set_days_on_day_set_c( CDaySet* set, CDaySet const* days )
    return set;
 }
 
-bool set_many_on_day_set_c( CDaySet* set, cDateSlice slice )
+bool set_many_on_day_set_c( CDaySet* set, cDates dates )
 {
-   cDatePeriod bound = determine_date_period_c( slice );
+   cDatePeriod bound = determine_date_period_c( dates );
 
    if ( not is_sub_date_period_c( set->full, bound ) )
    {
@@ -288,7 +288,7 @@ bool set_many_on_day_set_c( CDaySet* set, cDateSlice slice )
       if ( not rearrange_day_set( set, reqPeriod ) ) return false;
    }
 
-   each_c_( cDate const*, date, slice )
+   each_c_( cDate const*, date, dates )
    {
       set_on_day_set_c( set, *date );
    }

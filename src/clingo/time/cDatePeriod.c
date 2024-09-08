@@ -10,7 +10,7 @@
 
 extern inline cDatePeriod date_period_c( cDate first, cDate last );
 
-cDatePeriod determine_date_period_c( cDateSlice slice )
+cDatePeriod determine_date_period_c( cDates slice )
 {
    if ( is_empty_c_( slice ) ) return null_date_period_c();
 

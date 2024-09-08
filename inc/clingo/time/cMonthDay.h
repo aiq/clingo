@@ -24,9 +24,9 @@ typedef struct cMonthDay cMonthDay;
 *******************************************************************************/
 
 SLICES_C_(
-   cMonthDay,              // Type
-   cMonthDaySlice,         // SliceType
-   cVarMonthDaySlice       // VarSliceType
+   cMonthDay,     // Type
+   cMonthDays,    // SliceType
+   cVarMonthDays  // VarSliceType
 )
 
 /*******************************************************************************
