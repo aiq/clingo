@@ -31,11 +31,11 @@ enum c_RecorderErrorCode { cRECORDER_ERROR_CODE_ };
 #undef XMAP_C_
 typedef enum c_RecorderErrorCode c_RecorderErrorCode;
 
-struct cRecorderErrorData
+struct cRecorderError
 {
    int code;
 };
-typedef struct cRecorderErrorData cRecorderErrorData;
+typedef struct cRecorderError cRecorderError;
 
 CLINGO_API extern cErrorType const C_RecorderError;
 

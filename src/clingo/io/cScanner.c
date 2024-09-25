@@ -11,7 +11,7 @@
 
 static bool note_scanner_error( cRecorder rec[static 1], cError const* err )
 {
-   cScannerErrorData const* data = get_error_data_c( err );
+   cScannerError const* data = get_error_data_c( err );
    char const* msg = NULL;
    switch ( data->code )
    {
@@ -799,6 +799,6 @@ SCAN_FUNC_IMPL_( void*,    scan_pointer_c )
 bool push_scanner_error_c( cErrorStack es[static 1],
                            cScanner const sca[static 1] )
 {
-   cScannerErrorData d = { .code=sca->err };
-   return push_error_c( es, &C_ScannerError, &d, sizeof_c_( cScannerErrorData ) );
+   cScannerError e = { .code=sca->err };
+   return push_error_c( es, &C_ScannerError, &e, sizeof_c_( cScannerError ) );
 }

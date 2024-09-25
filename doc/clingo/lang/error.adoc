@@ -101,15 +101,15 @@ cErrorType const C_ErrnoError;
 Stores the cErrorType instance that all errors that represent an errno error
 reference.
 
-[id='cErrnoErrorData']
-==== cErrnoErrorData
+[id='cErrnoErro']
+==== cErrnoError
 [source,c]
 ----
-struct cErrnoErrorData
+struct cErrnoError
 {
    int number;
 };
-typedef struct cErrnoErrorData cErrnoErrorData;
+typedef struct cErrnoError cErrnoError;
 ----
 
 Stores the errno number that the error represents.

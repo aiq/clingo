@@ -29,7 +29,7 @@ SINGLE_ERROR_TYPE_C_(
 
 static bool note_file_error( cRecorder rec[static 1], cError const* err )
 {
-   cFileErrorData const* errd = get_error_data_c( err );
+   cFileError const* errd = get_error_data_c( err );
    char* errStr = strerror( errd->number );
    if ( errStr == NULL ) return false;
 
@@ -351,8 +351,8 @@ bool push_file_error_c( cErrorStack es[static 1], FILE* file )
 {
    if ( ferror( file ) != 0 )
    {
-      cFileErrorData d = { .number=ferror( file ) };
-      return push_error_c( es, &C_FileError, &d, sizeof_c_( cFileErrorData ) );
+      cFileError d = { .number=ferror( file ) };
+      return push_error_c( es, &C_FileError, &d, sizeof_c_( cFileError ) );
    }
    else if ( feof( file ) != 0 )
    {

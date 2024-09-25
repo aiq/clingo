@@ -22,11 +22,11 @@ CLINGO_API extern cErrorType const C_UnexpectedEof;
 
 CLINGO_API extern cErrorType const C_FileError;
 
-struct cFileErrorData
+struct cFileError
 {
    int number;
 };
-typedef struct cFileErrorData cFileErrorData;
+typedef struct cFileError cFileError;
 
 /*******************************************************************************
 ********************************************************************* Functions

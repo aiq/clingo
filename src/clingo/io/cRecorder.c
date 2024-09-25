@@ -14,9 +14,9 @@
 
 static bool note_recorder_error( cRecorder rec[static 1], cError const* err )
 {
-   cRecorderErrorData const* errd = get_error_data_c( err );
+   cRecorderError const* e = get_error_data_c( err );
    char const* msg = NULL;
-   switch ( errd->code )
+   switch ( e->code )
    {
       #define XMAP_C_( N, I, T ) case N: msg = T;
          cRECORDER_ERROR_CODE_
@@ -24,7 +24,7 @@ static bool note_recorder_error( cRecorder rec[static 1], cError const* err )
    }
    if ( msg == NULL )
    {
-      return write_c_( rec, "unknown recorder error code: {i64}", errd->code );
+      return write_c_( rec, "unknown recorder error code: {i64}", e->code );
    }
 
    return record_chars_c_( rec, msg );
@@ -303,6 +303,6 @@ char* turn_into_cstr_c( cRecorder rec[static 1] )
 bool push_recorder_error_c( cErrorStack es[static 1],
                             cRecorder const rec[static 1] )
 {
-   cRecorderErrorData d = { .code=rec->err };
-   return push_error_c( es, &C_RecorderError, &d, sizeof_c_( cRecorderErrorData ) );
+   cRecorderError e = { .code=rec->err };
+   return push_error_c( es, &C_RecorderError, &e, sizeof_c_( cRecorderError ) );
 }

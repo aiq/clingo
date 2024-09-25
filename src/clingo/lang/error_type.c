@@ -12,8 +12,8 @@
 static bool note_errno_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_ErrnoError );
-   cErrnoErrorData const* errd = get_error_data_c( err );
-   char* errStr = strerror( errd->number );
+   cErrnoError const* e = get_error_data_c( err );
+   char* errStr = strerror( e->number );
    if ( errStr == NULL ) return false;
 
    return record_chars_c_( rec, errStr );
@@ -25,8 +25,8 @@ cErrorType const C_ErrnoError = {
 
 bool push_errno_error_c( cErrorStack es[static 1], int number )
 {
-   cErrnoErrorData d = { .number=number };
-   return push_error_c( es, &C_ErrnoError, &d, sizeof_c_( cErrnoErrorData ) );
+   cErrnoError e = { .number=number };
+   return push_error_c( es, &C_ErrnoError, &e, sizeof_c_( cErrnoError ) );
 }
 
 /*******************************************************************************
@@ -36,8 +36,8 @@ bool push_errno_error_c( cErrorStack es[static 1], int number )
 static bool note_lit_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_LitError );
-   cLitErrorData const* errd = get_error_data_c( err );
-   return record_chars_c_( rec, errd->str );
+   cLitError const* e = get_error_data_c( err );
+   return record_chars_c_( rec, e->str );
 }
 cErrorType const C_LitError = {
    .desc = stringify_c_( C_LitError ),
@@ -46,8 +46,8 @@ cErrorType const C_LitError = {
 
 bool push_lit_error_c( cErrorStack es[static 1], char const str[static 1] )
 {
-   cLitErrorData d = { .str=str };
-   return push_error_c( es, &C_LitError, &d, sizeof_c_( cLitErrorData ) );
+   cLitError e = { .str=str };
+   return push_error_c( es, &C_LitError, &e, sizeof_c_( cLitError ) );
 }
 
 /*******************************************************************************
@@ -57,8 +57,8 @@ bool push_lit_error_c( cErrorStack es[static 1], char const str[static 1] )
 static bool note_text_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_TextError );
-   cTextErrorData const* errd = get_error_data_c( err );
-   return record_chars_c_( rec, errd->str );
+   cTextError const* e = get_error_data_c( err );
+   return record_chars_c_( rec, e->str );
 }
 cErrorType const C_TextError = {
    .desc = stringify_c_( C_TextError ),
@@ -79,8 +79,8 @@ bool push_text_error_c( cErrorStack es[static 1], int n, ... )
    es->space = rec->space;
    es->mem = rec->mem;
    reset_recorder_c( rec );
-   cTextErrorData d = { .str=rec->mem };
-   return push_error_c( es, &C_TextError, &d, sizeof_c_( cTextErrorData ) );
+   cTextError e = { .str=rec->mem };
+   return push_error_c( es, &C_TextError, &e, sizeof_c_( cTextError ) );
 }
 
 /*******************************************************************************
@@ -117,12 +117,12 @@ bool push_text_error_c( cErrorStack es[static 1], int n, ... )
    cXMAP_( push_usub32_error_c, 22, uint32_t, "{u} - {u}" )                    \
    cXMAP_( push_usub64_error_c, 23, uint64_t, "{u} - {u}" )
 
-static bool write_overflow_error( cRecorder rec[static 1], cOverflowErrorData const* errd )
+static bool write_overflow_error( cRecorder rec[static 1], cOverflowError const* e )
 {
-   switch ( errd->op )
+   switch ( e->op )
    {
       #define cXMAP_( FuncName, Op, Type, Fmt )   \
-         case Op: return write_c_( rec, Fmt, errd->a, errd->b, " overflows "#Type" range" );
+         case Op: return write_c_( rec, Fmt, e->a, e->b, " overflows "#Type" range" );
          cOverflowErrors_
       #undef cXMAP_
    }
@@ -132,8 +132,8 @@ static bool write_overflow_error( cRecorder rec[static 1], cOverflowErrorData co
 static bool note_overflow_error( cRecorder rec[static 1], cError const* err )
 {
    must_be_c_( err->type == &C_OverflowError );
-   cOverflowErrorData const* errd = get_error_data_c( err );
-   return write_overflow_error( rec, errd );
+   cOverflowError const* e = get_error_data_c( err );
+   return write_overflow_error( rec, e );
 }
 cErrorType const C_OverflowError = {
    .desc = stringify_c_( C_OverflowError ),
@@ -143,9 +143,9 @@ cErrorType const C_OverflowError = {
 #define PUSH_OVERFLOW_ERROR_( FuncName, Type, Op )                             \
 bool FuncName( cErrorStack es[static 1], Type a, Type b )                      \
 {                                                                              \
-   cOverflowErrorData d = { .op=Op, .a=(uint64_t)a, .b=(uint64_t)b };          \
-   int64_t errdSize = sizeof_c_( cOverflowErrorData );                         \
-   return push_error_c( es, &C_OverflowError, &d, errdSize );                  \
+   cOverflowError e = { .op=Op, .a=(uint64_t)a, .b=(uint64_t)b };              \
+   int64_t errdSize = sizeof_c_( cOverflowError );                             \
+   return push_error_c( es, &C_OverflowError, &e, errdSize );                  \
 }
 
 #define cXMAP_( FuncName, Op, Type, Fmt ) PUSH_OVERFLOW_ERROR_( FuncName, Type, Op )

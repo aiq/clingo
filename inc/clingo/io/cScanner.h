@@ -27,11 +27,11 @@ enum c_ScannerErrorCode { cSCANNER_ERROR_CODE_ };
 #undef XMAP_C_
 typedef enum c_ScannerErrorCode c_ScannerErrorCode;
 
-struct cScannerErrorData
+struct cScannerError
 {
    int code;
 };
-typedef struct cScannerErrorData cScannerErrorData;
+typedef struct cScannerError cScannerError;
 
 CLINGO_API extern cErrorType const C_ScannerError;
 
