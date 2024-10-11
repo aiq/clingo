@@ -20,10 +20,16 @@ struct CString
    int64_t len;
 };
 
+static void* tail( CString* str )
+{
+   return str+1;
+}
+
 static inline void cleanup( void* instance )
 {
    CString* str = instance;
-   if ( str->varChars.v )
+   if ( str->varChars.v != NULL and
+        str->varChars.v != tail( str ) )
    {
       free( str->varChars.v );
    }
@@ -63,6 +69,16 @@ CString* adopt_cstr_c( char cstr[static 1] )
    if ( result == NULL )
    {
       return NULL;
+   }
+   if ( tail( result ) == cstr )
+   {
+      CString* newResult = new_object_c_( CString, &C_StringMeta );
+      release_c( result );
+      if ( newResult == NULL )
+      {
+         return NULL;
+      }
+      result = newResult;
    }
 
    result->varChars.v = cstr;
@@ -139,19 +155,18 @@ CString* make_string_c( cChars chars )
       return NULL;
    }
 
-   CString* result = new_object_c_( CString, &C_StringMeta );
+   int64_t size = 0;
+   if ( not iadd64_c( sizeof_c_( CString ), chars.s+1, &size ) )
+   {
+      return NULL;
+   }
+   CString* result = new_object_c( size, &C_StringMeta );
    if ( result == NULL )
    {
       return NULL;
    }
-
-   result->varChars.v = alloc_array_c_( chars.s + 1, char );
+   result->varChars.v = tail( result );
    result->varChars.s = chars.s;
-   if ( result->varChars.v == NULL )
-   {
-      release_c( result );
-      return NULL;
-   }
 
    result->varChars.s = set_chars_c( result->varChars, chars );
    result->varChars.v[ chars.s ] = '\0';
@@ -183,6 +198,16 @@ CString* lit_c( char const cstr[static 1] )
    if ( result == NULL )
    {
       return NULL;
+   }
+   if ( tail( result ) == cstr )
+   {
+      CString* newResult = alloc_object_c_( CString, &info );
+      release_c( result );
+      if ( newResult == NULL )
+      {
+         return NULL;
+      }
+      result = newResult;
    }
 
    result->chars = chars;
