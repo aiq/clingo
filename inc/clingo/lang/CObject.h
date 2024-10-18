@@ -111,10 +111,13 @@ CObject* touch_c( CObject* obj );
  object info
 *******************************************************************************/
 CLINGO_API
-char const* get_object_desc_c( CObject const* obj );
+cMeta const* get_meta_c( CObject const* obj );
 
 CLINGO_API
 cObjectInfo const* get_object_info_c( CObject const* obj );
+
+CLINGO_API
+bool meta_is_c( CObject const* obj, cMeta const exp[static 1] );
 
 #define sizeof_object_c_( Type )                                               \
 (                                                                              \

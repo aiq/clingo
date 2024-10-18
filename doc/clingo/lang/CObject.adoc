@@ -226,13 +226,13 @@ Calls retain_c and release_c on obj.
 //***************************************************************** object info
 === object info
 
-==== get_object_desc_c
+==== get_meta_c
 [source,c]
 ----
-char const* get_object_desc_c( CObject const* obj );
+char const* get_meta_c( CObject const* obj );
 ----
 
-Util function to access the desc attribute of the linked cMeta instance.
+Util function to access the linked cMeta instance.
 
 ==== get_object_info_c
 [source,c]
@@ -241,6 +241,14 @@ cObjectInfo const* get_object_info_c( CObject const* obj );
 ----
 
 Returns the cObjectInfo of the CObject instance obj.
+
+==== meta_is_c
+[source,c]
+----
+bool meta_is_c( CObject const* obj, cMeta const exp[static 1] );
+----
+
+Util function that check if the object has the expected meta.
 
 ==== sizeof_object_c_
 [source,c]

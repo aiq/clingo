@@ -122,12 +122,12 @@ CObject* touch_c( CObject* obj )
 
 *******************************************************************************/
 
-char const* get_object_desc_c( CObject const* obj )
+cMeta const* get_meta_c( CObject const* obj )
 {
    must_exist_c_( obj );
 
    cObjectInfo const* info = get_object_info_c( obj );
-   return info->meta->desc;
+   return info->meta;
 }
 
 cObjectInfo const* get_object_info_c( CObject const* obj )
@@ -137,3 +137,10 @@ cObjectInfo const* get_object_info_c( CObject const* obj )
    return obj - sizeof( cObjectInfo );
 }
 
+bool meta_is_c( CObject const* obj, cMeta const exp[static 1] )
+{
+   must_exist_c_( obj );
+
+   cMeta const* meta = get_meta_c( obj );
+   return meta == exp;
+}
