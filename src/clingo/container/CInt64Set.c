@@ -10,7 +10,7 @@ VAL_SET_IMPL_C_(
    cInt64SetRow,     // RowType
    int64_t,          // ObjType
    int64_set_c,      // FuncSuffix
-   C_Int64SetMeta,   // Meta
+   C_Int64Set,       // Meta
    hash_int64_c,     // HashFunc
    cmp_int64_c,      // CmpFunc
    do_not_ref_c_     // DoRef

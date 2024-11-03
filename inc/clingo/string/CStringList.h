@@ -16,7 +16,7 @@ OBJ_VEC_DEF_C_(
    CStringList,      // VecType
    CString,          // ObjType
    string_list_c,    // FuncSuffix
-   C_StringListMeta  // Meta
+   C_StringList      // Meta
 )
 
 /*******************************************************************************

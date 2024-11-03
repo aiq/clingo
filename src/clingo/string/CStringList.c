@@ -13,7 +13,7 @@ OBJ_VEC_IMPL_C_(
    CStringList,      // VecType
    CString,          // ObjType
    string_list_c,    // FuncName
-   C_StringListMeta  // Meta
+   C_StringList      // Meta
 )
 
 /*******************************************************************************

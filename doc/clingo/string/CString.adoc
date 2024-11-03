@@ -13,11 +13,11 @@ Module that defines the CBitVec type and the associated functions.
 //******************************************************************************
 == Types and Definitions
 
-[id='C_StringMeta']
-==== C_StringMeta
+[id='C_String']
+==== C_String
 [source,c]
 ----
-cMeta const C_StringMeta;
+cMeta const C_String;
 ----
 
 Stores the cMeta instance that all CString instances reference.

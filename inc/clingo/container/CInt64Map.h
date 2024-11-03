@@ -14,7 +14,7 @@ VAL_VAL_MAP_DEF_C_(
    int64_t,       // KeyType
    int64_t,       // ValType
    int64_map_c,   // FuncName
-   C_Int64MapMeta // Meta
+   C_Int64Map     // Meta
 )
 
 #endif

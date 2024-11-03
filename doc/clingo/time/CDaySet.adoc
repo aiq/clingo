@@ -11,11 +11,11 @@
 //******************************************************************************
 == Types and Definitions
 
-[id='C_DaySetMeta']
-==== C_DaySetMeta
+[id='C_DaySet']
+==== C_DaySet
 [source,c]
 ----
-cMeta const C_DaySetMeta;
+cMeta const C_DaySet;
 ----
 
 Stores the cMeta intance that all CDaySet instances reference.

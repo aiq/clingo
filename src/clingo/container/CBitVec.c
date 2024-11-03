@@ -32,7 +32,7 @@ static inline void cleanup( void* instance )
    free( vec->bytes );
 }
 
-cMeta const C_BitVecMeta = {
+cMeta const C_BitVec = {
    .desc  =stringify_c_( CBitVec ),
    .cleanup = &cleanup
 };
@@ -129,7 +129,7 @@ CBitVec* new_bit_vec_c( int64_t n )
 {
    must_be_positive_c_( n );
 
-   CBitVec* result = new_object_c_( CBitVec, &C_BitVecMeta );
+   CBitVec* result = new_object_c_( CBitVec, &C_BitVec );
 
    if( result == NULL )
    {

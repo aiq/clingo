@@ -13,11 +13,11 @@ Module that defines the CBitVec type and the associated functions.
 //******************************************************************************
 == Types and Definitions
 
-[id='C_BitVecMeta']
-==== C_BitVecMeta
+[id='C_BitVec']
+==== C_BitVec
 [source,c]
 ----
-cMeta const C_BitVecMeta;
+cMeta const C_BitVec;
 ----
 
 Stores the cMeta instance that all CBitVec instances reference.

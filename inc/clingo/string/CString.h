@@ -14,7 +14,7 @@
  type
 *******************************************************************************/
 
-CLINGO_API extern cMeta const C_StringMeta;
+CLINGO_API extern cMeta const C_String;
 
 struct CString;
 typedef struct CString CString;

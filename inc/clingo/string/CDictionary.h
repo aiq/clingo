@@ -12,12 +12,12 @@
 *******************************************************************************/
 
 OBJ_OBJ_MAP_DEF_C_(
-   CLINGO_API,       // LibApi
-   CDictionary,      // MapType
-   CString,          // KeyType
-   CString,          // ValType
-   dictionary_c,     // FuncSuffix
-   C_DictionaryMeta  // Meta
+   CLINGO_API,    // LibApi
+   CDictionary,   // MapType
+   CString,       // KeyType
+   CString,       // ValType
+   dictionary_c,  // FuncSuffix
+   C_Dictionary   // Meta
 )
 
 /*******************************************************************************

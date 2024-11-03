@@ -11,11 +11,11 @@
 *******************************************************************************/
 
 VAL_VEC_DEF_C_(
-   CLINGO_API,    // LibApi
-   CByteVec,      // VecType
-   cByte,         // ValType
-   byte_vec_c,    // FuncName
-   C_ByteVecMeta  // Meta
+   CLINGO_API, // LibApi
+   CByteVec,   // VecType
+   cByte,      // ValType
+   byte_vec_c, // FuncName
+   C_ByteVec   // Meta
 )
 
 /*******************************************************************************

@@ -10,7 +10,7 @@ OBJ_SET_IMPL_C_(
    cStringSetRow,    // RowType
    CString,          // ObjType
    string_set_c,     // FuncSuffix
-   C_StringSetMeta,  // Meta
+   C_StringSet,      // Meta
    hash_string_c,    // HashFunc
    cmp_string_c      // CmpFunc
 )

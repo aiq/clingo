@@ -13,7 +13,7 @@ VAL_SET_DEF_C_(
    CInt64Set,     // VecType
    int64_t,       // ValType
    int64_set_c,   // FuncName
-   C_Int64SetMeta // Meta
+   C_Int64Set     // Meta
 )
 
 #endif

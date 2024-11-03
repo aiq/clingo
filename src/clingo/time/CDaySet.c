@@ -31,7 +31,7 @@ static inline void cleanup( void* instance )
    }
 }
 
-cMeta const C_DaySetMeta = {
+cMeta const C_DaySet = {
    .desc = stringify_c_( CDaySet ),
    .cleanup = &cleanup
 };
@@ -62,7 +62,7 @@ static CDaySet* build_day_set( cDatePeriod period )
 {
    int64_t days = date_period_days_c( period );
 
-   CDaySet* result = new_object_c_( CDaySet, &C_DaySetMeta );
+   CDaySet* result = new_object_c_( CDaySet, &C_DaySet );
    if( result == NULL )
    {
       return NULL;

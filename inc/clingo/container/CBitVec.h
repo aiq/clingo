@@ -12,7 +12,7 @@
 ********************************************************* Types and Definitions
 *******************************************************************************/
 
-CLINGO_API extern cMeta const C_BitVecMeta;
+CLINGO_API extern cMeta const C_BitVec;
 
 struct CBitVec;
 typedef struct CBitVec CBitVec;

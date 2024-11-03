@@ -13,7 +13,7 @@ OBJ_OBJ_MAP_IMPL_C_(
    CString,          // KeyType
    CString,          // ValType
    dictionary_c,     // FuncSuffix
-   C_DictionaryMeta, // Meta
+   C_Dictionary,     // Meta
    hash_string_c,    // HashFunc
    cmp_string_c      // CmpFunc
 )

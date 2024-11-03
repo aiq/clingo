@@ -35,7 +35,7 @@ static inline void cleanup( void* instance )
    }
 }
 
-cMeta const C_StringMeta = {
+cMeta const C_String = {
    .desc = stringify_c_( CString ),
    .cleanup = &cleanup
 };
@@ -65,14 +65,14 @@ CString* adopt_cstr_c( char cstr[static 1] )
       return NULL;
    }
 
-   CString* result = new_object_c_( CString, &C_StringMeta );
+   CString* result = new_object_c_( CString, &C_String );
    if ( result == NULL )
    {
       return NULL;
    }
    if ( tail( result ) == cstr )
    {
-      CString* newResult = new_object_c_( CString, &C_StringMeta );
+      CString* newResult = new_object_c_( CString, &C_String );
       release_c( result );
       if ( newResult == NULL )
       {
@@ -122,7 +122,7 @@ CString* empty_string_c( void )
 {
    if ( emptyString == NULL )
    {
-      cObjectInfo* info = &object_info_c_( &C_StringMeta, 0 );
+      cObjectInfo* info = &object_info_c_( &C_String, 0 );
       emptyString = init_object_c( emptyStringBuffer, info );
       if ( emptyString == NULL )
       {
@@ -160,7 +160,7 @@ CString* make_string_c( cChars chars )
    {
       return NULL;
    }
-   CString* result = new_object_c( size, &C_StringMeta );
+   CString* result = new_object_c( size, &C_String );
    if ( result == NULL )
    {
       return NULL;
@@ -193,7 +193,7 @@ CString* lit_c( char const cstr[static 1] )
       return NULL;
    }
 
-   cObjectInfo const info = object_info_c_( &C_StringMeta, c_Release );
+   cObjectInfo const info = object_info_c_( &C_String, c_Release );
    CString* result = alloc_object_c_( CString, &info );
    if ( result == NULL )
    {

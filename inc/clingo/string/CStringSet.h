@@ -14,7 +14,7 @@ OBJ_SET_DEF_C_(
    CStringSet,       // SetType
    CString,          // ObjType
    string_set_c,     // FuncSuffix
-   C_StringSetMeta   // Meta
+   C_StringSet       // Meta
 )
 
 /*******************************************************************************

@@ -13,7 +13,7 @@ OBJ_VEC_DEF_C_(
    CObjectVec,      // VecType
    CObject,         // ObjType
    object_vec_c,    // FuncName
-   C_ObjectVecMeta  // Meta
+   C_ObjectVec      // Meta
 )
 
 #endif

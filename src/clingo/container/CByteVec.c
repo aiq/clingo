@@ -12,7 +12,7 @@ VAL_VEC_IMPL_C_(
    CByteVec,      // VecType
    cByte,         // ValType
    byte_vec_c,    // FuncSuffix
-   C_ByteVecMeta, // Meta
+   C_ByteVec,     // Meta
    do_nothing_c_  // InDepthCleanup
 )
 
@@ -26,7 +26,7 @@ BUILD_VEC_C_(
    byte_vec_c,    // FuncSuffix
    CByteVec,      // VecType
    cByte,         // ValType
-   C_ByteVecMeta  // Meta
+   C_ByteVec      // Meta
 )
 
 extern inline cBytes byte_vec_bytes_c( CByteVec const* vec );

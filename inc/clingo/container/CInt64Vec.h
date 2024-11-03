@@ -14,7 +14,7 @@ VAL_VEC_DEF_C_(
    CInt64Vec,     // VecType
    int64_t,       // ValType
    int64_vec_c,   // FuncName
-   C_Int64VecMeta // Meta
+   C_Int64Vec     // Meta
 )
 
 /*******************************************************************************

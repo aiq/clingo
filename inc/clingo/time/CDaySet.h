@@ -11,7 +11,7 @@
 
 *******************************************************************************/
 
-CLINGO_API extern cMeta const C_DaySetMeta;
+CLINGO_API extern cMeta const C_DaySet;
 
 struct CDaySet;
 typedef struct CDaySet CDaySet;
