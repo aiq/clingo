@@ -307,7 +307,7 @@ int64_t count_runes_c( cChars chars )
    return result;
 }
 
-cVarRuneSlice fill_rune_slice_c( cVarRuneSlice dst, cChars src )
+cVarRunes fill_rune_slice_c( cVarRunes dst, cChars src )
 {
    if ( is_empty_c_( dst ) ) return dst;
 

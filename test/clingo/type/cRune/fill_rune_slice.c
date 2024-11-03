@@ -8,8 +8,8 @@ int main( void )
    cChars src = c_c( "My € makes 𝄞®!" );
 
    {
-      cVarRuneSlice dst = structs_c_( 20, cRune );
-      cVarRuneSlice res = fill_rune_slice_c( dst, src );
+      cVarRunes dst = structs_c_( 20, cRune );
+      cVarRunes res = fill_rune_slice_c( dst, src );
 
       expect_at_c_( res.s == 14 );
       expect_at_c_( rune_is_c( res.v[  0 ], "M" ) );
@@ -29,8 +29,8 @@ int main( void )
    }
 
    {
-      cVarRuneSlice dst = structs_c_( 10, cRune );
-      cVarRuneSlice res = fill_rune_slice_c( dst, src );
+      cVarRunes dst = structs_c_( 10, cRune );
+      cVarRunes res = fill_rune_slice_c( dst, src );
 
       expect_at_c_( res.s == 10 );
       expect_at_c_( rune_is_c( res.v[  0 ], "M" ) );

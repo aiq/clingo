@@ -32,9 +32,9 @@ typedef bool ( *c_check_rune )( cRune r );
 *******************************************************************************/
 
 SLICES_C_(
-   cRune,            // Type
-   cRuneSlice,       // SliceType
-   cVarRuneSlice     // VarSliceType
+   cRune,      // Type
+   cRunes,     // SliceType
+   cVarRunes   // VarSliceType
 )
 
 /*******************************************************************************
@@ -222,7 +222,7 @@ CLINGO_API bool chars_runes_match_c( cChars chars, c_check_rune check );
 
 CLINGO_API int64_t count_runes_c( cChars chars );
 
-CLINGO_API cVarRuneSlice fill_rune_slice_c( cVarRuneSlice dst, cChars src );
+CLINGO_API cVarRunes fill_rune_slice_c( cVarRunes dst, cChars src );
 
 #define find_any_rune_c_( Chars, Cstr )                                        \
    find_any_rune_c( (Chars), c_c( Cstr ) )
