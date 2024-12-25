@@ -9,9 +9,9 @@
 
 *******************************************************************************/
 
-static bool fwrite_format_text( FILE* file,
-                                cScanner sca[static 1],
-                                cErrorStack es[static 1] )
+static bool fwrite_format_text_c( FILE* file,
+                                  cScanner sca[static 1],
+                                  cErrorStack es[static 1] )
 {
    while ( true )
    {
@@ -52,7 +52,7 @@ static bool fwrite_format_text( FILE* file,
    }
 }
 
-static void cleanup_fwrite_impl( cRecorder rec[static 1], int64_t initCap )
+void cleanup_fwrite_impl_c( cRecorder rec[static 1], int64_t initCap )
 {
    if ( recorder_cap_c( rec ) != initCap )
    {
@@ -86,11 +86,11 @@ bool fwrite_impl_c( FILE* file,
       }
       else
       {
-         if ( not write_arg( rec, list, specifier.type, specifier.fmt ) )
+         if ( not write_arg( rec, &list, specifier.type, specifier.fmt ) )
          {
             if ( rec->err == cNoError_ )
             {
-               cleanup_fwrite_impl( rec, initCap );
+               cleanup_fwrite_impl_c( rec, initCap );
                return set_recorder_error_c( rec, c_InvalidWriteFormat );
             }
             if ( rec->err == c_NotEnoughRecorderSpace )
@@ -105,7 +105,7 @@ bool fwrite_impl_c( FILE* file,
                      return push_errno_error_c( es, ENOMEM );
                   }
                }
-               while ( not write_arg( rec, list, specifier.type, specifier.fmt ) )
+               while ( not write_arg( rec, &list, specifier.type, specifier.fmt ) )
                {
                   cap *= 2;
                   if ( not realloc_recorder_mem_c( rec, cap ) )
@@ -122,20 +122,20 @@ bool fwrite_impl_c( FILE* file,
          }
       }
 
-      fwrite_format_text( file, &fmtStrSca, es );
+      fwrite_format_text_c( file, &fmtStrSca, es );
       if ( fmtStrSca.space == 0 )
       {
          reset_write_specifier_c( &specifier );
       }
       else if ( not read_in_write_specifier_c( &fmtStrSca, &specifier ) )
       {
-         cleanup_fwrite_impl( rec, initCap );
+         cleanup_fwrite_impl_c( rec, initCap );
          return false;
       }
       reset_recorder_c( rec );
    }
 
-   cleanup_fwrite_impl( rec, initCap );
+   cleanup_fwrite_impl_c( rec, initCap );
    return true;
 }
 

@@ -13,7 +13,7 @@
 *******************************************************************************/
 
 typedef bool ( *c_write_va_arg )( cRecorder rec[static 1],
-                                  va_list list,
+                                  va_list* list,
                                   cChars type,
                                   char const fmt[static 1] );
 
@@ -25,7 +25,7 @@ typedef bool ( *c_write_va_arg )( cRecorder rec[static 1],
 
 CLINGO_API
 bool write_format_arg_c( cRecorder rec[static 1],
-                         va_list list,
+                         va_list* list,
                          cChars type,
                          char const fmt[static 1] );
 
