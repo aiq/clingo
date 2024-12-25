@@ -68,8 +68,10 @@ bool fwrite_impl_c( FILE* file,
                     cErrorStack es[static 1],
                     c_write_va_arg write_arg,
                     int n,
-                    va_list list )
+                    va_list listArg )
 {
+   va_list list;
+   va_copy( list, listArg );
    cScanner fmtStrSca = null_scanner_c_();
 
    cWriteSpecifier specifier;
@@ -143,6 +145,7 @@ bool fwrite_impl_c( FILE* file,
       reset_recorder_c( rec );
    }
 
+   va_end( list );
    cleanup_fwrite_impl_c( rec, initCap );
    return res;
 }

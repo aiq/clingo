@@ -183,8 +183,10 @@ bool write_format_arg_c( cRecorder rec[static 1],
 bool write_impl_c( cRecorder rec[static 1],
                    c_write_va_arg write_arg,
                    int n,
-                   va_list list )
+                   va_list listArg )
 {
+   va_list list;
+   va_copy( list, listArg );
    cScanner fmtStrSca = null_scanner_c_();
 
    cWriteSpecifier specifier;
@@ -222,6 +224,7 @@ bool write_impl_c( cRecorder rec[static 1],
       }
    }
 
+   va_end( list );
    return res;
 }
 
