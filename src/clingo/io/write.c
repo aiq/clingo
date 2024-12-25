@@ -190,6 +190,7 @@ bool write_impl_c( cRecorder rec[static 1],
    cWriteSpecifier specifier;
    reset_write_specifier_c( &specifier );
 
+   bool res = true;
    for ( int i = 0; i < n; ++i )
    {
       if ( is_empty_c_( specifier.type ) )
@@ -204,7 +205,8 @@ bool write_impl_c( cRecorder rec[static 1],
             if ( rec->err == cNoError_ )
                set_recorder_error_c( rec, c_InvalidWriteFormat );
 
-            return false;
+            res = false;
+            break;
          }
       }
 
@@ -215,11 +217,12 @@ bool write_impl_c( cRecorder rec[static 1],
       }
       else if ( not read_in_write_specifier_c( &fmtStrSca, &specifier ) )
       {
-         return false;
+         res = false;
+         break;
       }
    }
 
-   return true;
+   return res;
 }
 
 bool write_list_c( cRecorder rec[static 1], int n, va_list list )

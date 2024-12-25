@@ -52,7 +52,7 @@ static bool fwrite_format_text_c( FILE* file,
    }
 }
 
-void cleanup_fwrite_impl_c( cRecorder rec[static 1], int64_t initCap )
+static void cleanup_fwrite_impl_c( cRecorder rec[static 1], int64_t initCap )
 {
    if ( recorder_cap_c( rec ) != initCap )
    {
@@ -77,6 +77,7 @@ bool fwrite_impl_c( FILE* file,
 
    int64_t const initCap = 1024;
    cRecorder* rec = &recorder_c_( initCap );
+   bool res = true;
    for ( int i = 0; i < n; ++i )
    {
       if ( is_empty_c_( specifier.type ) )
@@ -90,8 +91,9 @@ bool fwrite_impl_c( FILE* file,
          {
             if ( rec->err == cNoError_ )
             {
-               cleanup_fwrite_impl_c( rec, initCap );
-               return set_recorder_error_c( rec, c_InvalidWriteFormat );
+               set_recorder_error_c( rec, c_InvalidWriteFormat );
+               res = push_recorder_error_c( es, rec );
+               break;
             }
             if ( rec->err == c_NotEnoughRecorderSpace )
             {
@@ -102,7 +104,8 @@ bool fwrite_impl_c( FILE* file,
                   cap *= 2;
                   if ( not alloc_recorder_mem_c( rec, cap ) )
                   {
-                     return push_errno_error_c( es, ENOMEM );
+                     res = push_errno_error_c( es, ENOMEM );
+                     break;
                   }
                }
                while ( not write_arg( rec, &list, specifier.type, specifier.fmt ) )
@@ -110,15 +113,20 @@ bool fwrite_impl_c( FILE* file,
                   cap *= 2;
                   if ( not realloc_recorder_mem_c( rec, cap ) )
                   {
-                     free_recorder_mem_c( rec );
-                     return push_errno_error_c( es, ENOMEM );
+                     res = push_errno_error_c( es, ENOMEM );
+                     break;
                   }
+               }
+               if ( not res )
+               {
+                  break;
                }
             }
          }
          if ( not fput_chars_c( file, recorded_chars_c( rec ) ) )
          {
-            return push_file_error_c( es, file );
+            res = push_file_error_c( es, file );
+            break;
          }
       }
 
@@ -129,14 +137,14 @@ bool fwrite_impl_c( FILE* file,
       }
       else if ( not read_in_write_specifier_c( &fmtStrSca, &specifier ) )
       {
-         cleanup_fwrite_impl_c( rec, initCap );
-         return false;
+         res = false;
+         break;
       }
       reset_recorder_c( rec );
    }
 
    cleanup_fwrite_impl_c( rec, initCap );
-   return true;
+   return res;
 }
 
 bool fwrite_list_c( FILE* file, cErrorStack es[static 1], int n, va_list list )
