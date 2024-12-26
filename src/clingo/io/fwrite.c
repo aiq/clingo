@@ -29,7 +29,16 @@ bool fwrite_c( FILE* file, cErrorStack es[static 1], int n, ... )
 
 bool fwriteln_list_c( FILE* file, cErrorStack es[static 1], int n, va_list list )
 {
-   return fwriteln_impl_c( file, es, n, list );
+   if ( not fwrite_impl_c( file, es, n, list ) )
+   {
+      return false;
+   }
+   if ( not fput_chars_c( file, c_c( "\n" ) ) )
+   {
+      push_file_error_c( es, file );
+      return false;
+   }
+   return true;
 }
 
 bool fwriteln_c( FILE* file, cErrorStack es[static 1], int n, ... )

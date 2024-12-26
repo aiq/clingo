@@ -40,15 +40,6 @@ union cVaArg
 
 typedef union cVaArg cVaArg;
 
-typedef bool ( *c_get_va_arg )( va_list* list,
-                                cChars type,
-                                cVaArg arg[static 1] );
-
-typedef bool ( *c_write_va_arg )( cRecorder rec[static 1],
-                                  cChars type,
-                                  cVaArg arg,
-                                  char const fmt[static 1] );
-
 /*******************************************************************************
 ********************************************************************* Functions
 ********************************************************************************
@@ -59,19 +50,9 @@ bool write_impl_c( cRecorder rec[static 1],
                    int n,
                    va_list list );
 
-bool writeln_impl_c( cRecorder rec[static 1],
-                     int n,
-                     va_list list );
-
 bool fwrite_impl_c( FILE* file,
                     cErrorStack es[static 1],
                     int n,
                     va_list list );
-
-
-bool fwriteln_impl_c( FILE* file,
-                      cErrorStack es[static 1],
-                      int n,
-                      va_list list );
 
 #endif

@@ -384,14 +384,6 @@ bool write_impl_c( cRecorder rec[static 1],
    return res;
 }
 
-bool writeln_impl_c( cRecorder rec[static 1],
-                     int n,
-                     va_list list )
-{
-   return write_impl_c( rec, n, list ) and
-          record_char_c( rec, '\n' );
-}
-
 /*******************************************************************************
  fwrite
 *******************************************************************************/
@@ -462,21 +454,4 @@ bool fwrite_impl_c( FILE* file,
    va_end( list );
    cleanup_fwrite_impl_c( rec, initCap );
    return res;
-}
-
-bool fwriteln_impl_c( FILE* file,
-                      cErrorStack es[static 1],
-                      int n,
-                      va_list list )
-{
-   if ( not fwrite_impl_c( file, es, n, list ) )
-   {
-      return false;
-   }
-   if ( not fput_chars_c( file, c_c( "\n" ) ) )
-   {
-      push_file_error_c( es, file );
-      return false;
-   }
-   return true;
 }

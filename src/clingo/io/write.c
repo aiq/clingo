@@ -34,7 +34,8 @@ bool write_c( cRecorder rec[static 1], int n, ... )
 
 bool writeln_list_c( cRecorder rec[static 1], int n, va_list list )
 {
-   return writeln_impl_c( rec, n, list );
+   return write_impl_c( rec, n, list ) and
+          record_char_c( rec, '\n' );
 }
 
 bool writeln_c( cRecorder rec[static 1], int n, ... )
