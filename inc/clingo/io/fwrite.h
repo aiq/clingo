@@ -10,13 +10,6 @@
  fwrite
 *******************************************************************************/
 
-CLINGO_API bool fwrite_impl_c( FILE* file,
-                               cErrorStack es[static 1],
-                               c_get_va_arg getArgFunc,
-                               c_write_va_arg writeArgFunc,
-                               int n,
-                               va_list list );
-
 CLINGO_API
 bool fwrite_list_c( FILE* file, cErrorStack es[static 1], int n, va_list list );
 
@@ -27,13 +20,6 @@ CLINGO_API bool fwrite_c( FILE* file, cErrorStack es[static 1], int n, ... );
 /*******************************************************************************
  fwriteln
 *******************************************************************************/
-
-CLINGO_API bool fwriteln_impl_c( FILE* file,
-                                 cErrorStack es[static 1],
-                                 c_get_va_arg getArgFunc,
-                                 c_write_va_arg writeArgFunc,
-                                 int n,
-                                 va_list list );
 
 CLINGO_API bool fwriteln_list_c( FILE* file,
                                  cErrorStack es[static 1],

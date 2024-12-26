@@ -60,17 +60,6 @@ The default implementatio of the function is write_format_arg_c.
 //********************************************************************* overall
 === overall
 
-==== write_format_arg_c
-[source,c]
-----
-bool write_format_arg_c( cRecorder rec[static 1],
-                         va_list* list,
-                         cChars type,
-                         char const fmt[static 1] );
-----
-
-Writes the current element in the list into the recorder.
-
 ==== write_c
 [souce,c]
 ----
