@@ -51,38 +51,31 @@ static bool write_format_text_c( cRecorder rec[static 1],
    }
 }
 
-bool write_format_arg_c( cRecorder rec[static 1],
-                         va_list* list,
-                         cChars type,
-                         char const fmt[static 1] )
+bool get_va_arg_c( va_list* list, cChars type, cVaArg arg[static 1] )
 {
-   if ( is_empty_c_( type ) )
-   {
-      return false;
-   }
-
    if ( type.v[0] == 'i' )
    {
       if ( chars_is_c( type, "i8" ) )
       {
          int32_t tmp = va_arg( *list, int32_t );
-         int8_t i = int8_c_( tmp );
-         return write_int8_c( rec, i, fmt );
+         arg->i8 = int8_c_( tmp );
+         return true;
       }
       else if ( chars_is_c( type, "i16" ) )
       {
          int32_t tmp = va_arg( *list, int32_t );
-         int16_t i = int16_c_( tmp );
-         return write_int16_c( rec, i, fmt );
+         arg->i16 = int16_c_( tmp );
+         return true;
       }
       else if ( chars_is_c( type, "i32" ) )
       {
-         return write_int32_c( rec, va_arg( *list, int32_t ), fmt );
+         arg->i32 = va_arg( *list, int32_t );
+         return true;
       }
-      else if ( chars_is_c( type, "i64" ) or
-                chars_is_c( type, "i" ) )
+      else if ( chars_is_c( type, "i64" ) )
       {
-         return write_int64_c( rec, va_arg( *list, int64_t ), fmt );
+         arg->i64 = va_arg( *list, int64_t );
+         return true;
       }
    }
    else if ( type.v[0] == 'u' )
@@ -90,87 +83,201 @@ bool write_format_arg_c( cRecorder rec[static 1],
       if ( chars_is_c( type, "u8" ) )
       {
          uint32_t tmp = va_arg( *list, uint32_t );
-         uint8_t u = uint8_c_( tmp );
-         return write_uint8_c( rec, u, fmt );
+         arg->u8 = uint8_c_( tmp );
+         return true;
       }
       else if ( chars_is_c( type, "u16" ) )
       {
          uint32_t tmp = va_arg( *list, uint32_t );
-         uint16_t u = uint16_c_( tmp );
-         return write_uint16_c( rec, u, fmt );
+         arg->u16 = uint16_c_( tmp );
+         return true;
       }
       else if ( chars_is_c( type, "u32" ) )
       {
-         return write_uint32_c( rec, va_arg( *list, uint32_t ), fmt );
+         arg->u32 = va_arg( *list, uint32_t );
+         return true;
       }
-      else if ( chars_is_c( type, "u64" ) or
-                chars_is_c( type, "u" ) )
+      else if ( chars_is_c( type, "u64" ) )
       {
-         return write_uint64_c( rec, va_arg( *list, uint64_t ), fmt );
+         arg->u64 = va_arg( *list, uint64_t );
+         return true;
       }
    }
    else if ( chars_is_c( type, "f" ) )
    {
       double tmp = va_arg( *list, double );
-      float f = float_c_( tmp );
-      return write_float_c( rec, f, fmt );
+      arg->f = float_c_( tmp );
+      return true;
    }
    else if ( chars_is_c( type, "d" ) )
    {
-      return write_double_c( rec, va_arg( *list, double ), fmt );
+      arg->d = va_arg( *list, double );
+      return true;
    }
    else if ( chars_is_c( type, "b" ) )
    {
       uint32_t tmp = va_arg( *list, uint32_t );
-      cByte b = byte_c_( tmp );
-      return write_byte_c( rec, b, fmt );
+      arg->b = byte_c_( tmp );
+      return true;
    }
    else if ( chars_is_c( type, "c" ) )
    {
       int32_t tmp = va_arg( *list, int32_t );
-      char c = char_c_( tmp );
-      return write_char_c( rec, c, fmt );
+      arg->c = char_c_( tmp );
+      return true;
    }
    else if ( chars_is_c( type, "e" ) )
    {
-      return write_error_c( rec, va_arg( *list, cError const* ), fmt );
+      arg->e = va_arg( *list, cError const* );
+      return true;
    }
    else if ( chars_is_c( type, "r" ) )
    {
-      return write_rune_c( rec, va_arg( *list, cRune ), fmt );
+      arg->r = va_arg( *list, cRune );
+      return true;
    }
    else if ( chars_is_c( type, "bool" ) )
    {
-      return write_bool_c( rec, va_arg( *list, int ) != 0, fmt );
+      arg->bool_ = va_arg( *list, int ) != 0;
+      return true;
    }
    else if ( chars_is_c( type, "rng" ) )
    {
-      return write_range_c( rec, va_arg( *list, cRange ), fmt );
+      arg->rng = va_arg( *list, cRange );
+      return true;
    }
    else if ( chars_is_c( type, "s" ) )
    {
-      return write_cstr_c( rec, va_arg( *list, char const* ), fmt );
+      arg->s = va_arg( *list, char const* );
+      return true;
    }
    else if ( chars_is_c( type, "bs" ) )
    {
-      return write_bytes_c( rec, va_arg( *list, cBytes ), fmt );
+      arg->bs = va_arg( *list, cBytes );
+      return true;
    }
    else if ( chars_is_c( type, "cs" ) )
    {
-      return write_chars_c( rec, va_arg( *list, cChars ), fmt );
+      arg->cs = va_arg( *list, cChars );
+      return true;
    }
    else if ( chars_is_c( type, "rec" ) )
    {
-      return write_recorded_c( rec, va_arg( *list, cRecorder const* ), fmt );
+      arg->rec = va_arg( *list, cRecorder const* );
+      return true;
    }
    else if ( chars_is_c( type, "sca" ) )
    {
-      return write_unscanned_c( rec, va_arg( *list, cScanner const* ), fmt );
+      arg->sca = va_arg( *list, cScanner const* );
+      return true;
    }
    else if ( chars_is_c( type, "t" ) )
    {
-      cTape tape = va_arg( *list, cTape );
-      return tape_c_( rec, tape, fmt );
+      arg->t = va_arg( *list, cTape );
+      return true;
+   }
+
+   return false;
+}
+
+bool write_va_arg_c( cRecorder rec[static 1],
+                     cChars type,
+                     cVaArg arg,
+                     char const fmt[static 1] )
+{
+   if ( type.v[0] == 'i' )
+   {
+      if ( chars_is_c( type, "i8" ) )
+      {
+         return write_int8_c( rec, arg.i8, fmt );
+      }
+      else if ( chars_is_c( type, "i16" ) )
+      {
+         return write_int16_c( rec, arg.i16, fmt );
+      }
+      else if ( chars_is_c( type, "i32" ) )
+      {
+         return write_int32_c( rec, arg.i32, fmt );
+      }
+      else if ( chars_is_c( type, "i64" ) )
+      {
+         return write_int64_c( rec, arg.i64, fmt );
+      }
+   }
+   else if ( type.v[0] == 'u' )
+   {
+      if ( chars_is_c( type, "u8" ) )
+      {
+         return write_uint8_c( rec, arg.u8, fmt );
+      }
+      else if ( chars_is_c( type, "u16" ) )
+      {
+         return write_uint16_c( rec, arg.u16, fmt );
+      }
+      else if ( chars_is_c( type, "u32" ) )
+      {
+         return write_uint32_c( rec, arg.u32, fmt );
+      }
+      else if ( chars_is_c( type, "u64" ) )
+      {
+         return write_uint64_c( rec, arg.u64, fmt );
+      }
+   }
+   else if ( chars_is_c( type, "f" ) )
+   {
+      return write_float_c( rec, arg.f, fmt );
+   }
+   else if ( chars_is_c( type, "d" ) )
+   {
+      return write_double_c( rec, arg.d, fmt );
+   }
+   else if ( chars_is_c( type, "b" ) )
+   {
+      return write_byte_c( rec, arg.b, fmt );
+   }
+   else if ( chars_is_c( type, "c" ) )
+   {
+      return write_char_c( rec, arg.c, fmt );
+   }
+   else if ( chars_is_c( type, "e" ) )
+   {
+      return write_error_c( rec, arg.e, fmt );
+   }
+   else if ( chars_is_c( type, "r" ) )
+   {
+      return write_rune_c( rec, arg.r, fmt );
+   }
+   else if ( chars_is_c( type, "bool" ) )
+   {
+      return write_bool_c( rec, arg.bool_, fmt );
+   }
+   else if ( chars_is_c( type, "rng" ) )
+   {
+      return write_range_c( rec, arg.rng, fmt );
+   }
+   else if ( chars_is_c( type, "s" ) )
+   {
+      return write_cstr_c( rec, arg.s, fmt );
+   }
+   else if ( chars_is_c( type, "bs" ) )
+   {
+      return write_bytes_c( rec, arg.bs, fmt );
+   }
+   else if ( chars_is_c( type, "cs" ) )
+   {
+      return write_chars_c( rec, arg.cs, fmt );
+   }
+   else if ( chars_is_c( type, "rec" ) )
+   {
+      return write_recorded_c( rec, arg.rec, fmt );
+   }
+   else if ( chars_is_c( type, "sca" ) )
+   {
+      return write_unscanned_c( rec, arg.sca, fmt );
+   }
+   else if ( chars_is_c( type, "t" ) )
+   {
+      return tape_c_( rec, arg.t, fmt );
    }
 
    return false;
@@ -181,7 +288,8 @@ bool write_format_arg_c( cRecorder rec[static 1],
 *******************************************************************************/
 
 bool write_impl_c( cRecorder rec[static 1],
-                   c_write_va_arg write_arg,
+                   c_get_va_arg getArgFunc,
+                   c_write_va_arg writeArgFunc,
                    int n,
                    va_list listArg )
 {
@@ -202,11 +310,14 @@ bool write_impl_c( cRecorder rec[static 1],
       }
       else
       {
-         if ( not write_arg( rec, &list, specifier.type, specifier.fmt ) )
+         cVaArg arg;
+         if ( not getArgFunc( &list, specifier.type, &arg ) )
          {
-            if ( rec->err == cNoError_ )
-               set_recorder_error_c( rec, c_InvalidWriteFormat );
-
+            res = set_recorder_error_c( rec, c_InvalidWriteFormat );
+            break;
+         }
+         if ( not writeArgFunc( rec, specifier.type, arg, specifier.fmt ) )
+         {
             res = false;
             break;
          }
@@ -230,7 +341,7 @@ bool write_impl_c( cRecorder rec[static 1],
 
 bool write_list_c( cRecorder rec[static 1], int n, va_list list )
 {
-   return write_impl_c( rec, write_format_arg_c, n, list );
+   return write_impl_c( rec, get_va_arg_c, write_va_arg_c, n, list );
 }
 
 bool write_c( cRecorder rec[static 1], int n, ... )
@@ -247,17 +358,18 @@ bool write_c( cRecorder rec[static 1], int n, ... )
 *******************************************************************************/
 
 bool writeln_impl_c( cRecorder rec[static 1],
-                   c_write_va_arg write_arg,
-                   int n,
-                   va_list list )
+                     c_get_va_arg getArgFunc,
+                     c_write_va_arg writeArgFunc,
+                     int n,
+                     va_list list )
 {
-   return write_impl_c( rec, write_arg, n, list ) and
+   return write_impl_c( rec, getArgFunc, writeArgFunc, n, list ) and
           record_char_c( rec, '\n' );
 }
 
 bool writeln_list_c( cRecorder rec[static 1], int n, va_list list )
 {
-   return writeln_impl_c( rec, write_format_arg_c, n, list );
+   return writeln_impl_c( rec, get_va_arg_c, write_va_arg_c, n, list );
 }
 
 bool writeln_c( cRecorder rec[static 1], int n, ... )

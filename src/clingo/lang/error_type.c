@@ -90,32 +90,32 @@ bool push_text_error_c( cErrorStack es[static 1], int n, ... )
 #define Zero_ 0
 
 #define cOverflowErrors_                                                       \
-   cXMAP_(  push_iadd8_error_c,  0,   int8_t, "{i} + {i}" )                    \
-   cXMAP_( push_iadd16_error_c,  1,  int16_t, "{i} + {i}" )                    \
-   cXMAP_( push_iadd32_error_c,  2,  int32_t, "{i} + {i}" )                    \
-   cXMAP_( push_iadd64_error_c,  3,  int64_t, "{i} + {i}" )                    \
-   cXMAP_(  push_uadd8_error_c,  4,  uint8_t, "{u} + {u}" )                    \
-   cXMAP_( push_uadd16_error_c,  5, uint16_t, "{u} + {u}" )                    \
-   cXMAP_( push_uadd32_error_c,  6, uint32_t, "{u} + {u}" )                    \
-   cXMAP_( push_uadd64_error_c,  7, uint64_t, "{u} + {u}" )                    \
+   cXMAP_(  push_iadd8_error_c,  0,   int8_t, "{i8} + {i8}" )                  \
+   cXMAP_( push_iadd16_error_c,  1,  int16_t, "{i16} + {i16}" )                \
+   cXMAP_( push_iadd32_error_c,  2,  int32_t, "{i32} + {i32}" )                \
+   cXMAP_( push_iadd64_error_c,  3,  int64_t, "{i64} + {i64}" )                \
+   cXMAP_(  push_uadd8_error_c,  4,  uint8_t, "{u8} + {u8}" )                  \
+   cXMAP_( push_uadd16_error_c,  5, uint16_t, "{u16} + {u16}" )                \
+   cXMAP_( push_uadd32_error_c,  6, uint32_t, "{u32} + {u32}" )                \
+   cXMAP_( push_uadd64_error_c,  7, uint64_t, "{u64} + {u64}" )                \
                                                                                \
-   cXMAP_(  push_imul8_error_c,  8,   int8_t, "{i} * {i}" )                    \
-   cXMAP_( push_imul16_error_c,  9,  int16_t, "{i} * {i}" )                    \
-   cXMAP_( push_imul32_error_c, 10,  int32_t, "{i} * {i}" )                    \
-   cXMAP_( push_imul64_error_c, 11,  int64_t, "{i} * {i}" )                    \
-   cXMAP_(  push_umul8_error_c, 12,  uint8_t, "{u} * {u}" )                    \
-   cXMAP_( push_umul16_error_c, 13, uint16_t, "{u} * {u}" )                    \
-   cXMAP_( push_umul32_error_c, 14, uint32_t, "{u} * {u}" )                    \
-   cXMAP_( push_umul64_error_c, 15, uint64_t, "{u} * {u}" )                    \
+   cXMAP_(  push_imul8_error_c,  8,   int8_t, "{i8} * {i8}" )                  \
+   cXMAP_( push_imul16_error_c,  9,  int16_t, "{i16} * {i16}" )                \
+   cXMAP_( push_imul32_error_c, 10,  int32_t, "{i32} * {i32}" )                \
+   cXMAP_( push_imul64_error_c, 11,  int64_t, "{i64} * {i64}" )                \
+   cXMAP_(  push_umul8_error_c, 12,  uint8_t, "{u8} * {u8}" )                  \
+   cXMAP_( push_umul16_error_c, 13, uint16_t, "{u16} * {u16}" )                \
+   cXMAP_( push_umul32_error_c, 14, uint32_t, "{u32} * {u32}" )                \
+   cXMAP_( push_umul64_error_c, 15, uint64_t, "{u64} * {u64}" )                \
                                                                                \
-   cXMAP_(  push_isub8_error_c, 16,   int8_t, "{i} - {i}" )                    \
-   cXMAP_( push_isub16_error_c, 17,  int16_t, "{i} - {i}" )                    \
-   cXMAP_( push_isub32_error_c, 18,  int32_t, "{i} - {i}" )                    \
-   cXMAP_( push_isub64_error_c, 19,  int64_t, "{i} - {i}" )                    \
-   cXMAP_(  push_usub8_error_c, 20,  uint8_t, "{u} - {u}" )                    \
-   cXMAP_( push_usub16_error_c, 21, uint16_t, "{u} - {u}" )                    \
-   cXMAP_( push_usub32_error_c, 22, uint32_t, "{u} - {u}" )                    \
-   cXMAP_( push_usub64_error_c, 23, uint64_t, "{u} - {u}" )
+   cXMAP_(  push_isub8_error_c, 16,   int8_t, "{i8} - {i8}" )                  \
+   cXMAP_( push_isub16_error_c, 17,  int16_t, "{i16} - {i16}" )                \
+   cXMAP_( push_isub32_error_c, 18,  int32_t, "{i32} - {i32}" )                \
+   cXMAP_( push_isub64_error_c, 19,  int64_t, "{i64} - {i64}" )                \
+   cXMAP_(  push_usub8_error_c, 20,  uint8_t, "{u8} - {u8}" )                  \
+   cXMAP_( push_usub16_error_c, 21, uint16_t, "{u16} - {u16}" )                \
+   cXMAP_( push_usub32_error_c, 22, uint32_t, "{u32} - {u32}" )                \
+   cXMAP_( push_usub64_error_c, 23, uint64_t, "{u64} - {u64}" )
 
 static bool write_overflow_error( cRecorder rec[static 1], cOverflowError const* e )
 {

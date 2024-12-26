@@ -25,10 +25,10 @@ int main( void )
    for_each_c_( i, test const*, t, tests )
    {
       cPixel res = bottom_right_pixel_c( t->a, t->b );
-      expect_block_c_( i, eq_pixel_c( res, t->exp ))
+      expect_block_c_( i, eq_pixel_c( res, t->exp ) )
       {
-         tap_exp_line_c_( "{i},{i}", t->exp.x, t->exp.y );
-         tap_got_line_c_( "{i},{i}", res.x, res.y );
+         tap_exp_line_c_( "{i32},{i32}", t->exp.x, t->exp.y );
+         tap_got_line_c_( "{i32},{i32}", res.x, res.y );
       }
    }
 

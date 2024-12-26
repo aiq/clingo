@@ -1,6 +1,7 @@
 #include "clingo/lang/expect.h"
 #include "clingo/io/FILE.h"
 #include "clingo/type/cCharsToken.h"
+#include "clingo/type/int32.h"
 
 #define expect_line_( Tok, Exp )                                               \
    require_c_( next_line_token_c( Tok ) );                                     \
@@ -13,7 +14,7 @@ int main( void )
 
    init_tap_c( "test session", f );
    tap_note_c( "tap_c_" );
-   tap_c_( true, C_TapDesc, "a description for {i64} test", 1, C_TapSkip, "{i64} reasons", 99 );
+   tap_c_( true, C_TapDesc, "a description for {i64} test", 1, C_TapSkip, "{i64} reasons", int64_c_( 99 ) );
    tap_c_( false, C_TapDesc, "more description", C_TapTodo, "more reason" );
    finish_tap_c_();
 

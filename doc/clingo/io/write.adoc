@@ -107,7 +107,6 @@ The default read_arg value read_format_arg_c uses the following mapping:
 |cs   |write_chars_c
 |d    |write_double_c
 |f    |write_float_c
-|i    |write_int64_c
 |i8   |write_int8_c
 |i16  |write_int16_c
 |i32  |write_int32_c
@@ -117,7 +116,6 @@ The default read_arg value read_format_arg_c uses the following mapping:
 |rng  |write_range_c
 |s    |write_cstr_c
 |t    |tape_c_
-|u    |write_uint64_c
 |u8   |write_uint8_c
 |u16  |write_uint16_c
 |u32  |write_uint32_c
