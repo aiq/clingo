@@ -24,11 +24,7 @@ bool read_in_write_specifier_c( cScanner sca[static 1],
    }
 
    char const* typeStr = sca->mem; // ------------------------------------ type
-   if ( not move_while_char_match_c( sca, char_is_alnum_c ) )
-   {
-      move_scanner_to_c( sca, initPos );
-      return false;
-   }
+   move_while_char_match_c( sca, char_is_alnum_c );
    spec->type = (cChars)atween_c_( typeStr, (char const*)sca->mem );
 
    char const* formatStr = sca->mem; // -------------------------------- format
@@ -59,6 +55,7 @@ bool read_in_write_specifier_c( cScanner sca[static 1],
       return false;
    }
 
+   spec->filled = true;
    return true;
 }
 
@@ -66,6 +63,7 @@ void reset_write_specifier_c( cWriteSpecifier spec[static 1] )
 {
    must_exist_c_( spec );
 
+   spec->filled = false;
    spec->type = (cChars)empty_c_();
    spec->fmt[ 0 ] = '\0';
 }

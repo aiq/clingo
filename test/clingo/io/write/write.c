@@ -14,7 +14,7 @@ int main( void )
       "{{really}\n", "BOOM!\n",
       "{cs:q}\n", c_c( "_" ),
       "that is so {bool}\n", true,
-      "and took {t:hhmmss}", duration_tape_c_( duration_c( 3, 59, 47, 0 ) )
+      "and took {:hhmmss}", duration_tape_c_( duration_c( 3, 59, 47, 0 ) )
    ) );
    expect_at_c_( recorded_is_c( rec,
       "'64' is more as \"3\" but both are in range [0..64]BOOM!\n"

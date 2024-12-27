@@ -167,7 +167,7 @@ bool get_va_arg_c( va_list* list, cChars type, cVaArg arg[static 1] )
       arg->sca = va_arg( *list, cScanner const* );
       return true;
    }
-   else if ( chars_is_c( type, "t" ) )
+   else if ( is_empty_c_( type ) )
    {
       arg->t = va_arg( *list, cTape );
       return true;
@@ -271,7 +271,7 @@ static bool write_va_arg_c( cRecorder rec[static 1],
    {
       return write_unscanned_c( rec, arg.sca, fmt );
    }
-   else if ( chars_is_c( type, "t" ) )
+   else if ( is_empty_c_( type ) )
    {
       return tape_c_( rec, arg.t, fmt );
    }
@@ -348,7 +348,7 @@ bool write_impl_c( cRecorder rec[static 1],
    bool res = true;
    for ( int i = 0; i < n; ++i )
    {
-      if ( is_empty_c_( specifier.type ) )
+      if ( not specifier.filled )
       {
          char const* fmtStr = va_arg( list, char const* );
          fmtStrSca = cstr_scanner_c_( fmtStr );

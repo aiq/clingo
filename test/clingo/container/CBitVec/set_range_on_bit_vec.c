@@ -50,7 +50,7 @@ int main( void )
       expect_block_c_( i, bit_vec_is_c_( vec, t->exp ) )
       {
          tap_exp_line_c_( "{s}", t->exp );
-         tap_got_line_c_( "{t:01/80/4}", bit_vec_tape_c( vec ) );
+         tap_got_line_c_( "{:01/80/4}", bit_vec_tape_c( vec ) );
       }
       release_c( vec );
    }

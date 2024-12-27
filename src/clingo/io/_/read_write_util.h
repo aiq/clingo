@@ -68,6 +68,7 @@ void reset_read_specifier_c( cReadSpecifier spec[static 1] );
 
 struct cWriteSpecifier
 {
+   bool filled;
    cChars type;
    char fmt[ cMaxSpecifierFormatLength_+1 ];
 };
