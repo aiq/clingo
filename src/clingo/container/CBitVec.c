@@ -209,6 +209,12 @@ bool resize_bit_vec_c( CBitVec* vec, int64_t n )
    cByte* bytes = realloc_array_c_( vec->bytes, numOfBytes, cByte );
    if ( bytes == NULL ) return false;
 
+   int64_t newBytes = numOfBytes - vec->numOfBytes;
+   if ( newBytes > 0 )
+   {
+      memset( bytes + vec->numOfBytes, 0, (size_t)newBytes );
+   }
+
    vec->numOfBits = n;
    vec->numOfBytes = numOfBytes;
    vec->bytes = bytes;
