@@ -21,7 +21,7 @@ int main( void )
       tap_desc_c_( true, "some description" );
       tap_desc_c_( true, "some description", C_TapSkip, "surprise" );
       tap_desc_c_( false, "some description", C_TapTodo, "no time" );
-      tap_desc_c_( false, "{i64} description about {s}", 1, "tests" );
+      tap_desc_c_( false, "{i64} description about {s}", int64_c_( 1 ), "tests" );
       finish_tap_c_();
 
       inp = (cVarChars)heap_slice_c_( file_size_c( f ), char );

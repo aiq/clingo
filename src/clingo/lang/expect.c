@@ -20,15 +20,15 @@ char const* C_TapSkip = " # SKIP ";
 char const* C_TapTodo = " # TODO ";
 
 static FILE* C_LogFile = NULL;
-static int C_Success = 0;
-static int C_Failure = 0;
+static int64_t C_Success = 0;
+static int64_t C_Failure = 0;
 static int64_t C_Indent = 0;
 
 /*******************************************************************************
  private util functions
 *******************************************************************************/
 
-static int test_number()
+static int64_t test_number()
 {
   return C_Success + C_Failure;
 }

@@ -26,10 +26,10 @@ int main( void )
       {
          tap_msg_line_c_( "bla bla bla" );
          tap_exp_line_c_( "a {s:q}", "string" );
-         tap_got_line_c_( "foo", "bar", "{i64}", 2000 );
+         tap_got_line_c_( "foo", "bar", "{i64}", int64_c_( 2000 ) );
          tap_line_c_( "lines", "dfdf\nafddf\n\"OOO\"" );
       }
-      expect_block_c_( 0, false ){}
+      expect_block_c_( int64_c_( 0 ), false ){}
       finish_tap_c_();
 
       inp = (cVarChars)heap_slice_c_( file_size_c( f ), char );
