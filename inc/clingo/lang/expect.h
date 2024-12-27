@@ -15,9 +15,9 @@
 
 *******************************************************************************/
 
-extern char const* C_TapDesc;
-extern char const* C_TapSkip;
-extern char const* C_TapTodo;
+CLINGO_API extern char const* C_TapDesc;
+CLINGO_API extern char const* C_TapSkip;
+CLINGO_API extern char const* C_TapTodo;
 
 /*******************************************************************************
 ********************************************************************* Functions
@@ -54,9 +54,9 @@ CLINGO_API int finish_tap_c( bool withPlan );
  block
 *******************************************************************************/
 
-bool tap_block_begin_c( void );
+CLINGO_API bool tap_block_begin_c( void );
 
-bool tap_block_end_c( void );
+CLINGO_API bool tap_block_end_c( void );
 
 #define tap_block_c_( Ok )                                                     \
 if ( not (Ok) )                                                                \
@@ -68,7 +68,7 @@ for (                                                                          \
 
 #define tap_line_c_( K, ... )                                                  \
    tap_line_c( (K), nargs_c_( __VA_ARGS__  ), __VA_ARGS__ )
-void tap_line_c( char const k[static 1], int n, ... );
+CLINGO_API void tap_line_c( char const k[static 1], int n, ... );
 
 #define tap_msg_line_c_( ... )            \
    tap_line_c_( "message", __VA_ARGS__ )
