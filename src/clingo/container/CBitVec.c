@@ -7,6 +7,7 @@
 #include "clingo/io/read_type.h"
 #include "clingo/io/write.h"
 #include "clingo/io/write_type.h"
+#include "clingo/lang/algo.h"
 #include "clingo/lang/func.h"
 #include "clingo/lang/math.h"
 #include "clingo/lang/mem.h"
@@ -960,4 +961,10 @@ bool read_bit_vec_c( cScanner sca[static 1],
    }
 
   return set_scanner_error_c( sca, c_InvalidReadFormat );
+}
+
+static TAPE_C_( tape_func, CBitVec, write_bit_vec_c, do_not_deref_c_ )
+cTape bit_vec_tape_c( CBitVec const* vec )
+{
+   return (cTape){ .i=vec, .f=tape_func };
 }

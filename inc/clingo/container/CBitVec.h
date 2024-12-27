@@ -4,6 +4,7 @@
 #include "clingo/apidecl.h"
 #include "clingo/io/cRecorder.h"
 #include "clingo/io/cScanner.h"
+#include "clingo/io/cTape.h"
 #include "clingo/lang/CObject.h"
 #include "clingo/type/cByte.h"
 #include "clingo/type/cRange.h"
@@ -125,5 +126,7 @@ CLINGO_API bool read_bit_vec_c( cScanner sca[static 1],
 CLINGO_API bool write_bit_vec_c( cRecorder rec[static 1],
                                  CBitVec const* vec,
                                  char const fmt[static 1] );
+
+CLINGO_API cTape bit_vec_tape_c( CBitVec const* vec );
 
 #endif
