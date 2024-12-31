@@ -60,7 +60,7 @@ CLINGO_API inline CString* get_via_chars_from_dictionary_c( CDictionary* dict,
    must_exist_c_( dict );
 
    CString* keyStr = retain_c( make_string_c( key ) );
-   if ( !keyStr ) return false;
+   if ( !keyStr ) return NULL;
 
    CString* result = get_from_dictionary_c( dict, keyStr );
    release_c( keyStr );
