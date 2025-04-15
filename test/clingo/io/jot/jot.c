@@ -61,7 +61,7 @@ int main()
                                   "0123456789\n"
                                   "_+_+_+_+_+_+_\n"
                                   "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n"
-                                  "1234the result value is: 1!\n"
+                                  "1234the result value is: true!\n"
                                   "on 2024-08-23!!!" ) );
 
    println_recorded_c( rec );
